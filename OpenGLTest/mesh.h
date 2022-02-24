@@ -1,24 +1,20 @@
 #pragma once
 
-struct MeshVertices
+#include "mesh.h"
+
+class Mesh
 {
+public:
     float* verticesData;
     int vcount;
     unsigned int* indices;
     int icount;
 
-    MeshVertices(float* firstV, int vcount, unsigned int* firstID, int icount);
-};
-
-class Mesh
-{
-public:
     unsigned int VAO;
-    unsigned int shaderID;
 
-    Mesh(MeshVertices* vertices, unsigned int shaderID);
+    Mesh(float* firstV, int vcount, unsigned int* firstID, int icount);
     void DrawMesh();
 
 private:
-    void SetVertexData(MeshVertices* data);
+    void SetVertexData();
 };

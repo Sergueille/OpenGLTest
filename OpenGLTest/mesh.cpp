@@ -11,29 +11,24 @@ Code from https://learnopengl.com/Getting-started/Hello-Triangle
 
 using namespace std;
 
-MeshVertices::MeshVertices(float* firstV, int vcount, unsigned int* firstID, int icount)
+Mesh::Mesh(float* firstV, int vcount, unsigned int* firstID, int icount)
 {
-    verticesData = firstV;
+    this->verticesData = firstV;
     this->vcount = vcount;
     this->indices = firstID;
     this->icount = icount;
-}
-
-Mesh::Mesh(MeshVertices* vertices, unsigned int shaderID)
-{
-    SetVertexData(vertices);
-    this->shaderID = shaderID;
+    SetVertexData();
 }
 
 void Mesh::DrawMesh()
 {    
-    glUseProgram(shaderID); // Use shader program
+    //glUseProgram(shaderID); // Use shader program
     glBindVertexArray(VAO); // Use the vertex array
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); // Draw mesh!
     glBindVertexArray(0);
 }
 
-void Mesh::SetVertexData(MeshVertices* data)
+void Mesh::SetVertexData()
 {
     // Create vertex buffer
     unsigned int VBO;
@@ -50,7 +45,7 @@ void Mesh::SetVertexData(MeshVertices* data)
 
     // Set vertex data in buffer
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * data->vcount, data->verticesData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vcount, verticesData, GL_STATIC_DRAW);
 
     // Set vertex attributes
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
@@ -60,7 +55,7 @@ void Mesh::SetVertexData(MeshVertices* data)
 
     // Set indices in buffer
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * data->icount, data->indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * icount, indices, GL_STATIC_DRAW);
 
     this->VAO = VAO;
 }

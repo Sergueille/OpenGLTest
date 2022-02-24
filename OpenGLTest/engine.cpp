@@ -2,7 +2,6 @@
 Code from https://learnopengl.com/
 */
 
-#include <vector>
 #include <iostream>
 
 #include <glad/glad.h> 
@@ -10,6 +9,9 @@ Code from https://learnopengl.com/
 
 #include "mesh.h"
 #include "shader.h"
+#include "Texture.h"
+#include "Utility.h"
+#include "Sprite.h"
 
 using namespace std;
 
@@ -23,7 +25,7 @@ int main(int argc, void* argv[])
     //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Create window
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Teeeest!", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(Utility::screenX, Utility::screenY, "Teeeest!", NULL, NULL);
     if (window == NULL) 
     {
         cout << "Failed to create GLFW window" << endl;
@@ -40,25 +42,13 @@ int main(int argc, void* argv[])
     }
 
     // Setup OpenGL viewport
-    glViewport(0, 0, 800, 600);
-
-    float vertices[] = {
-     0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-     0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-    -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
-    };
-
-    unsigned int indices[] = {
-        0, 1, 3,
-        1, 2, 3
-    };
+    glViewport(0, 0, Utility::screenX, Utility::screenY);
 
     // Create triangle
-    Shader defaultShader = *new Shader("Shaders\\DefaultVertexShader.glsl", "Shaders\\DefaultFragShader.glsl");
-    MeshVertices meshData = *new MeshVertices(&vertices[0], (int)size(vertices), &indices[0], (int)size(indices));
-    Mesh triangle = *new Mesh(&meshData, defaultShader.ID);
-
+    Texture tex = Texture("Images/potplant.png");
+    Shader defaultShader = Shader("Shaders\\DefaultVertexShader.glsl", "Shaders\\DefaultFragShader.glsl");
+    Sprite test = Sprite(&defaultShader, &tex);
+    
     // Rendering loop
     while (!glfwWindowShouldClose(window))
     {
@@ -66,11 +56,8 @@ int main(int argc, void* argv[])
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        float blueValue = (sin(glfwGetTime()) / 2.0f) + 0.5f;
-        defaultShader.SetUniform("mainColor", 0, 0, blueValue, 1);
-
-        // Draw triangle
-        triangle.DrawMesh();
+        //Draw sprite
+        test.Draw();
 
         // Check and call events and swap the buffers
         glfwSwapBuffers(window);

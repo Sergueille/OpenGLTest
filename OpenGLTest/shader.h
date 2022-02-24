@@ -1,7 +1,10 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include <vector>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "shader.h"
 
 class Shader
@@ -24,7 +27,8 @@ public:
 	void SetUniform(const char* uniformName, bool value);
 	void SetUniform(const char* uniformName, float value);
 	void SetUniform(const char* uniformName, int value);
-	void SetUniform(const char* uniformName, float x, float y, float z, float w);
+	void SetUniform(const char* uniformName, glm::vec4 value);
+	void SetUniform(const char* uniformName, glm::mat4 value);
 
 private:
 	/// <summary>

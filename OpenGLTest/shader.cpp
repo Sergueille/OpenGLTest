@@ -4,7 +4,10 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <vector>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "shader.h"
 
@@ -108,8 +111,14 @@ void Shader::SetUniform(const char* uniformName, float value)
     glUniform1f(glGetUniformLocation(ID, uniformName), value);
 }
 
-void Shader::SetUniform(const char* uniformName, float x, float y, float z, float w)
+void Shader::SetUniform(const char* uniformName, glm::vec4 value)
 {
     Use();
-    glUniform4f(glGetUniformLocation(ID, uniformName), x, y, z, w);
+    glUniform4f(glGetUniformLocation(ID, uniformName), value.x, value.y, value.z, value.w);
+}
+
+void Shader::SetUniform(const char* uniformName, glm::mat4 trans) 
+{
+    Use();
+    glUniformMatrix4fv(glGetUniformLocation(ID, uniformName), 1, GL_FALSE, glm::value_ptr(trans));
 }
