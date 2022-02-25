@@ -12,8 +12,12 @@ Code from https://learnopengl.com/
 #include "Texture.h"
 #include "Utility.h"
 #include "Sprite.h"
+#include "EventManager.h"
+#include "RessourceManager.h"
+#include "Player.h"
 
 using namespace std;
+using namespace Utility;
 
 int main(int argc, void* argv[])
 {
@@ -25,7 +29,7 @@ int main(int argc, void* argv[])
     //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Create window
-    GLFWwindow* window = glfwCreateWindow(Utility::screenX, Utility::screenY, "Teeeest!", NULL, NULL);
+    window = glfwCreateWindow(Utility::screenX, Utility::screenY, "Teeeest!", NULL, NULL);
     if (window == NULL) 
     {
         cout << "Failed to create GLFW window" << endl;
@@ -44,25 +48,41 @@ int main(int argc, void* argv[])
     // Setup OpenGL viewport
     glViewport(0, 0, Utility::screenX, Utility::screenY);
 
-    // Create triangle
-    Texture tex = Texture("Images/potplant.png");
-    Shader defaultShader = Shader("Shaders\\DefaultVertexShader.glsl", "Shaders\\DefaultFragShader.glsl");
-    Sprite test = Sprite(&defaultShader, &tex);
+    /////// GAME START
+
+    // Load basic ressources
+    RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\SpriteFragShader.glsl", "sprite");
+    RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\ColorFragShader.glsl", "spriteColor");
+    RessourceManager::LoadTexture("Images\\circle.png", "circle");
+
+    Sprite sprites[] = {
+        Sprite(NULL, glm::vec3(0, -3, 0), glm::vec2(5, 1), 0, glm::vec4(0)),
+    };
+
+    // Create palyer
+    Player player = Player();
     
-    // Rendering loop
+    /////// GAME LOOP
     while (!glfwWindowShouldClose(window))
     {
+        // Get Time
+        Utility::time = glfwGetTime();
+
         // Clear image
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        //Draw sprite
-        test.Draw();
+        EventManager::Call(&EventManager::OnMainLoop);
+
+        Utility::lastTime = Utility::time;
 
         // Check and call events and swap the buffers
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
+    EventManager::Call(&EventManager::OnExitApp);
+    RessourceManager::Clear();
 
     // Clean memory
     glfwTerminate();

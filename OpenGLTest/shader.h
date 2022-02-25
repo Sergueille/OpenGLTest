@@ -19,6 +19,10 @@ public:
 	/// </summary>
 	Shader(const char* vertexPath, const char* fragmentPath);
 	/// <summary>
+	/// DO NOT USE ME! I'm the default constructor!
+	/// </summary>
+	Shader();
+	/// <summary>
 	/// Activates the shader, nessesary to render or change uniforms
 	/// </summary>
 	void Use();

@@ -151,6 +151,8 @@
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RessourceManager.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stb_image.cpp" />
@@ -161,6 +163,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="mesh.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="RessourceManager.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="stb_image.h" />

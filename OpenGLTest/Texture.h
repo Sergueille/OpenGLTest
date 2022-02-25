@@ -17,6 +17,10 @@ public:
 	/// </summary>
 	Texture(const char* path);
 	/// <summary>
+	/// DO NOT USE ME! I'm the default constructor!
+	/// </summary>
+	Texture();
+	/// <summary>
 	/// Use this to put texture in a shader, just before rendering
 	/// </summary>
 	/// <param name="unit">The position of the texture in shader params (0-15)</param>

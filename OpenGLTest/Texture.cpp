@@ -33,6 +33,8 @@ Texture::Texture(const char* path)
 	stbi_image_free(data);
 }
 
+Texture::Texture() { }
+
 void Texture::Use(int unit)
 {
 	glActiveTexture(GL_TEXTURE0 + unit);

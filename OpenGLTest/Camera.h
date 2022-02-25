@@ -16,7 +16,7 @@ namespace Camera
 	/// The height of the wiew in world units.
 	/// Width is determined by ratio.
 	/// </summary>
-	static float size = 10;
+	static float size = 16;
 
 	/// <summary>
 	/// Pass this into vertex shaders for the projection matrix

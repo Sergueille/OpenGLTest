@@ -21,13 +21,21 @@ public:
 	float rotate;
 	glm::vec4 color;
 
-	Sprite(Shader* shader, Texture* texture, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1), 
-		float rotate = 0.0f, glm::vec4 color = glm::vec4(1.0f));
+	Sprite(Texture* texture, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1), 
+		float rotate = 0.0f, glm::vec4 color = glm::vec4(1.0f), Shader* shader = nullptr);
+
+private:
 	void Draw();
 };
 
 namespace SpriteRenderer
 {
+	/// <summary>
+	/// Mesh used to draw sprites
+	/// </summary>
 	static Mesh* mesh;
+	/// <summary>
+	/// Get sprite mesh
+	/// </summary>
 	static Mesh* GetMesh();
 };

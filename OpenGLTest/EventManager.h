@@ -1,10 +1,18 @@
-#pragma once
+#ifndef EVENT_MANAGER
+#define EVENT_MANAGER
 
-#include <array>
+#include <list>
+#include <functional>
 
 namespace EventManager
 {
-	std::array<void(*)(), 500> OnMainLoopSuscribed;
-	std::array<void(*)(), 500> OnExitAppSuscribed;
+	extern std::list<std::function<void()>> OnMainLoop;
+	extern std::list<std::function<void()>> OnExitApp;
+
+	/// <summary>
+	/// Call an event
+	/// </summary>
+	void Call(std::list<std::function<void()>>* eventList);
 };
 
+#endif
