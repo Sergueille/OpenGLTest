@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\alexis\Logiciels\GLFW\include;D:\alexis\Logiciels\GLAD\include;D:\alexis\Logiciels\glm;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\alexis\Logiciels\GLFW\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\alexis\Logiciels\GLFW\include;D:\alexis\Logiciels\GLAD\include;D:\alexis\Logiciels\glm;D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\alexis\Logiciels\GLFW\lib-vc2022;D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\release dll\win64;$(LibraryPath)</LibraryPath>
     <SourcePath>D:\alexis\Logiciels\GLAD\src;$(SourcePath)</SourcePath>
     <ExcludePath>$(ExcludePath)</ExcludePath>
     <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
@@ -125,7 +125,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -156,6 +156,7 @@
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stb_image.cpp" />
+    <ClCompile Include="TextManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="shader.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="TextManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>

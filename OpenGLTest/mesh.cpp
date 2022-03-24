@@ -22,7 +22,6 @@ Mesh::Mesh(float* firstV, int vcount, unsigned int* firstID, int icount)
 
 void Mesh::DrawMesh()
 {    
-    //glUseProgram(shaderID); // Use shader program
     glBindVertexArray(VAO); // Use the vertex array
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); // Draw mesh!
     glBindVertexArray(0);

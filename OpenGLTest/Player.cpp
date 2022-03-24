@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Camera.h"
 
 #include <iostream>
 
@@ -6,6 +7,7 @@ Player::Player()
 {
 	sprite = new Sprite(&RessourceManager::textures["circle"], glm::vec3(0), glm::vec2(height)); // Create a sprite!
 	EventManager::OnMainLoop.push_back([this] { this->OnMainLoop(); }); // subscribe to the main loop
+	Camera::getTarget = [this]() -> glm::vec2 { return this->position; };
 }
 
 Player::~Player()
