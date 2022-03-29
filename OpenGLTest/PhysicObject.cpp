@@ -1,16 +1,21 @@
 #include "PhysicObject.h"
 
 #include "Utility.h"
+#include "EventManager.h"
 
 using namespace glm;
 
 PhysicObject::PhysicObject(Collider* coll)
 {
 	this->collider = coll;
+
+	EventManager::OnMainLoop.push_back([this] { this->OnMainLoop(); }); // subscribe to the main loop
 }
 
-void PhysicObject::Move()
+void PhysicObject::OnMainLoop()
 {
+	this->OnBeforeMove();
+
 	// Skip if no colliders
 	if (collider == NULL)
 		throw "Physic object has no collider! Please assign one to field 'collider' before moving.";
@@ -49,6 +54,8 @@ void PhysicObject::Move()
 			ReactToCollision(res);
 		}
 	}
+
+	this->OnAfterMove();
 }
 
 vec2 PhysicObject::GetPos()
@@ -60,6 +67,14 @@ void PhysicObject::SetPos(vec2 pos)
 {
 	position = pos;
 	collider->position = pos;
+}
+
+void PhysicObject::OnBeforeMove()
+{
+}
+
+void PhysicObject::OnAfterMove()
+{
 }
 
 void PhysicObject::ReactToCollision(vec3 data)

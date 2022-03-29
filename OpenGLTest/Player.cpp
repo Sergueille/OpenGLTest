@@ -13,7 +13,6 @@ Player::Player() : PhysicObject(new CircleCollider(GetPos(), height))
 
 	collider = new CircleCollider(GetPos(), height);
 
-	EventManager::OnMainLoop.push_back([this] { this->OnMainLoop(); }); // subscribe to the main loop
 	Camera::getTarget = [this]() -> glm::vec2 { return this->GetPos(); };
 }
 
@@ -23,10 +22,8 @@ Player::~Player()
 	delete collider;
 }
 
-void Player::OnMainLoop()
+void Player::OnAfterMove()
 {
-	Move();
-
 	sprite->position = vec3(GetPos().x, GetPos().y, 0);
 
 	float realSpeed = walkSpeed;

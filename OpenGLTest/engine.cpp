@@ -85,6 +85,8 @@ int main(int argc, void* argv[])
 
     // Create palyer
     Player player = Player();
+
+    Camera::SetupCamera();
     
     /////// GAME LOOP
     while (!glfwWindowShouldClose(window))

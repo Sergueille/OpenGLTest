@@ -24,13 +24,16 @@ public:
 
 	Collider* collider = NULL;
 
-	void Move();
-
 	vec2 GetPos();
 	void SetPos(vec2 pos);
+
+protected:
+	virtual void OnBeforeMove();
+	virtual void OnAfterMove();
 
 private:
 	vec2 position = vec2(0);
 
+	void OnMainLoop();
 	void ReactToCollision(vec3 data);
 };

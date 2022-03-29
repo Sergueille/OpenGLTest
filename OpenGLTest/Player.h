@@ -41,7 +41,7 @@ public:
 	Player();
 	~Player();
 
-private:
-	void OnMainLoop();
+protected:
+	void OnAfterMove() override;
 };
 

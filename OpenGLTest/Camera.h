@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glad/glad.h> 
+#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -19,11 +20,19 @@ namespace Camera
 	extern float size;
 	extern float smoothTime;
 
+	extern bool editorCamera;
+
 	/// <summary>
 	/// Pass this into vertex shaders for the projection matrix
 	/// </summary>
 	glm::mat4 GetOrthographicProjection();
 
+	void SetupCamera();
+
 	void UpdateCamera();
+
+	void OnMouseClick(GLFWwindow* window, int button, int action, int mods);
+
+	void OnScroll(GLFWwindow* window, double xOffset, double yOffset);
 }
 
