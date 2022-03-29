@@ -17,6 +17,7 @@ Code from https://learnopengl.com/
 #include "Player.h"
 #include "Camera.h"
 #include "TextManager.h"
+#include "Collider.h"
 
 using namespace std;
 using namespace Utility;
@@ -68,7 +69,18 @@ int main(int argc, void* argv[])
     RessourceManager::LoadTexture("Images\\circle.png", "circle");
 
     Sprite sprites[] = {
-        Sprite(NULL, glm::vec3(0, -3, 0), glm::vec2(5, 1), 0, glm::vec4(0)),
+        Sprite(NULL, glm::vec3(0, -5, 0), glm::vec2(10, 1), 0, glm::vec4(0)),
+        Sprite(NULL, glm::vec3(-7, -5, 0), glm::vec2(5, 5), -10, glm::vec4(0)),
+        Sprite(&RessourceManager::textures["circle"], glm::vec3(7, -4, 0), glm::vec2(5, 5), 0, glm::vec4(0, 0, 0, 1)),
+    };
+
+    RectCollider colls[] = {
+        RectCollider(vec2(0, -5), vec2(10, 1), 0),
+        RectCollider(vec2(-7, -5), vec2(5, 5), -10),
+    };
+
+    CircleCollider circleColls[] = {
+        CircleCollider(vec2(7, -4), 5),
     };
 
     // Create palyer
@@ -78,7 +90,7 @@ int main(int argc, void* argv[])
     while (!glfwWindowShouldClose(window))
     {
         // Get Time
-        Utility::time = glfwGetTime();
+        Utility::time = (float)glfwGetTime();
 
         // Clear image and depth buffer
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -88,6 +100,10 @@ int main(int argc, void* argv[])
         EventManager::Call(&EventManager::OnMainLoop);
 
         Camera::UpdateCamera();
+
+        // TEST
+        sprites[1].rotate += 10 * Utility::GetDeltaTime();
+        colls[1].orientation += 10 * Utility::GetDeltaTime();
 
         // Check and call events and swap the buffers
         glfwSwapBuffers(window);

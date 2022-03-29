@@ -3,6 +3,7 @@
 std::map<std::string, Shader> RessourceManager::shaders = std::map<std::string, Shader>();
 std::map<std::string, Texture> RessourceManager::textures = std::map<std::string, Texture>();
 
+// TODO: optimisation : avoiding load twice?
 Shader* RessourceManager::LoadShader(const char* vtex, const char* frag, std::string programName)
 {
     shaders[programName] = Shader(vtex, frag);

@@ -13,10 +13,10 @@
 
 namespace TextManager{
     struct Character {
-        unsigned int textureID;  // ID handle of the glyph texture
-        glm::ivec2 size;         // Size of glyph
-        glm::ivec2 bearing;      // Offset from baseline to left/top of glyph
-        unsigned int advance;    // Offset to advance to next glyph
+        unsigned int textureID = -1; // ID handle of the glyph texture
+        glm::ivec2 size; // Size of glyph
+        glm::ivec2 bearing; // Offset from baseline to left/top of glyph
+        unsigned int advance = 0; // Offset to advance to next glyph
     };
 
     extern std::map<char, Character> characters;

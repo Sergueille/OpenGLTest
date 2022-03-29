@@ -47,9 +47,9 @@ void Sprite::Draw()
     shader->Use(); // TODO optimise if shader already used
     glm::mat4 transform = glm::mat4(1.0f); // Transformation matrix
     transform = glm::translate(transform, position); // Translate
-    transform = glm::translate(transform, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // Translate to pivot //TODO: chage pivot
+    // transform = glm::translate(transform, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // Translate to pivot //TODO: chage pivot
     transform = glm::rotate(transform, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // Rotate
-    transform = glm::translate(transform, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); //  Translate back to center
+    // transform = glm::translate(transform, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); //  Translate back to center
     transform = glm::scale(transform, glm::vec3(size, 1.0f) * glm::vec3(ratio, 1, 1)); // Scale with size and texture ratio
 
     shader->SetUniform("transform", transform); // Set transformation matrix to shader

@@ -3,38 +3,65 @@
 
 #include <iostream>
 
-Player::Player()
+using namespace glm;
+
+Player::Player() : PhysicObject(new CircleCollider(GetPos(), height))
 {
-	sprite = new Sprite(&RessourceManager::textures["circle"], glm::vec3(0), glm::vec2(height)); // Create a sprite!
+	sprite = new Sprite(&RessourceManager::textures["circle"], 
+		glm::vec3(0), glm::vec2(height), 0,
+		glm::vec4(1, 0, 0, 1)); // Create a sprite!
+
+	collider = new CircleCollider(GetPos(), height);
+
 	EventManager::OnMainLoop.push_back([this] { this->OnMainLoop(); }); // subscribe to the main loop
-	Camera::getTarget = [this]() -> glm::vec2 { return this->position; };
+	Camera::getTarget = [this]() -> glm::vec2 { return this->GetPos(); };
 }
 
 Player::~Player()
 {
 	delete sprite;
+	delete collider;
 }
 
 void Player::OnMainLoop()
 {
-	float realSpeed = speed * Utility::GetDeltaTime();
+	Move();
 
-	if (glfwGetKey(Utility::window, GLFW_KEY_W) == GLFW_PRESS)
-	{
-		position.y += realSpeed;
-	}
+	sprite->position = vec3(GetPos().x, GetPos().y, 0);
+
+	float realSpeed = walkSpeed;
+
 	if (glfwGetKey(Utility::window, GLFW_KEY_A) == GLFW_PRESS)
 	{
-		position.x -= realSpeed;
+		velocity.x = -realSpeed;
 	}
-	if (glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS)
+	else if (glfwGetKey(Utility::window, GLFW_KEY_D) == GLFW_PRESS)
 	{
-		position.y -= realSpeed;
+		velocity.x = realSpeed;
 	}
-	if (glfwGetKey(Utility::window, GLFW_KEY_D) == GLFW_PRESS)
+	else
 	{
-		position.x += realSpeed;
+		velocity.x = 0;
 	}
 
-	sprite->position = glm::vec3(position.x, position.y, 0);
+	// Jump !
+	if (isOnWalkableSurface) 
+	{
+		isJumping = false;
+		if (glfwGetKey(Utility::window, GLFW_KEY_W) == GLFW_PRESS || glfwGetKey(Utility::window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		{
+			velocity.y = jumpForce;
+			isJumping = true;
+		}
+	}
+	else
+	{
+		if (isJumping && velocity.y > 0)
+		{
+			if (glfwGetKey(Utility::window, GLFW_KEY_W) != GLFW_PRESS && glfwGetKey(Utility::window, GLFW_KEY_SPACE) != GLFW_PRESS)
+			{
+				velocity.y -= jumpForceStop * Utility::GetDeltaTime();
+			}
+		}
+	}
 }

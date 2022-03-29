@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="CollisionSystem">
+      <UniqueIdentifier>{2e66a932-5ff4-40c1-9ddd-39bd2ad53f6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp">
@@ -54,6 +57,18 @@
     <ClCompile Include="TextManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>CollisionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>CollisionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="RectCollider.cpp">
+      <Filter>CollisionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicObject.cpp">
+      <Filter>CollisionSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -88,6 +103,18 @@
     </ClInclude>
     <ClInclude Include="TextManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>CollisionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>CollisionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="RectCollider.h">
+      <Filter>CollisionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicObject.h">
+      <Filter>CollisionSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

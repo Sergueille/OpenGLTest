@@ -16,5 +16,20 @@ namespace Utility
 	extern float GetDeltaTime();
 	extern float time;
 	extern float lastTime;
+
+	const float PI = 3.14159265f;
+	const float HALF_PI = 3.14159265f / 2.0f;
+	const float DegToRad = PI / 180.0f;
+	const float RadToDeg = 180.0f / PI;
+
+	/// <summary>
+	/// Projects C on AB
+	/// </summary>
+	/// <returns>A vector where XY are the position of H, and Z is AH (oriented)</returns>
+	extern glm::vec3 Project(glm::vec2 a, glm::vec2 b, glm::vec2 c);
+
+	extern glm::vec2 Rotate(glm::vec2 vec, float beta);
+
+	extern float AngleBetween(glm::vec2 a, glm::vec2 b);
 };
 

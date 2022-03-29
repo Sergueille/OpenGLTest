@@ -63,12 +63,12 @@ namespace TextManager {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-            // now store character for later use
+            // store character
             Character character = {
                 texture,
                 glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
                 glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-                face->glyph->advance.x
+                (unsigned int)face->glyph->advance.x
             };
 
             characters.insert(std::pair<char, Character>(c, character));
@@ -91,6 +91,8 @@ namespace TextManager {
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
+
+        return 0;
     }
 
     void RenderText(std::string text, float x, float y, float scale, glm::vec3 color) {
