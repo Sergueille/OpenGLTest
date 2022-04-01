@@ -31,5 +31,15 @@ namespace Utility
 	extern glm::vec2 Rotate(glm::vec2 vec, float beta);
 
 	extern float AngleBetween(glm::vec2 a, glm::vec2 b);
+
+	/// <summary>
+	/// Get mouse pos in screen coordinates (top-left is 0)
+	/// </summary>
+	extern glm::vec2 GetMousePos();
+
+	/// <summary>
+	/// Get world position from screen position (raw pixels, not 0-1)
+	/// </summary>
+	extern glm::vec2 ScreenToWorld(glm::vec2 screenPos);
 };
 

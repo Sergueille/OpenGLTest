@@ -150,6 +150,9 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="EditorObject.cpp" />
+    <ClCompile Include="EditorPlayer.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="mesh.cpp" />
@@ -168,6 +171,9 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="Editor.h" />
+    <ClInclude Include="EditorObject.h" />
+    <ClInclude Include="EditorPlayer.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="PhysicObject.h" />

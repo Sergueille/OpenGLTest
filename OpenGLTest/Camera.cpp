@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "Utility.h"
+#include "EventManager.h"
 
 using namespace glm;
 
@@ -66,8 +67,8 @@ namespace Camera
 
 	void SetupCamera()
 	{
-		glfwSetMouseButtonCallback(Utility::window, OnMouseClick);
-		glfwSetScrollCallback(Utility::window, OnScroll);
+		EventManager::OnClick.push_back(OnMouseClick);
+		EventManager::OnScroll.push_back(OnScroll);
 
 		sizeTarget = size;
 	}

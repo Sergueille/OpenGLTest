@@ -18,6 +18,8 @@ Code from https://learnopengl.com/
 #include "Camera.h"
 #include "TextManager.h"
 #include "Collider.h"
+#include "Editor.h"
+#include "EditorPlayer.h"
 
 using namespace std;
 using namespace Utility;
@@ -63,28 +65,22 @@ int main(int argc, void* argv[])
     // glEnable(GL_BLEND);
     // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    // Start event manager
+    EventManager::SetupEvents();
+
     // Load basic ressources
     RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\SpriteFragShader.glsl", "sprite");
     RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\ColorFragShader.glsl", "spriteColor");
     RessourceManager::LoadTexture("Images\\circle.png", "circle");
 
-    Sprite sprites[] = {
-        Sprite(NULL, glm::vec3(0, -5, 0), glm::vec2(10, 1), 0, glm::vec4(0)),
-        Sprite(NULL, glm::vec3(-7, -5, 0), glm::vec2(5, 5), -10, glm::vec4(0)),
-        Sprite(&RessourceManager::textures["circle"], glm::vec3(7, -4, 0), glm::vec2(5, 5), 0, glm::vec4(0, 0, 0, 1)),
+    // Start level editor
+    Editor::SetupEditor();
+
+    EditorObject* objects[] = {
+        (EditorObject*)new EditorPlayer(vec2(0, 0))
     };
 
-    RectCollider colls[] = {
-        RectCollider(vec2(0, -5), vec2(10, 1), 0),
-        RectCollider(vec2(-7, -5), vec2(5, 5), -10),
-    };
-
-    CircleCollider circleColls[] = {
-        CircleCollider(vec2(7, -4), 5),
-    };
-
-    // Create palyer
-    Player player = Player();
+    objects[0]->name = "Player";
 
     Camera::SetupCamera();
     
@@ -101,11 +97,9 @@ int main(int argc, void* argv[])
 
         EventManager::Call(&EventManager::OnMainLoop);
 
-        Camera::UpdateCamera();
+        Editor::TextInput(vec2(100), "Test", "TestInput");
 
-        // TEST
-        sprites[1].rotate += 10 * Utility::GetDeltaTime();
-        colls[1].orientation += 10 * Utility::GetDeltaTime();
+        Camera::UpdateCamera();
 
         // Check and call events and swap the buffers
         glfwSwapBuffers(window);
@@ -116,6 +110,11 @@ int main(int argc, void* argv[])
 
     EventManager::Call(&EventManager::OnExitApp);
     RessourceManager::Clear();
+
+    for (void* object : objects)
+    {
+        delete object;
+    }
 
     // Clean memory
     glfwTerminate();

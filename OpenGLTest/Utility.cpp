@@ -1,5 +1,7 @@
 #include "Utility.h"
 
+#include "Camera.h"
+
 #include <iostream>
 #include <string>
 #include <math.h>
@@ -28,7 +30,7 @@ namespace Utility
 
 	glm::vec2 Rotate(glm::vec2 vec, float beta)
 	{
-		float rad = beta * 3.14159265 / 180.0;
+		double rad = beta * 3.14159265 / 180.0;
 		return glm::vec2(
 			(cos(rad) * vec.x) - (sin(rad) * vec.y),
 			(sin(rad) * vec.x) + (cos(rad) * vec.y)
@@ -38,5 +40,24 @@ namespace Utility
 	float AngleBetween(glm::vec2 a, glm::vec2 b)
 	{
 		return acos(glm::dot(a, b) / glm::length(a) / glm::length(b)) * Utility::RadToDeg;
+	}
+
+	glm::vec2 GetMousePos()
+	{
+		double mouseX, mouseY;
+		glfwGetCursorPos(window, &mouseX, &mouseY);
+		return glm::vec2((float)mouseX, (float)mouseY);
+	}
+
+	glm::vec2 ScreenToWorld(glm::vec2 screenPos)
+	{
+		screenPos.y *= -1;
+		screenPos.y += screenY / 2;
+		screenPos.x -= screenX / 2;
+
+		screenPos /= screenY;
+
+		glm::vec2 res = Camera::position + (screenPos * Camera::size);
+		return res;
 	}
 }

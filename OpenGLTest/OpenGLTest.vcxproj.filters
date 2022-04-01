@@ -16,6 +16,9 @@
     <Filter Include="CollisionSystem">
       <UniqueIdentifier>{2e66a932-5ff4-40c1-9ddd-39bd2ad53f6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LevelEditor">
+      <UniqueIdentifier>{24389f4e-6d65-4ef6-b153-409a493ded21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp">
@@ -69,6 +72,15 @@
     <ClCompile Include="PhysicObject.cpp">
       <Filter>CollisionSystem</Filter>
     </ClCompile>
+    <ClCompile Include="EditorObject.cpp">
+      <Filter>LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor.cpp">
+      <Filter>LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorPlayer.cpp">
+      <Filter>LevelEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -115,6 +127,15 @@
     </ClInclude>
     <ClInclude Include="PhysicObject.h">
       <Filter>CollisionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorObject.h">
+      <Filter>LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorPlayer.h">
+      <Filter>LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
