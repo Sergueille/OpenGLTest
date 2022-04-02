@@ -27,6 +27,11 @@ namespace Camera
 	/// </summary>
 	glm::mat4 GetOrthographicProjection();
 
+	/// <summary>
+	/// Pass this into vertex shaders for the projection matrix
+	/// </summary>
+	glm::mat4 GetUIProjection();
+
 	void SetupCamera();
 
 	void UpdateCamera();

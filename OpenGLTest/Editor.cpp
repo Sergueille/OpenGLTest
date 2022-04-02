@@ -18,16 +18,60 @@ const vec4 Editor::editColor = vec4(1, 0.2, 0.5, 1);;
 
 std::string Editor::focusedTextInputID = "";
 std::string Editor::focusedTextInputValue = "";
+float Editor::backspaceNextTime = 0;
 
 void Editor::SetupEditor()
 {
 	EventManager::OnMainLoop.push_back(OnMainLoop);
 	EventManager::OnClick.push_back(OnClick);
+	EventManager::OnCharPressed.push_back(OnCaracterInput);
 }
 
 void Editor::OnMainLoop()
 {
 	DrawPanel();
+
+	// Handle backspace for text input
+	if (focusedTextInputID != "")
+	{
+		if (glfwGetKey(Utility::window, GLFW_KEY_BACKSPACE) == GLFW_PRESS)
+		{
+			// Control: remove word
+			if (glfwGetKey(Utility::window, GLFW_KEY_LEFT_CONTROL) || glfwGetKey(Utility::window, GLFW_KEY_RIGHT_CONTROL) )
+			{
+				if (backspaceNextTime < Utility::time)
+				{
+					if (focusedTextInputValue.length() > 0)
+					{
+						focusedTextInputValue.pop_back();
+					}
+
+					while (focusedTextInputValue.length() > 0 && isalpha(focusedTextInputValue[focusedTextInputValue.length() - 1]))
+					{
+						focusedTextInputValue.pop_back();
+					}
+
+					backspaceNextTime = Utility::time + (backspaceFirstLatency / 1000.f);
+				}
+			}
+			else
+			{
+				// remove last letter
+				if (focusedTextInputValue.length() > 0 && backspaceNextTime < Utility::time)
+				{
+					focusedTextInputValue.pop_back();
+					if (backspaceNextTime == 0)
+						backspaceNextTime = Utility::time + (backspaceFirstLatency / 1000.f);
+					else
+						backspaceNextTime = Utility::time + (backspaceLatency / 1000.f);
+				}
+			}
+		}
+		else
+		{
+			backspaceNextTime = 0;
+		}
+	}
 }
 
 void Editor::DrawPanel()
@@ -67,19 +111,41 @@ void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 	}
 }
 
-std::tuple<vec2, std::string> Editor::TextInput(vec2 pos, std::string value, std::string ID)
+void Editor::OnCaracterInput(GLFWwindow* window, unsigned int codepoint)
+{
+	if (focusedTextInputID != "")
+	{
+		focusedTextInputValue += char(codepoint);
+	}
+}
+
+vec2 Editor::TextInput(vec2 pos, std::string* value, std::string ID, TextManager::text_align align)
 {
 	if (focusedTextInputID == ID)
 	{
-		vec2 textRect = TextManager::RenderText(focusedTextInputValue, pos, textSize, TextManager::right, editColor);
-		return { textRect, value };
+		if (glfwGetKey(Utility::window, GLFW_KEY_ENTER) == GLFW_PRESS)
+		{
+			*value = focusedTextInputValue;
+			focusedTextInputID = "";
+		}
+		else if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		{
+			focusedTextInputID = "";
+		}
+
+		bool showCursor = float(static_cast<int>(Utility::time * 1000) % textCursorBlink) > (textCursorBlink / 2.f);
+		std::string displayString = showCursor ? focusedTextInputValue + "|" : focusedTextInputValue;
+		vec2 textRect = TextManager::RenderText(displayString, pos, textSize, align, editColor);
+		return textRect;
 	}
 	else
 	{
+		std::string displayString = value->length() == 0 ? "<empty>" : *value;
+
 		vec2 mousePos = Utility::GetMousePos();
 		mousePos.y *= -1;
 		mousePos.y += Utility::screenY;
-		vec2 textRect = TextManager::GetRect(value, textSize);
+		vec2 textRect = TextManager::GetRect(displayString, textSize);
 
 		bool hoverX = mousePos.x > pos.x && mousePos.x < pos.x + textRect.x;
 		bool hoverY = mousePos.y > pos.y && mousePos.y < pos.y + textRect.y;
@@ -90,10 +156,10 @@ std::tuple<vec2, std::string> Editor::TextInput(vec2 pos, std::string value, std
 			if (glfwGetMouseButton(Utility::window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 			{
 				focusedTextInputID = ID;
-				focusedTextInputValue = value;
+				focusedTextInputValue = "";
 			}
 
-			float lerpValue = (float)cos(Utility::time * Utility::PI / (hoverHighlightDuration / 1000.f)) * 0.5 + 0.5;
+			float lerpValue = Utility::GetTimeSine(hoverHighlightDuration);
 			color = highlightColor + (textColor - highlightColor) * lerpValue;
 		}
 		else
@@ -101,8 +167,8 @@ std::tuple<vec2, std::string> Editor::TextInput(vec2 pos, std::string value, std
 			color = textColor;
 		}
 
-		TextManager::RenderText(value, pos, textSize, TextManager::right, color);
-		return { textRect, value };
+		TextManager::RenderText(displayString, pos, textSize, align, color);
+		return textRect;
 	}
 }
 
@@ -122,30 +188,46 @@ bool Editor::isOverUI(vec2 point)
 	return point.x > panelSize;
 }
 
-vec2 Editor::DrawProperty(vec2 drawPos, std::string name, std::string value, float sizeX)
+vec2 Editor::DrawProperty(vec2 drawPos, const std::string name, std::string* value, float propX, std::string ID)
 {
-	TextManager::RenderText(name, drawPos, textSize);
-	drawPos.x += sizeX;
-	TextManager::RenderText(value, drawPos, textSize, TextManager::left);
+	TextManager::RenderText(name + ":", drawPos, textSize);
+	drawPos.x += propX;
+	vec2 propSize = TextInput(drawPos, value, ID);
 
-	return vec2(sizeX, textSize);
+	return vec2(propX + propSize.x, textSize);
 }
 
-vec2 Editor::DrawProperty(vec2 drawPos, std::string name, vec2 value, float sizeX)
+vec2 Editor::DrawProperty(vec2 drawPos, const std::string name, float* value, float propX, std::string ID)
 {
-	drawPos.y -= TextManager::RenderText(name, drawPos, textSize).y;
-	drawPos.x += indentation;
-	TextManager::RenderText("X:", drawPos, textSize);
-	drawPos.y -= TextManager::RenderText(
-		std::to_string(value.x), 
-		drawPos + vec2(sizeX - indentation, 0),
-		textSize, TextManager::left).y;
+	std::string res = std::to_string(*value);
+	vec2 size = DrawProperty(drawPos, name, &res, propX, ID);
 
-	TextManager::RenderText("Y:", drawPos, textSize);
-	drawPos.y -= TextManager::RenderText(
-		std::to_string(value.y), 
-		drawPos + vec2(sizeX - indentation, 0),
-		textSize, TextManager::left).y;
+	try { *value = std::stof(res); }
+	catch (std::exception& e) { *value = 0.f; }
 
-	return vec2(sizeX + indentation, textSize * 3);
+	return size;
+}
+
+vec2 Editor::DrawProperty(vec2 drawPos, const std::string name, vec2* value, float propX, std::string ID)
+{
+	std::string resX = std::to_string(value->x);
+	std::string resY = std::to_string(value->y);
+
+	drawPos.y -= TextManager::RenderText(name + ":", drawPos, textSize).y;
+	TextManager::RenderText("X:", drawPos + vec2(indentation, 0), textSize);
+	vec2 Xsize = TextInput(drawPos + vec2(propX, 0), &resX, ID + "X");
+	drawPos.y -= Xsize.y;
+
+	TextManager::RenderText("Y:", drawPos + vec2(indentation, 0), textSize);
+	vec2 Ysize = TextInput(drawPos + vec2(propX, 0), &resY, ID + "Y");
+
+	float maxX = max(Xsize.x, Ysize.x);
+
+	try { value->x = std::stof(resX); }
+	catch (std::exception& e) { value->x = 0.f; }
+
+	try { value->y = std::stof(resY); }
+	catch (std::exception& e) { value->y = 0.f; }
+
+	return vec2(propX + maxX, textSize * 3);
 }

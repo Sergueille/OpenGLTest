@@ -20,9 +20,17 @@ public:
 	glm::vec2 size;
 	float rotate;
 	glm::vec4 color;
+	bool isUI;
 
 	Sprite(Texture* texture, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1), 
-		float rotate = 0.0f, glm::vec4 color = glm::vec4(1.0f), Shader* shader = nullptr);
+		float rotate = 0.0f, glm::vec4 color = glm::vec4(1.0f), Shader* shader = nullptr, bool isUI = false);
+
+	Sprite(bool isUI, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1), glm::vec4 color = glm::vec4(1.0f));
+
+	static void DrawSprite(Texture* texture, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1),
+		float rotate = 0.0f, glm::vec4 color = glm::vec4(1.0f), Shader* shader = nullptr, bool isUI = false);
+
+	static void DrawSpriteUI(glm::vec3 start, glm::vec3 end, glm::vec4 color = glm::vec4(0, 0, 0, 1));
 
 private:
 	void Draw();

@@ -15,32 +15,36 @@
 #include "RessourceManager.h"
 
 
-Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader)
+Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader, bool isUI)
 {
     this->texture = texture;
-
-    if (shader == nullptr)
-    {
-        if (texture == nullptr)
-            this->shader = &RessourceManager::shaders["spriteColor"];
-        else
-            this->shader = &RessourceManager::shaders["sprite"];
-    }
-    else 
-    {
-        this->shader = shader;
-    }
-
     this->position = position;
     this->size = size;
     this->rotate = rotate;
     this->color = color;
+    this->isUI = isUI;
+    this->shader = shader;
 
     EventManager::OnMainLoop.push_back([this] { this->Draw(); });
 }
 
-void Sprite::Draw()
+Sprite::Sprite(bool isUI, glm::vec3 position, glm::vec2 size, glm::vec4 color) : Sprite(nullptr, position, size, 0.f, color, nullptr, isUI)
+{ }
+
+void Sprite::DrawSprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader, bool isUI)
 {
+    if (shader == nullptr)
+    {
+        if (texture == nullptr)
+            shader = &RessourceManager::shaders["spriteColor"];
+        else
+            shader = &RessourceManager::shaders["sprite"];
+    }
+    else
+    {
+        shader = shader;
+    }
+
     // No texture? ratio of 1
     float ratio = texture == nullptr ? 1 : texture->ratio;
 
@@ -53,7 +57,10 @@ void Sprite::Draw()
     transform = glm::scale(transform, glm::vec3(size, 1.0f) * glm::vec3(ratio, 1, 1)); // Scale with size and texture ratio
 
     shader->SetUniform("transform", transform); // Set transformation matrix to shader
-    shader->SetUniform("projection", Camera::GetOrthographicProjection()); // Set projection matrix to shader
+    if (isUI)
+        shader->SetUniform("projection", Camera::GetUIProjection()); // Set projection matrix to shader
+    else
+        shader->SetUniform("projection", Camera::GetOrthographicProjection()); // Set projection matrix to shader
     shader->SetUniform("mainColor", color); // Set color
 
     // Set texture if it exists
@@ -66,6 +73,16 @@ void Sprite::Draw()
     // Get mesh and draw
     SpriteRenderer::GetMesh();
     SpriteRenderer::mesh->DrawMesh();
+}
+
+void Sprite::DrawSpriteUI(glm::vec3 start, glm::vec3 end, glm::vec4 color)
+{
+    DrawSprite(nullptr, (start + end) / 2.f, end - start, 0.f, color, nullptr, true);
+}
+
+void Sprite::Draw()
+{
+    DrawSprite(texture, position, size, rotate, color, shader, isUI);
 }
 
 namespace SpriteRenderer

@@ -11,6 +11,7 @@ namespace EventManager
 	extern std::list<std::function<void()>> OnExitApp;
 	extern std::list<GLFWmousebuttonfun> OnClick;
 	extern std::list<GLFWscrollfun> OnScroll;
+	extern std::list<GLFWcharfun> OnCharPressed;
 
 	void SetupEvents();
 
@@ -21,6 +22,7 @@ namespace EventManager
 
 	void OnClickCallback(GLFWwindow* window, int button, int action, int mods);
 	void OnScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
+	void OnCharPressedCallback(GLFWwindow* window, unsigned int codepoint);
 };
 
 #endif

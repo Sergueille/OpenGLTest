@@ -29,7 +29,12 @@ namespace Camera
 	{
 		float halfSize = size / 2;
 		float XhalfSize = (halfSize / Utility::screenY) * Utility::screenX;
-		return glm::ortho(position.x - XhalfSize, position.x + XhalfSize, position.y - halfSize, position.y + halfSize, -1.0f, 100.0f);
+		return glm::ortho(position.x - XhalfSize, position.x + XhalfSize, position.y - halfSize, position.y + halfSize, -1000.0f, 1000.0f);
+	}
+
+	glm::mat4 GetUIProjection()
+	{
+		return glm::ortho(0.f, (float)Utility::screenX, 0.f, (float)Utility::screenY, -10000.f, 10000.f);
 	}
 
 	void UpdateCamera()

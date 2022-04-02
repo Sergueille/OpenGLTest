@@ -41,5 +41,11 @@ namespace Utility
 	/// Get world position from screen position (raw pixels, not 0-1)
 	/// </summary>
 	extern glm::vec2 ScreenToWorld(glm::vec2 screenPos);
+
+	/// <summary>
+	/// Get the cos of the timen rescaled btw 0 and 1
+	/// </summary>
+	/// <param name="period">The duration of one sine (milliseconds)</param>
+	extern float GetTimeSine(int period);
 };
 

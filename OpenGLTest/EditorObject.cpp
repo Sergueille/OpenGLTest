@@ -31,10 +31,13 @@ vec2 EditorObject::SetPos(vec2 pos)
 
 vec2 EditorObject::DrawProperties(vec2 startPos)
 {
+	std::string strID = std::to_string(ID);
+	float propX = Editor::panelSize / 2.0f;
+
 	vec2 drawPos = startPos;
-	drawPos.y -= Editor::DrawProperty(drawPos, "Name :", name, Editor::panelSize - 20).y;
-	drawPos.y -= Editor::DrawProperty(drawPos, "Position :", position, Editor::panelSize - 20).y;
-	drawPos.y -= Editor::DrawProperty(drawPos, "Parallax :", std::to_string(parallax), Editor::panelSize - 20).y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Name", &name, propX, strID + "name").y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Position", &position, propX, strID + "pos").y;
+	SetPos(position);
 
 	return drawPos - startPos;
 }

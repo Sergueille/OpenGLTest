@@ -2,6 +2,7 @@
 
 #include "Utility.h"
 #include "RessourceManager.h"
+#include "Camera.h"
 #include <iostream>
 #include <ft2build.h>
 #include FT_FREETYPE_H 
@@ -96,13 +97,13 @@ namespace TextManager {
         return 0;
     }
 
-    glm::vec2 RenderText(std::string text, glm::vec2 pos, float scale, text_align align, glm::vec3 color) {
+    glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align, glm::vec3 color) {
         scale /= 64;
 
         Shader* shader = &RessourceManager::shaders["text"];
         shader->Use();
 
-        shader->SetUniform("projection", glm::ortho(0.0f, (float)Utility::screenX, 0.0f, (float)Utility::screenY));
+        shader->SetUniform("projection", Camera::GetUIProjection());
 
         glUniform3f(glGetUniformLocation(shader->ID, "textColor"), color.x, color.y, color.z);
         glActiveTexture(GL_TEXTURE0);
@@ -132,7 +133,7 @@ namespace TextManager {
         return glm::vec2(currentX - pos.x + scale, currentY - pos.y + scale) * 64.f;
     }
 
-    void DrawChar(char c, float* currentX, float* currentY, float scale, glm::vec2 pos)
+    void DrawChar(char c, float* currentX, float* currentY, float scale, glm::vec3 pos)
     {
         if (c == '\n')
         {

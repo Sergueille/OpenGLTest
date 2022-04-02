@@ -60,4 +60,8 @@ namespace Utility
 		glm::vec2 res = Camera::position + (screenPos * Camera::size);
 		return res;
 	}
+	float GetTimeSine(int period)
+	{
+		return (float)cos(Utility::time * Utility::PI / (period / 1000.f)) * 0.5 + 0.5; return 0.0f;
+	}
 }

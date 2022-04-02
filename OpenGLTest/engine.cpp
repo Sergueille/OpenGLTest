@@ -83,7 +83,7 @@ int main(int argc, void* argv[])
     objects[0]->name = "Player";
 
     Camera::SetupCamera();
-    
+
     /////// GAME LOOP
     while (!glfwWindowShouldClose(window))
     {
@@ -96,8 +96,6 @@ int main(int argc, void* argv[])
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         EventManager::Call(&EventManager::OnMainLoop);
-
-        Editor::TextInput(vec2(100), "Test", "TestInput");
 
         Camera::UpdateCamera();
 
