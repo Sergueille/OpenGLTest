@@ -88,9 +88,11 @@ namespace TextManager {
         glGenBuffers(1, &VBO);
         glBindVertexArray(VAO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 5, NULL, GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
 
@@ -151,14 +153,14 @@ namespace TextManager {
             float h = ch.size.y * scale;
 
             // update VBO for each character
-            float vertices[6][4] = {
-                { xpos,     ypos + h,   0.0f, 0.0f },
-                { xpos,     ypos,       0.0f, 1.0f },
-                { xpos + w, ypos,       1.0f, 1.0f },
+            float vertices[6][5] = {
+                { xpos,     ypos + h, pos.z,   0.0f, 0.0f },
+                { xpos,     ypos,     pos.z,   0.0f, 1.0f },
+                { xpos + w, ypos,     pos.z,   1.0f, 1.0f },
 
-                { xpos,     ypos + h,   0.0f, 0.0f },
-                { xpos + w, ypos,       1.0f, 1.0f },
-                { xpos + w, ypos + h,   1.0f, 0.0f }
+                { xpos,     ypos + h, pos.z,   0.0f, 0.0f },
+                { xpos + w, ypos,     pos.z,   1.0f, 1.0f },
+                { xpos + w, ypos + h, pos.z,   1.0f, 0.0f }
             };
 
             // render glyph texture over quad

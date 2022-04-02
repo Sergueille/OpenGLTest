@@ -30,6 +30,8 @@ public:
 	const static int backspaceFirstLatency = 300; // milliseconds
 	const static int backspaceLatency = 30; // milliseconds
 
+	const static int UIBaseZPos = 100;
+
 	const static vec4 textColor;
 	const static vec4 highlightColor;
 	const static vec4 editColor;
@@ -52,9 +54,9 @@ public:
 	/// <param name="propX">The x offset of the textInput</param>
 	/// <param name="ID">An unique ID</param>
 	/// <returns>The size of the property</returns>
-	static vec2 DrawProperty(vec2 drawPos, const std::string name, std::string* value, float propX, std::string ID);
-	static vec2 DrawProperty(vec2 drawPos, const std::string name, float* value, float propX, std::string ID);
-	static vec2 DrawProperty(vec2 drawPos, const std::string name, vec2* value, float propX, std::string ID);
+	static vec2 DrawProperty(vec3 drawPos, const std::string name, std::string* value, float propX, std::string ID);
+	static vec2 DrawProperty(vec3 drawPos, const std::string name, float* value, float propX, std::string ID);
+	static vec2 DrawProperty(vec3 drawPos, const std::string name, vec2* value, float propX, std::string ID);
 
 	/// <summary>
 	/// Displays a text input
@@ -64,7 +66,7 @@ public:
 	/// <param name="value">The current value of the input</param>
 	/// <param name="ID">An unique ID</param>
 	/// <returns>The size of the text input</returns>
-	static vec2 TextInput(vec2 pos, std::string* value, std::string ID, TextManager::text_align align = TextManager::right);
+	static vec2 TextInput(vec3 pos, std::string* value, std::string ID, TextManager::text_align align = TextManager::right);
 
 private:
 	static EditorObject* selectedObject;

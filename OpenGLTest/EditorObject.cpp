@@ -29,12 +29,12 @@ vec2 EditorObject::SetPos(vec2 pos)
 	return position;
 }
 
-vec2 EditorObject::DrawProperties(vec2 startPos)
+vec2 EditorObject::DrawProperties(vec3 startPos)
 {
 	std::string strID = std::to_string(ID);
 	float propX = Editor::panelSize / 2.0f;
 
-	vec2 drawPos = startPos;
+	vec3 drawPos = startPos;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Name", &name, propX, strID + "name").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Position", &position, propX, strID + "pos").y;
 	SetPos(position);

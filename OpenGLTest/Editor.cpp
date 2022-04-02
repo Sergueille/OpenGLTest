@@ -76,7 +76,9 @@ void Editor::OnMainLoop()
 
 void Editor::DrawPanel()
 {
-	vec2 drawPos = vec2(10, Utility::screenY - textSize - margin);
+	vec3 drawPos = vec3(10, Utility::screenY - textSize - margin, UIBaseZPos + 5);
+
+	Sprite::DrawSpriteUI(vec3(0, 0, UIBaseZPos), vec3(panelSize, Utility::screenY, UIBaseZPos));
 
 	if (GetSelectedObject() == NULL)
 	{
@@ -119,7 +121,7 @@ void Editor::OnCaracterInput(GLFWwindow* window, unsigned int codepoint)
 	}
 }
 
-vec2 Editor::TextInput(vec2 pos, std::string* value, std::string ID, TextManager::text_align align)
+vec2 Editor::TextInput(vec3 pos, std::string* value, std::string ID, TextManager::text_align align)
 {
 	if (focusedTextInputID == ID)
 	{
@@ -188,7 +190,7 @@ bool Editor::isOverUI(vec2 point)
 	return point.x > panelSize;
 }
 
-vec2 Editor::DrawProperty(vec2 drawPos, const std::string name, std::string* value, float propX, std::string ID)
+vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, std::string* value, float propX, std::string ID)
 {
 	TextManager::RenderText(name + ":", drawPos, textSize);
 	drawPos.x += propX;
@@ -197,37 +199,37 @@ vec2 Editor::DrawProperty(vec2 drawPos, const std::string name, std::string* val
 	return vec2(propX + propSize.x, textSize);
 }
 
-vec2 Editor::DrawProperty(vec2 drawPos, const std::string name, float* value, float propX, std::string ID)
+vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, float* value, float propX, std::string ID)
 {
 	std::string res = std::to_string(*value);
 	vec2 size = DrawProperty(drawPos, name, &res, propX, ID);
 
 	try { *value = std::stof(res); }
-	catch (std::exception& e) { *value = 0.f; }
+	catch (std::exception& _) { *value = 0.f; }
 
 	return size;
 }
 
-vec2 Editor::DrawProperty(vec2 drawPos, const std::string name, vec2* value, float propX, std::string ID)
+vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, vec2* value, float propX, std::string ID)
 {
 	std::string resX = std::to_string(value->x);
 	std::string resY = std::to_string(value->y);
 
 	drawPos.y -= TextManager::RenderText(name + ":", drawPos, textSize).y;
-	TextManager::RenderText("X:", drawPos + vec2(indentation, 0), textSize);
-	vec2 Xsize = TextInput(drawPos + vec2(propX, 0), &resX, ID + "X");
+	TextManager::RenderText("X:", drawPos + vec3(indentation, 0, 0), textSize);
+	vec2 Xsize = TextInput(drawPos + vec3(propX, 0, 0), &resX, ID + "X");
 	drawPos.y -= Xsize.y;
 
-	TextManager::RenderText("Y:", drawPos + vec2(indentation, 0), textSize);
-	vec2 Ysize = TextInput(drawPos + vec2(propX, 0), &resY, ID + "Y");
+	TextManager::RenderText("Y:", drawPos + vec3(indentation, 0, 0), textSize);
+	vec2 Ysize = TextInput(drawPos + vec3(propX, 0, 0), &resY, ID + "Y");
 
 	float maxX = max(Xsize.x, Ysize.x);
 
 	try { value->x = std::stof(resX); }
-	catch (std::exception& e) { value->x = 0.f; }
+	catch (std::exception& _) { value->x = 0.f; }
 
 	try { value->y = std::stof(resY); }
-	catch (std::exception& e) { value->y = 0.f; }
+	catch (std::exception& _) { value->y = 0.f; }
 
 	return vec2(propX + maxX, textSize * 3);
 }

@@ -26,7 +26,7 @@ public:
 	virtual std::string Save();
 	static EditorObject* LoadBaseData(std::string data);
 
-	virtual vec2 DrawProperties(vec2 drawPos);
+	virtual vec2 DrawProperties(vec3 drawPos);
 
 private:
 	vec2 position;
