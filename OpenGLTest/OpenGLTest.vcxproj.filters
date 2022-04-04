@@ -78,7 +78,7 @@
     <ClCompile Include="Editor.cpp">
       <Filter>LevelEditor</Filter>
     </ClCompile>
-    <ClCompile Include="EditorPlayer.cpp">
+    <ClCompile Include="EditorSprite.cpp">
       <Filter>LevelEditor</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,7 +134,7 @@
     <ClInclude Include="Editor.h">
       <Filter>LevelEditor</Filter>
     </ClInclude>
-    <ClInclude Include="EditorPlayer.h">
+    <ClInclude Include="EditorSprite.h">
       <Filter>LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>

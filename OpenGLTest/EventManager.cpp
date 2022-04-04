@@ -10,6 +10,9 @@ namespace EventManager
 	std::list<GLFWscrollfun> OnScroll = std::list<GLFWscrollfun>();
 	std::list<GLFWcharfun> OnCharPressed = std::list<GLFWcharfun>();
 
+	std::list<std::function<void()>> OnOpenEditor = std::list<std::function<void()>>();
+	std::list<std::function<void()>> OnCloseEditor = std::list<std::function<void()>>();
+
 	void SetupEvents()
 	{
 		glfwSetMouseButtonCallback(Utility::window, OnClickCallback);

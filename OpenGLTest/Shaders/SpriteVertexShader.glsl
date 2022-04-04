@@ -9,6 +9,6 @@ uniform mat4 projection;
 
 void main()
 {
-    gl_Position = projection * transform * vec4(vtexPos.xy, vtexPos.z - 1.0, 1.0);
+    gl_Position = projection * transform * vec4(vtexPos.xyz, 1.0);
     texCoord = vtexuv;
 }

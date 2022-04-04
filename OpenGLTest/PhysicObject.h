@@ -18,6 +18,8 @@ public:
 	/// </summary>
 	const float gravityAcceleration = 50;
 
+	bool physicsEnabled = true;
+
 	vec2 velocity = vec2(0);
 	bool isColliding = false;
 	bool isOnWalkableSurface = false;

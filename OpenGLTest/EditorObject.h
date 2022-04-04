@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Editor.h"
 #include "Collider.h"
+#include "Editor.h"
 
 #include <glm/common.hpp>
 #include <string>
@@ -11,14 +11,14 @@ using namespace glm;
 class EditorObject
 {
 public:
-	EditorObject(vec2 position);
+	EditorObject(vec3 position);
 	~EditorObject();
 
 	int ID;
 	std::string name;
 
-	vec2 GetPos();
-	virtual vec2 SetPos(vec2 pos);
+	vec3 GetEditPos();
+	virtual vec3 SetEditPos(vec3 pos);
 	float parallax;
 
 	Collider* clickCollider;
@@ -29,6 +29,6 @@ public:
 	virtual vec2 DrawProperties(vec3 drawPos);
 
 private:
-	vec2 position;
+	vec3 editorPosition;
 };
 

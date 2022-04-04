@@ -18,8 +18,8 @@ Code from https://learnopengl.com/
 #include "Camera.h"
 #include "TextManager.h"
 #include "Collider.h"
+#include "EditorSprite.h"
 #include "Editor.h"
-#include "EditorPlayer.h"
 
 using namespace std;
 using namespace Utility;
@@ -62,8 +62,8 @@ int main(int argc, void* argv[])
     glEnable(GL_DEPTH_TEST);
 
     // Eable blend
-    // glEnable(GL_BLEND);
-    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Start event manager
     EventManager::SetupEvents();
@@ -71,16 +71,17 @@ int main(int argc, void* argv[])
     // Load basic ressources
     RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\SpriteFragShader.glsl", "sprite");
     RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\ColorFragShader.glsl", "spriteColor");
-    RessourceManager::LoadTexture("Images\\circle.png", "circle");
 
     // Start level editor
-    Editor::SetupEditor();
+    Editor::CreateEditor();
 
     EditorObject* objects[] = {
-        (EditorObject*)new EditorPlayer(vec2(0, 0))
+        (EditorObject*)new Player(vec3(0)),
+        (EditorObject*)new EditorSprite(),
     };
 
     objects[0]->name = "Player";
+    objects[1]->name = "Sprite!";
 
     Camera::SetupCamera();
 
@@ -92,12 +93,15 @@ int main(int argc, void* argv[])
 
         // Clear image and depth buffer
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // Sprite::SetupFrame(); Uncomment when finished alpha sorting
+
+        Camera::UpdateCamera();
 
         EventManager::Call(&EventManager::OnMainLoop);
 
-        Camera::UpdateCamera();
+        // Sprite::DrawAll(); Uncomment when finished alpha sorting
 
         // Check and call events and swap the buffers
         glfwSwapBuffers(window);

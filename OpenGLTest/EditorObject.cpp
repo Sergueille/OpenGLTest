@@ -4,10 +4,13 @@
 
 using namespace glm;
 
-EditorObject::EditorObject(vec2 position)
+EditorObject::EditorObject(vec3 position)
 {
 	Editor::editorObjects.push_back(this);
-	this->SetPos(position);
+	this->SetEditPos(position);
+
+	Editor::IDmax++;
+	this->ID = Editor::IDmax;
 }
 
 EditorObject::~EditorObject()
@@ -16,30 +19,31 @@ EditorObject::~EditorObject()
 	if (clickCollider) delete clickCollider;
 }
 
-vec2 EditorObject::GetPos()
+vec3 EditorObject::GetEditPos()
 {
-	return position;
+	return editorPosition;
 }
 
-vec2 EditorObject::SetPos(vec2 pos)
+vec3 EditorObject::SetEditPos(vec3 pos)
 {
-	position = pos;
+	editorPosition = pos;
 	if (clickCollider) 
-		clickCollider->position = position;
-	return position;
+		clickCollider->position = editorPosition;
+	return editorPosition;
 }
 
 vec2 EditorObject::DrawProperties(vec3 startPos)
 {
 	std::string strID = std::to_string(ID);
-	float propX = Editor::panelSize / 2.0f;
 
 	vec3 drawPos = startPos;
-	drawPos.y -= Editor::DrawProperty(drawPos, "Name", &name, propX, strID + "name").y;
-	drawPos.y -= Editor::DrawProperty(drawPos, "Position", &position, propX, strID + "pos").y;
-	SetPos(position);
+	drawPos.y -= Editor::DrawProperty(drawPos, "Name", &name, Editor::panelPropertiesX, strID + "name").y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Position", &editorPosition, Editor::panelPropertiesX, strID + "pos").y;
+	SetEditPos(editorPosition);
 
-	return drawPos - startPos;
+	vec2 res = vec2(drawPos - startPos);
+	res.y *= -1;
+	return res;
 }
 
 std::string EditorObject::Save()

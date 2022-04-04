@@ -14,8 +14,9 @@
 #include "EventManager.h"
 #include "RessourceManager.h"
 
+std::priority_queue<Sprite, std::vector<Sprite>, CompareSprite> Sprite::drawQueue = std::priority_queue<Sprite, std::vector<Sprite>, CompareSprite>();
 
-Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader, bool isUI)
+Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader, bool isUI, bool isTransparent)
 {
     this->texture = texture;
     this->position = position;
@@ -28,10 +29,11 @@ Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotat
     EventManager::OnMainLoop.push_back([this] { this->Draw(); });
 }
 
-Sprite::Sprite(bool isUI, glm::vec3 position, glm::vec2 size, glm::vec4 color) : Sprite(nullptr, position, size, 0.f, color, nullptr, isUI)
+Sprite::Sprite(bool isUI, glm::vec3 position, glm::vec2 size, glm::vec4 color, bool isTransparent) : 
+    Sprite(nullptr, position, size, 0.f, color, nullptr, isUI, isTransparent)
 { }
 
-void Sprite::DrawSprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader, bool isUI)
+void Sprite::DrawSprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader, bool isUI, bool isTransparent)
 {
     if (shader == nullptr)
     {
@@ -77,12 +79,13 @@ void Sprite::DrawSprite(Texture* texture, glm::vec3 position, glm::vec2 size, fl
 
 void Sprite::DrawSpriteUI(glm::vec3 start, glm::vec3 end, glm::vec4 color)
 {
-    DrawSprite(nullptr, (start + end) / 2.f, end - start, 0.f, color, nullptr, true);
+    bool isTransparent = color.a < 1;
+    DrawSprite(nullptr, (start + end) / 2.f, end - start, 0.f, color, nullptr, true, isTransparent);
 }
 
 void Sprite::Draw()
 {
-    DrawSprite(texture, position, size, rotate, color, shader, isUI);
+    DrawSprite(texture, position, size, rotate, color, shader, isUI, isTransparent);
 }
 
 namespace SpriteRenderer
@@ -106,6 +109,10 @@ namespace SpriteRenderer
         mesh = new Mesh(&vertices[0], (int)std::size(vertices), &indices[0], (int)std::size(indices));
         return mesh;
     }
-
 }
 
+
+bool CompareSprite::operator()(const Sprite& lhs, const Sprite& rhs)
+{
+    return lhs.position.z < rhs.position.z;
+}

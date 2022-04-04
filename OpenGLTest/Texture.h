@@ -1,4 +1,7 @@
 #pragma once
+
+#include <string>
+
 class Texture
 {
 public:
@@ -13,9 +16,20 @@ public:
 	float ratio;
 
 	/// <summary>
-	/// Creates a new texture form file
+	/// The path of the original image file, NOT including base path and "Images\"
 	/// </summary>
-	Texture(const char* path);
+	std::string path;
+
+	/// <summary>
+	/// Could this texture be loaded
+	/// </summary>
+	bool loadingFailed;
+
+	/// <summary>
+	/// Creates a new texture form file
+	/// Enter path from executable position, including "Images"
+	/// </summary>
+	Texture(std::string path);
 	/// <summary>
 	/// DO NOT USE ME! I'm the default constructor!
 	/// </summary>

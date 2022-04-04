@@ -152,7 +152,7 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorObject.cpp" />
-    <ClCompile Include="EditorPlayer.cpp" />
+    <ClCompile Include="EditorSprite.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="mesh.cpp" />
@@ -173,7 +173,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorObject.h" />
-    <ClInclude Include="EditorPlayer.h" />
+    <ClInclude Include="EditorSprite.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="PhysicObject.h" />

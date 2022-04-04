@@ -14,10 +14,11 @@
 #include "EventManager.h"
 #include "Utility.h"
 #include "CircleCollider.h"
+#include "EditorObject.h"
 
 using namespace glm;
 
-class Player: PhysicObject
+class Player: PhysicObject, EditorObject
 {
 public:
 	const float height = 1;
@@ -38,8 +39,10 @@ public:
 
 	Sprite* sprite = NULL;
 
-	Player();
+	Player(vec3 position);
 	~Player();
+
+	virtual vec3 SetEditPos(vec3 pos) override;
 
 protected:
 	void OnAfterMove() override;

@@ -10,10 +10,21 @@ Shader* RessourceManager::LoadShader(const char* vtex, const char* frag, std::st
     return &shaders[programName];
 }
 
-Texture* RessourceManager::LoadTexture(const char* file, std::string textureName)
+Texture* RessourceManager::GetTexture(std::string file)
 {
-    textures[textureName] = Texture(file);
-    return &textures[textureName];
+    std::replace(file.begin(), file.end(), '/', '\\');
+
+    if (textures.find(file) == textures.end())
+    {
+        textures[file] = Texture("Images\\" + file);
+    }
+
+    if (textures[file].loadingFailed)
+    {
+        return GetTexture("Engine\\notFound.png");
+    }
+
+    return &textures[file];
 }
 
 void RessourceManager::Clear()

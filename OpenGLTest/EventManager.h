@@ -13,6 +13,9 @@ namespace EventManager
 	extern std::list<GLFWscrollfun> OnScroll;
 	extern std::list<GLFWcharfun> OnCharPressed;
 
+	extern std::list<std::function<void()>> OnOpenEditor;
+	extern std::list<std::function<void()>> OnCloseEditor;
+
 	void SetupEvents();
 
 	/// <summary>

@@ -5,15 +5,26 @@
 
 using namespace glm;
 
-Player::Player() : PhysicObject(new CircleCollider(GetPos(), height))
+Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), height)), EditorObject(position)
 {
-	sprite = new Sprite(&RessourceManager::textures["circle"], 
-		glm::vec3(0), glm::vec2(height), 0,
+	SetPos(position);
+
+	sprite = new Sprite(RessourceManager::GetTexture("util\\circle.png"),
+		position, glm::vec2(height), 0,
 		glm::vec4(1, 0, 0, 1)); // Create a sprite!
 
 	collider = new CircleCollider(GetPos(), height);
+	clickCollider = collider;
 
 	Camera::getTarget = [this]() -> glm::vec2 { return this->GetPos(); };
+
+	EventManager::OnOpenEditor.push_back([this]() -> void { this->physicsEnabled = false; });
+	EventManager::OnCloseEditor.push_back([this]() -> void { this->physicsEnabled = true; });
+
+	if (Editor::enabled)
+	{
+		this->physicsEnabled = false;
+	}
 }
 
 Player::~Player()
@@ -22,6 +33,13 @@ Player::~Player()
 	delete collider;
 }
 
+vec3 Player::SetEditPos(vec3 pos)
+{
+	sprite->position = vec3(pos.x, pos.y, -2);
+	return EditorObject::SetEditPos(pos);
+}
+
+// Handle physics
 void Player::OnAfterMove()
 {
 	sprite->position = vec3(GetPos().x, GetPos().y, 0);

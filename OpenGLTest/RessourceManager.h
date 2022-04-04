@@ -4,6 +4,7 @@
 #include <string>
 #include <glad/glad.h>
 #include <map>
+#include <algorithm>
 
 #include "texture.h"
 #include "shader.h"
@@ -15,7 +16,8 @@ public:
 	static std::map<std::string, Texture> textures;
 
 	static Shader* LoadShader(const char* vtex, const char* frag, std::string programName);
-	static Texture* LoadTexture(const char* file, std::string textureName);
+
+	static Texture* GetTexture(std::string file);
 
 	static void Clear();
 };

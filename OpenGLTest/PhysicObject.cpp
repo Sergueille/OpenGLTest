@@ -14,6 +14,9 @@ PhysicObject::PhysicObject(Collider* coll)
 
 void PhysicObject::OnMainLoop()
 {
+	if (!physicsEnabled)
+		return;
+
 	this->OnBeforeMove();
 
 	// Skip if no colliders
