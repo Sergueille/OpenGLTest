@@ -95,13 +95,11 @@ int main(int argc, void* argv[])
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Sprite::SetupFrame(); Uncomment when finished alpha sorting
-
         Camera::UpdateCamera();
 
         EventManager::Call(&EventManager::OnMainLoop);
 
-        // Sprite::DrawAll(); Uncomment when finished alpha sorting
+        Sprite::DrawAll();
 
         // Check and call events and swap the buffers
         glfwSwapBuffers(window);

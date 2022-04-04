@@ -14,9 +14,9 @@
 #include "EventManager.h"
 #include "RessourceManager.h"
 
-std::priority_queue<Sprite, std::vector<Sprite>, CompareSprite> Sprite::drawQueue = std::priority_queue<Sprite, std::vector<Sprite>, CompareSprite>();
+std::priority_queue<Sprite*, std::vector<Sprite*>, CompareSprite> Sprite::drawQueue = std::priority_queue<Sprite*, std::vector<Sprite*>, CompareSprite>();
 
-Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader, bool isUI, bool isTransparent)
+Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader, bool isUI, bool isTransparent, bool destroyAfterDrawing)
 {
     this->texture = texture;
     this->position = position;
@@ -25,15 +25,42 @@ Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotat
     this->color = color;
     this->isUI = isUI;
     this->shader = shader;
+    this->destroyAfterDrawing = destroyAfterDrawing;
 
+    if (texture == nullptr && color.a == 1)
+        this->isTransparent = false;
+    else
+        this->isTransparent = isTransparent;
+
+    // TODO: make auto-subscribe optional
     EventManager::OnMainLoop.push_back([this] { this->Draw(); });
 }
 
-Sprite::Sprite(bool isUI, glm::vec3 position, glm::vec2 size, glm::vec4 color, bool isTransparent) : 
-    Sprite(nullptr, position, size, 0.f, color, nullptr, isUI, isTransparent)
+Sprite::Sprite(bool isUI, glm::vec3 position, glm::vec2 size, glm::vec4 color, bool isTransparent, bool destroyAfterDrawing) :
+    Sprite(nullptr, position, size, 0.f, color, nullptr, isUI, isTransparent, destroyAfterDrawing)
 { }
 
-void Sprite::DrawSprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader, bool isUI, bool isTransparent)
+Sprite::Sprite(glm::vec3 start, glm::vec3 end, glm::vec4 color) :
+    Sprite(nullptr, glm::vec3(0), glm::vec2(0), 0.f, color, nullptr, true, false, true)
+{
+    this->position = (start + end) / 2.f;
+    this->size = end - start;
+    this->isTransparent = color.a < 1;
+}
+
+void Sprite::Draw()
+{
+    if (isTransparent)
+    {
+        drawQueue.push(this);
+    }
+    else
+    {
+        DrawNow();
+    }
+}
+
+void Sprite::DrawNow()
 {
     if (shader == nullptr)
     {
@@ -77,15 +104,32 @@ void Sprite::DrawSprite(Texture* texture, glm::vec3 position, glm::vec2 size, fl
     SpriteRenderer::mesh->DrawMesh();
 }
 
-void Sprite::DrawSpriteUI(glm::vec3 start, glm::vec3 end, glm::vec4 color)
+Sprite::~Sprite()
 {
-    bool isTransparent = color.a < 1;
-    DrawSprite(nullptr, (start + end) / 2.f, end - start, 0.f, color, nullptr, true, isTransparent);
+    std::cout << "Here!" << std::endl;
 }
 
-void Sprite::Draw()
+void Sprite::DrawAll()
 {
-    DrawSprite(texture, position, size, rotate, color, shader, isUI, isTransparent);
+    while (!drawQueue.empty())
+    {
+        if (drawQueue.top() == nullptr)
+        {
+            std::cout << "Sprite subscribed to transparent draw queue but have been destroyed!" << std::endl;
+            std::cout << "When creating a sprite, always store it in the heap and make sure auto-destroy property is true" << std::endl;
+        }
+        else
+        {
+            // Draw the sprite
+            drawQueue.top()->DrawNow();
+
+            // Auto-delete
+            if (drawQueue.top()->destroyAfterDrawing)
+                delete drawQueue.top();
+        }
+
+        drawQueue.pop();
+    }
 }
 
 namespace SpriteRenderer

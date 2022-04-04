@@ -13,7 +13,7 @@ class RessourceManager
 {
 public:
 	static std::map<std::string, Shader> shaders;
-	static std::map<std::string, Texture> textures;
+	static std::map<std::string, Texture*> textures;
 
 	static Shader* LoadShader(const char* vtex, const char* frag, std::string programName);
 

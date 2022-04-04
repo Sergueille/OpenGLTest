@@ -155,6 +155,7 @@
     <ClCompile Include="EditorSprite.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="EditorObject.h" />
     <ClInclude Include="EditorSprite.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="Player.h" />

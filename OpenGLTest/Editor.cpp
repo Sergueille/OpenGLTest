@@ -117,7 +117,7 @@ void Editor::DrawPanel()
 	vec3 drawPos = vec3(10, Utility::screenY - textSize - margin, UIBaseZPos + 5);
 
 	// Background
-	Sprite::DrawSpriteUI(vec3(0, 0, UIBaseZPos), vec3(panelSize, Utility::screenY, UIBaseZPos), vec4(0, 0, 0, 0.3f));
+	(new Sprite(vec3(0, 0, UIBaseZPos), vec3(panelSize, Utility::screenY, UIBaseZPos), vec4(0, 0, 0, 0.3f)))->Draw();
 
 	// Draw tabs buttons
 	int i = 0;

@@ -25,25 +25,36 @@ public:
 	bool isUI;
 	bool isTransparent;
 
-	static std::priority_queue<Sprite, std::vector<Sprite>, CompareSprite> drawQueue;
+	/// <summary>
+	/// Should the sprite be auto-destroyed when drawn
+	/// </summary>
+	bool destroyAfterDrawing;
+
+	static std::priority_queue<Sprite*, std::vector<Sprite*>, CompareSprite> drawQueue;
 
 	Sprite(Texture* texture, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1), 
 		float rotate = 0.0f, glm::vec4 color = glm::vec4(1.0f), Shader* shader = nullptr, 
-		bool isUI = false, bool isTransparent = false);
+		bool isUI = false, bool isTransparent = true, bool destroyAfterDrawing = false);
 
-	Sprite(bool isUI, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1), glm::vec4 color = glm::vec4(1.0f), bool isTransparent = false);
+	Sprite(bool isUI, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1), 
+		glm::vec4 color = glm::vec4(1.0f), bool isTransparent = true, bool destroyAfterDrawing = false);
+	Sprite(glm::vec3 start, glm::vec3 end, glm::vec4 color = glm::vec4(0, 0, 0, 1));
 
-	static void DrawSprite(Texture* texture, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1),
-		float rotate = 0.0f, glm::vec4 color = glm::vec4(1.0f), Shader* shader = nullptr, 
-		bool isUI = false, bool isTransparent = false);
+	// DEBUG DESTRUCTOR
+	~Sprite();
 
-	static void DrawSpriteUI(glm::vec3 start, glm::vec3 end, glm::vec4 color = glm::vec4(0, 0, 0, 1));
+	/// <summary>
+	/// Draw now if opaque, or add sprite to queue if transparent
+	/// </summary>
+	void Draw();
 
-	static void SetupFrame();
+	/// <summary>
+	/// Draw all sprites stored in queue
+	/// </summary>
 	static void DrawAll();
 
 private:
-	void Draw();
+	void DrawNow();
 };
 
 namespace SpriteRenderer

@@ -20,6 +20,12 @@ Mesh::Mesh(float* firstV, int vcount, unsigned int* firstID, int icount)
     SetVertexData();
 }
 
+Mesh::~Mesh()
+{
+    glDeleteVertexArrays(1, &VAO);
+    // TODO: where are the EBO and VBO destroyed?
+}
+
 void Mesh::DrawMesh()
 {    
     glBindVertexArray(VAO); // Use the vertex array
@@ -49,7 +55,7 @@ void Mesh::SetVertexData()
     // Set vertex attributes
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));//teeest
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
     // Set indices in buffer

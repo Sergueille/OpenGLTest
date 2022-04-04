@@ -1,7 +1,7 @@
 #include "RessourceManager.h"
 
 std::map<std::string, Shader> RessourceManager::shaders = std::map<std::string, Shader>();
-std::map<std::string, Texture> RessourceManager::textures = std::map<std::string, Texture>();
+std::map<std::string, Texture*> RessourceManager::textures = std::map<std::string, Texture*>();
 
 // TODO: optimisation : avoiding load twice?
 Shader* RessourceManager::LoadShader(const char* vtex, const char* frag, std::string programName)
@@ -16,15 +16,15 @@ Texture* RessourceManager::GetTexture(std::string file)
 
     if (textures.find(file) == textures.end())
     {
-        textures[file] = Texture("Images\\" + file);
+        textures[file] = new Texture("Images\\" + file);
     }
 
-    if (textures[file].loadingFailed)
+    if (textures[file]->loadingFailed)
     {
         return GetTexture("Engine\\notFound.png");
     }
 
-    return &textures[file];
+    return textures[file];
 }
 
 void RessourceManager::Clear()
@@ -33,5 +33,8 @@ void RessourceManager::Clear()
         glDeleteProgram(shader.second.ID);
 
     for (auto& texture : textures)
-        glDeleteProgram(texture.second.ID);
+    {
+        glDeleteProgram(texture.second->ID);
+        delete texture.second;
+    }
 }

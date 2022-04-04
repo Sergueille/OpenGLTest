@@ -13,6 +13,8 @@ public:
     unsigned int VAO;
 
     Mesh(float* firstV, int vcount, unsigned int* firstID, int icount);
+    ~Mesh();
+
     void DrawMesh();
 
 private:

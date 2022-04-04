@@ -9,7 +9,7 @@ Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), 
 {
 	SetPos(position);
 
-	sprite = new Sprite(RessourceManager::GetTexture("util\\circle.png"),
+	sprite = new Sprite(RessourceManager::GetTexture("Engine\\circle.png"),
 		position, glm::vec2(height), 0,
 		glm::vec4(1, 0, 0, 1)); // Create a sprite!
 
