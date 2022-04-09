@@ -12,7 +12,7 @@ class EditorObject
 {
 public:
 	EditorObject(vec3 position);
-	~EditorObject();
+	virtual ~EditorObject();
 
 	int ID;
 	std::string name;
@@ -21,12 +21,21 @@ public:
 	virtual vec3 SetEditPos(vec3 pos);
 	float parallax;
 
+	/// <summary>
+	/// Collider used to click on object in the editor
+	/// </summary>
 	Collider* clickCollider;
 
-	virtual std::string Save();
-	static EditorObject* LoadBaseData(std::string data);
-
+	/// <summary>
+	/// Draws properties of object in the editor panel
+	/// </summary>
 	virtual vec2 DrawProperties(vec3 drawPos);
+	/// <summary>
+	/// Draws buttons under the properties
+	/// </summary>
+	virtual vec2 DrawActions(vec3 drawPos);
+
+	virtual EditorObject* Copy() = 0;
 
 private:
 	vec3 editorPosition;

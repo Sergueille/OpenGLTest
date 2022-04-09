@@ -4,14 +4,14 @@
 
 namespace EventManager 
 {
-	std::list<std::function<void()>> OnMainLoop = std::list<std::function<void()>>();
-	std::list<std::function<void()>> OnExitApp = std::list<std::function<void()>>();
-	std::list<GLFWmousebuttonfun> OnClick = std::list<GLFWmousebuttonfun>();
-	std::list<GLFWscrollfun> OnScroll = std::list<GLFWscrollfun>();
-	std::list<GLFWcharfun> OnCharPressed = std::list<GLFWcharfun>();
+	LinkedList<std::function<void()>> OnMainLoop = LinkedList<std::function<void()>>();
+	LinkedList<std::function<void()>> OnExitApp = LinkedList<std::function<void()>>();
+	LinkedList<GLFWmousebuttonfun> OnClick = LinkedList<GLFWmousebuttonfun>();
+	LinkedList<GLFWscrollfun> OnScroll = LinkedList<GLFWscrollfun>();
+	LinkedList<GLFWcharfun> OnCharPressed = LinkedList<GLFWcharfun>();
 
-	std::list<std::function<void()>> OnOpenEditor = std::list<std::function<void()>>();
-	std::list<std::function<void()>> OnCloseEditor = std::list<std::function<void()>>();
+	LinkedList<std::function<void()>> OnOpenEditor = LinkedList<std::function<void()>>();
+	LinkedList<std::function<void()>> OnCloseEditor = LinkedList<std::function<void()>>();
 
 	void SetupEvents()
 	{
@@ -20,35 +20,35 @@ namespace EventManager
 		glfwSetCharCallback(Utility::window, OnCharPressedCallback);
 	}
 
-	void EventManager::Call(std::list<std::function<void()>>* eventList)
+	void EventManager::Call(LinkedList<std::function<void()>>* eventList)
 	{
-		for (auto& suscribedFunc : *eventList)
+		for (auto el = eventList->first; el != nullptr; el = el->next)
 		{
-			suscribedFunc();
+			el->value();
 		}
 	}
 
 	void EventManager::OnClickCallback(GLFWwindow* window, int button, int action, int mods)
 	{
-		for (auto fun : OnClick)
+		for (auto el = OnClick.first; el != nullptr; el = el->next)
 		{
-			fun(window, button, action, mods);
+			el->value(window, button, action, mods);
 		}
 	}
 
 	void EventManager::OnScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 	{
-		for (auto fun : OnScroll)
+		for (auto el = OnScroll.first; el != nullptr; el = el->next)
 		{
-			fun(window, xOffset, yOffset);
+			el->value(window, xOffset, yOffset);
 		}
 	}
 
 	void OnCharPressedCallback(GLFWwindow* window, unsigned int codepoint)
 	{
-		for (auto fun : OnCharPressed)
+		for (auto el = OnCharPressed.first; el != nullptr; el = el->next)
 		{
-			fun(window, codepoint);
+			el->value(window, codepoint);
 		}
 	}
 }

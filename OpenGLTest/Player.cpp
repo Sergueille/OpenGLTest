@@ -12,14 +12,15 @@ Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), 
 	sprite = new Sprite(RessourceManager::GetTexture("Engine\\circle.png"),
 		position, glm::vec2(height), 0,
 		glm::vec4(1, 0, 0, 1)); // Create a sprite!
+	sprite->DrawOnMainLoop();
 
 	collider = new CircleCollider(GetPos(), height);
 	clickCollider = collider;
 
 	Camera::getTarget = [this]() -> glm::vec2 { return this->GetPos(); };
 
-	EventManager::OnOpenEditor.push_back([this]() -> void { this->physicsEnabled = false; });
-	EventManager::OnCloseEditor.push_back([this]() -> void { this->physicsEnabled = true; });
+	subscribedFuncs[0] = EventManager::OnOpenEditor.push_end([this]() -> void { this->physicsEnabled = false; });
+	subscribedFuncs[1] = EventManager::OnCloseEditor.push_end([this]() -> void { this->physicsEnabled = true; });
 
 	if (Editor::enabled)
 	{
@@ -29,14 +30,32 @@ Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), 
 
 Player::~Player()
 {
-	delete sprite;
-	delete collider;
+	if (sprite != nullptr)
+	{
+		delete sprite; 
+		sprite = nullptr;
+	}
+
+	if (collider != nullptr)
+	{
+		delete collider;
+		collider = nullptr;
+		clickCollider = nullptr;
+	}
+
+	EventManager::OnOpenEditor.remove(subscribedFuncs[0]);
+	EventManager::OnCloseEditor.remove(subscribedFuncs[1]);
 }
 
 vec3 Player::SetEditPos(vec3 pos)
 {
-	sprite->position = vec3(pos.x, pos.y, -2);
+	sprite->position = vec3(pos.x, pos.y, pos.z);
 	return EditorObject::SetEditPos(pos);
+}
+
+EditorObject* Player::Copy()
+{
+	throw "Not implemented";
 }
 
 // Handle physics

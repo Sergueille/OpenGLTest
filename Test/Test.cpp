@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
-#include "../OpenGLTest/Utility.cpp"
+#include "../OpenGLTest/Utility.h"
 #include "../OpenGLTest/Collider.h"
 #include "../OpenGLTest/Collider.cpp"
 #include "../OpenGLTest/RectCollider.cpp"

@@ -75,13 +75,11 @@ int main(int argc, void* argv[])
     // Start level editor
     Editor::CreateEditor();
 
-    EditorObject* objects[] = {
-        (EditorObject*)new Player(vec3(0)),
-        (EditorObject*)new EditorSprite(),
-    };
+    Editor::AddObject((EditorObject*)new Player(vec3(0)));
+    Editor::AddObject((EditorObject*)new EditorSprite());
 
-    objects[0]->name = "Player";
-    objects[1]->name = "Sprite!";
+    (*Editor::editorObjects.begin())->name = "Player";
+    (*Editor::editorObjects.begin() + 1)->name = "Sprite!";
 
     Camera::SetupCamera();
 
@@ -110,11 +108,6 @@ int main(int argc, void* argv[])
 
     EventManager::Call(&EventManager::OnExitApp);
     RessourceManager::Clear();
-
-    for (void* object : objects)
-    {
-        delete object;
-    }
 
     // Clean memory
     glfwTerminate();

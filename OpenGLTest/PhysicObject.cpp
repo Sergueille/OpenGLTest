@@ -2,6 +2,7 @@
 
 #include "Utility.h"
 #include "EventManager.h"
+#include "RectCollider.h"
 
 using namespace glm;
 
@@ -9,7 +10,7 @@ PhysicObject::PhysicObject(Collider* coll)
 {
 	this->collider = coll;
 
-	EventManager::OnMainLoop.push_back([this] { this->OnMainLoop(); }); // subscribe to the main loop
+	EventManager::OnMainLoop.push_end([this] { this->OnMainLoop(); }); // subscribe to the main loop
 }
 
 void PhysicObject::OnMainLoop()
@@ -39,7 +40,7 @@ void PhysicObject::OnMainLoop()
 	// For each rect collider
 	for (auto coll = Collider::rectColliders.begin(); coll != Collider::rectColliders.end(); coll++)
 	{
-		if ((void*)*coll != collider)
+		if ((*coll)->collideWithPhys && (void*)*coll != collider)
 		{
 			// Evaluate collision data
 			vec3 res = collider->CollideWith(*coll);
@@ -50,7 +51,7 @@ void PhysicObject::OnMainLoop()
 	// For each circle colliders
 	for (auto coll = Collider::circleColliders.begin(); coll != Collider::circleColliders.end(); coll++)
 	{
-		if ((void*)*coll != collider)
+		if ((*coll)->collideWithPhys && (void*)*coll != collider)
 		{
 			// Evaluate collision data
 			vec3 res = collider->CollideWith(*coll);

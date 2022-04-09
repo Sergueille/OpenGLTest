@@ -176,6 +176,7 @@
     <ClInclude Include="EditorObject.h" />
     <ClInclude Include="EditorSprite.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="PhysicObject.h" />

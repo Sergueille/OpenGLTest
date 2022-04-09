@@ -2,26 +2,30 @@
 #define EVENT_MANAGER
 
 #include "Utility.h"
+#include "LinkedList.h"
+
 #include <list>
 #include <functional>
 
+using namespace Utility;
+
 namespace EventManager
 {
-	extern std::list<std::function<void()>> OnMainLoop;
-	extern std::list<std::function<void()>> OnExitApp;
-	extern std::list<GLFWmousebuttonfun> OnClick;
-	extern std::list<GLFWscrollfun> OnScroll;
-	extern std::list<GLFWcharfun> OnCharPressed;
+	extern LinkedList<std::function<void()>> OnMainLoop;
+	extern LinkedList<std::function<void()>> OnExitApp;
+	extern LinkedList<GLFWmousebuttonfun> OnClick;
+	extern LinkedList<GLFWscrollfun> OnScroll;
+	extern LinkedList<GLFWcharfun> OnCharPressed;
 
-	extern std::list<std::function<void()>> OnOpenEditor;
-	extern std::list<std::function<void()>> OnCloseEditor;
+	extern LinkedList<std::function<void()>> OnOpenEditor;
+	extern LinkedList<std::function<void()>> OnCloseEditor;
 
 	void SetupEvents();
 
 	/// <summary>
 	/// Call an event
 	/// </summary>
-	void Call(std::list<std::function<void()>>* eventList);
+	void Call(LinkedList<std::function<void()>>* eventList);
 
 	void OnClickCallback(GLFWwindow* window, int button, int action, int mods);
 	void OnScrollCallback(GLFWwindow* window, double xOffset, double yOffset);

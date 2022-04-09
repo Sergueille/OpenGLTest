@@ -4,17 +4,21 @@
 
 using namespace glm;
 
-RectCollider::RectCollider(vec2 position, vec2 size, float orientation)
+RectCollider::RectCollider(vec2 position, vec2 size, float orientation, bool collideWithPhys)
 {
 	this->position = position;
 	this->size = size;
 	this->orientation = orientation;
-	Collider::rectColliders.push_back(this);
+
+	this->collideWithPhys = collideWithPhys;
+	if (collideWithPhys)
+		Collider::rectColliders.push_back(this);
 }
 
 RectCollider::~RectCollider()
 {
-	Collider::rectColliders.remove(this);
+	if (collideWithPhys)
+		Collider::rectColliders.remove(this);
 }
 
 vec3 RectCollider::CollideWith(CircleCollider* other)

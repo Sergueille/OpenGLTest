@@ -16,7 +16,7 @@
 
 std::priority_queue<Sprite*, std::vector<Sprite*>, CompareSprite> Sprite::drawQueue = std::priority_queue<Sprite*, std::vector<Sprite*>, CompareSprite>();
 
-Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader, bool isUI, bool isTransparent, bool destroyAfterDrawing)
+Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotate, glm::vec4 color, Shader* shader, bool isUI)
 {
     this->texture = texture;
     this->position = position;
@@ -25,34 +25,30 @@ Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotat
     this->color = color;
     this->isUI = isUI;
     this->shader = shader;
-    this->destroyAfterDrawing = destroyAfterDrawing;
 
-    if (texture == nullptr && color.a == 1)
-        this->isTransparent = false;
-    else
-        this->isTransparent = isTransparent;
+    this->isDrawnOnMainLoop = false;
 
-    // TODO: make auto-subscribe optional
-    EventManager::OnMainLoop.push_back([this] { this->Draw(); });
+    this->autoDrawFunc = nullptr;
 }
 
-Sprite::Sprite(bool isUI, glm::vec3 position, glm::vec2 size, glm::vec4 color, bool isTransparent, bool destroyAfterDrawing) :
-    Sprite(nullptr, position, size, 0.f, color, nullptr, isUI, isTransparent, destroyAfterDrawing)
+Sprite::Sprite(bool isUI, glm::vec3 position, glm::vec2 size, glm::vec4 color) :
+    Sprite(nullptr, position, size, 0.f, color, nullptr, isUI)
 { }
 
 Sprite::Sprite(glm::vec3 start, glm::vec3 end, glm::vec4 color) :
-    Sprite(nullptr, glm::vec3(0), glm::vec2(0), 0.f, color, nullptr, true, false, true)
+    Sprite(nullptr, glm::vec3(0), glm::vec2(0), 0.f, color, nullptr, true)
 {
     this->position = (start + end) / 2.f;
     this->size = end - start;
-    this->isTransparent = color.a < 1;
 }
 
 void Sprite::Draw()
 {
-    if (isTransparent)
+    if (IsTransparent())
     {
-        drawQueue.push(this);
+        Sprite* copy = new Sprite(*this);
+        copy->isDrawnOnMainLoop = false;
+        drawQueue.push(copy);
     }
     else
     {
@@ -60,24 +56,31 @@ void Sprite::Draw()
     }
 }
 
+Sprite::~Sprite()
+{
+    if (isDrawnOnMainLoop)
+        StopDrawing();
+}
+
 void Sprite::DrawNow()
 {
+    Shader* realShader;
     if (shader == nullptr)
     {
         if (texture == nullptr)
-            shader = &RessourceManager::shaders["spriteColor"];
+            realShader = &RessourceManager::shaders["spriteColor"];
         else
-            shader = &RessourceManager::shaders["sprite"];
+            realShader = &RessourceManager::shaders["sprite"];
     }
     else
     {
-        shader = shader;
+        realShader = shader;
     }
 
     // No texture? ratio of 1
     float ratio = texture == nullptr ? 1 : texture->ratio;
 
-    shader->Use(); // TODO optimise if shader already used
+    realShader->Use(); // TODO optimise if shader already used
     glm::mat4 transform = glm::mat4(1.0f); // Transformation matrix
     transform = glm::translate(transform, position); // Translate
     // transform = glm::translate(transform, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // Translate to pivot //TODO: chage pivot
@@ -85,17 +88,17 @@ void Sprite::DrawNow()
     // transform = glm::translate(transform, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); //  Translate back to center
     transform = glm::scale(transform, glm::vec3(size, 1.0f) * glm::vec3(ratio, 1, 1)); // Scale with size and texture ratio
 
-    shader->SetUniform("transform", transform); // Set transformation matrix to shader
+    realShader->SetUniform("transform", transform); // Set transformation matrix to shader
     if (isUI)
-        shader->SetUniform("projection", Camera::GetUIProjection()); // Set projection matrix to shader
+        realShader->SetUniform("projection", Camera::GetUIProjection()); // Set projection matrix to shader
     else
-        shader->SetUniform("projection", Camera::GetOrthographicProjection()); // Set projection matrix to shader
-    shader->SetUniform("mainColor", color); // Set color
+        realShader->SetUniform("projection", Camera::GetOrthographicProjection()); // Set projection matrix to shader
+    realShader->SetUniform("mainColor", color); // Set color
 
     // Set texture if it exists
     if (texture != nullptr)
     {
-        shader->SetUniform("mainTexture", 0);
+        realShader->SetUniform("mainTexture", 0);
         texture->Use(0);
     }
 
@@ -104,32 +107,38 @@ void Sprite::DrawNow()
     SpriteRenderer::mesh->DrawMesh();
 }
 
-Sprite::~Sprite()
-{
-    std::cout << "Here!" << std::endl;
-}
-
 void Sprite::DrawAll()
 {
     while (!drawQueue.empty())
     {
-        if (drawQueue.top() == nullptr)
-        {
-            std::cout << "Sprite subscribed to transparent draw queue but have been destroyed!" << std::endl;
-            std::cout << "When creating a sprite, always store it in the heap and make sure auto-destroy property is true" << std::endl;
-        }
-        else
-        {
-            // Draw the sprite
-            drawQueue.top()->DrawNow();
-
-            // Auto-delete
-            if (drawQueue.top()->destroyAfterDrawing)
-                delete drawQueue.top();
-        }
-
+        drawQueue.top()->DrawNow();
+        delete drawQueue.top();
         drawQueue.pop();
     }
+}
+
+void Sprite::DrawOnMainLoop()
+{
+    if (!isDrawnOnMainLoop)
+    {
+        autoDrawFunc = EventManager::OnMainLoop.push_end([this] { this->Draw(); });
+        isDrawnOnMainLoop = true;
+    }
+}
+
+void Sprite::StopDrawing()
+{
+    if (isDrawnOnMainLoop)
+    {
+        EventManager::OnMainLoop.remove(autoDrawFunc);
+        isDrawnOnMainLoop = false;
+    }
+}
+
+bool Sprite::IsTransparent()
+{
+    bool opaqueTex = texture == nullptr || texture->isOpaque;
+    return !opaqueTex || color.a < 1;
 }
 
 namespace SpriteRenderer
@@ -156,7 +165,7 @@ namespace SpriteRenderer
 }
 
 
-bool CompareSprite::operator()(const Sprite& lhs, const Sprite& rhs)
+bool CompareSprite::operator()(Sprite* lhs, Sprite* rhs)
 {
-    return lhs.position.z < rhs.position.z;
+    return lhs->position.z > rhs->position.z;
 }

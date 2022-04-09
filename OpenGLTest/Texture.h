@@ -26,6 +26,11 @@ public:
 	bool loadingFailed;
 
 	/// <summary>
+	/// Is the texture opaque
+	/// </summary>
+	bool isOpaque;
+
+	/// <summary>
 	/// Creates a new texture form file
 	/// Enter path from executable position, including "Images"
 	/// </summary>

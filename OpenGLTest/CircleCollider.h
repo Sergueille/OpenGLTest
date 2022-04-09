@@ -9,7 +9,7 @@ using namespace glm;
 class CircleCollider : public Collider
 {
 public:
-	CircleCollider(vec2 position, float size);
+	CircleCollider(vec2 position, float size, bool collideWithPhys = true);
 	~CircleCollider();
 
 	/// <summary>

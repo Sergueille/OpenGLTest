@@ -37,14 +37,18 @@ public:
 
 	bool isJumping = false;
 
-	Sprite* sprite = NULL;
-
 	Player(vec3 position);
 	~Player();
 
 	virtual vec3 SetEditPos(vec3 pos) override;
+	virtual EditorObject* Copy() override;
+
 
 protected:
 	void OnAfterMove() override;
+
+private:
+	LinkedListElement<std::function<void()>>* subscribedFuncs[2];
+	Sprite* sprite;
 };
 

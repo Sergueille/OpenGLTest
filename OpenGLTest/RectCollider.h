@@ -9,7 +9,7 @@ using namespace glm;
 class RectCollider : public Collider
 {
 public:
-	RectCollider(vec2 position, vec2 size, float orientation);
+	RectCollider(vec2 position, vec2 size, float orientation, bool collideWithPhys = true);
 	~RectCollider();
 
 	/// <summary>

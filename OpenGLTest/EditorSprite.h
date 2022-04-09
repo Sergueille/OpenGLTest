@@ -15,6 +15,8 @@ public:
 	virtual vec3 SetEditPos(vec3 pos) override;
 	virtual vec2 DrawProperties(vec3 drawPos) override;
 
+	virtual EditorObject* Copy() override;
+
 	/// <summary>
 	/// Call this to replec collider
 	/// </summary>

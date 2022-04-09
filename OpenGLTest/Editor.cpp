@@ -15,7 +15,7 @@ EditorObject* Editor::selectedObject;
 
 bool Editor::enabled = false;
 
-const float Editor::selectClickMargin = 0.1f;
+const float Editor::selectClickMargin = 0.001f;
 
 const vec4 Editor::textColor = vec4(1);
 const vec4 Editor::highlightColor = vec4(1, 0.5, 0.8, 1);
@@ -37,9 +37,9 @@ int Editor::currentPanelWindow = 0;
 
 void Editor::CreateEditor()
 {
-	EventManager::OnMainLoop.push_back(OnMainLoop);
-	EventManager::OnClick.push_back(OnClick);
-	EventManager::OnCharPressed.push_back(OnCaracterInput);
+	EventManager::OnMainLoop.push_end(OnMainLoop);
+	EventManager::OnClick.push_end(OnClick);
+	EventManager::OnCharPressed.push_end(OnCaracterInput);
 
 	OpenEditor();
 }
@@ -117,7 +117,7 @@ void Editor::DrawPanel()
 	vec3 drawPos = vec3(10, Utility::screenY - textSize - margin, UIBaseZPos + 5);
 
 	// Background
-	(new Sprite(vec3(0, 0, UIBaseZPos), vec3(panelSize, Utility::screenY, UIBaseZPos), vec4(0, 0, 0, 0.3f)))->Draw();
+	Sprite(vec3(0, 0, UIBaseZPos), vec3(panelSize, Utility::screenY, UIBaseZPos), vec4(0, 0, 0, 0.3f)).Draw();
 
 	// Draw tabs buttons
 	int i = 0;
@@ -154,7 +154,7 @@ void Editor::DrawPanel()
 
 void Editor::DrawPropsTab(vec3 drawPos)
 {
-	if (GetSelectedObject() == NULL)
+	if (GetSelectedObject() == nullptr)
 	{
 		TextManager::RenderText("No selected object", drawPos, textSize);
 	}
@@ -162,7 +162,8 @@ void Editor::DrawPropsTab(vec3 drawPos)
 	{
 		drawPos.y -= TextManager::RenderText("Object properties", drawPos, textSize).y + margin;
 		drawPos.x += indentation;
-		drawPos.y -= GetSelectedObject()->DrawProperties(drawPos).y;
+		drawPos.y -= GetSelectedObject()->DrawProperties(drawPos).y + margin;
+		drawPos.y -= GetSelectedObject()->DrawActions(drawPos).y;
 	}
 }
 
@@ -172,22 +173,22 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.x += indentation;
 
 	bool pressed = false;
-	void* newObject = nullptr;
+	EditorObject* newObject = nullptr;
 
 	vec3 newPos = vec3(Camera::position.x, Camera::position.y, 0);
 
 	drawPos.y -= Button(drawPos, "Sprite", &pressed).y;
 	if (pressed)
-		newObject = new EditorSprite(newPos);
+		newObject = (EditorObject*)new EditorSprite(newPos);
 
 	drawPos.y -= Button(drawPos, "Player", &pressed).y;
 	if (pressed)
-		newObject = new Player(newPos);
+		newObject = (EditorObject*)new Player(newPos);
 
 	if (newObject != nullptr)
 	{
-		editorObjects.push_back((EditorObject*)newObject);
-		selectedObject = (EditorObject*)newObject;
+		AddObject(newObject);
+		selectedObject = newObject;
 	}
 }
 
@@ -202,7 +203,8 @@ void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 	if (!enabled)
 		return;
 
-	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+	// Select an object
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS  && !isOverUI(Utility::GetMousePos()))
 	{
 		vec2 worldPos = Utility::ScreenToWorld(Utility::GetMousePos());
 		CircleCollider mouseColl = CircleCollider(worldPos, selectClickMargin);
@@ -302,9 +304,25 @@ EditorObject* Editor::SelectObject(EditorObject* object)
 	return selectedObject;
 }
 
+EditorObject* Editor::AddObject(EditorObject* object)
+{
+	editorObjects.push_back(object);
+	return object;
+}
+
+void Editor::RemoveObject(EditorObject* object)
+{
+	if (GetSelectedObject()->ID == object->ID)
+		SelectObject(nullptr);
+
+	editorObjects.remove(object);
+
+	delete object;
+}
+
 bool Editor::isOverUI(vec2 point)
 {
-	return point.x > panelSize;
+	return point.x < panelSize;
 }
 
 vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, std::string* value, float propX, std::string ID)
@@ -322,7 +340,7 @@ vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, float* value, fl
 	vec2 size = DrawProperty(drawPos, name, &res, propX, ID);
 
 	try { *value = std::stof(res); }
-	catch (std::exception& _) { *value = 0.f; }
+	catch (std::exception) { *value = 0.f; }
 
 	return size;
 }
@@ -385,16 +403,16 @@ vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, vec4* value, int
 	drawPos.x = propX + maxX;
 
 	try { value->x = std::stof(resX); }
-	catch (std::exception& _) { value->x = 0.f; }
+	catch (std::exception) { value->x = 0.f; }
 
 	try { value->y = std::stof(resY); }
-	catch (std::exception& _) { value->y = 0.f; }
+	catch (std::exception) { value->y = 0.f; }
 
 	try { value->z = std::stof(resZ); }
-	catch (std::exception& _) { value->z = 0.f; }
+	catch (std::exception) { value->z = 0.f; }
 
 	try { value->w = std::stof(resW); }
-	catch (std::exception& _) { value->w = 0.f; }
+	catch (std::exception) { value->w = 0.f; }
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;

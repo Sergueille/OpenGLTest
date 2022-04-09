@@ -66,6 +66,9 @@ public:
 	static EditorObject* GetSelectedObject();
 	static EditorObject* SelectObject(EditorObject* object);
 
+	static EditorObject* AddObject(EditorObject* object);
+	static void RemoveObject(EditorObject* object);
+
 	/// <summary>
 	/// Is the point in screen coordinates over editor UI?
 	/// TODO: check if working

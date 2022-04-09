@@ -72,8 +72,8 @@ namespace Camera
 
 	void SetupCamera()
 	{
-		EventManager::OnClick.push_back(OnMouseClick);
-		EventManager::OnScroll.push_back(OnScroll);
+		EventManager::OnClick.push_end(OnMouseClick);
+		EventManager::OnScroll.push_end(OnScroll);
 
 		sizeTarget = size;
 	}

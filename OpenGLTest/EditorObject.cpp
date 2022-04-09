@@ -6,7 +6,6 @@ using namespace glm;
 
 EditorObject::EditorObject(vec3 position)
 {
-	Editor::editorObjects.push_back(this);
 	this->SetEditPos(position);
 
 	Editor::IDmax++;
@@ -15,7 +14,6 @@ EditorObject::EditorObject(vec3 position)
 
 EditorObject::~EditorObject()
 {
-	Editor::editorObjects.remove(this);
 	if (clickCollider) delete clickCollider;
 }
 
@@ -46,12 +44,31 @@ vec2 EditorObject::DrawProperties(vec3 startPos)
 	return res;
 }
 
-std::string EditorObject::Save()
+vec2 EditorObject::DrawActions(vec3 drawPos)
 {
-	return "";
-}
+	vec3 startPos = drawPos;
 
-EditorObject* EditorObject::LoadBaseData(std::string data)
-{
-	return NULL;
+	bool res;
+	drawPos.x += Editor::Button(drawPos, "Destroy", &res).x + Editor::margin;
+
+	if (res)
+	{
+		Editor::RemoveObject(this);
+		return vec2(0);
+	}
+
+	vec2 lastBtnSize = Editor::Button(drawPos, "Duplicate", &res);
+
+	if (res)
+	{
+		EditorObject* newObj = Copy();
+		Editor::SelectObject(newObj);
+	}
+
+	drawPos.x += lastBtnSize.x;
+	drawPos.y += lastBtnSize.y * -1;
+
+	vec2 size = vec2(drawPos - startPos);
+	size.y *= -1;
+	return size;
 }

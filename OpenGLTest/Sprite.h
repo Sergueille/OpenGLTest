@@ -5,12 +5,17 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <queue>
+#include <list>
+#include <functional>
 
+#include "LinkedList.h"
 #include "Texture.h"
 #include "mesh.h"
 #include "shader.h"
 
 // POSSIBLE MEMORY LEAK!!! delete static mesh 
+
+using namespace Utility;
 
 struct CompareSprite;
 class Sprite 
@@ -23,37 +28,40 @@ public:
 	float rotate;
 	glm::vec4 color;
 	bool isUI;
-	bool isTransparent;
-
-	/// <summary>
-	/// Should the sprite be auto-destroyed when drawn
-	/// </summary>
-	bool destroyAfterDrawing;
 
 	static std::priority_queue<Sprite*, std::vector<Sprite*>, CompareSprite> drawQueue;
 
 	Sprite(Texture* texture, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1), 
 		float rotate = 0.0f, glm::vec4 color = glm::vec4(1.0f), Shader* shader = nullptr, 
-		bool isUI = false, bool isTransparent = true, bool destroyAfterDrawing = false);
+		bool isUI = false);
 
 	Sprite(bool isUI, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1), 
-		glm::vec4 color = glm::vec4(1.0f), bool isTransparent = true, bool destroyAfterDrawing = false);
+		glm::vec4 color = glm::vec4(1.0f));
 	Sprite(glm::vec3 start, glm::vec3 end, glm::vec4 color = glm::vec4(0, 0, 0, 1));
 
-	// DEBUG DESTRUCTOR
-	~Sprite();
+	virtual ~Sprite();
 
 	/// <summary>
 	/// Draw now if opaque, or add sprite to queue if transparent
 	/// </summary>
 	void Draw();
 
+	void DrawOnMainLoop();
+	void StopDrawing();
+
+	bool IsTransparent();
+
 	/// <summary>
-	/// Draw all sprites stored in queue
+	/// Draw all sprites stored in queue, MUST BE CALLED ONCE PER FRAME
 	/// </summary>
 	static void DrawAll();
 
+protected:
+	bool isDrawnOnMainLoop;
+
 private:
+	LinkedListElement<std::function<void()>>* autoDrawFunc = nullptr;
+
 	void DrawNow();
 };
 
@@ -71,5 +79,5 @@ namespace SpriteRenderer
 
 struct CompareSprite
 {
-	bool operator()(const Sprite& lhs, const Sprite& rhs);
+	bool operator()(Sprite* lhs, Sprite* rhs);
 };

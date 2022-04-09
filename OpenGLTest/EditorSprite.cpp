@@ -2,7 +2,9 @@
 
 EditorSprite::EditorSprite(glm::vec3 position, glm::vec2 size, float rotate) : Sprite(nullptr, position, size, rotate), EditorObject(position)
 {
-	clickCollider = new RectCollider(position, size, rotate);
+	clickCollider = new RectCollider(position, size, rotate, false);
+
+	DrawOnMainLoop();
 }
 
 vec3 EditorSprite::SetEditPos(vec3 pos)
@@ -26,10 +28,11 @@ vec2 EditorSprite::DrawProperties(vec3 drawPos)
 	std::string texName = texture == nullptr? noTextureDisplay : texture->path;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Texture", &texName, Editor::panelPropertiesX, strID + "texture").y;
 
-	if (texName != "")
+	if (texName == "" || texName == noTextureDisplay)
+	{
 		texture = nullptr;
-
-	if (texName != noTextureDisplay)
+	}
+	else
 	{
 		if (texture == nullptr || texName != texture->path)
 		{
@@ -40,6 +43,24 @@ vec2 EditorSprite::DrawProperties(vec3 drawPos)
 	vec2 res = drawPos - startPos;
 	res.y *= -1;
 	return res;
+}
+
+EditorObject* EditorSprite::Copy()
+{
+	EditorSprite* newObj = new EditorSprite(*this);
+
+	// copy collider
+	RectCollider* oldCollider = (RectCollider*)this->clickCollider;
+	newObj->clickCollider = new RectCollider(oldCollider->position, oldCollider->size, oldCollider->orientation, false);
+
+	// subscribe again to main loop
+	newObj->isDrawnOnMainLoop = false;
+	newObj->DrawOnMainLoop();
+
+	// add to editor list because it's not called automatically because no constructor were used to create object
+	Editor::editorObjects.push_back(newObj);
+
+	return newObj;
 }
 
 void EditorSprite::UpdateTransform()

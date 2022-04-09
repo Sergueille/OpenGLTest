@@ -7,16 +7,20 @@
 
 using namespace glm;
 
-CircleCollider::CircleCollider(vec2 position, float size)
+CircleCollider::CircleCollider(vec2 position, float size, bool collideWithPhys)
 {
 	this->position = position;
 	this->size = size;
-	Collider::circleColliders.push_back(this);
+
+	this->collideWithPhys = collideWithPhys;
+	if (collideWithPhys)
+		Collider::circleColliders.push_back(this);
 }
 
 CircleCollider::~CircleCollider()
 {
-	Collider::circleColliders.remove(this);
+	if (collideWithPhys)
+		Collider::circleColliders.remove(this);
 }
 
 vec3 CircleCollider::CollideWith(CircleCollider* other)
