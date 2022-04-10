@@ -10,7 +10,12 @@ PhysicObject::PhysicObject(Collider* coll)
 {
 	this->collider = coll;
 
-	EventManager::OnMainLoop.push_end([this] { this->OnMainLoop(); }); // subscribe to the main loop
+	funcPos = EventManager::OnMainLoop.push_end([this] { this->OnMainLoop(); }); // subscribe to the main loop
+}
+
+PhysicObject::~PhysicObject()
+{
+	EventManager::OnMainLoop.remove(funcPos);
 }
 
 void PhysicObject::OnMainLoop()

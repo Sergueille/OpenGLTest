@@ -15,6 +15,11 @@ class EditorObject;
 class Editor
 {
 public:
+	enum class Tool
+	{
+		none, move, rotate, scale
+	};
+
 	static std::list<EditorObject*> editorObjects;
 
 	static bool enabled;
@@ -57,6 +62,8 @@ public:
 	/// Max usique object id attribued, used to create new ones
 	/// </summary>
 	static int IDmax;
+
+	static Tool currentTool;
 
 	static void CreateEditor(); // Setup editor and open it
 	static void OpenEditor(); // Open the editor, must be set up before
@@ -105,12 +112,19 @@ public:
 private:
 	static EditorObject* selectedObject;
 
+	static vec2 editToolStartMouse;
+	static vec3 editToolStartPos;
+
 	static void OnMainLoop();
 
 	static void DrawPanel();
 	static void DrawPropsTab(vec3 drawPos);
 	static void DrawAddTab(vec3 drawPos);
 	static void DrawMapTab(vec3 drawPos);
+
+	static void HandleInputBackspace();
+
+	static void HandleTools();
 
 	static void OnClick(GLFWwindow* window, int button, int action, int mods);
 	static void OnCaracterInput(GLFWwindow* window, unsigned int codepoint);

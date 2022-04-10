@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Collider.h"
+#include "LinkedList.h"
 
 using namespace glm;
 
@@ -8,6 +9,7 @@ class PhysicObject
 {
 public:
 	PhysicObject(Collider* coll);
+	virtual ~PhysicObject();
 
 	/// <summary>
 	/// Max angle allowed btw normal and up vector to consideer the surface as walkable
@@ -38,4 +40,6 @@ private:
 
 	void OnMainLoop();
 	void ReactToCollision(vec3 data);
+
+	LinkedListElement<std::function<void()>>* funcPos = nullptr;
 };

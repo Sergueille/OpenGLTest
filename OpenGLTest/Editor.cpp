@@ -28,6 +28,10 @@ float Editor::buttonAlreadyPressed = false;
 
 int Editor::IDmax = 0;
 
+Editor::Tool Editor::currentTool = Editor::Tool::none;
+vec2 Editor::editToolStartMouse;
+vec3 Editor::editToolStartPos;
+
 std::list<std::string> Editor::panelWindows = {
 	"Properties",
 	"Add",
@@ -66,48 +70,35 @@ void Editor::OnMainLoop()
 	if (!enabled)
 		return;
 
+	HandleTools();
+
 	DrawPanel();
 
-	// Handle backspace for text input
-	if (focusedTextInputID != "")
+	HandleInputBackspace();
+}
+
+void Editor::HandleTools()
+{
+	if (selectedObject == nullptr)
+		return;
+
+	vec2 mousePos = ScreenToWorld(GetMousePos());
+
+	// Change tool
+	if (glfwGetKey(Utility::window, GLFW_KEY_G) == GLFW_PRESS && currentTool != Tool::move)
 	{
-		if (glfwGetKey(Utility::window, GLFW_KEY_BACKSPACE) == GLFW_PRESS)
-		{
-			// Control: remove word
-			if (glfwGetKey(Utility::window, GLFW_KEY_LEFT_CONTROL) || glfwGetKey(Utility::window, GLFW_KEY_RIGHT_CONTROL) )
-			{
-				if (backspaceNextTime < Utility::time)
-				{
-					if (focusedTextInputValue.length() > 0)
-					{
-						focusedTextInputValue.pop_back();
-					}
+		currentTool = Tool::move;
+		editToolStartMouse = mousePos;
+		editToolStartPos = selectedObject->editorPosition;
+	}
 
-					while (focusedTextInputValue.length() > 0 && isalpha(focusedTextInputValue[focusedTextInputValue.length() - 1]))
-					{
-						focusedTextInputValue.pop_back();
-					}
-
-					backspaceNextTime = Utility::time + (backspaceFirstLatency / 1000.f);
-				}
-			}
-			else
-			{
-				// remove last letter
-				if (focusedTextInputValue.length() > 0 && backspaceNextTime < Utility::time)
-				{
-					focusedTextInputValue.pop_back();
-					if (backspaceNextTime == 0)
-						backspaceNextTime = Utility::time + (backspaceFirstLatency / 1000.f);
-					else
-						backspaceNextTime = Utility::time + (backspaceLatency / 1000.f);
-				}
-			}
-		}
-		else
-		{
-			backspaceNextTime = 0;
-		}
+	// Actual tools functions
+	switch (currentTool)
+	{
+	case Tool::move:
+		vec2 res = vec2(editToolStartPos) + mousePos - editToolStartMouse;
+		selectedObject->SetEditPos(vec3(res.x, res.y, editToolStartPos.z));
+		break;
 	}
 }
 
@@ -198,32 +189,82 @@ void Editor::DrawMapTab(vec3 drawPos)
 	drawPos.x += indentation;
 }
 
+void Editor::HandleInputBackspace()
+{
+	if (focusedTextInputID != "")
+	{
+		if (glfwGetKey(Utility::window, GLFW_KEY_BACKSPACE) == GLFW_PRESS)
+		{
+			// Control: remove word
+			if (glfwGetKey(Utility::window, GLFW_KEY_LEFT_CONTROL) || glfwGetKey(Utility::window, GLFW_KEY_RIGHT_CONTROL))
+			{
+				if (backspaceNextTime < Utility::time)
+				{
+					if (focusedTextInputValue.length() > 0)
+					{
+						focusedTextInputValue.pop_back();
+					}
+
+					while (focusedTextInputValue.length() > 0 && isalpha(focusedTextInputValue[focusedTextInputValue.length() - 1]))
+					{
+						focusedTextInputValue.pop_back();
+					}
+
+					backspaceNextTime = Utility::time + (backspaceFirstLatency / 1000.f);
+				}
+			}
+			else
+			{
+				// remove last letter
+				if (focusedTextInputValue.length() > 0 && backspaceNextTime < Utility::time)
+				{
+					focusedTextInputValue.pop_back();
+					if (backspaceNextTime == 0)
+						backspaceNextTime = Utility::time + (backspaceFirstLatency / 1000.f);
+					else
+						backspaceNextTime = Utility::time + (backspaceLatency / 1000.f);
+				}
+			}
+		}
+		else
+		{
+			backspaceNextTime = 0;
+		}
+	}
+}
+
 void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 {
 	if (!enabled)
 		return;
 
-	// Select an object
-	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS  && !isOverUI(Utility::GetMousePos()))
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
 	{
-		vec2 worldPos = Utility::ScreenToWorld(Utility::GetMousePos());
-		CircleCollider mouseColl = CircleCollider(worldPos, selectClickMargin);
+		// End current tool
+		currentTool = Tool::none;
 
-		for (auto obj = editorObjects.begin(); obj != editorObjects.end(); obj++)
+		// Select an object
+		if (!isOverUI(Utility::GetMousePos()))
 		{
-			if ((*obj)->clickCollider == nullptr)
-			{
-				std::cout << "Editor object " << (*obj)->name << " has no collider and can't be clicked in the editor" << std::endl;
-				continue;
-			}
+			vec2 worldPos = Utility::ScreenToWorld(Utility::GetMousePos());
+			CircleCollider mouseColl = CircleCollider(worldPos, selectClickMargin);
 
-			vec3 res = (*obj)->clickCollider->CollideWith(&mouseColl);
-
-			// Click on object
-			if (res.z != 0)
+			for (auto obj = editorObjects.begin(); obj != editorObjects.end(); obj++)
 			{
-				selectedObject = *obj;
-				break;
+				if ((*obj)->clickCollider == nullptr)
+				{
+					std::cout << "Editor object " << (*obj)->name << " has no collider and can't be clicked in the editor" << std::endl;
+					continue;
+				}
+
+				vec3 res = (*obj)->clickCollider->CollideWith(&mouseColl);
+
+				// Click on object
+				if (res.z != 0)
+				{
+					selectedObject = *obj;
+					break;
+				}
 			}
 		}
 	}

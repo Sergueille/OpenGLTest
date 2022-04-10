@@ -78,9 +78,6 @@ int main(int argc, void* argv[])
     Editor::AddObject((EditorObject*)new Player(vec3(0)));
     Editor::AddObject((EditorObject*)new EditorSprite());
 
-    (*Editor::editorObjects.begin())->name = "Player";
-    (*Editor::editorObjects.begin() + 1)->name = "Sprite!";
-
     Camera::SetupCamera();
 
     /////// GAME LOOP

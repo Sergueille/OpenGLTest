@@ -40,7 +40,7 @@ public:
 	Player(vec3 position);
 	~Player();
 
-	virtual vec3 SetEditPos(vec3 pos) override;
+	virtual void UpdateTransform() override;
 	virtual EditorObject* Copy() override;
 
 
@@ -49,6 +49,6 @@ protected:
 
 private:
 	LinkedListElement<std::function<void()>>* subscribedFuncs[2];
-	Sprite* sprite;
+	Sprite* playerSprite;
 };
 

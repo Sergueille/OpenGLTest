@@ -18,7 +18,15 @@ public:
 	std::string name;
 
 	vec3 GetEditPos();
-	virtual vec3 SetEditPos(vec3 pos);
+	vec3 SetEditPos(vec3 pos);
+	float SetEditRotation(float rot);
+	vec2 SetEditScale(vec2 scale);
+
+	/// <summary>
+	/// Call this to replace collider, sprites, etc.
+	/// </summary>
+	virtual void UpdateTransform();
+
 	float parallax;
 
 	/// <summary>
@@ -37,7 +45,9 @@ public:
 
 	virtual EditorObject* Copy() = 0;
 
-private:
+	// DO NOT SET MANUALLY, use setEditPos, setEditRotation...
 	vec3 editorPosition;
+	float editorRotation;
+	vec2 editorSize;
 };
 

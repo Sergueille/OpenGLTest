@@ -25,9 +25,28 @@ vec3 EditorObject::GetEditPos()
 vec3 EditorObject::SetEditPos(vec3 pos)
 {
 	editorPosition = pos;
-	if (clickCollider) 
-		clickCollider->position = editorPosition;
+	UpdateTransform();
 	return editorPosition;
+}
+
+float EditorObject::SetEditRotation(float rot)
+{
+	editorRotation = rot;
+	UpdateTransform();
+	return rot;
+}
+
+vec2 EditorObject::SetEditScale(vec2 scale)
+{
+	editorSize = scale;
+	UpdateTransform();
+	return scale;
+}
+
+void EditorObject::UpdateTransform()
+{
+	if (clickCollider)
+		clickCollider->position = editorPosition;
 }
 
 vec2 EditorObject::DrawProperties(vec3 startPos)

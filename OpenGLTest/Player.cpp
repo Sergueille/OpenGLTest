@@ -7,15 +7,15 @@ using namespace glm;
 
 Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), height)), EditorObject(position)
 {
-	SetPos(position);
-
-	sprite = new Sprite(RessourceManager::GetTexture("Engine\\circle.png"),
+	playerSprite = new Sprite(RessourceManager::GetTexture("Engine\\circle.png"),
 		position, glm::vec2(height), 0,
 		glm::vec4(1, 0, 0, 1)); // Create a sprite!
-	sprite->DrawOnMainLoop();
+	playerSprite->DrawOnMainLoop();
 
-	collider = new CircleCollider(GetPos(), height);
+	collider = new CircleCollider(position, height);
 	clickCollider = collider;
+
+	SetPos(position);
 
 	Camera::getTarget = [this]() -> glm::vec2 { return this->GetPos(); };
 
@@ -30,10 +30,10 @@ Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), 
 
 Player::~Player()
 {
-	if (sprite != nullptr)
+	if (playerSprite != nullptr)
 	{
-		delete sprite; 
-		sprite = nullptr;
+		delete playerSprite;
+		playerSprite = nullptr;
 	}
 
 	if (collider != nullptr)
@@ -47,10 +47,10 @@ Player::~Player()
 	EventManager::OnCloseEditor.remove(subscribedFuncs[1]);
 }
 
-vec3 Player::SetEditPos(vec3 pos)
+void Player::UpdateTransform()
 {
-	sprite->position = vec3(pos.x, pos.y, pos.z);
-	return EditorObject::SetEditPos(pos);
+	this->SetPos(editorPosition);
+	playerSprite->position = editorPosition;
 }
 
 EditorObject* Player::Copy()
@@ -61,7 +61,7 @@ EditorObject* Player::Copy()
 // Handle physics
 void Player::OnAfterMove()
 {
-	sprite->position = vec3(GetPos().x, GetPos().y, 0);
+	playerSprite->position = vec3(GetPos().x, GetPos().y, 0);
 
 	float realSpeed = walkSpeed;
 

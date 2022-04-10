@@ -4,13 +4,10 @@ EditorSprite::EditorSprite(glm::vec3 position, glm::vec2 size, float rotate) : S
 {
 	clickCollider = new RectCollider(position, size, rotate, false);
 
-	DrawOnMainLoop();
-}
+	this->editorRotation = rotate;
+	this->editorSize = size;
 
-vec3 EditorSprite::SetEditPos(vec3 pos)
-{
-	this->position = pos;
-	return EditorObject::SetEditPos(pos);
+	DrawOnMainLoop();
 }
 
 vec2 EditorSprite::DrawProperties(vec3 drawPos)
@@ -19,10 +16,10 @@ vec2 EditorSprite::DrawProperties(vec3 drawPos)
 	vec3 startPos = drawPos;
 
 	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
-	drawPos.y -= Editor::DrawProperty(drawPos, "Size", &size, Editor::panelPropertiesX, strID + "size").y;
-	drawPos.y -= Editor::DrawProperty(drawPos, "Orientation", &rotate, Editor::panelPropertiesX, strID + "rotate").y;
-	drawPos.y -= Editor::DrawProperty(drawPos, "Color", &color, Editor::panelPropertiesX, strID + "color", true).y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Size", &editorSize, Editor::panelPropertiesX, strID + "size").y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Orientation", &editorRotation, Editor::panelPropertiesX, strID + "rotate").y;
 	UpdateTransform();
+	drawPos.y -= Editor::DrawProperty(drawPos, "Color", &color, Editor::panelPropertiesX, strID + "color", true).y;
 
 	std::string noTextureDisplay = "No texture";
 	std::string texName = texture == nullptr? noTextureDisplay : texture->path;
@@ -65,6 +62,10 @@ EditorObject* EditorSprite::Copy()
 
 void EditorSprite::UpdateTransform()
 {
+	this->position = editorPosition;
+	this->rotate = editorRotation;
+	this->size = editorSize;
+
 	clickCollider->position = position;
 	((RectCollider*)clickCollider)->orientation = rotate;
 	((RectCollider*)clickCollider)->size = size;
