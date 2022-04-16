@@ -7,6 +7,8 @@ EditorSprite::EditorSprite(glm::vec3 position, glm::vec2 size, float rotate) : S
 	this->editorRotation = rotate;
 	this->editorSize = size;
 
+	typeName = "EditorSprite";
+
 	DrawOnMainLoop();
 }
 
@@ -58,6 +60,31 @@ EditorObject* EditorSprite::Copy()
 	Editor::editorObjects.push_back(newObj);
 
 	return newObj;
+}
+
+void EditorSprite::Load(std::map<std::string, std::string>* props)
+{
+	editorSize = EditorSaveManager::StringToVector2((*props)["size"]);
+	editorRotation = std::stof((*props)["rotation"]);
+	color = EditorSaveManager::StringToVector4((*props)["color"]);
+
+	std::string textureName = (*props)["texturePath"];
+	if (textureName != "")
+	{
+		texture = RessourceManager::GetTexture(textureName);
+	}
+
+	EditorObject::Load(props);
+}
+
+void EditorSprite::Save()
+{
+	EditorObject::Save();
+	EditorSaveManager::WriteProp("size", editorSize);
+	EditorSaveManager::WriteProp("rotation", std::to_string(editorRotation));
+	EditorSaveManager::WriteProp("color", color);
+	if (texture != nullptr)
+		EditorSaveManager::WriteProp("texturePath", texture->path);
 }
 
 void EditorSprite::UpdateTransform()

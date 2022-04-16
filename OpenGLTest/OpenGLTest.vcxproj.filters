@@ -84,6 +84,9 @@
     <ClCompile Include="Line.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="EditorSaveManager.cpp">
+      <Filter>LevelEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="LinkedList.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorSaveManager.h">
+      <Filter>LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

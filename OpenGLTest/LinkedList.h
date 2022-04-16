@@ -101,6 +101,8 @@ namespace Utility
 	template<typename T>
 	void LinkedList<T>::remove(LinkedListElement<T>* value)
 	{
+		if (value == nullptr) return;
+
 		if (value->prev != nullptr)
 			value->prev->next = value->next;
 

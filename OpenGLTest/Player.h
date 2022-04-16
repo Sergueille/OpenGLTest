@@ -18,7 +18,7 @@
 
 using namespace glm;
 
-class Player: PhysicObject, EditorObject
+class Player: PhysicObject, public EditorObject
 {
 public:
 	const float height = 1;
@@ -42,7 +42,6 @@ public:
 
 	virtual void UpdateTransform() override;
 	virtual EditorObject* Copy() override;
-
 
 protected:
 	void OnAfterMove() override;

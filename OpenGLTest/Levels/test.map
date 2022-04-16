@@ -1,0 +1,29 @@
+// Editor map file, test version
+
+count 4
+
+object MapData {
+	mapName: ""
+}
+object EditorSprite {
+	ID: "0"
+	name: ""
+	position: "-2.800000, -0.400000, 0.000000"
+	size: "1.000000, 2.600000"
+	rotation: "-20.000000"
+	color: "1.000000, 0.500000, 0.500000, 1.000000"
+}
+object EditorSprite {
+	ID: "1"
+	name: ""
+	position: "1.000000, -0.600000, 0.000000"
+	size: "2.400000, 2.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "potplant.png"
+}
+object Player {
+	ID: "2"
+	name: ""
+	position: "2.600000, 1.800000, 0.000000"
+}

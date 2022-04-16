@@ -9,6 +9,7 @@ namespace EventManager
 	LinkedList<GLFWmousebuttonfun> OnClick = LinkedList<GLFWmousebuttonfun>();
 	LinkedList<GLFWscrollfun> OnScroll = LinkedList<GLFWscrollfun>();
 	LinkedList<GLFWcharfun> OnCharPressed = LinkedList<GLFWcharfun>();
+	LinkedList<GLFWkeyfun> OnKeyPressed = LinkedList<GLFWkeyfun>();;
 
 	LinkedList<std::function<void()>> OnOpenEditor = LinkedList<std::function<void()>>();
 	LinkedList<std::function<void()>> OnCloseEditor = LinkedList<std::function<void()>>();
@@ -18,6 +19,7 @@ namespace EventManager
 		glfwSetMouseButtonCallback(Utility::window, OnClickCallback);
 		glfwSetScrollCallback(Utility::window, OnScrollCallback);
 		glfwSetCharCallback(Utility::window, OnCharPressedCallback);
+		glfwSetKeyCallback(Utility::window, OnKeyPressedCallbeck);
 	}
 
 	void EventManager::Call(LinkedList<std::function<void()>>* eventList)
@@ -49,6 +51,14 @@ namespace EventManager
 		for (auto el = OnCharPressed.first; el != nullptr; el = el->next)
 		{
 			el->value(window, codepoint);
+		}
+	}
+
+	void OnKeyPressedCallbeck(GLFWwindow* window, int key, int scancode, int action, int mods)
+	{
+		for (auto el = OnKeyPressed.first; el != nullptr; el = el->next)
+		{
+			el->value(window, key, scancode, action, mods);
 		}
 	}
 }

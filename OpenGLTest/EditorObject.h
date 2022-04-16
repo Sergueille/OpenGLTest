@@ -8,16 +8,22 @@
 
 using namespace glm;
 
+class EditorSaveManager;
 class EditorObject
 {
 public:
 	EditorObject(vec3 position);
 	virtual ~EditorObject();
 
+	std::string typeName;
+
 	int ID;
 	std::string name;
 
 	vec3 GetEditPos();
+	float GetEditRotation();
+	vec2 GetEditScale();
+
 	vec3 SetEditPos(vec3 pos);
 	float SetEditRotation(float rot);
 	vec2 SetEditScale(vec2 scale);
@@ -45,7 +51,14 @@ public:
 
 	virtual EditorObject* Copy() = 0;
 
-	// DO NOT SET MANUALLY, use setEditPos, setEditRotation...
+	/// <summary>
+	/// Save the object, please use EditorSaveManager api
+	/// because of inhiterance, DO NOT INCLUDE StartObject() AND EndObject()
+	/// </summary>
+	virtual void Save();
+	virtual void Load(std::map<std::string, std::string>* props);
+
+protected:
 	vec3 editorPosition;
 	float editorRotation;
 	vec2 editorSize;

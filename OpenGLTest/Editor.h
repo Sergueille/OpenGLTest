@@ -1,9 +1,9 @@
 #pragma once
 
 #include "EventManager.h"
-#include "EditorObject.h"
 #include "TextManager.h"
 #include "Camera.h"
+#include "EditorSaveManager.h"
 
 #include <GLFW/glfw3.h>
 #include <list>
@@ -12,6 +12,8 @@
 using namespace glm;
 
 class EditorObject;
+struct MapData;
+class EditorSaveManager;
 class Editor
 {
 public:
@@ -40,6 +42,13 @@ public:
 
 	const static int UIBaseZPos = 100; // The Z position of the UI elements to use
 
+	const static int rotateToolDegreesPerUnits = 40; // Rotration speed for rotate tool
+	static float sizeToolSizePerUnit; // Rotration speed for rotate tool
+
+	static float moveSnapping;
+	static float rotateSnapping;
+	static float sizeSnapping;
+
 	const static vec4 textColor;
 	const static vec4 highlightColor;
 	const static vec4 editColor;
@@ -48,6 +57,13 @@ public:
 	static std::string focusedTextInputValue;
 	static float backspaceNextTime;
 	static float buttonAlreadyPressed;
+
+	/// <summary>
+	/// Where to save the map, relative to levelsBasePath
+	/// </summary>
+	static std::string currentFilePath;
+
+	static MapData currentMapData;
 
 	/// <summary>
 	/// Names of the tabs of the panel
@@ -114,6 +130,9 @@ private:
 
 	static vec2 editToolStartMouse;
 	static vec3 editToolStartPos;
+	static float editToolStartRot;
+	static vec2 editToolStartScale;
+	static vec2 editToolAxisVector; // Used to apply tools only on ona axis (ex: press G X)
 
 	static void OnMainLoop();
 
@@ -128,6 +147,12 @@ private:
 
 	static void OnClick(GLFWwindow* window, int button, int action, int mods);
 	static void OnCaracterInput(GLFWwindow* window, unsigned int codepoint);
+	static void OnKeyPressed(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 	static vec2 DrawProperty(vec3 drawPos, const std::string name, vec4* value, int numComponents, float propX, std::string ID, bool colorNames = false);
+};
+
+struct MapData
+{
+	std::string mapName = "";
 };

@@ -31,43 +31,60 @@ int Editor::IDmax = 0;
 Editor::Tool Editor::currentTool = Editor::Tool::none;
 vec2 Editor::editToolStartMouse;
 vec3 Editor::editToolStartPos;
+float Editor::editToolStartRot;
+vec2 Editor::editToolStartScale;
+vec2 Editor::editToolAxisVector = vec2(1);
+
+float Editor::moveSnapping = 0.2f;
+float Editor::rotateSnapping = 5;
+float Editor::sizeSnapping = 0.2f;
+float Editor::sizeToolSizePerUnit = 1.5f;
+
+std::string Editor::currentFilePath = "";
+MapData Editor::currentMapData = MapData();
 
 std::list<std::string> Editor::panelWindows = {
-	"Properties",
+	"Props",
 	"Add",
-	"Map info",
+	"Map",
 };
 int Editor::currentPanelWindow = 0;
 
 void Editor::CreateEditor()
 {
+	std::cout << "Creating editor" << std::endl;
+
 	EventManager::OnMainLoop.push_end(OnMainLoop);
 	EventManager::OnClick.push_end(OnClick);
 	EventManager::OnCharPressed.push_end(OnCaracterInput);
+	EventManager::OnKeyPressed.push_end(OnKeyPressed);
 
 	OpenEditor();
 }
 
 void Editor::OpenEditor()
 {
+	if (enabled) return;
 	enabled = true;
 	EventManager::Call(&EventManager::OnOpenEditor);
 }
 
 void Editor::CloseEditor()
 {
+	if (!enabled) return;
 	enabled = false;
 	EventManager::Call(&EventManager::OnCloseEditor);
 }
 
 void Editor::DestroyEditor()
 {
+	std::cout << "Destroying editor" << std::endl;
 	CloseEditor();
 }
 
 void Editor::OnMainLoop()
 {
-	if (!enabled)
+	if (!enabled) // EDITOR ONLY
 		return;
 
 	HandleTools();
@@ -79,26 +96,83 @@ void Editor::OnMainLoop()
 
 void Editor::HandleTools()
 {
+	// click validation in OnClick() function;
+	// keys for axis in OnKeyPressed()
+
 	if (selectedObject == nullptr)
 		return;
 
 	vec2 mousePos = ScreenToWorld(GetMousePos());
+	bool snapping = glfwGetKey(Utility::window, GLFW_KEY_LEFT_CONTROL) == GLFW_RELEASE;
 
-	// Change tool
-	if (glfwGetKey(Utility::window, GLFW_KEY_G) == GLFW_PRESS && currentTool != Tool::move)
+	if (currentTool == Tool::move) // MOVE
 	{
-		currentTool = Tool::move;
-		editToolStartMouse = mousePos;
-		editToolStartPos = selectedObject->editorPosition;
+		vec2 pos = (mousePos - vec2(editToolStartPos)) * editToolAxisVector + vec2(editToolStartPos);
+		if (snapping)
+		{
+			pos.x = round(pos.x / moveSnapping) * moveSnapping;
+			pos.y = round(pos.y / moveSnapping) * moveSnapping;
+		}
+		selectedObject->SetEditPos(vec3(pos.x, pos.y, editToolStartPos.z));
+
+		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS) // Cancel
+		{
+			currentTool = Tool::none;
+			selectedObject->SetEditPos(editToolStartPos);
+		}
+	}
+	else if (currentTool == Tool::rotate) // ROTATE
+	{
+		float angle = -(mousePos.x - editToolStartMouse.x) * float(rotateToolDegreesPerUnits);
+		if (snapping) angle = round(angle / rotateSnapping) * rotateSnapping;
+		selectedObject->SetEditRotation(editToolStartRot + angle);
+
+		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS) // Cancel
+		{
+			currentTool = Tool::none;
+			selectedObject->SetEditRotation(editToolStartRot);
+		}
+	}
+	else if (currentTool == Tool::scale) // SCALE
+	{
+		vec2 scale = ((mousePos.x - editToolStartMouse.x) * sizeToolSizePerUnit + 1) * editToolStartScale;
+		if (snapping)
+		{
+			scale.x = round(scale.x / sizeSnapping) * sizeSnapping;
+			scale.y = round(scale.y / sizeSnapping) * sizeSnapping;
+		}
+		selectedObject->SetEditScale(scale * editToolAxisVector + editToolStartScale * (vec2(1) - editToolAxisVector));
+
+		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS) // Cancel
+		{
+			currentTool = Tool::none;
+			selectedObject->SetEditScale(editToolStartScale);
+		}
 	}
 
-	// Actual tools functions
-	switch (currentTool)
+	if (currentTool == Tool::none && !isOverUI(GetMousePos()))
 	{
-	case Tool::move:
-		vec2 res = vec2(editToolStartPos) + mousePos - editToolStartMouse;
-		selectedObject->SetEditPos(vec3(res.x, res.y, editToolStartPos.z));
-		break;
+		editToolAxisVector = vec2(1, 1);
+
+		// Change tool
+		if (glfwGetKey(Utility::window, GLFW_KEY_G) == GLFW_PRESS)
+		{
+			currentTool = Tool::move;
+			editToolStartMouse = mousePos;
+			editToolStartPos = selectedObject->GetEditPos();
+		}
+		else if (glfwGetKey(Utility::window, GLFW_KEY_R) == GLFW_PRESS)
+		{
+			currentTool = Tool::rotate;
+			editToolStartMouse = mousePos;
+			editToolStartRot = selectedObject->GetEditRotation();
+		}
+		else if (glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS)
+		{
+			currentTool = Tool::scale;
+			editToolStartMouse = mousePos;
+			editToolStartScale = selectedObject->GetEditScale();
+		}
 	}
 }
 
@@ -185,8 +259,19 @@ void Editor::DrawAddTab(vec3 drawPos)
 
 void Editor::DrawMapTab(vec3 drawPos)
 {
-	drawPos.y -= TextManager::RenderText("Map properties", drawPos, textSize).y + margin;
+	drawPos.y -= TextManager::RenderText("Map and file properties", drawPos, textSize).y + margin;
 	drawPos.x += indentation;
+	drawPos.y -= DrawProperty(drawPos, "File path", &currentFilePath, panelPropertiesX, "FilePath").y;
+
+	bool res;
+	drawPos.y -= Button(drawPos, "Save!", &res).y + margin;
+	if (res) EditorSaveManager::SaveLevel();
+
+	std::string loadPath = "";
+	drawPos.y -= DrawProperty(drawPos, "Load a level", &loadPath, panelPropertiesX, "LoadPath").y + margin;
+	if (loadPath != "") EditorSaveManager::LoadLevel(loadPath);
+
+	drawPos.y -= DrawProperty(drawPos, "Map name", &currentMapData.mapName, panelPropertiesX, "MapName").y;
 }
 
 void Editor::HandleInputBackspace()
@@ -460,6 +545,27 @@ vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, vec4* value, int
 	return res;
 }
 
+void Editor::OnKeyPressed(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	// Switch tool axis
+	if (currentTool != Tool::none)
+	{
+		if (key == GLFW_KEY_X && action == GLFW_PRESS)
+		{
+			if (editToolAxisVector == vec2(1, 0))
+				editToolAxisVector = vec2(1, 1);
+			else
+				editToolAxisVector = vec2(1, 0);
+		}
+		else if (key == GLFW_KEY_Y && action == GLFW_PRESS)
+		{
+			if (editToolAxisVector == vec2(0, 1))
+				editToolAxisVector = vec2(1, 1);
+			else
+				editToolAxisVector = vec2(0, 1);
+		}
+	}
+}
 
 vec2 Editor::Button(vec3 drawPos, std::string text, bool* out, TextManager::text_align align)
 {

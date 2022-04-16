@@ -8,8 +8,8 @@ EditorObject::EditorObject(vec3 position)
 {
 	this->SetEditPos(position);
 
-	Editor::IDmax++;
 	this->ID = Editor::IDmax;
+	Editor::IDmax++;
 }
 
 EditorObject::~EditorObject()
@@ -20,6 +20,16 @@ EditorObject::~EditorObject()
 vec3 EditorObject::GetEditPos()
 {
 	return editorPosition;
+}
+
+float EditorObject::GetEditRotation()
+{
+	return  editorRotation;
+}
+
+vec2 EditorObject::GetEditScale()
+{
+	return editorSize;
 }
 
 vec3 EditorObject::SetEditPos(vec3 pos)
@@ -81,6 +91,8 @@ vec2 EditorObject::DrawActions(vec3 drawPos)
 	if (res)
 	{
 		EditorObject* newObj = Copy();
+		newObj->ID = Editor::IDmax;
+		Editor::IDmax++;
 		Editor::SelectObject(newObj);
 	}
 
@@ -90,4 +102,20 @@ vec2 EditorObject::DrawActions(vec3 drawPos)
 	vec2 size = vec2(drawPos - startPos);
 	size.y *= -1;
 	return size;
+}
+
+void EditorObject::Save()
+{
+	EditorSaveManager::WriteProp("ID", std::to_string(ID));
+	EditorSaveManager::WriteProp("name", name);
+	EditorSaveManager::WriteProp("position", editorPosition);
+}
+
+void EditorObject::Load(std::map<std::string, std::string>* props)
+{
+	editorPosition = EditorSaveManager::StringToVector3((*props)["position"]);
+	name = (*props)["name"];
+	ID = std::stoi((*props)["ID"]);
+
+	this->UpdateTransform();
 }

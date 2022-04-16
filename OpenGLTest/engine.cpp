@@ -7,6 +7,7 @@ Code from https://learnopengl.com/
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
 
+#include "Editor.h"
 #include "mesh.h"
 #include "shader.h"
 #include "Texture.h"
@@ -19,7 +20,6 @@ Code from https://learnopengl.com/
 #include "TextManager.h"
 #include "Collider.h"
 #include "EditorSprite.h"
-#include "Editor.h"
 
 using namespace std;
 using namespace Utility;

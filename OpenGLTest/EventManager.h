@@ -16,6 +16,7 @@ namespace EventManager
 	extern LinkedList<GLFWmousebuttonfun> OnClick;
 	extern LinkedList<GLFWscrollfun> OnScroll;
 	extern LinkedList<GLFWcharfun> OnCharPressed;
+	extern LinkedList<GLFWkeyfun> OnKeyPressed;
 
 	extern LinkedList<std::function<void()>> OnOpenEditor;
 	extern LinkedList<std::function<void()>> OnCloseEditor;
@@ -30,6 +31,7 @@ namespace EventManager
 	void OnClickCallback(GLFWwindow* window, int button, int action, int mods);
 	void OnScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
 	void OnCharPressedCallback(GLFWwindow* window, unsigned int codepoint);
+	void OnKeyPressedCallbeck(GLFWwindow* window, int key, int scancode, int action, int mods);
 };
 
 #endif

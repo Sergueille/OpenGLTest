@@ -26,6 +26,8 @@ Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), 
 	{
 		this->physicsEnabled = false;
 	}
+
+	typeName = "Player";
 }
 
 Player::~Player()
