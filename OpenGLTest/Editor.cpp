@@ -38,7 +38,9 @@ vec2 Editor::editToolAxisVector = vec2(1);
 float Editor::moveSnapping = 0.2f;
 float Editor::rotateSnapping = 5;
 float Editor::sizeSnapping = 0.2f;
-float Editor::sizeToolSizePerUnit = 1.5f;
+
+float Editor::rotateToolDegreesPerPixel = 1.3f;
+float Editor::sizeToolSizePerPixel = 0.03f;
 
 std::string Editor::currentFilePath = "";
 MapData Editor::currentMapData = MapData();
@@ -47,8 +49,9 @@ std::list<std::string> Editor::panelWindows = {
 	"Props",
 	"Add",
 	"Map",
+	"File",
 };
-int Editor::currentPanelWindow = 0;
+Editor::PanelWindow Editor::currentPanelWindow = Editor::PanelWindow::properties;
 
 void Editor::CreateEditor()
 {
@@ -66,6 +69,8 @@ void Editor::OpenEditor()
 {
 	if (enabled) return;
 	enabled = true;
+
+	EditorSaveManager::EnableEditorObjects();
 	EventManager::Call(&EventManager::OnOpenEditor);
 }
 
@@ -73,12 +78,15 @@ void Editor::CloseEditor()
 {
 	if (!enabled) return;
 	enabled = false;
+
+	EditorSaveManager::DisableEditorObjects();
 	EventManager::Call(&EventManager::OnCloseEditor);
 }
 
 void Editor::DestroyEditor()
 {
 	std::cout << "Destroying editor" << std::endl;
+	EditorSaveManager::ClearEditorLevel();
 	CloseEditor();
 }
 
@@ -88,9 +96,7 @@ void Editor::OnMainLoop()
 		return;
 
 	HandleTools();
-
 	DrawPanel();
-
 	HandleInputBackspace();
 }
 
@@ -102,12 +108,13 @@ void Editor::HandleTools()
 	if (selectedObject == nullptr)
 		return;
 
-	vec2 mousePos = ScreenToWorld(GetMousePos());
+	vec2 mousePos = GetMousePos();
+	vec2 worldMousePos = ScreenToWorld(mousePos);
 	bool snapping = glfwGetKey(Utility::window, GLFW_KEY_LEFT_CONTROL) == GLFW_RELEASE;
 
 	if (currentTool == Tool::move) // MOVE
 	{
-		vec2 pos = (mousePos - vec2(editToolStartPos)) * editToolAxisVector + vec2(editToolStartPos);
+		vec2 pos = (worldMousePos - vec2(editToolStartPos)) * editToolAxisVector + vec2(editToolStartPos);
 		if (snapping)
 		{
 			pos.x = round(pos.x / moveSnapping) * moveSnapping;
@@ -123,7 +130,7 @@ void Editor::HandleTools()
 	}
 	else if (currentTool == Tool::rotate) // ROTATE
 	{
-		float angle = -(mousePos.x - editToolStartMouse.x) * float(rotateToolDegreesPerUnits);
+		float angle = -(mousePos.x - editToolStartMouse.x) * rotateToolDegreesPerPixel;
 		if (snapping) angle = round(angle / rotateSnapping) * rotateSnapping;
 		selectedObject->SetEditRotation(editToolStartRot + angle);
 
@@ -135,7 +142,7 @@ void Editor::HandleTools()
 	}
 	else if (currentTool == Tool::scale) // SCALE
 	{
-		vec2 scale = ((mousePos.x - editToolStartMouse.x) * sizeToolSizePerUnit + 1) * editToolStartScale;
+		vec2 scale = (((mousePos.x - editToolStartMouse.x) * sizeToolSizePerPixel) + 1) * editToolStartScale;
 		if (snapping)
 		{
 			scale.x = round(scale.x / sizeSnapping) * sizeSnapping;
@@ -176,6 +183,63 @@ void Editor::HandleTools()
 	}
 }
 
+void Editor::HandleHotkeys(int key)
+{
+	// NOTE: shortcuts for transform edition are located in HandleTools()
+
+	bool control = glfwGetKey(Utility::window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS
+		|| glfwGetKey(Utility::window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS;
+
+	bool alt = glfwGetKey(Utility::window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS
+		|| glfwGetKey(Utility::window, GLFW_KEY_RIGHT_ALT) == GLFW_PRESS;
+
+	bool shift = glfwGetKey(Utility::window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS
+		|| glfwGetKey(Utility::window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS;
+
+	
+	if (control && alt && glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS && enabled) // Save As
+	{
+		currentPanelWindow = PanelWindow::file;
+		focusedTextInputID = "FilePath";
+	}
+	else if (control && glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS && enabled) // Save
+	{
+		EditorSaveManager::SaveLevel();
+	}
+	else if (control && glfwGetKey(Utility::window, GLFW_KEY_O) == GLFW_PRESS && enabled) // Open
+	{
+		currentPanelWindow = PanelWindow::file;
+		focusedTextInputID = "LoadPath";
+	}
+	else if (control && glfwGetKey(Utility::window, GLFW_KEY_N) == GLFW_PRESS && enabled) // New
+	{
+		EditorSaveManager::ClearEditorLevel();
+		currentFilePath = "";
+	}
+	else if (glfwGetKey(Utility::window, GLFW_KEY_DELETE) == GLFW_PRESS && enabled) // Delete
+	{
+		if (selectedObject != nullptr)
+			RemoveObject(selectedObject);
+	}
+	else if (control && glfwGetKey(Utility::window, GLFW_KEY_D) == GLFW_PRESS && enabled) // Duplicate
+	{
+		if (selectedObject != nullptr)
+		{
+			EditorObject* newObj = selectedObject->Copy();
+			newObj->ID = Editor::IDmax;
+			Editor::IDmax++;
+			Editor::SelectObject(newObj);
+		}
+	}
+	else if (control && glfwGetKey(Utility::window, GLFW_KEY_T) == GLFW_PRESS) // Test level
+	{
+		if (enabled) // Start test
+			StartTest();
+		else // End test
+			EndTest();
+	}
+}
+
 void Editor::DrawPanel()
 {
 	// Start position: to left
@@ -192,7 +256,7 @@ void Editor::DrawPanel()
 		drawPos.x += Button(drawPos, *name, &pressed).x + margin;
 
 		if (pressed)
-			currentPanelWindow = i;
+			currentPanelWindow = (PanelWindow)i;
 
 		i++;
 	}
@@ -202,14 +266,17 @@ void Editor::DrawPanel()
 
 	switch (currentPanelWindow)
 	{
-	case 0:
+	case PanelWindow::properties:
 		DrawPropsTab(drawPos);
 		break;
-	case 1:
+	case PanelWindow::add:
 		DrawAddTab(drawPos);
 		break;
-	case 2:
+	case PanelWindow::map:
 		DrawMapTab(drawPos);
+		break;
+	case PanelWindow::file:
+		DrawFileTab(drawPos);
 		break;
 	default:
 		throw "Selected panel tab id is too high!";
@@ -259,8 +326,17 @@ void Editor::DrawAddTab(vec3 drawPos)
 
 void Editor::DrawMapTab(vec3 drawPos)
 {
-	drawPos.y -= TextManager::RenderText("Map and file properties", drawPos, textSize).y + margin;
+	drawPos.y -= TextManager::RenderText("Map properties", drawPos, textSize).y + margin;
 	drawPos.x += indentation;
+
+	drawPos.y -= DrawProperty(drawPos, "Map name", &currentMapData.mapName, panelPropertiesX, "MapName").y;
+}
+
+void Editor::DrawFileTab(vec3 drawPos)
+{
+	drawPos.y -= TextManager::RenderText("File", drawPos, textSize).y + margin;
+	drawPos.x += indentation;
+
 	drawPos.y -= DrawProperty(drawPos, "File path", &currentFilePath, panelPropertiesX, "FilePath").y;
 
 	bool res;
@@ -269,9 +345,11 @@ void Editor::DrawMapTab(vec3 drawPos)
 
 	std::string loadPath = "";
 	drawPos.y -= DrawProperty(drawPos, "Load a level", &loadPath, panelPropertiesX, "LoadPath").y + margin;
-	if (loadPath != "") EditorSaveManager::LoadLevel(loadPath);
-
-	drawPos.y -= DrawProperty(drawPos, "Map name", &currentMapData.mapName, panelPropertiesX, "MapName").y;
+	if (loadPath != "")
+	{
+		currentFilePath = loadPath;
+		EditorSaveManager::LoadLevel(loadPath, true);
+	}
 }
 
 void Editor::HandleInputBackspace()
@@ -446,6 +524,26 @@ void Editor::RemoveObject(EditorObject* object)
 	delete object;
 }
 
+void Editor::StartTest()
+{
+	if (currentFilePath.length() < 1)
+	{
+		std::cout << "No file path specified!" << std::endl;
+		currentPanelWindow = PanelWindow::file;
+		focusedTextInputID = "filePath";
+	}
+
+	EditorSaveManager::SaveLevel();
+	CloseEditor();
+	EditorSaveManager::LoadLevel(currentFilePath, false);
+}
+
+void Editor::EndTest()
+{
+	EditorSaveManager::ClearGameLevel();
+	OpenEditor();
+}
+
 bool Editor::isOverUI(vec2 point)
 {
 	return point.x < panelSize;
@@ -547,6 +645,9 @@ vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, vec4* value, int
 
 void Editor::OnKeyPressed(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+	if (action == GLFW_PRESS)
+		HandleHotkeys(key);
+
 	// Switch tool axis
 	if (currentTool != Tool::none)
 	{

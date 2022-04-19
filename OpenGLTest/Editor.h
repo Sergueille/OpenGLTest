@@ -22,6 +22,11 @@ public:
 		none, move, rotate, scale
 	};
 
+	enum class PanelWindow
+	{
+		properties, add, map, file
+	};
+
 	static std::list<EditorObject*> editorObjects;
 
 	static bool enabled;
@@ -42,8 +47,8 @@ public:
 
 	const static int UIBaseZPos = 100; // The Z position of the UI elements to use
 
-	const static int rotateToolDegreesPerUnits = 40; // Rotration speed for rotate tool
-	static float sizeToolSizePerUnit; // Rotration speed for rotate tool
+	static float rotateToolDegreesPerPixel; // Rotration speed for rotate tool
+	static float sizeToolSizePerPixel; // Rotration speed for rotate tool
 
 	static float moveSnapping;
 	static float rotateSnapping;
@@ -72,7 +77,7 @@ public:
 	/// <summary>
 	/// Panel tab that is currently selected
 	/// </summary>
-	static int currentPanelWindow;
+	static PanelWindow currentPanelWindow;
 
 	/// <summary>
 	/// Max usique object id attribued, used to create new ones
@@ -85,6 +90,9 @@ public:
 	static void OpenEditor(); // Open the editor, must be set up before
 	static void CloseEditor(); // Close the editor but don't destroy it
 	static void DestroyEditor(); // Destroy all editor
+
+	static void StartTest();
+	static void EndTest();
 
 	static EditorObject* GetSelectedObject();
 	static EditorObject* SelectObject(EditorObject* object);
@@ -140,10 +148,14 @@ private:
 	static void DrawPropsTab(vec3 drawPos);
 	static void DrawAddTab(vec3 drawPos);
 	static void DrawMapTab(vec3 drawPos);
+	static void DrawFileTab(vec3 drawPos);
 
 	static void HandleInputBackspace();
-
 	static void HandleTools();
+	/// <summary>
+	/// Called by OnKeyPressed()
+	/// </summary>
+	static void HandleHotkeys(int key);
 
 	static void OnClick(GLFWwindow* window, int button, int action, int mods);
 	static void OnCaracterInput(GLFWwindow* window, unsigned int codepoint);

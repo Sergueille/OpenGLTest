@@ -25,6 +25,8 @@ CircleCollider::~CircleCollider()
 
 vec3 CircleCollider::CollideWith(CircleCollider* other)
 {
+	if (!enabled) return vec3(0, 0, 0);
+
 	vec2 delta = position - other->position;
 	float sqDist = (delta.x * delta.x) + (delta.y * delta.y);
 	float maxDist = (size / 2) + (other->size / 2);
@@ -43,6 +45,8 @@ vec3 CircleCollider::CollideWith(CircleCollider* other)
 
 vec3 CircleCollider::CollideWith(RectCollider* other)
 {
+	if (!enabled) return vec3(0, 0, 0);
+
 	auto points = other->GetPoints();
 	std::vector<vec3> projected = { vec3(), vec3(), vec3(), vec3() };
 	int insideCount = 0;

@@ -9,20 +9,47 @@
 using namespace glm;
 
 struct MapData;
+class EditorObject;
 class EditorSaveManager
 {
 public:
+	static std::list<EditorObject*> levelObjectList;
+	static MapData currentMapData;
+
 	/// <summary>
 	/// The level folder path
 	/// </summary>
 	static const std::string mapsBasePath;
 
+	/// <summary>
+	/// String used to indentation (ex: two spaces, a tabulation)
+	/// </summary>
 	static const std::string indentationString;
 
-	static void ClearLevel();
+	/// <summary>
+	/// Destroy all editor objects
+	/// </summary>
+	static void ClearEditorLevel();
 
+	/// <summary>
+	/// Destroy all objects of the game level
+	/// </summary>
+	static void ClearGameLevel();
+
+	/// <summary>
+	/// Save all editor object into a file
+	/// </summary>
 	static void SaveLevel();
-	static void LoadLevel(std::string path);
+	static void LoadLevel(std::string path, bool inEditor = false);
+
+	/// <summary>
+	/// Makes all object of the editor disabled
+	/// </summary>
+	static void DisableEditorObjects();
+	/// <summary>
+	/// Makes all object of the editor enabled
+	/// </summary>
+	static void EnableEditorObjects();
 
 	static void WriteProp(std::string name, std::string value);
 	static void WriteProp(std::string name, vec2 value);
@@ -54,5 +81,5 @@ private:
 	static std::string ReadProp();
 	static void GoToEndOfLine();
 
-	static void ReadObject();
+	static void ReadObject(bool inEditor);
 };

@@ -19,9 +19,6 @@ Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), 
 
 	Camera::getTarget = [this]() -> glm::vec2 { return this->GetPos(); };
 
-	subscribedFuncs[0] = EventManager::OnOpenEditor.push_end([this]() -> void { this->physicsEnabled = false; });
-	subscribedFuncs[1] = EventManager::OnCloseEditor.push_end([this]() -> void { this->physicsEnabled = true; });
-
 	if (Editor::enabled)
 	{
 		this->physicsEnabled = false;
@@ -51,6 +48,7 @@ Player::~Player()
 
 void Player::UpdateTransform()
 {
+	EditorObject::UpdateTransform();
 	this->SetPos(editorPosition);
 	playerSprite->position = editorPosition;
 }
@@ -58,6 +56,23 @@ void Player::UpdateTransform()
 EditorObject* Player::Copy()
 {
 	throw "Not implemented";
+}
+
+void Player::Enable()
+{
+	EditorObject::Enable();
+	playerSprite->DrawOnMainLoop();
+	collider->enabled = true;
+	physicsEnabled = physicsWasEnabledBeforeDisabling;
+}
+
+void Player::Disable()
+{
+	EditorObject::Disable();
+	playerSprite->StopDrawing();
+	collider->enabled = false;
+	physicsWasEnabledBeforeDisabling = physicsEnabled;
+	physicsEnabled = false;
 }
 
 // Handle physics

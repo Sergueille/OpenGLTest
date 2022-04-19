@@ -34,7 +34,11 @@ int main(int argc, void* argv[])
     //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Create window
-    window = glfwCreateWindow(Utility::screenX, Utility::screenY, "Teeeest!", NULL, NULL);
+
+    int width = 1280;
+    int height = 720;
+
+    window = glfwCreateWindow(width, height, "Teeeest!", NULL, NULL);
     if (window == NULL) 
     {
         cout << "Failed to create GLFW window" << endl;
@@ -42,6 +46,9 @@ int main(int argc, void* argv[])
         return -1;
     }
     glfwMakeContextCurrent(window);
+
+    Utility::screenX = width;
+    Utility::screenY = height;
 
     // Init GLAD (get gl API)
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))

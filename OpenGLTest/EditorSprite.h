@@ -20,4 +20,7 @@ public:
 	virtual void Load(std::map<std::string, std::string>* props) override;
 
 	virtual void Save() override;
+
+	virtual void Enable() override;
+	virtual void Disable() override;
 };

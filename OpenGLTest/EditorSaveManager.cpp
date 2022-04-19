@@ -7,6 +7,9 @@
 
 using namespace glm;
 
+std::list<EditorObject*> EditorSaveManager::levelObjectList = std::list<EditorObject*>();
+MapData EditorSaveManager::currentMapData;
+
 const std::string EditorSaveManager::mapsBasePath = "Levels\\";
 std::ofstream* EditorSaveManager::ofile = nullptr;
 std::ifstream* EditorSaveManager::ifile = nullptr;
@@ -14,9 +17,9 @@ std::ifstream* EditorSaveManager::ifile = nullptr;
 const std::string EditorSaveManager::indentationString = "\t";
 int EditorSaveManager::indentation = 0;
 
-void EditorSaveManager::ClearLevel()
+void EditorSaveManager::ClearEditorLevel()
 {
-	std::cout << "Clearing level"  << std::endl;
+	std::cout << "Clearing editor level"  << std::endl;
 
 	// Destroy all objects
 	Editor::SelectObject(nullptr);
@@ -30,8 +33,25 @@ void EditorSaveManager::ClearLevel()
 	Editor::IDmax = 0;
 }
 
+void EditorSaveManager::ClearGameLevel()
+{
+	std::cout << "Clearing game level" << std::endl;
+
+	for (auto r = levelObjectList.begin(); r != levelObjectList.end(); r++)
+	{
+		delete *r;
+	}
+	levelObjectList.clear();
+}
+
 void EditorSaveManager::SaveLevel()
 {
+	if (!Editor::enabled)
+	{
+		std::cout << "You tried to save a level while the editor is disabled" << std::endl;
+		return;
+	}
+
 	// No file path
 	if (Editor::currentFilePath == "")
 	{
@@ -74,9 +94,12 @@ void EditorSaveManager::SaveLevel()
 	ofile->close();
 }
 
-void EditorSaveManager::LoadLevel(std::string path)
+void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 {
-	ClearLevel();
+	if (inEditor)
+		ClearEditorLevel();
+	else
+		ClearGameLevel();
 
 	std::cout << "Loading level " << path << std::endl;
 
@@ -98,7 +121,7 @@ void EditorSaveManager::LoadLevel(std::string path)
 
 		for (int i = 0; i < objectCount; i++)
 		{
-			ReadObject();
+			ReadObject(inEditor);
 		}
 	}
 	catch (std::exception e) // Catch exceptions to make sure the file is closed
@@ -109,6 +132,22 @@ void EditorSaveManager::LoadLevel(std::string path)
 	}
 
 	ifile->close();
+}
+
+void EditorSaveManager::DisableEditorObjects()
+{
+	for (auto r = Editor::editorObjects.begin(); r != Editor::editorObjects.end(); r++)
+	{
+		(*r)->Disable();
+	}
+}
+
+void EditorSaveManager::EnableEditorObjects()
+{
+	for (auto r = Editor::editorObjects.begin(); r != Editor::editorObjects.end(); r++)
+	{
+		(*r)->Enable();
+	}
 }
 
 void EditorSaveManager::WriteHeader()
@@ -257,7 +296,7 @@ void EditorSaveManager::GoToEndOfLine()
 	}
 }
 
-void EditorSaveManager::ReadObject()
+void EditorSaveManager::ReadObject(bool inEditor)
 {
 	FirstLineStartWith("object");
 	std::string objectType = ReadWord(); // Read type name
@@ -289,7 +328,11 @@ void EditorSaveManager::ReadObject()
 	{
 		MapData newData = MapData();
 		newData.mapName = props["mapName"];
-		Editor::currentMapData = newData;
+
+		if (inEditor)
+			Editor::currentMapData = newData;
+		else
+			currentMapData = newData;
 	}
 	else if (objectType == "Player")
 	{
@@ -305,7 +348,16 @@ void EditorSaveManager::ReadObject()
 		throw "Unknown object type for loading: " + objectType;
 
 	if (newObj != nullptr)
-		Editor::AddObject(newObj);
+	{
+		if (inEditor) 
+		{
+			Editor::AddObject(newObj);
+		}
+		else
+		{
+			levelObjectList.push_back(newObj);
+		}
+	}
 }
 
 vec2 EditorSaveManager::StringToVector2(std::string s)

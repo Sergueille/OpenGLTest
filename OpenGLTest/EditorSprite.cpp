@@ -87,6 +87,18 @@ void EditorSprite::Save()
 		EditorSaveManager::WriteProp("texturePath", texture->path);
 }
 
+void EditorSprite::Enable()
+{
+	EditorObject::Enable();
+	DrawOnMainLoop();
+}
+
+void EditorSprite::Disable()
+{
+	EditorObject::Disable();
+	StopDrawing();
+}
+
 void EditorSprite::UpdateTransform()
 {
 	this->position = editorPosition;

@@ -23,6 +23,8 @@ RectCollider::~RectCollider()
 
 vec3 RectCollider::CollideWith(CircleCollider* other)
 {
+	if (!enabled) return vec3(0, 0, 0);
+
 	vec3 res = other->CollideWith(this);
 	res.x = -res.x;
 	res.y = -res.y;
@@ -31,6 +33,8 @@ vec3 RectCollider::CollideWith(CircleCollider* other)
 
 vec3 RectCollider::CollideWith(RectCollider* other)
 {
+	if (!enabled) return vec3(0, 0, 0);
+
 	throw "Not implemented!";
 }
 

@@ -8,6 +8,9 @@
 
 namespace Utility
 {
+	int screenX;
+	int screenY;
+
 	GLFWwindow* window = NULL;
 	float time = 0;
 	float lastTime = 0;

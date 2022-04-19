@@ -22,6 +22,8 @@ public:
 	/// </summary>
 	glm::vec2 position;
 
+	bool enabled = true;
+
 	/// <summary>
 	/// Determines if is colliding with a specified CircleCollider
 	/// </summary>

@@ -8,8 +8,8 @@
 
 namespace Utility
 {
-	static const int screenX = 1280;
-	static const int screenY = 720;
+	extern int screenX;
+	extern int screenY;
 
 	extern GLFWwindow* window;
 

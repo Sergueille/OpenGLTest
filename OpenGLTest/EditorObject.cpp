@@ -119,3 +119,28 @@ void EditorObject::Load(std::map<std::string, std::string>* props)
 
 	this->UpdateTransform();
 }
+
+void EditorObject::Enable()
+{
+	enabled = true;
+	clickCollider->enabled = true;
+}
+
+void EditorObject::Disable()
+{
+	enabled = false;
+	clickCollider->enabled = true;
+}
+
+bool EditorObject::IsEnabled()
+{
+	return enabled;
+}
+
+void EditorObject::ToggleEnabled()
+{
+	if (enabled)
+		Disable();
+	else
+		Enable();
+}

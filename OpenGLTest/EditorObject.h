@@ -58,7 +58,22 @@ public:
 	virtual void Save();
 	virtual void Load(std::map<std::string, std::string>* props);
 
+	/// <summary>
+	/// Restores the sprites as it was before being disabled
+	/// </summary>
+	virtual void Enable();
+	/// <summary>
+	/// The object will not be visible, clickable or everything else. DON'T FORGET TO CALL BASE FUNCTION WHEN OVERRIDING
+	/// </summary>
+	virtual void Disable();
+	bool IsEnabled();
+	/// <summary>
+	/// TOGGLE TOGGLE TOGGLE!
+	/// </summary>
+	void ToggleEnabled();
+
 protected:
+	bool enabled;
 	vec3 editorPosition;
 	float editorRotation;
 	vec2 editorSize;

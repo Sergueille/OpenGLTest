@@ -1,0 +1,24 @@
+* {
+    --bg-dd: #101010;
+    --bg-d: #151515;
+    --bg: #202020;
+    --bg-l: #252525;
+    --bg-ll: #303030;
+    --txt: #dddddd;
+    --prim: #158f15;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--txt);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.page {
+    margin: 2em 15% 2em 15%;
+}
+
+a {
+    color: var(--prim);
+    text-decoration: none;
+}

@@ -43,11 +43,16 @@ public:
 	virtual void UpdateTransform() override;
 	virtual EditorObject* Copy() override;
 
+	virtual void Enable() override;
+	virtual void Disable() override;
+
 protected:
 	void OnAfterMove() override;
 
 private:
 	LinkedListElement<std::function<void()>>* subscribedFuncs[2];
 	Sprite* playerSprite;
+
+	bool physicsWasEnabledBeforeDisabling = false;
 };
 

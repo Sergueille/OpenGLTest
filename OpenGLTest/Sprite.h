@@ -46,7 +46,13 @@ public:
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// Make this sprite draw himself automatically on main loop
+	/// </summary>
 	void DrawOnMainLoop();
+	/// <summary>
+	/// Tell this sprite to stop drawing himself
+	/// </summary>
 	void StopDrawing();
 
 	bool IsTransparent();
@@ -62,6 +68,9 @@ protected:
 private:
 	LinkedListElement<std::function<void()>>* autoDrawFunc = nullptr;
 
+	/// <summary>
+	/// Force the sprite to be drawn RIGHT NOW, even if he's transparent
+	/// </summary>
 	void DrawNow();
 };
 

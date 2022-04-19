@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Documentation</title>
+</head>
+<body>
+    <div class="page">
+        <h2>Creating a new entity</h2>
+        This page will show you how to create a new entity for the level editor
+
+        <h3>Create the class</h3>
+        Your class must inherit from <code>EditorObject</code>
+        
+        <h3>Display the entity</h3>
+        If you want to use a sprite, your can make your class inherit form the <code>Sprite</code> class.
+        In this case, you have to make sure that the <code>Sprite</code> fields (such as the position) are the same as the <code>EditorObject</code> fields. <br/>
+        You can also simply create a sprite and keep a reference to it.
+
+        <h3>Making the entity clickable in the editor</h3>
+        You have to set the <code>clickCollider</code> field when the object is created.
+        The click collider position is handled by the <code>EditorObject</code> class, but not the size and the rotation!<br/>
+        Update your collider by overriding the <code>UpdateTransform()</code> method.
+
+        <h3>Making your entity editable</h3>
+        To draw object properties in the editor panel, override the <code>DrawProperties</code> method. Call the base function to dispay base properties.<br/>
+        In this method use <code>Editor::DrawProperty</code> to draw properties<br/>
+        To add action buttons, override the <code>DrawActions</code> method. Call the base function to dispay base buttons.<br/>
+        You must also override the <code>Copy()</code> function.
+
+        <h3>Save and load your entity</h3>
+        You have to override the <code>Load()</code> and <code>Save()</code> methods.
+        In both, call the base method. <br/>
+        To save a property, use <code>EditorSaveManager::WriteProp()</code>.<br/>
+        You can load properties by using the map provided as argument.<br/>
+        Add an if block <code>EditorSaveManager::ReadObject()</code> method<br/>
+        Finally, you must provide the type name by setting the <code>typeName</code> field
+
+        <h3>Different behaviour in editor and in game</h3>
+        In the constructor, you can use <code>Editor.enabled</code> to know if you are in the editor or in the game. 
+        Once the entity is created, it will not have to change angain to editor nor to ingame state.
+
+        <h3>Enabling and disabling</h3>
+        You have to override <code>Enable()</code> and <code>Disable()</code>, and call the base methods. 
+        When disabled, the entity must do nothing and not be visible
+    </div>
+</body>
+</html>
