@@ -32,7 +32,7 @@ public:
 	static bool enabled;
 
 	const static int panelSize = 300;
-	const static int panelPropertiesX = 120;
+	const static int panelPropertiesX = 150;
 
 	const static int textSize = 15;
 	const static int margin = 10;
@@ -133,6 +133,8 @@ public:
 
 	static vec2 Button(vec3 drawPos, std::string text, bool* out, TextManager::text_align align = TextManager::right);
 
+	static vec2 CheckBox(vec3 drawPos, std::string label, bool* value, float textWidth);
+
 private:
 	static EditorObject* selectedObject;
 
@@ -156,6 +158,8 @@ private:
 	/// Called by OnKeyPressed()
 	/// </summary>
 	static void HandleHotkeys(int key);
+
+	static void SelectTool(Tool tool);
 
 	static void OnClick(GLFWwindow* window, int button, int action, int mods);
 	static void OnCaracterInput(GLFWwindow* window, unsigned int codepoint);

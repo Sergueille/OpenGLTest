@@ -15,7 +15,7 @@ namespace Camera
 	std::function<glm::vec2()> getTarget = NULL;
 	glm::vec2 velocity = glm::vec2(0);
 
-	bool editorCamera = true; // TEST: set to false
+	bool editorCamera = false;
 
 	bool isDragging;
 	bool wasDraggingLastFrame;

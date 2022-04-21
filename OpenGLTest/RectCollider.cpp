@@ -38,6 +38,19 @@ vec3 RectCollider::CollideWith(RectCollider* other)
 	throw "Not implemented!";
 }
 
+void RectCollider::SetCollideWithPhys(bool value)
+{
+	if (collideWithPhys != value)
+	{
+		if (collideWithPhys)
+			Collider::rectColliders.remove(this);
+		else
+			Collider::rectColliders.push_back(this);
+	}
+
+	collideWithPhys = value;
+}
+
 std::vector<vec2> RectCollider::GetPoints()
 {
 	vec2 halfSize = size / 2.f;

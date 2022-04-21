@@ -24,6 +24,8 @@ public:
 	virtual vec3 CollideWith(CircleCollider* other) override;
 	virtual vec3 CollideWith(RectCollider* other) override;
 
+	virtual void SetCollideWithPhys(bool value) override;
+
 	/// <summary>
 	/// Get corners of collider, to-right first
 	/// </summary>

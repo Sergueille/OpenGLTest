@@ -3,6 +3,7 @@
 #include "Utility.h"
 #include "EventManager.h"
 #include "RectCollider.h"
+#include "EditorSaveManager.h"
 
 using namespace glm;
 
@@ -15,6 +16,12 @@ PhysicObject::PhysicObject(Collider* coll)
 
 PhysicObject::~PhysicObject()
 {
+	if (collider)
+	{
+		delete collider;
+		collider = nullptr;
+	}
+
 	EventManager::OnMainLoop.remove(funcPos);
 }
 
@@ -45,7 +52,7 @@ void PhysicObject::OnMainLoop()
 	// For each rect collider
 	for (auto coll = Collider::rectColliders.begin(); coll != Collider::rectColliders.end(); coll++)
 	{
-		if ((*coll)->collideWithPhys && (void*)*coll != collider)
+		if ((*coll)->collideWithPhys && (*coll)->enabled && (void*)*coll != collider)
 		{
 			// Evaluate collision data
 			vec3 res = collider->CollideWith(*coll);
@@ -56,7 +63,7 @@ void PhysicObject::OnMainLoop()
 	// For each circle colliders
 	for (auto coll = Collider::circleColliders.begin(); coll != Collider::circleColliders.end(); coll++)
 	{
-		if ((*coll)->collideWithPhys && (void*)*coll != collider)
+		if ((*coll)->collideWithPhys && (*coll)->enabled && (void*)*coll != collider)
 		{
 			// Evaluate collision data
 			vec3 res = collider->CollideWith(*coll);

@@ -12,16 +12,26 @@ EditorSprite::EditorSprite(glm::vec3 position, glm::vec2 size, float rotate) : S
 	DrawOnMainLoop();
 }
 
+EditorSprite::~EditorSprite()
+{
+	delete clickCollider;
+	clickCollider = nullptr;
+}
+
 vec2 EditorSprite::DrawProperties(vec3 drawPos)
 {
 	std::string strID = std::to_string(ID);
-	vec3 startPos = drawPos;
+	vec2 startPos = vec2(drawPos);
 
 	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Size", &editorSize, Editor::panelPropertiesX, strID + "size").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Orientation", &editorRotation, Editor::panelPropertiesX, strID + "rotate").y;
 	UpdateTransform();
 	drawPos.y -= Editor::DrawProperty(drawPos, "Color", &color, Editor::panelPropertiesX, strID + "color", true).y;
+
+	bool collide = clickCollider->MustCollideWithPhys();
+	drawPos.y -= Editor::CheckBox(drawPos, "Collide with physics", &collide, Editor::panelPropertiesX).y;
+	clickCollider->SetCollideWithPhys(collide);
 
 	std::string noTextureDisplay = "No texture";
 	std::string texName = texture == nullptr? noTextureDisplay : texture->path;
@@ -39,7 +49,10 @@ vec2 EditorSprite::DrawProperties(vec3 drawPos)
 		}
 	}
 
-	vec2 res = drawPos - startPos;
+	drawPos.y -= Editor::DrawProperty(drawPos, "UV start", &UVStart, Editor::panelPropertiesX, strID + "UVstart").y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "UV end", &UVEnd, Editor::panelPropertiesX, strID + "UVend").y;
+
+	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
 	return res;
 }
@@ -50,7 +63,7 @@ EditorObject* EditorSprite::Copy()
 
 	// copy collider
 	RectCollider* oldCollider = (RectCollider*)this->clickCollider;
-	newObj->clickCollider = new RectCollider(oldCollider->position, oldCollider->size, oldCollider->orientation, false);
+	newObj->clickCollider = new RectCollider(oldCollider->position, oldCollider->size, oldCollider->orientation, oldCollider->MustCollideWithPhys());
 
 	// subscribe again to main loop
 	newObj->isDrawnOnMainLoop = false;
@@ -74,6 +87,12 @@ void EditorSprite::Load(std::map<std::string, std::string>* props)
 		texture = RessourceManager::GetTexture(textureName);
 	}
 
+	bool collide = (*props)["collideWithPhys"] == "1";
+	clickCollider->SetCollideWithPhys(collide);
+
+	UVStart = EditorSaveManager::StringToVector2((*props)["UVstart"], UVStart);
+	UVEnd = EditorSaveManager::StringToVector2((*props)["UVend"], UVEnd);
+
 	EditorObject::Load(props);
 }
 
@@ -85,18 +104,23 @@ void EditorSprite::Save()
 	EditorSaveManager::WriteProp("color", color);
 	if (texture != nullptr)
 		EditorSaveManager::WriteProp("texturePath", texture->path);
+	EditorSaveManager::WriteProp("collideWithPhys", clickCollider->MustCollideWithPhys());
+	EditorSaveManager::WriteProp("UVstart", UVStart);
+	EditorSaveManager::WriteProp("UVend", UVEnd);
 }
 
 void EditorSprite::Enable()
 {
 	EditorObject::Enable();
 	DrawOnMainLoop();
+	clickCollider->enabled = true;
 }
 
 void EditorSprite::Disable()
 {
 	EditorObject::Disable();
 	StopDrawing();
+	clickCollider->enabled = false;
 }
 
 void EditorSprite::UpdateTransform()

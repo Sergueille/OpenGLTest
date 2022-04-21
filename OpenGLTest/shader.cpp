@@ -119,6 +119,12 @@ void Shader::SetUniform(const char* uniformName, glm::vec4 value)
     glUniform4f(glGetUniformLocation(ID, uniformName), value.x, value.y, value.z, value.w);
 }
 
+void Shader::SetUniform(const char* uniformName, glm::vec2 value)
+{
+    Use();
+    glUniform2f(glGetUniformLocation(ID, uniformName), value.x, value.y);
+}
+
 void Shader::SetUniform(const char* uniformName, glm::mat4 trans) 
 {
     Use();

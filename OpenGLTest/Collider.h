@@ -14,6 +14,8 @@ class Collider
 	friend class PhysicObject;
 
 public:
+	virtual ~Collider();
+
 	static std::list<CircleCollider*> circleColliders;
 	static std::list<RectCollider*> rectColliders;
 
@@ -34,6 +36,9 @@ public:
 	/// </summary>
 	/// <returns>A vector where X and Y represents normalisedcontact vector, and Z the distance to move objects to end collision</returns>
 	virtual glm::vec3 CollideWith(RectCollider* other) = 0;
+	 
+	virtual void SetCollideWithPhys(bool value) = 0;
+	bool MustCollideWithPhys();
 
 protected:
 	/// <summary>

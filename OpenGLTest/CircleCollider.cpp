@@ -117,3 +117,17 @@ vec3 CircleCollider::CollideWith(RectCollider* other)
 		return vec3(delta.x, delta.y, dist);
 	}
 }
+
+void CircleCollider::SetCollideWithPhys(bool value)
+{
+	if (collideWithPhys != value)
+	{
+		if (collideWithPhys)
+			Collider::circleColliders.remove(this);
+		else 
+			Collider::circleColliders.push_back(this);
+	}
+	
+	collideWithPhys = value;
+}
+

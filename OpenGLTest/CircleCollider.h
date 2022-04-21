@@ -19,4 +19,6 @@ public:
 
 	virtual vec3 CollideWith(CircleCollider* other) override;
 	virtual vec3 CollideWith(RectCollider* other) override;
+
+	virtual void SetCollideWithPhys(bool value) override;
 };

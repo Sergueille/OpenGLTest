@@ -169,6 +169,11 @@ void EditorSaveManager::WriteProp(std::string name, std::string value)
 	(*ofile) << name << ": \"" << value << "\"\n";
 }
 
+void EditorSaveManager::WriteProp(std::string name, bool value)
+{
+	EditorSaveManager::WriteProp(name, std::string(value ? "1" : "0"));
+}
+
 void EditorSaveManager::WriteProp(std::string name, vec2 value)
 {
 	WriteIndentation();
@@ -360,16 +365,20 @@ void EditorSaveManager::ReadObject(bool inEditor)
 	}
 }
 
-vec2 EditorSaveManager::StringToVector2(std::string s)
+vec2 EditorSaveManager::StringToVector2(std::string s, vec2 def)
 {
+	if (s.length() < 1) return def;
+
 	size_t pos = s.find(',');
 	std::string x = s.substr(0, pos);
 	std::string y = s.substr(pos + 1, s.length() - pos - 1);
 	return vec2(std::stof(x), std::stof(y));
 }
 
-vec3 EditorSaveManager::StringToVector3(std::string s)
+vec3 EditorSaveManager::StringToVector3(std::string s, vec3 def)
 {
+	if (s.length() < 1) return def;
+
 	size_t pos = s.find(',');
 	std::string x = s.substr(0, pos);
 	std::string yz = s.substr(pos + 1, s.length() - pos - 1);
@@ -380,8 +389,10 @@ vec3 EditorSaveManager::StringToVector3(std::string s)
 	return vec3(std::stof(x), std::stof(y), std::stof(z));
 }
 
-vec4 EditorSaveManager::StringToVector4(std::string s)
+vec4 EditorSaveManager::StringToVector4(std::string s, vec4 def)
 {
+	if (s.length() < 1) return def;
+
 	size_t pos = s.find(',');
 	std::string x = s.substr(0, pos);
 	std::string yzw = s.substr(pos + 1, s.length() - pos - 1);

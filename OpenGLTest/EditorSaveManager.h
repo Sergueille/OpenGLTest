@@ -52,6 +52,7 @@ public:
 	static void EnableEditorObjects();
 
 	static void WriteProp(std::string name, std::string value);
+	static void WriteProp(std::string name, bool value);
 	static void WriteProp(std::string name, vec2 value);
 	static void WriteProp(std::string name, vec3 value);
 	static void WriteProp(std::string name, vec4 value);
@@ -59,9 +60,9 @@ public:
 	static void StartObject(std::string type);
 	static void EndObject();
 
-	static vec2 StringToVector2(std::string s);
-	static vec3 StringToVector3(std::string s);
-	static vec4 StringToVector4(std::string s);
+	static vec2 StringToVector2(std::string s, vec2 def = vec2(0));
+	static vec3 StringToVector3(std::string s, vec3 def = vec3(0));
+	static vec4 StringToVector4(std::string s, vec4 def = vec4(0));
 private:
 	static std::ofstream* ofile;
 	static std::ifstream* ifile;

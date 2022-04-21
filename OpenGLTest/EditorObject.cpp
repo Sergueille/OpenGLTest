@@ -14,7 +14,11 @@ EditorObject::EditorObject(vec3 position)
 
 EditorObject::~EditorObject()
 {
-	if (clickCollider) delete clickCollider;
+	if (clickCollider)
+	{
+		delete clickCollider;
+		clickCollider = nullptr;
+	}
 }
 
 vec3 EditorObject::GetEditPos()
@@ -129,7 +133,7 @@ void EditorObject::Enable()
 void EditorObject::Disable()
 {
 	enabled = false;
-	clickCollider->enabled = true;
+	clickCollider->enabled = false;
 }
 
 bool EditorObject::IsEnabled()

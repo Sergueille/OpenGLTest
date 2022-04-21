@@ -28,6 +28,8 @@ public:
 	float rotate;
 	glm::vec4 color;
 	bool isUI;
+	glm::vec2 UVStart;
+	glm::vec2 UVEnd;
 
 	static std::priority_queue<Sprite*, std::vector<Sprite*>, CompareSprite> drawQueue;
 

@@ -70,6 +70,7 @@ void Editor::OpenEditor()
 	if (enabled) return;
 	enabled = true;
 
+	Camera::editorCamera = true;
 	EditorSaveManager::EnableEditorObjects();
 	EventManager::Call(&EventManager::OnOpenEditor);
 }
@@ -79,6 +80,7 @@ void Editor::CloseEditor()
 	if (!enabled) return;
 	enabled = false;
 
+	Camera::editorCamera = false;
 	EditorSaveManager::DisableEditorObjects();
 	EventManager::Call(&EventManager::OnCloseEditor);
 }
@@ -102,8 +104,11 @@ void Editor::OnMainLoop()
 
 void Editor::HandleTools()
 {
-	// click validation in OnClick() function;
-	// keys for axis in OnKeyPressed()
+	// The tool handling is scattered in the Edior code:
+	//		keys to enable tools are in HandleHotkeys()
+	//		click for validation is in OnClick() function
+	//		keys for axis are in OnKeyPressed()
+	//		can change tool with SelectTool()
 
 	if (selectedObject == nullptr)
 		return;
@@ -156,37 +161,21 @@ void Editor::HandleTools()
 			selectedObject->SetEditScale(editToolStartScale);
 		}
 	}
+}
 
-	if (currentTool == Tool::none && !isOverUI(GetMousePos()))
-	{
-		editToolAxisVector = vec2(1, 1);
-
-		// Change tool
-		if (glfwGetKey(Utility::window, GLFW_KEY_G) == GLFW_PRESS)
-		{
-			currentTool = Tool::move;
-			editToolStartMouse = mousePos;
-			editToolStartPos = selectedObject->GetEditPos();
-		}
-		else if (glfwGetKey(Utility::window, GLFW_KEY_R) == GLFW_PRESS)
-		{
-			currentTool = Tool::rotate;
-			editToolStartMouse = mousePos;
-			editToolStartRot = selectedObject->GetEditRotation();
-		}
-		else if (glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS)
-		{
-			currentTool = Tool::scale;
-			editToolStartMouse = mousePos;
-			editToolStartScale = selectedObject->GetEditScale();
-		}
-	}
+void Editor::SelectTool(Tool tool)
+{
+	if (selectedObject == nullptr) return;
+	currentTool = tool;
+	editToolStartMouse = GetMousePos();
+	editToolStartPos = selectedObject->GetEditPos();
+	editToolStartRot = selectedObject->GetEditRotation();
+	editToolStartScale = selectedObject->GetEditScale();
+	editToolAxisVector = vec2(1, 1);
 }
 
 void Editor::HandleHotkeys(int key)
 {
-	// NOTE: shortcuts for transform edition are located in HandleTools()
-
 	bool control = glfwGetKey(Utility::window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS
 		|| glfwGetKey(Utility::window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS;
 
@@ -237,6 +226,24 @@ void Editor::HandleHotkeys(int key)
 			StartTest();
 		else // End test
 			EndTest();
+	}
+
+	// Tools shortcuts
+	if (currentTool == Tool::none && !isOverUI(GetMousePos()) && !control && !shift && !alt && focusedTextInputID == "")
+	{
+		// Change tool
+		if (glfwGetKey(Utility::window, GLFW_KEY_G) == GLFW_PRESS)
+		{
+			SelectTool(Tool::move);
+		}
+		else if (glfwGetKey(Utility::window, GLFW_KEY_R) == GLFW_PRESS)
+		{
+			SelectTool(Tool::rotate);
+		}
+		else if (glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS)
+		{
+			SelectTool(Tool::scale);
+		}
 	}
 }
 
@@ -403,30 +410,41 @@ void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
 	{
-		// End current tool
-		currentTool = Tool::none;
+		if (currentTool != Tool::none)
+		{
+			// End current tool
+			currentTool = Tool::none;
+			return; // Ignore other clic events
+		}
 
 		// Select an object
-		if (!isOverUI(Utility::GetMousePos()))
+		if (!isOverUI(Utility::GetMousePos())) // If the mouse is not over the UI
 		{
-			vec2 worldPos = Utility::ScreenToWorld(Utility::GetMousePos());
-			CircleCollider mouseColl = CircleCollider(worldPos, selectClickMargin);
+			vec2 worldPos = Utility::ScreenToWorld(Utility::GetMousePos()); // Mouse pos in world space
+			CircleCollider mouseColl = CircleCollider(worldPos, selectClickMargin, false); // Create a small collider for the mouse
 
+			float maxZ = -FLT_MAX; // Max z pos found
+
+			// For each object
 			for (auto obj = editorObjects.begin(); obj != editorObjects.end(); obj++)
 			{
-				if ((*obj)->clickCollider == nullptr)
+				if ((*obj)->clickCollider == nullptr) // No click collider: that's a problem
 				{
 					std::cout << "Editor object " << (*obj)->name << " has no collider and can't be clicked in the editor" << std::endl;
 					continue;
 				}
 
-				vec3 res = (*obj)->clickCollider->CollideWith(&mouseColl);
-
-				// Click on object
-				if (res.z != 0)
+				if ((*obj)->GetEditPos().z > maxZ) // If the z is high enough
 				{
-					selectedObject = *obj;
-					break;
+					// Result of the collision
+					vec3 res = (*obj)->clickCollider->CollideWith(&mouseColl);
+
+					// If collision, select
+					if (res.z != 0)
+					{
+						selectedObject = *obj;
+						maxZ = (*obj)->GetEditPos().z;
+					}
 				}
 			}
 		}
@@ -706,4 +724,22 @@ vec2 Editor::Button(vec3 drawPos, std::string text, bool* out, TextManager::text
 
 	TextManager::RenderText(text, drawPos, textSize, align, color);
 	return textRect;
+}
+
+vec2 Editor::CheckBox(vec3 drawPos, std::string label, bool* value, float textWidth)
+{
+	vec2 startPos = vec2(drawPos);
+	std::string displayString = *value ? "Yes" : "No";
+	bool textClick, boxClick;
+	Button(drawPos, label, &textClick);
+	drawPos.x += textWidth;
+	vec2 btnSize = Button(drawPos, displayString, &boxClick);
+	drawPos += vec3(btnSize.x, btnSize.y, 0);
+
+	if (textClick || boxClick)
+	{
+		*value = !(*value);
+	}
+
+	return vec2(drawPos) - startPos;
 }

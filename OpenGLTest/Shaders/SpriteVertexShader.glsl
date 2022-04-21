@@ -6,9 +6,11 @@ out vec2 texCoord;
 
 uniform mat4 transform;
 uniform mat4 projection;
+uniform vec2 UVstart;
+uniform vec2 UVend;
 
 void main()
 {
     gl_Position = projection * transform * vec4(vtexPos.xyz, 1.0);
-    texCoord = vtexuv;
+    texCoord = UVstart + vtexuv * (UVend - UVstart);
 }

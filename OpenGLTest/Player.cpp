@@ -5,14 +5,14 @@
 
 using namespace glm;
 
-Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), height)), EditorObject(position)
+Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), height, true)), EditorObject(position)
 {
 	playerSprite = new Sprite(RessourceManager::GetTexture("Engine\\circle.png"),
 		position, glm::vec2(height), 0,
 		glm::vec4(1, 0, 0, 1)); // Create a sprite!
 	playerSprite->DrawOnMainLoop();
 
-	collider = new CircleCollider(position, height);
+	((CircleCollider*)collider)->size = height;
 	clickCollider = collider;
 
 	SetPos(position);
@@ -35,12 +35,9 @@ Player::~Player()
 		playerSprite = nullptr;
 	}
 
-	if (collider != nullptr)
-	{
-		delete collider;
-		collider = nullptr;
-		clickCollider = nullptr;
-	}
+	// The collider will be deleted by the PhysicObject destructor
+	// Sice collider and clickCollider ar the same object, set clickCollider to nullptr to prevent EditorObejct destructor frof deleting it again
+	clickCollider = nullptr;
 
 	EventManager::OnOpenEditor.remove(subscribedFuncs[0]);
 	EventManager::OnCloseEditor.remove(subscribedFuncs[1]);

@@ -25,6 +25,8 @@ Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotat
     this->color = color;
     this->isUI = isUI;
     this->shader = shader;
+    this->UVStart = glm::vec2(0, 0);
+    this->UVEnd = glm::vec2(1, 1);
 
     this->isDrawnOnMainLoop = false;
 
@@ -101,6 +103,9 @@ void Sprite::DrawNow()
         realShader->SetUniform("mainTexture", 0);
         texture->Use(0);
     }
+
+    realShader->SetUniform("UVstart", UVStart);
+    realShader->SetUniform("UVend", UVEnd);
 
     // Get mesh and draw
     SpriteRenderer::GetMesh();
