@@ -14,7 +14,7 @@ EditorObject::EditorObject(vec3 position)
 
 EditorObject::~EditorObject()
 {
-	if (clickCollider)
+	if (clickCollider != nullptr)
 	{
 		delete clickCollider;
 		clickCollider = nullptr;
@@ -95,8 +95,7 @@ vec2 EditorObject::DrawActions(vec3 drawPos)
 	if (res)
 	{
 		EditorObject* newObj = Copy();
-		newObj->ID = Editor::IDmax;
-		Editor::IDmax++;
+		Editor::AddObject(newObj);
 		Editor::SelectObject(newObj);
 	}
 

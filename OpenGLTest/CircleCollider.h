@@ -20,5 +20,7 @@ public:
 	virtual vec3 CollideWith(CircleCollider* other) override;
 	virtual vec3 CollideWith(RectCollider* other) override;
 
+	virtual std::vector<vec2> RaycastPoints(float a, float b) override;
+
 	virtual void SetCollideWithPhys(bool value) override;
 };

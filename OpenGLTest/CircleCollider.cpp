@@ -118,6 +118,68 @@ vec3 CircleCollider::CollideWith(RectCollider* other)
 	}
 }
 
+std::vector<vec2> CircleCollider::RaycastPoints(float a, float b)
+{
+	float x0 = position.x;
+	float y0 = position.y;
+	float r = size / 2;
+
+	if (std::isnan(a)) // Vertical line
+	{
+		float _a = 1;
+		float _b = -2 * y0;
+		float _c = (y0 * y0) + ((b - x0) * (b - x0)) - (r * r);
+
+		float delta = (_b * _b) - (4 * _a * _c);
+
+		if (delta < 0)
+		{
+			return std::vector<vec2>();
+		}
+		else if (delta == 0)
+		{
+			float sy = (-_b) / (2 * _a);
+			return std::vector<vec2> { vec2(b, sy) };
+		}
+		else
+		{
+			float s1y = (-_b - sqrt(delta)) / (2 * _a);
+			float s2y = (-_b + sqrt(delta)) / (2 * _a);
+			return std::vector<vec2> { vec2(b, s1y), vec2(b, s2y) };
+		}
+ 	}
+	else // Other lines
+	{
+		float _a = 1 + (a * a);
+		float _b = -(2 * x0) + (2 * a * b) - (2 * y0 * a);
+		float _c = (x0 * x0) + (b * b) - (2 * y0 * b) + (y0 * y0) - (r * r);
+
+		float delta = (_b * _b) - (4 * _a * _c);
+
+		if (delta < 0)
+		{
+			return std::vector<vec2>();
+		}
+		else if (delta == 0)
+		{
+			float sx = (-_b) / (2 * _a);
+			float sy = (a * sx) + b;
+
+			return std::vector<vec2> { vec2(sx, sy) };
+		}
+		else
+		{
+			float s1x = (-_b - sqrt(delta)) / (2 * _a);
+			float s2x = (-_b + sqrt(delta)) / (2 * _a);
+
+			float s1y = (a * s1x) + b;
+			float s2y = (a * s2x) + b;
+
+			return std::vector<vec2> { vec2(s1x, s1y), vec2(s2x, s2y) };
+		}
+	}
+}
+
 void CircleCollider::SetCollideWithPhys(bool value)
 {
 	if (collideWithPhys != value)

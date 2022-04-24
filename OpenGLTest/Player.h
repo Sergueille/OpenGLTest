@@ -34,8 +34,44 @@ public:
 	/// The force applied when jumping and the player release spacebar
 	/// </summary>
 	const float jumpForceStop = 70;
+	/// <summary>
+	/// The max force the player can apply to try to reach his walk speed, in newtons
+	/// </summary>
+	const float walkMaxForce = 60;
+	const float teleportationDistance = 4;
+	const int maxTeleprtationInAir = 2;
+
+	/// <summary>
+	/// When teleporting, add this to the y velocity
+	/// </summary>
+	const float teleportVerticalForce = 3;
+
+	/// <summary>
+	/// The distance btw the round and the player while floating
+	/// </summary>
+	const float floatingDistance = 0.7f;
+	/// <summary>
+	/// The min distance to jump and reload
+	/// </summary>
+	const float floatingDistanceToJump = 1.2f;
+	/// <summary>
+	/// The min distance to apply resistance force
+	/// </summary>
+	const float floatingForceStartDist = 1.4f;
+	/// <summary>
+	/// Force opposed to the floating force each second
+	/// </summary>
+	const float floatFriction = 0.5f;
+
+	const float groudRaycastsXshift = 0.5f;
+
+	const vec4 canTeleportColor = vec4(0, 1, 0, 0.5);
+	const vec4 cannotTeleportColor = vec4(1, 0, 0, 0.5);
+	const vec4 cannotTeleportClickColor = vec4(0.8, 0.5, 0, 0.5);
 
 	bool isJumping = false;
+
+	int teleportationsRemaining = maxTeleprtationInAir;
 
 	Player(vec3 position);
 	~Player();
@@ -51,8 +87,12 @@ protected:
 
 private:
 	LinkedListElement<std::function<void()>>* subscribedFuncs[2];
+
 	Sprite* playerSprite;
+	Sprite* teleportPosSprite;
 
 	bool physicsWasEnabledBeforeDisabling = false;
+
+	bool wasClickingLastFrame = false;
 };
 

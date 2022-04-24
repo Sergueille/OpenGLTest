@@ -8,6 +8,7 @@
 #include <GLFW/glfw3.h>
 #include <list>
 #include <functional>
+#include <stack>
 
 using namespace glm;
 
@@ -24,7 +25,19 @@ public:
 
 	enum class PanelWindow
 	{
-		properties, add, map, file
+		properties, add, map, file, settings
+	};
+
+	struct UndoAction {
+		enum class UndoActType { add, change, remove };
+		UndoActType type;
+		EditorObject* object = nullptr;
+		EditorObject* otherObject = nullptr;
+		int index;
+
+		void Do();
+		UndoAction GetOpposite();
+		std::string GetDescription();
 	};
 
 	static std::list<EditorObject*> editorObjects;
@@ -86,6 +99,9 @@ public:
 
 	static Tool currentTool;
 
+	static std::stack<UndoAction> undoStack;
+	static std::stack<UndoAction> redoStack;
+
 	static void CreateEditor(); // Setup editor and open it
 	static void OpenEditor(); // Open the editor, must be set up before
 	static void CloseEditor(); // Close the editor but don't destroy it
@@ -135,6 +151,14 @@ public:
 
 	static vec2 CheckBox(vec3 drawPos, std::string label, bool* value, float textWidth);
 
+	static int GetIndexOfEditorObject(EditorObject* object, bool throwIfNotFound);
+
+	// TODO: Redo system not working becaus of object references
+	static void Undo();
+	static void Redo();
+	static void ClearUndoStack();
+	static void ClearRedoStack();
+
 private:
 	static EditorObject* selectedObject;
 
@@ -143,6 +167,12 @@ private:
 	static float editToolStartRot;
 	static vec2 editToolStartScale;
 	static vec2 editToolAxisVector; // Used to apply tools only on ona axis (ex: press G X)
+	static EditorObject* oldToolObject;
+
+	/// <summary>
+	/// Will become true if a text input or a checkbox is changed
+	/// </summary>
+	static bool propertyChanged;
 
 	static void OnMainLoop();
 
@@ -151,6 +181,7 @@ private:
 	static void DrawAddTab(vec3 drawPos);
 	static void DrawMapTab(vec3 drawPos);
 	static void DrawFileTab(vec3 drawPos);
+	static void DrawSettingsTab(vec3 drawPos);
 
 	static void HandleInputBackspace();
 	static void HandleTools();
@@ -166,6 +197,12 @@ private:
 	static void OnKeyPressed(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 	static vec2 DrawProperty(vec3 drawPos, const std::string name, vec4* value, int numComponents, float propX, std::string ID, bool colorNames = false);
+
+	/// <summary>
+	/// Call this method after making a change to en entity, used for the undo system <br/>
+	/// Provide COPIES of the obects
+	/// </summary>
+	static void RecordObjectChange(EditorObject* oldObject, EditorObject* newObject);
 };
 
 struct MapData

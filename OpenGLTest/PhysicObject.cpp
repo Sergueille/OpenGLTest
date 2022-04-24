@@ -10,19 +10,23 @@ using namespace glm;
 PhysicObject::PhysicObject(Collider* coll)
 {
 	this->collider = coll;
-
-	funcPos = EventManager::OnMainLoop.push_end([this] { this->OnMainLoop(); }); // subscribe to the main loop
+	SubscribeToMainLoop();
 }
 
 PhysicObject::~PhysicObject()
 {
-	if (collider)
+	if (collider != nullptr)
 	{
 		delete collider;
 		collider = nullptr;
 	}
 
 	EventManager::OnMainLoop.remove(funcPos);
+}
+
+void PhysicObject::SubscribeToMainLoop()
+{
+	funcPos = EventManager::OnMainLoop.push_end([this] { this->OnMainLoop(); }); // subscribe to the main loop
 }
 
 void PhysicObject::OnMainLoop()

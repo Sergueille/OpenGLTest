@@ -26,10 +26,12 @@ public:
 	bool isColliding = false;
 	bool isOnWalkableSurface = false;
 
-	Collider* collider = NULL;
+	Collider* collider = nullptr;
 
 	vec2 GetPos();
 	void SetPos(vec2 pos);
+
+	void SubscribeToMainLoop();
 
 protected:
 	virtual void OnBeforeMove();

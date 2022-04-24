@@ -24,10 +24,12 @@ public:
 	virtual vec3 CollideWith(CircleCollider* other) override;
 	virtual vec3 CollideWith(RectCollider* other) override;
 
+	virtual std::vector<vec2> RaycastPoints(float a, float b) override;
+
 	virtual void SetCollideWithPhys(bool value) override;
 
 	/// <summary>
-	/// Get corners of collider, to-right first
+	/// Get corners of collider, to-right first, then counter-clockwise
 	/// </summary>
 	std::vector<vec2> GetPoints();
 };

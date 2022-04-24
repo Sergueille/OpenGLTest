@@ -29,6 +29,9 @@ void EditorSaveManager::ClearEditorLevel()
 	}
 	Editor::editorObjects.clear();
 
+	Editor::ClearUndoStack();
+	Editor::ClearRedoStack();
+
 	Editor::currentMapData = MapData();
 	Editor::IDmax = 0;
 }
@@ -97,9 +100,14 @@ void EditorSaveManager::SaveLevel()
 void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 {
 	if (inEditor)
+	{
 		ClearEditorLevel();
+		Editor::currentFilePath = path;
+	}
 	else
+	{
 		ClearGameLevel();
+	}
 
 	std::cout << "Loading level " << path << std::endl;
 
@@ -123,6 +131,9 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 		{
 			ReadObject(inEditor);
 		}
+
+		Editor::ClearUndoStack();
+		Editor::ClearRedoStack();
 	}
 	catch (std::exception e) // Catch exceptions to make sure the file is closed
 	{

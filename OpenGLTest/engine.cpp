@@ -81,9 +81,7 @@ int main(int argc, void* argv[])
 
     // Start level editor
     Editor::CreateEditor();
-
-    Editor::AddObject((EditorObject*)new Player(vec3(0)));
-    Editor::AddObject((EditorObject*)new EditorSprite());
+    EditorSaveManager::LoadLevel("test.map", true);
 
     Camera::SetupCamera();
 

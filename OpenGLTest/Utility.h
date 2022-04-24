@@ -28,6 +28,9 @@ namespace Utility
 	/// <returns>A vector where XY are the position of H, and Z is AH (oriented)</returns>
 	extern glm::vec3 Project(glm::vec2 a, glm::vec2 b, glm::vec2 c);
 
+	/// <summary>
+	/// Rotates a vector by theta angle couter-clockwise
+	/// </summary>
 	extern glm::vec2 Rotate(glm::vec2 vec, float beta);
 
 	extern float AngleBetween(glm::vec2 a, glm::vec2 b);
@@ -41,6 +44,24 @@ namespace Utility
 	/// Get world position from screen position (raw pixels, not 0-1)
 	/// </summary>
 	extern glm::vec2 ScreenToWorld(glm::vec2 screenPos);
+
+	/// <summary>
+	/// <para> Get the intersection of two lines of equation x = a1 y + b1 and x = a2 y + b2 </para>
+	/// <para> Check that the lines are crossing before calling the function with a1 != a2 </para>
+	/// <para> However, it handles the vertical line case with a = nan </para>
+	/// </summary>
+	extern glm::vec2 LineItersection(float a1, float b1, float a2, float b2);
+
+	/// <summary>
+	/// Same as LineItersection(), but the second equation is x = b2
+	/// </summary>
+	extern glm::vec2 LineItersectionVertical(float a1, float b1, float b2);
+
+	/// <summary>
+	/// <br>Get a line equation that touch p1 and p2</br>
+	/// <br>If the line is vertical, it will set a to nan, check with std::isnan() in math.h</br>
+	/// </summary>
+	extern void GetLineEquationFromPoints(glm::vec2 p1, glm::vec2 p2, float* a, float* b);
 
 	/// <summary>
 	/// Get the cos of the timen rescaled btw 0 and 1

@@ -122,6 +122,19 @@ void Sprite::DrawAll()
     }
 }
 
+Sprite* Sprite::Copy()
+{
+    Sprite* copy = new Sprite(*this);
+
+    if (copy->isDrawnOnMainLoop)
+    {
+        copy->isDrawnOnMainLoop = false;
+        copy->DrawOnMainLoop();
+    }
+
+    return copy;
+}
+
 void Sprite::DrawOnMainLoop()
 {
     if (!isDrawnOnMainLoop)

@@ -69,9 +69,6 @@ EditorObject* EditorSprite::Copy()
 	newObj->isDrawnOnMainLoop = false;
 	newObj->DrawOnMainLoop();
 
-	// add to editor list because it's not called automatically because no constructor were used to create object
-	Editor::editorObjects.push_back(newObj);
-
 	return newObj;
 }
 

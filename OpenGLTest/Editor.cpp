@@ -34,6 +34,7 @@ vec3 Editor::editToolStartPos;
 float Editor::editToolStartRot;
 vec2 Editor::editToolStartScale;
 vec2 Editor::editToolAxisVector = vec2(1);
+EditorObject* Editor::oldToolObject = nullptr;
 
 float Editor::moveSnapping = 0.2f;
 float Editor::rotateSnapping = 5;
@@ -45,11 +46,17 @@ float Editor::sizeToolSizePerPixel = 0.03f;
 std::string Editor::currentFilePath = "";
 MapData Editor::currentMapData = MapData();
 
+std::stack<Editor::UndoAction> Editor::undoStack;
+std::stack<Editor::UndoAction> Editor::redoStack;
+
+bool Editor::propertyChanged = false;
+
 std::list<std::string> Editor::panelWindows = {
 	"Props",
 	"Add",
 	"Map",
 	"File",
+	"Settings",
 };
 Editor::PanelWindow Editor::currentPanelWindow = Editor::PanelWindow::properties;
 
@@ -92,6 +99,55 @@ void Editor::DestroyEditor()
 	CloseEditor();
 }
 
+int Editor::GetIndexOfEditorObject(EditorObject* object, bool throwIfNotFound)
+{
+	int index = 0;
+	for (auto it = editorObjects.begin(); it != editorObjects.end(); it++)
+	{
+		if ((*it)->ID == object->ID)
+			return index;
+
+		index++;
+	}
+
+	if (throwIfNotFound)
+		throw "Editor object not found in list";
+
+	return -1;
+}
+
+void Editor::Undo()
+{
+	if (undoStack.size() < 1)
+	{
+		std::cout << "Undo stack is empty" << std::endl;
+		return;
+	}
+
+	UndoAction topAction = undoStack.top();
+	undoStack.pop();
+	std::cout << "Undo: " << topAction.GetDescription() << std::endl;
+
+	topAction.Do();
+	redoStack.push(topAction.GetOpposite());
+}
+
+void Editor::Redo()
+{
+	if (redoStack.size() < 1)
+	{
+		std::cout << "Redo stack is empty" << std::endl;
+		return;
+	}
+
+	UndoAction topAction = redoStack.top();
+	redoStack.pop();
+	std::cout << "Redo: " << topAction.GetDescription() << std::endl;
+
+	topAction.Do();
+	undoStack.push(topAction.GetOpposite());
+}
+
 void Editor::OnMainLoop()
 {
 	if (!enabled) // EDITOR ONLY
@@ -131,6 +187,12 @@ void Editor::HandleTools()
 		{
 			currentTool = Tool::none;
 			selectedObject->SetEditPos(editToolStartPos);
+
+			if (oldToolObject != nullptr)
+			{
+				delete oldToolObject;
+				oldToolObject = nullptr;
+			}
 		}
 	}
 	else if (currentTool == Tool::rotate) // ROTATE
@@ -143,6 +205,12 @@ void Editor::HandleTools()
 		{
 			currentTool = Tool::none;
 			selectedObject->SetEditRotation(editToolStartRot);
+
+			if (oldToolObject != nullptr)
+			{
+				delete oldToolObject;
+				oldToolObject = nullptr;
+			}
 		}
 	}
 	else if (currentTool == Tool::scale) // SCALE
@@ -159,6 +227,12 @@ void Editor::HandleTools()
 		{
 			currentTool = Tool::none;
 			selectedObject->SetEditScale(editToolStartScale);
+
+			if (oldToolObject != nullptr)
+			{
+				delete oldToolObject;
+				oldToolObject = nullptr;
+			}
 		}
 	}
 }
@@ -172,6 +246,15 @@ void Editor::SelectTool(Tool tool)
 	editToolStartRot = selectedObject->GetEditRotation();
 	editToolStartScale = selectedObject->GetEditScale();
 	editToolAxisVector = vec2(1, 1);
+
+	if (oldToolObject != nullptr)
+	{
+		delete oldToolObject;
+		oldToolObject = nullptr;
+	}
+
+	oldToolObject = selectedObject->Copy();
+	oldToolObject->Disable();
 }
 
 void Editor::HandleHotkeys(int key)
@@ -186,31 +269,31 @@ void Editor::HandleHotkeys(int key)
 		|| glfwGetKey(Utility::window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS;
 
 	
-	if (control && alt && glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS && enabled) // Save As
+	if (enabled && control && alt && glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS) // Save As
 	{
 		currentPanelWindow = PanelWindow::file;
 		focusedTextInputID = "FilePath";
 	}
-	else if (control && glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS && enabled) // Save
+	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS) // Save
 	{
 		EditorSaveManager::SaveLevel();
 	}
-	else if (control && glfwGetKey(Utility::window, GLFW_KEY_O) == GLFW_PRESS && enabled) // Open
+	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_O) == GLFW_PRESS) // Open
 	{
 		currentPanelWindow = PanelWindow::file;
 		focusedTextInputID = "LoadPath";
 	}
-	else if (control && glfwGetKey(Utility::window, GLFW_KEY_N) == GLFW_PRESS && enabled) // New
+	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_N) == GLFW_PRESS) // New
 	{
 		EditorSaveManager::ClearEditorLevel();
 		currentFilePath = "";
 	}
-	else if (glfwGetKey(Utility::window, GLFW_KEY_DELETE) == GLFW_PRESS && enabled) // Delete
+	else if (enabled && glfwGetKey(Utility::window, GLFW_KEY_DELETE) == GLFW_PRESS) // Delete
 	{
 		if (selectedObject != nullptr)
 			RemoveObject(selectedObject);
 	}
-	else if (control && glfwGetKey(Utility::window, GLFW_KEY_D) == GLFW_PRESS && enabled) // Duplicate
+	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_D) == GLFW_PRESS) // Duplicate
 	{
 		if (selectedObject != nullptr)
 		{
@@ -227,9 +310,21 @@ void Editor::HandleHotkeys(int key)
 		else // End test
 			EndTest();
 	}
+	else if (enabled && control && shift && glfwGetKey(Utility::window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		Redo();
+	}
+	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		Undo();
+	}
+	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_Y) == GLFW_PRESS)
+	{
+		Redo();
+	}
 
 	// Tools shortcuts
-	if (currentTool == Tool::none && !isOverUI(GetMousePos()) && !control && !shift && !alt && focusedTextInputID == "")
+	if (currentTool == Tool::none && !isOverUI(GetMousePos()) && enabled && !control && !shift && !alt && focusedTextInputID == "")
 	{
 		// Change tool
 		if (glfwGetKey(Utility::window, GLFW_KEY_G) == GLFW_PRESS)
@@ -285,6 +380,9 @@ void Editor::DrawPanel()
 	case PanelWindow::file:
 		DrawFileTab(drawPos);
 		break;
+	case PanelWindow::settings:
+		DrawSettingsTab(drawPos);
+		break;
 	default:
 		throw "Selected panel tab id is too high!";
 		break;
@@ -299,10 +397,24 @@ void Editor::DrawPropsTab(vec3 drawPos)
 	}
 	else
 	{
+		propertyChanged = false;
+		EditorObject* copy = GetSelectedObject()->Copy();
+		copy->Disable();
+
 		drawPos.y -= TextManager::RenderText("Object properties", drawPos, textSize).y + margin;
 		drawPos.x += indentation;
 		drawPos.y -= GetSelectedObject()->DrawProperties(drawPos).y + margin;
 		drawPos.y -= GetSelectedObject()->DrawActions(drawPos).y;
+
+		if (propertyChanged)
+		{
+			RecordObjectChange(copy, GetSelectedObject()->Copy());
+		}
+		else
+		{
+			delete copy;
+			copy = nullptr;
+		}
 	}
 }
 
@@ -354,9 +466,18 @@ void Editor::DrawFileTab(vec3 drawPos)
 	drawPos.y -= DrawProperty(drawPos, "Load a level", &loadPath, panelPropertiesX, "LoadPath").y + margin;
 	if (loadPath != "")
 	{
-		currentFilePath = loadPath;
 		EditorSaveManager::LoadLevel(loadPath, true);
 	}
+}
+
+void Editor::DrawSettingsTab(vec3 drawPos)
+{
+	drawPos.y -= TextManager::RenderText("Editor settings\nThese props are not saved for now", drawPos, textSize).y + margin;
+	drawPos.x += indentation;
+
+	drawPos.y -= DrawProperty(drawPos, "Move tool step", &moveSnapping, panelPropertiesX, "moveSnap").y;
+	drawPos.y -= DrawProperty(drawPos, "Rotate tool step", &rotateSnapping, panelPropertiesX, "rotateSnap").y;
+	drawPos.y -= DrawProperty(drawPos, "Scale tool step", &sizeSnapping, panelPropertiesX, "scaleSnap").y;
 }
 
 void Editor::HandleInputBackspace()
@@ -414,6 +535,10 @@ void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 		{
 			// End current tool
 			currentTool = Tool::none;
+			EditorObject* newObject = selectedObject->Copy();
+			newObject->Disable();
+			RecordObjectChange(oldToolObject, newObject);
+			oldToolObject = nullptr;
 			return; // Ignore other clic events
 		}
 
@@ -470,6 +595,8 @@ vec2 Editor::TextInput(vec3 pos, std::string* value, std::string ID, TextManager
 		{
 			*value = focusedTextInputValue;
 			focusedTextInputID = "";
+			focusedTextInputValue = "";
+			propertyChanged = true;
 		}
 		else if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		{
@@ -529,17 +656,34 @@ EditorObject* Editor::SelectObject(EditorObject* object)
 EditorObject* Editor::AddObject(EditorObject* object)
 {
 	editorObjects.push_back(object);
+
+	// Record undo entry
+	UndoAction action = UndoAction{ UndoAction::UndoActType::remove };
+	action.object = nullptr;
+	action.otherObject = object;
+	action.index = GetIndexOfEditorObject(object, true);
+	undoStack.push(action);
+	ClearRedoStack();
+
 	return object;
 }
 
 void Editor::RemoveObject(EditorObject* object)
 {
+	// Record undo entry
+	UndoAction action = UndoAction{ UndoAction::UndoActType::add };
+	action.object = object;
+	action.otherObject = nullptr;
+	action.index = GetIndexOfEditorObject(object, true);
+	undoStack.push(action);
+	ClearRedoStack();
+
 	if (GetSelectedObject()->ID == object->ID)
 		SelectObject(nullptr);
 
 	editorObjects.remove(object);
 
-	delete object;
+	object->Disable();
 }
 
 void Editor::StartTest()
@@ -739,7 +883,102 @@ vec2 Editor::CheckBox(vec3 drawPos, std::string label, bool* value, float textWi
 	if (textClick || boxClick)
 	{
 		*value = !(*value);
+		propertyChanged = true;
 	}
 
 	return vec2(drawPos) - startPos;
+}
+
+void Editor::RecordObjectChange(EditorObject* oldObject, EditorObject* newObject)
+{
+	UndoAction action = UndoAction{ UndoAction::UndoActType::change };
+	action.object = oldObject;
+	action.otherObject = newObject;
+	action.index = GetIndexOfEditorObject(newObject, true);
+	undoStack.push(action);
+	ClearRedoStack();
+}
+
+void Editor::ClearUndoStack()
+{
+	while (!undoStack.empty())
+	{
+		delete undoStack.top().object;
+		undoStack.pop();
+	}
+}
+
+void Editor::ClearRedoStack()
+{
+	while (!redoStack.empty())
+	{
+		delete redoStack.top().object;
+		redoStack.pop();
+	}
+}
+
+void Editor::UndoAction::Do()
+{
+	auto iter = index == 0 ? editorObjects.begin() : std::next(editorObjects.begin(), index);
+
+	if (type == UndoActType::add)
+	{
+		EditorObject* copy = object->Copy();
+		editorObjects.insert(iter, copy);
+		copy->Enable();
+	}
+	else if (type == UndoActType::remove)
+	{
+		if (GetSelectedObject() != nullptr && GetSelectedObject()->ID == (*iter)->ID)
+			SelectObject(nullptr);
+		(*iter)->Disable();
+		editorObjects.erase(iter);
+	}
+	else if (type == UndoActType::change)
+	{
+		(*iter)->Disable();
+		auto newIter = editorObjects.erase(iter);
+		EditorObject* copy = object->Copy();
+		editorObjects.insert(newIter, copy);
+		copy->Enable();
+	}
+}
+
+Editor::UndoAction Editor::UndoAction::GetOpposite()
+{
+	UndoAction newAction = {};
+
+	if (this->type == UndoActType::add)
+	{
+		newAction.type = UndoActType::remove;
+	}
+	else if (this->type == UndoActType::remove)
+	{
+		newAction.type = UndoActType::add;
+	}
+	else if (this->type == UndoActType::change)
+	{
+		newAction.type = UndoActType::change;
+	}
+
+	newAction.object = this->otherObject;
+	newAction.otherObject = this->object;
+
+	return newAction;
+}
+
+std::string Editor::UndoAction::GetDescription()
+{
+	if (type == UndoActType::add)
+	{
+		return "Add object at index " + std::to_string(index);
+	}
+	else if (type == UndoActType::remove)
+	{
+		return "Remove object at index " + std::to_string(index);
+	}
+	else if (type == UndoActType::change)
+	{
+		return "Change object at index " + std::to_string(index);
+	}
 }

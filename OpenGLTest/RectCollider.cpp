@@ -1,6 +1,7 @@
 #include "RectCollider.h"
 #include "Collider.h"
 #include "Utility.h"
+#include <math.h>
 
 using namespace glm;
 
@@ -36,6 +37,49 @@ vec3 RectCollider::CollideWith(RectCollider* other)
 	if (!enabled) return vec3(0, 0, 0);
 
 	throw "Not implemented!";
+}
+
+std::vector<vec2> RectCollider::RaycastPoints(float ra, float rb)
+{
+	std::vector<vec2> points = GetPoints();
+	std::vector<vec2> result = std::vector<vec2>();
+
+	// For each side
+	for (auto it = points.begin(); it != points.end(); it++)
+	{
+		vec2 point = *it; // First point pf the side
+		vec2 next; // Second point of the side
+
+		if (it + 1 == points.end()) next = points[0];
+		else next = *(it + 1);
+
+		float a, b;
+		GetLineEquationFromPoints(point, next, &a, &b); // Get line equation
+
+		if (ra == a || (std::isnan(ra) && std::isnan(a))) continue; // Continue if lines are not crossing
+
+		vec2 res = LineItersection(ra, rb, a, b); // Get intersection points
+
+		// Check if the intesection point is on the line
+		if (point.x == next.x) // Vectical lines
+		{
+			if ((point.y < next.y && res.y > point.y && res.y < next.y)
+				|| (point.y > next.y && res.y < point.y && res.y > next.y))
+			{
+				result.push_back(res);
+			}
+		}
+		else // Other lines
+		{
+			if ((point.x < next.x && res.x > point.x && res.x < next.x)
+				|| (point.x > next.x && res.x < point.x && res.x > next.x))
+			{
+				result.push_back(res);
+			}
+		}
+	}
+
+	return result;
 }
 
 void RectCollider::SetCollideWithPhys(bool value)

@@ -64,6 +64,8 @@ public:
 	/// </summary>
 	static void DrawAll();
 
+	Sprite* Copy();
+
 protected:
 	bool isDrawnOnMainLoop;
 

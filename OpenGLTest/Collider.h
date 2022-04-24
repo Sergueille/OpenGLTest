@@ -1,9 +1,8 @@
 #pragma once
 
 #include <list>
+#include <vector>
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 #include "Sprite.h"
 
@@ -36,6 +35,22 @@ public:
 	/// </summary>
 	/// <returns>A vector where X and Y represents normalisedcontact vector, and Z the distance to move objects to end collision</returns>
 	virtual glm::vec3 CollideWith(RectCollider* other) = 0;
+
+	/// <summary>
+	/// Determine if this collider is touching any of the colliders that can collide with phisics
+	/// </summary>
+	bool IsTouchingAnyCollider();
+
+	/// <summary>
+	/// The raycast points of a line (ax+b)
+	/// </summary>
+	virtual std::vector<glm::vec2> RaycastPoints(float a, float b) = 0;
+
+	/// <summary>
+	/// RAYCAST!
+	/// </summary>
+	/// <returns></returns>
+	static bool Raycast(glm::vec2 origin, glm::vec2 direction, glm::vec2* result, Collider* ignoreCollider = nullptr);
 	 
 	virtual void SetCollideWithPhys(bool value) = 0;
 	bool MustCollideWithPhys();
