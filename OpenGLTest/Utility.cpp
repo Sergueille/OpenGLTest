@@ -15,6 +15,8 @@ namespace Utility
 	float time = 0;
 	float lastTime = 0;
 
+	SoLoud::Soloud* soloud = nullptr;
+
 	float GetDeltaTime()
 	{
 		return time - lastTime;
@@ -55,8 +57,8 @@ namespace Utility
 	glm::vec2 ScreenToWorld(glm::vec2 screenPos)
 	{
 		screenPos.y *= -1;
-		screenPos.y += screenY / 2;
-		screenPos.x -= screenX / 2;
+		screenPos.y += (float)screenY / 2;
+		screenPos.x -= (float)screenX / 2;
 
 		screenPos /= screenY;
 

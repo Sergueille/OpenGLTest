@@ -78,9 +78,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\alexis\Logiciels\GLFW\include;D:\alexis\Logiciels\GLAD\include;D:\alexis\Logiciels\glm;D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\alexis\Logiciels\GLFW\include;D:\alexis\Logiciels\GLAD\include;D:\alexis\Logiciels\glm;D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\include;D:\alexis\Logiciels\Soloud\soloud20200207\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\alexis\Logiciels\GLFW\lib-vc2022;D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\release dll\win64;$(LibraryPath)</LibraryPath>
-    <SourcePath>D:\alexis\Logiciels\GLAD\src;$(SourcePath)</SourcePath>
+    <SourcePath>D:\alexis\Logiciels\GLAD\src;D:\alexis\Logiciels\Soloud\soloud20200207\src;D:\alexis\Logiciels\Soloud\soloud20200207\src\core;$(SourcePath)</SourcePath>
     <ExcludePath>$(ExcludePath)</ExcludePath>
     <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
@@ -121,6 +121,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +147,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\dr_impl.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\soloud_wav.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\soloud_wavstream.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\stb_vorbis.c" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\backend\miniaudio\soloud_miniaudio.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\backend\portaudio\soloud_portaudio.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\backend\portaudio\soloud_portaudio_dll.c" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_audiosource.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_bus.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_core_3d.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_core_basicops.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_core_faderops.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_core_filterops.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_core_getters.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_core_setters.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_core_voicegroup.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_core_voiceops.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_fader.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_fft.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_fft_lut.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_file.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_filter.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_misc.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_queue.cpp" />
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_thread.cpp" />
     <ClCompile Include="..\glad.c" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
@@ -170,6 +197,11 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\dr_flac.h" />
+    <ClInclude Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\dr_mp3.h" />
+    <ClInclude Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\dr_wav.h" />
+    <ClInclude Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\stb_vorbis.h" />
+    <ClInclude Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\backend\miniaudio\miniaudio.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />

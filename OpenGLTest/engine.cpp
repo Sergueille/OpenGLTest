@@ -6,6 +6,8 @@ Code from https://learnopengl.com/
 
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
+#include <soloud.h>
+#include <soloud_wav.h>
 
 #include "Editor.h"
 #include "mesh.h"
@@ -60,7 +62,9 @@ int main(int argc, void* argv[])
     // Setup OpenGL viewport
     glViewport(0, 0, Utility::screenX, Utility::screenY);
 
-    /////// GAME START
+    // Init sound engine
+    Utility::soloud = new SoLoud::Soloud();
+    Utility::soloud->init();
 
     // Init text manager
     TextManager::Init();
@@ -109,9 +113,15 @@ int main(int argc, void* argv[])
     }
 
     EventManager::Call(&EventManager::OnExitApp);
+
+    // Clear ressources
     RessourceManager::Clear();
 
-    // Clean memory
+    // Clean sound engine
+    Utility::soloud->deinit();
+    delete Utility::soloud;
+
+    // Clean GLFW memory
     glfwTerminate();
     return 0;
 }

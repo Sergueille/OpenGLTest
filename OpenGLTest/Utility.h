@@ -5,6 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <GLFW/glfw3.h>
+#include <soloud.h>
 
 namespace Utility
 {
@@ -21,6 +22,8 @@ namespace Utility
 	const float HALF_PI = 3.14159265f / 2.0f;
 	const float DegToRad = PI / 180.0f;
 	const float RadToDeg = 180.0f / PI;
+
+	extern SoLoud::Soloud* soloud;
 
 	/// <summary>
 	/// Projects C on AB
