@@ -17,6 +17,8 @@
 
 using namespace Utility;
 
+typedef void (SetSpriteShaderUniforms) (Shader* shader, void* object);
+
 struct CompareSprite;
 class Sprite 
 {
@@ -30,6 +32,10 @@ public:
 	bool isUI;
 	glm::vec2 UVStart;
 	glm::vec2 UVEnd;
+	bool forceOpaque;
+
+	SetSpriteShaderUniforms* setUniforms;
+	void* setUniformsObjectCall = nullptr;
 
 	static std::priority_queue<Sprite*, std::vector<Sprite*>, CompareSprite> drawQueue;
 

@@ -1,6 +1,6 @@
 // Editor map file, test version
 
-count 26
+count 31
 
 object MapData {
 	mapName: ""
@@ -8,7 +8,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: "Player"
-	position: "-5.600000, 1.400000, 20.000000"
+	position: "-5.200000, 0.800000, 20.000000"
 }
 object EditorSprite {
 	ID: "1"
@@ -223,7 +223,7 @@ object EditorSprite {
 	ID: "116"
 	name: ""
 	position: "48.000000, 16.400000, 0.000000"
-	size: "41.600002, 15.200000"
+	size: "42.799999, 15.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -244,8 +244,8 @@ object EditorSprite {
 object EditorSprite {
 	ID: "209"
 	name: ""
-	position: "63.799999, 3.600000, 0.000000"
-	size: "14.400001, 11.400001"
+	position: "63.200001, 3.400000, 0.000000"
+	size: "12.400001, 11.400001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -268,6 +268,61 @@ object EditorSprite {
 	name: ""
 	position: "37.000000, 6.400000, 0.000000"
 	size: "14.400001, 5.400000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "75"
+	name: ""
+	position: "68.599998, -30.000000, 0.000000"
+	size: "18.200001, 26.800001"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "76"
+	name: ""
+	position: "84.400002, -21.000000, 0.000000"
+	size: "18.200001, 26.800001"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "131"
+	name: ""
+	position: "87.599998, 6.600000, 0.000000"
+	size: "37.400002, 20.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "30"
+	name: ""
+	position: "98.000000, -33.000000, 0.000000"
+	size: "18.200001, 26.800001"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "31"
+	name: ""
+	position: "115.599998, -21.000000, 0.000000"
+	size: "18.200001, 26.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"

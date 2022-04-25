@@ -44,7 +44,7 @@ public:
 
 	static bool enabled;
 
-	const static int panelSize = 300;
+	const static int panelSize = 400;
 	const static int panelPropertiesX = 150;
 
 	const static int textSize = 15;
@@ -70,6 +70,7 @@ public:
 	const static vec4 textColor;
 	const static vec4 highlightColor;
 	const static vec4 editColor;
+	const static vec4 disabledTextColor;
 
 	static std::string focusedTextInputID;
 	static std::string focusedTextInputValue;
@@ -133,6 +134,7 @@ public:
 	/// <returns>The size of the property</returns>
 	static vec2 DrawProperty(vec3 drawPos, const std::string name, std::string* value, float propX, std::string ID);
 	static vec2 DrawProperty(vec3 drawPos, const std::string name, float* value, float propX, std::string ID);
+	static vec2 DrawProperty(vec3 drawPos, const std::string name, int* value, float propX, std::string ID);
 	static vec2 DrawProperty(vec3 drawPos, const std::string name, vec2* value, float propX, std::string ID);
 	static vec2 DrawProperty(vec3 drawPos, const std::string name, vec3* value, float propX, std::string ID, bool colorNames = false);
 	static vec2 DrawProperty(vec3 drawPos, const std::string name, vec4* value, float propX, std::string ID, bool colorNames = false);
@@ -147,9 +149,11 @@ public:
 	/// <returns>The size of the text input</returns>
 	static vec2 TextInput(vec3 pos, std::string* value, std::string ID, TextManager::text_align align = TextManager::right);
 
-	static vec2 Button(vec3 drawPos, std::string text, bool* out, TextManager::text_align align = TextManager::right);
+	static vec2 Button(vec3 drawPos, std::string text, bool* out, bool enabled = true, TextManager::text_align align = TextManager::right);
 
 	static vec2 CheckBox(vec3 drawPos, std::string label, bool* value, float textWidth);
+
+	static vec2 OprionProp(vec3 drawPos, std::string name, int* value, int max, std::string* firstDisplay, float propX);
 
 	static int GetIndexOfEditorObject(EditorObject* object, bool throwIfNotFound);
 

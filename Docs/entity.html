@@ -45,6 +45,10 @@
         <h3>Enabling and disabling</h3>
         You have to override <code>Enable()</code> and <code>Disable()</code>, and call the base methods. 
         When disabled, the entity must do nothing and not be visible
+
+        <h3>Add your entity to the editor add tab</h3>
+        Add your button in <code>Editor::DrawAddTab()</code> and set the <code>newObject</code> variable to a
+        new instance of the entity
     </div>
 </body>
 </html>

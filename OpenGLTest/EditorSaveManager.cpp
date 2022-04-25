@@ -4,6 +4,7 @@
 
 #include "Player.h"
 #include "EditorSprite.h"
+#include "Laser.h"
 
 using namespace glm;
 
@@ -360,8 +361,13 @@ void EditorSaveManager::ReadObject(bool inEditor)
 		newObj = new EditorSprite();
 		newObj->Load(&props);
 	}
+	else if (objectType == "Laser")
+	{
+		newObj = new Laser();
+		newObj->Load(&props);
+	}
 	else
-		throw "Unknown object type for loading: " + objectType;
+		throw "Unknown object type for loading!";
 
 	if (newObj != nullptr)
 	{
@@ -415,4 +421,12 @@ vec4 EditorSaveManager::StringToVector4(std::string s, vec4 def)
 	std::string w = zw.substr(pos + 1, s.length() - pos - 1);
 
 	return vec4(std::stof(x), std::stof(y), std::stof(z), std::stof(w));
+}
+
+void EditorSaveManager::FloatProp(std::map<std::string, std::string>* props, std::string name, float* value)
+{
+	std::string text = (*props)[name];
+
+	if (text != "")
+		*value = std::stof(text);
 }

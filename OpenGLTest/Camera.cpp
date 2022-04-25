@@ -8,7 +8,9 @@ using namespace glm;
 
 namespace Camera
 {
-	const float scrollSensitivity = 0.15;
+	const float defaultSize = 16;
+
+	const float scrollSensitivity = 0.15f;
 	const float scrollSmoothAmount = 15;
 
 	glm::vec2 position = glm::vec2(0);
@@ -56,9 +58,6 @@ namespace Camera
 
 			// Set last mouse pos
 			lastMousePos = vec2(mouseX, mouseY);
-
-			// Update zoom
-			size -= (size - sizeTarget) * Utility::GetDeltaTime() * scrollSmoothAmount;
 		}
 		else
 		{
@@ -66,8 +65,12 @@ namespace Camera
 			velocity += (getTarget() - position);
 			velocity /= smoothTime;
 			position += velocity * Utility::GetDeltaTime();
+
+			sizeTarget = defaultSize;
 		}
 
+		// Update zoom
+		size -= (size - sizeTarget) * Utility::GetDeltaTime() * scrollSmoothAmount;
 	}
 
 	void SetupCamera()

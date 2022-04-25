@@ -1,6 +1,6 @@
 // Editor map file, test version
 
-count 14
+count 15
 
 object MapData {
 	mapName: ""
@@ -13,7 +13,7 @@ object Player {
 object EditorSprite {
 	ID: "2"
 	name: "Potplant"
-	position: "-4.000000, -0.000000, 0.000000"
+	position: "-4.000000, -0.000000, -2.000000"
 	size: "2.200000, 2.200000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -145,4 +145,13 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+}
+object Laser {
+	ID: "13"
+	name: ""
+	position: "-2.800000, 3.400000, -0.500000"
+	orientation: "-90.000000"
+	laserType: "0"
+	startOffset: "-0.100000"
+	endOffset: "0.150000"
 }

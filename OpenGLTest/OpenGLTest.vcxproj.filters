@@ -168,6 +168,9 @@
     <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\stb_vorbis.c">
       <Filter>SoLoud</Filter>
     </ClCompile>
+    <ClCompile Include="Laser.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\stb_vorbis.h">
       <Filter>SoLoud</Filter>
+    </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

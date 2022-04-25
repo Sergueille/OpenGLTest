@@ -79,9 +79,10 @@ int main(int argc, void* argv[])
     // Start event manager
     EventManager::SetupEvents();
 
-    // Load basic ressources
+    // Load shaders
     RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\SpriteFragShader.glsl", "sprite");
     RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\ColorFragShader.glsl", "spriteColor");
+    RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\LaserFragShader.glsl", "laser");
 
     // Start level editor
     Editor::CreateEditor();

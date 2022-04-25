@@ -1,10 +1,11 @@
-#include "Editor.h"
+﻿#include "Editor.h"
 
 #include "CircleCollider.h"
 #include "Utility.h"
 
 #include "Player.h"
 #include "EditorSprite.h"
+#include "Laser.h"
 
 #include <iostream>
 
@@ -20,6 +21,7 @@ const float Editor::selectClickMargin = 0.001f;
 const vec4 Editor::textColor = vec4(1);
 const vec4 Editor::highlightColor = vec4(1, 0.5, 0.8, 1);
 const vec4 Editor::editColor = vec4(1, 0.2, 0.5, 1);;
+const vec4 Editor::disabledTextColor = vec4(0.7, 0.7, 0.7, 0.7);
 
 std::string Editor::focusedTextInputID = "";
 std::string Editor::focusedTextInputValue = "";
@@ -300,6 +302,7 @@ void Editor::HandleHotkeys(int key)
 			EditorObject* newObj = selectedObject->Copy();
 			newObj->ID = Editor::IDmax;
 			Editor::IDmax++;
+			Editor::AddObject(newObj);
 			Editor::SelectObject(newObj);
 		}
 	}
@@ -408,7 +411,9 @@ void Editor::DrawPropsTab(vec3 drawPos)
 
 		if (propertyChanged)
 		{
-			RecordObjectChange(copy, GetSelectedObject()->Copy());
+			EditorObject* newCopy = GetSelectedObject()->Copy();
+			newCopy->Disable();
+			RecordObjectChange(copy, newCopy);
 		}
 		else
 		{
@@ -435,6 +440,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.y -= Button(drawPos, "Player", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new Player(newPos);
+
+	drawPos.y -= Button(drawPos, "Laser", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new Laser();
 
 	if (newObject != nullptr)
 	{
@@ -711,6 +720,29 @@ bool Editor::isOverUI(vec2 point)
 	return point.x < panelSize;
 }
 
+vec2 Editor::OprionProp(vec3 startPos, std::string name, int* value, int max, std::string* firstDisplay, float propX)
+{
+	vec3 drawPos = startPos;
+
+	TextManager::RenderText(name + ":", drawPos, textSize);
+	drawPos.x += propX;
+
+	bool pressed;
+
+	drawPos.x += Button(drawPos, "(-)", &pressed, *value > 0).x + margin;
+	if (pressed)
+		(*value)--;
+
+	drawPos.x += TextManager::RenderText(*(firstDisplay + *value), drawPos, textSize).x + margin;
+
+	vec2 btnSize = Button(drawPos, "(+)", &pressed, *value < max);
+	drawPos += vec3(btnSize.x, -btnSize.y, 0);
+	if (pressed)
+		(*value)++;
+
+	return vec2(startPos - drawPos);
+}
+
 vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, std::string* value, float propX, std::string ID)
 {
 	TextManager::RenderText(name + ":", drawPos, textSize);
@@ -727,6 +759,17 @@ vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, float* value, fl
 
 	try { *value = std::stof(res); }
 	catch (std::exception) { *value = 0.f; }
+
+	return size;
+}
+
+vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, int* value, float propX, std::string ID)
+{
+	std::string res = std::to_string(*value);
+	vec2 size = DrawProperty(drawPos, name, &res, propX, ID);
+
+	try { *value = std::stoi(res); }
+	catch (std::exception) { *value = 0; }
 
 	return size;
 }
@@ -830,40 +873,49 @@ void Editor::OnKeyPressed(GLFWwindow* window, int key, int scancode, int action,
 	}
 }
 
-vec2 Editor::Button(vec3 drawPos, std::string text, bool* out, TextManager::text_align align)
+vec2 Editor::Button(vec3 drawPos, std::string text, bool* out, bool enabled, TextManager::text_align align)
 {
-	vec2 mousePos = Utility::GetMousePos();
-	mousePos.y *= -1;
-	mousePos.y += Utility::screenY;
+	vec4 color;
 	vec2 textRect = TextManager::GetRect(text, textSize);
 
-	bool hoverX = mousePos.x > drawPos.x && mousePos.x < drawPos.x + textRect.x;
-	bool hoverY = mousePos.y > drawPos.y && mousePos.y < drawPos.y + textRect.y;
-
-	*out = false;
-
-	vec4 color;
-	if (hoverX && hoverY)
+	if (!enabled)
 	{
-		if (glfwGetMouseButton(Utility::window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+		color = disabledTextColor;
+		*out = false;
+	}
+	else
+	{
+		vec2 mousePos = Utility::GetMousePos();
+		mousePos.y *= -1;
+		mousePos.y += Utility::screenY;
+
+		bool hoverX = mousePos.x > drawPos.x && mousePos.x < drawPos.x + textRect.x;
+		bool hoverY = mousePos.y > drawPos.y && mousePos.y < drawPos.y + textRect.y;
+
+		*out = false;
+
+		if (hoverX && hoverY)
 		{
-			if (!buttonAlreadyPressed)
+			if (glfwGetMouseButton(Utility::window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 			{
-				*out = true;
-				color = editColor;
-				buttonAlreadyPressed = true;
+				if (!buttonAlreadyPressed)
+				{
+					*out = true;
+					color = editColor;
+					buttonAlreadyPressed = true;
+				}
+			}
+			else
+			{
+				float lerpValue = Utility::GetTimeSine(hoverHighlightDuration);
+				color = highlightColor + (textColor - highlightColor) * lerpValue;
+				buttonAlreadyPressed = false;
 			}
 		}
 		else
 		{
-			float lerpValue = Utility::GetTimeSine(hoverHighlightDuration);
-			color = highlightColor + (textColor - highlightColor) * lerpValue;
-			buttonAlreadyPressed = false;
+			color = textColor;
 		}
-	}
-	else
-	{
-		color = textColor;
 	}
 
 	TextManager::RenderText(text, drawPos, textSize, align, color);

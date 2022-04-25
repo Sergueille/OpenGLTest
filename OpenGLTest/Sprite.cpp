@@ -27,6 +27,9 @@ Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotat
     this->shader = shader;
     this->UVStart = glm::vec2(0, 0);
     this->UVEnd = glm::vec2(1, 1);
+    this->forceOpaque = false;
+    this->setUniforms = nullptr;
+    this->setUniformsObjectCall = nullptr;
 
     this->isDrawnOnMainLoop = false;
 
@@ -85,9 +88,9 @@ void Sprite::DrawNow()
     realShader->Use(); // TODO optimise if shader already used
     glm::mat4 transform = glm::mat4(1.0f); // Transformation matrix
     transform = glm::translate(transform, position); // Translate
-    // transform = glm::translate(transform, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // Translate to pivot //TODO: chage pivot
+    // transform = glm::translate(transform, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // Translate to pivot // TODO: chage pivot
     transform = glm::rotate(transform, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // Rotate
-    // transform = glm::translate(transform, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); //  Translate back to center
+    // transform = glm::translate(transform, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); // Translate back to center
     transform = glm::scale(transform, glm::vec3(size, 1.0f) * glm::vec3(ratio, 1, 1)); // Scale with size and texture ratio
 
     realShader->SetUniform("transform", transform); // Set transformation matrix to shader
@@ -106,6 +109,11 @@ void Sprite::DrawNow()
 
     realShader->SetUniform("UVstart", UVStart);
     realShader->SetUniform("UVend", UVEnd);
+
+    if (setUniforms != nullptr)
+    {
+        setUniforms(realShader, setUniformsObjectCall);
+    }
 
     // Get mesh and draw
     SpriteRenderer::GetMesh();
@@ -156,7 +164,7 @@ void Sprite::StopDrawing()
 bool Sprite::IsTransparent()
 {
     bool opaqueTex = texture == nullptr || texture->isOpaque;
-    return !opaqueTex || color.a < 1;
+    return (!opaqueTex || color.a < 1 || shader != nullptr) && !forceOpaque;
 }
 
 namespace SpriteRenderer

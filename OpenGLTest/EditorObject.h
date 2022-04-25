@@ -73,7 +73,7 @@ public:
 	void ToggleEnabled();
 
 protected:
-	bool enabled;
+	bool enabled = true;
 	vec3 editorPosition;
 	float editorRotation;
 	vec2 editorSize;

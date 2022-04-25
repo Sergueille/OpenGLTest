@@ -109,6 +109,6 @@ namespace Utility
 
 	float GetTimeSine(int period)
 	{
-		return (float)cos(Utility::time * Utility::PI / (period / 1000.f)) * 0.5 + 0.5; return 0.0f;
+		return (float)cos(Utility::time * Utility::PI / (period / 1000.f)) * 0.5f + 0.5f; return 0.0f;
 	}
 }

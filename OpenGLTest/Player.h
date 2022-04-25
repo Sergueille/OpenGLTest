@@ -49,7 +49,7 @@ public:
 	/// <summary>
 	/// The distance btw the round and the player while floating
 	/// </summary>
-	const float floatingDistance = 0.7f;
+	const float floatingDistance = 0.55f;
 	/// <summary>
 	/// The min distance to jump and reload
 	/// </summary>
@@ -57,11 +57,11 @@ public:
 	/// <summary>
 	/// The min distance to apply resistance force
 	/// </summary>
-	const float floatingForceStartDist = 1.4f;
+	const float floatingForceStartDist = 1.3f;
 	/// <summary>
 	/// Force opposed to the floating force each second
 	/// </summary>
-	const float floatFriction = 0.5f;
+	const float floatFriction = 0.8f;
 
 	const float groudRaycastsXshift = 0.5f;
 

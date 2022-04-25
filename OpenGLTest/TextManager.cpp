@@ -132,7 +132,7 @@ namespace TextManager {
         glBindVertexArray(0);
         glBindTexture(GL_TEXTURE_2D, 0);
 
-        return glm::vec2(currentX - pos.x + scale * 64.f, pos.y - currentY + scale * 64.f) ;
+        return glm::vec2(currentX - pos.x, pos.y - currentY + scale * 64.f) ;
     }
 
     void DrawChar(char c, float* currentX, float* currentY, float scale, glm::vec3 pos)
