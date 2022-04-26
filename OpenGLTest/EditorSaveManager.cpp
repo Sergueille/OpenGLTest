@@ -376,6 +376,11 @@ void EditorSaveManager::ReadObject(bool inEditor)
 		if (inEditor) 
 		{
 			Editor::AddObject(newObj);
+
+			if (newObj->ID > Editor::IDmax)
+			{ 
+				Editor::IDmax = newObj->ID;
+			}
 		}
 		else
 		{

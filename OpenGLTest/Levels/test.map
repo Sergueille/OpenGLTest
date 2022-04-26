@@ -137,7 +137,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "24"
 	name: "Blue potplant"
-	position: "4.400000, 8.400001, 0.000000"
+	position: "5.600000, 8.400001, 0.000000"
 	size: "2.200000, 2.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 3.000000, 1.000000"

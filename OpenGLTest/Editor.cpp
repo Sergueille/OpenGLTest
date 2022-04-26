@@ -12,7 +12,7 @@
 using namespace glm;
 
 std::list<EditorObject*> Editor::editorObjects;
-EditorObject* Editor::selectedObject;
+std::list<EditorObject*> Editor::selectedObjects = std::list<EditorObject*>();
 
 bool Editor::enabled = false;
 
@@ -168,7 +168,7 @@ void Editor::HandleTools()
 	//		keys for axis are in OnKeyPressed()
 	//		can change tool with SelectTool()
 
-	if (selectedObject == nullptr)
+	if (GetSelectedObject() == nullptr)
 		return;
 
 	vec2 mousePos = GetMousePos();
@@ -183,12 +183,12 @@ void Editor::HandleTools()
 			pos.x = round(pos.x / moveSnapping) * moveSnapping;
 			pos.y = round(pos.y / moveSnapping) * moveSnapping;
 		}
-		selectedObject->SetEditPos(vec3(pos.x, pos.y, editToolStartPos.z));
+		GetSelectedObject()->SetEditPos(vec3(pos.x, pos.y, editToolStartPos.z));
 
 		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS) // Cancel
 		{
 			currentTool = Tool::none;
-			selectedObject->SetEditPos(editToolStartPos);
+			GetSelectedObject()->SetEditPos(editToolStartPos);
 
 			if (oldToolObject != nullptr)
 			{
@@ -201,12 +201,12 @@ void Editor::HandleTools()
 	{
 		float angle = -(mousePos.x - editToolStartMouse.x) * rotateToolDegreesPerPixel;
 		if (snapping) angle = round(angle / rotateSnapping) * rotateSnapping;
-		selectedObject->SetEditRotation(editToolStartRot + angle);
+		GetSelectedObject()->SetEditRotation(editToolStartRot + angle);
 
 		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS) // Cancel
 		{
 			currentTool = Tool::none;
-			selectedObject->SetEditRotation(editToolStartRot);
+			GetSelectedObject()->SetEditRotation(editToolStartRot);
 
 			if (oldToolObject != nullptr)
 			{
@@ -223,12 +223,12 @@ void Editor::HandleTools()
 			scale.x = round(scale.x / sizeSnapping) * sizeSnapping;
 			scale.y = round(scale.y / sizeSnapping) * sizeSnapping;
 		}
-		selectedObject->SetEditScale(scale * editToolAxisVector + editToolStartScale * (vec2(1) - editToolAxisVector));
+		GetSelectedObject()->SetEditScale(scale * editToolAxisVector + editToolStartScale * (vec2(1) - editToolAxisVector));
 
 		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS) // Cancel
 		{
 			currentTool = Tool::none;
-			selectedObject->SetEditScale(editToolStartScale);
+			GetSelectedObject()->SetEditScale(editToolStartScale);
 
 			if (oldToolObject != nullptr)
 			{
@@ -241,12 +241,12 @@ void Editor::HandleTools()
 
 void Editor::SelectTool(Tool tool)
 {
-	if (selectedObject == nullptr) return;
+	if (GetSelectedObject() == nullptr) return;
 	currentTool = tool;
 	editToolStartMouse = GetMousePos();
-	editToolStartPos = selectedObject->GetEditPos();
-	editToolStartRot = selectedObject->GetEditRotation();
-	editToolStartScale = selectedObject->GetEditScale();
+	editToolStartPos = GetSelectedObject()->GetEditPos();
+	editToolStartRot = GetSelectedObject()->GetEditRotation();
+	editToolStartScale = GetSelectedObject()->GetEditScale();
 	editToolAxisVector = vec2(1, 1);
 
 	if (oldToolObject != nullptr)
@@ -255,7 +255,7 @@ void Editor::SelectTool(Tool tool)
 		oldToolObject = nullptr;
 	}
 
-	oldToolObject = selectedObject->Copy();
+	oldToolObject = GetSelectedObject()->Copy();
 	oldToolObject->Disable();
 }
 
@@ -292,14 +292,14 @@ void Editor::HandleHotkeys(int key)
 	}
 	else if (enabled && glfwGetKey(Utility::window, GLFW_KEY_DELETE) == GLFW_PRESS) // Delete
 	{
-		if (selectedObject != nullptr)
-			RemoveObject(selectedObject);
+		if (GetSelectedObject() != nullptr)
+			RemoveObject(GetSelectedObject());
 	}
 	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_D) == GLFW_PRESS) // Duplicate
 	{
-		if (selectedObject != nullptr)
+		if (GetSelectedObject() != nullptr)
 		{
-			EditorObject* newObj = selectedObject->Copy();
+			EditorObject* newObj = GetSelectedObject()->Copy();
 			newObj->ID = Editor::IDmax;
 			Editor::IDmax++;
 			Editor::AddObject(newObj);
@@ -448,7 +448,7 @@ void Editor::DrawAddTab(vec3 drawPos)
 	if (newObject != nullptr)
 	{
 		AddObject(newObject);
-		selectedObject = newObject;
+		SelectObject(newObject);
 	}
 }
 
@@ -544,7 +544,7 @@ void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 		{
 			// End current tool
 			currentTool = Tool::none;
-			EditorObject* newObject = selectedObject->Copy();
+			EditorObject* newObject = GetSelectedObject()->Copy();
 			newObject->Disable();
 			RecordObjectChange(oldToolObject, newObject);
 			oldToolObject = nullptr;
@@ -576,7 +576,7 @@ void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 					// If collision, select
 					if (res.z != 0)
 					{
-						selectedObject = *obj;
+						SelectObject(*obj);
 						maxZ = (*obj)->GetEditPos().z;
 					}
 				}
@@ -653,13 +653,24 @@ vec2 Editor::TextInput(vec3 pos, std::string* value, std::string ID, TextManager
 
 EditorObject* Editor::GetSelectedObject()
 {
-	return selectedObject;
+	if (selectedObjects.size() > 0)
+		return selectedObjects.front();
+	else
+		return nullptr;
 }
 
-EditorObject* Editor::SelectObject(EditorObject* object)
+std::list<EditorObject*>* Editor::GetAllSelectedObjects()
 {
-	selectedObject = object;
-	return selectedObject;
+	return &selectedObjects;
+}
+
+EditorObject* Editor::SelectObject(EditorObject* object, bool addToCurrentSelection)
+{
+	if (!addToCurrentSelection)
+		selectedObjects.clear();
+	
+	selectedObjects.push_back(object);
+	return object;
 }
 
 EditorObject* Editor::AddObject(EditorObject* object)

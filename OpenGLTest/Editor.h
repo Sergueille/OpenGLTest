@@ -112,7 +112,8 @@ public:
 	static void EndTest();
 
 	static EditorObject* GetSelectedObject();
-	static EditorObject* SelectObject(EditorObject* object);
+	static std::list<EditorObject*>* GetAllSelectedObjects();
+	static EditorObject* SelectObject(EditorObject* object, bool addToCurrentSelection = false);
 
 	static EditorObject* AddObject(EditorObject* object);
 	static void RemoveObject(EditorObject* object);
@@ -164,7 +165,7 @@ public:
 	static void ClearRedoStack();
 
 private:
-	static EditorObject* selectedObject;
+	static std::list<EditorObject*> selectedObjects;
 
 	static vec2 editToolStartMouse;
 	static vec3 editToolStartPos;
