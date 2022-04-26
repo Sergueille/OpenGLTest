@@ -63,7 +63,7 @@ public:
 	/// </summary>
 	const float floatFriction = 0.8f;
 
-	const float groudRaycastsXshift = 0.5f;
+	const float groudRaycastsXshift = 0.4f;
 
 	const vec4 canTeleportColor = vec4(0, 1, 0, 0.5);
 	const vec4 cannotTeleportColor = vec4(1, 0, 0, 0.5);

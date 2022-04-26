@@ -8,7 +8,7 @@ using namespace glm;
 
 namespace Camera
 {
-	const float defaultSize = 16;
+	const float defaultSize = 18;
 
 	const float scrollSensitivity = 0.15f;
 	const float scrollSmoothAmount = 15;

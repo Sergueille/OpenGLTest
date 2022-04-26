@@ -1,0 +1,7 @@
+// Editor map file, test version
+
+count 1
+
+object MapData {
+	mapName: ""
+}

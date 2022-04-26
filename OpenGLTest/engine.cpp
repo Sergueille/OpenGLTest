@@ -28,6 +28,11 @@ using namespace Utility;
 
 int main(int argc, void* argv[])
 {
+    const bool fullscreen = true;
+    const int smallWindowWidth = 1280;
+    const int smallWindowHeght = 720;
+    const char* windowName = "Teeeest!";
+
     // Init GLFW
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -36,11 +41,25 @@ int main(int argc, void* argv[])
     //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Create window
+    if (fullscreen)
+    {
+        const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        glfwWindowHint(GLFW_RED_BITS, mode->redBits);
+        glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
+        glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
+        glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
+        Utility::window = glfwCreateWindow(mode->width, mode->height, windowName, glfwGetPrimaryMonitor(), NULL);
 
-    int width = 1280;
-    int height = 720;
+        Utility::screenX = mode->width;
+        Utility::screenY = mode->height;
+    }
+    else
+    {
+        Utility::window = glfwCreateWindow(smallWindowWidth, smallWindowHeght, windowName, NULL, NULL);
 
-    window = glfwCreateWindow(width, height, "Teeeest!", NULL, NULL);
+        Utility::screenX = smallWindowWidth;
+        Utility::screenY = smallWindowHeght;
+    }
     if (window == NULL) 
     {
         cout << "Failed to create GLFW window" << endl;
@@ -48,9 +67,6 @@ int main(int argc, void* argv[])
         return -1;
     }
     glfwMakeContextCurrent(window);
-
-    Utility::screenX = width;
-    Utility::screenY = height;
 
     // Init GLAD (get gl API)
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -124,5 +140,7 @@ int main(int argc, void* argv[])
 
     // Clean GLFW memory
     glfwTerminate();
+
+    std::cout << "Papaaaaaye! The game closed sucessfully!" << std::endl;
     return 0;
 }

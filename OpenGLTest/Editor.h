@@ -46,6 +46,7 @@ public:
 
 	const static int panelSize = 400;
 	const static int panelPropertiesX = 150;
+	const static int infoBarWidth = 20;
 
 	const static int textSize = 15;
 	const static int margin = 10;
@@ -71,6 +72,8 @@ public:
 	const static vec4 highlightColor;
 	const static vec4 editColor;
 	const static vec4 disabledTextColor;
+	const static vec4 backgroundColor;
+	const static vec4 infobarColor;
 
 	static std::string focusedTextInputID;
 	static std::string focusedTextInputValue;
@@ -103,6 +106,8 @@ public:
 	static std::stack<UndoAction> undoStack;
 	static std::stack<UndoAction> redoStack;
 
+	static std::string infoBarText;
+
 	static void CreateEditor(); // Setup editor and open it
 	static void OpenEditor(); // Open the editor, must be set up before
 	static void CloseEditor(); // Close the editor but don't destroy it
@@ -114,6 +119,7 @@ public:
 	static EditorObject* GetSelectedObject();
 	static std::list<EditorObject*>* GetAllSelectedObjects();
 	static EditorObject* SelectObject(EditorObject* object, bool addToCurrentSelection = false);
+	static std::list<EditorObject*>* SelectObjects(std::list<EditorObject*> objects);
 
 	static EditorObject* AddObject(EditorObject* object);
 	static void RemoveObject(EditorObject* object);
@@ -168,9 +174,9 @@ private:
 	static std::list<EditorObject*> selectedObjects;
 
 	static vec2 editToolStartMouse;
-	static vec3 editToolStartPos;
-	static float editToolStartRot;
-	static vec2 editToolStartScale;
+	static std::list<vec3> editToolStartPos;
+	static std::list<float> editToolStartRot;
+	static std::list<vec2> editToolStartScale;
 	static vec2 editToolAxisVector; // Used to apply tools only on ona axis (ex: press G X)
 	static EditorObject* oldToolObject;
 
@@ -187,6 +193,8 @@ private:
 	static void DrawMapTab(vec3 drawPos);
 	static void DrawFileTab(vec3 drawPos);
 	static void DrawSettingsTab(vec3 drawPos);
+
+	static void DrawInfoBar();
 
 	static void HandleInputBackspace();
 	static void HandleTools();

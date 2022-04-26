@@ -59,7 +59,8 @@ void EditorSaveManager::SaveLevel()
 	// No file path
 	if (Editor::currentFilePath == "")
 	{
-		std::cout << "No save file path specified!!" << std::endl;
+		Editor::infoBarText = "Can't save the level, no save file path specified!!";
+		std::cout << "Can't save the level, no save file path specified!!" << std::endl;
 		return;
 	}
 
@@ -72,7 +73,8 @@ void EditorSaveManager::SaveLevel()
 	// Can't open
 	if (!ofile->is_open())
 	{
-		std::cout << "Couldn't open level file!" << std::endl;
+		Editor::infoBarText = "Couldn't open level file for saving!";
+		std::cout << "Couldn't open level file for saving!" << std::endl;
 		return;
 	}
 
@@ -120,6 +122,7 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 	// Can't open
 	if (!ifile->is_open())
 	{
+		Editor::infoBarText = "Oops! We couldn't open the level file!";
 		std::cout << "Oops! We couldn't open the level file!" << std::endl;
 		return;
 	}
@@ -137,11 +140,14 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 
 		Editor::ClearUndoStack();
 		Editor::ClearRedoStack();
+
+		Editor::infoBarText = "Loaded " + path;
 	}
 	catch (std::exception e) // Catch exceptions to make sure the file is closed
 	{
 		ifile->close();
-		std::cout << "Got an error while loading level file here's what it says:" << std::endl;
+		Editor::infoBarText = "Got an error while loading level file, see console for details";
+		std::cout << "Got an error while loading level file, here's what it says:" << std::endl;
 		std::cout << e.what() << std::endl;
 	}
 

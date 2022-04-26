@@ -22,6 +22,8 @@ const vec4 Editor::textColor = vec4(1);
 const vec4 Editor::highlightColor = vec4(1, 0.5, 0.8, 1);
 const vec4 Editor::editColor = vec4(1, 0.2, 0.5, 1);;
 const vec4 Editor::disabledTextColor = vec4(0.7, 0.7, 0.7, 0.7);
+const vec4 Editor::backgroundColor = vec4(0.2f, 0.2f, 0.2f, 0.4f);
+const vec4 Editor::infobarColor = vec4(0.1f, 0.1f, 0.1f, 1);
 
 std::string Editor::focusedTextInputID = "";
 std::string Editor::focusedTextInputValue = "";
@@ -32,9 +34,9 @@ int Editor::IDmax = 0;
 
 Editor::Tool Editor::currentTool = Editor::Tool::none;
 vec2 Editor::editToolStartMouse;
-vec3 Editor::editToolStartPos;
-float Editor::editToolStartRot;
-vec2 Editor::editToolStartScale;
+std::list<vec3> Editor::editToolStartPos = std::list<vec3>();
+std::list<float> Editor::editToolStartRot = std::list<float>();
+std::list<vec2> Editor::editToolStartScale = std::list<vec2>();
 vec2 Editor::editToolAxisVector = vec2(1);
 EditorObject* Editor::oldToolObject = nullptr;
 
@@ -62,9 +64,12 @@ std::list<std::string> Editor::panelWindows = {
 };
 Editor::PanelWindow Editor::currentPanelWindow = Editor::PanelWindow::properties;
 
+std::string Editor::infoBarText = "Welcome to the level editor!";
+
 void Editor::CreateEditor()
 {
 	std::cout << "Creating editor" << std::endl;
+	infoBarText = "Welcome to the level editor!";
 
 	EventManager::OnMainLoop.push_end(OnMainLoop);
 	EventManager::OnClick.push_end(OnClick);
@@ -122,12 +127,15 @@ void Editor::Undo()
 {
 	if (undoStack.size() < 1)
 	{
+		infoBarText = "Undo stack is empty";
 		std::cout << "Undo stack is empty" << std::endl;
 		return;
 	}
 
 	UndoAction topAction = undoStack.top();
 	undoStack.pop();
+
+	infoBarText = "Undone";
 	std::cout << "Undo: " << topAction.GetDescription() << std::endl;
 
 	topAction.Do();
@@ -138,12 +146,15 @@ void Editor::Redo()
 {
 	if (redoStack.size() < 1)
 	{
+		infoBarText = "Redo stack is empty";
 		std::cout << "Redo stack is empty" << std::endl;
 		return;
 	}
 
 	UndoAction topAction = redoStack.top();
 	redoStack.pop();
+
+	infoBarText = "Redone";
 	std::cout << "Redo: " << topAction.GetDescription() << std::endl;
 
 	topAction.Do();
@@ -157,6 +168,7 @@ void Editor::OnMainLoop()
 
 	HandleTools();
 	DrawPanel();
+	DrawInfoBar();
 	HandleInputBackspace();
 }
 
@@ -168,27 +180,43 @@ void Editor::HandleTools()
 	//		keys for axis are in OnKeyPressed()
 	//		can change tool with SelectTool()
 
-	if (GetSelectedObject() == nullptr)
+	if (GetAllSelectedObjects()->size() < 1)
 		return;
 
 	vec2 mousePos = GetMousePos();
 	vec2 worldMousePos = ScreenToWorld(mousePos);
+	vec2 editToolStartMouseWorld = ScreenToWorld(editToolStartMouse);
 	bool snapping = glfwGetKey(Utility::window, GLFW_KEY_LEFT_CONTROL) == GLFW_RELEASE;
 
 	if (currentTool == Tool::move) // MOVE
 	{
-		vec2 pos = (worldMousePos - vec2(editToolStartPos)) * editToolAxisVector + vec2(editToolStartPos);
-		if (snapping)
+		vec2 delta = (worldMousePos - editToolStartMouseWorld) * editToolAxisVector;
+
+		auto objIt = GetAllSelectedObjects()->begin();
+		auto posIt = editToolStartPos.begin();
+		for (; objIt != GetAllSelectedObjects()->end(); objIt++, posIt++)
 		{
-			pos.x = round(pos.x / moveSnapping) * moveSnapping;
-			pos.y = round(pos.y / moveSnapping) * moveSnapping;
+			vec3 pos = *posIt + vec3(delta.x, delta.y, 0);
+
+			if (snapping)
+			{
+				pos.x = round(pos.x / moveSnapping) * moveSnapping;
+				pos.y = round(pos.y / moveSnapping) * moveSnapping;
+			}
+
+			(*objIt)->SetEditPos(pos);
 		}
-		GetSelectedObject()->SetEditPos(vec3(pos.x, pos.y, editToolStartPos.z));
 
 		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS) // Cancel
 		{
 			currentTool = Tool::none;
-			GetSelectedObject()->SetEditPos(editToolStartPos);
+
+			objIt = GetAllSelectedObjects()->begin();
+			posIt = editToolStartPos.begin();
+			for (; objIt != GetAllSelectedObjects()->end(); objIt++, posIt++)
+			{
+				(*objIt)->SetEditPos(*posIt);
+			}
 
 			if (oldToolObject != nullptr)
 			{
@@ -200,13 +228,26 @@ void Editor::HandleTools()
 	else if (currentTool == Tool::rotate) // ROTATE
 	{
 		float angle = -(mousePos.x - editToolStartMouse.x) * rotateToolDegreesPerPixel;
-		if (snapping) angle = round(angle / rotateSnapping) * rotateSnapping;
-		GetSelectedObject()->SetEditRotation(editToolStartRot + angle);
+
+		auto objIt = GetAllSelectedObjects()->begin();
+		auto rotIt = editToolStartRot.begin();
+		for (; objIt != GetAllSelectedObjects()->end(); objIt++, rotIt++)
+		{
+			float finalAngle = *rotIt + angle;
+			if (snapping) finalAngle = round(finalAngle / rotateSnapping) * rotateSnapping;
+			(*objIt)->SetEditRotation(finalAngle);
+		}
 
 		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS) // Cancel
 		{
 			currentTool = Tool::none;
-			GetSelectedObject()->SetEditRotation(editToolStartRot);
+
+			objIt = GetAllSelectedObjects()->begin();
+			rotIt = editToolStartRot.begin();
+			for (; objIt != GetAllSelectedObjects()->end(); objIt++, rotIt++)
+			{
+				(*objIt)->SetEditRotation(*rotIt);
+			}
 
 			if (oldToolObject != nullptr)
 			{
@@ -217,18 +258,33 @@ void Editor::HandleTools()
 	}
 	else if (currentTool == Tool::scale) // SCALE
 	{
-		vec2 scale = (((mousePos.x - editToolStartMouse.x) * sizeToolSizePerPixel) + 1) * editToolStartScale;
-		if (snapping)
+		vec2 deltaScale = vec2(((mousePos.x - editToolStartMouse.x) * sizeToolSizePerPixel) + 1.f) * editToolAxisVector;
+		
+		auto objIt = GetAllSelectedObjects()->begin();
+		auto scaleIt = editToolStartScale.begin();
+		for (; objIt != GetAllSelectedObjects()->end(); objIt++, scaleIt++)
 		{
-			scale.x = round(scale.x / sizeSnapping) * sizeSnapping;
-			scale.y = round(scale.y / sizeSnapping) * sizeSnapping;
+			vec2 scale = *scaleIt + deltaScale;
+
+			if (snapping)
+			{
+				scale.x = round(scale.x / sizeSnapping) * sizeSnapping;
+				scale.y = round(scale.y / sizeSnapping) * sizeSnapping;
+			}
+
+			(*objIt)->SetEditScale(scale);
 		}
-		GetSelectedObject()->SetEditScale(scale * editToolAxisVector + editToolStartScale * (vec2(1) - editToolAxisVector));
 
 		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS) // Cancel
 		{
 			currentTool = Tool::none;
-			GetSelectedObject()->SetEditScale(editToolStartScale);
+
+			objIt = GetAllSelectedObjects()->begin();
+			scaleIt = editToolStartScale.begin();
+			for (; objIt != GetAllSelectedObjects()->end(); objIt++, scaleIt++)
+			{
+				(*objIt)->SetEditScale(*scaleIt);
+			}
 
 			if (oldToolObject != nullptr)
 			{
@@ -244,9 +300,18 @@ void Editor::SelectTool(Tool tool)
 	if (GetSelectedObject() == nullptr) return;
 	currentTool = tool;
 	editToolStartMouse = GetMousePos();
-	editToolStartPos = GetSelectedObject()->GetEditPos();
-	editToolStartRot = GetSelectedObject()->GetEditRotation();
-	editToolStartScale = GetSelectedObject()->GetEditScale();
+
+	editToolStartPos.clear();
+	editToolStartRot.clear();
+	editToolStartScale.clear();
+
+	for (auto it = GetAllSelectedObjects()->begin(); it != GetAllSelectedObjects()->end(); it++)
+	{
+		editToolStartPos.push_back((*it)->GetEditPos());
+		editToolStartRot.push_back((*it)->GetEditRotation());
+		editToolStartScale.push_back((*it)->GetEditScale());
+	}
+
 	editToolAxisVector = vec2(1, 1);
 
 	if (oldToolObject != nullptr)
@@ -278,6 +343,7 @@ void Editor::HandleHotkeys(int key)
 	}
 	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS) // Save
 	{
+		infoBarText = "Save level at " + Editor::currentFilePath;
 		EditorSaveManager::SaveLevel();
 	}
 	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_O) == GLFW_PRESS) // Open
@@ -289,11 +355,17 @@ void Editor::HandleHotkeys(int key)
 	{
 		EditorSaveManager::ClearEditorLevel();
 		currentFilePath = "";
+
+		infoBarText = "New level";
 	}
 	else if (enabled && glfwGetKey(Utility::window, GLFW_KEY_DELETE) == GLFW_PRESS) // Delete
 	{
 		if (GetSelectedObject() != nullptr)
+		{
 			RemoveObject(GetSelectedObject());
+
+			infoBarText = "Deleted object";
+		}
 	}
 	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_D) == GLFW_PRESS) // Duplicate
 	{
@@ -304,6 +376,8 @@ void Editor::HandleHotkeys(int key)
 			Editor::IDmax++;
 			Editor::AddObject(newObj);
 			Editor::SelectObject(newObj);
+
+			infoBarText = "Duplicated object";
 		}
 	}
 	else if (control && glfwGetKey(Utility::window, GLFW_KEY_T) == GLFW_PRESS) // Test level
@@ -333,14 +407,17 @@ void Editor::HandleHotkeys(int key)
 		if (glfwGetKey(Utility::window, GLFW_KEY_G) == GLFW_PRESS)
 		{
 			SelectTool(Tool::move);
+			infoBarText = "Move tool";
 		}
 		else if (glfwGetKey(Utility::window, GLFW_KEY_R) == GLFW_PRESS)
 		{
 			SelectTool(Tool::rotate);
+			infoBarText = "Rotate tool";
 		}
 		else if (glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS)
 		{
 			SelectTool(Tool::scale);
+			infoBarText = "Scale tool";
 		}
 	}
 }
@@ -348,10 +425,10 @@ void Editor::HandleHotkeys(int key)
 void Editor::DrawPanel()
 {
 	// Start position: to left
-	vec3 drawPos = vec3(10, Utility::screenY - textSize - margin, UIBaseZPos + 5);
+	vec3 drawPos = vec3(10, Utility::screenY - infoBarWidth - textSize - margin, UIBaseZPos + 5);
 
 	// Background
-	Sprite(vec3(0, 0, UIBaseZPos), vec3(panelSize, Utility::screenY, UIBaseZPos), vec4(0, 0, 0, 0.3f)).Draw();
+	Sprite(vec3(0, 0, UIBaseZPos), vec3(panelSize, Utility::screenY - infoBarWidth, UIBaseZPos), backgroundColor).Draw();
 
 	// Draw tabs buttons
 	int i = 0;
@@ -394,11 +471,11 @@ void Editor::DrawPanel()
 
 void Editor::DrawPropsTab(vec3 drawPos)
 {
-	if (GetSelectedObject() == nullptr)
+	if (GetAllSelectedObjects()->size() < 1)
 	{
 		TextManager::RenderText("No selected object", drawPos, textSize);
 	}
-	else
+	else if (GetAllSelectedObjects()->size() == 1)
 	{
 		propertyChanged = false;
 		EditorObject* copy = GetSelectedObject()->Copy();
@@ -420,6 +497,11 @@ void Editor::DrawPropsTab(vec3 drawPos)
 			delete copy;
 			copy = nullptr;
 		}
+	}
+	else
+	{
+		std::string sizeTxt = std::to_string(GetAllSelectedObjects()->size());
+		drawPos.y -= TextManager::RenderText(sizeTxt + " objects selected", drawPos, textSize).y + margin;
 	}
 }
 
@@ -489,6 +571,14 @@ void Editor::DrawSettingsTab(vec3 drawPos)
 	drawPos.y -= DrawProperty(drawPos, "Scale tool step", &sizeSnapping, panelPropertiesX, "scaleSnap").y;
 }
 
+void Editor::DrawInfoBar()
+{
+	Sprite(vec3(0, Utility::screenY - infoBarWidth, UIBaseZPos - 1), vec3(Utility::screenX, Utility::screenY, UIBaseZPos - 1), infobarColor).Draw();
+	vec3 drawPos = vec3(margin, Utility::screenY - textSize, UIBaseZPos);
+
+	TextManager::RenderText(infoBarText, drawPos, textSize);
+}
+
 void Editor::HandleInputBackspace()
 {
 	if (focusedTextInputID != "")
@@ -554,16 +644,21 @@ void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 		// Select an object
 		if (!isOverUI(Utility::GetMousePos())) // If the mouse is not over the UI
 		{
+			bool add = glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS
+				|| glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS;
+
 			vec2 worldPos = Utility::ScreenToWorld(Utility::GetMousePos()); // Mouse pos in world space
 			CircleCollider mouseColl = CircleCollider(worldPos, selectClickMargin, false); // Create a small collider for the mouse
 
 			float maxZ = -FLT_MAX; // Max z pos found
+			EditorObject* bestObject = nullptr;
 
 			// For each object
 			for (auto obj = editorObjects.begin(); obj != editorObjects.end(); obj++)
 			{
 				if ((*obj)->clickCollider == nullptr) // No click collider: that's a problem
 				{
+					infoBarText = "Editor object " + (*obj)->name + " has no collider and can't be clicked in the editor";
 					std::cout << "Editor object " << (*obj)->name << " has no collider and can't be clicked in the editor" << std::endl;
 					continue;
 				}
@@ -576,11 +671,14 @@ void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 					// If collision, select
 					if (res.z != 0)
 					{
-						SelectObject(*obj);
+						bestObject = *obj;
 						maxZ = (*obj)->GetEditPos().z;
 					}
 				}
 			}
+
+			if (bestObject != nullptr)
+				SelectObject(bestObject, add);
 		}
 	}
 }
@@ -669,8 +767,16 @@ EditorObject* Editor::SelectObject(EditorObject* object, bool addToCurrentSelect
 	if (!addToCurrentSelection)
 		selectedObjects.clear();
 	
-	selectedObjects.push_back(object);
+	if (object != nullptr)
+		selectedObjects.push_back(object);
+
 	return object;
+}
+
+std::list<EditorObject*>* Editor::SelectObjects(std::list<EditorObject*> objects)
+{
+	selectedObjects = std::list<EditorObject*>(objects);
+	return &selectedObjects;
 }
 
 EditorObject* Editor::AddObject(EditorObject* object)
@@ -710,6 +816,7 @@ void Editor::StartTest()
 {
 	if (currentFilePath.length() < 1)
 	{
+		infoBarText = "No file path specified!";
 		std::cout << "No file path specified!" << std::endl;
 		currentPanelWindow = PanelWindow::file;
 		focusedTextInputID = "filePath";
@@ -870,16 +977,28 @@ void Editor::OnKeyPressed(GLFWwindow* window, int key, int scancode, int action,
 		if (key == GLFW_KEY_X && action == GLFW_PRESS)
 		{
 			if (editToolAxisVector == vec2(1, 0))
+			{
 				editToolAxisVector = vec2(1, 1);
+				infoBarText = "Tool now on both axes";
+			}
 			else
+			{
 				editToolAxisVector = vec2(1, 0);
+				infoBarText = "Tool now only on X axis";
+			}
 		}
 		else if (key == GLFW_KEY_Y && action == GLFW_PRESS)
 		{
 			if (editToolAxisVector == vec2(0, 1))
+			{
 				editToolAxisVector = vec2(1, 1);
-			else
+				infoBarText = "Tool now on both axes";
+			}
+			else 
+			{
 				editToolAxisVector = vec2(0, 1);
+				infoBarText = "Tool now only on Y axis";
+			}
 		}
 	}
 }
