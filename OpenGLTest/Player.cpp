@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Camera.h"
+#include "Laser.h"
 
 #include <iostream>
 
@@ -106,10 +107,12 @@ void Player::Disable()
 // Handle physics
 void Player::OnAfterMove()
 {
+	// Set sprite position
 	playerSprite->position = vec3(GetPos().x, GetPos().y, editorPosition.z);
 
 	float realSpeed = walkSpeed;
 
+	// Hanlde horizontal movement
 	if (glfwGetKey(Utility::window, GLFW_KEY_A) == GLFW_PRESS)
 	{
 		float deltaVelocity = (-realSpeed) - velocity.x; // Difference of velocity to reach target velocity
@@ -142,7 +145,8 @@ void Player::OnAfterMove()
 	// Determines if teleportation not in a wall
 	CircleCollider teleportCollider = CircleCollider(teleportPos, height, false);
 	bool isColliding = teleportCollider.IsTouchingAnyCollider();
-	bool canTeleprt = teleportationsRemaining > 0 && !isColliding;
+	bool hitLaser = TeleportCollideWithLaser(teleportPos);
+	bool canTeleprt = teleportationsRemaining > 0 && !isColliding && !hitLaser;
 
 	// Set sprite color
 	teleportPosSprite->color = canTeleprt ? canTeleportColor : cannotTeleportColor;
@@ -155,6 +159,7 @@ void Player::OnAfterMove()
 		{
 			SetPos(teleportPos);
 			velocity.y += teleportVerticalForce;
+			isJumping = false;
 
 			teleportationsRemaining--;
 		}
@@ -215,4 +220,30 @@ void Player::OnAfterMove()
 			}
 		}
 	}
+}
+
+bool Player::TeleportCollideWithLaser(vec2 teleportPosition)
+{
+	vec2 middle = (teleportPosition + GetPos()) / 2.f;
+	float length = glm::length(teleportPosition - GetPos());
+	float angle = GetVectorAngle(teleportPosition - GetPos());
+
+	RectCollider teleportCollider = RectCollider(middle, vec2(length, this->height), angle, false);
+	CircleCollider teleportEndCollider = CircleCollider(teleportPosition, this->height, false);
+
+	for (auto it = Laser::lasers.begin(); it != Laser::lasers.end(); it++)
+	{
+		if ((*it)->laserType == Laser::LaserType::noTeleport || (*it)->laserType == Laser::LaserType::disableTeleport)
+		{
+			bool rectColl = teleportCollider.CollideWith((*it)->laserCollider).z != 0;
+			if (rectColl)
+				return true;
+
+			bool circleColl = teleportEndCollider.CollideWith((*it)->laserCollider).z != 0;
+			if (circleColl)
+				return true;
+		}
+	}
+
+	return false;
 }

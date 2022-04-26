@@ -8,7 +8,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: "Player"
-	position: "-6.200000, 0.800000, 20.000000"
+	position: "-7.200000, 1.600000, 20.000000"
 }
 object EditorSprite {
 	ID: "2"
@@ -149,7 +149,7 @@ object EditorSprite {
 object Laser {
 	ID: "13"
 	name: ""
-	position: "-2.800000, 3.400000, -0.500000"
+	position: "-3.000000, 3.400000, -0.500000"
 	orientation: "-90.000000"
 	laserType: "0"
 	startOffset: "-0.100000"

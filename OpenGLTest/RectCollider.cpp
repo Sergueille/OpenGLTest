@@ -36,7 +36,40 @@ vec3 RectCollider::CollideWith(RectCollider* other)
 {
 	if (!enabled) return vec3(0, 0, 0);
 
-	throw "Not implemented!";
+	std::vector<vec2> myPoints = this->GetPoints();
+	std::vector<vec2> otherPoints = other->GetPoints();
+
+	std::vector<vec2> intersections = std::vector<vec2>();
+
+	// For each side
+	for (auto it = myPoints.begin(); it != myPoints.end(); it++)
+	{
+		vec2 myPoint = *it; // First point pf the side
+		vec2 myNext; // Second point of the side
+
+		if (it + 1 == myPoints.end()) myNext = myPoints[0];
+		else myNext = *(it + 1);
+
+		vec2 res;
+		if (SegementIntersection(myPoint, myNext, otherPoints[0], otherPoints[1], &res))
+			intersections.push_back(res);
+		if (SegementIntersection(myPoint, myNext, otherPoints[1], otherPoints[2], &res))
+			intersections.push_back(res);
+		if (SegementIntersection(myPoint, myNext, otherPoints[2], otherPoints[3], &res))
+			intersections.push_back(res);
+		if (SegementIntersection(myPoint, myNext, otherPoints[3], otherPoints[0], &res))
+			intersections.push_back(res);
+	}
+
+	if (intersections.size() < 2)
+	{
+		return vec3(0, 0, 0);
+	}
+	else
+	{
+		// TODO, NOT WORKING: Have to compute the direction of the reaction force, just return a non-zero value for now
+		return vec3(0, 0, 1);
+	}
 }
 
 std::vector<vec2> RectCollider::RaycastPoints(float ra, float rb)

@@ -39,6 +39,11 @@ namespace Utility
 	extern float AngleBetween(glm::vec2 a, glm::vec2 b);
 
 	/// <summary>
+	/// Get angle of the vector from right, counter clockwise
+	/// </summary>
+	extern float GetVectorAngle(glm::vec2 vector);
+
+	/// <summary>
 	/// Get mouse pos in screen coordinates (top-left is 0)
 	/// </summary>
 	extern glm::vec2 GetMousePos();
@@ -59,6 +64,11 @@ namespace Utility
 	/// Same as LineItersection(), but the second equation is x = b2
 	/// </summary>
 	extern glm::vec2 LineItersectionVertical(float a1, float b1, float b2);
+
+	/// <summary>
+	/// Get the intersection of the segment A1 B1 and A2 B2, if none, don't do anything
+	/// </summary>
+	extern bool SegementIntersection(glm::vec2 A1, glm::vec2 B1, glm::vec2 A2, glm::vec2 B2, glm::vec2* res);
 
 	/// <summary>
 	/// <br>Get a line equation that touch p1 and p2</br>

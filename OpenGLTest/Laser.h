@@ -1,5 +1,6 @@
 #pragma once
 #include "EditorObject.h"
+#include "RectCollider.h"
 
 /// <summary>
 /// Props of diferent types of laser
@@ -8,34 +9,47 @@ struct LaserSharedProps
 {
 	vec4 centerColor;
 	vec4 borderColor;
+	vec2 noiseSpeed;
+	float noiseSize;
+	float distorsionAmount;
 };
 
 class Laser : public EditorObject
 {
 public:
-	enum class LaserType { noTeleprot, disableTeleport, lastValue = disableTeleport };
+	enum class LaserType { noTeleport, disableTeleport, lastValue = disableTeleport };
 
-	const float width = 0.4f;
+	const float width = 0.5f;
 	const float editorSpriteAlpha = 0.5f;
 
 	const LaserSharedProps props[2] = {
 		LaserSharedProps {
 			vec4(1, 0.8, 0.9, 1), // centerColor
-			vec4(1, 0.2, 0.7, 0), // borderColor
+			vec4(1, 0.3, 0.8, 0), // borderColor
+			vec2(0.7f), // noiseSpeed
+			0.3f, // noiseSize
+			0.2f, // distorsionAmount
 		},
 		LaserSharedProps {
 			vec4(0.8, 0.9, 1, 1),// centerColor
-			vec4(0.3, 0.6, 1, 0),// borderColor
+			vec4(0.4, 0.7, 1, 0),// borderColor
+			vec2(0.7f), // noiseSpeed
+			0.3f, // noiseSize
+			0.2f, // distorsionAmount
 		},
 	};
 
 	Laser();
 	~Laser();
 
-	LaserType laserType = LaserType::noTeleprot;
+	static std::list<Laser*> lasers;
+
+	LaserType laserType = LaserType::noTeleport;
 
 	Sprite* displaySprite = nullptr;
 	Sprite* editorSprite = nullptr;
+
+	RectCollider* laserCollider;
 
 	/// <summary>
 	/// The offset of the display sprite at the start of the laser

@@ -104,6 +104,8 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 	{
 		ClearEditorLevel();
 		Editor::currentFilePath = path;
+
+		Camera::position = vec2(0, 0); // Reset camera position
 	}
 	else
 	{

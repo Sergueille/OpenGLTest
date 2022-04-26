@@ -92,7 +92,8 @@ private:
 	Sprite* teleportPosSprite;
 
 	bool physicsWasEnabledBeforeDisabling = false;
-
 	bool wasClickingLastFrame = false;
+
+	bool TeleportCollideWithLaser(vec2 teleportPosition);
 };
 

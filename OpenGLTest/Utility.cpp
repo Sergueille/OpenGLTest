@@ -66,6 +66,17 @@ namespace Utility
 		return res;
 	}
 
+	float GetVectorAngle(glm::vec2 vector)
+	{
+		float angleRight = AngleBetween(glm::vec2(1, 0), vector);
+		float angleDown = AngleBetween(glm::vec2(0, -1), vector);
+
+		if (angleDown < 90)
+			return 360 - angleRight;
+		else
+			return angleRight;
+	}
+
 	glm::vec2 LineItersection(float a1, float b1, float a2, float b2)
 	{
 		if (a1 == a2) throw "The lines are not crossing. Please check that a1 is not equal to a2 before calling the function";
@@ -91,6 +102,72 @@ namespace Utility
 		float sx = b2;
 
 		return glm::vec2(sx, sy);
+	}
+
+	bool SegementIntersection(glm::vec2 A1, glm::vec2 B1, glm::vec2 A2, glm::vec2 B2, glm::vec2* res)
+	{
+		float a1, b1;
+		GetLineEquationFromPoints(A1, B1, &a1, &b1);
+
+		float a2, b2;
+		GetLineEquationFromPoints(A2, B2, &a2, &b2);
+
+		// Parallel segemnts
+		if (a1 == a2 || (std::isnan(a1) && std::isnan(a2)))
+		{
+			return false;
+		}
+
+		glm::vec2 intersection = LineItersection(a1, b1, a2, b2);
+
+		bool inFirst = false;
+		bool inSecond = false;
+
+		// Check if the intesection point is inside first segement
+		if (A1.x == B1.x) // Vectical lines
+		{
+			if ((A1.y < B1.y && intersection.y > A1.y && intersection.y < B1.y)
+				|| (A1.y > B1.y && intersection.y < A1.y && intersection.y > B1.y))
+			{
+				inFirst = true;
+			}
+		}
+		else // Other lines
+		{
+			if ((A1.x < B1.x && intersection.x > A1.x && intersection.x < B1.x)
+				|| (A1.x > B1.x && intersection.x < A1.x && intersection.x > B1.x))
+			{
+				inFirst = true;
+			}
+		}
+
+		// Check if the intesection point is inside second segement
+		if (A2.x == B2.x) // Vectical lines
+		{
+			if ((A2.y < B2.y && intersection.y > A2.y && intersection.y < B2.y)
+				|| (A2.y > B2.y && intersection.y < A2.y && intersection.y > B2.y))
+			{
+				inSecond = true;
+			}
+		}
+		else // Other lines
+		{
+			if ((A2.x < B2.x && intersection.x > A2.x && intersection.x < B2.x)
+				|| (A2.x > B2.x && intersection.x < A2.x && intersection.x > B2.x))
+			{
+				inSecond = true;
+			}
+		}
+
+		if (inFirst && inSecond)
+		{
+			*res = intersection;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	void GetLineEquationFromPoints(glm::vec2 p1, glm::vec2 p2, float* a, float* b)

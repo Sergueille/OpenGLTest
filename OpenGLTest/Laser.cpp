@@ -3,6 +3,8 @@
 #include "CircleCollider.h"
 #include "EventManager.h"
 
+std::list<Laser*> Laser::lasers = std::list<Laser*>();
+
 Laser::Laser() : EditorObject(vec3(0, 0, 0))
 {
 	if (Editor::enabled)
@@ -19,6 +21,9 @@ Laser::Laser() : EditorObject(vec3(0, 0, 0))
 	displaySprite->DrawOnMainLoop();
 
 	clickCollider = new CircleCollider(vec3(0), 1, false);
+	laserCollider = new RectCollider(vec2(0), vec2(1), 0, false);
+
+	lasers.push_back(this);
 
 	SubscribeToFuncs();
 
@@ -37,6 +42,11 @@ Laser::~Laser()
 		delete editorSprite;
 		editorSprite = nullptr;
 	}
+
+	delete laserCollider;
+	laserCollider = nullptr;
+
+	lasers.remove(this);
 
 	EventManager::OnMainLoop.remove(mainLoopFuncPos);
 }
@@ -81,6 +91,10 @@ void Laser::Enable()
 
 	if (editorSprite != nullptr)
 		editorSprite->DrawOnMainLoop();
+
+	laserCollider->enabled = true;
+
+	lasers.push_back(this);
 }
 
 void Laser::Disable()
@@ -90,6 +104,10 @@ void Laser::Disable()
 
 	if (editorSprite != nullptr)
 		editorSprite->StopDrawing();
+
+	laserCollider->enabled = false;
+
+	lasers.remove(this);
 }
 
 Laser* Laser::Copy()
@@ -105,6 +123,8 @@ Laser* Laser::Copy()
 
 	CircleCollider* oldCollider = (CircleCollider*)this->clickCollider;
 	copy->clickCollider = new CircleCollider(oldCollider->position, oldCollider->size, false);
+
+	copy->laserCollider = new RectCollider(vec2(0), vec2(1), 0, false);
 
 	copy->SubscribeToFuncs();
 
@@ -162,6 +182,10 @@ void Laser::OnMainLoop()
 			displaySprite->position = vec3(middle.x, middle.y, editorPosition.z);
 			displaySprite->size = vec2(length, width);
 			displaySprite->rotate = editorRotation;
+
+			laserCollider->position = vec3(middle.x, middle.y, editorPosition.z);
+			laserCollider->size = vec2(length, width);
+			laserCollider->orientation = editorRotation;
 		}
 	}
 }
@@ -174,7 +198,13 @@ void Laser::SubscribeToFuncs()
 void Laser::SetSpriteUniforms(Shader* shader, void* object)
 {
 	Laser* laser = (Laser*)object;
-
 	LaserSharedProps myProps = laser->props[(int)laser->laserType];
+
 	shader->SetUniform("secColor", myProps.borderColor);
+	shader->SetUniform("mainTexture", 0);
+	RessourceManager::GetTexture("noise1.png")->Use(0);
+	shader->SetUniform("noiseSpeed", myProps.noiseSpeed);
+	shader->SetUniform("noiseSize", myProps.noiseSize);
+	shader->SetUniform("distorsionAmount", myProps.distorsionAmount);
+	shader->SetUniform("time", Utility::time);
 }

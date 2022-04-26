@@ -13,9 +13,13 @@ Shader* RessourceManager::LoadShader(const char* vtex, const char* frag, std::st
     return &shaders[programName];
 }
 
-Texture* RessourceManager::GetTexture(std::string file)
+Texture* RessourceManager::GetTexture(std::string file_param)
 {
+    // Change backslash and case to make sure the file is not already loaded
+    std::string file = std::string(file_param);
     std::replace(file.begin(), file.end(), '/', '\\');
+    std::transform(file.begin(), file.end(), file.begin(),
+        [](char c) { return std::tolower(c); });
 
     if (textures.find(file) == textures.end())
     {
@@ -32,8 +36,11 @@ Texture* RessourceManager::GetTexture(std::string file)
 
 SoLoud::Wav* RessourceManager::GetSound(std::string file_param)
 {
+    // Change backslash and case to make sure the file is not already loaded
     std::string file = std::string(file_param);
     std::replace(file.begin(), file.end(), '/', '\\');
+    std::transform(file.begin(), file.end(), file.begin(),
+        [](char c) { return std::tolower(c); });
 
     if (sounds.find(file) == sounds.end())
     {
