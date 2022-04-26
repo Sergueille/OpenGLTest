@@ -2,7 +2,6 @@
 
 #include "CircleCollider.h"
 #include "Utility.h"
-
 #include "Player.h"
 #include "EditorSprite.h"
 #include "Laser.h"
@@ -481,7 +480,7 @@ void Editor::DrawPropsTab(vec3 drawPos)
 		EditorObject* copy = GetSelectedObject()->Copy();
 		copy->Disable();
 
-		drawPos.y -= TextManager::RenderText("Object properties", drawPos, textSize).y + margin;
+		drawPos.y -= TextManager::RenderText("Object properties : " + GetSelectedObject()->typeName, drawPos, textSize).y + margin;
 		drawPos.x += indentation;
 		drawPos.y -= GetSelectedObject()->DrawProperties(drawPos).y + margin;
 		drawPos.y -= GetSelectedObject()->DrawActions(drawPos).y;
@@ -647,40 +646,45 @@ void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 			bool add = glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS
 				|| glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS;
 
-			vec2 worldPos = Utility::ScreenToWorld(Utility::GetMousePos()); // Mouse pos in world space
-			CircleCollider mouseColl = CircleCollider(worldPos, selectClickMargin, false); // Create a small collider for the mouse
-
-			float maxZ = -FLT_MAX; // Max z pos found
-			EditorObject* bestObject = nullptr;
-
-			// For each object
-			for (auto obj = editorObjects.begin(); obj != editorObjects.end(); obj++)
-			{
-				if ((*obj)->clickCollider == nullptr) // No click collider: that's a problem
-				{
-					infoBarText = "Editor object " + (*obj)->name + " has no collider and can't be clicked in the editor";
-					std::cout << "Editor object " << (*obj)->name << " has no collider and can't be clicked in the editor" << std::endl;
-					continue;
-				}
-
-				if ((*obj)->GetEditPos().z > maxZ) // If the z is high enough
-				{
-					// Result of the collision
-					vec3 res = (*obj)->clickCollider->CollideWith(&mouseColl);
-
-					// If collision, select
-					if (res.z != 0)
-					{
-						bestObject = *obj;
-						maxZ = (*obj)->GetEditPos().z;
-					}
-				}
-			}
-
-			if (bestObject != nullptr)
-				SelectObject(bestObject, add);
+			SelectObject(GetObjectUnderMouse(), add);
 		}
 	}
+}
+
+EditorObject* Editor::GetObjectUnderMouse()
+{
+	vec2 worldPos = Utility::ScreenToWorld(Utility::GetMousePos()); // Mouse pos in world space
+	CircleCollider mouseColl = CircleCollider(worldPos, selectClickMargin, false); // Create a small collider for the mouse
+
+	float maxZ = -FLT_MAX; // Max z pos found
+	EditorObject* bestObject = nullptr;
+
+	// For each object
+	for (auto obj = editorObjects.begin(); obj != editorObjects.end(); obj++)
+	{
+		if ((*obj)->clickCollider == nullptr) // No click collider: that's a problem
+		{
+			infoBarText = "Editor object " + (*obj)->name + " has no collider and can't be clicked in the editor";
+			std::cout << "Editor object " << (*obj)->name << " has no collider and can't be clicked in the editor" << std::endl;
+			continue;
+		}
+
+		if ((*obj)->GetEditPos().z > maxZ) // If the z is high enough
+		{
+			// Result of the collision
+			vec3 res = (*obj)->clickCollider->CollideWith(&mouseColl);
+
+			// If collision, select
+			if (res.z != 0)
+			{
+				bestObject = *obj;
+				maxZ = (*obj)->GetEditPos().z;
+			}
+		}
+	}
+
+	if (bestObject != nullptr)
+		return bestObject;
 }
 
 void Editor::OnCaracterInput(GLFWwindow* window, unsigned int codepoint)

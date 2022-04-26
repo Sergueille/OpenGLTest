@@ -170,6 +170,8 @@ public:
 	static void ClearUndoStack();
 	static void ClearRedoStack();
 
+	static EditorObject* GetObjectUnderMouse();
+
 private:
 	static std::list<EditorObject*> selectedObjects;
 
