@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <math.h>
+#include <algorithm>
 
 namespace Utility
 {
@@ -16,6 +17,8 @@ namespace Utility
 	float lastTime = 0;
 
 	SoLoud::Soloud* soloud = nullptr;
+
+	bool isAzerty = true;
 
 	int FPSvalues[FPS_NB_VALUES];
 	int FPSvaluePos;
@@ -202,5 +205,42 @@ namespace Utility
 		}
 
 		return sum / FPS_NB_VALUES;
+	}
+
+	std::string GetKeyDesc(int glfwKey)
+	{
+		if (glfwKey == GLFW_KEY_DELETE) return "Del";
+
+		if (isAzerty)
+		{
+			if (glfwKey == GLFW_KEY_A)
+				return "Q";
+			if (glfwKey == GLFW_KEY_Q)
+				return "A";
+			if (glfwKey == GLFW_KEY_W)
+				return "Z";
+			if (glfwKey == GLFW_KEY_Z)
+				return "W";
+		}
+			
+		return std::string(1, glfwKey);
+	}
+
+	std::string ToLower(std::string value)
+	{
+		std::string res = value;
+		std::transform(value.begin(), value.end(), res.begin(),
+			[](unsigned char c) { return std::tolower(c); });
+
+		return res;
+	}
+
+	std::string ToUpper(std::string value)
+	{
+		std::string res = value;
+		std::transform(value.begin(), value.end(), res.begin(),
+			[](unsigned char c) { return std::toupper(c); });
+
+		return res;
 	}
 }

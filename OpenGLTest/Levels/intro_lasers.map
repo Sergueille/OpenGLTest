@@ -1,6 +1,6 @@
 // Editor map file, test version
 
-count 31
+count 35
 
 object MapData {
 	mapName: ""
@@ -8,13 +8,13 @@ object MapData {
 object Player {
 	ID: "0"
 	name: ""
-	position: "63.200001, -10.200000, 20.000000"
+	position: "-6.200000, -0.600000, 20.000000"
 }
 object EditorSprite {
 	ID: "2"
 	name: ""
-	position: "63.799999, -18.200001, 0.000000"
-	size: "30.000000, 12.200000"
+	position: "-5.600000, -7.000000, 0.000000"
+	size: "30.000000, 9.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -24,7 +24,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "3"
 	name: ""
-	position: "54.799999, -11.200000, 0.000000"
+	position: "-14.600000, -1.600000, 0.000000"
 	size: "12.200000, 25.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -35,7 +35,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "4"
 	name: ""
-	position: "78.400002, -2.000000, 0.000000"
+	position: "9.000000, 7.600000, 0.000000"
 	size: "35.600002, 12.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -46,7 +46,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "10"
 	name: ""
-	position: "92.200005, -9.800000, 0.000000"
+	position: "22.800001, -0.200000, 0.000000"
 	size: "1.000000, 5.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -57,7 +57,7 @@ object EditorSprite {
 object Laser {
 	ID: "11"
 	name: ""
-	position: "93.200005, -8.200000, 0.000000"
+	position: "23.800001, 1.400000, 0.000000"
 	orientation: "-90.000000"
 	laserType: "0"
 	startOffset: "-0.100000"
@@ -66,7 +66,7 @@ object Laser {
 object EditorSprite {
 	ID: "18"
 	name: ""
-	position: "75.800003, -10.200000, 0.000000"
+	position: "6.400000, -0.600000, 0.000000"
 	size: "1.000000, 5.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -77,8 +77,8 @@ object EditorSprite {
 object EditorSprite {
 	ID: "20"
 	name: ""
-	position: "92.800003, -14.000000, 0.000000"
-	size: "12.400001, 3.800000"
+	position: "23.400000, -6.800000, 0.000000"
+	size: "12.400001, 8.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -88,7 +88,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "21"
 	name: ""
-	position: "91.599998, -25.200001, 0.000000"
+	position: "22.000000, -21.800001, 0.000000"
 	size: "55.799999, 10.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -99,7 +99,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "22"
 	name: ""
-	position: "82.800003, -13.200000, 0.000000"
+	position: "13.400001, -3.600000, 0.000000"
 	size: "12.000000, 2.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -110,7 +110,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "23"
 	name: ""
-	position: "102.400002, -12.600000, 0.000000"
+	position: "33.000000, -3.000000, 0.000000"
 	size: "12.000000, 1.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -121,8 +121,8 @@ object EditorSprite {
 object EditorSprite {
 	ID: "24"
 	name: ""
-	position: "117.800003, -18.200001, 0.000000"
-	size: "30.000000, 12.200000"
+	position: "48.400002, -10.600000, 0.000000"
+	size: "30.000000, 16.200001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -132,7 +132,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "61"
 	name: ""
-	position: "107.200005, -5.800000, 0.000000"
+	position: "37.799999, 3.800000, 0.000000"
 	size: "11.000000, 4.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -143,7 +143,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "62"
 	name: ""
-	position: "108.400002, -9.800000, 0.000000"
+	position: "39.000000, -0.200000, 0.000000"
 	size: "1.000000, 5.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -154,7 +154,7 @@ object EditorSprite {
 object Laser {
 	ID: "63"
 	name: ""
-	position: "107.400002, -8.200000, 0.000000"
+	position: "38.000000, 1.400000, 0.000000"
 	orientation: "-90.000000"
 	laserType: "0"
 	startOffset: "-0.100000"
@@ -163,7 +163,7 @@ object Laser {
 object EditorSprite {
 	ID: "64"
 	name: ""
-	position: "99.000000, -7.400000, 0.000000"
+	position: "29.600000, 2.200000, 0.000000"
 	size: "12.000000, 1.400000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -174,7 +174,7 @@ object EditorSprite {
 object Laser {
 	ID: "81"
 	name: ""
-	position: "96.400002, 0.600000, 0.000000"
+	position: "27.000000, 10.200000, 0.000000"
 	orientation: "0.000000"
 	laserType: "0"
 	startOffset: "-0.200000"
@@ -183,7 +183,7 @@ object Laser {
 object EditorSprite {
 	ID: "99"
 	name: ""
-	position: "99.599998, -3.000000, 0.000000"
+	position: "30.200001, 6.600000, 0.000000"
 	size: "12.000000, 1.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -194,7 +194,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "100"
 	name: ""
-	position: "109.200005, -2.000000, 0.000000"
+	position: "39.799999, 7.600000, 0.000000"
 	size: "11.000000, 4.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -205,7 +205,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "101"
 	name: ""
-	position: "110.800003, -1.400000, 0.000000"
+	position: "41.400002, 8.200000, 0.000000"
 	size: "11.000000, 4.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -216,7 +216,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "122"
 	name: ""
-	position: "91.200005, 6.400000, 0.000000"
+	position: "21.800001, 16.000000, 0.000000"
 	size: "10.000000, 12.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -227,7 +227,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "123"
 	name: ""
-	position: "102.200005, 12.000000, 0.000000"
+	position: "32.799999, 21.600000, 0.000000"
 	size: "22.800001, 9.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -238,7 +238,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "146"
 	name: ""
-	position: "120.800003, 9.200000, 0.000000"
+	position: "51.400002, 18.800001, 0.000000"
 	size: "22.800001, 9.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -249,7 +249,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "147"
 	name: ""
-	position: "112.599998, 2.600000, 0.000000"
+	position: "43.200001, 12.200000, 0.000000"
 	size: "1.000000, 5.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -260,7 +260,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "148"
 	name: ""
-	position: "127.000000, -3.600000, 0.000000"
+	position: "57.600002, 6.000000, 0.000000"
 	size: "11.000000, 9.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -271,7 +271,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "149"
 	name: ""
-	position: "112.400002, -5.800000, 0.000000"
+	position: "43.000000, 3.800000, 0.000000"
 	size: "7.800000, 4.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -282,7 +282,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "150"
 	name: ""
-	position: "119.000000, 0.400000, 0.000000"
+	position: "49.600002, 10.000000, 0.000000"
 	size: "12.000000, 1.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -293,7 +293,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "151"
 	name: ""
-	position: "117.400002, -7.600000, 0.000000"
+	position: "48.000000, 2.000000, 0.000000"
 	size: "12.000000, 1.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -304,7 +304,7 @@ object EditorSprite {
 object Laser {
 	ID: "152"
 	name: ""
-	position: "116.400002, -0.600000, 0.000000"
+	position: "47.000000, 9.000000, 0.000000"
 	orientation: "0.000000"
 	laserType: "0"
 	startOffset: "-0.200000"
@@ -313,8 +313,50 @@ object Laser {
 object EditorSprite {
 	ID: "119"
 	name: ""
-	position: "135.600006, 4.400000, 0.000000"
+	position: "66.200005, 14.000000, 0.000000"
 	size: "11.000000, 20.800001"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "183"
+	name: ""
+	position: "14.200000, -11.000000, 0.000000"
+	size: "15.600000, 1.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "186"
+	name: ""
+	position: "-3.800000, -15.400001, 0.000000"
+	size: "17.000000, 12.200000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+}
+object Laser {
+	ID: "187"
+	name: ""
+	position: "21.400000, -11.600000, 0.000000"
+	orientation: "-90.000000"
+	laserType: "0"
+	startOffset: "-0.100000"
+	endOffset: "0.050000"
+}
+object EditorSprite {
+	ID: "221"
+	name: ""
+	position: "29.800001, -10.600000, 0.000000"
+	size: "15.600000, 1.800000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"

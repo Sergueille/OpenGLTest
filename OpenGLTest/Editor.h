@@ -14,6 +14,7 @@ using namespace glm;
 
 class EditorObject;
 struct MapData;
+struct EditorAction;
 class EditorSaveManager;
 class Editor
 {
@@ -39,6 +40,8 @@ public:
 		UndoAction GetOpposite();
 		std::string GetDescription();
 	};
+
+	static EditorAction editorActions[14];
 
 	static std::list<EditorObject*> editorObjects;
 
@@ -147,14 +150,15 @@ public:
 	static vec2 DrawProperty(vec3 drawPos, const std::string name, vec4* value, float propX, std::string ID, bool colorNames = false);
 
 	/// <summary>
-	/// Displays a text input
-	/// TODO: use a string builder, too lazy to use it
+	/// <para>Displays a text input</para>
+	/// <para>TODO: use a string builder, too lazy to use it</para>
 	/// </summary>
 	/// <param name="pos">The position of the text input</param>
 	/// <param name="value">The current value of the input</param>
 	/// <param name="ID">An unique ID</param>
+	/// <param name="needReturn">If true (by default) the user need to press the return key to send the value</param>
 	/// <returns>The size of the text input</returns>
-	static vec2 TextInput(vec3 pos, std::string* value, std::string ID, TextManager::text_align align = TextManager::right);
+	static vec2 TextInput(vec3 pos, std::string* value, std::string ID, TextManager::text_align align = TextManager::right, bool needReturn = true);
 
 	static vec2 Button(vec3 drawPos, std::string text, bool* out, bool enabled = true, TextManager::text_align align = TextManager::right);
 
@@ -223,4 +227,24 @@ private:
 struct MapData
 {
 	std::string mapName = "";
+};
+
+/// <summary>
+/// Action that can be done with a key shortcut or through the serch bar
+/// </summary>
+struct EditorAction
+{
+	std::string actionName;
+	std::string description;
+
+	int shortcutKey;
+	bool needControl;
+	bool needAlt;
+	bool needShift;
+
+	std::function<void()> func;
+
+	bool needEnabled = true;
+
+	std::string GetHoykeyDesc();
 };

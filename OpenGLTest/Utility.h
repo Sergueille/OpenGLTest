@@ -6,6 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <GLFW/glfw3.h>
 #include <soloud.h>
+#include <string>
 
 namespace Utility
 {
@@ -24,6 +25,8 @@ namespace Utility
 	const float RadToDeg = 180.0f / PI;
 
 	extern SoLoud::Soloud* soloud;
+
+	extern bool isAzerty;
 
 	const int FPS_NB_VALUES = 150;
 	extern int FPSvalues[FPS_NB_VALUES];
@@ -87,5 +90,10 @@ namespace Utility
 	extern float GetTimeSine(int period);
 
 	int GetFPS();
+
+	extern std::string GetKeyDesc(int glfwKey);
+
+	extern std::string ToLower(std::string value);
+	extern std::string ToUpper(std::string value);
 };
 

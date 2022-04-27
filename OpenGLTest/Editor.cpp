@@ -65,6 +65,183 @@ Editor::PanelWindow Editor::currentPanelWindow = Editor::PanelWindow::properties
 
 std::string Editor::infoBarText = "Welcome to the level editor!";
 
+EditorAction Editor::editorActions[14] = {
+	EditorAction {
+		"Save",
+		"Save the level in the current file path",
+		GLFW_KEY_S,
+		true,
+		false,
+		false,
+		[] { EditorSaveManager::SaveLevel(); },
+	},
+	EditorAction {
+		"Save as",
+		"Focus on the file path text input",
+		GLFW_KEY_S,
+		true,
+		true,
+		false,
+		[] {
+			currentPanelWindow = PanelWindow::file;
+			focusedTextInputID = "FilePath";
+		},
+	},
+	EditorAction {
+		"Load",
+		"Focus on the load path text input",
+		GLFW_KEY_O,
+		true,
+		false,
+		false,
+		[] {
+			currentPanelWindow = PanelWindow::file;
+			focusedTextInputID = "LoadPath";
+		},
+	},
+	EditorAction {
+		"New level",
+		"Switch to a new level",
+		GLFW_KEY_N,
+		true,
+		false,
+		false,
+		[] {
+			EditorSaveManager::ClearEditorLevel();
+			currentFilePath = "";
+		},
+	},
+	EditorAction {
+		"Delete object",
+		"Delete the object",
+		GLFW_KEY_DELETE,
+		false,
+		false,
+		false,
+		[] {
+			if (GetSelectedObject() != nullptr)
+			{
+				RemoveObject(GetSelectedObject());
+			}
+		},
+	},
+	EditorAction {
+		"Duplicate object",
+		"Create a copy of the object",
+		GLFW_KEY_D,
+		true,
+		false,
+		false,
+		[] {
+			if (GetSelectedObject() != nullptr)
+			{
+				EditorObject* newObj = GetSelectedObject()->Copy();
+				newObj->ID = Editor::IDmax;
+				Editor::IDmax++;
+				Editor::AddObject(newObj);
+				Editor::SelectObject(newObj);
+
+				infoBarText = "Duplicated object";
+			}
+		},
+	},
+	EditorAction {
+		"Test level",
+		"Test the current level",
+		GLFW_KEY_T,
+		true,
+		false,
+		false,
+		[] {
+			if (enabled) // Start test
+				StartTest();
+			else // End test
+				EndTest();
+		},
+		false,
+	},
+	EditorAction {
+		"Undo",
+		"Undo last action",
+		GLFW_KEY_W,
+		true,
+		false,
+		false,
+		[] {
+			Undo();
+		},
+	},
+	EditorAction{
+		"Redo",
+		"Redo the undone action (broken)",
+		GLFW_KEY_W,
+		true,
+		false,
+		true,
+		[] {
+			Redo();
+		},
+	},
+	EditorAction{
+		"Redo",
+		"Redo the undone action (broken)",
+		GLFW_KEY_Y,
+		true,
+		false,
+		false,
+		[] {
+			Redo();
+		},
+	},
+	EditorAction{
+		"Move tool",
+		"Select the move tool",
+		GLFW_KEY_G,
+		false,
+		false,
+		false,
+		[] {
+			if (currentTool == Tool::none && !isOverUI(GetMousePos()))
+				SelectTool(Tool::move);
+		},
+	},
+	EditorAction{
+		"Rotate tool",
+		"Select the rotate tool",
+		GLFW_KEY_R,
+		false,
+		false,
+		false,
+		[] {
+			if (currentTool == Tool::none && !isOverUI(GetMousePos()))
+				SelectTool(Tool::rotate);
+		},
+	},
+	EditorAction{
+		"Scale tool",
+		"Select the scale tool",
+		GLFW_KEY_S,
+		false,
+		false,
+		false,
+		[] {
+			if (currentTool == Tool::none && !isOverUI(GetMousePos()))
+				SelectTool(Tool::scale);
+		},
+	},
+	EditorAction{
+		"Select all",
+		"Select all the obects of the level",
+		GLFW_KEY_Q,
+		true,
+		false,
+		false,
+		[] {
+			SelectObjects(editorObjects);
+		},
+	},
+};
+
 void Editor::CreateEditor()
 {
 	std::cout << "Creating editor" << std::endl;
@@ -334,89 +511,16 @@ void Editor::HandleHotkeys(int key)
 	bool shift = glfwGetKey(Utility::window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS
 		|| glfwGetKey(Utility::window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS;
 
-	
-	if (enabled && control && alt && glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS) // Save As
+	for (int i = 0; i < sizeof(editorActions) / sizeof(*editorActions); i++)
 	{
-		currentPanelWindow = PanelWindow::file;
-		focusedTextInputID = "FilePath";
-	}
-	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS) // Save
-	{
-		infoBarText = "Save level at " + Editor::currentFilePath;
-		EditorSaveManager::SaveLevel();
-	}
-	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_O) == GLFW_PRESS) // Open
-	{
-		currentPanelWindow = PanelWindow::file;
-		focusedTextInputID = "LoadPath";
-	}
-	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_N) == GLFW_PRESS) // New
-	{
-		EditorSaveManager::ClearEditorLevel();
-		currentFilePath = "";
-
-		infoBarText = "New level";
-	}
-	else if (enabled && glfwGetKey(Utility::window, GLFW_KEY_DELETE) == GLFW_PRESS) // Delete
-	{
-		if (GetSelectedObject() != nullptr)
+		if (control == editorActions[i].needControl
+			&& alt == editorActions[i].needAlt
+			&& shift == editorActions[i].needShift
+			&& (enabled || !editorActions[i].needEnabled)
+			&& glfwGetKey(window, editorActions[i].shortcutKey) == GLFW_PRESS)
 		{
-			RemoveObject(GetSelectedObject());
-
-			infoBarText = "Deleted object";
-		}
-	}
-	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_D) == GLFW_PRESS) // Duplicate
-	{
-		if (GetSelectedObject() != nullptr)
-		{
-			EditorObject* newObj = GetSelectedObject()->Copy();
-			newObj->ID = Editor::IDmax;
-			Editor::IDmax++;
-			Editor::AddObject(newObj);
-			Editor::SelectObject(newObj);
-
-			infoBarText = "Duplicated object";
-		}
-	}
-	else if (control && glfwGetKey(Utility::window, GLFW_KEY_T) == GLFW_PRESS) // Test level
-	{
-		if (enabled) // Start test
-			StartTest();
-		else // End test
-			EndTest();
-	}
-	else if (enabled && control && shift && glfwGetKey(Utility::window, GLFW_KEY_W) == GLFW_PRESS)
-	{
-		Redo();
-	}
-	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_W) == GLFW_PRESS)
-	{
-		Undo();
-	}
-	else if (enabled && control && glfwGetKey(Utility::window, GLFW_KEY_Y) == GLFW_PRESS)
-	{
-		Redo();
-	}
-
-	// Tools shortcuts
-	if (currentTool == Tool::none && !isOverUI(GetMousePos()) && enabled && !control && !shift && !alt && focusedTextInputID == "")
-	{
-		// Change tool
-		if (glfwGetKey(Utility::window, GLFW_KEY_G) == GLFW_PRESS)
-		{
-			SelectTool(Tool::move);
-			infoBarText = "Move tool";
-		}
-		else if (glfwGetKey(Utility::window, GLFW_KEY_R) == GLFW_PRESS)
-		{
-			SelectTool(Tool::rotate);
-			infoBarText = "Rotate tool";
-		}
-		else if (glfwGetKey(Utility::window, GLFW_KEY_S) == GLFW_PRESS)
-		{
-			SelectTool(Tool::scale);
-			infoBarText = "Scale tool";
+			infoBarText = editorActions[i].actionName + " (" + editorActions[i].GetHoykeyDesc() + ")";
+			editorActions[i].func();
 		}
 	}
 }
@@ -577,6 +681,40 @@ void Editor::DrawInfoBar()
 
 	drawPos.x += TextManager::RenderText(infoBarText, drawPos, textSize).x;
 
+	drawPos.x = Utility::screenX / 2.f;
+	std::string placeholder = "Search a command...";
+	std::string search = placeholder;
+	drawPos.y -= TextInput(drawPos, &search, "EditorActionSearch", TextManager::center, false).y;
+
+	if (search != placeholder)
+	{
+		std::string lowerSearch = ToLower(search);
+
+		for (int i = 0; i < sizeof(editorActions) / sizeof(*editorActions); i++)
+		{
+			std::string lowerName = ToLower(editorActions[i].actionName);
+			std::string lowerDesc = ToLower(editorActions[i].description);
+
+			if (lowerName.find(lowerSearch) != std::string::npos
+				|| lowerDesc.find(lowerSearch) != std::string::npos)
+			{
+				bool click1 = false;
+				bool click2 = false;
+
+				std::string displayName = editorActions[i].actionName + " (" + editorActions[i].GetHoykeyDesc() + ")";
+				drawPos.y -= Button(drawPos, displayName, &click1, true, TextManager::center).y;
+				drawPos.y -= Button(drawPos, editorActions[i].description, &click2, true, TextManager::center).y + margin;
+
+				if (click1 || click2)
+				{
+					editorActions[i].func();
+					focusedTextInputID = "";
+					break;
+				}
+			}
+		}
+	}
+
 	drawPos = vec3(Utility::screenX - margin, Utility::screenY - textSize, UIBaseZPos);
 	std::string displayFPS = std::to_string(GetFPS()) + " FPS";
 	drawPos.x -= TextManager::RenderText(displayFPS, drawPos, textSize, TextManager::text_align::left).x;
@@ -687,8 +825,7 @@ EditorObject* Editor::GetObjectUnderMouse()
 		}
 	}
 
-	if (bestObject != nullptr)
-		return bestObject;
+	return bestObject;
 }
 
 void Editor::OnCaracterInput(GLFWwindow* window, unsigned int codepoint)
@@ -702,7 +839,7 @@ void Editor::OnCaracterInput(GLFWwindow* window, unsigned int codepoint)
 	}
 }
 
-vec2 Editor::TextInput(vec3 pos, std::string* value, std::string ID, TextManager::text_align align)
+vec2 Editor::TextInput(vec3 pos, std::string* value, std::string ID, TextManager::text_align align, bool needReturn)
 {
 	if (focusedTextInputID == ID)
 	{
@@ -716,6 +853,11 @@ vec2 Editor::TextInput(vec3 pos, std::string* value, std::string ID, TextManager
 		else if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		{
 			focusedTextInputID = "";
+		}
+		else if (!needReturn)
+		{
+			*value = focusedTextInputValue;
+			propertyChanged = true;
 		}
 
 		bool showCursor = float(static_cast<int>(Utility::time * 1000) % textCursorBlink) > (textCursorBlink / 2.f);
@@ -732,8 +874,21 @@ vec2 Editor::TextInput(vec3 pos, std::string* value, std::string ID, TextManager
 		mousePos.y += Utility::screenY;
 		vec2 textRect = TextManager::GetRect(displayString, textSize);
 
-		bool hoverX = mousePos.x > pos.x && mousePos.x < pos.x + textRect.x;
+		bool hoverX;
 		bool hoverY = mousePos.y > pos.y && mousePos.y < pos.y + textRect.y;
+
+		if (align == TextManager::right)
+		{
+			hoverX = mousePos.x > pos.x && mousePos.x < pos.x + textRect.x;
+		}
+		else if (align == TextManager::left)
+		{
+			hoverX = mousePos.x > pos.x - textRect.x && mousePos.x < pos.x;
+		}
+		else
+		{
+			hoverX = mousePos.x > pos.x - (textRect.x / 2) && mousePos.x < pos.x + (textRect.x / 2);
+		}
 		
 		vec4 color;
 		if (hoverX && hoverY)
@@ -843,7 +998,7 @@ void Editor::EndTest()
 
 bool Editor::isOverUI(vec2 point)
 {
-	return point.x < panelSize;
+	return point.x < panelSize || point.y < infoBarWidth;
 }
 
 vec2 Editor::OprionProp(vec3 startPos, std::string name, int* value, int max, std::string* firstDisplay, float propX)
@@ -1171,4 +1326,18 @@ std::string Editor::UndoAction::GetDescription()
 	{
 		return "Change object at index " + std::to_string(index);
 	}
+	else return "Unkown undo action type";
+}
+
+std::string EditorAction::GetHoykeyDesc()
+{
+	std::string res = "";
+
+	if (needControl) res += "Ctrl + ";
+	if (needAlt) res += "Alt + ";
+	if (needShift) res += "Shift + ";
+
+	res += GetKeyDesc(shortcutKey);
+
+	return res;
 }
