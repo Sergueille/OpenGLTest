@@ -32,6 +32,7 @@ int main(int argc, void* argv[])
     const int smallWindowWidth = 1280;
     const int smallWindowHeght = 720;
     const char* windowName = "Teeeest!";
+    const bool displayFPS = true;
 
     // Init GLFW
     glfwInit();
@@ -120,11 +121,22 @@ int main(int argc, void* argv[])
 
         EventManager::Call(&EventManager::OnMainLoop);
 
+        // Display the FPS
+        if (!Editor::enabled && displayFPS)
+            TextManager::RenderText(std::to_string(GetFPS()) + " FPS",
+                glm::vec3(screenX - Editor::margin, screenY - Editor::margin - Editor::textSize, Editor::UIBaseZPos),
+                Editor::textSize, TextManager::left);
+
         Sprite::DrawAll();
 
         // Check and call events and swap the buffers
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        // Record FPS
+        Utility::FPSvalues[FPSvaluePos] = static_cast<int>(1.f / (Utility::time - Utility::lastTime));
+        FPSvaluePos++;
+        FPSvaluePos %= FPS_NB_VALUES;
 
         Utility::lastTime = Utility::time;
     }

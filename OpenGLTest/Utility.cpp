@@ -17,6 +17,9 @@ namespace Utility
 
 	SoLoud::Soloud* soloud = nullptr;
 
+	int FPSvalues[FPS_NB_VALUES];
+	int FPSvaluePos;
+
 	float GetDeltaTime()
 	{
 		return time - lastTime;
@@ -187,5 +190,17 @@ namespace Utility
 	float GetTimeSine(int period)
 	{
 		return (float)cos(Utility::time * Utility::PI / (period / 1000.f)) * 0.5f + 0.5f; return 0.0f;
+	}
+
+	int GetFPS()
+	{
+		int sum = 0;
+
+		for (int i = 0; i < FPS_NB_VALUES; i++)
+		{
+			sum += FPSvalues[i];
+		}
+
+		return sum / FPS_NB_VALUES;
 	}
 }

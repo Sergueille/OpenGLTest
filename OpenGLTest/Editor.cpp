@@ -575,7 +575,11 @@ void Editor::DrawInfoBar()
 	Sprite(vec3(0, Utility::screenY - infoBarWidth, UIBaseZPos - 1), vec3(Utility::screenX, Utility::screenY, UIBaseZPos - 1), infobarColor).Draw();
 	vec3 drawPos = vec3(margin, Utility::screenY - textSize, UIBaseZPos);
 
-	TextManager::RenderText(infoBarText, drawPos, textSize);
+	drawPos.x += TextManager::RenderText(infoBarText, drawPos, textSize).x;
+
+	drawPos = vec3(Utility::screenX - margin, Utility::screenY - textSize, UIBaseZPos);
+	std::string displayFPS = std::to_string(GetFPS()) + " FPS";
+	drawPos.x -= TextManager::RenderText(displayFPS, drawPos, textSize, TextManager::text_align::left).x;
 }
 
 void Editor::HandleInputBackspace()

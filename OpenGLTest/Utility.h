@@ -25,6 +25,10 @@ namespace Utility
 
 	extern SoLoud::Soloud* soloud;
 
+	const int FPS_NB_VALUES = 150;
+	extern int FPSvalues[FPS_NB_VALUES];
+	extern int FPSvaluePos;
+
 	/// <summary>
 	/// Projects C on AB
 	/// </summary>
@@ -81,5 +85,7 @@ namespace Utility
 	/// </summary>
 	/// <param name="period">The duration of one sine (milliseconds)</param>
 	extern float GetTimeSine(int period);
+
+	int GetFPS();
 };
 
