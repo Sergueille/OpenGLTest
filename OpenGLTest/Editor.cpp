@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "EditorSprite.h"
 #include "Laser.h"
+#include "Button.h"
 
 #include <iostream>
 
@@ -28,6 +29,7 @@ std::string Editor::focusedTextInputID = "";
 std::string Editor::focusedTextInputValue = "";
 float Editor::backspaceNextTime = 0;
 float Editor::buttonAlreadyPressed = false;
+bool Editor::canSelectObject = true;
 
 int Editor::IDmax = 0;
 
@@ -201,7 +203,7 @@ EditorAction Editor::editorActions[14] = {
 		false,
 		false,
 		[] {
-			if (currentTool == Tool::none && !isOverUI(GetMousePos()))
+			if (currentTool == Tool::none && !isOverUI(GetMousePos()) && focusedTextInputID == "")
 				SelectTool(Tool::move);
 		},
 	},
@@ -213,7 +215,7 @@ EditorAction Editor::editorActions[14] = {
 		false,
 		false,
 		[] {
-			if (currentTool == Tool::none && !isOverUI(GetMousePos()))
+			if (currentTool == Tool::none && !isOverUI(GetMousePos()) && focusedTextInputID == "")
 				SelectTool(Tool::rotate);
 		},
 	},
@@ -225,7 +227,7 @@ EditorAction Editor::editorActions[14] = {
 		false,
 		false,
 		[] {
-			if (currentTool == Tool::none && !isOverUI(GetMousePos()))
+			if (currentTool == Tool::none && !isOverUI(GetMousePos()) && focusedTextInputID == "")
 				SelectTool(Tool::scale);
 		},
 	},
@@ -434,7 +436,7 @@ void Editor::HandleTools()
 	}
 	else if (currentTool == Tool::scale) // SCALE
 	{
-		vec2 deltaScale = vec2(((mousePos.x - editToolStartMouse.x) * sizeToolSizePerPixel) + 1.f) * editToolAxisVector;
+		vec2 deltaScale = vec2((mousePos.x - editToolStartMouse.x) * sizeToolSizePerPixel) * editToolAxisVector;
 		
 		auto objIt = GetAllSelectedObjects()->begin();
 		auto scaleIt = editToolStartScale.begin();
@@ -538,7 +540,7 @@ void Editor::DrawPanel()
 	for (auto name = panelWindows.begin(); name != panelWindows.end(); name++)
 	{
 		bool pressed;
-		drawPos.x += Button(drawPos, *name, &pressed).x + margin;
+		drawPos.x += UIButton(drawPos, *name, &pressed).x + margin;
 
 		if (pressed)
 			currentPanelWindow = (PanelWindow)i;
@@ -618,17 +620,21 @@ void Editor::DrawAddTab(vec3 drawPos)
 
 	vec3 newPos = vec3(Camera::position.x, Camera::position.y, 0);
 
-	drawPos.y -= Button(drawPos, "Sprite", &pressed).y;
+	drawPos.y -= UIButton(drawPos, "Sprite", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new EditorSprite(newPos);
 
-	drawPos.y -= Button(drawPos, "Player", &pressed).y;
+	drawPos.y -= UIButton(drawPos, "Player", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new Player(newPos);
 
-	drawPos.y -= Button(drawPos, "Laser", &pressed).y;
+	drawPos.y -= UIButton(drawPos, "Laser", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new Laser();
+
+	drawPos.y -= UIButton(drawPos, "Button", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new Button(vec3(0));
 
 	if (newObject != nullptr)
 	{
@@ -653,7 +659,7 @@ void Editor::DrawFileTab(vec3 drawPos)
 	drawPos.y -= DrawProperty(drawPos, "File path", &currentFilePath, panelPropertiesX, "FilePath").y;
 
 	bool res;
-	drawPos.y -= Button(drawPos, "Save!", &res).y + margin;
+	drawPos.y -= UIButton(drawPos, "Save!", &res).y + margin;
 	if (res) EditorSaveManager::SaveLevel();
 
 	std::string loadPath = "";
@@ -684,7 +690,7 @@ void Editor::DrawInfoBar()
 	drawPos.x = Utility::screenX / 2.f;
 	std::string placeholder = "Search a command...";
 	std::string search = placeholder;
-	drawPos.y -= TextInput(drawPos, &search, "EditorActionSearch", TextManager::center, false).y;
+	drawPos.y -= TextInput(drawPos, &search, "EditorActionSearch", TextManager::center, false).y + margin;
 
 	if (search != placeholder)
 	{
@@ -702,8 +708,8 @@ void Editor::DrawInfoBar()
 				bool click2 = false;
 
 				std::string displayName = editorActions[i].actionName + " (" + editorActions[i].GetHoykeyDesc() + ")";
-				drawPos.y -= Button(drawPos, displayName, &click1, true, TextManager::center).y;
-				drawPos.y -= Button(drawPos, editorActions[i].description, &click2, true, TextManager::center).y + margin;
+				drawPos.y -= UIButton(drawPos, displayName, &click1, true, TextManager::center).y;
+				drawPos.y -= UIButton(drawPos, editorActions[i].description, &click2, true, TextManager::center).y + margin;
 
 				if (click1 || click2)
 				{
@@ -783,7 +789,7 @@ void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 		}
 
 		// Select an object
-		if (!isOverUI(Utility::GetMousePos())) // If the mouse is not over the UI
+		if (!isOverUI(Utility::GetMousePos()) && canSelectObject) // If the mouse is not over the UI
 		{
 			bool add = glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS
 				|| glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS;
@@ -1001,7 +1007,7 @@ bool Editor::isOverUI(vec2 point)
 	return point.x < panelSize || point.y < infoBarWidth;
 }
 
-vec2 Editor::OprionProp(vec3 startPos, std::string name, int* value, int max, std::string* firstDisplay, float propX)
+vec2 Editor::OptionProp(vec3 startPos, std::string name, int* value, int max, std::string* firstDisplay, float propX)
 {
 	vec3 drawPos = startPos;
 
@@ -1010,18 +1016,64 @@ vec2 Editor::OprionProp(vec3 startPos, std::string name, int* value, int max, st
 
 	bool pressed;
 
-	drawPos.x += Button(drawPos, "(-)", &pressed, *value > 0).x + margin;
+	drawPos.x += UIButton(drawPos, "(-)", &pressed, *value > 0).x + margin;
 	if (pressed)
 		(*value)--;
 
 	drawPos.x += TextManager::RenderText(*(firstDisplay + *value), drawPos, textSize).x + margin;
 
-	vec2 btnSize = Button(drawPos, "(+)", &pressed, *value < max);
+	vec2 btnSize = UIButton(drawPos, "(+)", &pressed, *value < max);
 	drawPos += vec3(btnSize.x, -btnSize.y, 0);
 	if (pressed)
 		(*value)++;
 
 	return vec2(startPos - drawPos);
+}
+
+vec2 Editor::ObjectSelector(vec3 drawPos, std::string name, EditorObject** value, float propX, std::string ID)
+{
+	vec3 startPos = drawPos;
+
+	TextManager::RenderText(name + ":", drawPos, textSize);
+	drawPos.x += propX;
+
+	if (focusedTextInputID == ID) // Selecting an object
+	{
+		drawPos.x += TextManager::RenderText("Please select an object", drawPos, textSize, TextManager::right, vec3(editColor)).x;
+
+		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS) // Cancel
+		{
+			focusedTextInputID = "";
+			canSelectObject = true;
+		}
+		else if (glfwGetMouseButton(Utility::window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS && !isOverUI(GetMousePos())) // Select
+		{
+			*value = GetObjectUnderMouse();
+			focusedTextInputID = "";
+			canSelectObject = true;
+		}
+	}
+	else // Not selecting an object
+	{
+		std::string displayName;
+		if (*value == nullptr)
+			displayName = "No object";
+		else if ((*value)->name != "")
+			displayName = (*value)->name;
+		else
+			displayName = (*value)->typeName + " with no name (ID: " + std::to_string((*value)->ID) + ")";
+
+		bool pressed;
+		drawPos.x += UIButton(drawPos, displayName, &pressed).x;
+
+		if (pressed)
+		{
+			focusedTextInputID = ID;
+			canSelectObject = false;
+		}
+	}
+
+	return vec2(drawPos.x - startPos.x, textSize);
 }
 
 vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, std::string* value, float propX, std::string ID)
@@ -1166,7 +1218,7 @@ void Editor::OnKeyPressed(GLFWwindow* window, int key, int scancode, int action,
 	}
 }
 
-vec2 Editor::Button(vec3 drawPos, std::string text, bool* out, bool enabled, TextManager::text_align align)
+vec2 Editor::UIButton(vec3 drawPos, std::string text, bool* out, bool enabled, TextManager::text_align align)
 {
 	vec4 color;
 	vec2 textRect = TextManager::GetRect(text, textSize);
@@ -1220,9 +1272,9 @@ vec2 Editor::CheckBox(vec3 drawPos, std::string label, bool* value, float textWi
 	vec2 startPos = vec2(drawPos);
 	std::string displayString = *value ? "Yes" : "No";
 	bool textClick, boxClick;
-	Button(drawPos, label, &textClick);
+	UIButton(drawPos, label, &textClick);
 	drawPos.x += textWidth;
-	vec2 btnSize = Button(drawPos, displayString, &boxClick);
+	vec2 btnSize = UIButton(drawPos, displayString, &boxClick);
 	drawPos += vec3(btnSize.x, btnSize.y, 0);
 
 	if (textClick || boxClick)
@@ -1232,6 +1284,21 @@ vec2 Editor::CheckBox(vec3 drawPos, std::string label, bool* value, float textWi
 	}
 
 	return vec2(drawPos) - startPos;
+}
+
+EditorObject* Editor::GetEditorObjectByID(int ID, bool inEditor, bool throwIfNotFound)
+{
+	std::list<EditorObject*>* searchList = inEditor ? &editorObjects : &EditorSaveManager::levelObjectList;
+	for (auto it = searchList->begin(); it != searchList->end(); it++)
+	{
+		if ((*it)->ID == ID)
+			return *it;
+	}
+
+	if (throwIfNotFound)
+		throw "No object with ID";
+
+	return nullptr;
 }
 
 void Editor::RecordObjectChange(EditorObject* oldObject, EditorObject* newObject)

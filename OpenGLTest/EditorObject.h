@@ -8,6 +8,13 @@
 
 using namespace glm;
 
+class EditorObject;
+struct ObjectEvent
+{
+	std::string eventName;
+	std::function<void(EditorObject* object, void* param)> func;
+};
+
 class EditorSaveManager;
 class EditorObject
 {
@@ -72,6 +79,10 @@ public:
 	/// </summary>
 	void ToggleEnabled();
 
+	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount);
+
+	void CallEvent(std::string eventName);
+
 protected:
 	bool enabled = true;
 	vec3 editorPosition;
@@ -79,3 +90,21 @@ protected:
 	vec2 editorSize;
 };
 
+struct EventList
+{
+	EventList();
+	~EventList();
+
+	/// <summary>
+	/// TODO: store object pointers instead of their ID
+	/// </summary>
+	void Call(); 
+
+	vec2 DrawInPanel(vec3 drawPos, std::string eventName);
+
+	std::string GetString();
+	static void Load(EventList* res, std::string text);
+
+	std::list<int> ids;
+	std::list<std::string> events;
+};

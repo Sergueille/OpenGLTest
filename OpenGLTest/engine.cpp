@@ -1,5 +1,5 @@
 /*
-Code from https://learnopengl.com/
+Some code from https://learnopengl.com/
 */
 
 #include <iostream>
@@ -28,7 +28,7 @@ using namespace Utility;
 
 int main(int argc, void* argv[])
 {
-    const bool fullscreen = true;
+    const bool fullscreen = false;
     const int smallWindowWidth = 1280;
     const int smallWindowHeght = 720;
     const char* windowName = "Teeeest!";

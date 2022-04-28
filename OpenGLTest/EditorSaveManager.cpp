@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "EditorSprite.h"
 #include "Laser.h"
+#include "Button.h"
 
 using namespace glm;
 
@@ -149,6 +150,16 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 		Editor::infoBarText = "Got an error while loading level file, see console for details";
 		std::cout << "Got an error while loading level file, here's what it says:" << std::endl;
 		std::cout << e.what() << std::endl;
+
+		// Make sure the editor stays empty
+		if (inEditor)
+		{
+			ClearEditorLevel();
+		}
+		else
+		{
+			ClearGameLevel();
+		}
 	}
 
 	ifile->close();
@@ -372,6 +383,11 @@ void EditorSaveManager::ReadObject(bool inEditor)
 	else if (objectType == "Laser")
 	{
 		newObj = new Laser();
+		newObj->Load(&props);
+	}
+	else if (objectType == "Button")
+	{
+		newObj = new Button(vec3(0));
 		newObj->Load(&props);
 	}
 	else

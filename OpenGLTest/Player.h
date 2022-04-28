@@ -38,7 +38,7 @@ public:
 	/// The max force the player can apply to try to reach his walk speed, in newtons
 	/// </summary>
 	const float walkMaxForce = 60;
-	const float teleportationDistance = 4;
+	const float teleportationDistance = 4.5f;
 	const int maxTeleprtationInAir = 2;
 
 	/// <summary>

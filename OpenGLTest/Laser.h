@@ -2,6 +2,8 @@
 #include "EditorObject.h"
 #include "RectCollider.h"
 
+constexpr int LASER_EVENT_COUNT = 3;
+
 /// <summary>
 /// Props of diferent types of laser
 /// </summary>
@@ -32,7 +34,7 @@ public:
 		},
 		LaserSharedProps {
 			vec4(0.8, 0.9, 1, 1),// centerColor
-			vec4(0.4, 0.7, 1, 0),// borderColor
+			vec4(0.3, 0.8, 1, 0),// borderColor
 			vec2(0.7f), // noiseSpeed
 			0.3f, // noiseSize
 			0.2f, // distorsionAmount
@@ -43,6 +45,8 @@ public:
 	~Laser();
 
 	static std::list<Laser*> lasers;
+
+	bool laserOn = true;
 
 	LaserType laserType = LaserType::noTeleport;
 
@@ -68,11 +72,17 @@ public:
 	virtual void Enable() override;
 	virtual void Disable() override;
 
+	void TurnOn();
+	void TurnOff();
+	void ToggleOnOff();
+
 	virtual Laser* Copy() override;
 
 	virtual vec2 DrawProperties(vec3 startPos) override;
 
 	void SetType(LaserType newType);
+
+	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 
 private:
 	LinkedListElement<std::function<void()>>* mainLoopFuncPos;
@@ -80,4 +90,6 @@ private:
 	void OnMainLoop();
 	void SubscribeToFuncs();
 	static void SetSpriteUniforms(Shader* shader, void* object);
+
+	static const ObjectEvent events[LASER_EVENT_COUNT];
 };

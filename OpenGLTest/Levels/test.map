@@ -1,6 +1,6 @@
 // Editor map file, test version
 
-count 15
+count 16
 
 object MapData {
 	mapName: ""
@@ -8,7 +8,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: "Player"
-	position: "-7.200000, 1.600000, 20.000000"
+	position: "6.000000, 4.400000, 20.000000"
 }
 object EditorSprite {
 	ID: "2"
@@ -148,10 +148,17 @@ object EditorSprite {
 }
 object Laser {
 	ID: "13"
-	name: ""
+	name: "TestLaser"
 	position: "-3.000000, 3.400000, -0.500000"
 	orientation: "-90.000000"
 	laserType: "0"
 	startOffset: "-0.100000"
 	endOffset: "0.150000"
+}
+object Button {
+	ID: "156"
+	name: ""
+	position: "2.600000, 3.000000, 0.000000"
+	onPressed: "13|Turn on|"
+	onUnpressed: "13|Turn off|"
 }

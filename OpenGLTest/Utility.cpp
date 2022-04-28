@@ -243,4 +243,21 @@ namespace Utility
 
 		return res;
 	}
+
+	glm::vec2 Abs(glm::vec2 vector)
+	{
+		return glm::vec2(
+			abs(vector.x),
+			abs(vector.y)
+		);
+	}
+
+	glm::vec3 Abs(glm::vec3 vector)
+	{
+		return glm::vec3(
+			abs(vector.x),
+			abs(vector.y),
+			abs(vector.z)
+		);
+	}
 }

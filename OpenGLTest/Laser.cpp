@@ -5,6 +5,27 @@
 
 std::list<Laser*> Laser::lasers = std::list<Laser*>();
 
+const ObjectEvent Laser::events[LASER_EVENT_COUNT]{
+	ObjectEvent {
+		"Turn on",
+		[] (EditorObject* object, void* param) {
+			((Laser*)object)->TurnOn();
+		},
+	},
+	ObjectEvent {
+		"Turn off",
+		[] (EditorObject* object, void* param) {
+			((Laser*)object)->TurnOff();
+		},
+	},
+	ObjectEvent {
+		"Toggle On/Off",
+		[](EditorObject* object, void* param) {
+			((Laser*)object)->ToggleOnOff();
+		},
+	},
+};
+
 Laser::Laser() : EditorObject(vec3(0, 0, 0))
 {
 	if (Editor::enabled)
@@ -94,7 +115,8 @@ void Laser::Enable()
 
 	laserCollider->enabled = true;
 
-	lasers.push_back(this);
+	if (laserOn)
+		lasers.push_back(this);
 }
 
 void Laser::Disable()
@@ -107,7 +129,8 @@ void Laser::Disable()
 
 	laserCollider->enabled = false;
 
-	lasers.remove(this);
+	if (laserOn)
+		lasers.remove(this);
 }
 
 Laser* Laser::Copy()
@@ -142,7 +165,7 @@ vec2 Laser::DrawProperties(vec3 startPos)
 
 	std::string types[] = { "No teleportation", "Disable teleportation" };
 	int intType = (int)laserType;
-	drawPos.y -= Editor::OprionProp(drawPos, "Type", &intType, (int)LaserType::lastValue, &types[0], Editor::panelPropertiesX).y;
+	drawPos.y -= Editor::OptionProp(drawPos, "Type", &intType, (int)LaserType::lastValue, &types[0], Editor::panelPropertiesX).y;
 	SetType((LaserType)intType);
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Start offset", &startOffset, Editor::panelPropertiesX, strID + "startOffset").y;
@@ -167,7 +190,7 @@ void Laser::SetType(LaserType newType)
 
 void Laser::OnMainLoop()
 {
-	if (enabled)
+	if (enabled && laserOn)
 	{
 		vec2 raycastRes;
 		vec2 direction = Utility::Rotate(vec2(1, 0), editorRotation);
@@ -207,4 +230,40 @@ void Laser::SetSpriteUniforms(Shader* shader, void* object)
 	shader->SetUniform("noiseSize", myProps.noiseSize);
 	shader->SetUniform("distorsionAmount", myProps.distorsionAmount);
 	shader->SetUniform("time", Utility::time);
+}
+
+void Laser::GetObjectEvents(const ObjectEvent** res, int* resCount)
+{
+	*res = &(events[0]);
+	*resCount = LASER_EVENT_COUNT;
+}
+
+void Laser::TurnOn()
+{
+	if (laserOn) return;
+	if (!enabled) throw "Don't call this method when object is disabled!";
+	laserOn = true;
+
+	displaySprite->DrawOnMainLoop();
+
+	lasers.push_back(this);
+}
+
+void Laser::TurnOff()
+{
+	if (!laserOn) return;
+	if (!enabled) throw "Don't call this method when object is disabled!";
+	laserOn = false;
+
+	displaySprite->StopDrawing();
+
+	lasers.remove(this);
+}
+
+void Laser::ToggleOnOff()
+{
+	if (laserOn)
+		TurnOff();
+	else
+		TurnOn();
 }

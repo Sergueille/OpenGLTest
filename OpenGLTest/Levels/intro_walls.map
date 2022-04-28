@@ -278,7 +278,7 @@ object EditorSprite {
 	ID: "75"
 	name: ""
 	position: "68.599998, -30.000000, 0.000000"
-	size: "18.200001, 26.800001"
+	size: "22.000000, 26.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -288,7 +288,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "76"
 	name: ""
-	position: "84.400002, -21.000000, 0.000000"
+	position: "87.400002, -21.000000, 0.000000"
 	size: "18.200001, 26.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -310,8 +310,8 @@ object EditorSprite {
 object EditorSprite {
 	ID: "30"
 	name: ""
-	position: "98.000000, -33.000000, 0.000000"
-	size: "18.200001, 26.800001"
+	position: "105.599998, -33.000000, 0.000000"
+	size: "19.600000, 26.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -321,7 +321,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "31"
 	name: ""
-	position: "115.599998, -21.000000, 0.000000"
+	position: "121.599998, -21.000000, 0.000000"
 	size: "18.200001, 26.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"

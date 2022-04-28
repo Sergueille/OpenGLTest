@@ -82,7 +82,7 @@ vec2 EditorObject::DrawActions(vec3 drawPos)
 	vec3 startPos = drawPos;
 
 	bool res;
-	drawPos.x += Editor::Button(drawPos, "Destroy", &res).x + Editor::margin;
+	drawPos.x += Editor::UIButton(drawPos, "Destroy", &res).x + Editor::margin;
 
 	if (res)
 	{
@@ -90,7 +90,7 @@ vec2 EditorObject::DrawActions(vec3 drawPos)
 		return vec2(0);
 	}
 
-	vec2 lastBtnSize = Editor::Button(drawPos, "Duplicate", &res);
+	vec2 lastBtnSize = Editor::UIButton(drawPos, "Duplicate", &res);
 
 	if (res)
 	{
@@ -146,4 +146,176 @@ void EditorObject::ToggleEnabled()
 		Disable();
 	else
 		Enable();
+}
+
+void EditorObject::GetObjectEvents(const ObjectEvent** res, int* resCount)
+{
+	*res = nullptr;
+	*resCount = 0;
+}
+
+void EditorObject::CallEvent(std::string eventName)
+{
+	const ObjectEvent* firstEvent; int eventCount;
+	this->GetObjectEvents(&firstEvent, &eventCount);
+
+	for (int i = 0; i < eventCount; i++)
+	{
+		if ((firstEvent + i)->eventName == eventName)
+		{
+			(firstEvent + i)->func(this, nullptr);
+			return;
+		}
+	}
+}
+
+EventList::EventList()
+{
+	ids = std::list<int>();
+	events = std::list<std::string>();
+}
+
+EventList::~EventList()
+{
+	
+}
+
+void EventList::Call()
+{
+	if (Editor::enabled)
+		throw "Must not call event while in editor";
+
+	auto itID = ids.begin();
+	auto itEvents = events.begin();
+	for (; itID != ids.end(); itID++, itEvents++)
+	{
+		EditorObject* target = Editor::GetEditorObjectByID(*itID, false, true);
+		target->CallEvent(*itEvents);
+	}
+}
+
+vec2 EventList::DrawInPanel(vec3 drawPos, std::string eventName)
+{
+	vec2 startPos = vec2(drawPos);
+	drawPos.y -= TextManager::RenderText(eventName, drawPos, Editor::textSize).y;
+	drawPos.x += Editor::indentation;
+
+	// For cach event to send
+	auto itID = ids.begin();
+	auto itEvents = events.begin();
+	int i = 0;
+	for (; itID != ids.end(); itID++, itEvents++, i++)
+	{
+		// Display number
+		float numberSize = TextManager::RenderText(std::to_string(i) + ":", drawPos, Editor::textSize).x;
+		drawPos.x += numberSize;
+
+		// Target selector
+		EditorObject* target = Editor::GetEditorObjectByID(*itID, true, false);
+		drawPos.y -= Editor::ObjectSelector(drawPos, "Target", &target, Editor::panelPropertiesX - Editor::indentation, eventName + std::to_string(i) + "ID").y;
+		
+		int newId = target == nullptr ? -1 : target->ID;
+		if (newId != *itID) // Apply if new object
+		{
+			*itID = newId;
+		}
+		
+		if (target != nullptr)
+		{
+			// Select event method
+			const ObjectEvent* firstEvent; int eventCount;
+			target->GetObjectEvents(&firstEvent, &eventCount);
+
+			std::string* names = new std::string[eventCount + 1]; // Get event names
+			int selected = eventCount; // get currently selected event
+			for (int i = 0; i < eventCount; i++)
+			{
+				names[i] = (firstEvent + i)->eventName;
+				if ((firstEvent + i)->eventName == *itEvents)
+				{
+					selected = i;
+				}
+			}
+
+			names[eventCount] = "None"; // Additional element if nthing selected
+
+			drawPos.y -= Editor::OptionProp(drawPos, "Event", &selected, eventCount, names, Editor::panelPropertiesX).y;
+
+			if (selected != eventCount) // If an event is selected
+			{
+				*itEvents = names[selected];
+			}
+
+			delete[] names;
+		}
+
+		// Remove button
+		bool mustRemove = false;
+		drawPos.y -= Editor::UIButton(drawPos, "Remove", &mustRemove).y;
+
+		if (mustRemove)
+		{
+			ids.erase(itID);
+			events.erase(itEvents);
+			break;
+		}
+
+		drawPos.x -= numberSize;
+		drawPos.y -= Editor::margin;
+	}
+
+	// Add button
+	bool mustAdd;
+	drawPos.y -= Editor::UIButton(drawPos, "Add event target", &mustAdd).y;
+
+	if (mustAdd)
+	{
+		ids.push_back(-1);
+		events.push_back("");
+	}
+
+	return Abs(vec2(drawPos) - startPos);
+}
+
+std::string EventList::GetString()
+{
+	std::string res = "";
+
+	auto itID = ids.begin();
+	auto itEvents = events.begin();
+	int i = 0;
+	for (; itID != ids.end(); itID++, itEvents++, i++)
+	{
+		res += std::to_string(*itID) + "|" + *itEvents + "|";
+	}
+
+	return res;
+}
+
+void EventList::Load(EventList* res, std::string text)
+{
+	*res = EventList();
+
+	int elementBegin = 0;
+	bool isID = true;
+
+	for (int i = 0; i < text.length(); i++)
+	{
+		if (text[i] == '|')
+		{
+			std::string element = text.substr(elementBegin, i - elementBegin);
+
+			if (isID)
+			{
+				res->ids.push_back(std::stoi(element));
+			}
+			else
+			{
+				res->events.push_back(element);
+			}
+
+			elementBegin = i + 1;
+			isID = !isID;
+		}
+	}
 }

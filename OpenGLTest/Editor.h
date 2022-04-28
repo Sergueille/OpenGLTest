@@ -78,10 +78,14 @@ public:
 	const static vec4 backgroundColor;
 	const static vec4 infobarColor;
 
+	/// <summary>
+	/// The focused text input or object selector
+	/// </summary>
 	static std::string focusedTextInputID;
 	static std::string focusedTextInputValue;
 	static float backspaceNextTime;
 	static float buttonAlreadyPressed;
+	static bool canSelectObject;
 
 	/// <summary>
 	/// Where to save the map, relative to levelsBasePath
@@ -160,11 +164,23 @@ public:
 	/// <returns>The size of the text input</returns>
 	static vec2 TextInput(vec3 pos, std::string* value, std::string ID, TextManager::text_align align = TextManager::right, bool needReturn = true);
 
-	static vec2 Button(vec3 drawPos, std::string text, bool* out, bool enabled = true, TextManager::text_align align = TextManager::right);
+	/// <summary>
+	/// A button!
+	/// </summary>
+	/// <param name="enabled">If false, the button is gray and not clickable</param>
+	static vec2 UIButton(vec3 drawPos, std::string text, bool* out, bool enabled = true, TextManager::text_align align = TextManager::right);
 
+	/// <summary>
+	/// A checkbox that display the label, and "yes" or "no"
+	/// </summary>
 	static vec2 CheckBox(vec3 drawPos, std::string label, bool* value, float textWidth);
 
-	static vec2 OprionProp(vec3 drawPos, std::string name, int* value, int max, std::string* firstDisplay, float propX);
+	/// <summary>
+	/// Allow to choose an option
+	/// </summary>
+	static vec2 OptionProp(vec3 drawPos, std::string name, int* value, int max, std::string* firstDisplay, float propX);
+
+	static vec2 ObjectSelector(vec3 drawPos, std::string name, EditorObject** value, float propX, std::string ID);
 
 	static int GetIndexOfEditorObject(EditorObject* object, bool throwIfNotFound);
 
@@ -175,6 +191,8 @@ public:
 	static void ClearRedoStack();
 
 	static EditorObject* GetObjectUnderMouse();
+
+	static EditorObject* GetEditorObjectByID(int ID, bool inEditor = false, bool throwIfNotFound = true);
 
 private:
 	static std::list<EditorObject*> selectedObjects;

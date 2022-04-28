@@ -122,8 +122,10 @@ void Sprite::DrawNow()
 
 void Sprite::DrawAll()
 {
+    int i = 0;
     while (!drawQueue.empty())
     {
+        i++;
         drawQueue.top()->DrawNow();
         delete drawQueue.top();
         drawQueue.pop();

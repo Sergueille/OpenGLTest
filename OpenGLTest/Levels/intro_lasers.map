@@ -1,6 +1,6 @@
 // Editor map file, test version
 
-count 35
+count 36
 
 object MapData {
 	mapName: ""
@@ -121,8 +121,8 @@ object EditorSprite {
 object EditorSprite {
 	ID: "24"
 	name: ""
-	position: "48.400002, -10.600000, 0.000000"
-	size: "30.000000, 16.200001"
+	position: "48.400002, -6.600000, 0.000000"
+	size: "30.000000, 8.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -357,6 +357,17 @@ object EditorSprite {
 	name: ""
 	position: "29.800001, -10.600000, 0.000000"
 	size: "15.600000, 1.800000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "323"
+	name: ""
+	position: "51.000000, -14.000000, 0.000000"
+	size: "30.000000, 8.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"

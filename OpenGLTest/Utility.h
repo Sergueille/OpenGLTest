@@ -95,5 +95,8 @@ namespace Utility
 
 	extern std::string ToLower(std::string value);
 	extern std::string ToUpper(std::string value);
+
+	extern glm::vec2 Abs(glm::vec2 vector);
+	extern glm::vec3 Abs(glm::vec3 vector);
 };
 
