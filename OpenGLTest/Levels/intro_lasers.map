@@ -8,7 +8,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: ""
-	position: "55.400002, -0.800000, 20.000000"
+	position: "-6.200000, -0.800000, 20.000000"
 }
 object EditorSprite {
 	ID: "2"

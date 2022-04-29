@@ -40,7 +40,7 @@ public:
 	/// </summary>
 	virtual void UpdateTransform();
 
-	float parallax;
+	float parallax = 1;
 
 	/// <summary>
 	/// Collider used to click on object in the editor

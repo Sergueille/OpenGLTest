@@ -13,7 +13,7 @@ object Player {
 object EditorSprite {
 	ID: "2"
 	name: "Potplant"
-	position: "-4.000000, -0.000000, -2.000000"
+	position: "-10.200000, 0.000000, -2.000000"
 	size: "2.200000, 2.200000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"

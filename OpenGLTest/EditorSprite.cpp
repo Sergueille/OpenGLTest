@@ -122,7 +122,7 @@ void EditorSprite::Disable()
 
 void EditorSprite::UpdateTransform()
 {
-	this->position = editorPosition;
+	this->position = GetEditPos();
 	this->rotate = editorRotation;
 	this->size = editorSize;
 

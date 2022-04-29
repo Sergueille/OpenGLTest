@@ -57,7 +57,7 @@ public:
 	/// <summary>
 	/// The min distance to apply resistance force
 	/// </summary>
-	const float floatingForceStartDist = 1.3f;
+	const float floatingForceStartDist = 2.f;
 	/// <summary>
 	/// Force opposed to the floating force each second
 	/// </summary>

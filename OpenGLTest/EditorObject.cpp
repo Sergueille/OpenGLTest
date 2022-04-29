@@ -23,7 +23,10 @@ EditorObject::~EditorObject()
 
 vec3 EditorObject::GetEditPos()
 {
-	return editorPosition;
+	vec2 delta = vec2(editorPosition) - Camera::position;
+	vec2 res = Camera::position + delta * parallax;
+
+	return vec3(res.x, res.y, editorPosition.z);
 }
 
 float EditorObject::GetEditRotation()
@@ -70,7 +73,8 @@ vec2 EditorObject::DrawProperties(vec3 startPos)
 	vec3 drawPos = startPos;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Name", &name, Editor::panelPropertiesX, strID + "name").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Position", &editorPosition, Editor::panelPropertiesX, strID + "pos").y;
-	SetEditPos(editorPosition);
+	drawPos.y -= Editor::DrawProperty(drawPos, "Parallax", &parallax, Editor::panelPropertiesX, strID + "parallax").y;
+	UpdateTransform();
 
 	vec2 res = vec2(drawPos - startPos);
 	res.y *= -1;
