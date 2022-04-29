@@ -1,10 +1,13 @@
 #include "Player.h"
 #include "Camera.h"
 #include "Laser.h"
+#include "CircleCollider.h"
 
 #include <iostream>
 
 using namespace glm;
+
+Player* Player::ingameInstance = nullptr;
 
 Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), height, true)), EditorObject(position)
 {
@@ -30,6 +33,13 @@ Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), 
 	{
 		this->physicsEnabled = false;
 	}
+	else
+	{
+		if (ingameInstance == nullptr)
+			ingameInstance = this;
+		else
+			std::cout << "Two player instaces in game !!" << std::endl;
+	}
 
 	typeName = "Player";
 }
@@ -54,6 +64,8 @@ Player::~Player()
 		clickCollider = nullptr;
 		collider = nullptr;
 	}
+
+	ingameInstance = nullptr;
 
 	EventManager::OnOpenEditor.remove(subscribedFuncs[0]);
 	EventManager::OnCloseEditor.remove(subscribedFuncs[1]);
@@ -241,6 +253,10 @@ bool Player::TeleportCollideWithLaser(vec2 teleportPosition)
 
 			bool circleColl = teleportEndCollider.CollideWith((*it)->laserCollider).z != 0;
 			if (circleColl)
+				return true;
+
+			bool playerColl = ((CircleCollider*)collider)->CollideWith((*it)->laserCollider).z != 0;
+			if (playerColl)
 				return true;
 		}
 	}

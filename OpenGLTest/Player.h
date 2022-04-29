@@ -18,7 +18,7 @@
 
 using namespace glm;
 
-class Player: PhysicObject, public EditorObject
+class Player: public PhysicObject, public EditorObject
 {
 public:
 	const float height = 1;
@@ -68,6 +68,8 @@ public:
 	const vec4 canTeleportColor = vec4(0, 1, 0, 0.5);
 	const vec4 cannotTeleportColor = vec4(1, 0, 0, 0.5);
 	const vec4 cannotTeleportClickColor = vec4(0.8, 0.5, 0, 0.5);
+
+	static Player* ingameInstance;
 
 	bool isJumping = false;
 

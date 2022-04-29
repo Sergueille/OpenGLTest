@@ -16,7 +16,7 @@ namespace EventManager
 	extern LinkedList<GLFWmousebuttonfun> OnClick;
 	extern LinkedList<GLFWscrollfun> OnScroll;
 	extern LinkedList<GLFWcharfun> OnCharPressed;
-	extern LinkedList<GLFWkeyfun> OnKeyPressed;
+	extern LinkedList<std::function<void(GLFWwindow* window, int key, int scancode, int action, int mods)>> OnKeyPressed;
 
 	extern LinkedList<std::function<void()>> OnOpenEditor;
 	extern LinkedList<std::function<void()>> OnCloseEditor;

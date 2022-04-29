@@ -1,6 +1,7 @@
 #include "Button.h"
 
 #include "CircleCollider.h"
+#include "Player.h"
 
 Button::Button(vec3 position) : EditorObject(position)
 {
@@ -16,12 +17,26 @@ Button::Button(vec3 position) : EditorObject(position)
 	clickCollider = new CircleCollider(position, .5f, false);
 
 	typeName = "Button";
+
+	if (!Editor::enabled)
+	{
+		// Subscribe to events
+		keyFuncPos = EventManager::OnKeyPressed.push_end(
+			[this] (GLFWwindow* window, int key, int scancode, int action, int mods) 
+			{ this->OnKeyPressed(key, action); }
+		);
+	}
 }
 
 Button::~Button()
 {
 	delete btnSprite;
 	btnSprite = nullptr;
+
+	if (!Editor::enabled)
+	{
+		EventManager::OnKeyPressed.remove(keyFuncPos);
+	}
 }
 
 EditorObject* Button::Copy()
@@ -61,7 +76,9 @@ vec2 Button::DrawProperties(vec3 drawPos)
 
 	std::string strID = std::to_string(ID);
 	
-	drawPos.y -= onPressed.DrawInPanel(drawPos, "On pressed").y + Editor::margin;
+	drawPos.y -= Editor::CheckBox(drawPos, "Start pressed", &startPressed, Editor::panelPropertiesX).y;
+
+	drawPos.y -= onPressed.DrawInPanel(drawPos, "On pressed").y;
 	drawPos.y -= onUnpressed.DrawInPanel(drawPos, "On unpressed").y;
 
 	vec2 sizeRes = vec2(drawPos) - startPos;
@@ -74,18 +91,22 @@ bool Button::GetState()
 	return isPressed;
 }
 
-void Button::SetState(bool value)
+void Button::SetState(bool value, bool sendEvents)
 {
 	isPressed = value;
 
 	if (isPressed)
 	{
-		onPressed.Call();
+		if (sendEvents)
+			onPressed.Call();
+
 		btnSprite->color = vec4(0, 1, 0, 1);
 	}
 	else
 	{
-		onUnpressed.Call();
+		if (sendEvents)
+			onUnpressed.Call();
+
 		btnSprite->color = vec4(1, 0, 0, 1);
 	}
 }
@@ -93,6 +114,7 @@ void Button::SetState(bool value)
 void Button::Save()
 {
 	EditorObject::Save();
+	EditorSaveManager::WriteProp("startPressed", startPressed);
 	EditorSaveManager::WriteProp("onPressed", onPressed.GetString());
 	EditorSaveManager::WriteProp("onUnpressed", onUnpressed.GetString());
 }
@@ -103,4 +125,32 @@ void Button::Load(std::map<std::string, std::string>* props)
 
 	EventList::Load(&onPressed, (*props)["onPressed"]);
 	EventList::Load(&onUnpressed, (*props)["onUnpressed"]);
+
+	startPressed = (*props)["startPressed"] == "1";
+
+	SetState(startPressed, false);
+}
+
+void Button::OnKeyPressed(int key, int action)
+{
+	if (key == GLFW_KEY_E && action == GLFW_PRESS)
+	{
+		if (!interactAlreadyPressed)
+		{
+			vec2 playerPos = vec2(Player::ingameInstance->GetPos());
+			vec2 myPos = vec2(GetEditPos());
+			float dist = glm::length(playerPos - myPos);
+
+			if (dist < interactDistance)
+			{
+				SetState(!GetState());
+			}
+
+			interactAlreadyPressed = true;
+		}
+	}
+	else
+	{
+		interactAlreadyPressed = false;
+	}
 }

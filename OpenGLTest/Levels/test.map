@@ -159,6 +159,7 @@ object Button {
 	ID: "156"
 	name: ""
 	position: "2.600000, 3.000000, 0.000000"
+	startPressed: "1"
 	onPressed: "13|Turn on|"
 	onUnpressed: "13|Turn off|"
 }

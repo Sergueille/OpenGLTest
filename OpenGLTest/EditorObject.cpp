@@ -197,6 +197,7 @@ void EventList::Call()
 vec2 EventList::DrawInPanel(vec3 drawPos, std::string eventName)
 {
 	vec2 startPos = vec2(drawPos);
+	drawPos.y -= Editor::margin;
 	drawPos.y -= TextManager::RenderText(eventName, drawPos, Editor::textSize).y;
 	drawPos.x += Editor::indentation;
 

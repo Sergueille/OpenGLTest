@@ -9,7 +9,8 @@ namespace EventManager
 	LinkedList<GLFWmousebuttonfun> OnClick = LinkedList<GLFWmousebuttonfun>();
 	LinkedList<GLFWscrollfun> OnScroll = LinkedList<GLFWscrollfun>();
 	LinkedList<GLFWcharfun> OnCharPressed = LinkedList<GLFWcharfun>();
-	LinkedList<GLFWkeyfun> OnKeyPressed = LinkedList<GLFWkeyfun>();;
+	LinkedList<std::function<void(GLFWwindow* window, int key, int scancode, int action, int mods)>> OnKeyPressed 
+		= LinkedList<std::function<void(GLFWwindow* window, int key, int scancode, int action, int mods)>>();;
 
 	LinkedList<std::function<void()>> OnOpenEditor = LinkedList<std::function<void()>>();
 	LinkedList<std::function<void()>> OnCloseEditor = LinkedList<std::function<void()>>();
