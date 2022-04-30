@@ -1,6 +1,6 @@
 // Editor map file, test version
 
-count 16
+count 18
 
 object MapData {
 	mapName: ""
@@ -8,12 +8,12 @@ object MapData {
 object Player {
 	ID: "0"
 	name: "Player"
-	position: "6.000000, 4.400000, 20.000000"
+	position: "15.600000, 6.800000, 20.000000"
 }
 object EditorSprite {
 	ID: "2"
 	name: "Potplant"
-	position: "-10.200000, 0.000000, -2.000000"
+	position: "5.600000, 3.000000, -2.000000"
 	size: "2.200000, 2.200000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -47,7 +47,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "38"
 	name: "Red potplant"
-	position: "7.200000, 3.000000, 0.000000"
+	position: "-7.800000, 8.400001, 0.000000"
 	size: "2.200000, 2.200000"
 	rotation: "0.000000"
 	color: "1.000000, 0.000000, 1.000000, 1.000000"
@@ -137,10 +137,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "24"
 	name: "Blue potplant"
-	position: "5.600000, 8.400001, 0.000000"
+	position: "5.200000, 8.400001, 0.000000"
 	size: "2.200000, 2.200000"
 	rotation: "0.000000"
-	color: "0.000000, 0.000000, 3.000000, 1.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "potplant.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
@@ -162,4 +162,28 @@ object Button {
 	startPressed: "1"
 	onPressed: "13|Turn on|"
 	onUnpressed: "13|Turn off|"
+}
+object EditorSprite {
+	ID: "157"
+	name: "Test potplant"
+	position: "11.000000, 8.400001, 0.000000"
+	size: "2.200000, 2.200000"
+	rotation: "0.000000"
+	color: "2.000000, 2.000000, 2.000000, 1.000000"
+	texturePath: "potplant.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "174"
+	name: "Test potplant"
+	position: "8.000000, 8.400001, 0.000000"
+	size: "2.200000, 2.200000"
+	rotation: "0.000000"
+	color: "1.500000, 1.500000, 1.500000, 1.000000"
+	texturePath: "potplant.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
 }

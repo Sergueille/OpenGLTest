@@ -41,6 +41,11 @@ private:
 	/// </summary>
 	/// <param name="shaderID">The ID of the shader object</param>
 	static void CheckShaderCompilation(unsigned int shaderID, const char* path);
+
+	static std::string GetUtilShaderText();
+	static std::string utilShaderText;
+
+	static unsigned int currentlyUsed;
 };
 
 #endif

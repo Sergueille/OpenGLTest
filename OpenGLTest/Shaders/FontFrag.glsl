@@ -1,6 +1,6 @@
-#version 330 core
+layout (location = 0) out vec4 FragColor;
+layout (location = 1) out vec4 BrightColor;
 in vec2 TexCoords;
-out vec4 color;
 
 uniform sampler2D text;
 uniform vec3 textColor;
@@ -11,5 +11,6 @@ void main()
         discard;
     }
 
-    color = vec4(textColor, 1.0);
+    FragColor = vec4(textColor, 1.0);
+    BrightColor = getBright(textColor);
 }  

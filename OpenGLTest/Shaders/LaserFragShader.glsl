@@ -1,5 +1,5 @@
-#version 330 core
-out vec4 FragColor;
+layout (location = 0) out vec4 FragColor;
+layout (location = 1) out vec4 BrightColor;
 
 in vec2 texCoord;
 in vec3 position;
@@ -30,4 +30,5 @@ void main()
     }
 
     FragColor = color;
+    BrightColor = getBright(color);
 } 

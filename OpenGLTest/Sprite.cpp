@@ -169,29 +169,27 @@ bool Sprite::IsTransparent()
     return (!opaqueTex || color.a < 1 || shader != nullptr) && !forceOpaque;
 }
 
-namespace SpriteRenderer
+Mesh* SpriteRenderer::mesh = nullptr;
+
+Mesh* SpriteRenderer::GetMesh()
 {
-    Mesh* GetMesh()
-    {
-	    if (mesh != NULL) return mesh;
+	if (mesh != NULL) return mesh;
 
-        float vertices[] = {
-             0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-             0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-            -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
-        };
+    float vertices[] = {
+        0.5f,   0.5f,   0.0f,  1.0f, 1.0f,
+        0.5f,   -0.5f,  0.0f,  1.0f, 0.0f,
+        -0.5f,  -0.5f,  0.0f,  0.0f, 0.0f,
+        -0.5f,  0.5f,   0.0f,  0.0f, 1.0f,
+    };
 
-        unsigned int indices[] = {
-            0, 1, 3,
-            1, 2, 3
-        };
+    unsigned int indices[] = {
+        0, 1, 3,
+        1, 2, 3
+    };
 
-        mesh = new Mesh(&vertices[0], (int)std::size(vertices), &indices[0], (int)std::size(indices));
-        return mesh;
-    }
+    mesh = new Mesh(&vertices[0], (int)std::size(vertices), &indices[0], (int)std::size(indices));
+    return mesh;
 }
-
 
 bool CompareSprite::operator()(Sprite* lhs, Sprite* rhs)
 {

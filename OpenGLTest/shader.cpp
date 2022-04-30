@@ -11,11 +11,14 @@
 
 #include "shader.h"
 
+std::string Shader::utilShaderText = "";
+unsigned int Shader::currentlyUsed = 0;
+
 // First part form https://learnopengl.com/Getting-started/Shaders
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
 {
     // Retrieve the vertex/fragment source code from filePath
-    std::string vertexCode; // CAUSING BUILD FAIL
+    std::string vertexCode;
     std::string fragmentCode;
     std::ifstream vShaderFile;
     std::ifstream fShaderFile;
@@ -42,6 +45,9 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     {
         std::cout << "The shader file couldn't be read!" << std::endl;
     }
+
+    fragmentCode = GetUtilShaderText() + fragmentCode;
+
     const char* vShaderCode = vertexCode.c_str();
     const char* fShaderCode = fragmentCode.c_str();
 
@@ -80,6 +86,9 @@ Shader::Shader() { ID = -1; }
 
 void Shader::Use()
 {
+    if (currentlyUsed == ID) return;
+
+    currentlyUsed = ID;
     glUseProgram(ID);
 }
 
@@ -95,10 +104,44 @@ void Shader::CheckShaderCompilation(unsigned int shaderID, const char* path)
     }
 }
 
+std::string Shader::GetUtilShaderText()
+{
+    if (utilShaderText != "") return utilShaderText;
+
+    std::string path = "Shaders\\util.glsl";
+
+    std::ifstream shaderFile;
+    std::string shaderCodeStr;
+    const char* shaderCode = nullptr;
+    try 
+    {
+        // Open file
+        shaderFile.open(path);
+        std::stringstream shaderStream;
+        // Read file's buffer contents into streams
+        shaderStream << shaderFile.rdbuf();
+        // Cose file handlers
+        shaderFile.close();
+        // Convert stream into string
+        shaderCodeStr = shaderStream.str();
+        shaderCode = shaderCodeStr.c_str();
+    }
+    catch (std::ifstream::failure e) 
+    {
+        std::cout << "Util shader file couldn't be read!" << std::endl;
+    }
+
+    if (shaderCode == nullptr)
+        return "";
+
+    utilShaderText = shaderCode;
+    return shaderCode;
+}
+
 void Shader::SetUniform(const char* uniformName, bool value)
 {
     Use();
-    glUniform1i(glGetUniformLocation(ID, uniformName), (int)value);
+    glUniform1i(glGetUniformLocation(ID, uniformName), value);
 }
 
 void Shader::SetUniform(const char* uniformName, int value)

@@ -89,11 +89,11 @@ namespace SpriteRenderer
 	/// <summary>
 	/// Mesh used to draw sprites
 	/// </summary>
-	static Mesh* mesh;
+	extern Mesh* mesh;
 	/// <summary>
 	/// Get sprite mesh
 	/// </summary>
-	static Mesh* GetMesh();
+	Mesh* GetMesh();
 };
 
 struct CompareSprite
