@@ -23,4 +23,6 @@ public:
 	virtual std::vector<vec2> RaycastPoints(float a, float b) override;
 
 	virtual void SetCollideWithPhys(bool value) override;
+
+	virtual void GetAABB(glm::vec2* resMin, glm::vec2* resMax) override;
 };

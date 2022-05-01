@@ -4,8 +4,8 @@ EditorSprite::EditorSprite(glm::vec3 position, glm::vec2 size, float rotate) : S
 {
 	clickCollider = new RectCollider(position, size, rotate, false);
 
-	this->editorRotation = rotate;
-	this->editorSize = size;
+	SetEditRotation(rotate);
+	SetEditScale(size);
 
 	typeName = "EditorSprite";
 

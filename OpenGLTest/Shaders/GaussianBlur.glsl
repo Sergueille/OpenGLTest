@@ -6,6 +6,7 @@ uniform sampler2D image;
   
 uniform bool horizontal;
 uniform float weight[5] = float[] (0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216);
+uniform int count = 3;
 uniform float offsetSize = 5;
 
 void main()
@@ -15,7 +16,7 @@ void main()
 
     if(horizontal)
     {
-        for(int i = 1; i < 5; ++i)
+        for(int i = 1; i < count; ++i)
         {
             result += texture(image, texCoord + vec2(tex_offset.x * i * offsetSize, 0.0)).rgb * weight[i];
             result += texture(image, texCoord - vec2(tex_offset.x * i * offsetSize, 0.0)).rgb * weight[i];
@@ -23,7 +24,7 @@ void main()
     }
     else
     {
-        for(int i = 1; i < 5; ++i)
+        for(int i = 1; i < count; ++i)
         {
             result += texture(image, texCoord + vec2(0.0, tex_offset.y * i * offsetSize)).rgb * weight[i];
             result += texture(image, texCoord - vec2(0.0, tex_offset.y * i * offsetSize)).rgb * weight[i];

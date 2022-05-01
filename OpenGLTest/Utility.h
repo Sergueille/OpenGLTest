@@ -98,5 +98,7 @@ namespace Utility
 
 	extern glm::vec2 Abs(glm::vec2 vector);
 	extern glm::vec3 Abs(glm::vec3 vector);
-};
 
+	extern void GlBindVtexArrayOptimised(unsigned int VAO);
+	extern unsigned int currentVAO;
+};

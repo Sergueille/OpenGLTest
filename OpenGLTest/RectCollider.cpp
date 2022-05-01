@@ -141,3 +141,23 @@ std::vector<vec2> RectCollider::GetPoints()
 		position + xVect - yVect,
 	};
 }
+
+void RectCollider::GetAABB(vec2* resMin, vec2* resMax)
+{
+	std::vector<glm::vec2> points = GetPoints();
+
+	*resMin = points[0];
+	*resMax = points[0];
+
+	for (int i = 1; i < 4; i++)
+	{
+		if (points[i].x < resMin->x)
+			resMin->x = points[i].x;
+		if (points[i].x > resMax->x)
+			resMax->x = points[i].x;
+		if (points[i].y < resMin->y)
+			resMin->y = points[i].y;
+		if (points[i].y > resMax->y)
+			resMax->y = points[i].y;
+	}
+}

@@ -86,7 +86,7 @@ namespace TextManager {
         // Create VBO for dynamic mesh
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
-        glBindVertexArray(VAO);
+        Utility::GlBindVtexArrayOptimised(VAO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 5, NULL, GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
@@ -94,7 +94,6 @@ namespace TextManager {
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
 
         return 0;
     }
@@ -109,7 +108,7 @@ namespace TextManager {
 
         glUniform3f(glGetUniformLocation(shader->ID, "textColor"), color.x, color.y, color.z);
         glActiveTexture(GL_TEXTURE0);
-        glBindVertexArray(VAO);
+        Utility::GlBindVtexArrayOptimised(VAO);
 
         if (align == left)
         {
@@ -129,7 +128,6 @@ namespace TextManager {
             DrawChar(*c, &currentX, &currentY, scale, pos);
         }
 
-        glBindVertexArray(0);
         glBindTexture(GL_TEXTURE_2D, 0);
 
         return glm::vec2(currentX - pos.x, pos.y - currentY + scale * 64.f) ;

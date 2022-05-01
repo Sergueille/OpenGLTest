@@ -6,6 +6,7 @@
 #include "EditorSprite.h"
 #include "Laser.h"
 #include "Button.h"
+#include "Light.h"
 
 using namespace glm;
 
@@ -103,11 +104,11 @@ void EditorSaveManager::SaveLevel()
 
 void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 {
+	Editor::currentFilePath = path;
+
 	if (inEditor)
 	{
 		ClearEditorLevel();
-		Editor::currentFilePath = path;
-
 		Camera::position = vec2(0, 0); // Reset camera position
 	}
 	else
@@ -198,6 +199,16 @@ void EditorSaveManager::WriteProp(std::string name, std::string value)
 {
 	WriteIndentation();
 	(*ofile) << name << ": \"" << value << "\"\n";
+}
+
+void EditorSaveManager::WriteProp(std::string name, float value)
+{
+	EditorSaveManager::WriteProp(name, std::to_string(value));
+}
+
+void EditorSaveManager::WriteProp(std::string name, int value)
+{
+	EditorSaveManager::WriteProp(name, std::to_string(value));
 }
 
 void EditorSaveManager::WriteProp(std::string name, bool value)
@@ -388,6 +399,11 @@ void EditorSaveManager::ReadObject(bool inEditor)
 	else if (objectType == "Button")
 	{
 		newObj = new Button(vec3(0));
+		newObj->Load(&props);
+	}
+	else if (objectType == "Light")
+	{
+		newObj = new Light();
 		newObj->Load(&props);
 	}
 	else

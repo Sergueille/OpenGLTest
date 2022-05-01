@@ -193,3 +193,8 @@ void CircleCollider::SetCollideWithPhys(bool value)
 	collideWithPhys = value;
 }
 
+void CircleCollider::GetAABB(vec2* resMin, vec2* resMax)
+{
+	*resMin = position - vec2(size / 2);
+	*resMax = position + vec2(size / 2);
+}

@@ -41,7 +41,7 @@ public:
 		std::string GetDescription();
 	};
 
-	static EditorAction editorActions[14];
+	static EditorAction editorActions[15];
 
 	static std::list<EditorObject*> editorObjects;
 
@@ -193,6 +193,8 @@ public:
 	static EditorObject* GetObjectUnderMouse();
 
 	static EditorObject* GetEditorObjectByID(int ID, bool inEditor = false, bool throwIfNotFound = true);
+
+	static void GetLevelAABB(vec2* resMin, vec2* resMax);
 
 private:
 	static std::list<EditorObject*> selectedObjects;

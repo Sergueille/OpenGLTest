@@ -83,6 +83,8 @@ public:
 
 	void CallEvent(std::string eventName);
 
+	virtual void GetAABB(vec2* minRes, vec2* maxRes);
+
 protected:
 	bool enabled = true;
 	vec3 editorPosition;

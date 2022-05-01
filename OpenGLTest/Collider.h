@@ -55,6 +55,8 @@ public:
 	virtual void SetCollideWithPhys(bool value) = 0;
 	bool MustCollideWithPhys();
 
+	virtual void GetAABB(glm::vec2* resMin, glm::vec2* resMax) = 0;
+
 protected:
 	/// <summary>
 	/// Shold this collider collide with physic objects

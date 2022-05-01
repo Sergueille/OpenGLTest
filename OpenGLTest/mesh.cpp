@@ -8,6 +8,7 @@ Code from https://learnopengl.com/Getting-started/Hello-Triangle
 #include <GLFW/glfw3.h>
 
 #include "mesh.h"
+#include "Utility.h"
 
 using namespace std;
 
@@ -28,9 +29,8 @@ Mesh::~Mesh()
 
 void Mesh::DrawMesh()
 {    
-    glBindVertexArray(VAO); // Use the vertex array
+    Utility::GlBindVtexArrayOptimised(VAO); // Use the vertex array
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); // Draw mesh!
-    glBindVertexArray(0);
 }
 
 void Mesh::SetVertexData()
@@ -42,7 +42,7 @@ void Mesh::SetVertexData()
     // Create vertex array
     unsigned int VAO;
     glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
+    Utility::GlBindVtexArrayOptimised(VAO);
 
     // Create element buffer
     unsigned int EBO;

@@ -28,7 +28,7 @@ using namespace Utility;
 
 int main(int argc, void* argv[])
 {
-    const bool fullscreen = true;
+    const bool fullscreen = false;
     const int smallWindowWidth = 1280;
     const int smallWindowHeght = 720;
     const char* windowName = "Teeeest!";
@@ -101,7 +101,7 @@ int main(int argc, void* argv[])
     for (unsigned int i = 0; i < 2; i++)
     {
         glBindTexture(GL_TEXTURE_2D, colorTex[i]); // Bind colorTex
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, screenX, screenY, 0, GL_RGBA, GL_FLOAT, NULL);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenX, screenY, 0, GL_RGB, GL_FLOAT, NULL);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -136,6 +136,7 @@ int main(int argc, void* argv[])
     RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\LaserFragShader.glsl", "laser");
     RessourceManager::LoadShader("Shaders\\RenderVtex.glsl", "Shaders\\RenderFrag.glsl", "screenShader");
     RessourceManager::LoadShader("Shaders\\RenderVtex.glsl", "Shaders\\GaussianBlur.glsl", "screenBlur");
+    RessourceManager::LoadShader("Shaders\\LightmapperVtex.glsl", "Shaders\\LightmapperFrag.glsl", "lightmapper");
 
     // Start level editor
     Editor::CreateEditor();
@@ -152,7 +153,7 @@ int main(int argc, void* argv[])
     {
         glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[i]);
         glBindTexture(GL_TEXTURE_2D, pingpongBuffer[i]);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, screenX, screenY, 0, GL_RGBA, GL_FLOAT, NULL);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenX, screenY, 0, GL_RGB, GL_FLOAT, NULL);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -204,7 +205,7 @@ int main(int argc, void* argv[])
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         // Clear color and depth buffer
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0, 0, 0, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Disable depth test
@@ -216,7 +217,7 @@ int main(int argc, void* argv[])
         int amount = 4;
         RessourceManager::shaders["screenBlur"].Use();
 
-        const float firstOffsetSize = 10;
+        const float firstOffsetSize = 12;
         const float secondOffsetSize = 2;
         for (unsigned int i = 0; i < amount; i++)
         {

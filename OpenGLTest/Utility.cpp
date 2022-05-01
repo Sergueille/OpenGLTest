@@ -260,4 +260,13 @@ namespace Utility
 			abs(vector.z)
 		);
 	}
+
+	unsigned int currentVAO = 0;
+	void GlBindVtexArrayOptimised(unsigned int VAO)
+	{
+		if (currentVAO == VAO) return;
+
+		currentVAO = VAO;
+		glBindVertexArray(VAO);
+	}
 }

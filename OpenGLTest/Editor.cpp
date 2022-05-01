@@ -6,6 +6,8 @@
 #include "EditorSprite.h"
 #include "Laser.h"
 #include "Button.h"
+#include "Light.h"
+#include "LightManager.h"
 
 #include <iostream>
 
@@ -67,7 +69,7 @@ Editor::PanelWindow Editor::currentPanelWindow = Editor::PanelWindow::properties
 
 std::string Editor::infoBarText = "Welcome to the level editor!";
 
-EditorAction Editor::editorActions[14] = {
+EditorAction Editor::editorActions[15] = {
 	EditorAction {
 		"Save",
 		"Save the level in the current file path",
@@ -240,6 +242,17 @@ EditorAction Editor::editorActions[14] = {
 		false,
 		[] {
 			SelectObjects(editorObjects);
+		},
+	},
+	EditorAction{
+		"Bake light",
+		"Create lightmaps for this level",
+		GLFW_KEY_B,
+		true,
+		true,
+		false,
+		[] {
+			LightManager::BakeLight();
 		},
 	},
 };
@@ -636,6 +649,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	if (pressed)
 		newObject = (EditorObject*)new Button(vec3(0));
 
+	drawPos.y -= UIButton(drawPos, "Point light", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new Light();
+
 	if (newObject != nullptr)
 	{
 		AddObject(newObject);
@@ -724,6 +741,26 @@ void Editor::DrawInfoBar()
 	drawPos = vec3(Utility::screenX - margin, Utility::screenY - textSize, UIBaseZPos);
 	std::string displayFPS = std::to_string(GetFPS()) + " FPS";
 	drawPos.x -= TextManager::RenderText(displayFPS, drawPos, textSize, TextManager::text_align::left).x;
+}
+
+void Editor::GetLevelAABB(vec2* resMin, vec2* resMax)
+{
+	(*editorObjects.begin())->GetAABB(resMin, resMax);
+
+	for (auto it = editorObjects.begin(); it != editorObjects.end(); it++)
+	{
+		vec2 min; vec2 max;
+		(*it)->GetAABB(&min, &max);
+
+		if (min.x < resMin->x)
+			resMin->x = min.x;
+		if (max.x > resMax->x)
+			resMax->x = max.x;
+		if (min.y < resMin->y)
+			resMin->y = min.y;
+		if (max.y > resMax->y)
+			resMax->y = max.y;
+	}
 }
 
 void Editor::HandleInputBackspace()

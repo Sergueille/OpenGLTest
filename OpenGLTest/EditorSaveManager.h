@@ -52,6 +52,8 @@ public:
 	static void EnableEditorObjects();
 
 	static void WriteProp(std::string name, std::string value);
+	static void WriteProp(std::string name, float value);
+	static void WriteProp(std::string name, int value);
 	static void WriteProp(std::string name, bool value);
 	static void WriteProp(std::string name, vec2 value);
 	static void WriteProp(std::string name, vec3 value);

@@ -173,6 +173,11 @@ void EditorObject::CallEvent(std::string eventName)
 	}
 }
 
+void EditorObject::GetAABB(vec2* minRes, vec2* maxRes)
+{
+	clickCollider->GetAABB(minRes, maxRes);
+}
+
 EventList::EventList()
 {
 	ids = std::list<int>();

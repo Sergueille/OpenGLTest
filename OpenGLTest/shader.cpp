@@ -168,8 +168,44 @@ void Shader::SetUniform(const char* uniformName, glm::vec2 value)
     glUniform2f(glGetUniformLocation(ID, uniformName), value.x, value.y);
 }
 
+void Shader::SetUniform(const char* uniformName, glm::vec3 value)
+{
+    Use();
+    glUniform3f(glGetUniformLocation(ID, uniformName), value.x, value.y, value.z);
+}
+
 void Shader::SetUniform(const char* uniformName, glm::mat4 trans) 
 {
     Use();
     glUniformMatrix4fv(glGetUniformLocation(ID, uniformName), 1, GL_FALSE, glm::value_ptr(trans));
+}
+
+void Shader::SetUniform(const char* uniformName, int* value, int count)
+{
+    Use();
+    glUniform1iv(glGetUniformLocation(ID, uniformName), count, value);
+}
+
+void Shader::SetUniform(const char* uniformName, float* value, int count)
+{
+    Use();
+    glUniform1fv(glGetUniformLocation(ID, uniformName), count, value);
+}
+
+void Shader::SetUniform2f(const char* uniformName, float* value, int count)
+{
+    Use();
+    glUniform2fv(glGetUniformLocation(ID, uniformName), count, value);
+}
+
+void Shader::SetUniform3f(const char* uniformName, float* value, int count)
+{
+    Use();
+    glUniform3fv(glGetUniformLocation(ID, uniformName), count, value);
+}
+
+void Shader::SetUniform4f(const char* uniformName, float* value, int count)
+{
+    Use();
+    glUniform4fv(glGetUniformLocation(ID, uniformName), count, value);
 }

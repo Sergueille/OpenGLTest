@@ -32,5 +32,7 @@ public:
 	/// Get corners of collider, to-right first, then counter-clockwise
 	/// </summary>
 	std::vector<vec2> GetPoints();
+
+	virtual void GetAABB(glm::vec2* resMin, glm::vec2* resMax) override;
 };
 

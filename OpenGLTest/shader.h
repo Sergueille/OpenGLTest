@@ -32,8 +32,15 @@ public:
 	void SetUniform(const char* uniformName, float value);
 	void SetUniform(const char* uniformName, int value);
 	void SetUniform(const char* uniformName, glm::vec2 value);
+	void SetUniform(const char* uniformName, glm::vec3 value);
 	void SetUniform(const char* uniformName, glm::vec4 value);
 	void SetUniform(const char* uniformName, glm::mat4 value);
+
+	void SetUniform(const char* uniformName, float* value, int count);
+	void SetUniform(const char* uniformName, int* value, int count);
+	void SetUniform2f(const char* uniformName, float* value, int count);
+	void SetUniform3f(const char* uniformName, float* value, int count);
+	void SetUniform4f(const char* uniformName, float* value, int count);
 
 private:
 	/// <summary>
