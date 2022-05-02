@@ -42,6 +42,7 @@ void Light::UpdateTransform()
 
 void Light::Enable()
 {
+	EditorObject::Enable();
 	if (editorSprite != nullptr)
 	{
 		editorSprite->DrawOnMainLoop();
@@ -50,6 +51,7 @@ void Light::Enable()
 
 void Light::Disable()
 {
+	EditorObject::Disable();
 	if (editorSprite != nullptr)
 	{
 		editorSprite->StopDrawing();

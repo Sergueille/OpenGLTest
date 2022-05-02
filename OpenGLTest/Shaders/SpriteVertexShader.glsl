@@ -4,15 +4,20 @@ layout (location = 1) in vec2 vtexuv;
 
 out vec2 texCoord;
 out vec3 position;
+out vec2 lightmapCoord;
 
 uniform mat4 transform;
 uniform mat4 projection;
 uniform vec2 UVstart;
 uniform vec2 UVend;
 
+uniform vec2 lightmapStart;
+uniform vec2 lightmapEnd;
+
 void main()
 {
     gl_Position = projection * transform * vec4(vtexPos.xyz, 1.0);
     position = (transform * vec4(vtexPos.xyz, 1.0)).xyz;
     texCoord = UVstart + vtexuv * (UVend - UVstart);
+    lightmapCoord = (vec2(position) - lightmapStart) / (lightmapEnd - lightmapStart);
 }

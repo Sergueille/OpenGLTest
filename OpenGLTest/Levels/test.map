@@ -1,6 +1,6 @@
 // Editor map file, test version
 
-count 19
+count 25
 
 object MapData {
 	mapName: ""
@@ -21,6 +21,7 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "4"
@@ -32,6 +33,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "30"
@@ -43,6 +45,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "38"
@@ -55,6 +58,7 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "88"
@@ -66,6 +70,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "95"
@@ -77,6 +82,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "117"
@@ -89,6 +95,7 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 5.000000"
+	isLit: "1"
 }
 object EditorSprite {
 	ID: "151"
@@ -100,6 +107,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "152"
@@ -111,6 +119,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "153"
@@ -122,6 +131,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "154"
@@ -133,6 +143,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "24"
@@ -145,6 +156,7 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object Laser {
 	ID: "13"
@@ -158,7 +170,7 @@ object Laser {
 object Button {
 	ID: "156"
 	name: ""
-	position: "2.600000, 3.000000, 0.000000"
+	position: "2.600000, 3.000000, 1.000000"
 	startPressed: "1"
 	onPressed: "13|Turn on|"
 	onUnpressed: "13|Turn off|"
@@ -174,6 +186,7 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "174"
@@ -186,12 +199,61 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object Light {
 	ID: "179"
 	name: ""
-	position: "-3.000000, 6.200000, 10.000000"
-	lightSize: "8.000000"
-	color: "1.000000, 1.000000, 0.000000, 1.000000"
+	position: "-3.000000, 10.600000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "1.500000"
+}
+object Light {
+	ID: "179"
+	name: ""
+	position: "5.800000, 10.600000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "1.500000"
+}
+object Light {
+	ID: "180"
+	name: ""
+	position: "15.000000, 10.600000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "1.500000"
+}
+object Light {
+	ID: "201"
+	name: ""
+	position: "-11.400001, 10.600000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "1.500000"
+}
+object Light {
+	ID: "225"
+	name: ""
+	position: "2.600000, 3.000000, 0.000000"
+	lightSize: "1.000000"
+	color: "0.200000, 1.000000, 0.200000, 1.000000"
 	intensity: "0.800000"
+}
+object Light {
+	ID: "270"
+	name: ""
+	position: "-3.000000, 2.000000, 10.000000"
+	lightSize: "3.000000"
+	color: "1.000000, 0.000000, 0.900000, 1.000000"
+	intensity: "0.500000"
+}
+object Light {
+	ID: "271"
+	name: ""
+	position: "-3.000000, 0.200000, 10.000000"
+	lightSize: "3.000000"
+	color: "1.000000, 0.000000, 0.900000, 1.000000"
+	intensity: "0.500000"
 }

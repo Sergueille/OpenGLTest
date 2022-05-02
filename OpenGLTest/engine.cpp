@@ -28,7 +28,7 @@ using namespace Utility;
 
 int main(int argc, void* argv[])
 {
-    const bool fullscreen = false;
+    const bool fullscreen = true;
     const int smallWindowWidth = 1280;
     const int smallWindowHeght = 720;
     const char* windowName = "Teeeest!";
@@ -132,7 +132,6 @@ int main(int argc, void* argv[])
 
     // Load shaders
     RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\SpriteFragShader.glsl", "sprite");
-    RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\ColorFragShader.glsl", "spriteColor");
     RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\LaserFragShader.glsl", "laser");
     RessourceManager::LoadShader("Shaders\\RenderVtex.glsl", "Shaders\\RenderFrag.glsl", "screenShader");
     RessourceManager::LoadShader("Shaders\\RenderVtex.glsl", "Shaders\\GaussianBlur.glsl", "screenBlur");

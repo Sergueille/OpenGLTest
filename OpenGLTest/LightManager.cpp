@@ -12,6 +12,9 @@ int LightManager::pixelsPerUnit = 5;
 unsigned int LightManager::texID = 0;
 std::string LightManager::texLevelPath = "";
 
+vec2 LightManager::lightmapMin = vec2(0);
+vec2 LightManager::lightmapMax = vec2(0);
+
 void LightManager::BakeLight()
 {
 	Shader* shader = &RessourceManager::shaders["lightmapper"];
@@ -28,26 +31,29 @@ void LightManager::BakeLight()
 	Editor::GetLevelAABB(&levelMin, &levelMax);
 	vec2 levelSize = levelMax - levelMin;
 
-	GLfloat posArray[MAX_LIGHT_COUNT * 2] = {};
-	GLfloat colorArray[MAX_LIGHT_COUNT * 3] = {};
-	GLfloat sizeArray[MAX_LIGHT_COUNT * 2] = {};
+	float posArray[MAX_LIGHT_COUNT * 2] = {};
+	float colorArray[MAX_LIGHT_COUNT * 3] = {};
+	float sizeArray[MAX_LIGHT_COUNT * 2] = {};
 
 	int i = 0;
 	for (auto it = lights.begin(); it != lights.end(); it++, i++)
 	{
-		vec2 uvPos = (vec2((*it)->GetEditPos()) - levelMin);
-		uvPos.x /= levelSize.x;
-		uvPos.y /= levelSize.y;
+		if ((*it)->IsEnabled())
+		{
+			vec2 uvPos = (vec2((*it)->GetEditPos()) - levelMin);
+			uvPos.x /= levelSize.x;
+			uvPos.y /= levelSize.y;
 
-		posArray[2 * i] = uvPos.x;
-		posArray[2 * i + 1] = uvPos.y;
+			posArray[2 * i] = uvPos.x;
+			posArray[2 * i + 1] = uvPos.y;
 
-		colorArray[3 * i] = (*it)->color.r * (*it)->intensity;
-		colorArray[3 * i + 1] = (*it)->color.g * (*it)->intensity;
-		colorArray[3 * i + 2] = (*it)->color.b * (*it)->intensity;
+			colorArray[3 * i] = (*it)->color.r * (*it)->intensity;
+			colorArray[3 * i + 1] = (*it)->color.g * (*it)->intensity;
+			colorArray[3 * i + 2] = (*it)->color.b * (*it)->intensity;
 
-		sizeArray[2 * i] = (*it)->size / levelSize.x;
-		sizeArray[2 * i + 1] = (*it)->size / levelSize.y;
+			sizeArray[2 * i] = (*it)->size / levelSize.x;
+			sizeArray[2 * i + 1] = (*it)->size / levelSize.y;
+		}
 	}
 
 	ivec2 resolution = ivec2(
@@ -73,9 +79,9 @@ void LightManager::BakeLight()
 	// Setup shader
 	shader->Use();
 	shader->SetUniform("nbLights", (int)lights.size());
-	shader->SetUniform2f("lightPos", posArray, MAX_LIGHT_COUNT);
-	shader->SetUniform3f("lightColor", colorArray, MAX_LIGHT_COUNT);
-	shader->SetUniform2f("lightSize", sizeArray, MAX_LIGHT_COUNT);
+	shader->SetUniform2f("lightPos", posArray, (int)lights.size());
+	shader->SetUniform3f("lightColor", colorArray, (int)lights.size());
+	shader->SetUniform2f("lightSize", sizeArray, (int)lights.size());
 
 	vec2 quadSize = vec2(screenX, screenY);
 	quadSize.x /= (float)resolution.x;
@@ -99,6 +105,9 @@ void LightManager::BakeLight()
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0); // Unbind fbo
 
+	lightmapMin = levelMin;
+	lightmapMax = levelMax;
+
 	ForceRefreshLightmaps();
 }
 
@@ -114,11 +123,12 @@ unsigned int LightManager::GetLightData()
 	// Read texture file
 	stbi_set_flip_vertically_on_load(true);
 	int width, height, nrChannels;
-	unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
+	float* data = stbi_loadf(path.c_str(), &width, &height, &nrChannels, 0);
 
 	if (nrChannels != 3)
 	{
-		std::cout << "Ooops! The lightmap image hae wrong amount of channels" << std::endl;
+		std::cout << "Ooops! The lightmap image has wrong amount of channels" << std::endl;
+		stbi_image_free(data);
 		return 0;
 	}
 
@@ -127,16 +137,23 @@ unsigned int LightManager::GetLightData()
 		// Create texture
 		glGenTextures(1, &texID);
 		glBindTexture(GL_TEXTURE_2D, texID);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_FLOAT, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGB, GL_FLOAT, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
+		// Update lightmap pos
+		Editor::GetLevelAABB(&lightmapMin, &lightmapMax);
+
 		std::cout << "Loaded texture " << path << std::endl;
+		return texID;
 	}
 	else 
 	{
 		std::cout << "Failed to read level lighmap at " << path << std::endl;
+		stbi_image_free(data);
 		return 0;
 	}
+
+	stbi_image_free(data);
 }
 
 void LightManager::ForceRefreshLightmaps()

@@ -33,6 +33,7 @@ public:
 	glm::vec2 UVStart;
 	glm::vec2 UVEnd;
 	bool forceOpaque;
+	bool isLit;
 
 	SetSpriteShaderUniforms* setUniforms;
 	void* setUniformsObjectCall = nullptr;

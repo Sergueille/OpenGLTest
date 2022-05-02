@@ -16,7 +16,11 @@ public:
 
 	static void ForceRefreshLightmaps();
 
+	static vec2 lightmapMin;
+	static vec2 lightmapMax;
+
 private:
 	static unsigned int texID;
 	static std::string texLevelPath;
+
 };

@@ -52,6 +52,8 @@ vec2 EditorSprite::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "UV start", &UVStart, Editor::panelPropertiesX, strID + "UVstart").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "UV end", &UVEnd, Editor::panelPropertiesX, strID + "UVend").y;
 
+	drawPos.y -= Editor::CheckBox(drawPos, "Is lit", &isLit, Editor::panelPropertiesX).y;
+
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
 	return res;
@@ -90,6 +92,8 @@ void EditorSprite::Load(std::map<std::string, std::string>* props)
 	UVStart = EditorSaveManager::StringToVector2((*props)["UVstart"], UVStart);
 	UVEnd = EditorSaveManager::StringToVector2((*props)["UVend"], UVEnd);
 
+	isLit = (*props)["isLit"] == "1";
+
 	EditorObject::Load(props);
 }
 
@@ -104,6 +108,7 @@ void EditorSprite::Save()
 	EditorSaveManager::WriteProp("collideWithPhys", clickCollider->MustCollideWithPhys());
 	EditorSaveManager::WriteProp("UVstart", UVStart);
 	EditorSaveManager::WriteProp("UVend", UVEnd);
+	EditorSaveManager::WriteProp("isLit", isLit);
 }
 
 void EditorSprite::Enable()

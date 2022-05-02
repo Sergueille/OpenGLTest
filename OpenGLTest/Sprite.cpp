@@ -13,6 +13,7 @@
 #include "Camera.h"
 #include "EventManager.h"
 #include "RessourceManager.h"
+#include "LightManager.h"
 
 std::priority_queue<Sprite*, std::vector<Sprite*>, CompareSprite> Sprite::drawQueue = std::priority_queue<Sprite*, std::vector<Sprite*>, CompareSprite>();
 
@@ -30,6 +31,7 @@ Sprite::Sprite(Texture* texture, glm::vec3 position, glm::vec2 size, float rotat
     this->forceOpaque = false;
     this->setUniforms = nullptr;
     this->setUniformsObjectCall = nullptr;
+    this->isLit = false;
 
     this->isDrawnOnMainLoop = false;
 
@@ -72,10 +74,7 @@ void Sprite::DrawNow()
     Shader* realShader;
     if (shader == nullptr)
     {
-        if (texture == nullptr)
-            realShader = &RessourceManager::shaders["spriteColor"];
-        else
-            realShader = &RessourceManager::shaders["sprite"];
+        realShader = &RessourceManager::shaders["sprite"];
     }
     else
     {
@@ -103,8 +102,27 @@ void Sprite::DrawNow()
     // Set texture if it exists
     if (texture != nullptr)
     {
+        realShader->SetUniform("hasTexture", true);
         realShader->SetUniform("mainTexture", 0);
         texture->Use(0);
+    }
+    else
+    {
+        realShader->SetUniform("hasTexture", false);
+    }
+
+    if (isLit)
+    {
+        realShader->SetUniform("isLit", true);
+        realShader->SetUniform("lightmapStart", LightManager::lightmapMin);
+        realShader->SetUniform("lightmapEnd", LightManager::lightmapMax);
+        realShader->SetUniform("lightmap", 1);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, LightManager::GetLightData());
+    }
+    else
+    {
+        realShader->SetUniform("isLit", false);
     }
 
     realShader->SetUniform("UVstart", UVStart);
@@ -118,6 +136,8 @@ void Sprite::DrawNow()
     // Get mesh and draw
     SpriteRenderer::GetMesh();
     SpriteRenderer::mesh->DrawMesh();
+
+    glActiveTexture(GL_TEXTURE0); // Make sure stays 0
 }
 
 void Sprite::DrawAll()
