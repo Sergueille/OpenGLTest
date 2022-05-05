@@ -35,11 +35,6 @@ public:
 	float SetEditRotation(float rot);
 	vec2 SetEditScale(vec2 scale);
 
-	/// <summary>
-	/// Call this to replace collider, sprites, etc.
-	/// </summary>
-	virtual void UpdateTransform();
-
 	float parallax = 1;
 
 	/// <summary>
@@ -56,6 +51,10 @@ public:
 	/// </summary>
 	virtual vec2 DrawActions(vec3 drawPos);
 
+	/// <summary>
+	/// Returns a copy of the object. When overriding, DONT'T FORGET TO CALL copy->SubscribeToMainLoop()
+	/// </summary>
+	/// <returns></returns>
 	virtual EditorObject* Copy() = 0;
 
 	/// <summary>
@@ -90,6 +89,17 @@ protected:
 	vec3 editorPosition;
 	float editorRotation;
 	vec2 editorSize;
+
+	/// <summary>
+	/// Call this to replace collider, sprites, etc.
+	/// </summary>
+	virtual void UpdateTransform();
+
+	void SubscribeToEditorObjectFuncs();
+
+private:
+	virtual void OnMainLoop();
+	LinkedListElement<std::function<void()>>* mainLoopFuncPos = nullptr;
 };
 
 struct EventList

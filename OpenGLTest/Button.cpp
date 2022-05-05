@@ -48,6 +48,8 @@ EditorObject* Button::Copy()
 
 	newObj->btnSprite = this->btnSprite->Copy();
 
+	newObj->SubscribeToEditorObjectFuncs();
+
 	return newObj;
 }
 

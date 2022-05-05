@@ -88,7 +88,7 @@ protected:
 	void OnAfterMove() override;
 
 private:
-	LinkedListElement<std::function<void()>>* subscribedFuncs[2];
+	//LinkedListElement<std::function<void()>>* subscribedFuncs[2];
 
 	Sprite* playerSprite;
 	Sprite* teleportPosSprite;

@@ -117,5 +117,7 @@ EditorObject* Light::Copy()
 		LightManager::lights.push_back(copy);
 	}
 
+	copy->SubscribeToEditorObjectFuncs();
+
 	return copy;
 }

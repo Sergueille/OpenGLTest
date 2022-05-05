@@ -26,7 +26,6 @@ vec2 EditorSprite::DrawProperties(vec3 drawPos)
 	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Size", &editorSize, Editor::panelPropertiesX, strID + "size").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Orientation", &editorRotation, Editor::panelPropertiesX, strID + "rotate").y;
-	UpdateTransform();
 	drawPos.y -= Editor::DrawProperty(drawPos, "Color", &color, Editor::panelPropertiesX, strID + "color", true).y;
 
 	bool collide = clickCollider->MustCollideWithPhys();
@@ -70,6 +69,7 @@ EditorObject* EditorSprite::Copy()
 	// subscribe again to main loop
 	newObj->isDrawnOnMainLoop = false;
 	newObj->DrawOnMainLoop();
+	newObj->SubscribeToEditorObjectFuncs();
 
 	return newObj;
 }
@@ -127,6 +127,7 @@ void EditorSprite::Disable()
 
 void EditorSprite::UpdateTransform()
 {
+	EditorObject::UpdateTransform();
 	this->position = GetEditPos();
 	this->rotate = editorRotation;
 	this->size = editorSize;

@@ -10,6 +10,8 @@ EditorObject::EditorObject(vec3 position)
 
 	this->ID = Editor::IDmax;
 	Editor::IDmax++;
+
+	SubscribeToEditorObjectFuncs();
 }
 
 EditorObject::~EditorObject()
@@ -18,6 +20,12 @@ EditorObject::~EditorObject()
 	{
 		delete clickCollider;
 		clickCollider = nullptr;
+	}
+
+	if (mainLoopFuncPos != nullptr)
+	{
+		EventManager::OnMainLoop.remove(mainLoopFuncPos);
+		mainLoopFuncPos = nullptr;
 	}
 }
 
@@ -42,21 +50,18 @@ vec2 EditorObject::GetEditScale()
 vec3 EditorObject::SetEditPos(vec3 pos)
 {
 	editorPosition = pos;
-	UpdateTransform();
 	return editorPosition;
 }
 
 float EditorObject::SetEditRotation(float rot)
 {
 	editorRotation = rot;
-	UpdateTransform();
 	return rot;
 }
 
 vec2 EditorObject::SetEditScale(vec2 scale)
 {
 	editorSize = scale;
-	UpdateTransform();
 	return scale;
 }
 
@@ -64,6 +69,11 @@ void EditorObject::UpdateTransform()
 {
 	if (clickCollider)
 		clickCollider->position = editorPosition;
+}
+
+void EditorObject::SubscribeToEditorObjectFuncs()
+{
+	mainLoopFuncPos = EventManager::OnMainLoop.push_end([this] {this->OnMainLoop(); });
 }
 
 vec2 EditorObject::DrawProperties(vec3 startPos)
@@ -74,7 +84,6 @@ vec2 EditorObject::DrawProperties(vec3 startPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "Name", &name, Editor::panelPropertiesX, strID + "name").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Position", &editorPosition, Editor::panelPropertiesX, strID + "pos").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Parallax", &parallax, Editor::panelPropertiesX, strID + "parallax").y;
-	UpdateTransform();
 
 	vec2 res = vec2(drawPos - startPos);
 	res.y *= -1;
@@ -123,20 +132,29 @@ void EditorObject::Load(std::map<std::string, std::string>* props)
 	editorPosition = EditorSaveManager::StringToVector3((*props)["position"]);
 	name = (*props)["name"];
 	ID = std::stoi((*props)["ID"]);
-
-	this->UpdateTransform();
 }
 
 void EditorObject::Enable()
 {
+	if (enabled) return;
+
 	enabled = true;
 	clickCollider->enabled = true;
+	SubscribeToEditorObjectFuncs();
 }
 
 void EditorObject::Disable()
 {
+	if (!enabled) return;
+
 	enabled = false;
 	clickCollider->enabled = false;
+
+	if (mainLoopFuncPos != nullptr)
+	{
+		EventManager::OnMainLoop.remove(mainLoopFuncPos);
+		mainLoopFuncPos = nullptr;
+	}
 }
 
 bool EditorObject::IsEnabled()
@@ -176,6 +194,11 @@ void EditorObject::CallEvent(std::string eventName)
 void EditorObject::GetAABB(vec2* minRes, vec2* maxRes)
 {
 	clickCollider->GetAABB(minRes, maxRes);
+}
+
+void EditorObject::OnMainLoop()
+{
+	UpdateTransform();
 }
 
 EventList::EventList()

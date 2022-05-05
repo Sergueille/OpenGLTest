@@ -66,9 +66,6 @@ Player::~Player()
 	}
 
 	ingameInstance = nullptr;
-
-	EventManager::OnOpenEditor.remove(subscribedFuncs[0]);
-	EventManager::OnCloseEditor.remove(subscribedFuncs[1]);
 }
 
 void Player::UpdateTransform()
@@ -93,6 +90,7 @@ EditorObject* Player::Copy()
 	copy->teleportPosSprite = this->teleportPosSprite->Copy(); 
 
 	copy->SubscribeToMainLoop();
+	copy->SubscribeToEditorObjectFuncs();
 
 	return copy;
 }

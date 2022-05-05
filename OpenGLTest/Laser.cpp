@@ -150,6 +150,7 @@ Laser* Laser::Copy()
 	copy->laserCollider = new RectCollider(vec2(0), vec2(1), 0, false);
 
 	copy->SubscribeToFuncs();
+	copy->SubscribeToEditorObjectFuncs();
 
 	return copy;
 }
