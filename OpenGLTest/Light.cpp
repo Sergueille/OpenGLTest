@@ -46,6 +46,7 @@ void Light::Enable()
 	if (editorSprite != nullptr)
 	{
 		editorSprite->DrawOnMainLoop();
+		LightManager::lights.push_back(this);
 	}
 }
 
@@ -55,6 +56,7 @@ void Light::Disable()
 	if (editorSprite != nullptr)
 	{
 		editorSprite->StopDrawing();
+		LightManager::lights.remove(this);
 	}
 }
 
@@ -69,6 +71,10 @@ vec2 Light::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "Color", &color, Editor::panelPropertiesX, strID + "color", true).y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Intensity", &intensity, Editor::panelPropertiesX, strID + "intensity").y;
 
+	drawPos.y -= Editor::DrawProperty(drawPos, "Rotation", &editorRotation, Editor::panelPropertiesX, strID + "angle").y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Inner angle", &innerAngle, Editor::panelPropertiesX, strID + "inner").y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Outer angle", &outerAngle, Editor::panelPropertiesX, strID + "outer").y;
+
 	return Abs(startPos - vec2(drawPos));
 }
 
@@ -79,6 +85,10 @@ void Light::Save()
 	EditorSaveManager::WriteProp("lightSize", size);
 	EditorSaveManager::WriteProp("color", color);
 	EditorSaveManager::WriteProp("intensity", intensity);
+
+	EditorSaveManager::WriteProp("rotation", editorRotation);
+	EditorSaveManager::WriteProp("innerAngle", innerAngle);
+	EditorSaveManager::WriteProp("outerAngle", outerAngle);
 }
 
 void Light::Load(std::map<std::string, std::string>* props)
@@ -88,6 +98,10 @@ void Light::Load(std::map<std::string, std::string>* props)
 	EditorSaveManager::FloatProp(props, "lightSize", &size);
 	color = EditorSaveManager::StringToVector4((*props)["color"]);
 	EditorSaveManager::FloatProp(props, "intensity", &intensity);
+
+	EditorSaveManager::FloatProp(props, "rotation", &editorRotation);
+	EditorSaveManager::FloatProp(props, "innerAngle", &innerAngle);
+	EditorSaveManager::FloatProp(props, "outerAngle", &outerAngle);
 }
 
 EditorObject* Light::Copy()

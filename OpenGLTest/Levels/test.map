@@ -1,6 +1,6 @@
 // Editor map file, test version
 
-count 25
+count 30
 
 object MapData {
 	mapName: ""
@@ -21,7 +21,7 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
-	isLit: "0"
+	isLit: "1"
 }
 object EditorSprite {
 	ID: "4"
@@ -58,7 +58,7 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
-	isLit: "0"
+	isLit: "1"
 }
 object EditorSprite {
 	ID: "88"
@@ -156,7 +156,7 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
-	isLit: "0"
+	isLit: "1"
 }
 object Laser {
 	ID: "13"
@@ -202,44 +202,15 @@ object EditorSprite {
 	isLit: "0"
 }
 object Light {
-	ID: "179"
-	name: ""
-	position: "-3.000000, 10.600000, 10.000000"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "1.500000"
-}
-object Light {
-	ID: "179"
-	name: ""
-	position: "5.800000, 10.600000, 10.000000"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "1.500000"
-}
-object Light {
-	ID: "180"
-	name: ""
-	position: "15.000000, 10.600000, 10.000000"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "1.500000"
-}
-object Light {
-	ID: "201"
-	name: ""
-	position: "-11.400001, 10.600000, 10.000000"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "1.500000"
-}
-object Light {
 	ID: "225"
 	name: ""
 	position: "2.600000, 3.000000, 0.000000"
 	lightSize: "1.000000"
 	color: "0.200000, 1.000000, 0.200000, 1.000000"
 	intensity: "0.800000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
 }
 object Light {
 	ID: "270"
@@ -248,6 +219,9 @@ object Light {
 	lightSize: "3.000000"
 	color: "1.000000, 0.000000, 0.900000, 1.000000"
 	intensity: "0.500000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
 }
 object Light {
 	ID: "271"
@@ -256,4 +230,106 @@ object Light {
 	lightSize: "3.000000"
 	color: "1.000000, 0.000000, 0.900000, 1.000000"
 	intensity: "0.500000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+}
+object Light {
+	ID: "273"
+	name: ""
+	position: "-19.600000, 4.000000, 10.000000"
+	lightSize: "7.000000"
+	color: "1.000000, 0.200000, 0.200000, 1.000000"
+	intensity: "1.500000"
+	rotation: "-30.000000"
+	innerAngle: "20.000000"
+	outerAngle: "45.000000"
+}
+object Light {
+	ID: "275"
+	name: ""
+	position: "10.000000, 6.200000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "0.800000"
+	rotation: "-90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "100.000000"
+}
+object Light {
+	ID: "276"
+	name: ""
+	position: "3.200000, 6.200000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "0.800000"
+	rotation: "-90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "100.000000"
+}
+object Light {
+	ID: "277"
+	name: ""
+	position: "19.000000, 10.600000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "1.300000"
+	rotation: "-90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "100.000000"
+}
+object Light {
+	ID: "278"
+	name: ""
+	position: "12.800000, 10.600000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "1.300000"
+	rotation: "-90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "100.000000"
+}
+object Light {
+	ID: "281"
+	name: ""
+	position: "1.200000, 10.600000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "1.300000"
+	rotation: "-90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "100.000000"
+}
+object Light {
+	ID: "282"
+	name: ""
+	position: "-9.400001, 10.600000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "1.300000"
+	rotation: "-90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "100.000000"
+}
+object Light {
+	ID: "283"
+	name: ""
+	position: "-20.000000, 10.600000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "1.300000"
+	rotation: "-90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "100.000000"
+}
+object Light {
+	ID: "285"
+	name: ""
+	position: "-8.600000, 6.200000, 10.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "1.300000"
+	rotation: "-90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "100.000000"
 }

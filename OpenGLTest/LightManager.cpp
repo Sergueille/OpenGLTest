@@ -20,10 +20,15 @@ void LightManager::BakeLight()
 	Shader* shader = &RessourceManager::shaders["lightmapper"];
 
 	constexpr int MAX_LIGHT_COUNT = 256;
+	constexpr int MAX_SHADOW_CASTERS_COUNT = 128;
 
 	if (lights.size() > MAX_LIGHT_COUNT)
 	{
 		std::cout << "Max light count exceeded, please changhe the array sizes in the lightmapper shader" << std::endl;
+	}
+	if (lights.size() > MAX_SHADOW_CASTERS_COUNT)
+	{
+		std::cout << "Max shodow casters count exceeded, please changhe the array sizes in the lightmapper shader" << std::endl;
 	}
 
 	// Get light data
@@ -34,6 +39,7 @@ void LightManager::BakeLight()
 	float posArray[MAX_LIGHT_COUNT * 2] = {};
 	float colorArray[MAX_LIGHT_COUNT * 3] = {};
 	float sizeArray[MAX_LIGHT_COUNT * 2] = {};
+	float angleArray[MAX_LIGHT_COUNT * 3] = {};
 
 	int i = 0;
 	for (auto it = lights.begin(); it != lights.end(); it++, i++)
@@ -53,6 +59,10 @@ void LightManager::BakeLight()
 
 			sizeArray[2 * i] = (*it)->size / levelSize.x;
 			sizeArray[2 * i + 1] = (*it)->size / levelSize.y;
+
+			angleArray[3 * i] = (*it)->GetEditRotation();
+			angleArray[3 * i + 1] = (*it)->innerAngle;
+			angleArray[3 * i + 2] = (*it)->outerAngle;
 		}
 	}
 
@@ -82,6 +92,7 @@ void LightManager::BakeLight()
 	shader->SetUniform2f("lightPos", posArray, (int)lights.size());
 	shader->SetUniform3f("lightColor", colorArray, (int)lights.size());
 	shader->SetUniform2f("lightSize", sizeArray, (int)lights.size());
+	shader->SetUniform3f("lightAngles", angleArray, (int)lights.size());
 
 	vec2 quadSize = vec2(screenX, screenY);
 	quadSize.x /= (float)resolution.x;

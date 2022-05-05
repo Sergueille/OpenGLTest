@@ -11,6 +11,8 @@ public:
 	float size = 5;
 	vec4 color = vec4(1);
 	float intensity = 1;
+	float innerAngle = 360;
+	float outerAngle = 360;
 
 	virtual void UpdateTransform() override;
 
