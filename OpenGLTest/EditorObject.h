@@ -84,6 +84,9 @@ public:
 
 	virtual void GetAABB(vec2* minRes, vec2* maxRes);
 
+	virtual void OnSelected() { };
+	virtual void OnUnselected() { };
+
 protected:
 	bool enabled = true;
 	vec3 editorPosition;
@@ -96,9 +99,9 @@ protected:
 	virtual void UpdateTransform();
 
 	void SubscribeToEditorObjectFuncs();
+	void OnMainLoop();
 
 private:
-	virtual void OnMainLoop();
 	LinkedListElement<std::function<void()>>* mainLoopFuncPos = nullptr;
 };
 

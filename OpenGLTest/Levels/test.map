@@ -1,6 +1,6 @@
 // Editor map file, test version
 
-count 30
+count 32
 
 object MapData {
 	mapName: ""
@@ -8,7 +8,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: "Player"
-	position: "13.000000, 4.000000, 20.000000"
+	position: "11.200000, 4.400000, 20.000000"
 }
 object EditorSprite {
 	ID: "2"
@@ -58,7 +58,7 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
-	isLit: "1"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "88"
@@ -161,7 +161,7 @@ object EditorSprite {
 object Laser {
 	ID: "13"
 	name: "TestLaser"
-	position: "-3.000000, 3.400000, -0.500000"
+	position: "11.200000, 5.400000, -0.500000"
 	orientation: "-90.000000"
 	laserType: "0"
 	startOffset: "-0.100000"
@@ -216,9 +216,9 @@ object Light {
 	ID: "270"
 	name: ""
 	position: "-3.000000, 2.000000, 10.000000"
-	lightSize: "3.000000"
+	lightSize: "5.000000"
 	color: "1.000000, 0.000000, 0.900000, 1.000000"
-	intensity: "0.500000"
+	intensity: "0.300000"
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
@@ -227,9 +227,9 @@ object Light {
 	ID: "271"
 	name: ""
 	position: "-3.000000, 0.200000, 10.000000"
-	lightSize: "3.000000"
+	lightSize: "5.000000"
 	color: "1.000000, 0.000000, 0.900000, 1.000000"
-	intensity: "0.500000"
+	intensity: "0.300000"
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
@@ -248,21 +248,10 @@ object Light {
 object Light {
 	ID: "275"
 	name: ""
-	position: "10.000000, 6.200000, 10.000000"
+	position: "7.200000, 6.200000, 10.000000"
 	lightSize: "10.000000"
 	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "0.800000"
-	rotation: "-90.000000"
-	innerAngle: "50.000000"
-	outerAngle: "100.000000"
-}
-object Light {
-	ID: "276"
-	name: ""
-	position: "3.200000, 6.200000, 10.000000"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "0.800000"
+	intensity: "1.300000"
 	rotation: "-90.000000"
 	innerAngle: "50.000000"
 	outerAngle: "100.000000"
@@ -270,7 +259,7 @@ object Light {
 object Light {
 	ID: "277"
 	name: ""
-	position: "19.000000, 10.600000, 10.000000"
+	position: "16.800001, 10.600000, 10.000000"
 	lightSize: "10.000000"
 	color: "1.000000, 1.000000, 0.900000, 1.000000"
 	intensity: "1.300000"
@@ -281,7 +270,7 @@ object Light {
 object Light {
 	ID: "278"
 	name: ""
-	position: "12.800000, 10.600000, 10.000000"
+	position: "7.800000, 10.600000, 10.000000"
 	lightSize: "10.000000"
 	color: "1.000000, 1.000000, 0.900000, 1.000000"
 	intensity: "1.300000"
@@ -292,7 +281,7 @@ object Light {
 object Light {
 	ID: "281"
 	name: ""
-	position: "1.200000, 10.600000, 10.000000"
+	position: "-0.800000, 10.600000, 10.000000"
 	lightSize: "10.000000"
 	color: "1.000000, 1.000000, 0.900000, 1.000000"
 	intensity: "1.300000"
@@ -303,7 +292,7 @@ object Light {
 object Light {
 	ID: "282"
 	name: ""
-	position: "-9.400001, 10.600000, 10.000000"
+	position: "-11.400001, 10.600000, 10.000000"
 	lightSize: "10.000000"
 	color: "1.000000, 1.000000, 0.900000, 1.000000"
 	intensity: "1.300000"
@@ -332,4 +321,25 @@ object Light {
 	rotation: "-90.000000"
 	innerAngle: "50.000000"
 	outerAngle: "100.000000"
+}
+object ShadowCaster {
+	ID: "372"
+	name: ""
+	position: "-8.400001, 6.800000, 10.000000"
+	size: "3.800000, 1.000000"
+	orientation: "-0.000000"
+}
+object ShadowCaster {
+	ID: "372"
+	name: ""
+	position: "6.600000, 6.800000, 10.000000"
+	size: "10.200000, 1.000000"
+	orientation: "-0.000000"
+}
+object ShadowCaster {
+	ID: "473"
+	name: ""
+	position: "-3.200000, 4.000000, 10.000000"
+	size: "3.800000, 1.000000"
+	orientation: "-0.000000"
 }

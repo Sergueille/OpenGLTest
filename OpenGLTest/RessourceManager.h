@@ -23,5 +23,7 @@ public:
 	static SoLoud::Wav* GetSound(std::string file);
 
 	static void Clear();
+
+	static void LoadBaseShaders();
 };
 

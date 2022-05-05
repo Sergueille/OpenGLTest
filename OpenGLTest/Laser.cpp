@@ -46,8 +46,7 @@ Laser::Laser() : EditorObject(vec3(0, 0, 0))
 
 	lasers.push_back(this);
 
-	SubscribeToFuncs();
-
+	laserMainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { this->OnLaserMainLoop(); });
 	typeName = "Laser";
 
 	SetType(laserType);
@@ -68,8 +67,7 @@ Laser::~Laser()
 	laserCollider = nullptr;
 
 	lasers.remove(this);
-
-	EventManager::OnMainLoop.remove(mainLoopFuncPos);
+	EventManager::OnMainLoop.remove(laserMainLoopFuncPos);
 }
 
 void Laser::UpdateTransform()
@@ -149,8 +147,8 @@ Laser* Laser::Copy()
 
 	copy->laserCollider = new RectCollider(vec2(0), vec2(1), 0, false);
 
-	copy->SubscribeToFuncs();
 	copy->SubscribeToEditorObjectFuncs();
+	copy->laserMainLoopFuncPos = EventManager::OnMainLoop.push_end([copy] { copy->OnLaserMainLoop(); });
 
 	return copy;
 }
@@ -172,8 +170,6 @@ vec2 Laser::DrawProperties(vec3 startPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "Start offset", &startOffset, Editor::panelPropertiesX, strID + "startOffset").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "End offset", &endOffset, Editor::panelPropertiesX, strID + "endOffset").y;
 
-	UpdateTransform();
-
 	vec2 res = vec2(drawPos - startPos);
 	res.y *= -1;
 	return res;
@@ -189,13 +185,13 @@ void Laser::SetType(LaserType newType)
 		editorSprite->color = vec4(newProps.centerColor.x, newProps.centerColor.y, newProps.centerColor.z, editorSpriteAlpha);
 }
 
-void Laser::OnMainLoop()
+void Laser::OnLaserMainLoop()
 {
 	if (enabled && laserOn)
 	{
 		vec2 raycastRes;
 		vec2 direction = Utility::Rotate(vec2(1, 0), editorRotation);
-		if (Collider::Raycast(editorPosition, direction, &raycastRes))
+		if (Collider::Raycast(editorPosition, direction, &raycastRes)) // NOT WORKING, why?
 		{
 			vec2 spriteStart = vec2(editorPosition) + (direction * startOffset);
 			vec2 spriteEnd = raycastRes + (direction * endOffset);
@@ -212,11 +208,6 @@ void Laser::OnMainLoop()
 			laserCollider->orientation = editorRotation;
 		}
 	}
-}
-
-void Laser::SubscribeToFuncs()
-{
-	mainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { this->OnMainLoop(); });
 }
 
 void Laser::SetSpriteUniforms(Shader* shader, void* object)

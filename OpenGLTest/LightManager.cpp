@@ -7,7 +7,8 @@
 #include "stb_image.h"
 
 std::list<Light*> LightManager::lights = std::list<Light*>();
-int LightManager::pixelsPerUnit = 5;
+std::list<ShadowCaster*> LightManager::shadowCasters = std::list<ShadowCaster*>();
+int LightManager::pixelsPerUnit = 20;
 
 unsigned int LightManager::texID = 0;
 std::string LightManager::texLevelPath = "";
@@ -66,6 +67,29 @@ void LightManager::BakeLight()
 		}
 	}
 
+	float shadowPos[MAX_SHADOW_CASTERS_COUNT * 2] = {};
+	float shadowRot[MAX_SHADOW_CASTERS_COUNT] = {};
+	float shadowScale[MAX_SHADOW_CASTERS_COUNT * 2] = {};
+
+	i = 0;
+	for (auto it = shadowCasters.begin(); it != shadowCasters.end(); it++, i++)
+	{
+		if ((*it)->IsEnabled())
+		{
+			vec2 uvPos = (vec2((*it)->GetEditPos()) - levelMin);
+			uvPos.x /= levelSize.x;
+			uvPos.y /= levelSize.y;
+
+			shadowPos[2 * i] = uvPos.x;
+			shadowPos[2 * i + 1] = uvPos.y;
+
+			shadowScale[2 * i] = (*it)->GetEditScale().x / levelSize.x;
+			shadowScale[2 * i + 1] = (*it)->GetEditScale().y / levelSize.y;
+
+			shadowRot[2 * i] = (*it)->GetEditRotation() + 0.001; // Because don't likes vertival lines
+		}
+	}
+
 	ivec2 resolution = ivec2(
 		static_cast<int>(levelSize.x * (float)pixelsPerUnit),
 		static_cast<int>(levelSize.y * (float)pixelsPerUnit)
@@ -93,6 +117,11 @@ void LightManager::BakeLight()
 	shader->SetUniform3f("lightColor", colorArray, (int)lights.size());
 	shader->SetUniform2f("lightSize", sizeArray, (int)lights.size());
 	shader->SetUniform3f("lightAngles", angleArray, (int)lights.size());
+
+	shader->SetUniform("nbShadowCasters", (int)shadowCasters.size());
+	shader->SetUniform2f("shadowCastersPos", shadowPos, (int)shadowCasters.size());
+	shader->SetUniform("shadowCastersRot", shadowRot, (int)shadowCasters.size());
+	shader->SetUniform2f("shadowCastersSize", shadowScale, (int)shadowCasters.size());
 
 	vec2 quadSize = vec2(screenX, screenY);
 	quadSize.x /= (float)resolution.x;

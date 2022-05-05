@@ -64,7 +64,7 @@ vec2 Rotate(vec2 vector, float angle)
 bool GetShadow(int light) 
 {
     float a = (texCoord.y - lightPos[light].y) / (texCoord.x - lightPos[light].x);
-    float b = lightPos[light].y - (a * lightPos[light].x);
+    float b = lightPos[light].y - (a * lightPos[light].x); // Validated
 
     // Part of code from RectCollider
     for (int i = 0; i < nbShadowCasters; i++)
@@ -88,13 +88,13 @@ bool GetShadow(int light)
             vec2 next = j == 3 ? points[0] : points[j + 1]; // Second point of the side
 
             float aside = (point.y - next.y) / (point.x - next.x);
-            float bside = next.y - (a * next.x);
+            float bside = next.y - (aside * next.x);
 
             if (aside == a) continue; // Continue if lines are not crossing
 
             // Get intersection point
             float resx = (bside - b) / (a - aside);
-            float resy = (a * resx) + b;
+            float resy = (aside * resx) + bside;
             vec2 res = vec2(resx, resy);
 
             // Check if the intesection point is on the line
@@ -109,9 +109,13 @@ bool GetShadow(int light)
             else // Other lines
             {
                 if ((point.x < next.x && res.x > point.x && res.x < next.x)
-                    || (point.x > next.x && res.x < point.x && res.x > next.x))
+                    || (point.x > next.x && res.x < point.x && res.x > next.x)) // If on side
                 {
-                    return false; // Intersect
+                    if ((texCoord.x > lightPos[light].x && res.x < texCoord.x && res.x > lightPos[light].x)
+                        || (texCoord.x < lightPos[light].x && res.x > texCoord.x && res.x < lightPos[light].x)) // If btw light and texCoord
+                    {
+                        return false; // Intersect
+                    }
                 }
             }
         }

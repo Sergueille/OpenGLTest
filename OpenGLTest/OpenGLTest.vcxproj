@@ -194,6 +194,7 @@
     <ClCompile Include="RectCollider.cpp" />
     <ClCompile Include="RessourceManager.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="ShadowCaster.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="TextManager.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="RectCollider.h" />
     <ClInclude Include="RessourceManager.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="ShadowCaster.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="stb_image_write.h" />

@@ -85,10 +85,9 @@ public:
 	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 
 private:
-	LinkedListElement<std::function<void()>>* mainLoopFuncPos;
+	LinkedListElement<std::function<void()>>* laserMainLoopFuncPos = nullptr;
+	void OnLaserMainLoop();
 
-	void OnMainLoop();
-	void SubscribeToFuncs();
 	static void SetSpriteUniforms(Shader* shader, void* object);
 
 	static const ObjectEvent events[LASER_EVENT_COUNT];

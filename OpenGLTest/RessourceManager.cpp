@@ -73,3 +73,12 @@ void RessourceManager::Clear()
     }
 }
 
+void RessourceManager::LoadBaseShaders()
+{
+    RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\SpriteFragShader.glsl", "sprite");
+    RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\LaserFragShader.glsl", "laser");
+    RessourceManager::LoadShader("Shaders\\RenderVtex.glsl", "Shaders\\RenderFrag.glsl", "screenShader");
+    RessourceManager::LoadShader("Shaders\\RenderVtex.glsl", "Shaders\\GaussianBlur.glsl", "screenBlur");
+    RessourceManager::LoadShader("Shaders\\LightmapperVtex.glsl", "Shaders\\LightmapperFrag.glsl", "lightmapper");
+}
+

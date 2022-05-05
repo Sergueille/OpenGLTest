@@ -7,6 +7,7 @@
 #include "Laser.h"
 #include "Button.h"
 #include "Light.h"
+#include "ShadowCaster.h"
 
 using namespace glm;
 
@@ -404,6 +405,11 @@ void EditorSaveManager::ReadObject(bool inEditor)
 	else if (objectType == "Light")
 	{
 		newObj = new Light();
+		newObj->Load(&props);
+	}
+	else if (objectType == "ShadowCaster")
+	{
+		newObj = new ShadowCaster();
 		newObj->Load(&props);
 	}
 	else

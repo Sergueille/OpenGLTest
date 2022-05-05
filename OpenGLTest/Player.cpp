@@ -14,6 +14,7 @@ Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), 
 	playerSprite = new Sprite(RessourceManager::GetTexture("Engine\\circle.png"),
 		position, glm::vec2(height), 0,
 		glm::vec4(1, 0, 0, 1)); // Create a sprite!
+	playerSprite->isLit = true;
 	playerSprite->DrawOnMainLoop();
 
 	teleportPosSprite = new Sprite(RessourceManager::GetTexture("Engine\\circle.png"),
@@ -71,9 +72,13 @@ Player::~Player()
 void Player::UpdateTransform()
 {
 	EditorObject::UpdateTransform();
-	this->SetPos(editorPosition);
-	playerSprite->position = editorPosition;
-	teleportPosSprite->position = editorPosition + vec3(teleportationDistance, 0, 0);
+
+	if (Editor::enabled && enabled)
+	{
+		this->SetPos(editorPosition);
+		playerSprite->position = editorPosition;
+		teleportPosSprite->position = editorPosition + vec3(teleportationDistance, 0, 0);
+	}
 }
 
 EditorObject* Player::Copy()
@@ -112,6 +117,12 @@ void Player::Disable()
 	collider->enabled = false;
 	physicsWasEnabledBeforeDisabling = physicsEnabled;
 	physicsEnabled = false;
+}
+
+void Player::Load(std::map<std::string, std::string>* props)
+{
+	EditorObject::Load(props);
+	SetPos(editorPosition);
 }
 
 // Handle physics

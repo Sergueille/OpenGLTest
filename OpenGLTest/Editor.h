@@ -41,7 +41,7 @@ public:
 		std::string GetDescription();
 	};
 
-	static EditorAction editorActions[15];
+	static EditorAction editorActions[16];
 
 	static std::list<EditorObject*> editorObjects;
 

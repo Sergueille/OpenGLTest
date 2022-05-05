@@ -84,6 +84,8 @@ public:
 	virtual void Enable() override;
 	virtual void Disable() override;
 
+	virtual void Load(std::map<std::string, std::string>* props);
+
 protected:
 	void OnAfterMove() override;
 

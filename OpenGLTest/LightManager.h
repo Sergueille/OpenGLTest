@@ -3,11 +3,13 @@
 #include <list>
 
 #include "Light.h"
+#include "ShadowCaster.h"
 
 class LightManager
 {
 public:
 	static std::list<Light*> lights;
+	static std::list<ShadowCaster*> shadowCasters;
 
 	static int pixelsPerUnit;
 

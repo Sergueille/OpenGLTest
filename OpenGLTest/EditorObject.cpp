@@ -73,7 +73,7 @@ void EditorObject::UpdateTransform()
 
 void EditorObject::SubscribeToEditorObjectFuncs()
 {
-	mainLoopFuncPos = EventManager::OnMainLoop.push_end([this] {this->OnMainLoop(); });
+	mainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { OnMainLoop(); });
 }
 
 vec2 EditorObject::DrawProperties(vec3 startPos)
@@ -198,7 +198,8 @@ void EditorObject::GetAABB(vec2* minRes, vec2* maxRes)
 
 void EditorObject::OnMainLoop()
 {
-	UpdateTransform();
+	if (enabled)
+		UpdateTransform();
 }
 
 EventList::EventList()

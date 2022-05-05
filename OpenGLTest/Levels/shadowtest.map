@@ -1,0 +1,66 @@
+// Editor map file, test version
+
+count 7
+
+object MapData {
+	mapName: ""
+}
+object EditorSprite {
+	ID: "0"
+	name: ""
+	position: "0.400000, -4.200000, 0.000000"
+	size: "25.000000, 3.200000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object Player {
+	ID: "1"
+	name: ""
+	position: "0.400000, -0.000000, 0.000000"
+}
+object EditorSprite {
+	ID: "4"
+	name: "bg"
+	position: "0.600000, 1.200000, -10.000000"
+	size: "51.799999, 51.799999"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "stone.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "5.000000, 5.000000"
+	isLit: "1"
+}
+object Light {
+	ID: "14"
+	name: ""
+	position: "-6.000000, 5.800000, 0.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	intensity: "2.000000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+}
+object ShadowCaster {
+	ID: "15"
+	name: ""
+	position: "-5.800000, 3.400000, -2.000000"
+	size: "8.600000, 2.200000"
+	orientation: "-181.000000"
+}
+object Light {
+	ID: "16"
+	name: ""
+	position: "-5.800000, 0.200000, 0.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	intensity: "2.000000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+}

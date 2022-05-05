@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "Light.h"
 #include "LightManager.h"
+#include "ShadowCaster.h"
 
 #include <iostream>
 
@@ -69,7 +70,7 @@ Editor::PanelWindow Editor::currentPanelWindow = Editor::PanelWindow::properties
 
 std::string Editor::infoBarText = "Welcome to the level editor!";
 
-EditorAction Editor::editorActions[15] = {
+EditorAction Editor::editorActions[16] = {
 	EditorAction {
 		"Save",
 		"Save the level in the current file path",
@@ -253,6 +254,17 @@ EditorAction Editor::editorActions[15] = {
 		false,
 		[] {
 			LightManager::BakeLight();
+		},
+	},
+	EditorAction{
+		"Reload base shaders",
+		"Recomile all base shaders from files",
+		GLFW_KEY_R,
+		true,
+		true,
+		false,
+		[] {
+			RessourceManager::LoadBaseShaders();
 		},
 	},
 };
@@ -653,6 +665,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	if (pressed)
 		newObject = (EditorObject*)new Light();
 
+	drawPos.y -= UIButton(drawPos, "Shadow caster", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new ShadowCaster();
+
 	if (newObject != nullptr)
 	{
 		AddObject(newObject);
@@ -971,17 +987,32 @@ std::list<EditorObject*>* Editor::GetAllSelectedObjects()
 EditorObject* Editor::SelectObject(EditorObject* object, bool addToCurrentSelection)
 {
 	if (!addToCurrentSelection)
+	{
+		for (auto it = selectedObjects.begin(); it != selectedObjects.end(); it++)
+			(*it)->OnUnselected();
+
 		selectedObjects.clear();
+	}
 	
 	if (object != nullptr)
+	{
 		selectedObjects.push_back(object);
+		object->OnSelected();
+	}
 
 	return object;
 }
 
 std::list<EditorObject*>* Editor::SelectObjects(std::list<EditorObject*> objects)
 {
+	for (auto it = selectedObjects.begin(); it != selectedObjects.end(); it++)
+		(*it)->OnUnselected();
+
 	selectedObjects = std::list<EditorObject*>(objects);
+
+	for (auto it = selectedObjects.begin(); it != selectedObjects.end(); it++)
+		(*it)->OnSelected();
+
 	return &selectedObjects;
 }
 
