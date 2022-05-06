@@ -79,6 +79,10 @@ void Player::UpdateTransform()
 		playerSprite->position = editorPosition;
 		teleportPosSprite->position = editorPosition + vec3(teleportationDistance, 0, 0);
 	}
+	else
+	{
+		collider->position = GetPos(); // Re-set collider position because EditorObject will replace it by default
+	}
 }
 
 EditorObject* Player::Copy()

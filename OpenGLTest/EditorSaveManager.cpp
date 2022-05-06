@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "Light.h"
 #include "ShadowCaster.h"
+#include "LightManager.h"
 
 using namespace glm;
 
@@ -143,6 +144,8 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 
 		Editor::ClearUndoStack();
 		Editor::ClearRedoStack();
+
+		LightManager::ForceRefreshLightmaps();
 
 		Editor::infoBarText = "Loaded " + path;
 	}

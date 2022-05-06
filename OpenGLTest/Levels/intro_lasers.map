@@ -20,6 +20,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "3"
@@ -31,6 +32,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "4"
@@ -42,6 +44,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "10"
@@ -53,6 +56,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object Laser {
 	ID: "11"
@@ -73,6 +77,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "20"
@@ -84,6 +89,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "21"
@@ -95,6 +101,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "22"
@@ -106,6 +113,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "23"
@@ -117,6 +125,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "24"
@@ -128,6 +137,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "61"
@@ -139,6 +149,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "62"
@@ -150,6 +161,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object Laser {
 	ID: "63"
@@ -170,6 +182,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object Laser {
 	ID: "81"
@@ -190,6 +203,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "100"
@@ -201,6 +215,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "101"
@@ -212,6 +227,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "122"
@@ -223,6 +239,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "123"
@@ -234,6 +251,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "146"
@@ -245,6 +263,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "147"
@@ -256,6 +275,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "148"
@@ -267,6 +287,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "149"
@@ -278,6 +299,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "150"
@@ -289,6 +311,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "151"
@@ -300,6 +323,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object Laser {
 	ID: "152"
@@ -320,6 +344,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "183"
@@ -331,6 +356,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "186"
@@ -342,6 +368,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object Laser {
 	ID: "187"
@@ -362,6 +389,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "323"
@@ -373,6 +401,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object Button {
 	ID: "393"
@@ -392,6 +421,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "432"
@@ -403,6 +433,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "433"
@@ -414,6 +445,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "434"
@@ -425,6 +457,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object EditorSprite {
 	ID: "476"
@@ -436,6 +469,7 @@ object EditorSprite {
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }
 object Laser {
 	ID: "477"

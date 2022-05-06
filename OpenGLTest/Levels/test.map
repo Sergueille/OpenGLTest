@@ -8,7 +8,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: "Player"
-	position: "11.200000, 4.400000, 20.000000"
+	position: "14.600000, 6.800000, 20.000000"
 }
 object EditorSprite {
 	ID: "2"
@@ -161,8 +161,8 @@ object EditorSprite {
 object Laser {
 	ID: "13"
 	name: "TestLaser"
-	position: "11.200000, 5.400000, -0.500000"
-	orientation: "-90.000000"
+	position: "-3.000000, 3.400000, -0.500000"
+	orientation: "270.000000"
 	laserType: "0"
 	startOffset: "-0.100000"
 	endOffset: "0.150000"
@@ -215,7 +215,7 @@ object Light {
 object Light {
 	ID: "270"
 	name: ""
-	position: "-3.000000, 2.000000, 10.000000"
+	position: "-3.000000, 2.600000, 10.000000"
 	lightSize: "5.000000"
 	color: "1.000000, 0.000000, 0.900000, 1.000000"
 	intensity: "0.300000"
@@ -226,7 +226,7 @@ object Light {
 object Light {
 	ID: "271"
 	name: ""
-	position: "-3.000000, 0.200000, 10.000000"
+	position: "-3.000000, -0.200000, 10.000000"
 	lightSize: "5.000000"
 	color: "1.000000, 0.000000, 0.900000, 1.000000"
 	intensity: "0.300000"
@@ -270,7 +270,7 @@ object Light {
 object Light {
 	ID: "278"
 	name: ""
-	position: "7.800000, 10.600000, 10.000000"
+	position: "8.400001, 10.600000, 10.000000"
 	lightSize: "10.000000"
 	color: "1.000000, 1.000000, 0.900000, 1.000000"
 	intensity: "1.300000"

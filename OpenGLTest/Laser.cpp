@@ -2,6 +2,7 @@
 #include "RessourceManager.h"
 #include "CircleCollider.h"
 #include "EventManager.h"
+#include "Player.h"
 
 std::list<Laser*> Laser::lasers = std::list<Laser*>();
 
@@ -67,7 +68,9 @@ Laser::~Laser()
 	laserCollider = nullptr;
 
 	lasers.remove(this);
-	EventManager::OnMainLoop.remove(laserMainLoopFuncPos);
+
+	if (enabled)
+		EventManager::OnMainLoop.remove(laserMainLoopFuncPos);
 }
 
 void Laser::UpdateTransform()
@@ -113,6 +116,8 @@ void Laser::Enable()
 
 	laserCollider->enabled = true;
 
+	laserMainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { this->OnLaserMainLoop(); });
+
 	if (laserOn)
 		lasers.push_back(this);
 }
@@ -126,6 +131,8 @@ void Laser::Disable()
 		editorSprite->StopDrawing();
 
 	laserCollider->enabled = false;
+
+	EventManager::OnMainLoop.remove(laserMainLoopFuncPos);
 
 	if (laserOn)
 		lasers.remove(this);
