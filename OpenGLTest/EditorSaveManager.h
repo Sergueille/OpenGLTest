@@ -63,6 +63,7 @@ public:
 	static void EndObject();
 
 	static void FloatProp(std::map<std::string, std::string>* props, std::string name, float* value);
+	static void IntProp(std::map<std::string, std::string>* props, std::string name, int* value);
 
 	static vec2 StringToVector2(std::string s, vec2 def = vec2(0));
 	static vec3 StringToVector3(std::string s, vec3 def = vec3(0));

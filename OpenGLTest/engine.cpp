@@ -26,6 +26,11 @@ Some code from https://learnopengl.com/
 using namespace std;
 using namespace Utility;
 
+extern "C" {
+    _declspec(dllexport) DWORD NvOptimusEnablement = 1;
+    _declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
+}
+
 int main(int argc, void* argv[])
 {
     const bool fullscreen = true;
@@ -209,7 +214,7 @@ int main(int argc, void* argv[])
         // Blur the bright areas
         bool horizontal = true; 
         bool first_iteration = true;
-        int amount = 4;
+        unsigned int amount = 4;
         RessourceManager::shaders["screenBlur"].Use();
 
         const float firstOffsetSize = 12;

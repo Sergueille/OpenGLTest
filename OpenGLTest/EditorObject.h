@@ -35,6 +35,10 @@ public:
 	float SetEditRotation(float rot);
 	vec2 SetEditScale(vec2 scale);
 
+	vec3 SetGlobalEditPos(vec3 pos);
+
+	int parentID = -1;
+
 	float parallax = 1;
 
 	/// <summary>

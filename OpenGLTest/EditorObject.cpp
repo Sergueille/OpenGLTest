@@ -31,20 +31,50 @@ EditorObject::~EditorObject()
 
 vec3 EditorObject::GetEditPos()
 {
-	vec2 delta = vec2(editorPosition) - Camera::position;
-	vec2 res = Camera::position + delta * parallax;
+	EditorObject* parent = Editor::GetEditorObjectByID(parentID, Editor::enabled, false);
+	vec3 res;
+	if (parent != nullptr)
+	{
+		vec2 delta = Rotate(vec2(editorPosition), parent->GetEditRotation()) * parent->GetEditScale();
+		vec3 delta2 = vec3(delta.x, delta.y, editorPosition.z);
 
-	return vec3(res.x, res.y, editorPosition.z);
+		res = parent->GetEditPos() + delta2;
+	}
+	else
+	{
+		res = editorPosition;
+	}
+
+	vec2 delta = vec2(res) - Camera::position;
+	vec2 prallaxed = Camera::position + delta * parallax;
+
+	return vec3(prallaxed.x, prallaxed.y, res.z);
 }
 
 float EditorObject::GetEditRotation()
 {
-	return  editorRotation;
+	EditorObject* parent = Editor::GetEditorObjectByID(parentID, Editor::enabled, false);
+	if (parent != nullptr)
+	{
+		return editorRotation + parent->GetEditRotation();
+	}
+	else
+	{
+		return editorRotation;
+	}
 }
 
 vec2 EditorObject::GetEditScale()
 {
-	return editorSize;
+	EditorObject* parent = Editor::GetEditorObjectByID(parentID, Editor::enabled, false);
+	if (parent != nullptr)
+	{
+		return editorSize * parent->GetEditScale();
+	}
+	else
+	{
+		return editorSize;
+	}
 }
 
 vec3 EditorObject::SetEditPos(vec3 pos)
@@ -63,6 +93,25 @@ vec2 EditorObject::SetEditScale(vec2 scale)
 {
 	editorSize = scale;
 	return scale;
+}
+
+vec3 EditorObject::SetGlobalEditPos(vec3 pos)
+{
+	EditorObject* parent = Editor::GetEditorObjectByID(parentID, Editor::enabled, false);
+	vec3 res;
+	if (parent != nullptr)
+	{
+		vec3 delta = pos - parent->GetEditPos();
+		vec2 finalDelta = Rotate(vec2(delta), -parent->GetEditRotation()) / parent->GetEditScale();
+		res = vec3(finalDelta.x, finalDelta.y, delta.z); // NOT WORKING
+	}
+	else
+	{
+		res = pos;
+	}
+
+	editorPosition = res;
+	return editorPosition;
 }
 
 void EditorObject::UpdateTransform()
@@ -84,6 +133,11 @@ vec2 EditorObject::DrawProperties(vec3 startPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "Name", &name, Editor::panelPropertiesX, strID + "name").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Position", &editorPosition, Editor::panelPropertiesX, strID + "pos").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Parallax", &parallax, Editor::panelPropertiesX, strID + "parallax").y;
+	
+	EditorObject* selected = Editor::GetEditorObjectByID(parentID, true, false);
+	drawPos.y -= Editor::ObjectSelector(drawPos, "Parent", &selected, Editor::panelPropertiesX, strID + "parent").y;
+	if (selected != nullptr)
+		parentID = selected->ID;
 
 	vec2 res = vec2(drawPos - startPos);
 	res.y *= -1;
@@ -125,6 +179,7 @@ void EditorObject::Save()
 	EditorSaveManager::WriteProp("ID", std::to_string(ID));
 	EditorSaveManager::WriteProp("name", name);
 	EditorSaveManager::WriteProp("position", editorPosition);
+	EditorSaveManager::WriteProp("parent", parentID);
 }
 
 void EditorObject::Load(std::map<std::string, std::string>* props)
@@ -132,6 +187,7 @@ void EditorObject::Load(std::map<std::string, std::string>* props)
 	editorPosition = EditorSaveManager::StringToVector3((*props)["position"]);
 	name = (*props)["name"];
 	ID = std::stoi((*props)["ID"]);
+	EditorSaveManager::IntProp(props, "parent", &parentID);
 }
 
 void EditorObject::Enable()

@@ -484,3 +484,11 @@ void EditorSaveManager::FloatProp(std::map<std::string, std::string>* props, std
 	if (text != "")
 		*value = std::stof(text);
 }
+
+void EditorSaveManager::IntProp(std::map<std::string, std::string>* props, std::string name, int* value)
+{
+	std::string text = (*props)[name];
+
+	if (text != "")
+		*value = std::stoi(text);
+}

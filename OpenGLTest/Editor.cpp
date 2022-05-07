@@ -407,7 +407,7 @@ void Editor::HandleTools()
 				pos.y = round(pos.y / moveSnapping) * moveSnapping;
 			}
 
-			(*objIt)->SetEditPos(pos);
+			(*objIt)->SetGlobalEditPos(pos);
 		}
 
 		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS) // Cancel
@@ -1356,11 +1356,15 @@ vec2 Editor::CheckBox(vec3 drawPos, std::string label, bool* value, float textWi
 
 EditorObject* Editor::GetEditorObjectByID(int ID, bool inEditor, bool throwIfNotFound)
 {
-	std::list<EditorObject*>* searchList = inEditor ? &editorObjects : &EditorSaveManager::levelObjectList;
-	for (auto it = searchList->begin(); it != searchList->end(); it++)
+	if (ID != -1)
 	{
-		if ((*it)->ID == ID)
-			return *it;
+		std::list<EditorObject*>* searchList = inEditor ? &editorObjects : &EditorSaveManager::levelObjectList;
+		for (auto it = searchList->begin(); it != searchList->end(); it++)
+		{
+			if ((*it)->ID == ID)
+				return *it;
+		}
+
 	}
 
 	if (throwIfNotFound)

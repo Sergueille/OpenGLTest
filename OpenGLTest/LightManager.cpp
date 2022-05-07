@@ -86,7 +86,7 @@ void LightManager::BakeLight()
 			shadowScale[2 * i] = (*it)->GetEditScale().x / levelSize.x;
 			shadowScale[2 * i + 1] = (*it)->GetEditScale().y / levelSize.y;
 
-			shadowRot[2 * i] = (*it)->GetEditRotation() + 0.1; // Because don't likes vertival lines
+			shadowRot[2 * i] = (*it)->GetEditRotation() + 0.1f; // Because don't likes vertival lines
 		}
 	}
 

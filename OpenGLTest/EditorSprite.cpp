@@ -129,8 +129,8 @@ void EditorSprite::UpdateTransform()
 {
 	EditorObject::UpdateTransform();
 	this->position = GetEditPos();
-	this->rotate = editorRotation;
-	this->size = editorSize;
+	this->rotate = GetEditRotation();
+	this->size = GetEditScale();
 
 	clickCollider->position = position;
 	((RectCollider*)clickCollider)->orientation = rotate;
