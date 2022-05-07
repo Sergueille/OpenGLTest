@@ -86,7 +86,7 @@ void LightManager::BakeLight()
 			shadowScale[2 * i] = (*it)->GetEditScale().x / levelSize.x;
 			shadowScale[2 * i + 1] = (*it)->GetEditScale().y / levelSize.y;
 
-			shadowRot[2 * i] = (*it)->GetEditRotation() + 0.001; // Because don't likes vertival lines
+			shadowRot[2 * i] = (*it)->GetEditRotation() + 0.1; // Because don't likes vertival lines
 		}
 	}
 
@@ -109,6 +109,7 @@ void LightManager::BakeLight()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glBindTexture(GL_TEXTURE_2D, 0); // Unbind colorTex
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTex, 0); // Bind color texture to buffer
+	glViewport(0, 0, resolution.x, resolution.y);
 
 	// Setup shader
 	shader->Use();
@@ -144,6 +145,7 @@ void LightManager::BakeLight()
 	stbi_write_hdr(path.c_str(), resolution.x, resolution.y, 3, pixels);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0); // Unbind fbo
+	glViewport(0, 0, Utility::screenX, Utility::screenY);
 
 	lightmapMin = levelMin;
 	lightmapMax = levelMax;

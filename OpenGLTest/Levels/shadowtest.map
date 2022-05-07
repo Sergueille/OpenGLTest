@@ -20,16 +20,15 @@ object EditorSprite {
 object Player {
 	ID: "1"
 	name: ""
-	position: "0.400000, -0.000000, 0.000000"
+	position: "0.000000, -0.400000, 0.000000"
 }
 object EditorSprite {
 	ID: "4"
 	name: "bg"
 	position: "0.600000, 1.200000, -10.000000"
-	size: "51.799999, 51.799999"
+	size: "62.200001, 62.200001"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "stone.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 5.000000"
@@ -49,9 +48,9 @@ object Light {
 object ShadowCaster {
 	ID: "15"
 	name: ""
-	position: "-5.800000, 3.400000, -2.000000"
+	position: "-4.200000, 3.400000, -2.000000"
 	size: "8.600000, 2.200000"
-	orientation: "-181.000000"
+	orientation: "-180.000000"
 }
 object Light {
 	ID: "16"

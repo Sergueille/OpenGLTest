@@ -23,7 +23,8 @@ void main()
         delta.y /= lightSize[i].y;
 
         float distAttenuation = 1 - length(delta);
-        if (distAttenuation < 0) distAttenuation = 0; // Clamp
+        if (distAttenuation <= 0) 
+            continue;
 
         float lightDir = (lightAngles[i].x + 135) * 3.14159265 / 180; // Add 135 don't know why
         vec2 lightVector = vec2(
@@ -35,8 +36,9 @@ void main()
         float inner = lightAngles[i].y;
         float outer = lightAngles[i].z;
         float angleAttenuation = (outer - deltaAngle) / (outer - inner);
-        if (angleAttenuation < 0) angleAttenuation = 0; // Clamp
-        if (angleAttenuation > 1) angleAttenuation = 1;
+        if (angleAttenuation < 0)
+            continue; 
+        if (angleAttenuation > 1) angleAttenuation = 1; // Clamp
 
         float finalAttenuation = distAttenuation * angleAttenuation;
 
@@ -64,11 +66,16 @@ vec2 Rotate(vec2 vector, float angle)
 bool GetShadow(int light) 
 {
     float a = (texCoord.y - lightPos[light].y) / (texCoord.x - lightPos[light].x);
-    float b = lightPos[light].y - (a * lightPos[light].x); // Validated
+    float b = lightPos[light].y - (a * lightPos[light].x);
 
     // Part of code from RectCollider
     for (int i = 0; i < nbShadowCasters; i++)
     {
+        float dist =  length(lightPos[light] - shadowCastersPos[i]);
+        if (dist > lightSize[light].x + shadowCastersSize[i].x * 2
+            || dist > lightSize[light].y + shadowCastersSize[i].y * 2)
+            continue;
+
         vec2 halfSize = shadowCastersSize[i] / 2.f;
         float orientation = shadowCastersRot[i];
         vec2 xVect = Rotate(vec2(1, 0), orientation) * halfSize.x;
