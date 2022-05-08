@@ -30,14 +30,16 @@ public:
 	vec3 GetEditPos();
 	float GetEditRotation();
 	vec2 GetEditScale();
+	EditorObject* GetParent();
 
 	vec3 SetEditPos(vec3 pos);
 	float SetEditRotation(float rot);
 	vec2 SetEditScale(vec2 scale);
+	void SetParent(EditorObject* newParent);
+
+	void SearchParent();
 
 	vec3 SetGlobalEditPos(vec3 pos);
-
-	int parentID = -1;
 
 	float parallax = 1;
 
@@ -106,6 +108,9 @@ protected:
 	void OnMainLoop();
 
 private:
+	int parentID = -1;
+	EditorObject* _parent = nullptr;
+
 	LinkedListElement<std::function<void()>>* mainLoopFuncPos = nullptr;
 };
 

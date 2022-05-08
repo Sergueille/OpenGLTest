@@ -188,7 +188,7 @@ void EditorSaveManager::EnableEditorObjects()
 
 void EditorSaveManager::WriteHeader()
 {
-	(*ofile) << "// Editor map file, test version\n\n";
+	(*ofile) << "// Editor map file, version 1\n\n";
 	(*ofile) << "count " << std::to_string(Editor::editorObjects.size() + 1) << "\n\n";
 }
 
@@ -426,7 +426,7 @@ void EditorSaveManager::ReadObject(bool inEditor)
 
 			if (newObj->ID > Editor::IDmax)
 			{ 
-				Editor::IDmax = newObj->ID;
+				Editor::IDmax = newObj->ID + 1;
 			}
 		}
 		else

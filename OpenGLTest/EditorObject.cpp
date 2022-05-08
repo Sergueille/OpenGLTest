@@ -31,14 +31,13 @@ EditorObject::~EditorObject()
 
 vec3 EditorObject::GetEditPos()
 {
-	EditorObject* parent = Editor::GetEditorObjectByID(parentID, Editor::enabled, false);
 	vec3 res;
-	if (parent != nullptr)
+	if (GetParent() != nullptr)
 	{
-		vec2 delta = Rotate(vec2(editorPosition), parent->GetEditRotation()) * parent->GetEditScale();
+		vec2 delta = Rotate(vec2(editorPosition), GetParent()->GetEditRotation()) * GetParent()->GetEditScale();
 		vec3 delta2 = vec3(delta.x, delta.y, editorPosition.z);
 
-		res = parent->GetEditPos() + delta2;
+		res = GetParent()->GetEditPos() + delta2;
 	}
 	else
 	{
@@ -53,10 +52,9 @@ vec3 EditorObject::GetEditPos()
 
 float EditorObject::GetEditRotation()
 {
-	EditorObject* parent = Editor::GetEditorObjectByID(parentID, Editor::enabled, false);
-	if (parent != nullptr)
+	if (GetParent() != nullptr)
 	{
-		return editorRotation + parent->GetEditRotation();
+		return editorRotation + GetParent()->GetEditRotation();
 	}
 	else
 	{
@@ -66,15 +64,38 @@ float EditorObject::GetEditRotation()
 
 vec2 EditorObject::GetEditScale()
 {
-	EditorObject* parent = Editor::GetEditorObjectByID(parentID, Editor::enabled, false);
-	if (parent != nullptr)
+	if (GetParent() != nullptr)
 	{
-		return editorSize * parent->GetEditScale();
+		return editorSize * GetParent()->GetEditScale();
 	}
 	else
 	{
 		return editorSize;
 	}
+}
+
+EditorObject* EditorObject::GetParent()
+{
+	if (_parent == nullptr && parentID != -1)
+	{
+		_parent = Editor::GetEditorObjectByID(parentID, Editor::enabled, false);
+	}
+
+	if (_parent == nullptr) // Not found
+		parentID = -1; // Make sure not searching for nothig nex time
+
+	return _parent;
+}
+
+void EditorObject::SetParent(EditorObject* newParent)
+{
+	_parent = newParent;
+	parentID = newParent == nullptr ? -1 : newParent->ID;
+}
+
+void EditorObject::SearchParent()
+{
+	_parent = nullptr;
 }
 
 vec3 EditorObject::SetEditPos(vec3 pos)
@@ -97,13 +118,12 @@ vec2 EditorObject::SetEditScale(vec2 scale)
 
 vec3 EditorObject::SetGlobalEditPos(vec3 pos)
 {
-	EditorObject* parent = Editor::GetEditorObjectByID(parentID, Editor::enabled, false);
 	vec3 res;
-	if (parent != nullptr)
+	if (GetParent() != nullptr)
 	{
-		vec3 delta = pos - parent->GetEditPos();
-		vec2 finalDelta = Rotate(vec2(delta), -parent->GetEditRotation()) / parent->GetEditScale();
-		res = vec3(finalDelta.x, finalDelta.y, delta.z); // NOT WORKING
+		vec3 delta = pos - GetParent()->GetEditPos();
+		vec2 finalDelta = Rotate(vec2(delta), -GetParent()->GetEditRotation()) / GetParent()->GetEditScale();
+		res = vec3(finalDelta.x, finalDelta.y, delta.z);
 	}
 	else
 	{
@@ -134,10 +154,9 @@ vec2 EditorObject::DrawProperties(vec3 startPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "Position", &editorPosition, Editor::panelPropertiesX, strID + "pos").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Parallax", &parallax, Editor::panelPropertiesX, strID + "parallax").y;
 	
-	EditorObject* selected = Editor::GetEditorObjectByID(parentID, true, false);
+	EditorObject* selected = GetParent();
 	drawPos.y -= Editor::ObjectSelector(drawPos, "Parent", &selected, Editor::panelPropertiesX, strID + "parent").y;
-	if (selected != nullptr)
-		parentID = selected->ID;
+	SetParent(selected);
 
 	vec2 res = vec2(drawPos - startPos);
 	res.y *= -1;
@@ -290,7 +309,7 @@ vec2 EventList::DrawInPanel(vec3 drawPos, std::string eventName)
 	drawPos.y -= TextManager::RenderText(eventName, drawPos, Editor::textSize).y;
 	drawPos.x += Editor::indentation;
 
-	// For cach event to send
+	// For each event to send
 	auto itID = ids.begin();
 	auto itEvents = events.begin();
 	int i = 0;

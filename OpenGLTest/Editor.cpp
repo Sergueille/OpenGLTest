@@ -343,6 +343,9 @@ void Editor::Undo()
 
 	topAction.Do();
 	redoStack.push(topAction.GetOpposite());
+
+	// Make sure we have no problem with the parents
+	ObjectsSearchThisParent(topAction.object);
 }
 
 void Editor::Redo()
@@ -362,6 +365,9 @@ void Editor::Redo()
 
 	topAction.Do();
 	undoStack.push(topAction.GetOpposite());
+
+	// Make sure we have no problem with the parents
+	ObjectsSearchThisParent(topAction.object);
 }
 
 void Editor::OnMainLoop()
@@ -852,6 +858,17 @@ void Editor::OnClick(GLFWwindow* window, int button, int action, int mods)
 	}
 }
 
+void Editor::ObjectsSearchThisParent(EditorObject* parent)
+{
+	for (auto it = editorObjects.begin(); it != editorObjects.end(); it++)
+	{
+		if ((*it)->GetParent() != nullptr && (*it)->GetParent()->ID == parent->ID)
+		{
+			(*it)->SearchParent();
+		}
+	}
+}
+
 EditorObject* Editor::GetObjectUnderMouse()
 {
 	vec2 worldPos = Utility::ScreenToWorld(Utility::GetMousePos()); // Mouse pos in world space
@@ -1041,11 +1058,17 @@ void Editor::RemoveObject(EditorObject* object)
 	undoStack.push(action);
 	ClearRedoStack();
 
+	// Unselect if selected
 	if (GetSelectedObject()->ID == object->ID)
 		SelectObject(nullptr);
 
+	// Remove from list
 	editorObjects.remove(object);
 
+	// Check if it is the parent of objects
+	ObjectsSearchThisParent(object);
+
+	// Disable but keep it for the undo stack
 	object->Disable();
 }
 

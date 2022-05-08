@@ -196,6 +196,11 @@ public:
 
 	static void GetLevelAABB(vec2* resMin, vec2* resMax);
 
+	/// <summary>
+	/// Make all editorObjects search again for this parent by its ID, use when deleting parent, replacing, etc
+	/// </summary>
+	static void ObjectsSearchThisParent(EditorObject* parent);
+
 private:
 	static std::list<EditorObject*> selectedObjects;
 
