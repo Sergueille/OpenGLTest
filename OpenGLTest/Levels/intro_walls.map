@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 106
+count 109
 
 object MapData {
 	mapName: ""
@@ -1275,4 +1275,40 @@ object Light {
 	rotation: "-90.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+}
+object Light {
+	ID: "1817"
+	name: ""
+	position: "94.000000, -20.600000, 5.000000"
+	parent: "-1"
+	lightSize: "10.000000"
+	color: "0.500000, 1.000000, 0.400000, 1.000000"
+	intensity: "0.700000"
+	rotation: "90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "110.000000"
+}
+object Light {
+	ID: "1818"
+	name: ""
+	position: "103.000000, -22.000000, 5.000000"
+	parent: "-1"
+	lightSize: "10.000000"
+	color: "0.500000, 1.000000, 0.400000, 1.000000"
+	intensity: "0.700000"
+	rotation: "90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "110.000000"
+}
+object Light {
+	ID: "1819"
+	name: ""
+	position: "77.000000, -18.200001, 5.000000"
+	parent: "-1"
+	lightSize: "10.000000"
+	color: "0.500000, 1.000000, 0.400000, 1.000000"
+	intensity: "0.700000"
+	rotation: "90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "110.000000"
 }

@@ -33,7 +33,7 @@ extern "C" {
 
 int main(int argc, void* argv[])
 {
-    const bool fullscreen = false;
+    const bool fullscreen = true;
     const int smallWindowWidth = 1280;
     const int smallWindowHeght = 720;
     const char* windowName = "Teeeest!";
@@ -251,6 +251,8 @@ int main(int argc, void* argv[])
 
         Utility::lastTime = Utility::time;
     }
+
+    Editor::DestroyEditor();
 
     EventManager::Call(&EventManager::OnExitApp);
 

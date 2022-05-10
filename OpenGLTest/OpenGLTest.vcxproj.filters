@@ -189,6 +189,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="Prefab.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -286,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefab.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
 #include "Light.h"
 #include "LightManager.h"
 #include "ShadowCaster.h"
+#include "Prefab.h"
 
 #include <iostream>
 
@@ -674,6 +675,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.y -= UIButton(drawPos, "Shadow caster", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new ShadowCaster();
+
+	drawPos.y -= UIButton(drawPos, "Prefab", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new Prefab();
 
 	if (newObject != nullptr)
 	{

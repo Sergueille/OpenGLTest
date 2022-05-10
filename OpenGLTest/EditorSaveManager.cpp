@@ -9,6 +9,7 @@
 #include "Light.h"
 #include "ShadowCaster.h"
 #include "LightManager.h"
+#include "Prefab.h"
 
 using namespace glm;
 
@@ -413,6 +414,11 @@ void EditorSaveManager::ReadObject(bool inEditor)
 	else if (objectType == "ShadowCaster")
 	{
 		newObj = new ShadowCaster();
+		newObj->Load(&props);
+	}
+	else if (objectType == "Prefab")
+	{
+		newObj = new Prefab();
 		newObj->Load(&props);
 	}
 	else

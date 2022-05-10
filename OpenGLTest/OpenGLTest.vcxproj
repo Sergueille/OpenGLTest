@@ -191,6 +191,7 @@
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Prefab.cpp" />
     <ClCompile Include="RectCollider.cpp" />
     <ClCompile Include="RessourceManager.cpp" />
     <ClCompile Include="shader.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="mesh.h" />
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Prefab.h" />
     <ClInclude Include="RectCollider.h" />
     <ClInclude Include="RessourceManager.h" />
     <ClInclude Include="shader.h" />
