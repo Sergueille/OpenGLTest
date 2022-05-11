@@ -41,7 +41,7 @@ public:
 		std::string GetDescription();
 	};
 
-	static EditorAction editorActions[16];
+	static EditorAction editorActions[18];
 
 	static std::list<EditorObject*> editorObjects;
 
@@ -124,6 +124,8 @@ public:
 	/// </summary>
 	static float gizmoSize;
 
+	static std::list<EditorObject*> clipboard;
+
 	static void CreateEditor(); // Setup editor and open it
 	static void OpenEditor(); // Open the editor, must be set up before
 	static void CloseEditor(); // Close the editor but don't destroy it
@@ -139,6 +141,7 @@ public:
 
 	static EditorObject* AddObject(EditorObject* object);
 	static void RemoveObject(EditorObject* object);
+	static void RemoveObjects(std::list<EditorObject*> objects);
 
 	/// <summary>
 	/// Is the point in screen coordinates over editor UI?
@@ -256,6 +259,12 @@ private:
 	/// Provide COPIES of the obects
 	/// </summary>
 	static void RecordObjectChange(EditorObject* oldObject, EditorObject* newObject);
+
+	static void DuplicateSelection();
+
+	static void Copy();
+	static void Paste();
+	static void ClearClipboard();
 };
 
 struct MapData

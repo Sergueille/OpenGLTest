@@ -74,7 +74,9 @@ Editor::PanelWindow Editor::currentPanelWindow = Editor::PanelWindow::properties
 
 std::string Editor::infoBarText = "Welcome to the level editor!";
 
-EditorAction Editor::editorActions[16] = {
+std::list<EditorObject*> Editor::clipboard = std::list<EditorObject*>();
+
+EditorAction Editor::editorActions[18] = {
 	EditorAction {
 		"Save",
 		"Save the level in the current file path",
@@ -130,28 +132,19 @@ EditorAction Editor::editorActions[16] = {
 		[] {
 			if (GetSelectedObject() != nullptr)
 			{
-				RemoveObject(GetSelectedObject());
+				RemoveObjects(*GetAllSelectedObjects());
 			}
 		},
 	},
 	EditorAction {
-		"Duplicate object",
-		"Create a copy of the object",
+		"Duplicate selection",
+		"Create a copy of all the selected objects",
 		GLFW_KEY_D,
 		true,
 		false,
 		false,
 		[] {
-			if (GetSelectedObject() != nullptr)
-			{
-				EditorObject* newObj = GetSelectedObject()->Copy();
-				newObj->ID = Editor::IDmax;
-				Editor::IDmax++;
-				Editor::AddObject(newObj);
-				Editor::SelectObject(newObj);
-
-				infoBarText = "Duplicated object";
-			}
+			DuplicateSelection();
 		},
 	},
 	EditorAction {
@@ -271,6 +264,28 @@ EditorAction Editor::editorActions[16] = {
 			RessourceManager::LoadBaseShaders();
 		},
 	},
+	EditorAction{
+		"Copy",
+		"Copy selected objects",
+		GLFW_KEY_C,
+		true,
+		false,
+		false,
+		[] {
+			Copy();
+		},
+	},
+	EditorAction{
+		"Paste",
+		"Paste clipboard",
+		GLFW_KEY_V,
+		true,
+		false,
+		false,
+		[] {
+			Paste();
+		},
+	},
 };
 
 void Editor::CreateEditor()
@@ -310,6 +325,7 @@ void Editor::DestroyEditor()
 {
 	std::cout << "Destroying editor" << std::endl;
 	EditorSaveManager::ClearEditorLevel();
+	ClearClipboard();
 	CloseEditor();
 }
 
@@ -881,6 +897,62 @@ void Editor::ObjectsSearchThisParent(EditorObject* parent)
 	}
 }
 
+void Editor::DuplicateSelection()
+{
+	if (GetAllSelectedObjects()->size() > 0)
+	{
+		std::list<EditorObject*> selected = std::list<EditorObject*>(*GetAllSelectedObjects());
+		Editor::SelectObject(nullptr);
+
+		for (auto it = selected.begin(); it != selected.end(); it++)
+		{
+			EditorObject* newObj = (*it)->Copy();
+			Editor::IDmax++; // Don't know if must iincrement before or after, so do it twice
+			newObj->ID = Editor::IDmax;
+			Editor::IDmax++;
+			Editor::AddObject(newObj);
+			Editor::SelectObject(newObj, true);
+		}
+	}
+}
+
+void Editor::Copy()
+{
+	if (GetAllSelectedObjects()->size() > 0)
+	{
+		ClearClipboard();
+		for (auto it = GetAllSelectedObjects()->begin(); it != GetAllSelectedObjects()->end(); it++)
+		{
+			EditorObject* copy = (*it)->Copy();
+			copy->Disable();
+			clipboard.push_back(copy);
+		}
+	}
+}
+
+void Editor::Paste()
+{
+	if (clipboard.size() == 0) return;
+
+	SelectObject(nullptr);
+	for (auto it = clipboard.begin(); it != clipboard.end(); it++)
+	{
+		EditorObject* pasted = (*it)->Copy();
+		pasted->Enable();
+		Editor::AddObject(pasted);
+		SelectObject(pasted, true);
+	}
+}
+
+void Editor::ClearClipboard()
+{
+	for (auto it = clipboard.begin(); it != clipboard.end(); it++)
+	{
+		delete (*it);
+	}
+	clipboard = std::list<EditorObject*>();
+}
+
 EditorObject* Editor::GetObjectUnderMouse()
 {
 	vec2 worldPos = Utility::ScreenToWorld(Utility::GetMousePos()); // Mouse pos in world space
@@ -1082,6 +1154,34 @@ void Editor::RemoveObject(EditorObject* object)
 
 	// Disable but keep it for the undo stack
 	object->Disable();
+}
+
+void Editor::RemoveObjects(std::list<EditorObject*> objects)
+{
+	SelectObject(nullptr);
+
+	for (auto it = objects.begin(); it != objects.end(); it++)
+	{
+		EditorObject* object = *it;
+
+		// Record undo entry
+		UndoAction action = UndoAction{ UndoAction::UndoActType::add };
+		action.object = object;
+		action.otherObject = nullptr;
+		action.index = GetIndexOfEditorObject(object, true);
+		undoStack.push(action);
+
+		// Remove from list
+		editorObjects.remove(object);
+
+		// Check if it is the parent of objects
+		ObjectsSearchThisParent(object);
+
+		// Disable but keep it for the undo stack
+		object->Disable();
+	}
+
+	ClearRedoStack();
 }
 
 void Editor::StartTest()

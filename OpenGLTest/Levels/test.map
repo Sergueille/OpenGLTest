@@ -1,23 +1,9 @@
 // Editor map file, version 1
 
-count 30
+count 32
 
 object MapData {
 	mapName: ""
-}
-object EditorSprite {
-	ID: "474"
-	name: "Test potplant"
-	position: "-2.200000, 5.600000, 1.000000"
-	parent: "-1"
-	size: "2.200000, 2.200000"
-	rotation: "0.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "potplant.png"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "1"
 }
 object EditorSprite {
 	ID: "4"
@@ -331,7 +317,7 @@ object ShadowCaster {
 object EditorSprite {
 	ID: "476"
 	name: "Test potplant"
-	position: "-8.200000, 8.400001, 1.000000"
+	position: "-7.000000, 8.400001, 1.000000"
 	parent: "-1"
 	size: "2.200000, 2.200000"
 	rotation: "0.000000"
@@ -347,4 +333,46 @@ object Player {
 	name: ""
 	position: "9.600000, 3.200000, 20.000000"
 	parent: "-1"
+}
+object EditorSprite {
+	ID: "514"
+	name: "Test potplant"
+	position: "-7.000000, 8.400001, 1.000000"
+	parent: "-1"
+	size: "2.200000, 2.200000"
+	rotation: "0.000000"
+	color: "1.000000, 0.000000, 1.000000, 1.000000"
+	texturePath: "potplant.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "516"
+	name: "Test potplant"
+	position: "-2.000000, 5.600000, 1.000000"
+	parent: "-1"
+	size: "2.200000, 2.200000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "potplant.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "516"
+	name: "Test potplant"
+	position: "5.800000, 3.000000, 1.000000"
+	parent: "-1"
+	size: "2.200000, 2.200000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "potplant.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
 }
