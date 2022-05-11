@@ -149,6 +149,19 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 		LightManager::ForceRefreshLightmaps();
 
 		Editor::infoBarText = "Loaded " + path;
+
+		ifile->close();
+
+		// Load prefabs inside level
+		std::list<EditorObject*>* levelList = inEditor? &Editor::editorObjects : &levelObjectList;
+		for (auto it = levelList->begin(); it != levelList->end(); it++)
+		{
+			if ((*it)->typeName == "Prefab")
+			{
+				Prefab* prefab = (Prefab*)(*it);
+				prefab->ReloadPrefab();
+			}
+		}
 	}
 	catch (std::exception e) // Catch exceptions to make sure the file is closed
 	{
@@ -167,8 +180,63 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 			ClearGameLevel();
 		}
 	}
+}
 
-	ifile->close();
+void EditorSaveManager::LoadPrefab(Prefab* prefab)
+{
+	if (prefab->GetPath() == "") return;
+
+	std::cout << "Loading prefab : " << prefab->GetPath() << std::endl;
+
+	std::string path = mapsBasePath + prefab->GetPath();
+	ifile->open(path, std::ios::in);
+
+	// Can't open
+	if (!ifile->is_open())
+	{
+		std::cout << "Oops! We couldn't open the prefab file!" << std::endl;
+		return;
+	}
+
+	try
+	{
+		// Start to read file
+		FirstLineStartWith("count");
+		int objectCount = std::stoi(ReadWord());
+
+		for (int i = 0; i < objectCount; i++)
+		{
+			// Load object
+			ReadObject(false, prefab);
+
+			if (prefab->prefabObjects.size() == 0) continue; // Map data loaded, ignore
+
+			// Set parent to prefab if none
+			EditorObject* newObj = prefab->prefabObjects.back();
+			if (newObj->GetParent() == nullptr)
+			{
+				newObj->SetParent(prefab);
+			}
+		}
+
+		ifile->close();
+
+		// Load prefabs inside prefab
+		for (auto it = prefab->prefabObjects.begin(); it != prefab->prefabObjects.end(); it++)
+		{
+			if ((*it)->typeName == "Prefab")
+			{
+				Prefab* prefab = (Prefab*)(*it);
+				prefab->ReloadPrefab();
+			}
+		}
+	}
+	catch (std::exception e) // Catch exceptions to make sure the file is closed
+	{
+		ifile->close();
+		std::cout << "Got an error while loading prefab file, here's what it says:" << std::endl;
+		std::cout << e.what() << std::endl;
+	}
 }
 
 void EditorSaveManager::DisableEditorObjects()
@@ -299,15 +367,21 @@ std::string EditorSaveManager::ReadWord()
 {
 	std::string res = "";
 	char ch = ' ';
-	while (std::isspace(ch))
+	while (std::isspace(ch) && !ifile->eof())
 	{
 		ifile->get(ch);
+
+		if (ifile->eof())
+			throw "EOF found while reading word!";
 	}
 
-	while (std::isalpha(ch) || std::isdigit(ch))
+	while ((std::isalpha(ch) || std::isdigit(ch)) && !ifile->eof())
 	{
 		res += ch;
 		ifile->get(ch);
+
+		if (ifile->eof())
+			throw "EOF found while reading word!";
 	}
 
 	return res;
@@ -348,7 +422,7 @@ void EditorSaveManager::GoToEndOfLine()
 	}
 }
 
-void EditorSaveManager::ReadObject(bool inEditor)
+void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 {
 	FirstLineStartWith("object");
 	std::string objectType = ReadWord(); // Read type name
@@ -381,7 +455,9 @@ void EditorSaveManager::ReadObject(bool inEditor)
 		MapData newData = MapData();
 		newData.mapName = props["mapName"];
 
-		if (inEditor)
+		if (prefab != nullptr)
+			prefab->mapData = newData;
+		else if (inEditor)
 			Editor::currentMapData = newData;
 		else
 			currentMapData = newData;
@@ -426,7 +502,11 @@ void EditorSaveManager::ReadObject(bool inEditor)
 
 	if (newObj != nullptr)
 	{
-		if (inEditor) 
+		if (prefab != nullptr)
+		{
+			prefab->prefabObjects.push_back(newObj);
+		}
+		else if (inEditor) 
 		{
 			Editor::AddObject(newObj);
 

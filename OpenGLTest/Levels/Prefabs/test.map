@@ -1,0 +1,33 @@
+// Editor map file, version 1
+
+count 3
+
+object MapData {
+	mapName: ""
+}
+object EditorSprite {
+	ID: "0"
+	name: ""
+	position: "0.000000, 0.000000, 0.000000"
+	parent: "-1"
+	size: "1.000000, 1.000000"
+	rotation: "0.000000"
+	color: "1.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "1"
+	name: ""
+	position: "0.600000, -0.400000, 2.000000"
+	parent: "-1"
+	size: "1.000000, 1.000000"
+	rotation: "-45.000000"
+	color: "0.000000, 1.000000, 0.000000, 1.000000"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}

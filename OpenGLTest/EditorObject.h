@@ -31,6 +31,7 @@ public:
 	float GetEditRotation();
 	vec2 GetEditScale();
 	EditorObject* GetParent();
+	int parentID = -1;
 
 	vec3 SetEditPos(vec3 pos);
 	float SetEditRotation(float rot);
@@ -97,7 +98,7 @@ protected:
 	bool enabled = true;
 	vec3 editorPosition;
 	float editorRotation;
-	vec2 editorSize;
+	vec2 editorSize = vec2(1);
 
 	/// <summary>
 	/// Call this to replace collider, sprites, etc.
@@ -108,7 +109,6 @@ protected:
 	void OnMainLoop();
 
 private:
-	int parentID = -1;
 	EditorObject* _parent = nullptr;
 
 	LinkedListElement<std::function<void()>>* mainLoopFuncPos = nullptr;

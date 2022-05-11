@@ -37,6 +37,8 @@ void Light::UpdateTransform()
 	if (editorSprite != nullptr)
 	{
 		editorSprite->position = GetEditPos();
+		editorSprite->size = vec2(Editor::gizmoSize);
+		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
 	}
 }
 

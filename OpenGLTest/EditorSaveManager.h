@@ -10,6 +10,7 @@ using namespace glm;
 
 struct MapData;
 class EditorObject;
+class Prefab;
 class EditorSaveManager
 {
 public:
@@ -41,6 +42,8 @@ public:
 	/// </summary>
 	static void SaveLevel();
 	static void LoadLevel(std::string path, bool inEditor = false);
+
+	static void LoadPrefab(Prefab* prefab);
 
 	/// <summary>
 	/// Makes all object of the editor disabled
@@ -87,5 +90,5 @@ private:
 	static std::string ReadProp();
 	static void GoToEndOfLine();
 
-	static void ReadObject(bool inEditor);
+	static void ReadObject(bool inEditor, Prefab* prefab = nullptr);
 };

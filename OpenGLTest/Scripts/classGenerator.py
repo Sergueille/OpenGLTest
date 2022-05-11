@@ -83,9 +83,18 @@ def GetSpriteUpdateTransform():
     res = ""
     if sprite_type != "none":
         if sprite_type == "editor":
-            res += f"if ({spriteName} != nullptr) "
-
-        res += f"{spriteName}->position = editorPosition;"
+            res += f"""if ({spriteName} != nullptr)
+    {{
+        {spriteName}->position = editorPosition;
+		{spriteName}->size = vec2(Editor::gizmoSize);
+        {
+            f"((CircleCollider*){spriteName})->size = Editor::gizmoSize;"
+            if use_circle_coll else ""
+        }
+    }}
+            """
+        else:
+            res += f"{spriteName}->position = editorPosition;"
     return res
 
 

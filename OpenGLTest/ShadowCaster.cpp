@@ -50,6 +50,9 @@ void ShadowCaster::UpdateTransform()
 	areaSprite->position = GetEditPos() + vec3(0, 0, -0.1f);
 	areaSprite->rotate = GetEditRotation();
 	areaSprite->size = GetEditScale();
+
+	editorSprite->size = vec2(Editor::gizmoSize);
+	((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
 }
 
 vec2 ShadowCaster::DrawProperties(vec3 drawPos)

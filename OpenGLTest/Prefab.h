@@ -14,7 +14,18 @@ public:
 
     Sprite* editorSprite = nullptr;
 
+	std::list<EditorObject*> prefabObjects;
+
+	MapData mapData;
+
+	std::string GetPath();
+	void SetPath(std::string newName);
+
+	void ReloadPrefab();
+
 	virtual vec2 DrawProperties(vec3 drawPos) override;
+	virtual vec2 DrawActions(vec3 drawPos) override;
+
 	virtual void UpdateTransform() override;
 
 	virtual EditorObject* Copy() override;
@@ -24,4 +35,9 @@ public:
 
 	virtual void Enable() override;
 	virtual void Disable() override;
+
+	virtual void GetAABB(vec2* minRes, vec2* maxRes);
+
+private:
+	std::string prefabPath = "";
 };

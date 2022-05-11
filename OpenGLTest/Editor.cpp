@@ -60,6 +60,9 @@ std::stack<Editor::UndoAction> Editor::redoStack;
 
 bool Editor::propertyChanged = false;
 
+float Editor::baseGizmoSize = 3;
+float Editor::gizmoSize = 0;
+
 std::list<std::string> Editor::panelWindows = {
 	"Props",
 	"Add",
@@ -375,6 +378,8 @@ void Editor::OnMainLoop()
 {
 	if (!enabled) // EDITOR ONLY
 		return;
+
+	gizmoSize = Camera::size * baseGizmoSize / 100.0f;
 
 	HandleTools();
 	DrawPanel();
@@ -721,7 +726,9 @@ void Editor::DrawSettingsTab(vec3 drawPos)
 
 	drawPos.y -= DrawProperty(drawPos, "Move tool step", &moveSnapping, panelPropertiesX, "moveSnap").y;
 	drawPos.y -= DrawProperty(drawPos, "Rotate tool step", &rotateSnapping, panelPropertiesX, "rotateSnap").y;
-	drawPos.y -= DrawProperty(drawPos, "Scale tool step", &sizeSnapping, panelPropertiesX, "scaleSnap").y;
+	drawPos.y -= DrawProperty(drawPos, "Scale tool step", &sizeSnapping, panelPropertiesX, "scaleSnap").y + margin;
+
+	drawPos.y -= DrawProperty(drawPos, "Gismo size", &baseGizmoSize, panelPropertiesX, "gizmoSize").y;
 }
 
 void Editor::DrawInfoBar()

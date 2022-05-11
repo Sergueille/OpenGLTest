@@ -115,6 +115,15 @@ public:
 
 	static std::string infoBarText;
 
+	/// <summary>
+	/// Size of the editor Gismos, in screen proportion multiplied by 100
+	/// </summary>
+	static float baseGizmoSize;
+	/// <summary>
+	/// Current size of gismos, in world units
+	/// </summary>
+	static float gizmoSize;
+
 	static void CreateEditor(); // Setup editor and open it
 	static void OpenEditor(); // Open the editor, must be set up before
 	static void CloseEditor(); // Close the editor but don't destroy it
