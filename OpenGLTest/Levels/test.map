@@ -1,22 +1,9 @@
 // Editor map file, version 1
 
-count 32
+count 29
 
 object MapData {
 	mapName: ""
-}
-object EditorSprite {
-	ID: "4"
-	name: "Ground"
-	position: "0.600000, -7.200000, 0.000000"
-	parent: "-1"
-	size: "66.599998, 12.200000"
-	rotation: "0.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	collideWithPhys: "1"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
 }
 object EditorSprite {
 	ID: "30"
@@ -142,34 +129,6 @@ object Button {
 	onPressed: "13|Turn on|"
 	onUnpressed: "13|Turn off|"
 }
-object EditorSprite {
-	ID: "157"
-	name: "Test potplant"
-	position: "11.000000, 8.400001, 0.000000"
-	parent: "-1"
-	size: "2.200000, 2.200000"
-	rotation: "0.000000"
-	color: "2.000000, 2.000000, 2.000000, 1.000000"
-	texturePath: "potplant.png"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
-}
-object EditorSprite {
-	ID: "174"
-	name: "Test potplant"
-	position: "8.000000, 8.400001, 0.000000"
-	parent: "-1"
-	size: "2.200000, 2.200000"
-	rotation: "0.000000"
-	color: "2.500000, 2.500000, 2.500000, 1.000000"
-	texturePath: "potplant.png"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
-}
 object Light {
 	ID: "225"
 	name: ""
@@ -218,78 +177,6 @@ object Light {
 	innerAngle: "20.000000"
 	outerAngle: "45.000000"
 }
-object Light {
-	ID: "275"
-	name: ""
-	position: "7.200000, 6.200000, 10.000000"
-	parent: "-1"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "1.300000"
-	rotation: "-90.000000"
-	innerAngle: "50.000000"
-	outerAngle: "100.000000"
-}
-object Light {
-	ID: "277"
-	name: ""
-	position: "18.800001, 11.000000, 10.000000"
-	parent: "-1"
-	lightSize: "20.000000"
-	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "1.300000"
-	rotation: "-100.000000"
-	innerAngle: "50.000000"
-	outerAngle: "100.000000"
-}
-object Light {
-	ID: "281"
-	name: ""
-	position: "-0.800000, 10.600000, 10.000000"
-	parent: "-1"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "1.300000"
-	rotation: "-90.000000"
-	innerAngle: "50.000000"
-	outerAngle: "100.000000"
-}
-object Light {
-	ID: "282"
-	name: ""
-	position: "-11.400001, 10.600000, 10.000000"
-	parent: "-1"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "1.300000"
-	rotation: "-90.000000"
-	innerAngle: "50.000000"
-	outerAngle: "100.000000"
-}
-object Light {
-	ID: "283"
-	name: ""
-	position: "-20.000000, 10.600000, 10.000000"
-	parent: "-1"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "1.300000"
-	rotation: "-90.000000"
-	innerAngle: "50.000000"
-	outerAngle: "100.000000"
-}
-object Light {
-	ID: "285"
-	name: ""
-	position: "-8.600000, 6.200000, 10.000000"
-	parent: "-1"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 0.900000, 1.000000"
-	intensity: "1.300000"
-	rotation: "-90.000000"
-	innerAngle: "50.000000"
-	outerAngle: "100.000000"
-}
 object ShadowCaster {
 	ID: "372"
 	name: ""
@@ -314,65 +201,113 @@ object ShadowCaster {
 	size: "3.800000, 1.000000"
 	orientation: "-0.000000"
 }
-object EditorSprite {
-	ID: "476"
-	name: "Test potplant"
-	position: "-7.000000, 8.400001, 1.000000"
-	parent: "-1"
-	size: "2.200000, 2.200000"
-	rotation: "0.000000"
-	color: "1.000000, 0.000000, 1.000000, 1.000000"
-	texturePath: "potplant.png"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "1"
-}
 object Player {
 	ID: "477"
 	name: ""
-	position: "9.600000, 3.200000, 20.000000"
+	position: "5.400000, 8.400001, 20.000000"
 	parent: "-1"
 }
-object EditorSprite {
-	ID: "514"
-	name: "Test potplant"
-	position: "-7.000000, 8.400001, 1.000000"
+object Prefab {
+	ID: "558"
+	name: ""
+	position: "-6.200000, 10.800000, 0.000000"
 	parent: "-1"
-	size: "2.200000, 2.200000"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "560"
+	name: ""
+	position: "3.600000, 10.800000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "562"
+	name: ""
+	position: "11.200000, 10.800000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "627"
+	name: ""
+	position: "6.800000, 6.200000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "631"
+	name: ""
+	position: "-8.400001, 6.200000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "656"
+	name: ""
+	position: "-15.200000, 10.800000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "736"
+	name: ""
+	position: "15.200000, 3.000000, 0.000000"
+	parent: "-1"
+	size: "2.400000, 2.400000"
 	rotation: "0.000000"
-	color: "1.000000, 0.000000, 1.000000, 1.000000"
-	texturePath: "potplant.png"
+	color: "1.150000, 1.150000, 1.150000, 1.000000"
+	texturePath: "desk2.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 }
 object EditorSprite {
-	ID: "516"
-	name: "Test potplant"
-	position: "-2.000000, 5.600000, 1.000000"
+	ID: "788"
+	name: ""
+	position: "7.400000, 3.000000, 0.000000"
 	parent: "-1"
-	size: "2.200000, 2.200000"
+	size: "2.400000, 2.400000"
 	rotation: "0.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "potplant.png"
+	color: "1.200000, 1.200000, 1.200000, 1.000000"
+	texturePath: "desk1.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 }
-object EditorSprite {
-	ID: "516"
-	name: "Test potplant"
-	position: "5.800000, 3.000000, 1.000000"
+object Prefab {
+	ID: "790"
+	name: ""
+	position: "19.400000, 10.800000, 0.000000"
 	parent: "-1"
-	size: "2.200000, 2.200000"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "848"
+	name: "Ground"
+	position: "-9.600000, -5.800000, 0.000000"
+	parent: "-1"
+	size: "26.800001, 9.600000"
 	rotation: "0.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "potplant.png"
-	collideWithPhys: "0"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
-	isLit: "1"
+	isLit: "0"
 }

@@ -1,0 +1,57 @@
+// Editor map file, version 1
+
+count 5
+
+object MapData {
+	mapName: ""
+}
+object Light {
+	ID: "619"
+	name: ""
+	position: "1.200000, -0.600000, 10.000000"
+	parent: "-1"
+	lightSize: "5.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "0.300000"
+	rotation: "-90.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+}
+object Light {
+	ID: "282"
+	name: ""
+	position: "0.000000, 0.000000, 10.000000"
+	parent: "-1"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "1.000000"
+	rotation: "-90.000000"
+	innerAngle: "50.000000"
+	outerAngle: "100.000000"
+}
+object EditorSprite {
+	ID: "517"
+	name: ""
+	position: "0.004360, -0.043493, 0.000000"
+	parent: "-1"
+	size: "0.310000, 0.310000"
+	rotation: "0.000000"
+	color: "1.300000, 1.300000, 1.300000, 1.000000"
+	texturePath: "neon.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object Light {
+	ID: "1"
+	name: ""
+	position: "-1.200000, -0.600000, 10.000000"
+	parent: "-1"
+	lightSize: "5.000000"
+	color: "1.000000, 1.000000, 0.900000, 1.000000"
+	intensity: "0.300000"
+	rotation: "-90.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+}
