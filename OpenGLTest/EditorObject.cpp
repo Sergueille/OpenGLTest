@@ -273,8 +273,10 @@ void EditorObject::GetAABB(vec2* minRes, vec2* maxRes)
 
 void EditorObject::OnMainLoop()
 {
-	if (enabled)
-		UpdateTransform();
+	if (!enabled) return;
+
+	UpdateTransform();
+	DerivedOnMainLoop();
 }
 
 EventList::EventList()

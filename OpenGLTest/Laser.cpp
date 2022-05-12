@@ -90,6 +90,7 @@ void Laser::Save()
 	EditorSaveManager::WriteProp("laserType", (int)laserType);
 	EditorSaveManager::WriteProp("startOffset", std::to_string(startOffset));
 	EditorSaveManager::WriteProp("endOffset", std::to_string(endOffset));
+	EditorSaveManager::WriteProp("startOn", startOn);
 }
 
 void Laser::Load(std::map<std::string, std::string>* props)
@@ -102,6 +103,9 @@ void Laser::Load(std::map<std::string, std::string>* props)
 
 	EditorSaveManager::FloatProp(props, "startOffset", &startOffset);
 	EditorSaveManager::FloatProp(props, "endOffset", &endOffset);
+	startOn = (*props)["startOn"] != "0";
+
+	if (!Editor::enabled && !startOn) TurnOff();
 
 	EditorObject::Load(props);
 }
@@ -173,6 +177,8 @@ vec2 Laser::DrawProperties(vec3 startPos)
 	int intType = (int)laserType;
 	drawPos.y -= Editor::OptionProp(drawPos, "Type", &intType, (int)LaserType::lastValue, &types[0], Editor::panelPropertiesX).y;
 	SetType((LaserType)intType);
+
+	drawPos.y -= Editor::CheckBox(drawPos, "Start on", &startOn, Editor::panelPropertiesX).y;
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Start offset", &startOffset, Editor::panelPropertiesX, strID + "startOffset").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "End offset", &endOffset, Editor::panelPropertiesX, strID + "endOffset").y;

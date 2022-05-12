@@ -2,6 +2,9 @@ print("Welcome to the editor class generator!")
 class_name = input("Class name : ")
 use_circle_coll = input("Collider type (Circle / Rect) : ").lower()[0] == "c"
 
+use_ori = input("Use orientation (Yes / No) : ").lower()[0] == "y"
+use_scale = input("Use scale (Yes / No) : ").lower()[0] == "y"
+
 sprite_type = input("Sprite type (None / Always / Editor) : ").lower()[0]
 if sprite_type == "n":
     sprite_type = "none"
@@ -80,21 +83,37 @@ def GetSpriteDestruction():
 
 
 def GetSpriteUpdateTransform():
-    res = ""
-    if sprite_type != "none":
+    res = "\n"
+    if use_circle_coll:
         if sprite_type == "editor":
-            res += f"""if ({spriteName} != nullptr)
-    {{
-        {spriteName}->position = editorPosition;
+            res += f"""    if ({spriteName} != nullptr)
+	{{
+		{spriteName}->position = editorPosition;
 		{spriteName}->size = vec2(Editor::gizmoSize);
-        {
-            f"((CircleCollider*){spriteName})->size = Editor::gizmoSize;"
-            if use_circle_coll else ""
-        }
-    }}
-            """
+		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
+	}}"""
+
+
+        else:
+            res += f"\t{spriteName}->position = editorPosition;"
+
+            
+    else:
+        if sprite_type == "editor":
+            res += f"""    if ({spriteName} != nullptr)
+	{{
+		{spriteName}->position = editorPosition;
+	}}"""
+
         else:
             res += f"{spriteName}->position = editorPosition;"
+
+            
+        if use_scale:
+            res += "\n\t((RectCollider*)clickCollider)->size = editorSize;"
+        if use_ori:
+            res += "\n\t((RectCollider*)clickCollider)->orientation = editorRotation;"
+
     return res
 
 
@@ -157,6 +176,15 @@ vec2 {class_name}::DrawProperties(vec3 drawPos)
 
 	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
 
+    {
+        'drawPos.y -= Editor::DrawProperty(drawPos, "Orientation", &editorRotation, Editor::panelPropertiesX, strID + "ori").y;'
+        if use_ori else ''
+    }
+    {
+        'drawPos.y -= Editor::DrawProperty(drawPos, "Scale", &editorSize, Editor::panelPropertiesX, strID + "size").y;'
+        if use_scale else ''
+    }
+
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
 	return res;
@@ -183,11 +211,29 @@ EditorObject* {class_name}::Copy()
 void {class_name}::Load(std::map<std::string, std::string>* props)
 {{
 	EditorObject::Load(props);
+
+    {
+        'EditorSaveManager::FloatProp(props, "orientation", &editorRotation);'
+        if use_ori else ''
+    }
+    {
+        'editorSize = EditorSaveManager::StringToVector2((*props)["scale"]);'
+        if use_scale else ''
+    }
 }}
 
 void {class_name}::Save()
 {{
 	EditorObject::Save();
+
+    {
+        'EditorSaveManager::WriteProp("orientation", editorRotation);'
+        if use_ori else ''
+    }
+    {
+        'EditorSaveManager::WriteProp("scale", editorSize);'
+        if use_scale else ''
+    }
 }}
 
 void {class_name}::Enable()

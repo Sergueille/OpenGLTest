@@ -32,9 +32,9 @@ object Light {
 object EditorSprite {
 	ID: "517"
 	name: ""
-	position: "0.004360, -0.043493, 0.000000"
+	position: "0.000000, -0.000000, 0.000000"
 	parent: "-1"
-	size: "0.310000, 0.310000"
+	size: "0.250000, 0.250000"
 	rotation: "0.000000"
 	color: "1.300000, 1.300000, 1.300000, 1.000000"
 	texturePath: "neon_half.png"

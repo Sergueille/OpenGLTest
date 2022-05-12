@@ -10,6 +10,7 @@
 #include "LightManager.h"
 #include "ShadowCaster.h"
 #include "Prefab.h"
+#include "Trigger.h"
 
 #include <iostream>
 
@@ -701,10 +702,15 @@ void Editor::DrawAddTab(vec3 drawPos)
 	if (pressed)
 		newObject = (EditorObject*)new Prefab();
 
+	drawPos.y -= UIButton(drawPos, "Trigger", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new Trigger();
+
 	if (newObject != nullptr)
 	{
 		AddObject(newObject);
 		SelectObject(newObject);
+		newObject->SetEditPos(vec3(Camera::position.x, Camera::position.y, 0));
 	}
 }
 

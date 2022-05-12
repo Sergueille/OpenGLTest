@@ -72,6 +72,7 @@ object Laser {
 	laserType: "0"
 	startOffset: "-0.100000"
 	endOffset: "0.050000"
+	startOn: "1"
 }
 object EditorSprite {
 	ID: "18"
@@ -186,6 +187,7 @@ object Laser {
 	laserType: "0"
 	startOffset: "-0.100000"
 	endOffset: "0.050000"
+	startOn: "1"
 }
 object EditorSprite {
 	ID: "64"
@@ -209,6 +211,7 @@ object Laser {
 	laserType: "0"
 	startOffset: "-0.200000"
 	endOffset: "0.050000"
+	startOn: "1"
 }
 object EditorSprite {
 	ID: "99"
@@ -362,6 +365,7 @@ object Laser {
 	laserType: "0"
 	startOffset: "-0.200000"
 	endOffset: "0.050000"
+	startOn: "1"
 }
 object EditorSprite {
 	ID: "119"
@@ -411,6 +415,7 @@ object Laser {
 	laserType: "0"
 	startOffset: "-0.100000"
 	endOffset: "0.050000"
+	startOn: "1"
 }
 object EditorSprite {
 	ID: "221"
@@ -521,4 +526,5 @@ object Laser {
 	laserType: "0"
 	startOffset: "-0.200000"
 	endOffset: "0.050000"
+	startOn: "1"
 }

@@ -47,6 +47,7 @@ public:
 	static std::list<Laser*> lasers;
 
 	bool laserOn = true;
+	bool startOn = true;
 
 	LaserType laserType = LaserType::noTeleport;
 

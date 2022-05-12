@@ -10,6 +10,7 @@
 #include "ShadowCaster.h"
 #include "LightManager.h"
 #include "Prefab.h"
+#include "Trigger.h"
 
 using namespace glm;
 
@@ -495,6 +496,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "Prefab")
 	{
 		newObj = new Prefab();
+		newObj->Load(&props);
+	}
+	else if (objectType == "Trigger")
+	{
+		newObj = new Trigger();
 		newObj->Load(&props);
 	}
 	else

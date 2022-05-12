@@ -119,6 +119,7 @@ object Laser {
 	laserType: "0"
 	startOffset: "-0.100000"
 	endOffset: "0.150000"
+	startOn: "0"
 }
 object Button {
 	ID: "156"
@@ -126,8 +127,8 @@ object Button {
 	position: "2.600000, 3.000000, 1.000000"
 	parent: "-1"
 	startPressed: "1"
-	onPressed: "13|Turn on|"
-	onUnpressed: "13|Turn off|"
+	onPressed: "13|Turn off|"
+	onUnpressed: "13|Turn on|"
 }
 object Light {
 	ID: "225"
@@ -264,7 +265,7 @@ object Prefab {
 object EditorSprite {
 	ID: "736"
 	name: ""
-	position: "15.200000, 3.000000, 0.000000"
+	position: "15.000000, 3.000000, 0.000000"
 	parent: "-1"
 	size: "2.400000, 2.400000"
 	rotation: "0.000000"

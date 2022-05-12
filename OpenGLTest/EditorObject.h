@@ -94,6 +94,8 @@ public:
 	virtual void OnSelected() { };
 	virtual void OnUnselected() { };
 
+	virtual void DerivedOnMainLoop() { };
+
 protected:
 	bool enabled = true;
 	vec3 editorPosition;
