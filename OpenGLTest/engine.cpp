@@ -39,6 +39,8 @@ int main(int argc, void* argv[])
     const char* windowName = "Teeeest!";
     const bool displayFPS = true;
 
+    const int bloomResDivide = 4;
+
     // Init GLFW
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -153,7 +155,7 @@ int main(int argc, void* argv[])
     {
         glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[i]);
         glBindTexture(GL_TEXTURE_2D, pingpongBuffer[i]);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenX, screenY, 0, GL_RGB, GL_FLOAT, NULL);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenX / bloomResDivide, screenY / bloomResDivide, 0, GL_RGB, GL_FLOAT, NULL);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -217,15 +219,16 @@ int main(int argc, void* argv[])
         unsigned int amount = 4;
         RessourceManager::shaders["screenBlur"].Use();
 
-        const float firstOffsetSize = 12;
-        const float secondOffsetSize = 2;
+        glViewport(0, 0, (int)(screenX / bloomResDivide), (int)(screenY / bloomResDivide));
+        const float firstOffsetSize = 2;
+        const float secondOffsetSize = 1;
         for (unsigned int i = 0; i < amount; i++)
         {
             glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[horizontal]);
             RessourceManager::shaders["screenBlur"].SetUniform("horizontal", horizontal);
             RessourceManager::shaders["screenBlur"].SetUniform("offsetSize", i > 1? firstOffsetSize : secondOffsetSize);
             glBindTexture(GL_TEXTURE_2D, first_iteration ? colorTex[1] : pingpongBuffer[!horizontal]);
-            SpriteRenderer::GetMesh()->DrawMesh(); // PERFORMANCE: this is causing fps drop ant it shouldn't
+            SpriteRenderer::GetMesh()->DrawMesh();
             horizontal = !horizontal;
             first_iteration = false;
         }
@@ -238,6 +241,10 @@ int main(int argc, void* argv[])
         glBindTexture(GL_TEXTURE_2D, colorTex[0]);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, pingpongBuffer[0]);
+
+        // Set original viewport
+        glViewport(0, 0, Utility::screenX, Utility::screenY);
+
         SpriteRenderer::GetMesh()->DrawMesh(); // Stealing the sprite quad
 
         // Check and call events and swap the buffers

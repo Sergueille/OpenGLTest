@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 138
+count 139
 
 object MapData {
 	mapName: ""
@@ -636,11 +636,11 @@ object EditorSprite {
 	parent: "-1"
 	size: "30.000000, 5.000000"
 	rotation: "0.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "stone.jpg"
+	color: "0.800000, 0.800000, 0.800000, 1.000000"
+	texturePath: "back\plaster1.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "6.000000, 1.000000"
+	UVend: "3.000000, 0.500000"
 	isLit: "1"
 }
 object EditorSprite {
@@ -1133,7 +1133,7 @@ object Light {
 object Player {
 	ID: "1496"
 	name: ""
-	position: "-3.000000, 1.200000, 10.000000"
+	position: "-4.000000, 0.600000, 10.000000"
 	parent: "-1"
 }
 object ShadowCaster {
@@ -1308,7 +1308,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1839"
 	name: ""
-	position: "204.800003, 27.600000, 0.000000"
+	position: "203.400009, 27.600000, 0.000000"
 	parent: "-1"
 	size: "20.200001, 7.000000"
 	rotation: "0.000000"
@@ -1425,7 +1425,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1855"
 	name: ""
-	position: "10.200000, 0.800000, -1.000000"
+	position: "11.600000, 0.800000, -5.000000"
 	parent: "-1"
 	size: "2.200000, 2.200000"
 	rotation: "0.000000"
@@ -1439,7 +1439,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1857"
 	name: ""
-	position: "15.800000, 0.800000, 0.000000"
+	position: "16.000000, 0.800000, 0.000000"
 	parent: "-1"
 	size: "2.200000, 2.200000"
 	rotation: "0.000000"
@@ -1481,7 +1481,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "2239"
 	name: ""
-	position: "19.705521, 0.341476, 2.000000"
+	position: "18.739834, 0.369879, 2.000000"
 	parent: "-1"
 	size: "1.700000, 1.700000"
 	rotation: "0.000000"
@@ -1679,6 +1679,20 @@ object EditorSprite {
 	rotation: "-270.000000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
 	texturePath: "pipe_l.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "3407"
+	name: ""
+	position: "19.591911, 0.384080, -1.000000"
+	parent: "-1"
+	size: "1.700000, 1.700000"
+	rotation: "0.000000"
+	color: "0.800000, 0.800000, 0.800000, 1.000000"
+	texturePath: "chair_knocked2.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
