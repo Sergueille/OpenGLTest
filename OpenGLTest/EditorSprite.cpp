@@ -32,21 +32,7 @@ vec2 EditorSprite::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::CheckBox(drawPos, "Collide with physics", &collide, Editor::panelPropertiesX).y;
 	clickCollider->SetCollideWithPhys(collide);
 
-	std::string noTextureDisplay = "No texture";
-	std::string texName = texture == nullptr? noTextureDisplay : texture->path;
-	drawPos.y -= Editor::DrawProperty(drawPos, "Texture", &texName, Editor::panelPropertiesX, strID + "texture").y;
-
-	if (texName == "" || texName == noTextureDisplay)
-	{
-		texture = nullptr;
-	}
-	else
-	{
-		if (texture == nullptr || texName != texture->path)
-		{
-			texture = RessourceManager::GetTexture(texName);
-		}
-	}
+	drawPos.y -= Editor::DrawProperty(drawPos, "Texture test", &texture, Editor::panelPropertiesX, strID + "texture").y;
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "UV start", &UVStart, Editor::panelPropertiesX, strID + "UVstart").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "UV end", &UVEnd, Editor::panelPropertiesX, strID + "UVend").y;

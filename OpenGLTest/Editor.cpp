@@ -24,10 +24,11 @@ bool Editor::enabled = false;
 const float Editor::selectClickMargin = 0.001f;
 
 const vec4 Editor::textColor = vec4(1);
-const vec4 Editor::highlightColor = vec4(1, 0.5, 0.8, 1);
-const vec4 Editor::editColor = vec4(1, 0.2, 0.5, 1);;
+const vec4 Editor::highlightColor = vec4(0.4, 1, 0.4, 1);
+const vec4 Editor::editColor = vec4(0.1, 0.9, 0.1, 1);;
 const vec4 Editor::disabledTextColor = vec4(0.7, 0.7, 0.7, 0.7);
 const vec4 Editor::backgroundColor = vec4(0.2f, 0.2f, 0.2f, 0.4f);
+const vec4 Editor::opaqueBackgroundColor = vec4(0.2f, 0.2f, 0.2f, 1);
 const vec4 Editor::infobarColor = vec4(0.1f, 0.1f, 0.1f, 1);
 
 std::string Editor::focusedTextInputID = "";
@@ -76,6 +77,10 @@ Editor::PanelWindow Editor::currentPanelWindow = Editor::PanelWindow::properties
 std::string Editor::infoBarText = "Welcome to the level editor!";
 
 std::list<EditorObject*> Editor::clipboard = std::list<EditorObject*>();
+
+std::list<std::string> Editor::textureFiles = std::list<std::string>();
+std::list<std::string> Editor::mapFiles = std::list<std::string>();
+std::list<std::string> Editor::soundFiles = std::list<std::string>();
 
 EditorAction Editor::editorActions[18] = {
 	EditorAction {
@@ -298,6 +303,8 @@ void Editor::CreateEditor()
 	EventManager::OnClick.push_end(OnClick);
 	EventManager::OnCharPressed.push_end(OnCaracterInput);
 	EventManager::OnKeyPressed.push_end(OnKeyPressed);
+
+	IndexFiles();
 
 	OpenEditor();
 }
@@ -734,7 +741,7 @@ void Editor::DrawFileTab(vec3 drawPos)
 	if (res) EditorSaveManager::SaveLevel();
 
 	std::string loadPath = "";
-	drawPos.y -= DrawProperty(drawPos, "Load a level", &loadPath, panelPropertiesX, "LoadPath").y + margin;
+	drawPos.y -= FileSelector(drawPos, "Load", &loadPath, &mapFiles, Editor::panelPropertiesX, "LoadPath").y;
 	if (loadPath != "")
 	{
 		EditorSaveManager::LoadLevel(loadPath, true);
@@ -1216,6 +1223,35 @@ bool Editor::isOverUI(vec2 point)
 	return point.x < panelSize || point.y < infoBarWidth;
 }
 
+void Editor::IndexFiles() 
+{
+	std::string imagesDir = "Images";
+	for (const auto& entry : std::filesystem::recursive_directory_iterator(imagesDir))
+	{
+		std::string fileName = ToLower(entry.path().string());
+		fileName = fileName.substr(imagesDir.length() + 1, fileName.length() - imagesDir.length() - 1); // Remove "images\"
+		textureFiles.push_back(fileName);
+	}
+
+	std::string mapDir = "Levels";
+	for (const auto& entry : std::filesystem::recursive_directory_iterator(mapDir))
+	{
+		std::string fileName = ToLower(entry.path().string());
+		fileName = fileName.substr(mapDir.length() + 1, mapDir.length() - mapDir.length() - 1); // Remove "levels\"
+		mapFiles.push_back(fileName);
+		std::cout << fileName << std::endl;
+	}
+
+	std::string soundsDir = "Sounds";
+	for (const auto& entry : std::filesystem::recursive_directory_iterator(soundsDir))
+	{
+		std::string fileName = ToLower(entry.path().string());
+		soundFiles.push_back(fileName);
+	}
+
+	std::cout << "Indexed " << textureFiles.size() + mapFiles.size() + soundFiles.size() << " files" << std::endl;
+}
+
 vec2 Editor::OptionProp(vec3 startPos, std::string name, int* value, int max, std::string* firstDisplay, float propX)
 {
 	vec3 drawPos = startPos;
@@ -1388,6 +1424,81 @@ vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, vec4* value, int
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
 	return res;
+}
+
+vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, Texture** value, float propX, std::string ID)
+{
+	std::string res = (*value)->path;
+	vec2 size = FileSelector(drawPos, name, &res, &textureFiles, propX, ID);
+
+	if (glfwGetKey(Utility::window, GLFW_KEY_ENTER) == GLFW_PRESS || res != "") // Set value or press enter
+	{
+		if (res == "")
+			*value = nullptr;
+		else
+			*value = RessourceManager::GetTexture(res);
+	}
+
+	return size;
+}
+
+vec2 Editor::FileSelector(vec3 drawPos, std::string name, std::string* value, std::list<std::string>* pathList, float propX, std::string ID)
+{
+	vec2 startPos = drawPos;
+	drawPos.z += 5;
+
+	TextManager::RenderText(name + ":", drawPos, textSize);
+	drawPos.x += propX;
+
+	std::string search = *value;
+	vec3 spriteStart = drawPos;
+	drawPos.y -= TextInput(drawPos, &search, ID, TextManager::right, false).y;
+	vec2 endPos = drawPos;
+
+	const int maxResCount = 15;
+	if (focusedTextInputID == ID) // User is searching, show files
+	{
+		search = ToLower(search);
+
+		drawPos.x += margin;
+		drawPos.y -= margin * 2;
+
+		float maxWidth = 0;
+		int resCount = 0;
+		for (auto it = pathList->begin(); it != pathList->end() && resCount < maxResCount; it++)
+		{
+			if (it->find(search) != std::string::npos)
+			{
+				bool pressed;
+				vec2 btnSize = Editor::UIButton(drawPos, *it, &pressed);
+
+				drawPos.y -= btnSize.y;
+				if (btnSize.x > maxWidth)
+					maxWidth = btnSize.x;
+
+				if (pressed)
+				{
+					*value = *it;
+					focusedTextInputID = "";
+					propertyChanged = true;
+					break;
+				}
+
+				resCount++;
+			}
+		}
+
+		Sprite(spriteStart + vec3(0, -margin, -1), drawPos + vec3(maxWidth + 2 * margin, 0, -1), opaqueBackgroundColor).Draw();
+	}
+
+	// On enter, set value
+	if (glfwGetKey(Utility::window, GLFW_KEY_ENTER) == GLFW_PRESS && search != *value)
+	{
+		*value = search;
+		focusedTextInputID = "";
+	}
+
+	return Abs(startPos - endPos);
 }
 
 void Editor::OnKeyPressed(GLFWwindow* window, int key, int scancode, int action, int mods)

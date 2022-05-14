@@ -39,7 +39,7 @@ int main(int argc, void* argv[])
     const char* windowName = "Teeeest!";
     const bool displayFPS = true;
 
-    const int bloomResDivide = 4;
+    const int bloomResDivide = 2;
 
     // Init GLFW
     glfwInit();

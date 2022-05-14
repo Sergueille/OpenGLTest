@@ -187,7 +187,7 @@ void EditorSaveManager::LoadPrefab(Prefab* prefab)
 {
 	if (prefab->GetPath() == "") return;
 
-	std::cout << "Loading prefab : " << prefab->GetPath() << std::endl;
+	std::cout << "Loading prefab " << prefab->GetPath() << std::endl;
 
 	std::string path = mapsBasePath + prefab->GetPath();
 	ifile->open(path, std::ios::in);
