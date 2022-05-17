@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 28
+count 30
 
 object MapData {
 	mapName: ""
@@ -129,18 +129,6 @@ object Button {
 	startPressed: "1"
 	onPressed: "13|Turn off|"
 	onUnpressed: "13|Turn on|"
-}
-object Light {
-	ID: "225"
-	name: ""
-	position: "2.600000, 3.000000, 10.000000"
-	parent: "-1"
-	lightSize: "1.000000"
-	color: "0.200000, 1.000000, 0.200000, 1.000000"
-	intensity: "0.800000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
 }
 object Light {
 	ID: "270"
@@ -302,4 +290,30 @@ object Prefab {
 	path: "prefabs\neon.map"
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
+}
+object CameraController {
+	ID: "895"
+	name: "Zoom out"
+	position: "2.800000, 0.600000, 100.000000"
+	parent: "-1"
+	zoom: "1.200000"
+	transTime: "2.000000"
+}
+object Trigger {
+	ID: "896"
+	name: ""
+	position: "-3.200000, 5.800000, 100.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "3.800000, 2.800000"
+	onEnter: "898|Set zoom|"
+	onExit: "895|Set zoom|"
+}
+object CameraController {
+	ID: "898"
+	name: "Zoom in"
+	position: "3.800000, 0.600000, 100.000000"
+	parent: "-1"
+	zoom: "0.800000"
+	transTime: "2.000000"
 }

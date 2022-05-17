@@ -123,10 +123,10 @@ void EditorSprite::UpdateTransform()
 
 	if (texture != nullptr)
 	{
-		((RectCollider*)clickCollider)->size = size * vec2(texture->ratio, 1);
+		((RectCollider*)clickCollider)->size = Abs(size * vec2(texture->ratio, 1));
 	}
 	else
 	{
-		((RectCollider*)clickCollider)->size = size;
+		((RectCollider*)clickCollider)->size = Abs(size);
 	}
 }

@@ -11,6 +11,7 @@
 #include "ShadowCaster.h"
 #include "Prefab.h"
 #include "Trigger.h"
+#include "CameraController.h"
 
 #include <iostream>
 
@@ -713,6 +714,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	if (pressed)
 		newObject = (EditorObject*)new Trigger();
 
+	drawPos.y -= UIButton(drawPos, "CameraController", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new CameraController();
+
 	if (newObject != nullptr)
 	{
 		AddObject(newObject);
@@ -1207,6 +1212,8 @@ void Editor::StartTest()
 		focusedTextInputID = "filePath";
 	}
 
+	Camera::size = Camera::defaultSize;
+
 	EditorSaveManager::SaveLevel();
 	CloseEditor();
 	EditorSaveManager::LoadLevel(currentFilePath, false);
@@ -1239,7 +1246,6 @@ void Editor::IndexFiles()
 		std::string fileName = ToLower(entry.path().string());
 		fileName = fileName.substr(mapDir.length() + 1, mapDir.length() - mapDir.length() - 1); // Remove "levels\"
 		mapFiles.push_back(fileName);
-		std::cout << fileName << std::endl;
 	}
 
 	std::string soundsDir = "Sounds";
@@ -1428,7 +1434,7 @@ vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, vec4* value, int
 
 vec2 Editor::DrawProperty(vec3 drawPos, const std::string name, Texture** value, float propX, std::string ID)
 {
-	std::string res = (*value)->path;
+	std::string res = *value == nullptr ? "" : (*value)->path;
 	vec2 size = FileSelector(drawPos, name, &res, &textureFiles, propX, ID);
 
 	if (glfwGetKey(Utility::window, GLFW_KEY_ENTER) == GLFW_PRESS || res != "") // Set value or press enter

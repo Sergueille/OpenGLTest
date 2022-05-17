@@ -11,6 +11,7 @@
 #include "LightManager.h"
 #include "Prefab.h"
 #include "Trigger.h"
+#include "CameraController.h"
 
 using namespace glm;
 
@@ -501,6 +502,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "Trigger")
 	{
 		newObj = new Trigger();
+		newObj->Load(&props);
+	}
+	else if (objectType == "CameraController")
+	{
+		newObj = new CameraController();
 		newObj->Load(&props);
 	}
 	else

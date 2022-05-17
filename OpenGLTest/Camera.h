@@ -41,5 +41,7 @@ namespace Camera
 	void OnMouseClick(GLFWwindow* window, int button, int action, int mods);
 
 	void OnScroll(GLFWwindow* window, double xOffset, double yOffset);
+
+	void SetSize(float value);
 }
 

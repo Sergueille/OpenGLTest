@@ -195,6 +195,9 @@
     <ClCompile Include="Trigger.cpp">
       <Filter>Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -298,6 +301,15 @@
     </ClInclude>
     <ClInclude Include="Trigger.h">
       <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="TweenManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="TweenAction.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

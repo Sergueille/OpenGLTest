@@ -1,0 +1,33 @@
+// Editor map file, version 1
+
+count 3
+
+object MapData {
+	mapName: ""
+}
+object Light {
+	ID: "5660"
+	name: ""
+	position: "0.000000, 0.000000, 15.000000"
+	parent: "-1"
+	lightSize: "10.000000"
+	color: "0.900000, 0.950000, 1.000000, 1.000000"
+	intensity: "1.000000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+}
+object EditorSprite {
+	ID: "5654"
+	name: ""
+	position: "0.000000, 0.000000, -6.000000"
+	parent: "-1"
+	size: "1.000000, 1.000000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "light_fluo.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}

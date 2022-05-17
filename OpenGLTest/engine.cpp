@@ -15,6 +15,7 @@ Some code from https://learnopengl.com/
 #include "Texture.h"
 #include "Utility.h"
 #include "Sprite.h"
+#include "TweenManager.h"
 #include "EventManager.h"
 #include "RessourceManager.h"
 #include "Player.h"

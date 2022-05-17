@@ -177,6 +177,7 @@
     <ClCompile Include="..\glad.c" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Editor.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\backend\miniaudio\miniaudio.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraController.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Editor.h" />
@@ -238,6 +240,8 @@
     <ClInclude Include="TextManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Trigger.h" />
+    <ClInclude Include="TweenAction.h" />
+    <ClInclude Include="TweenManager.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
