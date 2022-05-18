@@ -65,9 +65,12 @@ namespace Camera
 		else
 		{
 			// Follow target
-			velocity += (getTarget() - position);
-			velocity /= smoothTime;
-			position += velocity * Utility::GetDeltaTime();
+			if (getTarget != nullptr)
+			{
+				velocity += (getTarget() - position);
+				velocity /= smoothTime;
+				position += velocity * Utility::GetDeltaTime();
+			}
 		}
 	}
 

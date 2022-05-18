@@ -47,6 +47,10 @@ public:
 
 	static std::list<EditorObject*> editorObjects;
 
+	/// <summary>
+	/// Has the Editotr::createEditor() method be called
+	/// </summary>
+	static bool created;
 	static bool enabled;
 
 	const static int panelSize = 400;

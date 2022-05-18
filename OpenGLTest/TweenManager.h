@@ -4,12 +4,13 @@
 #include "LinkedList.h"
 
 // NOTE: no cpp file because of template
+// Tween type enum in TweenAction.h
 
 template <typename T>
 class TweenManager
 {
 public:
-	static LinkedListElement<TweenAction<T>>* Tween(T startVal, T endVal, float duration, std::function<void(T value)> func);
+	static LinkedListElement<TweenAction<T>>* Tween(T startVal, T endVal, float duration, std::function<void(T value)> func, EaseType type);
 	static void Cancel(LinkedListElement<TweenAction<T>>* action);
 
 private:
@@ -27,7 +28,7 @@ template <typename T>
 TweenManager<T>* TweenManager<T>::instance = nullptr;
 
 template <typename T>
-LinkedListElement<TweenAction<T>>* TweenManager<T>::Tween(T startVal, T endVal, float duration, std::function<void(T value)> func)
+LinkedListElement<TweenAction<T>>* TweenManager<T>::Tween(T startVal, T endVal, float duration, std::function<void(T value)> func, EaseType type)
 {
 	if (TweenManager<T>::instance == nullptr)
 	{
@@ -35,8 +36,7 @@ LinkedListElement<TweenAction<T>>* TweenManager<T>::Tween(T startVal, T endVal, 
 		EventManager::OnMainLoop.push_end([] { TweenManager<T>::instance->OnMainLoop(); });
 	}
 
-	// ???
-	TweenAction<T> newAction = TweenAction<T>(startVal, endVal, Utility::time, duration, func);
+	TweenAction<T> newAction = TweenAction<T>(startVal, endVal, Utility::time, duration, func, type);
 	return TweenManager<T>::activeActions.push_end(newAction);
 }
 

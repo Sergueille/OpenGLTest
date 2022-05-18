@@ -20,6 +20,7 @@ using namespace glm;
 std::list<EditorObject*> Editor::editorObjects;
 std::list<EditorObject*> Editor::selectedObjects = std::list<EditorObject*>();
 
+bool Editor::created = false;
 bool Editor::enabled = false;
 
 const float Editor::selectClickMargin = 0.001f;
@@ -297,6 +298,8 @@ EditorAction Editor::editorActions[18] = {
 
 void Editor::CreateEditor()
 {
+	if (created) return;
+
 	std::cout << "Creating editor" << std::endl;
 	infoBarText = "Welcome to the level editor!";
 
@@ -307,13 +310,15 @@ void Editor::CreateEditor()
 
 	IndexFiles();
 
-	OpenEditor();
+	created = true;
 }
 
 void Editor::OpenEditor()
 {
 	if (enabled) return;
 	enabled = true;
+
+	if (!created) CreateEditor();
 
 	Camera::editorCamera = true;
 	EditorSaveManager::EnableEditorObjects();
@@ -332,10 +337,14 @@ void Editor::CloseEditor()
 
 void Editor::DestroyEditor()
 {
+	if (!created) return;
+
 	std::cout << "Destroying editor" << std::endl;
 	EditorSaveManager::ClearEditorLevel();
 	ClearClipboard();
 	CloseEditor();
+
+	created = false;
 }
 
 int Editor::GetIndexOfEditorObject(EditorObject* object, bool throwIfNotFound)

@@ -106,7 +106,7 @@ void CameraController::GetObjectEvents(const ObjectEvent** res, int* resCount)
 
 void CameraController::SetZoom(float zoom, float transTime)
 {
-	TweenManager<float>::Tween(Camera::size, zoom * Camera::defaultSize, transTime, [](float val) { Camera::size = val; });
+	TweenManager<float>::Tween(Camera::size, zoom * Camera::defaultSize, transTime, [](float val) { Camera::size = val; }, EaseType::sineInOut);
 }
 
 void CameraController::SetZoomWithProps()

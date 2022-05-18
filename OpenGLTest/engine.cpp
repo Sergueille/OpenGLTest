@@ -23,6 +23,7 @@ Some code from https://learnopengl.com/
 #include "TextManager.h"
 #include "Collider.h"
 #include "EditorSprite.h"
+#include "MenuManager.h"
 
 using namespace std;
 using namespace Utility;
@@ -141,9 +142,8 @@ int main(int argc, void* argv[])
     // Load shaders
     RessourceManager::LoadBaseShaders();
 
-    // Start level editor
-    Editor::CreateEditor();
-    EditorSaveManager::LoadLevel("test.map", true);
+    // Open main menu
+    MenuManager::OpenMenu(MenuManager::Menu::main);
 
     Camera::SetupCamera();
 
