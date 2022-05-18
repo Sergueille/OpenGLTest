@@ -229,8 +229,6 @@ public:
 
 	static EditorObject* GetEditorObjectByID(int ID, bool inEditor = false, bool throwIfNotFound = true);
 
-	static void GetLevelAABB(vec2* resMin, vec2* resMax);
-
 	/// <summary>
 	/// Make all editorObjects search again for this parent by its ID, use when deleting parent, replacing, etc
 	/// </summary>

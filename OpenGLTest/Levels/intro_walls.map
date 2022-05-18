@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 235
+count 233
 
 object MapData {
 	mapName: ""
@@ -927,18 +927,6 @@ object ShadowCaster {
 	orientation: "0.000000"
 }
 object Light {
-	ID: "1388"
-	name: ""
-	position: "132.600006, -11.000000, 5.000000"
-	parent: "-1"
-	lightSize: "5.000000"
-	color: "1.000000, 0.200000, 0.000000, 1.000000"
-	intensity: "0.700000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-}
-object Light {
 	ID: "1493"
 	name: ""
 	position: "143.199997, -9.000000, 5.000000"
@@ -965,7 +953,7 @@ object Light {
 object Player {
 	ID: "1496"
 	name: ""
-	position: "-4.000000, 0.600000, 10.000000"
+	position: "203.400009, 3.600000, 10.000000"
 	parent: "-1"
 }
 object ShadowCaster {
@@ -975,42 +963,6 @@ object ShadowCaster {
 	parent: "-1"
 	size: "10.800000, 2.200000"
 	orientation: "0.000000"
-}
-object Light {
-	ID: "1602"
-	name: ""
-	position: "131.800003, -21.800001, 5.000000"
-	parent: "-1"
-	lightSize: "10.000000"
-	color: "0.500000, 1.000000, 0.400000, 1.000000"
-	intensity: "0.700000"
-	rotation: "90.000000"
-	innerAngle: "50.000000"
-	outerAngle: "110.000000"
-}
-object Light {
-	ID: "1603"
-	name: ""
-	position: "138.600006, -22.600000, 5.000000"
-	parent: "-1"
-	lightSize: "10.000000"
-	color: "0.500000, 1.000000, 0.400000, 1.000000"
-	intensity: "0.700000"
-	rotation: "90.000000"
-	innerAngle: "50.000000"
-	outerAngle: "110.000000"
-}
-object Light {
-	ID: "1604"
-	name: ""
-	position: "151.199997, -21.800001, 5.000000"
-	parent: "-1"
-	lightSize: "10.000000"
-	color: "0.500000, 1.000000, 0.400000, 1.000000"
-	intensity: "0.700000"
-	rotation: "90.000000"
-	innerAngle: "50.000000"
-	outerAngle: "110.000000"
 }
 object Light {
 	ID: "1605"
@@ -1208,9 +1160,9 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1855"
 	name: ""
-	position: "209.600006, -6.200000, 0.000000"
+	position: "216.600006, -6.200000, 0.000000"
 	parent: "-1"
-	size: "46.600002, 15.800000"
+	size: "64.200005, 15.800000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -2998,4 +2950,21 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+}
+object LevelEnd {
+	ID: "7726"
+	name: ""
+	position: "242.199997, 4.200000, 20.000000"
+	parent: "-1"
+	nextLevel: "intro_lasers.map"
+}
+object Trigger {
+	ID: "8013"
+	name: ""
+	position: "229.800003, 4.400000, 0.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "12.600000, 7.200000"
+	onEnter: "7726|End level|"
+	onExit: ""
 }

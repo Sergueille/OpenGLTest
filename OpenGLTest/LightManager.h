@@ -21,8 +21,10 @@ public:
 	static vec2 lightmapMin;
 	static vec2 lightmapMax;
 
-private:
-	static unsigned int texID;
+	static bool forceRefreshOnNextFrame;
+	static bool mustReadNewFile;
 	static std::string texLevelPath;
 
+private:
+	static unsigned int texID;
 };

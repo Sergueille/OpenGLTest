@@ -10,8 +10,8 @@ template <typename T>
 class TweenManager
 {
 public:
-	static LinkedListElement<TweenAction<T>>* Tween(T startVal, T endVal, float duration, std::function<void(T value)> func, EaseType type);
-	static void Cancel(LinkedListElement<TweenAction<T>>* action);
+	static TweenAction<T>* Tween(T startVal, T endVal, float duration, std::function<void(T value)> func, EaseType type);
+	static void Cancel(TweenAction<T>* action);
 
 private:
 	static LinkedList<TweenAction<T>> activeActions;
@@ -28,7 +28,7 @@ template <typename T>
 TweenManager<T>* TweenManager<T>::instance = nullptr;
 
 template <typename T>
-LinkedListElement<TweenAction<T>>* TweenManager<T>::Tween(T startVal, T endVal, float duration, std::function<void(T value)> func, EaseType type)
+TweenAction<T>* TweenManager<T>::Tween(T startVal, T endVal, float duration, std::function<void(T value)> func, EaseType type)
 {
 	if (TweenManager<T>::instance == nullptr)
 	{
@@ -36,14 +36,15 @@ LinkedListElement<TweenAction<T>>* TweenManager<T>::Tween(T startVal, T endVal, 
 		EventManager::OnMainLoop.push_end([] { TweenManager<T>::instance->OnMainLoop(); });
 	}
 
-	TweenAction<T> newAction = TweenAction<T>(startVal, endVal, Utility::time, duration, func, type);
-	return TweenManager<T>::activeActions.push_end(newAction);
+	auto listElement = TweenManager<T>::activeActions.push_end(TweenAction<T>(startVal, endVal, Utility::time, duration, func, type));
+	return &listElement->value;
+	listElement->value.listElement = listElement;
 }
 
 template <typename T>
-void TweenManager<T>::Cancel(LinkedListElement<TweenAction<T>>* action)
+void TweenManager<T>::Cancel(TweenAction<T>* action)
 {
-	activeActions.remove(action);
+	activeActions.remove(action->listElement);
 }
 
 template <typename T>
@@ -53,6 +54,9 @@ void TweenManager<T>::OnMainLoop()
 	{
 		if (el->value.IsFinshedAt(Utility::time)) // Action ended
 		{
+			if (el->value.onFinished != nullptr)
+				el->value.onFinished();
+
 			auto next = el->next;
 			activeActions.remove(el);
 			el = next;

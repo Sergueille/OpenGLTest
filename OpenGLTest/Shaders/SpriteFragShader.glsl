@@ -29,7 +29,7 @@ void main()
         color *= vec4(texture(lightmap, lightmapCoord).rgb, 1);
     }
 
-    if (color.a < 0.01)
+    if (color.a < 0.001)
     {
         discard;
     }

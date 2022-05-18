@@ -16,6 +16,9 @@ std::string LightManager::texLevelPath = "";
 vec2 LightManager::lightmapMin = vec2(0);
 vec2 LightManager::lightmapMax = vec2(0);
 
+bool LightManager::forceRefreshOnNextFrame = false;
+bool LightManager::mustReadNewFile = false;
+
 void LightManager::BakeLight()
 {
 	Shader* shader = &RessourceManager::shaders["lightmapper"];
@@ -34,7 +37,7 @@ void LightManager::BakeLight()
 
 	// Get light data
 	vec2 levelMin; vec2 levelMax;
-	Editor::GetLevelAABB(&levelMin, &levelMax);
+	GetLevelAABB(&levelMin, &levelMax, Editor::enabled);
 	vec2 levelSize = levelMax - levelMin;
 
 	float posArray[MAX_LIGHT_COUNT * 2] = {};
@@ -155,10 +158,11 @@ void LightManager::BakeLight()
 
 unsigned int LightManager::GetLightData()
 {
-	if (Editor::currentFilePath == texLevelPath)
+	if (!mustReadNewFile)
 		return texID;
 
 	texLevelPath = Editor::currentFilePath;
+	mustReadNewFile = false;
 
 	std::string path = "Lightmaps\\" + Editor::currentFilePath + ".hdr";
 
@@ -183,7 +187,7 @@ unsigned int LightManager::GetLightData()
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		// Update lightmap pos
-		Editor::GetLevelAABB(&lightmapMin, &lightmapMax);
+		GetLevelAABB(&lightmapMin, &lightmapMax, Editor::enabled);
 
 		std::cout << "Loaded texture " << path << std::endl;
 		return texID;
@@ -200,5 +204,5 @@ unsigned int LightManager::GetLightData()
 
 void LightManager::ForceRefreshLightmaps()
 {
-	texLevelPath = "";
+	forceRefreshOnNextFrame = true;
 }

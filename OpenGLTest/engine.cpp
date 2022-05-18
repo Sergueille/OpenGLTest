@@ -24,6 +24,7 @@ Some code from https://learnopengl.com/
 #include "Collider.h"
 #include "EditorSprite.h"
 #include "MenuManager.h"
+#include "LightManager.h"
 
 using namespace std;
 using namespace Utility;
@@ -147,6 +148,9 @@ int main(int argc, void* argv[])
 
     Camera::SetupCamera();
 
+    // Create overlay sprite
+    Sprite* overlaySprite = new Sprite(vec3(0, 0, overlayZ), vec3(screenX, screenY, overlayZ), overlayColor);
+
     // Create bloom blur buffers
     unsigned int pingpongFBO[2];
     unsigned int pingpongBuffer[2];
@@ -197,8 +201,19 @@ int main(int argc, void* argv[])
         // Call events
         EventManager::Call(&EventManager::OnMainLoop);
 
+        overlaySprite->color = overlayColor;
+        overlaySprite->position.z = overlayZ;
+        overlaySprite->Draw();
+
         // Draw transparent sprites
         Sprite::DrawAll();
+
+        // Update lightmap if needed
+        if (LightManager::forceRefreshOnNextFrame)
+        {
+            LightManager::forceRefreshOnNextFrame = false;
+            LightManager::mustReadNewFile = true;
+        }
 
         ///////////////////
         // GAME LOOP END //

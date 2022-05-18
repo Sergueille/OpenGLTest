@@ -12,6 +12,7 @@
 #include "Prefab.h"
 #include "Trigger.h"
 #include "CameraController.h"
+#include "LevelEnd.h"
 
 #include <iostream>
 
@@ -723,9 +724,14 @@ void Editor::DrawAddTab(vec3 drawPos)
 	if (pressed)
 		newObject = (EditorObject*)new Trigger();
 
-	drawPos.y -= UIButton(drawPos, "CameraController", &pressed).y;
+	drawPos.y -= UIButton(drawPos, "Camera controller", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new CameraController();
+
+	drawPos.y -= UIButton(drawPos, "Level end", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new LevelEnd();
+
 
 	if (newObject != nullptr)
 	{
@@ -818,26 +824,6 @@ void Editor::DrawInfoBar()
 	drawPos = vec3(Utility::screenX - margin, Utility::screenY - textSize, UIBaseZPos);
 	std::string displayFPS = std::to_string(GetFPS()) + " FPS";
 	drawPos.x -= TextManager::RenderText(displayFPS, drawPos, textSize, TextManager::text_align::left).x;
-}
-
-void Editor::GetLevelAABB(vec2* resMin, vec2* resMax)
-{
-	(*editorObjects.begin())->GetAABB(resMin, resMax);
-
-	for (auto it = editorObjects.begin(); it != editorObjects.end(); it++)
-	{
-		vec2 min; vec2 max;
-		(*it)->GetAABB(&min, &max);
-
-		if (min.x < resMin->x)
-			resMin->x = min.x;
-		if (max.x > resMax->x)
-			resMax->x = max.x;
-		if (min.y < resMin->y)
-			resMin->y = min.y;
-		if (max.y > resMax->y)
-			resMax->y = max.y;
-	}
 }
 
 void Editor::HandleInputBackspace()
@@ -1231,6 +1217,9 @@ void Editor::StartTest()
 void Editor::EndTest()
 {
 	EditorSaveManager::ClearGameLevel();
+
+	LightManager::ForceRefreshLightmaps();
+
 	OpenEditor();
 }
 

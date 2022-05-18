@@ -31,8 +31,13 @@ public:
 
 	std::function<void(T value)> func;
 
+	LinkedListElement<TweenAction<T>>* listElement = nullptr;
+	std::function<void()> onFinished = nullptr;
+
 	T EvalAt(float time);
 	bool IsFinshedAt(float time);
+
+	TweenAction<T>* SetOnFinished(std::function<void()> function);
 };
 
 template <typename T>
@@ -117,6 +122,13 @@ template <typename T>
 bool TweenAction<T>::IsFinshedAt(float time)
 {
 	return time > startTime + duration;
+}
+
+template<typename T>
+inline TweenAction<T>* TweenAction<T>::SetOnFinished(std::function<void()> function)
+{
+	onFinished = function;
+	return this;
 }
 
 template<typename T>

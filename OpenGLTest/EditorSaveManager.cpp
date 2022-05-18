@@ -12,6 +12,7 @@
 #include "Prefab.h"
 #include "Trigger.h"
 #include "CameraController.h"
+#include "LevelEnd.h"
 
 using namespace glm;
 
@@ -109,10 +110,9 @@ void EditorSaveManager::SaveLevel()
 
 void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 {
-	Editor::currentFilePath = path;
-
 	if (inEditor)
 	{
+		Editor::currentFilePath = path;
 		ClearEditorLevel();
 		Camera::position = vec2(0, 0); // Reset camera position
 	}
@@ -148,9 +148,8 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 		Editor::ClearUndoStack();
 		Editor::ClearRedoStack();
 
-		LightManager::ForceRefreshLightmaps();
-
-		Editor::infoBarText = "Loaded " + path;
+		if (inEditor)
+			Editor::infoBarText = "Loaded " + path;
 
 		ifile->close();
 
@@ -164,6 +163,8 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 				prefab->ReloadPrefab();
 			}
 		}
+
+		LightManager::ForceRefreshLightmaps();
 	}
 	catch (std::exception e) // Catch exceptions to make sure the file is closed
 	{
@@ -507,6 +508,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "CameraController")
 	{
 		newObj = new CameraController();
+		newObj->Load(&props);
+	}
+	else if (objectType == "LevelEnd")
+	{
+		newObj = new LevelEnd();
 		newObj->Load(&props);
 	}
 	else

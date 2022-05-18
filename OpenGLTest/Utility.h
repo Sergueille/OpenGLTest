@@ -32,6 +32,9 @@ namespace Utility
 	extern int FPSvalues[FPS_NB_VALUES];
 	extern int FPSvaluePos;
 
+	extern glm::vec4 overlayColor;
+	extern float overlayZ;
+
 	/// <summary>
 	/// Projects C on AB
 	/// </summary>
@@ -101,4 +104,6 @@ namespace Utility
 
 	extern void GlBindVtexArrayOptimised(unsigned int VAO);
 	extern unsigned int currentVAO;
+
+	extern void GetLevelAABB(glm::vec2* resMin, glm::vec2* resMax, bool inEditor);
 };

@@ -6,6 +6,7 @@
 #include <string>
 #include <math.h>
 #include <algorithm>
+#include "Editor.h"
 
 namespace Utility
 {
@@ -22,6 +23,9 @@ namespace Utility
 
 	int FPSvalues[FPS_NB_VALUES];
 	int FPSvaluePos;
+
+	glm::vec4 overlayColor = glm::vec4(0);
+	float overlayZ = 100;
 
 	float GetDeltaTime()
 	{
@@ -268,5 +272,27 @@ namespace Utility
 
 		currentVAO = VAO;
 		glBindVertexArray(VAO);
+	}
+
+	void GetLevelAABB(glm::vec2* resMin, glm::vec2* resMax, bool inEditor)
+	{
+		auto list = inEditor ? &Editor::editorObjects : &EditorSaveManager::levelObjectList;
+
+		(*list->begin())->GetAABB(resMin, resMax);
+
+		for (auto it = list->begin(); it != list->end(); it++)
+		{
+			vec2 min; vec2 max;
+			(*it)->GetAABB(&min, &max);
+
+			if (min.x < resMin->x)
+				resMin->x = min.x;
+			if (max.x > resMax->x)
+				resMax->x = max.x;
+			if (min.y < resMin->y)
+				resMin->y = min.y;
+			if (max.y > resMax->y)
+				resMax->y = max.y;
+		}
 	}
 }

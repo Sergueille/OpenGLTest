@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 30
+count 29
 
 object MapData {
 	mapName: ""
@@ -291,29 +291,20 @@ object Prefab {
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
 }
-object CameraController {
-	ID: "895"
-	name: "Zoom out"
-	position: "2.800000, 0.600000, 100.000000"
-	parent: "-1"
-	zoom: "1.200000"
-	transTime: "2.000000"
-}
 object Trigger {
 	ID: "896"
 	name: ""
-	position: "-3.200000, 5.800000, 100.000000"
+	position: "-18.600000, 0.400000, 0.000000"
 	parent: "-1"
 	orientation: "0.000000"
-	scale: "3.800000, 2.800000"
-	onEnter: "898|Set zoom|"
-	onExit: "895|Set zoom|"
+	scale: "6.200000, 5.200000"
+	onEnter: "1028|End level|"
+	onExit: ""
 }
-object CameraController {
-	ID: "898"
-	name: "Zoom in"
-	position: "3.800000, 0.600000, 100.000000"
+object LevelEnd {
+	ID: "1028"
+	name: "Level end"
+	position: "-21.400000, 0.400000, 10.000000"
 	parent: "-1"
-	zoom: "0.800000"
-	transTime: "2.000000"
+	nextLevel: "intro_walls.map"
 }
