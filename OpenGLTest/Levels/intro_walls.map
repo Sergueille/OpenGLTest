@@ -953,7 +953,7 @@ object Light {
 object Player {
 	ID: "1496"
 	name: ""
-	position: "203.400009, 3.600000, 10.000000"
+	position: "-5.600000, 0.600000, 10.000000"
 	parent: "-1"
 }
 object ShadowCaster {

@@ -17,6 +17,8 @@ public:
 	static std::list<EditorObject*> levelObjectList;
 	static MapData currentMapData;
 
+	static std::string filePath;
+
 	/// <summary>
 	/// The level folder path
 	/// </summary>

@@ -24,7 +24,7 @@ namespace Camera
 	vec2 lastMousePos;
 	float sizeTarget;
 
-	float size = 16;
+	float size = 24;
 	float smoothTime = 1.3f;
 
 	glm::mat4 GetOrthographicProjection()

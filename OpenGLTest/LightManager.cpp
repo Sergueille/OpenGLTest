@@ -161,10 +161,10 @@ unsigned int LightManager::GetLightData()
 	if (!mustReadNewFile)
 		return texID;
 
-	texLevelPath = Editor::currentFilePath;
+	texLevelPath = Editor::enabled? Editor::currentFilePath : EditorSaveManager::filePath;
 	mustReadNewFile = false;
 
-	std::string path = "Lightmaps\\" + Editor::currentFilePath + ".hdr";
+	std::string path = "Lightmaps\\" + texLevelPath + ".hdr";
 
 	// Read texture file
 	stbi_set_flip_vertically_on_load(true);

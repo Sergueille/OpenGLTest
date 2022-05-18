@@ -13,6 +13,8 @@
 
 using namespace glm;
 
+constexpr int EDITOR_ACTIONS_COUNT = 19;
+
 class EditorObject;
 struct MapData;
 struct EditorAction;
@@ -43,7 +45,7 @@ public:
 		std::string GetDescription();
 	};
 
-	static EditorAction editorActions[18];
+	static EditorAction editorActions[EDITOR_ACTIONS_COUNT];
 
 	static std::list<EditorObject*> editorObjects;
 

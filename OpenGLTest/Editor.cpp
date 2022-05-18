@@ -13,10 +13,12 @@
 #include "Trigger.h"
 #include "CameraController.h"
 #include "LevelEnd.h"
+#include "MenuManager.h"
 
 #include <iostream>
 
 using namespace glm;
+
 
 std::list<EditorObject*> Editor::editorObjects;
 std::list<EditorObject*> Editor::selectedObjects = std::list<EditorObject*>();
@@ -85,7 +87,7 @@ std::list<std::string> Editor::textureFiles = std::list<std::string>();
 std::list<std::string> Editor::mapFiles = std::list<std::string>();
 std::list<std::string> Editor::soundFiles = std::list<std::string>();
 
-EditorAction Editor::editorActions[18] = {
+EditorAction Editor::editorActions[EDITOR_ACTIONS_COUNT] = {
 	EditorAction {
 		"Save",
 		"Save the level in the current file path",
@@ -293,6 +295,18 @@ EditorAction Editor::editorActions[18] = {
 		false,
 		[] {
 			Paste();
+		},
+	},
+	EditorAction{
+		"Quit editor",
+		"Destroy editor end open main menu",
+		GLFW_KEY_Q,
+		true,
+		true,
+		true,
+		[] {
+			DestroyEditor();
+			MenuManager::OpenMenu(MenuManager::Menu::main);
 		},
 	},
 };

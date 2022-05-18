@@ -54,6 +54,8 @@ void TweenManager<T>::OnMainLoop()
 	{
 		if (el->value.IsFinshedAt(Utility::time)) // Action ended
 		{
+			el->value.func(el->value.endVal);
+
 			if (el->value.onFinished != nullptr)
 				el->value.onFinished();
 

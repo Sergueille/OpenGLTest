@@ -116,6 +116,8 @@ void LevelEnd::EndLevel()
 
 	isEndingLevel = true;
 
+	overlayZ = 90;
+
 	// Fade in
 	TweenManager<float>::Tween(0, 1, 2, [](float value) {
 		overlayColor = vec4(0, 0, 0, value);

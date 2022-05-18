@@ -19,6 +19,8 @@ using namespace glm;
 std::list<EditorObject*> EditorSaveManager::levelObjectList = std::list<EditorObject*>();
 MapData EditorSaveManager::currentMapData;
 
+std::string EditorSaveManager::filePath = "";
+
 const std::string EditorSaveManager::mapsBasePath = "Levels\\";
 std::ofstream* EditorSaveManager::ofile = nullptr;
 std::ifstream* EditorSaveManager::ifile = nullptr;
@@ -119,6 +121,7 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 	else
 	{
 		ClearGameLevel();
+		filePath = path;
 	}
 
 	std::cout << "Loading level " << path << std::endl;

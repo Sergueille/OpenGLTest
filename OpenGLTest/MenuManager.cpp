@@ -3,6 +3,7 @@
 #include "EventManager.h"
 #include "Editor.h"
 #include "TextManager.h"
+#include "TweenManager.h"
 
 MenuManager::Menu MenuManager::currentMenu = Menu::none;
 bool MenuManager::isSetup = false;
@@ -35,7 +36,26 @@ void MenuManager::OnMainLoop()
 
 		if (pressed)
 		{
+			overlayZ = 2000;
 
+			TweenManager<float>::Tween(0, 1, 2, [](float value) {
+				overlayColor = vec4(0, 0, 0, value);
+			}, linear)
+			->SetOnFinished([] {
+				// Load next level
+				EditorSaveManager::LoadLevel("intro_walls.map", false);
+
+				OpenMenu(Menu::none);
+
+				// Fade out
+				TweenManager<float>::Tween(1, 0, 2, [](float value) {
+					overlayColor = vec4(0, 0, 0, value);
+					}, linear);
+
+				// Set camera instantly
+				if (Camera::getTarget != nullptr)
+					Camera::position = Camera::getTarget();
+			});
 		}
 	}
 	else if (currentMenu == Menu::none)
