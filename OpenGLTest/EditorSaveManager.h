@@ -23,6 +23,10 @@ public:
 	/// The level folder path
 	/// </summary>
 	static const std::string mapsBasePath;
+	/// <summary>
+	/// The settings folder path
+	/// </summary>
+	static const std::string settingsBasePath;
 
 	/// <summary>
 	/// String used to indentation (ex: two spaces, a tabulation)
@@ -73,6 +77,9 @@ public:
 	static vec2 StringToVector2(std::string s, vec2 def = vec2(0));
 	static vec3 StringToVector3(std::string s, vec3 def = vec3(0));
 	static vec4 StringToVector4(std::string s, vec4 def = vec4(0));
+
+	static void ReadSettings(std::string fileName, std::map<std::string, std::string>* res);
+
 private:
 	static std::ofstream* ofile;
 	static std::ifstream* ifile;

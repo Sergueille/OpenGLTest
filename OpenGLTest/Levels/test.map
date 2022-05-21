@@ -119,7 +119,7 @@ object Laser {
 	laserType: "0"
 	startOffset: "-0.100000"
 	endOffset: "0.150000"
-	startOn: "0"
+	startOn: "1"
 }
 object Button {
 	ID: "156"
@@ -127,8 +127,8 @@ object Button {
 	position: "2.600000, 3.000000, 1.000000"
 	parent: "-1"
 	startPressed: "1"
-	onPressed: "13|Turn off|"
-	onUnpressed: "13|Turn on|"
+	onPressed: "13|Turn on|"
+	onUnpressed: "13|Turn off|"
 }
 object Light {
 	ID: "270"
@@ -193,7 +193,7 @@ object ShadowCaster {
 object Player {
 	ID: "477"
 	name: ""
-	position: "5.400000, 8.400001, 20.000000"
+	position: "4.600000, 9.000000, 20.000000"
 	parent: "-1"
 }
 object Prefab {

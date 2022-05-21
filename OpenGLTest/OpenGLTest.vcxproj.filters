@@ -22,11 +22,11 @@
     <Filter Include="SoLoud">
       <UniqueIdentifier>{d2ad4dbb-1924-451d-a60d-9d0e21bcd38e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Light">
-      <UniqueIdentifier>{8f12c53b-0070-4da7-8c2f-2b0f2e47c052}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Gameplay">
       <UniqueIdentifier>{0c156b34-2275-4314-8af9-96dceb92fe91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LevelEditor\Light">
+      <UniqueIdentifier>{8f12c53b-0070-4da7-8c2f-2b0f2e47c052}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -172,13 +172,13 @@
       <Filter>SoLoud</Filter>
     </ClCompile>
     <ClCompile Include="Light.cpp">
-      <Filter>Light</Filter>
+      <Filter>LevelEditor\Light</Filter>
     </ClCompile>
     <ClCompile Include="LightManager.cpp">
-      <Filter>Light</Filter>
+      <Filter>LevelEditor\Light</Filter>
     </ClCompile>
     <ClCompile Include="ShadowCaster.cpp">
-      <Filter>Light</Filter>
+      <Filter>LevelEditor\Light</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Gameplay</Filter>
@@ -285,13 +285,13 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
-      <Filter>Light</Filter>
+      <Filter>LevelEditor\Light</Filter>
     </ClInclude>
     <ClInclude Include="LightManager.h">
-      <Filter>Light</Filter>
+      <Filter>LevelEditor\Light</Filter>
     </ClInclude>
     <ClInclude Include="ShadowCaster.h">
-      <Filter>Light</Filter>
+      <Filter>LevelEditor\Light</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Gameplay</Filter>

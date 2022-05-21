@@ -38,6 +38,8 @@ public:
 	SetSpriteShaderUniforms* setUniforms;
 	void* setUniformsObjectCall = nullptr;
 
+	Sprite* transparentQueueCopy = nullptr;
+
 	static std::priority_queue<Sprite*, std::vector<Sprite*>, CompareSprite> drawQueue;
 
 	Sprite(Texture* texture, glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1), 

@@ -6,6 +6,7 @@
 #include "RectCollider.h"
 #include "RessourceManager.h"
 #include "TweenManager.h"
+#include "LightManager.h"
 
 const ObjectEvent LevelEnd::events[LEVEL_END_EVENT_COUNT] =
 {
@@ -129,7 +130,8 @@ void LevelEnd::EndLevel()
 		// Fade out
 		TweenManager<float>::Tween(1, 0, 2, [](float value) {
 			overlayColor = vec4(0, 0, 0, value);
-		}, linear);
+		}, linear)
+		->SetCondition([] { return !LightManager::forceRefreshOnNextFrame; }); 
 
 		// Set camera instantly
 		if (Camera::getTarget != nullptr)

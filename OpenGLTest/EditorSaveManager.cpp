@@ -22,6 +22,7 @@ MapData EditorSaveManager::currentMapData;
 std::string EditorSaveManager::filePath = "";
 
 const std::string EditorSaveManager::mapsBasePath = "Levels\\";
+const std::string EditorSaveManager::settingsBasePath = "Settings\\";
 std::ofstream* EditorSaveManager::ofile = nullptr;
 std::ifstream* EditorSaveManager::ifile = nullptr;
 
@@ -598,4 +599,44 @@ void EditorSaveManager::IntProp(std::map<std::string, std::string>* props, std::
 
 	if (text != "")
 		*value = std::stoi(text);
+}
+
+void EditorSaveManager::ReadSettings(std::string fileName, std::map<std::string, std::string>* res)
+{
+	std::string path = settingsBasePath + fileName;
+
+	ifile = new std::ifstream();
+	ifile->open(path, std::ios::in);
+
+	if (!ifile->is_open())
+	{
+		std::cout << "Couldn't open settings file (" << path << ")" << std::endl;
+		return;
+	}
+
+	try
+	{
+		FirstLineStartWith("Settings");
+		GoToEndOfLine();
+
+		while (!ifile->eof())
+		{
+			std::string settingName = ReadWord();
+			if (settingName == "")
+				break;
+			ifile->ignore(1); // Ignore colons
+			std::string propVal = ReadProp();
+			res->insert(make_pair(settingName, propVal));
+			GoToEndOfLine();
+		}
+
+		std::cout << "Read settings at " << path << std::endl;
+		ifile->close();
+	}
+	catch (std::exception e) // Catch exceptions to make sure the file is closed
+	{
+		std::cout << "Got an error while loading settings file (" << path << "), here's what it says:" << std::endl;
+		std::cout << e.what() << std::endl;
+		ifile->close();
+	}
 }

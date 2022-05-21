@@ -204,7 +204,7 @@ void Laser::OnLaserMainLoop()
 	{
 		vec2 raycastRes;
 		vec2 direction = Utility::Rotate(vec2(1, 0), editorRotation);
-		if (Collider::Raycast(editorPosition, direction, &raycastRes)) // NOT WORKING, why?
+		if (Collider::Raycast(editorPosition, direction, &raycastRes))
 		{
 			vec2 spriteStart = vec2(editorPosition) + (direction * startOffset);
 			vec2 spriteEnd = raycastRes + (direction * endOffset);

@@ -49,7 +49,7 @@ public:
 	/// <summary>
 	/// The distance btw the round and the player while floating
 	/// </summary>
-	const float floatingDistance = 0.55f;
+	const float floatingDistance = 0.8f;
 	/// <summary>
 	/// The min distance to jump and reload
 	/// </summary>
@@ -59,21 +59,36 @@ public:
 	/// </summary>
 	const float floatingForceStartDist = 2.f;
 	/// <summary>
-	/// Force opposed to the floating force each second
+	/// Lower value will make the bot apply less force to float
 	/// </summary>
-	const float floatFriction = 0.8f;
+	const float floatForceFactor = 0.15f;
+	const float maxFloatForceMultiplicator = 3;
+	/// <summary>
+	/// Duration of the float period
+	/// </summary>
+	const float floatPeriod = 0.7f;
+	/// <summary>
+	/// How much sinusoid movment the player will add to his position, in units
+	/// </summary>
+	const float floatIntensity = 0.2f;
 
 	const float groudRaycastsXshift = 0.4f;
 
-	const vec4 canTeleportColor = vec4(0, 1, 0, 0.5);
-	const vec4 cannotTeleportColor = vec4(1, 0, 0, 0.5);
-	const vec4 cannotTeleportClickColor = vec4(0.8, 0.5, 0, 0.5);
+	const vec4 canTeleportColor = vec4(0, 2, 0, 0.5f);
+	const vec4 cannotTeleportColor = vec4(2, 0, 0, 0.5f);
+	const vec4 cannotTeleportClickColor = vec4(1.6f, 1, 0, 0.5f);
+	vec4 normalLightColor = vec4(2, 2, 2, 1);
+	vec4 brightLightColor = vec4(8, 4, 4, 1);
 
 	static Player* ingameInstance;
 
 	bool isJumping = false;
 
 	int teleportationsRemaining = maxTeleprtationInAir;
+
+	Sprite* playerSprite;
+	Sprite* teleportPosSprite;
+	Sprite* lightsSprite;
 
 	Player(vec3 position);
 	~Player();
@@ -90,9 +105,6 @@ protected:
 	void OnAfterMove() override;
 
 private:
-	Sprite* playerSprite;
-	Sprite* teleportPosSprite;
-
 	bool physicsWasEnabledBeforeDisabling = false;
 	bool wasClickingLastFrame = false;
 

@@ -52,6 +52,14 @@ void TweenManager<T>::OnMainLoop()
 {
 	for (auto el = activeActions.first; el != nullptr;)
 	{
+		// Condition is false
+		if (el->value.conditionFunc != nullptr && !el->value.conditionFunc())
+		{
+			el->value.startTime = Utility::time;
+			el = el->next;
+			continue;
+		}
+
 		if (el->value.IsFinshedAt(Utility::time)) // Action ended
 		{
 			el->value.func(el->value.endVal);

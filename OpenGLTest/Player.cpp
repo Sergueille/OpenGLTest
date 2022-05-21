@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include "Laser.h"
 #include "CircleCollider.h"
+#include "TweenManager.h"
 
 #include <iostream>
 
@@ -11,17 +12,22 @@ Player* Player::ingameInstance = nullptr;
 
 Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), height, true)), EditorObject(position)
 {
-	playerSprite = new Sprite(RessourceManager::GetTexture("Engine\\circle.png"),
+	playerSprite = new Sprite(RessourceManager::GetTexture("robot.png"),
 		position, glm::vec2(height), 0,
-		glm::vec4(1, 0, 0, 1)); // Create a sprite!
+		glm::vec4(1.5, 1.5, 1.5, 1)); // Create a sprite!
 	playerSprite->isLit = true;
 	playerSprite->DrawOnMainLoop();
 
-	teleportPosSprite = new Sprite(RessourceManager::GetTexture("Engine\\circle.png"),
+	teleportPosSprite = new Sprite(RessourceManager::GetTexture("robot.png"),
 		position + vec3(teleportationDistance, 0, 0),
 		glm::vec2(height), 0,
 		canTeleportColor);
 	teleportPosSprite->DrawOnMainLoop();
+
+	lightsSprite = new Sprite(RessourceManager::GetTexture("robot_lights.png"),
+		position, glm::vec2(height * 0.23f), 0,
+		normalLightColor); // Create a sprite!
+	lightsSprite->DrawOnMainLoop();
 
 	((CircleCollider*)collider)->size = height;
 	clickCollider = collider;
@@ -59,6 +65,12 @@ Player::~Player()
 		teleportPosSprite = nullptr;
 	}
 
+	if (lightsSprite != nullptr)
+	{
+		delete lightsSprite;
+		lightsSprite = nullptr;
+	}
+
 	if (collider != nullptr)
 	{
 		delete collider;
@@ -78,6 +90,7 @@ void Player::UpdateTransform()
 		this->SetPos(editorPosition);
 		playerSprite->position = editorPosition;
 		teleportPosSprite->position = editorPosition + vec3(teleportationDistance, 0, 0);
+		lightsSprite->position = editorPosition + height * vec3(0, -0.344, 1);
 	}
 	else
 	{
@@ -97,6 +110,7 @@ EditorObject* Player::Copy()
 	// Copy sprites
 	copy->playerSprite = this->playerSprite->Copy();
 	copy->teleportPosSprite = this->teleportPosSprite->Copy(); 
+	copy->lightsSprite = this->lightsSprite->Copy();
 
 	copy->SubscribeToMainLoop();
 	copy->SubscribeToEditorObjectFuncs();
@@ -109,6 +123,7 @@ void Player::Enable()
 	EditorObject::Enable();
 	playerSprite->DrawOnMainLoop();
 	teleportPosSprite->DrawOnMainLoop();
+	lightsSprite->DrawOnMainLoop();
 	collider->enabled = true;
 	physicsEnabled = physicsWasEnabledBeforeDisabling;
 }
@@ -118,6 +133,7 @@ void Player::Disable()
 	EditorObject::Disable();
 	playerSprite->StopDrawing();
 	teleportPosSprite->StopDrawing();
+	lightsSprite->StopDrawing();
 	collider->enabled = false;
 	physicsWasEnabledBeforeDisabling = physicsEnabled;
 	physicsEnabled = false;
@@ -132,8 +148,12 @@ void Player::Load(std::map<std::string, std::string>* props)
 // Handle physics
 void Player::OnAfterMove()
 {
+	float deltaY = GetTimeSine((int)(floatPeriod * 1000.0f)) * floatIntensity - (floatIntensity / 2);
+
 	// Set sprite position
-	playerSprite->position = vec3(GetPos().x, GetPos().y, editorPosition.z);
+	playerSprite->position = vec3(GetPos().x, GetPos().y + deltaY, editorPosition.z);
+	vec2 lightPos = GetPos() + height * vec2(0, -0.344);;
+	lightsSprite->position = vec3(lightPos.x, lightPos.y + deltaY, editorPosition.z + 1);
 
 	float realSpeed = walkSpeed;
 
@@ -212,12 +232,20 @@ void Player::OnAfterMove()
 
 		if (dist < floatingForceStartDist && (!isJumping || velocity.y < 0)) // Levitation
 		{
-			float maxForce = PhysicObject::gravityAcceleration * ((1 / (floatingForceStartDist - floatingDistance)) + 1);
-			float force = (1 - (dist / floatingForceStartDist)) * maxForce;
+			float quantity;
+			if (dist > floatingDistance)
+				quantity = 1 - ((dist - floatingDistance) / floatingForceStartDist);
+			else
+				quantity = ((1 - (dist / floatingDistance)) * (maxFloatForceMultiplicator - 1)) + 1;
+
+			float force = (gravityAcceleration - (velocity.y / GetDeltaTime() * floatForceFactor)) * quantity;
 			velocity.y += force * GetDeltaTime();
-			
-			float frictionForce = floatFriction * (-velocity.y);
-			velocity.y += frictionForce * GetDeltaTime();
+
+			this->lightsSprite->color = (quantity / maxFloatForceMultiplicator) * (brightLightColor - normalLightColor) + normalLightColor;
+		}
+		else
+		{
+			this->lightsSprite->color = normalLightColor;
 		}
 
 		// Jump !

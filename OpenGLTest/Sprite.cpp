@@ -51,10 +51,13 @@ Sprite::Sprite(glm::vec3 start, glm::vec3 end, glm::vec4 color) :
 
 void Sprite::Draw()
 {
+    transparentQueueCopy = nullptr;
+
     if (IsTransparent())
     {
         Sprite* copy = new Sprite(*this);
         copy->isDrawnOnMainLoop = false;
+        transparentQueueCopy = copy;
         drawQueue.push(copy);
     }
     else
@@ -67,6 +70,9 @@ Sprite::~Sprite()
 {
     if (isDrawnOnMainLoop)
         StopDrawing();
+
+    if (transparentQueueCopy != nullptr)
+        transparentQueueCopy->setUniformsObjectCall = nullptr;
 }
 
 void Sprite::DrawNow()
@@ -128,7 +134,7 @@ void Sprite::DrawNow()
     realShader->SetUniform("UVstart", UVStart);
     realShader->SetUniform("UVend", UVEnd);
 
-    if (setUniforms != nullptr)
+    if (setUniforms != nullptr && setUniformsObjectCall != nullptr)
     {
         setUniforms(realShader, setUniformsObjectCall);
     }

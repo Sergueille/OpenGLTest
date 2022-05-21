@@ -1,0 +1,8 @@
+// User options of the game: appearance, resolution, volume...
+
+Settings {
+    fullscreen: "1" // "1" for full screen
+    screenX: "1280" // Resolution of the window if not in fullscreen
+    screenY: "720"
+    displayFPS: "1" // Displays FPS at the top right of the screen
+}

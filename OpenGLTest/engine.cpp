@@ -36,12 +36,17 @@ extern "C" {
 
 int main(int argc, void* argv[])
 {
-    const bool fullscreen = true;
-    const int smallWindowWidth = 1280;
-    const int smallWindowHeght = 720;
-    const char* windowName = "Teeeest!";
-    const bool displayFPS = true;
+    std::map<std::string, std::string> settings = std::map<std::string, std::string>();
+    EditorSaveManager::ReadSettings("options.set", &settings);
 
+    bool fullscreen = settings["fullscreen"] == "1";
+    int smallWindowWidth = 1820;
+    EditorSaveManager::IntProp(&settings, "screenX", &smallWindowWidth);
+    int smallWindowHeght = 720;
+    EditorSaveManager::IntProp(&settings, "screenY", &smallWindowHeght);
+    bool displayFPS = settings["displayFPS"] == "1";
+
+    const char* windowName = "Teeeest!";
     const int bloomResDivide = 2;
 
     // Init GLFW

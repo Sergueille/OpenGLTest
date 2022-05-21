@@ -8,10 +8,11 @@ Button::Button(vec3 position) : EditorObject(position)
 	isPressed = false;
 
 	btnSprite = new Sprite(
-		RessourceManager::GetTexture("engine\\circle.png"),
-		position, vec2(.5f),
-		0, vec4(1, 0, 0, 1)
+		RessourceManager::GetTexture("switch_on.png"),
+		position, vec2(1.16f),
+		0, vec4(1.3, 1.3, 1.3, 1)
 	);
+	btnSprite->isLit = true;
 	btnSprite->DrawOnMainLoop();
 
 	clickCollider = new CircleCollider(position, .5f, false);
@@ -102,14 +103,14 @@ void Button::SetState(bool value, bool sendEvents)
 		if (sendEvents)
 			onPressed.Call();
 
-		btnSprite->color = vec4(0, 1, 0, 1);
+		btnSprite->texture = RessourceManager::GetTexture("switch_on.png");
 	}
 	else
 	{
 		if (sendEvents)
 			onUnpressed.Call();
 
-		btnSprite->color = vec4(1, 0, 0, 1);
+		btnSprite->texture = RessourceManager::GetTexture("switch_off.png");
 	}
 }
 

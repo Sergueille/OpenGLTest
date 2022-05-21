@@ -4,6 +4,7 @@
 #include "Editor.h"
 #include "TextManager.h"
 #include "TweenManager.h"
+#include "LightManager.h"
 
 MenuManager::Menu MenuManager::currentMenu = Menu::none;
 bool MenuManager::isSetup = false;
@@ -50,7 +51,8 @@ void MenuManager::OnMainLoop()
 				// Fade out
 				TweenManager<float>::Tween(1, 0, 2, [](float value) {
 					overlayColor = vec4(0, 0, 0, value);
-					}, linear);
+					}, linear)
+					->SetCondition([] { return !LightManager::forceRefreshOnNextFrame; });
 
 				// Set camera instantly
 				if (Camera::getTarget != nullptr)
