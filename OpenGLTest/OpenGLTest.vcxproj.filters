@@ -25,7 +25,7 @@
     <Filter Include="Gameplay">
       <UniqueIdentifier>{0c156b34-2275-4314-8af9-96dceb92fe91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="LevelEditor\Light">
+    <Filter Include="Light">
       <UniqueIdentifier>{8f12c53b-0070-4da7-8c2f-2b0f2e47c052}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -172,13 +172,13 @@
       <Filter>SoLoud</Filter>
     </ClCompile>
     <ClCompile Include="Light.cpp">
-      <Filter>LevelEditor\Light</Filter>
+      <Filter>Light</Filter>
     </ClCompile>
     <ClCompile Include="LightManager.cpp">
-      <Filter>LevelEditor\Light</Filter>
+      <Filter>Light</Filter>
     </ClCompile>
     <ClCompile Include="ShadowCaster.cpp">
-      <Filter>LevelEditor\Light</Filter>
+      <Filter>Light</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Gameplay</Filter>
@@ -203,6 +203,12 @@
     </ClCompile>
     <ClCompile Include="LevelEnd.cpp">
       <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorParticleSystem.cpp">
+      <Filter>LevelEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -285,13 +291,13 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
-      <Filter>LevelEditor\Light</Filter>
+      <Filter>Light</Filter>
     </ClInclude>
     <ClInclude Include="LightManager.h">
-      <Filter>LevelEditor\Light</Filter>
+      <Filter>Light</Filter>
     </ClInclude>
     <ClInclude Include="ShadowCaster.h">
-      <Filter>LevelEditor\Light</Filter>
+      <Filter>Light</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Gameplay</Filter>
@@ -322,6 +328,12 @@
     </ClInclude>
     <ClInclude Include="LevelEnd.h">
       <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorParticleSystem.h">
+      <Filter>LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

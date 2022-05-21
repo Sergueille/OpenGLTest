@@ -13,6 +13,7 @@
 #include "Trigger.h"
 #include "CameraController.h"
 #include "LevelEnd.h"
+#include "EditorParticleSystem.h"
 
 using namespace glm;
 
@@ -517,6 +518,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "LevelEnd")
 	{
 		newObj = new LevelEnd();
+		newObj->Load(&props);
+	}
+	else if (objectType == "EditorParticleSystem")
+	{
+		newObj = new EditorParticleSystem();
 		newObj->Load(&props);
 	}
 	else

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 29
+count 31
 
 object MapData {
 	mapName: ""
@@ -307,4 +307,42 @@ object LevelEnd {
 	position: "-21.400000, 0.400000, 10.000000"
 	parent: "-1"
 	nextLevel: "intro_walls.map"
+}
+object EditorParticleSystem {
+	ID: "1053"
+	name: ""
+	position: "-8.400001, 5.400000, 0.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "3.200000, 1.400000"
+	emitCircle: "0"
+	startVelocity: "0.000000, 0.100000"
+	endVelocity: "0.000000, -0.250000"
+	startSize: "0.150000, 0.150000"
+	endSize: "0.150000, 0.150000"
+	startColor: "1.000000, 1.000000, 1.000000, 1.000000"
+	endColor: "1.000000, 1.000000, 1.000000, 0.000000"
+	texture: "glow.png"
+	isLit: "0"
+	particlesPerSecond: "5.000000"
+	particleLifetime: "5.000000"
+}
+object EditorParticleSystem {
+	ID: "1161"
+	name: ""
+	position: "0.000000, 5.000000, 50.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "45.400002, 17.000000"
+	emitCircle: "0"
+	startVelocity: "0.000000, -15.000000"
+	endVelocity: "0.000000, -20.000000"
+	startSize: "0.050000, 0.300000"
+	endSize: "0.050000, 0.300000"
+	startColor: "0.600000, 0.800000, 1.000000, 1.000000"
+	endColor: "0.600000, 0.800000, 1.000000, 1.000000"
+	texture: "glow.png"
+	isLit: "0"
+	particlesPerSecond: "100.000000"
+	particleLifetime: "0.200000"
 }

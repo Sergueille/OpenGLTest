@@ -10,7 +10,7 @@ class ParticleSystem
 {
 public:
 	ParticleSystem();
-	~ParticleSystem();
+	virtual ~ParticleSystem();
 
 	vec3 emitterPosition = vec3(0);
 	vec2 emitterSize = vec2(1);
@@ -38,7 +38,9 @@ public:
 	void Stop();
 	bool IsPlaying();
 
-private:
+	void SubscribeToPerticleSysEvents();
+
+protected:
 	bool isPlaying = false;
 	std::list<Particle*> particles = std::list<Particle*>();
 
@@ -47,7 +49,6 @@ private:
 	float lastInstantiationTime = 0;
 
 	void OnParticleSystemMainLoop();
-
 };
 
 class Particle

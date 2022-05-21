@@ -187,6 +187,7 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorObject.cpp" />
+    <ClCompile Include="EditorParticleSystem.cpp" />
     <ClCompile Include="EditorSaveManager.cpp" />
     <ClCompile Include="EditorSprite.cpp" />
     <ClCompile Include="engine.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorObject.h" />
+    <ClInclude Include="EditorParticleSystem.h" />
     <ClInclude Include="EditorSaveManager.h" />
     <ClInclude Include="EditorSprite.h" />
     <ClInclude Include="EventManager.h" />

@@ -5,7 +5,7 @@
 
 ParticleSystem::ParticleSystem()
 {
-	psysMainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { this->OnParticleSystemMainLoop(); });
+	SubscribeToPerticleSysEvents();
 }
 
 ParticleSystem::~ParticleSystem()
@@ -52,6 +52,11 @@ bool ParticleSystem::IsPlaying()
 	return isPlaying;
 }
 
+void ParticleSystem::SubscribeToPerticleSysEvents()
+{
+	psysMainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { this->OnParticleSystemMainLoop(); });
+}
+
 void ParticleSystem::OnParticleSystemMainLoop()
 {
 	if (!IsPlaying()) return;
@@ -79,8 +84,8 @@ void ParticleSystem::OnParticleSystemMainLoop()
 			float randomAngle = ((float)(rand() % precision) / precision) * 360; // Between 0 and 360
 
 			copy->position = emitterPosition + vec3(
-				randomDist * cos(randomAngle) * emitterSize.x,
-				randomDist * sin(randomAngle) * emitterSize.y,
+				randomDist * cos(randomAngle) * emitterSize.x / 2,
+				randomDist * sin(randomAngle) * emitterSize.y / 2,
 				0
 			);
 		}
@@ -88,8 +93,8 @@ void ParticleSystem::OnParticleSystemMainLoop()
 		{
 			float randomX = ((float)(rand() % precision) / precision) * 2 - 1; // Between -1 and 1
 			float randomY = ((float)(rand() % precision) / precision) * 2 - 1; // Between -1 and 1
-			vec2 vecX = Rotate(vec2(emitterSize.x, 0), emitterRotation) * randomX;
-			vec2 vecY = Rotate(vec2(0, emitterSize.y), emitterRotation) * randomY;
+			vec2 vecX = Rotate(vec2(emitterSize.x / 2, 0), emitterRotation) * randomX;
+			vec2 vecY = Rotate(vec2(0, emitterSize.y / 2), emitterRotation) * randomY;
 			copy->position = emitterPosition + vec3(vecX.x + vecY.x, vecX.y + vecY.y, 0);
 		}
 

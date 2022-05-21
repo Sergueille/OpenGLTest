@@ -14,6 +14,7 @@
 #include "CameraController.h"
 #include "LevelEnd.h"
 #include "MenuManager.h"
+#include "EditorParticleSystem.h"
 
 #include <iostream>
 
@@ -745,6 +746,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.y -= UIButton(drawPos, "Level end", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new LevelEnd();
+
+	drawPos.y -= UIButton(drawPos, "Particle system", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new EditorParticleSystem();
 
 
 	if (newObject != nullptr)
