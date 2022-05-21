@@ -61,7 +61,7 @@ public:
 	/// <summary>
 	/// Lower value will make the bot apply less force to float
 	/// </summary>
-	const float floatForceFactor = 0.15f;
+	const float floatForceFactor = 0.1f;
 	const float maxFloatForceMultiplicator = 3;
 	/// <summary>
 	/// Duration of the float period

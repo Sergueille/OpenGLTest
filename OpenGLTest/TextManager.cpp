@@ -29,7 +29,7 @@ namespace TextManager {
         }
 
         // Set font resolution
-        FT_Set_Pixel_Sizes(face, 0, 64);
+        FT_Set_Pixel_Sizes(face, 0, 64); // TEST
 
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // disable byte-alignment restriction
 

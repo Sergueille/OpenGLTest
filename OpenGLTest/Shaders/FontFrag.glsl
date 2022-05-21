@@ -7,10 +7,14 @@ uniform vec3 textColor;
 
 void main()
 {    
-    if (texture(text, TexCoords).r < 0.1) {
+    float alpha = texture(text, TexCoords).r;
+
+    if (alpha < 0.01) {
         discard;
     }
 
-    FragColor = vec4(textColor, 1.0);
-    BrightColor = getBright(textColor);
+    vec4 color = vec4(textColor, alpha);
+
+    FragColor = color;
+    BrightColor = getBright(color);
 }  

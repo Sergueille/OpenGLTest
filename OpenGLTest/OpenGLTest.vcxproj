@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -86,6 +86,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\include;D:\alexis\Logiciels\glm;D:\alexis\Logiciels\GLAD\include;D:\alexis\Logiciels\Soloud\soloud20200207\include;D:\alexis\Logiciels\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\release dll\win64;D:\alexis\Logiciels\GLFW\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <SourcePath>D:\alexis\Logiciels\Soloud\soloud20200207\src\core;D:\alexis\Logiciels\Soloud\soloud20200207\src;D:\alexis\Logiciels\GLAD\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -137,14 +140,16 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -193,6 +198,7 @@
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prefab.cpp" />
@@ -231,6 +237,7 @@
     <ClInclude Include="Line.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="mesh.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Prefab.h" />

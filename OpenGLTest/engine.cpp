@@ -25,6 +25,7 @@ Some code from https://learnopengl.com/
 #include "EditorSprite.h"
 #include "MenuManager.h"
 #include "LightManager.h"
+#include "ParticleSystem.h"
 
 using namespace std;
 using namespace Utility;
@@ -36,6 +37,7 @@ extern "C" {
 
 int main(int argc, void* argv[])
 {
+    // Read setting file
     std::map<std::string, std::string> settings = std::map<std::string, std::string>();
     EditorSaveManager::ReadSettings("options.set", &settings);
 
@@ -294,6 +296,6 @@ int main(int argc, void* argv[])
     // Clean GLFW memory
     glfwTerminate();
 
-    std::cout << "Papaaaaaye! The game closed sucessfully!" << std::endl;
+    std::cout << "The game closed sucessfully!" << std::endl;
     return 0;
 }

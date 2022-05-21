@@ -70,7 +70,7 @@ vec3 CircleCollider::CollideWith(RectCollider* other)
 	
 	if (insideCount == 3)
 	{
-		throw "Shouldn't have this... There is a problem in the function";
+		return vec3(0, 0, 0);
 	}
 	else if (insideCount == 2 || insideCount == 4)
 	{
@@ -82,7 +82,7 @@ vec3 CircleCollider::CollideWith(RectCollider* other)
 	}
 	else if (insideCount == 1)
 	{
-		throw "Shouldn't have this... There is a problem in the function";
+		return vec3(0, 0, 0);
 	}
 	else if (insideCount == 0)
 	{

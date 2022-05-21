@@ -106,4 +106,10 @@ namespace Utility
 	extern unsigned int currentVAO;
 
 	extern void GetLevelAABB(glm::vec2* resMin, glm::vec2* resMax, bool inEditor);
+
+	template <typename T>
+	inline T Lerp(T a, T b, float value)
+	{
+		return a + value * (b - a);
+	};
 };
