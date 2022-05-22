@@ -662,7 +662,7 @@ object ShadowCaster {
 	name: ""
 	position: "17.600000, -1.200000, 10.000000"
 	parent: "-1"
-	size: "10.800000, 2.000000"
+	size: "10.600000, 1.800000"
 	orientation: "0.000000"
 }
 object EditorSprite {
@@ -698,7 +698,7 @@ object ShadowCaster {
 	name: ""
 	position: "19.200001, -7.200000, 10.000000"
 	parent: "-1"
-	size: "10.800000, 2.000000"
+	size: "10.600000, 1.800000"
 	orientation: "0.000000"
 }
 object ShadowCaster {
@@ -706,7 +706,7 @@ object ShadowCaster {
 	name: ""
 	position: "18.200001, -13.200000, 10.000000"
 	parent: "-1"
-	size: "18.400000, 2.000000"
+	size: "18.200001, 1.800000"
 	orientation: "0.000000"
 }
 object Light {
@@ -788,9 +788,9 @@ object Light {
 object ShadowCaster {
 	ID: "1011"
 	name: ""
-	position: "36.200001, -13.200000, 10.000000"
+	position: "35.799999, -13.200000, 10.000000"
 	parent: "-1"
-	size: "10.800000, 2.000000"
+	size: "10.600000, 1.800000"
 	orientation: "0.000000"
 }
 object EditorSprite {
@@ -812,7 +812,7 @@ object ShadowCaster {
 	name: ""
 	position: "38.000000, -7.200000, 10.000000"
 	parent: "-1"
-	size: "10.800000, 2.000000"
+	size: "10.600000, 1.800000"
 	orientation: "0.000000"
 }
 object EditorSprite {
@@ -836,18 +836,6 @@ object ShadowCaster {
 	parent: "-1"
 	size: "4.800000, 4.800000"
 	orientation: "0.000000"
-}
-object Light {
-	ID: "1281"
-	name: ""
-	position: "117.000000, -3.600000, 5.000000"
-	parent: "-1"
-	lightSize: "13.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "-90.000000"
-	innerAngle: "30.000000"
-	outerAngle: "110.000000"
 }
 object Light {
 	ID: "1282"
@@ -876,9 +864,9 @@ object Light {
 object ShadowCaster {
 	ID: "1284"
 	name: ""
-	position: "80.599998, -10.000000, 10.000000"
+	position: "80.200005, -9.600000, 10.000000"
 	parent: "-1"
-	size: "4.800000, 4.800000"
+	size: "4.000000, 4.000000"
 	orientation: "0.000000"
 }
 object ShadowCaster {
@@ -900,9 +888,9 @@ object ShadowCaster {
 object ShadowCaster {
 	ID: "1287"
 	name: ""
-	position: "128.199997, -10.000000, 10.000000"
+	position: "125.599998, -12.600000, 10.000000"
 	parent: "-1"
-	size: "4.800000, 4.800000"
+	size: "10.000000, 10.000000"
 	orientation: "0.000000"
 }
 object EditorSprite {
@@ -949,7 +937,7 @@ object ShadowCaster {
 	name: ""
 	position: "55.000000, -2.400000, 10.000000"
 	parent: "-1"
-	size: "10.800000, 2.200000"
+	size: "10.600000, 2.000000"
 	orientation: "0.000000"
 }
 object Light {
@@ -3527,4 +3515,13 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+}
+object Prefab {
+	ID: "9015"
+	name: ""
+	position: "117.000000, -3.600000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
 }

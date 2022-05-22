@@ -7,6 +7,8 @@
 
 using namespace glm;
 
+bool PhysicObject::disableAllPhysics = false;
+
 PhysicObject::PhysicObject(Collider* coll)
 {
 	this->collider = coll;
@@ -31,7 +33,7 @@ void PhysicObject::SubscribeToMainLoop()
 
 void PhysicObject::OnMainLoop()
 {
-	if (!physicsEnabled)
+	if (!physicsEnabled || disableAllPhysics)
 		return;
 
 	this->OnBeforeMove();

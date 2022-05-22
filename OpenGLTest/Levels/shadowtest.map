@@ -1,6 +1,6 @@
-// Editor map file, test version
+// Editor map file, version 1
 
-count 7
+count 6
 
 object MapData {
 	mapName: ""
@@ -9,6 +9,7 @@ object EditorSprite {
 	ID: "0"
 	name: ""
 	position: "0.400000, -4.200000, 0.000000"
+	parent: "-1"
 	size: "25.000000, 3.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -21,14 +22,17 @@ object Player {
 	ID: "1"
 	name: ""
 	position: "0.000000, -0.400000, 0.000000"
+	parent: "-1"
 }
 object EditorSprite {
 	ID: "4"
 	name: "bg"
 	position: "0.600000, 1.200000, -10.000000"
+	parent: "-1"
 	size: "62.200001, 62.200001"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\plaster1.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 5.000000"
@@ -38,9 +42,10 @@ object Light {
 	ID: "14"
 	name: ""
 	position: "-6.000000, 5.800000, 0.000000"
+	parent: "-1"
 	lightSize: "10.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "2.000000"
+	intensity: "1.000000"
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
@@ -48,18 +53,8 @@ object Light {
 object ShadowCaster {
 	ID: "15"
 	name: ""
-	position: "-4.200000, 3.400000, -2.000000"
-	size: "8.600000, 2.200000"
+	position: "-5.600000, 2.600000, -2.000000"
+	parent: "-1"
+	size: "3.000000, 3.000000"
 	orientation: "-180.000000"
-}
-object Light {
-	ID: "16"
-	name: ""
-	position: "-5.800000, 0.200000, 0.000000"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "2.000000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
 }

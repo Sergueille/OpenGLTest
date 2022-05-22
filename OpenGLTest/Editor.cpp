@@ -301,7 +301,7 @@ EditorAction Editor::editorActions[EDITOR_ACTIONS_COUNT] = {
 	EditorAction{
 		"Quit editor",
 		"Destroy editor end open main menu",
-		GLFW_KEY_Q,
+		GLFW_KEY_A,
 		true,
 		true,
 		true,

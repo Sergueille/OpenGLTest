@@ -39,7 +39,7 @@ int main(int argc, void* argv[])
 {
     // Read setting file
     std::map<std::string, std::string> settings = std::map<std::string, std::string>();
-    EditorSaveManager::ReadSettings("options.set", &settings);
+    EditorSaveManager::ReadPropsFile("Settings\\options.set", &settings);
 
     bool fullscreen = settings["fullscreen"] == "1";
     int smallWindowWidth = 1820;

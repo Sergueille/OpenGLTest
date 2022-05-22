@@ -8,7 +8,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: ""
-	position: "-33.200001, 3.600000, 20.000000"
+	position: "-35.000000, 3.400000, 20.000000"
 	parent: "-1"
 }
 object EditorSprite {
@@ -186,7 +186,7 @@ object Laser {
 	orientation: "-90.000000"
 	laserType: "0"
 	startOffset: "-0.100000"
-	endOffset: "0.050000"
+	endOffset: "0.200000"
 	startOn: "1"
 }
 object EditorSprite {
@@ -205,12 +205,12 @@ object EditorSprite {
 object Laser {
 	ID: "81"
 	name: ""
-	position: "27.000000, 10.200000, 0.000000"
+	position: "34.200001, 10.200000, 0.000000"
 	parent: "-1"
-	orientation: "0.000000"
+	orientation: "180.000000"
 	laserType: "0"
-	startOffset: "-0.200000"
-	endOffset: "0.050000"
+	startOffset: "-2.000000"
+	endOffset: "0.200000"
 	startOn: "1"
 }
 object EditorSprite {
@@ -229,7 +229,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "100"
 	name: ""
-	position: "39.799999, 7.600000, 0.000000"
+	position: "39.799999, 8.200000, 0.000000"
 	parent: "-1"
 	size: "11.000000, 4.600000"
 	rotation: "0.000000"
@@ -364,7 +364,7 @@ object Laser {
 	orientation: "0.000000"
 	laserType: "0"
 	startOffset: "-0.200000"
-	endOffset: "0.050000"
+	endOffset: "2.000000"
 	startOn: "1"
 }
 object EditorSprite {
@@ -973,12 +973,12 @@ object EditorSprite {
 object Laser {
 	ID: "550"
 	name: ""
-	position: "95.000000, 8.000000, 0.000000"
+	position: "104.400002, 8.000000, 0.000000"
 	parent: "-1"
-	orientation: "0.000000"
+	orientation: "-180.000000"
 	laserType: "0"
-	startOffset: "-0.200000"
-	endOffset: "0.050000"
+	startOffset: "-2.000000"
+	endOffset: "0.200000"
 	startOn: "1"
 }
 object EditorSprite {
@@ -1024,18 +1024,18 @@ object EditorSprite {
 object Laser {
 	ID: "1330"
 	name: ""
-	position: "121.599998, 8.000000, 0.000000"
+	position: "134.000000, 8.000000, 0.000000"
 	parent: "-1"
-	orientation: "0.000000"
+	orientation: "180.000000"
 	laserType: "0"
-	startOffset: "-0.200000"
-	endOffset: "0.050000"
+	startOffset: "-2.000000"
+	endOffset: "0.200000"
 	startOn: "1"
 }
 object EditorSprite {
 	ID: "1332"
 	name: ""
-	position: "139.800003, -1.800000, 0.000000"
+	position: "139.800003, -2.000000, 0.000000"
 	parent: "-1"
 	size: "11.200000, 21.000000"
 	rotation: "0.000000"
@@ -1175,18 +1175,18 @@ object EditorSprite {
 object Laser {
 	ID: "1523"
 	name: ""
-	position: "148.800003, 8.200000, 0.000000"
+	position: "156.800003, 8.000000, 0.000000"
 	parent: "-1"
-	orientation: "0.000000"
+	orientation: "180.000000"
 	laserType: "0"
-	startOffset: "-0.200000"
-	endOffset: "0.050000"
+	startOffset: "-2.000000"
+	endOffset: "0.200000"
 	startOn: "1"
 }
 object EditorSprite {
 	ID: "1525"
 	name: ""
-	position: "147.000000, 8.200000, 0.000000"
+	position: "147.000000, 8.000000, 0.000000"
 	parent: "-1"
 	size: "3.200000, 1.000000"
 	rotation: "0.000000"
@@ -1199,7 +1199,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1527"
 	name: ""
-	position: "158.400009, -1.800000, 0.000000"
+	position: "158.400009, -2.000000, 0.000000"
 	parent: "-1"
 	size: "3.000000, 21.000000"
 	rotation: "0.000000"
@@ -1225,12 +1225,12 @@ object EditorSprite {
 object Laser {
 	ID: "1531"
 	name: ""
-	position: "169.000000, 8.200000, 0.000000"
+	position: "168.800003, 8.000000, 0.000000"
 	parent: "-1"
 	orientation: "540.000000"
 	laserType: "0"
-	startOffset: "-0.200000"
-	endOffset: "0.050000"
+	startOffset: "-2.000000"
+	endOffset: "0.200000"
 	startOn: "1"
 }
 object Light {

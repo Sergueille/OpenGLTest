@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 31
+count 30
 
 object MapData {
 	mapName: ""
@@ -208,7 +208,7 @@ object Prefab {
 object Prefab {
 	ID: "562"
 	name: ""
-	position: "7.000000, 10.800000, 0.000000"
+	position: "6.200000, 10.800000, 0.000000"
 	parent: "-1"
 	path: "prefabs\neon.map"
 	ori: "0.000000"
@@ -326,23 +326,4 @@ object EditorParticleSystem {
 	isLit: "0"
 	particlesPerSecond: "5.000000"
 	particleLifetime: "5.000000"
-}
-object EditorParticleSystem {
-	ID: "1161"
-	name: ""
-	position: "0.000000, 5.000000, 50.000000"
-	parent: "-1"
-	orientation: "0.000000"
-	scale: "45.400002, 17.000000"
-	emitCircle: "0"
-	startVelocity: "0.000000, -15.000000"
-	endVelocity: "0.000000, -20.000000"
-	startSize: "0.050000, 0.300000"
-	endSize: "0.050000, 0.300000"
-	startColor: "0.600000, 0.800000, 1.000000, 1.000000"
-	endColor: "0.600000, 0.800000, 1.000000, 1.000000"
-	texture: "glow.png"
-	isLit: "0"
-	particlesPerSecond: "100.000000"
-	particleLifetime: "0.200000"
 }

@@ -14,6 +14,8 @@
 #include "CameraController.h"
 #include "LevelEnd.h"
 #include "EditorParticleSystem.h"
+#include "TweenManager.h"
+#include "MenuManager.h"
 
 using namespace glm;
 
@@ -29,6 +31,10 @@ std::ifstream* EditorSaveManager::ifile = nullptr;
 
 const std::string EditorSaveManager::indentationString = "\t";
 int EditorSaveManager::indentation = 0;
+
+std::string EditorSaveManager::currentUserSave = "";
+
+std::list<std::string> EditorSaveManager::userSaves = std::list<std::string>();
 
 void EditorSaveManager::ClearEditorLevel()
 {
@@ -188,6 +194,32 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 			ClearGameLevel();
 		}
 	}
+}
+
+void EditorSaveManager::LoadLevelWithTransition(std::string path, std::function<void()> onLoad)
+{
+	overlayZ = 2000;
+
+	TweenManager<float>::Tween(0, 1, 2, [](float value) {
+		overlayColor = vec4(0, 0, 0, value);
+	}, linear)
+	->SetOnFinished([path, onLoad] {
+		// Load next level
+		EditorSaveManager::LoadLevel(path, false);
+
+		if (onLoad != nullptr)
+			onLoad();
+
+		// Fade out
+		TweenManager<float>::Tween(1, 0, 2, [](float value) {
+			overlayColor = vec4(0, 0, 0, value);
+			}, linear)
+		->SetCondition([] { return !LightManager::forceRefreshOnNextFrame; });
+
+		// Set camera instantly
+		if (Camera::getTarget != nullptr)
+			Camera::position = Camera::getTarget();
+	});
 }
 
 void EditorSaveManager::LoadPrefab(Prefab* prefab)
@@ -607,22 +639,22 @@ void EditorSaveManager::IntProp(std::map<std::string, std::string>* props, std::
 		*value = std::stoi(text);
 }
 
-void EditorSaveManager::ReadSettings(std::string fileName, std::map<std::string, std::string>* res)
+void EditorSaveManager::ReadPropsFile(std::string fileName, std::map<std::string, std::string>* res)
 {
-	std::string path = settingsBasePath + fileName;
+	std::string path = fileName;
 
 	ifile = new std::ifstream();
 	ifile->open(path, std::ios::in);
 
 	if (!ifile->is_open())
 	{
-		std::cout << "Couldn't open settings file (" << path << ")" << std::endl;
+		std::cout << "Couldn't open props file (" << path << ")" << std::endl;
 		return;
 	}
 
 	try
 	{
-		FirstLineStartWith("Settings");
+		FirstLineStartWith("Props");
 		GoToEndOfLine();
 
 		while (!ifile->eof())
@@ -636,13 +668,41 @@ void EditorSaveManager::ReadSettings(std::string fileName, std::map<std::string,
 			GoToEndOfLine();
 		}
 
-		std::cout << "Read settings at " << path << std::endl;
+		std::cout << "Read props at " << path << std::endl;
 		ifile->close();
 	}
 	catch (std::exception e) // Catch exceptions to make sure the file is closed
 	{
-		std::cout << "Got an error while loading settings file (" << path << "), here's what it says:" << std::endl;
+		std::cout << "Got an error while loading props file (" << path << "), here's what it says:" << std::endl;
 		std::cout << e.what() << std::endl;
 		ifile->close();
+	}
+}
+
+void EditorSaveManager::LoadUserSave(std::string fileName)
+{
+	std::map<std::string, std::string> props = std::map<std::string, std::string>();
+	ReadPropsFile(fileName, &props);
+
+	vec2 position = StringToVector2(props["position"]);
+	LoadLevelWithTransition(props["level"], [position] {
+		MenuManager::OpenMenu(MenuManager::Menu::ingame);
+		if (Player::ingameInstance != nullptr)
+		{
+			Player::ingameInstance->SetPos(position);
+		}
+	});
+}
+
+void EditorSaveManager::IndexUserSaves()
+{
+	userSaves.clear();
+
+	std::string savesDir = "Saves";
+	for (const auto& entry : std::filesystem::recursive_directory_iterator(savesDir))
+	{
+		std::string fileName = ToLower(entry.path().string());
+		fileName = fileName.substr(savesDir.length() + 1, fileName.length() - savesDir.length() - 1); // Remove "saves\"
+		userSaves.push_back(fileName);
 	}
 }

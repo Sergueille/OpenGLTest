@@ -114,28 +114,6 @@ void LevelEnd::GetObjectEvents(const ObjectEvent** res, int* resCount)
 void LevelEnd::EndLevel()
 {
 	if (isEndingLevel) return;
-
 	isEndingLevel = true;
-
-	overlayZ = 90;
-
-	// Fade in
-	TweenManager<float>::Tween(0, 1, 2, [](float value) {
-		overlayColor = vec4(0, 0, 0, value);
-	}, linear)
-	->SetOnFinished([this] { 
-		// Load next level
-		EditorSaveManager::LoadLevel(this->nextLevel, false);
-
-		// Fade out
-		TweenManager<float>::Tween(1, 0, 2, [](float value) {
-			overlayColor = vec4(0, 0, 0, value);
-		}, linear)
-		->SetCondition([] { return !LightManager::forceRefreshOnNextFrame; }); 
-
-		// Set camera instantly
-		if (Camera::getTarget != nullptr)
-			Camera::position = Camera::getTarget();
-	});
+	EditorSaveManager::LoadLevelWithTransition(nextLevel);
 }
-

@@ -37,8 +37,8 @@ TweenAction<T>* TweenManager<T>::Tween(T startVal, T endVal, float duration, std
 	}
 
 	auto listElement = TweenManager<T>::activeActions.push_end(TweenAction<T>(startVal, endVal, Utility::time, duration, func, type));
-	return &listElement->value;
 	listElement->value.listElement = listElement;
+	return &listElement->value;
 }
 
 template <typename T>

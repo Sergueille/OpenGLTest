@@ -34,6 +34,16 @@ public:
 	static const std::string indentationString;
 
 	/// <summary>
+	/// User save that is currnetly being used to save the game
+	/// </summary>
+	static std::string currentUserSave;
+
+	/// <summary>
+	/// List of all the user saves, created by IndexUserSaves()
+	/// </summary>
+	static std::list<std::string> userSaves;
+
+	/// <summary>
 	/// Destroy all editor objects
 	/// </summary>
 	static void ClearEditorLevel();
@@ -48,6 +58,8 @@ public:
 	/// </summary>
 	static void SaveLevel();
 	static void LoadLevel(std::string path, bool inEditor = false);
+
+	static void LoadLevelWithTransition(std::string path, std::function<void()> onLoad = nullptr);
 
 	static void LoadPrefab(Prefab* prefab);
 
@@ -78,7 +90,11 @@ public:
 	static vec3 StringToVector3(std::string s, vec3 def = vec3(0));
 	static vec4 StringToVector4(std::string s, vec4 def = vec4(0));
 
-	static void ReadSettings(std::string fileName, std::map<std::string, std::string>* res);
+	static void ReadPropsFile(std::string fileName, std::map<std::string, std::string>* res);
+
+	static void LoadUserSave(std::string fileName);
+
+	static void IndexUserSaves();
 
 private:
 	static std::ofstream* ofile;

@@ -12,7 +12,9 @@ uniform vec2 shadowCastersPos[128]; // Position in UV coordinates
 uniform float shadowCastersRot[128]; // Rotation
 uniform vec2 shadowCastersSize[128]; // Size in UV coordinates
 
-bool GetShadow(int light);
+bool GetShadow(int light, vec2 pos);
+float GetFinalShadow(int light);
+
 void main()
 {
     vec3 res = vec3(0);
@@ -44,10 +46,10 @@ void main()
 
         if (finalAttenuation > 0)
         {
-            if (GetShadow(i))
-            {
-                res += lightColor[i] * finalAttenuation; // Add light
-            }
+            float shadowAmount = GetFinalShadow(i);
+
+            if (shadowAmount > 0)
+                res += lightColor[i] * finalAttenuation * shadowAmount; // Add light
         }
     }
 
@@ -63,9 +65,29 @@ vec2 Rotate(vec2 vector, float angle)
     );
 }
 
-bool GetShadow(int light) 
+float GetFinalShadow(int light)
 {
-    float a = (texCoord.y - lightPos[light].y) / (texCoord.x - lightPos[light].x);
+    float nbAngle = 3;
+    float angleStep = 1;
+
+    vec2 lightPos = vec2(lightPos[light].x, lightPos[light].y);
+    vec2 delta = texCoord - lightPos;
+
+    float passed = 0;
+    for (float angle = -nbAngle * angleStep; angle < nbAngle * angleStep - 0.01; angle += angleStep)
+    {
+        vec2 newVect = Rotate(delta, angle);
+        vec2 newPoint = newVect + lightPos;
+        
+        passed += GetShadow(light, newPoint) ? 1 : 0;
+    }
+
+    return passed / nbAngle / 2;
+}
+
+bool GetShadow(int light, vec2 pos) 
+{
+    float a = (pos.y - lightPos[light].y) / (pos.x - lightPos[light].x);
     float b = lightPos[light].y - (a * lightPos[light].x);
 
     // Part of code from RectCollider
@@ -118,8 +140,8 @@ bool GetShadow(int light)
                 if ((point.x < next.x && res.x > point.x && res.x < next.x)
                     || (point.x > next.x && res.x < point.x && res.x > next.x)) // If on side
                 {
-                    if ((texCoord.x > lightPos[light].x && res.x < texCoord.x && res.x > lightPos[light].x)
-                        || (texCoord.x < lightPos[light].x && res.x > texCoord.x && res.x < lightPos[light].x)) // If btw light and texCoord
+                    if ((pos.x > lightPos[light].x && res.x < pos.x && res.x > lightPos[light].x)
+                        || (pos.x < lightPos[light].x && res.x > pos.x && res.x < lightPos[light].x)) // If btw light and pos
                     {
                         return false; // Intersect
                     }

@@ -22,6 +22,11 @@ public:
 
 	bool physicsEnabled = true;
 
+	/// <summary>
+	/// If true, pause all the physic simulation, used for pause menu
+	/// </summary>
+	static bool disableAllPhysics;
+
 	vec2 velocity = vec2(0);
 	bool isColliding = false;
 	bool isOnWalkableSurface = false;

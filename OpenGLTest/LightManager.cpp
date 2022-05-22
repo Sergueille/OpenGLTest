@@ -8,7 +8,7 @@
 
 std::list<Light*> LightManager::lights = std::list<Light*>();
 std::list<ShadowCaster*> LightManager::shadowCasters = std::list<ShadowCaster*>();
-int LightManager::pixelsPerUnit = 20;
+int LightManager::pixelsPerUnit = 5;
 
 unsigned int LightManager::texID = 0;
 std::string LightManager::texLevelPath = "";
