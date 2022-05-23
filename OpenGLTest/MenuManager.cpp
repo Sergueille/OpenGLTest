@@ -6,6 +6,7 @@
 #include "TweenManager.h"
 #include "LightManager.h"
 #include "PhysicObject.h"
+#include "LogicRelay.h"
 
 MenuManager::Menu MenuManager::currentMenu = Menu::none;
 bool MenuManager::isSetup = false;
@@ -16,17 +17,23 @@ MenuManager::Menu MenuManager::previousMenu = Menu::none;
 std::string MenuManager::focusedTextInputID = "";
 std::string MenuManager::focusedTextInputValue = "";
 
+const vec4 MenuManager::textColor = vec4(1);
+const vec4 MenuManager::textDisabledColor = vec4(0.8, 0.8, 0.8, 1);
+const vec4 MenuManager::textHoveredColor = vec4(1.15, 1.15, 1.15, 1);
+const vec4 MenuManager::textSelectedColor = vec4(1.3, 1.3, 1.3, 1);
+
 const vec4 MenuManager::textInputPlaceholderColor = vec4(0.8, 0.8, 0.8, 1);
-const vec4 MenuManager::textInputTextColor = vec4(1);
-const vec4 MenuManager::textInputHoverColor = vec4(1.3, 1.3, 1.3, 1);
-const vec4 MenuManager::textInputEditColor = vec4(1.15, 1.15, 1.15, 1);
-const vec4 MenuManager::textInputBackgroundColor = vec4(0.2, 0.2, 0.2, 0.2);
+const vec4 MenuManager::textInputBackgroundColor = vec4(0.1, 0.1, 0.1, 1);
+
+bool MenuManager::clickLastFrame = false;
+float MenuManager::backspaceNextTime = 0;
 
 void MenuManager::Setup()
 {
 	if (isSetup) return;
 
 	EventManager::OnMainLoop.push_end(OnMainLoop);
+	EventManager::OnCharPressed.push_end(OnCaracterInput);
 	isSetup = true;
 }
 
@@ -35,26 +42,30 @@ void MenuManager::OnMainLoop()
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 		escPressedLastFrame = false;
 
+	HandleInputBackspace();
+
 	if (currentMenu == Menu::main)
 	{
+		Camera::position = vec2(0, 0);
+
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
 		bool pressed;
 
 		drawPos.y -= TextManager::RenderText("Title here", drawPos, titleScale).y + margin;
 
-		drawPos.y -= Editor::UIButton(drawPos, "New game", &pressed).y + margin;
+		drawPos.y -= Button(drawPos, "New game", &pressed).y + margin;
 		if (pressed)
 		{
 			OpenMenu(Menu::newGame);
 		}
 
-		drawPos.y -= Editor::UIButton(drawPos, "Load", &pressed).y + margin;
+		drawPos.y -= Button(drawPos, "Load", &pressed).y + margin;
 		if (pressed)
 		{
 			OpenMenu(Menu::load);
 		}
 
-		drawPos.y -= Editor::UIButton(drawPos, "Open level editor", &pressed).y + margin;
+		drawPos.y -= Button(drawPos, "Open level editor", &pressed).y + margin;
 		if (pressed)
 		{
 			EditorSaveManager::ClearGameLevel();
@@ -62,7 +73,7 @@ void MenuManager::OnMainLoop()
 			Editor::OpenEditor();
 		}
 
-		drawPos.y -= Editor::UIButton(drawPos, "Quit", &pressed).y + margin;
+		drawPos.y -= Button(drawPos, "Quit", &pressed).y + margin;
 		if (pressed)
 		{
 			glfwSetWindowShouldClose(window, 1);
@@ -77,7 +88,7 @@ void MenuManager::OnMainLoop()
 
 		drawPos.y -= TextManager::RenderText("The game is paused", drawPos, titleScale).y + margin;
 
-		drawPos.y -= Editor::UIButton(drawPos, "Resume", &pressed).y + margin;
+		drawPos.y -= Button(drawPos, "Resume", &pressed).y + margin;
 		if (pressed || (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS && !escPressedLastFrame))
 		{
 			OpenMenu(Menu::ingame);
@@ -85,7 +96,7 @@ void MenuManager::OnMainLoop()
 			escPressedLastFrame = true;
 		}
 
-		Editor::UIButton(drawPos, "Back to main menu", &pressed);
+		Button(drawPos, "Back to main menu", &pressed);
 		if (pressed)
 		{
 			EditorSaveManager::ClearGameLevel();
@@ -112,7 +123,7 @@ void MenuManager::OnMainLoop()
 
 		for (auto fileName = EditorSaveManager::userSaves.begin(); fileName != EditorSaveManager::userSaves.end(); fileName++)
 		{
-			drawPos.y -= Editor::UIButton(drawPos, *fileName, &pressed).y;
+			drawPos.y -= Button(drawPos, *fileName, &pressed).y;
 
 			if (pressed)
 			{
@@ -129,19 +140,17 @@ void MenuManager::OnMainLoop()
 		bool pressed;
 
 		drawPos.y -= TextManager::RenderText("Start a new game:", drawPos, titleScale).y + margin;
-
-		drawPos.y -= TextManager::RenderText("Please choose a name for your save file:", drawPos, textSize).y;
+		TextManager::RenderText("Please choose a name for your save file:", drawPos, textSize);
+		drawPos.y -= smallMargin;
 
 		std::string fileName = "";
 		drawPos.y -= TextInput(drawPos, &fileName, "File name...", "loadPath").y;
+		drawPos.y -= textSize + smallMargin;
 
-		if (Editor::focusedTextInputID == "loadPath")
+		drawPos.y -= Button(drawPos, "Play", &pressed, fileName != "").y + margin;
+		if (pressed)
 		{
-			drawPos.y -= TextManager::RenderText("Press enter to start playing", drawPos, textSize).y;
-		}
-
-		if (fileName != "")
-		{
+			EditorSaveManager::currentUserSave = fileName + ".sav";
 			EditorSaveManager::LoadLevelWithTransition("intro_walls.map", [] { OpenMenu(Menu::ingame); });
 		}
 
@@ -154,32 +163,42 @@ void MenuManager::OnMainLoop()
 	}
 	else
 	{
-		TextManager::RenderText("Unknown menu type!", vec3(screenMargin, screenMargin, UIbaseZPos), 10);
+		TextManager::RenderText("Unknown menu type!", vec3(screenMargin, screenMargin, UIbaseZPos), 15);
+	}
+}
+
+void MenuManager::OnCaracterInput(GLFWwindow* window, unsigned int codepoint)
+{
+	if (focusedTextInputID != "")
+	{
+		focusedTextInputValue += char(codepoint);
 	}
 }
 
 vec2 MenuManager::TextInput(vec3 drawPos, std::string* value, std::string placeHolder, std::string ID)
 {
 	vec2 inputRect = vec2(textInputWidth, textInputHeight);
-	Sprite(drawPos, drawPos + vec3(inputRect.x, inputRect.y, -1), textInputBackgroundColor).Draw();
+	Sprite(drawPos + vec3(0, -inputRect.y, -1), drawPos + vec3(inputRect.x, 0, -1), textInputBackgroundColor).Draw();
+
+	float margin = (inputRect.y - textSize) / 2;
+	vec3 textPos = drawPos + vec3(margin, -textSize-margin, 0);
 
 	if (focusedTextInputID == ID)
 	{
-		if (glfwGetKey(Utility::window, GLFW_KEY_ENTER) == GLFW_PRESS)
-		{
-			*value = focusedTextInputValue;
-			focusedTextInputID = "";
-			focusedTextInputValue = "";
-		}
-		if (glfwGetKey(Utility::window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		{
-			focusedTextInputID = "";
-		}
+		*value = focusedTextInputValue;
+
+		vec2 textRect = TextManager::RenderText(*value, textPos, textSize, TextManager::right, textSelectedColor);
 
 		bool showCursor = float(static_cast<int>(Utility::time * 1000) % textInputCursorBlink) > (textInputCursorBlink / 2.f);
-		// TODO: draw cursor
-		vec2 textRect = TextManager::RenderText(*value, drawPos, textSize, TextManager::right, textInputEditColor);
-		return textRect;
+		if (showCursor)
+		{
+			// Draw cursor
+			vec2 startPos = vec2(textPos) + textRect;
+			vec2 endPos = startPos + vec2(2, -textSize);
+			Sprite(vec3(startPos.x, startPos.y, drawPos.z + 1), vec3(endPos.x, endPos.y, drawPos.z + 1), textColor).Draw();
+		}
+		
+		return inputRect;
 	}
 	else
 	{
@@ -191,7 +210,7 @@ vec2 MenuManager::TextInput(vec3 drawPos, std::string* value, std::string placeH
 		
 
 		bool hoverX = mousePos.x > drawPos.x && mousePos.x < drawPos.x + inputRect.x;
-		bool hoverY = mousePos.y > drawPos.y && mousePos.y < drawPos.y + inputRect.y;
+		bool hoverY = mousePos.y > drawPos.y - inputRect.y && mousePos.y < drawPos.y;
 
 		vec4 color;
 		if (hoverX && hoverY)
@@ -202,16 +221,81 @@ vec2 MenuManager::TextInput(vec3 drawPos, std::string* value, std::string placeH
 				focusedTextInputValue = "";
 			}
 
-			color = textInputHoverColor;
+			color = textHoveredColor;
 		}
 		else
 		{
-			color = value->length() == 0 ? textInputPlaceholderColor : textInputTextColor;
+			color = value->length() == 0 ? textInputPlaceholderColor : textColor;
 		}
 
-		TextManager::RenderText(displayString, drawPos, textSize, TextManager::right, color);
+		if (glfwGetMouseButton(Utility::window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+		{
+			if (hoverX && hoverY)
+			{
+				if (focusedTextInputID != ID)
+				{
+					focusedTextInputID = ID;
+					focusedTextInputValue = "";
+				}
+			}
+			else
+			{
+				focusedTextInputID = "";
+				focusedTextInputValue = "";
+			}
+		}
+
+		TextManager::RenderText(displayString, textPos, textSize, TextManager::right, color);
 		return inputRect;
 	}
+}
+
+vec2 MenuManager::Button(vec3 drawPos, std::string text, bool* out, bool enabled)
+{
+	vec4 color;
+	vec2 textRect = TextManager::GetRect(text, textSize);
+
+	if (!enabled)
+	{
+		color = textDisabledColor;
+		*out = false;
+	}
+	else
+	{
+		vec2 mousePos = Utility::GetMousePos();
+		mousePos.y *= -1;
+		mousePos.y += Utility::screenY;
+
+		bool hoverX = mousePos.x > drawPos.x && mousePos.x < drawPos.x + textRect.x;
+		bool hoverY = mousePos.y > drawPos.y && mousePos.y < drawPos.y + textRect.y;
+
+		*out = false;
+
+		if (hoverX && hoverY)
+		{
+			if (glfwGetMouseButton(Utility::window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+			{
+				color = textSelectedColor;
+				clickLastFrame = true;
+			}
+			else
+			{
+				color = textHoveredColor;
+
+				if (clickLastFrame)
+					*out = true;
+
+				clickLastFrame = false;
+			}
+		}
+		else
+		{
+			color = textColor;
+		}
+	}
+
+	TextManager::RenderText(text, drawPos, textSize, TextManager::right, color);
+	return textRect;
 }
 
 MenuManager::Menu MenuManager::GetCurrentMenu()
@@ -235,7 +319,6 @@ void MenuManager::OpenMenu(Menu menu)
 		if (EditorSaveManager::filePath != "menu_bg.map")
 		{
 			EditorSaveManager::LoadLevel("menu_bg.map", false);
-			Camera::position = vec2(0, 0);
 		}
 	}
 }
@@ -243,7 +326,7 @@ void MenuManager::OpenMenu(Menu menu)
 vec2 MenuManager::PreviousMenuButton(vec3 drawPos)
 {
 	bool pressed;
-	vec2 size = Editor::UIButton(drawPos, "Back", &pressed);
+	vec2 size = Button(drawPos, "Back", &pressed);
 
 	if (pressed || (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS && !escPressedLastFrame))
 	{
@@ -252,4 +335,48 @@ vec2 MenuManager::PreviousMenuButton(vec3 drawPos)
 	}
 
 	return size;
+}
+
+void MenuManager::HandleInputBackspace()
+{
+	if (focusedTextInputID != "")
+	{
+		if (glfwGetKey(Utility::window, GLFW_KEY_BACKSPACE) == GLFW_PRESS)
+		{
+			// Control: remove word
+			if (glfwGetKey(Utility::window, GLFW_KEY_LEFT_CONTROL) || glfwGetKey(Utility::window, GLFW_KEY_RIGHT_CONTROL))
+			{
+				if (backspaceNextTime < Utility::time)
+				{
+					if (focusedTextInputValue.length() > 0)
+					{
+						focusedTextInputValue.pop_back();
+					}
+
+					while (focusedTextInputValue.length() > 0 && isalpha(focusedTextInputValue[focusedTextInputValue.length() - 1]))
+					{
+						focusedTextInputValue.pop_back();
+					}
+
+					backspaceNextTime = Utility::time + (backspaceFirstLatency / 1000.f);
+				}
+			}
+			else
+			{
+				// remove last letter
+				if (focusedTextInputValue.length() > 0 && backspaceNextTime < Utility::time)
+				{
+					focusedTextInputValue.pop_back();
+					if (backspaceNextTime == 0)
+						backspaceNextTime = Utility::time + (backspaceFirstLatency / 1000.f);
+					else
+						backspaceNextTime = Utility::time + (backspaceLatency / 1000.f);
+				}
+			}
+		}
+		else
+		{
+			backspaceNextTime = 0;
+		}
+	}
 }

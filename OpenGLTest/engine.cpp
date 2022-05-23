@@ -9,6 +9,7 @@ Some code from https://learnopengl.com/
 #include <soloud.h>
 #include <soloud_wav.h>
 
+#include "MenuManager.h"
 #include "Editor.h"
 #include "mesh.h"
 #include "shader.h"
@@ -23,7 +24,6 @@ Some code from https://learnopengl.com/
 #include "TextManager.h"
 #include "Collider.h"
 #include "EditorSprite.h"
-#include "MenuManager.h"
 #include "LightManager.h"
 #include "ParticleSystem.h"
 
@@ -206,6 +206,8 @@ int main(int argc, void* argv[])
                 Editor::textSize, TextManager::left);
 
         // Call events
+        EventManager::Call(&EventManager::nextFrameActions);
+        EventManager::nextFrameActions = LinkedList<std::function<void()>>();
         EventManager::Call(&EventManager::OnMainLoop);
 
         overlaySprite->color = overlayColor;

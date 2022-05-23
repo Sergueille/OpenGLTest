@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 5
+count 6
 
 object MapData {
 	mapName: ""
@@ -54,4 +54,23 @@ object Light {
 	rotation: "-90.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+}
+object EditorParticleSystem {
+	ID: "1608"
+	name: ""
+	position: "0.000000, -0.600000, 0.100000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "3.200000, 1.400000"
+	emitCircle: "0"
+	startVelocity: "0.000000, 0.100000"
+	endVelocity: "0.000000, -0.250000"
+	startSize: "0.000000, 0.000000"
+	endSize: "0.150000, 0.150000"
+	startColor: "1.000000, 1.000000, 1.000000, 1.000000"
+	endColor: "1.000000, 1.000000, 1.000000, 0.000000"
+	texture: "glow.png"
+	isLit: "0"
+	particlesPerSecond: "5.000000"
+	particleLifetime: "5.000000"
 }

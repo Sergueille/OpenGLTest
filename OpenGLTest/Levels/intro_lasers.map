@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 117
+count 121
 
 object MapData {
 	mapName: ""
@@ -935,7 +935,7 @@ object Light {
 object Light {
 	ID: "544"
 	name: ""
-	position: "123.200005, 10.200000, 0.000000"
+	position: "122.400002, 11.400001, 0.000000"
 	parent: "-1"
 	lightSize: "12.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -1136,9 +1136,9 @@ object Light {
 object EditorSprite {
 	ID: "1517"
 	name: ""
-	position: "179.800003, 14.600000, -10.000000"
+	position: "171.400009, 14.600000, -10.000000"
 	parent: "-1"
-	size: "46.400002, 14.200000"
+	size: "30.400000, 14.200000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "back\plaster1.jpg"
@@ -1212,9 +1212,9 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1529"
 	name: ""
-	position: "174.800003, -2.000000, 0.000000"
+	position: "175.400009, -2.000000, 0.000000"
 	parent: "-1"
-	size: "11.200000, 21.000000"
+	size: "13.000000, 21.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -1349,7 +1349,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1846"
 	name: ""
-	position: "202.400009, 20.000000, 0.000000"
+	position: "202.400009, 20.200001, 0.000000"
 	parent: "-1"
 	size: "48.600002, 14.600000"
 	rotation: "0.000000"
@@ -1374,7 +1374,7 @@ object Light {
 object Light {
 	ID: "1957"
 	name: ""
-	position: "195.600006, 9.800000, 20.000000"
+	position: "202.199997, 5.400000, 20.000000"
 	parent: "-1"
 	lightSize: "12.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -1465,6 +1465,59 @@ object EditorSprite {
 	position: "-63.799999, -0.400000, 0.000000"
 	parent: "-1"
 	size: "29.000000, 47.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "2433"
+	name: ""
+	position: "180.199997, 10.800000, 0.000000"
+	parent: "-1"
+	size: "1.000000, 4.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "2435"
+	name: ""
+	position: "198.400009, -7.200000, 0.000000"
+	parent: "-1"
+	size: "44.000000, 19.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "2437"
+	name: ""
+	position: "199.199997, 7.400000, -10.000000"
+	parent: "-1"
+	size: "35.400002, 14.200000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\plaster1.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "3.000000, 1.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "2439"
+	name: ""
+	position: "215.000000, 17.400000, 0.000000"
+	parent: "-1"
+	size: "23.400000, 19.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"

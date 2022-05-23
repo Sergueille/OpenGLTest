@@ -210,6 +210,9 @@
     <ClCompile Include="EditorParticleSystem.cpp">
       <Filter>LevelEditor</Filter>
     </ClCompile>
+    <ClCompile Include="LogicRelay.cpp">
+      <Filter>LevelEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -333,6 +336,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="EditorParticleSystem.h">
+      <Filter>LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicRelay.h">
       <Filter>LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>

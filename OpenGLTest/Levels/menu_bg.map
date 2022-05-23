@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 70
+count 71
 
 object MapData {
 	mapName: ""
@@ -857,7 +857,7 @@ object CameraController {
 	position: "5.200000, 6.200000, 50.000000"
 	parent: "-1"
 	zoom: "0.800000"
-	transTime: "2.000000"
+	transTime: "10.000000"
 }
 object EditorSprite {
 	ID: "1542"
@@ -872,4 +872,12 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+}
+object LogicRelay {
+	ID: "1566"
+	name: ""
+	position: "3.600000, 6.800000, 100.000000"
+	parent: "-1"
+	onTrigger: "1192|Set zoom|"
+	triggerOnStart: "1"
 }

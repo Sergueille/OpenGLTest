@@ -20,6 +20,8 @@ namespace Utility
 		LinkedListElement<T>* push_start(T value);
 
 		void remove(LinkedListElement<T>* value);
+
+		void Concatenate(LinkedList<T>* other);
 	};
 
 	template <typename T>
@@ -125,4 +127,13 @@ namespace Utility
 		delete value;
 	}
 
+	template<typename T>
+	inline void LinkedList<T>::Concatenate(LinkedList<T>* other)
+	{
+		this->last->next = other->first;
+		other->first->prev = this->last;
+
+		this->last = other->last;
+		other->first = this->first;
+	}
 }

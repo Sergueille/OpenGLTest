@@ -197,6 +197,7 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="Line.cpp" />
+    <ClCompile Include="LogicRelay.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
@@ -237,6 +238,7 @@
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="LogicRelay.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="ParticleSystem.h" />

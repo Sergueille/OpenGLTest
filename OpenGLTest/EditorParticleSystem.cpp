@@ -183,18 +183,18 @@ void EditorParticleSystem::UpdateTransform()
     
     if (editorSprite != nullptr)
 	{
-		editorSprite->position = editorPosition + vec3(0, 0, 50);
+		editorSprite->position = GetEditPos() + vec3(0, 0, 50);
 		editorSprite->size = vec2(Editor::gizmoSize);
 		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
 
-		previewSprite->position = editorPosition - vec3(0, 0, 0.1f);
-		previewSprite->rotate = editorRotation;
-		previewSprite->size = editorSize;
+		previewSprite->position = GetEditPos() - vec3(0, 0, 0.1f);
+		previewSprite->rotate = GetEditRotation();
+		previewSprite->size = GetEditScale();
 
 		previewSprite->texture = emitCircle ? RessourceManager::GetTexture("Engine\\circle.png") : nullptr;
 	}
 
-	emitterPosition = editorPosition;
-	emitterRotation = editorRotation;
-	emitterSize = editorSize;
+	emitterPosition = GetEditPos();
+	emitterRotation = GetEditRotation();
+	emitterSize = GetEditScale();
 }

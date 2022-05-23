@@ -15,6 +15,8 @@ namespace EventManager
 	LinkedList<std::function<void()>> OnOpenEditor = LinkedList<std::function<void()>>();
 	LinkedList<std::function<void()>> OnCloseEditor = LinkedList<std::function<void()>>();
 
+	LinkedList<std::function<void()>> nextFrameActions = LinkedList<std::function<void()>>();
+
 	void SetupEvents()
 	{
 		glfwSetMouseButtonCallback(Utility::window, OnClickCallback);
@@ -61,5 +63,10 @@ namespace EventManager
 		{
 			el->value(window, key, scancode, action, mods);
 		}
+	}
+
+	void DoInOneFrame(std::function<void()> func)
+	{
+		nextFrameActions.push_end(func);
 	}
 }

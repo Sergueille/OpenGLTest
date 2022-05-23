@@ -16,6 +16,7 @@
 #include "EditorParticleSystem.h"
 #include "TweenManager.h"
 #include "MenuManager.h"
+#include "LogicRelay.h"
 
 using namespace glm;
 
@@ -555,6 +556,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "EditorParticleSystem")
 	{
 		newObj = new EditorParticleSystem();
+		newObj->Load(&props);
+	}
+	else if (objectType == "LogicRelay")
+	{
+		newObj = new LogicRelay();
 		newObj->Load(&props);
 	}
 	else

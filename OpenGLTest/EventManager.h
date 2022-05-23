@@ -21,6 +21,8 @@ namespace EventManager
 	extern LinkedList<std::function<void()>> OnOpenEditor;
 	extern LinkedList<std::function<void()>> OnCloseEditor;
 
+	extern LinkedList<std::function<void()>> nextFrameActions;
+
 	void SetupEvents();
 
 	/// <summary>
@@ -32,6 +34,11 @@ namespace EventManager
 	void OnScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
 	void OnCharPressedCallback(GLFWwindow* window, unsigned int codepoint);
 	void OnKeyPressedCallbeck(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+	/// <summary>
+	/// Do this action on the next game loop. The captured object must be still alive on next frame
+	/// </summary>
+	void DoInOneFrame(std::function<void()> func);
 };
 
 #endif
