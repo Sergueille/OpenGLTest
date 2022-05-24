@@ -215,6 +215,11 @@ public:
 	/// </summary>
 	static vec2 OptionProp(vec3 drawPos, std::string name, int* value, int max, std::string* firstDisplay, float propX);
 
+	/// <summary>
+	/// Allow to choose an option
+	/// </summary>
+	static vec2 OptionProp(vec3 drawPos, std::string name, int* value, int max, const char** firstDisplay, float propX);
+
 	static vec2 ObjectSelector(vec3 drawPos, std::string name, EditorObject** value, float propX, std::string ID);
 
 	static vec2 FileSelector(vec3 drawPos, std::string name, std::string* value, std::list<std::string>* pathList, float propX, std::string ID);

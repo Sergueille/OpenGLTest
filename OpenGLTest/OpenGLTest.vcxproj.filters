@@ -213,6 +213,9 @@
     <ClCompile Include="LogicRelay.cpp">
       <Filter>LevelEditor</Filter>
     </ClCompile>
+    <ClCompile Include="TransformModifier.cpp">
+      <Filter>LevelEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -339,6 +342,9 @@
       <Filter>LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="LogicRelay.h">
+      <Filter>LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformModifier.h">
       <Filter>LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>

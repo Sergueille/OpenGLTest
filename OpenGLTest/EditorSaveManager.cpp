@@ -17,6 +17,7 @@
 #include "TweenManager.h"
 #include "MenuManager.h"
 #include "LogicRelay.h"
+#include "TransformModifier.h"
 
 using namespace glm;
 
@@ -561,6 +562,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "LogicRelay")
 	{
 		newObj = new LogicRelay();
+		newObj->Load(&props);
+	}
+	else if (objectType == "TransformModifier")
+	{
+		newObj = new TransformModifier();
 		newObj->Load(&props);
 	}
 	else

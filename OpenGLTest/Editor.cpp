@@ -16,6 +16,7 @@
 #include "MenuManager.h"
 #include "EditorParticleSystem.h"
 #include "LogicRelay.h"
+#include "TransformModifier.h"
 
 #include <iostream>
 
@@ -756,6 +757,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	if (pressed)
 		newObject = (EditorObject*)new LogicRelay();
 
+	drawPos.y -= UIButton(drawPos, "Transform modifier", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new TransformModifier();
+
 
 	if (newObject != nullptr)
 	{
@@ -1281,6 +1286,29 @@ void Editor::IndexFiles()
 }
 
 vec2 Editor::OptionProp(vec3 startPos, std::string name, int* value, int max, std::string* firstDisplay, float propX)
+{
+	vec3 drawPos = startPos;
+
+	TextManager::RenderText(name + ":", drawPos, textSize);
+	drawPos.x += propX;
+
+	bool pressed;
+
+	drawPos.x += UIButton(drawPos, "(-)", &pressed, *value > 0).x + margin;
+	if (pressed)
+		(*value)--;
+
+	drawPos.x += TextManager::RenderText(*(firstDisplay + *value), drawPos, textSize).x + margin;
+
+	vec2 btnSize = UIButton(drawPos, "(+)", &pressed, *value < max);
+	drawPos += vec3(btnSize.x, -btnSize.y, 0);
+	if (pressed)
+		(*value)++;
+
+	return vec2(startPos - drawPos);
+}
+
+vec2 Editor::OptionProp(vec3 startPos, std::string name, int* value, int max, const char** firstDisplay, float propX)
 {
 	vec3 drawPos = startPos;
 

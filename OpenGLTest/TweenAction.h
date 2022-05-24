@@ -14,6 +14,18 @@ enum EaseType
 	circIn, circOut, circInOut,
 };
 
+constexpr int EASE_TYPE_COUNT = 22;
+constexpr const char* EASE_TYPE_NAMES[] = {
+	"linear",
+	"sineIn", "sineOut", "sineInOut",
+	"quadIn", "quadOut", "quadInOut",
+	"cubicIn", "cubicOut", "cubicInOut",
+	"quartIn", "quartOut", "quartInOut",
+	"quintIn", "quintOut", "quintInOut",
+	"expoIn", "expoOut", "expoInOut",
+	"circIn", "circOut", "circInOut",
+};
+
 template <typename T>
 class TweenAction
 {
