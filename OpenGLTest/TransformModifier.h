@@ -48,4 +48,12 @@ public:
 
 private:
 	EditorObject* targetObject;
+
+	TweenAction<vec2>* moveAction = nullptr;
+	TweenAction<float>* roateAction = nullptr;
+	TweenAction<vec2>* scaleAction = nullptr;
+
+	vec3 targetStartPos;
+	float targetStartRotation;
+	vec2 targetStartScale;
 };

@@ -50,6 +50,11 @@ vec3 EditorObject::GetEditPos()
 	return vec3(prallaxed.x, prallaxed.y, res.z);
 }
 
+vec3 EditorObject::GetLocalEditPos()
+{
+	return editorPosition;
+}
+
 float EditorObject::GetEditRotation()
 {
 	if (GetParent() != nullptr)
@@ -60,6 +65,11 @@ float EditorObject::GetEditRotation()
 	{
 		return editorRotation;
 	}
+}
+
+float EditorObject::GetLocalEditRotation()
+{
+	return editorRotation;
 }
 
 vec2 EditorObject::GetEditScale()
@@ -73,6 +83,12 @@ vec2 EditorObject::GetEditScale()
 		return editorSize;
 	}
 }
+
+vec2 EditorObject::GetLocalEditScale()
+{
+	return editorSize;
+}
+
 
 EditorObject* EditorObject::GetParent()
 {

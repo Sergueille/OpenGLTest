@@ -28,8 +28,11 @@ public:
 	std::string name;
 
 	vec3 GetEditPos();
+	vec3 GetLocalEditPos();
 	float GetEditRotation();
+	float GetLocalEditRotation();
 	vec2 GetEditScale();
+	vec2 GetLocalEditScale();
 	EditorObject* GetParent();
 	int parentID = -1;
 

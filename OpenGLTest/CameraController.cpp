@@ -37,7 +37,9 @@ CameraController::~CameraController()
         delete editorSprite;
         editorSprite = nullptr;
     }
-        
+
+	if (zoomTweenAction != nullptr && !zoomTweenAction->IsFinshedAt(Utility::time))
+		TweenManager<float>::Cancel(zoomTweenAction);
 }
 
 vec2 CameraController::DrawProperties(vec3 drawPos)
@@ -106,7 +108,7 @@ void CameraController::GetObjectEvents(const ObjectEvent** res, int* resCount)
 
 void CameraController::SetZoom(float zoom, float transTime)
 {
-	TweenManager<float>::Tween(Camera::size, zoom * Camera::defaultSize, transTime, [](float val) { Camera::size = val; }, EaseType::sineInOut);
+	zoomTweenAction = TweenManager<float>::Tween(Camera::size, zoom * Camera::defaultSize, transTime, [](float val) { Camera::size = val; }, EaseType::sineInOut);
 }
 
 void CameraController::SetZoomWithProps()

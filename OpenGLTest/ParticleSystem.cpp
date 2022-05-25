@@ -43,7 +43,6 @@ void ParticleSystem::Stop()
 	for (auto particle = particles.begin(); particle != particles.end(); particle++)
 	{
 		delete (*particle);
-		particle = particles.erase(particle);
 	}
 }
 

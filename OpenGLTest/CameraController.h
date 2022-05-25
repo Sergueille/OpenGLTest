@@ -3,6 +3,7 @@
 #include "EditorObject.h"
 #include "Sprite.h"
 #include "RessourceManager.h"
+#include "TweenManager.h"
 
 using namespace glm;
 
@@ -50,5 +51,8 @@ public:
 	/// Set camera zoom with objects props
 	/// </summary>
 	void SetZoomWithProps();
+
+private:
+	TweenAction<float>* zoomTweenAction = nullptr;
 };
 

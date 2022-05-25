@@ -36,7 +36,16 @@ TransformModifier::TransformModifier() : EditorObject(vec3(0))
     }
 	else
 	{
-		EventManager::DoInOneFrame([this] { this->targetObject = Editor::GetEditorObjectByID(this->targetID); });
+		EventManager::DoInOneFrame([this] { 
+			this->targetObject = Editor::GetEditorObjectByID(this->targetID, false, false); 
+
+			if (targetObject != nullptr)
+			{
+				targetStartPos = targetObject->GetLocalEditPos();
+				targetStartRotation = targetObject->GetLocalEditRotation();
+				targetStartScale = targetObject->GetLocalEditScale();
+			}
+		});
 	}
             
 	typeName = "TransformModifier";
@@ -49,6 +58,10 @@ TransformModifier::~TransformModifier()
         delete editorSprite;
         editorSprite = nullptr;
     }
+
+	if (moveAction != nullptr && !moveAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(moveAction);
+	if (roateAction != nullptr && !roateAction->IsFinshedAt(Utility::time)) TweenManager<float>::Cancel(roateAction);
+	if (scaleAction != nullptr && !scaleAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(scaleAction);
 }
 
 vec2 TransformModifier::DrawProperties(vec3 drawPos)
@@ -59,9 +72,9 @@ vec2 TransformModifier::DrawProperties(vec3 drawPos)
 	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
 
 	// Object selector
-	EditorObject* selected = Editor::GetEditorObjectByID(targetID);
+	EditorObject* selected = Editor::GetEditorObjectByID(targetID, true, false);
 	drawPos.y -= Editor::ObjectSelector(drawPos, "Target", &selected, Editor::panelPropertiesX, strID + "target").y;
-	targetID = selected->ID;
+	targetID = selected == nullptr ? -1 : selected->ID;
 
 	drawPos.y -= Editor::CheckBox(drawPos, "Relative values", &relative, Editor::panelPropertiesX).y;
 
@@ -137,6 +150,49 @@ void TransformModifier::GetObjectEvents(const ObjectEvent** firstEvent, int* cou
 {
 	*firstEvent = &events[0];
 	*count = TRANS_MODIFIER_EVENT_COUNT;
+}
+
+void TransformModifier::SetPosition()
+{
+	if (targetObject == nullptr) return;
+	if (moveAction != nullptr && !moveAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(moveAction);
+
+	vec2 obj = relative ? vec2(targetStartPos) + targetPos : targetPos;
+
+	moveAction = TweenManager<vec2>::Tween(vec2(targetObject->GetLocalEditPos()), obj, duration,
+		[this](vec2 value) { this->targetObject->SetEditPos(vec3(value.x, value.y, this->targetObject->GetLocalEditPos().z)); },
+		easeType);
+}
+
+void TransformModifier::SetRotation()
+{
+	if (targetObject == nullptr) return;
+	if (roateAction != nullptr && !roateAction->IsFinshedAt(Utility::time)) TweenManager<float>::Cancel(roateAction);
+
+	float obj = relative ? targetStartRotation + targetRotation : targetRotation;
+
+	roateAction = TweenManager<float>::Tween(targetObject->GetLocalEditRotation(), obj, duration,
+		[this](float value) { this->targetObject->SetEditRotation(value); },
+		easeType);
+}
+
+void TransformModifier::SetScale()
+{
+	if (targetObject == nullptr) return;
+	if (scaleAction != nullptr && !scaleAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(scaleAction);
+
+	vec2 obj = relative ? targetStartScale * targetSize : targetSize;
+
+	scaleAction = TweenManager<vec2>::Tween(targetObject->GetLocalEditScale(), obj, duration,
+		[this](vec2 value) { this->targetObject->SetEditScale(value); },
+		easeType);
+}
+
+void TransformModifier::SetAllTransforms()
+{
+	SetPosition();
+	SetRotation();
+	SetScale();
 }
 
 void TransformModifier::UpdateTransform()

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 32
+count 29
 
 object MapData {
 	mapName: ""
@@ -307,32 +307,4 @@ object LevelEnd {
 	position: "-21.400000, 0.400000, 10.000000"
 	parent: "-1"
 	nextLevel: "intro_walls.map"
-}
-object EditorSprite {
-	ID: "1060"
-	name: ""
-	position: "-3.200000, 6.000000, 0.000000"
-	parent: "-1"
-	size: "3.000000, 3.000000"
-	rotation: "0.000000"
-	color: "1.200000, 1.200000, 1.200000, 1.000000"
-	texturePath: "plant.png"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "1"
-}
-object TransformModifier {
-	ID: "1061"
-	name: "Plant move"
-	position: "-3.000000, 11.600000, 100.000000"
-	parent: "-1"
-}
-object LogicRelay {
-	ID: "1063"
-	name: ""
-	position: "-1.800000, 11.600000, 100.000000"
-	parent: "-1"
-	onTrigger: "1061||"
-	triggerOnStart: "1"
 }
