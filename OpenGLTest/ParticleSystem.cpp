@@ -115,6 +115,10 @@ void ParticleSystem::OnParticleSystemMainLoop()
 		{
 			delete particle;
 			it = particles.erase(it);
+
+			if (it == particles.end())
+				break;
+
 			continue;
 		}
 

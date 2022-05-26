@@ -216,6 +216,9 @@
     <ClCompile Include="TransformModifier.cpp">
       <Filter>LevelEditor</Filter>
     </ClCompile>
+    <ClCompile Include="PrefabRelay.cpp">
+      <Filter>LevelEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -345,6 +348,9 @@
       <Filter>LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="TransformModifier.h">
+      <Filter>LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="PrefabRelay.h">
       <Filter>LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>

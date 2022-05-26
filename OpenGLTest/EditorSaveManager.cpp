@@ -18,6 +18,7 @@
 #include "MenuManager.h"
 #include "LogicRelay.h"
 #include "TransformModifier.h"
+#include "PrefabRelay.h"
 
 using namespace glm;
 
@@ -230,6 +231,8 @@ void EditorSaveManager::LoadPrefab(Prefab* prefab)
 
 	std::cout << "Loading prefab " << prefab->GetPath() << std::endl;
 
+	prefab->prefabRelay = nullptr;
+
 	std::string path = mapsBasePath + prefab->GetPath();
 	ifile->open(path, std::ios::in);
 
@@ -261,6 +264,14 @@ void EditorSaveManager::LoadPrefab(Prefab* prefab)
 			}
 
 			newObj->prefabOwner = prefab;
+
+			if (newObj->typeName == "PrefabRelay")
+			{
+				if (prefab->prefabRelay != nullptr)
+					std::cout << "Two prefabRelay in one prefab!" << std::endl;
+				else
+					prefab->prefabRelay = (PrefabRelay*)newObj;
+			}
 		}
 
 		ifile->close();
@@ -569,6 +580,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "TransformModifier")
 	{
 		newObj = new TransformModifier();
+		newObj->Load(&props);
+	}
+	else if (objectType == "PrefabRelay")
+	{
+		newObj = new PrefabRelay();
 		newObj->Load(&props);
 	}
 	else

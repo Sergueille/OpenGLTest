@@ -4,8 +4,11 @@
 #include "Sprite.h"
 #include "RessourceManager.h"
 
+constexpr int PREFAB_MAX_EVENT_COUNT = 8;
+
 using namespace glm;
 
+class PrefabRelay;
 class Prefab : public EditorObject
 {
 public:
@@ -15,6 +18,7 @@ public:
     Sprite* editorSprite = nullptr;
 
 	std::list<EditorObject*> prefabObjects;
+	PrefabRelay* prefabRelay;
 
 	MapData mapData;
 
@@ -38,6 +42,11 @@ public:
 
 	virtual void GetAABB(vec2* minRes, vec2* maxRes);
 
+	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
+
 private:
 	std::string prefabPath = "";
+	
+	int eventCount = 0;
+	ObjectEvent events[PREFAB_MAX_EVENT_COUNT];
 };

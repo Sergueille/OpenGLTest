@@ -17,6 +17,7 @@
 #include "EditorParticleSystem.h"
 #include "LogicRelay.h"
 #include "TransformModifier.h"
+#include "PrefabRelay.h"
 
 #include <iostream>
 
@@ -736,6 +737,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.y -= UIButton(drawPos, "Prefab", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new Prefab();
+
+	drawPos.y -= UIButton(drawPos, "Prefab relay", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new PrefabRelay();
 
 	drawPos.y -= UIButton(drawPos, "Trigger", &pressed).y;
 	if (pressed)

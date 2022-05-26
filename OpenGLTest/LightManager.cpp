@@ -153,6 +153,8 @@ void LightManager::BakeLight()
 	lightmapMin = levelMin;
 	lightmapMax = levelMax;
 
+	delete[] pixels;
+
 	ForceRefreshLightmaps();
 }
 
@@ -160,6 +162,8 @@ unsigned int LightManager::GetLightData()
 {
 	if (!mustReadNewFile)
 		return texID;
+
+	glDeleteTextures(1, &texID);
 
 	texLevelPath = Editor::enabled? Editor::currentFilePath : EditorSaveManager::filePath;
 	mustReadNewFile = false;

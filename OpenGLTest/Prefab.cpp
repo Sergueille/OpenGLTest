@@ -5,6 +5,7 @@
 #include "CircleCollider.h"
 #include "RectCollider.h"
 #include "RessourceManager.h"
+#include "PrefabRelay.h"
 
 Prefab::Prefab() : EditorObject(vec3(0))
 {
@@ -61,6 +62,26 @@ void Prefab::ReloadPrefab()
 
 	// Load file
 	EditorSaveManager::LoadPrefab(this);
+
+	if (prefabRelay == nullptr)
+	{
+		eventCount = 0;
+	}
+	else
+	{
+		eventCount = (int)prefabRelay->eventLists.size();
+
+		if (eventCount > 0)
+		{
+			for (int i = 0; i < eventCount; i++)
+			{
+				events[i] = ObjectEvent{
+					prefabRelay->eventNames[i],
+					[i](EditorObject* object, void* param) ->void { ((Prefab*)object)->prefabRelay->CallEventList(i); },
+				};
+			}
+		}
+	}
 }
 
 vec2 Prefab::DrawProperties(vec3 drawPos)
@@ -186,6 +207,12 @@ void Prefab::GetAABB(vec2* minRes, vec2* maxRes)
 		if (objMax.y > minRes->y)
 			maxRes->y = objMax.y;
 	}
+}
+
+void Prefab::GetObjectEvents(const ObjectEvent** res, int* resCount)
+{
+	*resCount = eventCount;
+	*res = &events[0];
 }
 
 void Prefab::UpdateTransform()

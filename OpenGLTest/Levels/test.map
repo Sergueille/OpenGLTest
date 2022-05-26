@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 29
+count 35
 
 object MapData {
 	mapName: ""
@@ -47,15 +47,15 @@ object EditorSprite {
 object EditorSprite {
 	ID: "117"
 	name: "background"
-	position: "0.400000, 4.400000, -5.000000"
+	position: "3.200000, 4.400000, -5.000000"
 	parent: "-1"
-	size: "45.000000, 45.000000"
+	size: "54.000000, 45.000000"
 	rotation: "0.000000"
 	color: "0.800000, 0.800000, 0.800000, 1.000000"
 	texturePath: "back\plaster2.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "5.000000, 5.000000"
+	UVend: "6.000000, 5.000000"
 	isLit: "1"
 }
 object EditorSprite {
@@ -74,7 +74,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "152"
 	name: "Ground"
-	position: "31.800001, 5.200000, 0.000000"
+	position: "39.400002, 5.200000, 0.000000"
 	parent: "-1"
 	size: "20.400000, 35.799999"
 	rotation: "0.000000"
@@ -124,11 +124,11 @@ object Laser {
 object Button {
 	ID: "156"
 	name: ""
-	position: "2.600000, 3.000000, 1.000000"
+	position: "12.000000, 3.400000, 1.000000"
 	parent: "-1"
-	startPressed: "1"
-	onPressed: "13|Turn on|"
-	onUnpressed: "13|Turn off|"
+	startPressed: "0"
+	onPressed: "2462|Open door|"
+	onUnpressed: "2462|Close door|"
 }
 object Light {
 	ID: "270"
@@ -217,7 +217,7 @@ object Prefab {
 object Prefab {
 	ID: "627"
 	name: ""
-	position: "6.800000, 6.200000, 0.000000"
+	position: "3.200000, 6.200000, 0.000000"
 	parent: "-1"
 	path: "prefabs\neon.map"
 	ori: "0.000000"
@@ -235,26 +235,12 @@ object Prefab {
 object EditorSprite {
 	ID: "736"
 	name: ""
-	position: "11.200000, 3.000000, 0.000000"
+	position: "15.800000, 3.000000, 0.000000"
 	parent: "-1"
 	size: "2.400000, 2.400000"
 	rotation: "0.000000"
-	color: "1.500000, 1.500000, 1.500000, 1.000000"
+	color: "1.300000, 1.300000, 1.300000, 1.000000"
 	texturePath: "desk2.png"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "1"
-}
-object EditorSprite {
-	ID: "788"
-	name: ""
-	position: "6.800000, 3.000000, 0.000000"
-	parent: "-1"
-	size: "2.400000, 2.400000"
-	rotation: "0.000000"
-	color: "1.200000, 1.200000, 1.200000, 1.000000"
-	texturePath: "desk1.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
@@ -263,7 +249,7 @@ object EditorSprite {
 object Prefab {
 	ID: "790"
 	name: ""
-	position: "19.400000, 10.800000, 0.000000"
+	position: "16.800001, 10.800000, 0.000000"
 	parent: "-1"
 	path: "prefabs\neon.map"
 	ori: "0.000000"
@@ -307,4 +293,74 @@ object LevelEnd {
 	position: "-21.400000, 0.400000, 10.000000"
 	parent: "-1"
 	nextLevel: "intro_walls.map"
+}
+object EditorSprite {
+	ID: "2457"
+	name: "Ground"
+	position: "21.000000, -5.600000, 0.000000"
+	parent: "-1"
+	size: "20.400000, 15.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object Prefab {
+	ID: "2459"
+	name: ""
+	position: "25.200001, 10.800000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "2461"
+	name: "Platform"
+	position: "24.400000, 8.800000, 0.000000"
+	parent: "-1"
+	size: "10.200000, 5.000000"
+	rotation: "-180.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object Prefab {
+	ID: "2462"
+	name: ""
+	position: "21.200001, 4.200000, 0.000000"
+	parent: "-1"
+	path: "prefabs\door.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object ShadowCaster {
+	ID: "2538"
+	name: ""
+	position: "24.400000, 9.000000, 10.000000"
+	parent: "-1"
+	size: "10.200000, 5.400000"
+	orientation: "-0.000000"
+}
+object Prefab {
+	ID: "2542"
+	name: ""
+	position: "25.200001, 6.200000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "2544"
+	name: ""
+	position: "10.000000, 6.200000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
 }

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 5
+count 6
 
 object MapData {
 	mapName: ""
@@ -21,7 +21,7 @@ object TransformModifier {
 object TransformModifier {
 	ID: "114"
 	name: "Door close"
-	position: "0.400000, -3.000000, 80.000000"
+	position: "0.000000, -3.000000, 80.000000"
 	parent: "-1"
 	targetID: "23"
 	relative: "1"
@@ -54,4 +54,15 @@ object Laser {
 	startOffset: "-1.000000"
 	endOffset: "0.050000"
 	startOn: "1"
+}
+object PrefabRelay {
+	ID: "117"
+	name: ""
+	position: "1.000000, -3.000000, 80.000000"
+	parent: "-1"
+	eventListsCount: "2"
+	eventList0: "88|Set all transforms|42|Turn off|"
+	eventList0name: "Open door"
+	eventList1: "114|Set all transforms|42|Turn on|"
+	eventList1name: "Close door"
 }

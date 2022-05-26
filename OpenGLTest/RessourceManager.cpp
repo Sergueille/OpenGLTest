@@ -63,7 +63,7 @@ void RessourceManager::Clear()
 
     for (auto& texture : textures)
     {
-        glDeleteProgram(texture.second->ID);
+        glDeleteTextures(1, &texture.second->ID);
         delete texture.second;
     }
 

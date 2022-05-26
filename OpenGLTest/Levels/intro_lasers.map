@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 121
+count 122
 
 object MapData {
 	mapName: ""
@@ -1473,19 +1473,6 @@ object EditorSprite {
 	isLit: "0"
 }
 object EditorSprite {
-	ID: "2433"
-	name: ""
-	position: "180.199997, 10.800000, 0.000000"
-	parent: "-1"
-	size: "1.000000, 4.600000"
-	rotation: "0.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	collideWithPhys: "1"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
-}
-object EditorSprite {
 	ID: "2435"
 	name: ""
 	position: "198.400009, -7.200000, 0.000000"
@@ -1524,4 +1511,22 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+}
+object Prefab {
+	ID: "2442"
+	name: ""
+	position: "180.199997, 10.800000, 0.000000"
+	parent: "-1"
+	path: "prefabs\door.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Button {
+	ID: "2448"
+	name: ""
+	position: "176.800003, 10.200000, 0.000000"
+	parent: "-1"
+	startPressed: "0"
+	onPressed: "2442|Open door|"
+	onUnpressed: "2442|Close door|"
 }
