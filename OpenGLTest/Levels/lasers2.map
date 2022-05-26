@@ -231,11 +231,11 @@ object Light {
 object Button {
 	ID: "43"
 	name: ""
-	position: "28.800001, -11.800000, 0.000000"
+	position: "28.400000, -11.800000, 0.000000"
 	parent: "-1"
 	startPressed: "0"
-	onPressed: "42|Turn off|88|Set all transforms|"
-	onUnpressed: "42|Turn on|114|Set all transforms|"
+	onPressed: ""
+	onUnpressed: ""
 }
 object EditorSprite {
 	ID: "87"
@@ -267,7 +267,7 @@ object EditorSprite {
 object Prefab {
 	ID: "4717"
 	name: ""
-	position: "32.200001, -11.400001, 0.000000"
+	position: "32.000000, -11.200000, 0.000000"
 	parent: "-1"
 	path: "prefabs\door.map"
 	ori: "0.000000"

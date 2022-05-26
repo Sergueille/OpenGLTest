@@ -37,7 +37,7 @@ TransformModifier::TransformModifier() : EditorObject(vec3(0))
 	else
 	{
 		EventManager::DoInOneFrame([this] { 
-			this->targetObject = Editor::GetEditorObjectByID(this->targetID, false, false); 
+			this->targetObject = Editor::GetEditorObjectByIDInObjectContext(this, this->targetID, false, false); 
 
 			if (targetObject != nullptr)
 			{
@@ -201,7 +201,7 @@ void TransformModifier::UpdateTransform()
     
     if (editorSprite != nullptr)
 	{
-		editorSprite->position = editorPosition;
+		editorSprite->position = GetEditPos();
 		editorSprite->size = vec2(Editor::gizmoSize);
 		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
 	}

@@ -44,6 +44,7 @@ void ParticleSystem::Stop()
 	{
 		delete (*particle);
 	}
+	particles.clear();
 }
 
 bool ParticleSystem::IsPlaying()

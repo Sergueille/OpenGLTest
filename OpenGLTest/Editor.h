@@ -234,7 +234,15 @@ public:
 
 	static EditorObject* GetObjectUnderMouse();
 
+	/// <summary>
+	/// <para>Get the first object of the loaded level that has the specified ID</para>
+	/// <para>If the result is used for an EditorObject, you MUST use GetEditorObjectByIDInObjectContext() instead</para>
+	/// </summary>
 	static EditorObject* GetEditorObjectByID(int ID, bool inEditor = false, bool throwIfNotFound = true);
+	/// <summary>
+	/// <para>Get the first object of the loaded level, or of the object's containing prefab, that has the specified ID</para>
+	/// </summary>
+	static EditorObject* GetEditorObjectByIDInObjectContext(EditorObject* context, int ID, bool inEditor = false, bool throwIfNotFound = true);
 
 	/// <summary>
 	/// Make all editorObjects search again for this parent by its ID, use when deleting parent, replacing, etc

@@ -79,7 +79,7 @@ void Laser::UpdateTransform()
 
 	if (editorSprite != nullptr)
 	{
-		editorSprite->position = editorPosition + vec3(0, 0, 1); // Bigger Z to render above laser
+		editorSprite->position = GetEditPos() + vec3(0, 0, 1); // Bigger Z to render above laser
 	}
 }
 
@@ -203,22 +203,22 @@ void Laser::OnLaserMainLoop()
 	if (enabled && laserOn)
 	{
 		vec2 raycastRes;
-		vec2 direction = Utility::Rotate(vec2(1, 0), editorRotation);
-		if (Collider::Raycast(editorPosition, direction, &raycastRes))
+		vec2 direction = Utility::Rotate(vec2(1, 0), GetEditRotation());
+		if (Collider::Raycast(GetEditPos(), direction, &raycastRes))
 		{
-			vec2 spriteStart = vec2(editorPosition) + (direction * startOffset);
+			vec2 spriteStart = vec2(GetEditPos()) + (direction * startOffset);
 			vec2 spriteEnd = raycastRes + (direction * endOffset);
 
 			vec2 middle = (spriteStart + spriteEnd) / 2.f;
 			float length = glm::length(spriteStart - spriteEnd);
 
-			displaySprite->position = vec3(middle.x, middle.y, editorPosition.z);
+			displaySprite->position = vec3(middle.x, middle.y, GetEditPos().z);
 			displaySprite->size = vec2(length, width);
-			displaySprite->rotate = editorRotation;
+			displaySprite->rotate = GetEditRotation();
 
-			laserCollider->position = vec3(middle.x, middle.y, editorPosition.z);
+			laserCollider->position = vec3(middle.x, middle.y, GetEditPos().z);
 			laserCollider->size = vec2(length, width);
-			laserCollider->orientation = editorRotation;
+			laserCollider->orientation = GetEditRotation();
 		}
 	}
 }

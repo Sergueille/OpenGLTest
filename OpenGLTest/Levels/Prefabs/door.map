@@ -34,7 +34,7 @@ object TransformModifier {
 object EditorSprite {
 	ID: "23"
 	name: "Door"
-	position: "0.000000, 0.000000, 1.000000"
+	position: "0.000000, -0.100000, 1.000000"
 	parent: "-1"
 	size: "1.000000, 4.500000"
 	rotation: "0.000000"
@@ -47,11 +47,11 @@ object EditorSprite {
 object Laser {
 	ID: "42"
 	name: ""
-	position: "-1.000000, 2.200000, 0.000000"
+	position: "-1.000000, 1.600000, 0.000000"
 	parent: "-1"
 	orientation: "-90.000000"
 	laserType: "0"
-	startOffset: "-0.100000"
+	startOffset: "-1.000000"
 	endOffset: "0.050000"
 	startOn: "1"
 }

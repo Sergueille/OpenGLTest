@@ -17,7 +17,7 @@ public:
 
     Sprite* editorSprite = nullptr;
 
-	int targetID;
+	int targetID = -1;
 	bool relative = true;
 	vec2 targetPos = vec2(0);
 	float targetRotation = 0;

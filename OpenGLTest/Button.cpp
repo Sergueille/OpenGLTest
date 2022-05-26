@@ -101,14 +101,14 @@ void Button::SetState(bool value, bool sendEvents)
 	if (isPressed)
 	{
 		if (sendEvents)
-			onPressed.Call();
+			onPressed.Call(this);
 
 		btnSprite->texture = RessourceManager::GetTexture("switch_on.png");
 	}
 	else
 	{
 		if (sendEvents)
-			onUnpressed.Call();
+			onUnpressed.Call(this);
 
 		btnSprite->texture = RessourceManager::GetTexture("switch_off.png");
 	}

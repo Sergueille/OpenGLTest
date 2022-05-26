@@ -153,7 +153,7 @@ vec3 EditorObject::SetGlobalEditPos(vec3 pos)
 void EditorObject::UpdateTransform()
 {
 	if (clickCollider)
-		clickCollider->position = editorPosition;
+		clickCollider->position = GetEditPos();
 }
 
 void EditorObject::SubscribeToEditorObjectFuncs()
@@ -306,7 +306,7 @@ EventList::~EventList()
 	
 }
 
-void EventList::Call()
+void EventList::Call(EditorObject* context)
 {
 	if (Editor::enabled)
 		throw "Must not call event while in editor";
@@ -315,7 +315,14 @@ void EventList::Call()
 	auto itEvents = events.begin();
 	for (; itID != ids.end(); itID++, itEvents++)
 	{
-		EditorObject* target = Editor::GetEditorObjectByID(*itID, false, true);
+		EditorObject* target = Editor::GetEditorObjectByIDInObjectContext(context, *itID, false, false);
+
+		if (target == nullptr)
+		{
+			std::cout << "Object event has no valid target!" << std::endl;
+			continue;
+		}
+
 		target->CallEvent(*itEvents);
 	}
 }

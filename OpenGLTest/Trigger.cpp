@@ -108,7 +108,7 @@ void Trigger::DerivedOnMainLoop()
 			if (!collideWithPlayer)
 			{
 				collideWithPlayer = true;
-				onEnter.Call();
+				onEnter.Call(this);
 			}
 		}
 		else
@@ -116,7 +116,7 @@ void Trigger::DerivedOnMainLoop()
 			if (collideWithPlayer)
 			{
 				collideWithPlayer = false;
-				onExit.Call();
+				onExit.Call(this);
 			}
 		}
 	}
@@ -132,10 +132,10 @@ void Trigger::UpdateTransform()
     
 	if (editorSprite != nullptr)
 	{
-		editorSprite->position = editorPosition; 
-		editorSprite->size = editorSize;
-		editorSprite->rotate = editorRotation;
+		editorSprite->position = GetEditPos();
+		editorSprite->size = GetEditScale();
+		editorSprite->rotate = GetEditRotation();
 	}
-	((RectCollider*)clickCollider)->size = editorSize;
-	((RectCollider*)clickCollider)->orientation = editorRotation;
+	((RectCollider*)clickCollider)->size = GetEditScale();
+	((RectCollider*)clickCollider)->orientation = GetEditRotation();
 }

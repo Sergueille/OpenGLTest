@@ -112,7 +112,7 @@ void LogicRelay::UpdateTransform()
     
     if (editorSprite != nullptr)
 	{
-		editorSprite->position = editorPosition;
+		editorSprite->position = GetEditPos();
 		editorSprite->size = vec2(Editor::gizmoSize);
 		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
 	}
@@ -120,5 +120,5 @@ void LogicRelay::UpdateTransform()
 
 void LogicRelay::Trigger()
 {
-	onTrigger.Call();
+	onTrigger.Call(this);
 }

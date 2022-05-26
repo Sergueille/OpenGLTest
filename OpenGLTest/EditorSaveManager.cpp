@@ -259,6 +259,8 @@ void EditorSaveManager::LoadPrefab(Prefab* prefab)
 			{
 				newObj->SetParent(prefab);
 			}
+
+			newObj->prefabOwner = prefab;
 		}
 
 		ifile->close();

@@ -15,6 +15,7 @@ struct ObjectEvent
 	std::function<void(EditorObject* object, void* param)> func;
 };
 
+class Prefab;
 class EditorSaveManager;
 class EditorObject
 {
@@ -51,6 +52,11 @@ public:
 	/// Collider used to click on object in the editor
 	/// </summary>
 	Collider* clickCollider;
+
+	/// <summary>
+	/// Prefab that owns this object, nullptr if not in prefab
+	/// </summary>
+	Prefab* prefabOwner = nullptr;
 
 	/// <summary>
 	/// Draws properties of object in the editor panel
@@ -127,7 +133,7 @@ struct EventList
 	/// <summary>
 	/// TODO: store object pointers instead of their ID
 	/// </summary>
-	void Call(); 
+	void Call(EditorObject* context); 
 
 	vec2 DrawInPanel(vec3 drawPos, std::string eventName);
 

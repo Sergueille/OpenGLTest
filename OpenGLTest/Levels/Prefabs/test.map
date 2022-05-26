@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 3
+count 4
 
 object MapData {
 	mapName: ""
@@ -18,16 +18,24 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 }
-object EditorSprite {
-	ID: "1"
+object TransformModifier {
+	ID: "2"
 	name: ""
-	position: "0.600000, -0.400000, 2.000000"
+	position: "1.400000, -0.000000, 0.000000"
 	parent: "-1"
-	size: "1.000000, 1.000000"
-	rotation: "-45.000000"
-	color: "0.000000, 1.000000, 0.000000, 1.000000"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
+	targetID: "0"
+	relative: "1"
+	targetPos: "1.000000, 0.000000"
+	targetRotation: "0.000000"
+	targetSize: "1.000000, 1.000000"
+	duration: "3.000000"
+	easeType: "12"
+}
+object LogicRelay {
+	ID: "2"
+	name: ""
+	position: "1.400000, 1.200000, 20.000000"
+	parent: "-1"
+	onTrigger: "2|Set all transforms|"
+	triggerOnStart: "1"
 }

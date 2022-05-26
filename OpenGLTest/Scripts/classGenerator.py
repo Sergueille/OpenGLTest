@@ -88,31 +88,31 @@ def GetSpriteUpdateTransform():
         if sprite_type == "editor":
             res += f"""    if ({spriteName} != nullptr)
 	{{
-		{spriteName}->position = editorPosition;
+		{spriteName}->position = GetEditPos();
 		{spriteName}->size = vec2(Editor::gizmoSize);
 		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
 	}}"""
 
 
         else:
-            res += f"\t{spriteName}->position = editorPosition;"
+            res += f"\t{spriteName}->position = GetEditPos();"
 
             
     else:
         if sprite_type == "editor":
             res += f"""    if ({spriteName} != nullptr)
 	{{
-		{spriteName}->position = editorPosition;
+		{spriteName}->position = GetEditPos();
 	}}"""
 
         else:
-            res += f"{spriteName}->position = editorPosition;"
+            res += f"{spriteName}->position = GetEditPos();"
 
             
         if use_scale:
-            res += "\n\t((RectCollider*)clickCollider)->size = editorSize;"
+            res += "\n\t((RectCollider*)clickCollider)->size = GetEditScale();"
         if use_ori:
-            res += "\n\t((RectCollider*)clickCollider)->orientation = editorRotation;"
+            res += "\n\t((RectCollider*)clickCollider)->orientation = GetEditRotation();"
 
     return res
 

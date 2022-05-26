@@ -1672,11 +1672,33 @@ EditorObject* Editor::GetEditorObjectByID(int ID, bool inEditor, bool throwIfNot
 			if ((*it)->ID == ID)
 				return *it;
 		}
-
 	}
 
 	if (throwIfNotFound)
 		throw "No object with ID";
+
+	return nullptr;
+}
+
+EditorObject* Editor::GetEditorObjectByIDInObjectContext(EditorObject* context, int ID, bool inEditor, bool throwIfNotFound)
+{
+	// No object or not in prefab
+	if (context == nullptr || context->prefabOwner == nullptr)
+		return GetEditorObjectByID(ID, inEditor, throwIfNotFound);
+
+	// In prefab
+	if (ID != -1)
+	{
+		auto* list = &context->prefabOwner->prefabObjects;
+		for (auto it = list->begin(); it != list->end(); it++)
+		{
+			if ((*it)->ID == ID)
+				return *it;
+		}
+	}
+
+	if (throwIfNotFound)
+		throw "No object with this ID";
 
 	return nullptr;
 }
