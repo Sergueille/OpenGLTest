@@ -258,7 +258,7 @@ void EditorSaveManager::LoadPrefab(Prefab* prefab)
 
 			// Set parent to prefab if none
 			EditorObject* newObj = prefab->prefabObjects.back();
-			if (newObj->GetParent() == nullptr)
+			if (newObj->parentID == -1)
 			{
 				newObj->SetParent(prefab);
 			}

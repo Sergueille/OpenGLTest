@@ -12,7 +12,9 @@ bool PhysicObject::disableAllPhysics = false;
 PhysicObject::PhysicObject(Collider* coll)
 {
 	this->collider = coll;
-	SubscribeToMainLoop();
+
+	// Start physics next frmae to let the leveml finish loading
+	EventManager::DoInOneFrame([this] { SubscribeToMainLoop(); });
 }
 
 PhysicObject::~PhysicObject()

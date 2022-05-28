@@ -19,7 +19,7 @@ public:
 
 	float particleLifetime = 3;
 	float particlesPerSecond = 100;
-	float duration = 5;
+	float duration = -1; // Set to -1 for infinite
 
 	Sprite* paticleTemplate = nullptr;
 
@@ -42,6 +42,8 @@ public:
 
 protected:
 	bool isPlaying = false;
+	float endTime = 0;
+
 	std::list<Particle*> particles = std::list<Particle*>();
 
 	LinkedListElement<std::function<void()>>* psysMainLoopFuncPos = nullptr;

@@ -7,6 +7,17 @@
 #include "RessourceManager.h"
 #include "ParticleSystem.h"
 
+ObjectEvent EditorParticleSystem::events[PSYS_EVENT_COUNT] = {
+	ObjectEvent{
+		"Start",
+		[](EditorObject* object, void* param) { ((EditorParticleSystem*)object)->Start(); },
+	},
+	ObjectEvent{
+		"Stop",
+		[](EditorObject* object, void* param) { ((EditorParticleSystem*)object)->Stop(); },
+	},
+};
+
 EditorParticleSystem::EditorParticleSystem() : EditorObject(vec3(0))
 {
 	clickCollider = new CircleCollider(vec2(0), 1, false);
@@ -22,7 +33,9 @@ EditorParticleSystem::EditorParticleSystem() : EditorObject(vec3(0))
 	changeSize = true;
 	changeColor = true;
 	paticleTemplate = new Sprite(nullptr, vec3(0));
-	Start();
+
+	if (autoStart)
+		EventManager::DoInOneFrame([this] { Start(); });
             
 	typeName = "EditorParticleSystem";
 }
@@ -47,14 +60,19 @@ vec2 EditorParticleSystem::DrawProperties(vec3 drawPos)
 	std::string strID = std::to_string(ID);
 	vec2 startPos = vec2(drawPos);
 
-	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
+	drawPos.y -= EditorObject::DrawProperties(drawPos).y + Editor::margin;
+
+	bool pressed;
+	drawPos.y -= Editor::UIButton(drawPos, "Start again", &pressed).y + Editor::margin;
+	if (pressed) Start();
 
     drawPos.y -= Editor::CheckBox(drawPos, "Use circle emitter", &emitCircle, Editor::panelPropertiesX).y;
-
 	drawPos.y -= Editor::DrawProperty(drawPos, "Emitter orientation", &editorRotation, Editor::panelPropertiesX, strID + "ori").y;
     drawPos.y -= Editor::DrawProperty(drawPos, "Emitter scale", &editorSize, Editor::panelPropertiesX, strID + "size").y + Editor::margin;
 
-    drawPos.y -= Editor::DrawProperty(drawPos, "Particles each second", &particlesPerSecond, Editor::panelPropertiesX, strID + "quantity").y + Editor::margin;
+    drawPos.y -= Editor::CheckBox(drawPos, "Auto start", &autoStart, Editor::panelPropertiesX).y;
+    drawPos.y -= Editor::DrawProperty(drawPos, "Duration", &duration, Editor::panelPropertiesX, strID + "duration").y;
+    drawPos.y -= Editor::DrawProperty(drawPos, "Particles each second", &particlesPerSecond, Editor::panelPropertiesX, strID + "quantity").y;
     drawPos.y -= Editor::DrawProperty(drawPos, "Particles lifetime", &particleLifetime, Editor::panelPropertiesX, strID + "lifetime").y + Editor::margin;
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Start velocity", &startVelocity, Editor::panelPropertiesX, strID + "startVel").y;
@@ -80,7 +98,7 @@ EditorObject* EditorParticleSystem::Copy()
 
 	// copy collider
 	CircleCollider* oldCollider = (CircleCollider*)this->clickCollider;
-	newObj->clickCollider = new CircleCollider(oldCollider->position, oldCollider->size, oldCollider->MustCollideWithPhys());
+	newObj->clickCollider = new CircleCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->MustCollideWithPhys());
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
     if (previewSprite != nullptr) newObj->previewSprite = this->previewSprite->Copy();
@@ -101,6 +119,9 @@ void EditorParticleSystem::Load(std::map<std::string, std::string>* props)
     EditorSaveManager::FloatProp(props, "orientation", &editorRotation);
     editorSize = EditorSaveManager::StringToVector2((*props)["scale"]);
 
+	duration = -1; // Default
+    EditorSaveManager::FloatProp(props, "duration", &duration);
+
 	emitCircle = (*props)["emitCircle"] == "1";
 
 	startSize = EditorSaveManager::StringToVector2((*props)["startSize"]);
@@ -119,6 +140,8 @@ void EditorParticleSystem::Load(std::map<std::string, std::string>* props)
 
 	EditorSaveManager::FloatProp(props, "particlesPerSecond", &particlesPerSecond);
 	EditorSaveManager::FloatProp(props, "particleLifetime", &particleLifetime);
+
+	autoStart = (*props)["autoStart"] != "0";
 }
 
 void EditorParticleSystem::Save()
@@ -142,6 +165,10 @@ void EditorParticleSystem::Save()
 
 	EditorSaveManager::WriteProp("particlesPerSecond", particlesPerSecond);
 	EditorSaveManager::WriteProp("particleLifetime", particleLifetime);
+
+	EditorSaveManager::WriteProp("duration", duration);
+
+	EditorSaveManager::WriteProp("autoStart", autoStart);
 }
 
 void EditorParticleSystem::Enable()
@@ -175,6 +202,12 @@ void EditorParticleSystem::OnUnselected()
 {
 	if (previewSprite != nullptr)
 		previewSprite->StopDrawing();
+}
+
+void EditorParticleSystem::GetObjectEvents(const ObjectEvent** res, int* resCount)
+{
+	*res = &events[0];
+	*resCount = PSYS_EVENT_COUNT;
 }
 
 void EditorParticleSystem::UpdateTransform()

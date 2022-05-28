@@ -54,7 +54,7 @@ EditorObject* Trigger::Copy()
 
 	// copy collider
 	RectCollider* oldCollider = (RectCollider*)this->clickCollider;
-	newObj->clickCollider = new RectCollider(oldCollider->position, oldCollider->size, oldCollider->orientation, oldCollider->MustCollideWithPhys());
+	newObj->clickCollider = new RectCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->orientation, oldCollider->MustCollideWithPhys());
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 

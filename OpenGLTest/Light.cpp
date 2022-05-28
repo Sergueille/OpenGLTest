@@ -111,7 +111,7 @@ EditorObject* Light::Copy()
 	Light* copy = new Light(*this);
 
 	CircleCollider* oldCollider = (CircleCollider*)this->clickCollider;
-	copy->clickCollider = new CircleCollider(oldCollider->position, oldCollider->size, false);
+	copy->clickCollider = new CircleCollider(oldCollider->GetPos(), oldCollider->size, false);
 
 	if (editorSprite != nullptr)
 	{

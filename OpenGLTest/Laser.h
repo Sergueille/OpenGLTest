@@ -24,6 +24,11 @@ public:
 	const float width = 0.5f;
 	const float editorSpriteAlpha = 0.5f;
 
+	/// <summary>
+	/// The laser will not update if the player is further than this distance
+	/// </summary>
+	const float minPlayerDist = 30;
+
 	const LaserSharedProps props[2] = {
 		LaserSharedProps {
 			vec4(1, 0.8, 0.9, 1), // centerColor
@@ -87,8 +92,10 @@ public:
 
 private:
 	LinkedListElement<std::function<void()>>* laserMainLoopFuncPos = nullptr;
-	void OnLaserMainLoop();
 
+	bool hasRefreshedOnce = false;
+
+	void OnLaserMainLoop();
 	static void SetSpriteUniforms(Shader* shader, void* object);
 
 	static const ObjectEvent events[LASER_EVENT_COUNT];

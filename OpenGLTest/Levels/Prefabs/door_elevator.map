@@ -1,0 +1,91 @@
+// Editor map file, version 1
+
+count 7
+
+object MapData {
+	mapName: ""
+}
+object TransformModifier {
+	ID: "88"
+	name: "Door open"
+	position: "-1.000000, -3.000000, 80.000000"
+	parent: "-1"
+	targetID: "23"
+	relative: "1"
+	targetPos: "0.000000, 4.500000"
+	targetRotation: "0.000000"
+	targetSize: "1.000000, 1.000000"
+	duration: "2.000000"
+	easeType: "4"
+	onFinished: ""
+}
+object TransformModifier {
+	ID: "114"
+	name: "Door close"
+	position: "0.000000, -3.000000, 80.000000"
+	parent: "-1"
+	targetID: "23"
+	relative: "1"
+	targetPos: "0.000000, 0.000000"
+	targetRotation: "0.000000"
+	targetSize: "1.000000, 1.000000"
+	duration: "0.500000"
+	easeType: "4"
+	onFinished: "118|Start|"
+}
+object EditorSprite {
+	ID: "23"
+	name: "Door"
+	position: "0.000000, -0.100000, 1.000000"
+	parent: "-1"
+	size: "0.400000, 4.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object Laser {
+	ID: "42"
+	name: ""
+	position: "-0.600000, 1.600000, 0.000000"
+	parent: "-1"
+	orientation: "-90.000000"
+	laserType: "0"
+	startOffset: "-1.000000"
+	endOffset: "0.050000"
+	startOn: "1"
+}
+object PrefabRelay {
+	ID: "117"
+	name: ""
+	position: "1.000000, -3.000000, 80.000000"
+	parent: "-1"
+	eventListsCount: "2"
+	eventList0: "88|Set all transforms|42|Turn off|"
+	eventList0name: "Open door"
+	eventList1: "114|Set all transforms|42|Turn on|"
+	eventList1name: "Close door"
+}
+object EditorParticleSystem {
+	ID: "118"
+	name: "Close smoke"
+	position: "-0.003023, -2.327453, 20.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "1.200000, 0.040000"
+	emitCircle: "0"
+	startVelocity: "0.000000, 0.000000"
+	endVelocity: "0.000000, 2.000000"
+	startSize: "0.200000, 0.200000"
+	endSize: "1.500000, 1.500000"
+	startColor: "0.700000, 0.700000, 0.700000, 0.400000"
+	endColor: "0.700000, 0.700000, 0.700000, 0.000000"
+	texture: "smoke1.png"
+	isLit: "0"
+	particlesPerSecond: "100.000000"
+	particleLifetime: "2.000000"
+	duration: "0.100000"
+	autoStart: "0"
+}

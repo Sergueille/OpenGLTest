@@ -8,6 +8,30 @@ std::list<RectCollider*> Collider::rectColliders = std::list<RectCollider*>();
 
 Collider::~Collider() { }
 
+void Collider::SetPos(glm::vec2 value)
+{
+	if (Utility::time == lastSetPosTime)
+	{
+		deltaPos += value - position;
+	}
+	else
+	{
+		deltaPos = value - position;
+	}
+
+	// Too much movement, ignore delta
+	if (abs(deltaPos.x) > 2 || abs(deltaPos.y) > 2)
+		deltaPos = glm::vec2(0);
+
+	position = value;
+	lastSetPosTime = Utility::time;
+}
+
+glm::vec2 Collider::GetPos()
+{
+	return position;
+}
+
 bool Collider::IsTouchingAnyCollider()
 {
 	// For each rect collider
@@ -39,7 +63,7 @@ bool Collider::IsTouchingAnyCollider()
 	return false;
 }
 
-bool Collider::Raycast(vec2 origin, vec2 direction, vec2* result, Collider* ignoreCollider)
+bool Collider::Raycast(vec2 origin, vec2 direction, vec2* result, Collider* ignoreCollider, Collider** resHitCollider)
 {
 	float a, b;
 	Utility::GetLineEquationFromPoints(origin, origin + direction, &a, &b);
@@ -47,6 +71,8 @@ bool Collider::Raycast(vec2 origin, vec2 direction, vec2* result, Collider* igno
 	vec2 nearestPoint;
 	float nearestPointDist = FLT_MAX;
 	bool found = false;
+
+	Collider* hitCollider = nullptr;
 
 	// For each rect collider
 	for (auto coll = Collider::rectColliders.begin(); coll != Collider::rectColliders.end(); coll++)
@@ -66,6 +92,7 @@ bool Collider::Raycast(vec2 origin, vec2 direction, vec2* result, Collider* igno
 				{
 					nearestPointDist = dist;
 					nearestPoint = *vec;
+					hitCollider = (*coll);
 					found = true;
 				}
 			}
@@ -90,6 +117,7 @@ bool Collider::Raycast(vec2 origin, vec2 direction, vec2* result, Collider* igno
 				{
 					nearestPointDist = dist;
 					nearestPoint = *vec;
+					hitCollider = (*coll);
 					found = true;
 				}
 			}
@@ -99,10 +127,17 @@ bool Collider::Raycast(vec2 origin, vec2 direction, vec2* result, Collider* igno
 	if (found)
 	{
 		*result = nearestPoint;
+
+		if (resHitCollider != nullptr)
+			*resHitCollider = hitCollider;
+
 		return true;
 	}
 	else
 	{
+		if (resHitCollider != nullptr)
+			*resHitCollider = nullptr;
+
 		return false;
 	}
 

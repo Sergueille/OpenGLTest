@@ -26,6 +26,8 @@ public:
 	float duration = 1;
 	EaseType easeType = linear;
 
+	EventList onFinished;
+
 	static ObjectEvent events[TRANS_MODIFIER_EVENT_COUNT];
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;

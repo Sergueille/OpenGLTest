@@ -19,11 +19,14 @@ public:
 	static std::list<RectCollider*> rectColliders;
 
 	/// <summary>
-	/// The position of the collider
+	/// The difference between the collider's position and it's position last frame
 	/// </summary>
-	glm::vec2 position;
+	glm::vec2 deltaPos = glm::vec2(0, 0);
 
 	bool enabled = true;
+
+	void SetPos(glm::vec2 value);
+	glm::vec2 GetPos();
 
 	/// <summary>
 	/// Determines if is colliding with a specified CircleCollider
@@ -50,7 +53,7 @@ public:
 	/// RAYCAST!
 	/// </summary>
 	/// <returns></returns>
-	static bool Raycast(glm::vec2 origin, glm::vec2 direction, glm::vec2* result, Collider* ignoreCollider = nullptr);
+	static bool Raycast(glm::vec2 origin, glm::vec2 direction, glm::vec2* result, Collider* ignoreCollider = nullptr, Collider** hitCollider = nullptr);
 	 
 	virtual void SetCollideWithPhys(bool value) = 0;
 	bool MustCollideWithPhys();
@@ -62,4 +65,11 @@ protected:
 	/// Shold this collider collide with physic objects
 	/// </summary>
 	bool collideWithPhys;
+
+	float lastSetPosTime = 0;
+
+	/// <summary>
+	/// The position of the collider
+	/// </summary>
+	glm::vec2 position;
 };

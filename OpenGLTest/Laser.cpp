@@ -154,7 +154,7 @@ Laser* Laser::Copy()
 	copy->displaySprite = this->displaySprite->Copy();
 
 	CircleCollider* oldCollider = (CircleCollider*)this->clickCollider;
-	copy->clickCollider = new CircleCollider(oldCollider->position, oldCollider->size, false);
+	copy->clickCollider = new CircleCollider(oldCollider->GetPos(), oldCollider->size, false);
 
 	copy->laserCollider = new RectCollider(vec2(0), vec2(1), 0, false);
 
@@ -202,24 +202,33 @@ void Laser::OnLaserMainLoop()
 {
 	if (enabled && laserOn)
 	{
-		vec2 raycastRes;
-		vec2 direction = Utility::Rotate(vec2(1, 0), GetEditRotation());
-		if (Collider::Raycast(GetEditPos(), direction, &raycastRes))
+		float playerDist = Player::ingameInstance == nullptr
+			? 0 
+			: glm::length(Player::ingameInstance->GetPos() - vec2(GetEditPos()));
+
+		if (Editor::enabled || playerDist < minPlayerDist || !hasRefreshedOnce) // Refresh anyway for the first time to relpace the sprite correctly
 		{
-			vec2 spriteStart = vec2(GetEditPos()) + (direction * startOffset);
-			vec2 spriteEnd = raycastRes + (direction * endOffset);
+			vec2 raycastRes;
+			vec2 direction = Utility::Rotate(vec2(1, 0), GetEditRotation());
+			if (Collider::Raycast(GetEditPos(), direction, &raycastRes))
+			{
+				vec2 spriteStart = vec2(GetEditPos()) + (direction * startOffset);
+				vec2 spriteEnd = raycastRes + (direction * endOffset);
 
-			vec2 middle = (spriteStart + spriteEnd) / 2.f;
-			float length = glm::length(spriteStart - spriteEnd);
+				vec2 middle = (spriteStart + spriteEnd) / 2.f;
+				float length = glm::length(spriteStart - spriteEnd);
 
-			displaySprite->position = vec3(middle.x, middle.y, GetEditPos().z);
-			displaySprite->size = vec2(length, width);
-			displaySprite->rotate = GetEditRotation();
+				displaySprite->position = vec3(middle.x, middle.y, GetEditPos().z);
+				displaySprite->size = vec2(length, width);
+				displaySprite->rotate = GetEditRotation();
 
-			laserCollider->position = vec3(middle.x, middle.y, GetEditPos().z);
-			laserCollider->size = vec2(length, width);
-			laserCollider->orientation = GetEditRotation();
-		}
+				laserCollider->SetPos(vec3(middle.x, middle.y, GetEditPos().z));
+				laserCollider->size = vec2(length, width);
+				laserCollider->orientation = GetEditRotation();
+			}
+
+			hasRefreshedOnce = true;
+		}		
 	}
 }
 

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 122
+count 125
 
 object MapData {
 	mapName: ""
@@ -8,7 +8,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: ""
-	position: "-35.000000, 3.400000, 20.000000"
+	position: "-36.000000, 5.200000, 20.000000"
 	parent: "-1"
 }
 object EditorSprite {
@@ -1338,7 +1338,7 @@ object EditorSprite {
 	name: ""
 	position: "179.199997, 28.200001, 0.000000"
 	parent: "-1"
-	size: "48.600002, 14.600000"
+	size: "53.799999, 14.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -1349,9 +1349,9 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1846"
 	name: ""
-	position: "202.400009, 20.200001, 0.000000"
+	position: "192.000000, 20.200001, 0.000000"
 	parent: "-1"
-	size: "48.600002, 14.600000"
+	size: "27.000000, 14.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -1475,9 +1475,9 @@ object EditorSprite {
 object EditorSprite {
 	ID: "2435"
 	name: ""
-	position: "198.400009, -7.200000, 0.000000"
+	position: "190.400009, -7.200000, 0.000000"
 	parent: "-1"
-	size: "44.000000, 19.600000"
+	size: "30.000000, 19.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -1488,9 +1488,9 @@ object EditorSprite {
 object EditorSprite {
 	ID: "2437"
 	name: ""
-	position: "199.199997, 7.400000, -10.000000"
+	position: "197.400009, 7.400000, -10.000000"
 	parent: "-1"
-	size: "35.400002, 14.200000"
+	size: "31.600000, 14.200000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "back\plaster1.jpg"
@@ -1498,19 +1498,6 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "3.000000, 1.000000"
 	isLit: "1"
-}
-object EditorSprite {
-	ID: "2439"
-	name: ""
-	position: "215.000000, 17.400000, 0.000000"
-	parent: "-1"
-	size: "23.400000, 19.600000"
-	rotation: "0.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	collideWithPhys: "1"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
 }
 object Prefab {
 	ID: "2442"
@@ -1529,4 +1516,43 @@ object Button {
 	startPressed: "0"
 	onPressed: "2442|Open door|"
 	onUnpressed: "2442|Close door|"
+}
+object Prefab {
+	ID: "2455"
+	name: ""
+	position: "221.400009, 4.800000, 0.000000"
+	parent: "-1"
+	path: "prefabs\elevator.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Trigger {
+	ID: "2485"
+	name: ""
+	position: "216.199997, -16.000000, 20.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "5.800000, 5.800000"
+	onEnter: "2486|End level|"
+	onExit: ""
+}
+object LevelEnd {
+	ID: "2486"
+	name: ""
+	position: "222.000000, -16.000000, 50.000000"
+	parent: "-1"
+	nextLevel: "lasers2.map"
+}
+object EditorSprite {
+	ID: "3035"
+	name: ""
+	position: "194.800003, -28.000000, 0.000000"
+	parent: "-1"
+	size: "26.600000, 34.600002"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
 }

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 35
+count 34
 
 object MapData {
 	mapName: ""
@@ -21,7 +21,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "88"
 	name: "Ground"
-	position: "11.600000, -1.400000, 0.000000"
+	position: "11.400001, -1.200000, 0.000000"
 	parent: "-1"
 	size: "20.400000, 6.600000"
 	rotation: "0.000000"
@@ -47,12 +47,12 @@ object EditorSprite {
 object EditorSprite {
 	ID: "117"
 	name: "background"
-	position: "3.200000, 4.400000, -5.000000"
+	position: "2.600000, 4.400000, -5.000000"
 	parent: "-1"
 	size: "54.000000, 45.000000"
 	rotation: "0.000000"
 	color: "0.800000, 0.800000, 0.800000, 1.000000"
-	texturePath: "back\plaster2.jpg"
+	texturePath: "back\plaster1.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "6.000000, 5.000000"
@@ -61,22 +61,9 @@ object EditorSprite {
 object EditorSprite {
 	ID: "151"
 	name: "Ground"
-	position: "-0.800000, 17.000000, 0.000000"
+	position: "-4.000000, 17.000000, 0.000000"
 	parent: "-1"
-	size: "68.000000, 12.200000"
-	rotation: "0.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	collideWithPhys: "1"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
-}
-object EditorSprite {
-	ID: "152"
-	name: "Ground"
-	position: "39.400002, 5.200000, 0.000000"
-	parent: "-1"
-	size: "20.400000, 35.799999"
+	size: "64.000000, 12.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -120,15 +107,6 @@ object Laser {
 	startOffset: "-0.100000"
 	endOffset: "0.150000"
 	startOn: "1"
-}
-object Button {
-	ID: "156"
-	name: ""
-	position: "12.000000, 3.400000, 1.000000"
-	parent: "-1"
-	startPressed: "0"
-	onPressed: "2462|Open door|"
-	onUnpressed: "2462|Close door|"
 }
 object Light {
 	ID: "270"
@@ -280,7 +258,7 @@ object Prefab {
 object Trigger {
 	ID: "896"
 	name: ""
-	position: "-18.600000, 0.400000, 0.000000"
+	position: "32.600002, -18.400000, -5.000000"
 	parent: "-1"
 	orientation: "0.000000"
 	scale: "6.200000, 5.200000"
@@ -290,60 +268,16 @@ object Trigger {
 object LevelEnd {
 	ID: "1028"
 	name: "Level end"
-	position: "-21.400000, 0.400000, 10.000000"
+	position: "40.200001, -12.400001, 10.000000"
 	parent: "-1"
 	nextLevel: "intro_walls.map"
-}
-object EditorSprite {
-	ID: "2457"
-	name: "Ground"
-	position: "21.000000, -5.600000, 0.000000"
-	parent: "-1"
-	size: "20.400000, 15.000000"
-	rotation: "0.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	collideWithPhys: "1"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
-}
-object Prefab {
-	ID: "2459"
-	name: ""
-	position: "25.200001, 10.800000, 0.000000"
-	parent: "-1"
-	path: "prefabs\neon.map"
-	ori: "0.000000"
-	scale: "1.000000, 1.000000"
-}
-object EditorSprite {
-	ID: "2461"
-	name: "Platform"
-	position: "24.400000, 8.800000, 0.000000"
-	parent: "-1"
-	size: "10.200000, 5.000000"
-	rotation: "-180.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	collideWithPhys: "1"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
-}
-object Prefab {
-	ID: "2462"
-	name: ""
-	position: "21.200001, 4.200000, 0.000000"
-	parent: "-1"
-	path: "prefabs\door.map"
-	ori: "0.000000"
-	scale: "1.000000, 1.000000"
 }
 object ShadowCaster {
 	ID: "2538"
 	name: ""
-	position: "24.400000, 9.000000, 10.000000"
+	position: "25.600000, 9.000000, 10.000000"
 	parent: "-1"
-	size: "10.200000, 5.400000"
+	size: "8.000000, 5.400000"
 	orientation: "-0.000000"
 }
 object Prefab {
@@ -363,4 +297,63 @@ object Prefab {
 	path: "prefabs\neon.map"
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "3273"
+	name: ""
+	position: "37.799999, 4.200000, 0.000000"
+	parent: "-1"
+	path: "prefabs\elevator.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "3361"
+	name: "Ground"
+	position: "8.400001, -30.600000, 0.000000"
+	parent: "-1"
+	size: "29.800001, 34.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "3452"
+	name: "Platform"
+	position: "-12.200000, 7.200000, 0.000000"
+	parent: "-1"
+	size: "3.800000, 0.200000"
+	rotation: "-180.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object Trigger {
+	ID: "3453"
+	name: ""
+	position: "-12.800000, 8.600000, -2.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "3.400000, 3.400000"
+	onEnter: "3454|Set all transforms|"
+	onExit: ""
+}
+object TransformModifier {
+	ID: "3454"
+	name: ""
+	position: "-11.800000, 5.600000, 100.000000"
+	parent: "-1"
+	targetID: "3452"
+	relative: "1"
+	targetPos: "-8.000000, 0.000000"
+	targetRotation: "0.000000"
+	targetSize: "1.000000, 1.000000"
+	duration: "3.000000"
+	easeType: "2"
+	onFinished: ""
 }

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 6
+count 7
 
 object MapData {
 	mapName: ""
@@ -17,6 +17,7 @@ object TransformModifier {
 	targetSize: "1.000000, 1.000000"
 	duration: "2.000000"
 	easeType: "4"
+	onFinished: ""
 }
 object TransformModifier {
 	ID: "114"
@@ -30,6 +31,7 @@ object TransformModifier {
 	targetSize: "1.000000, 1.000000"
 	duration: "2.000000"
 	easeType: "4"
+	onFinished: "118|Start|"
 }
 object EditorSprite {
 	ID: "23"
@@ -65,4 +67,25 @@ object PrefabRelay {
 	eventList0name: "Open door"
 	eventList1: "114|Set all transforms|42|Turn on|"
 	eventList1name: "Close door"
+}
+object EditorParticleSystem {
+	ID: "118"
+	name: "Close smoke"
+	position: "-0.003023, -2.327453, 20.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "1.200000, 0.040000"
+	emitCircle: "0"
+	startVelocity: "0.000000, 0.000000"
+	endVelocity: "0.000000, 2.000000"
+	startSize: "0.200000, 0.200000"
+	endSize: "1.500000, 1.500000"
+	startColor: "0.700000, 0.700000, 0.700000, 0.400000"
+	endColor: "0.700000, 0.700000, 0.700000, 0.000000"
+	texture: "smoke1.png"
+	isLit: "0"
+	particlesPerSecond: "100.000000"
+	particleLifetime: "2.000000"
+	duration: "0.100000"
+	autoStart: "0"
 }

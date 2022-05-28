@@ -94,7 +94,7 @@ void Player::UpdateTransform()
 	}
 	else
 	{
-		collider->position = GetPos(); // Re-set collider position because EditorObject will replace it by default
+		collider->SetPos(GetPos()); // Re-set collider position because EditorObject will replace it by default
 	}
 }
 
@@ -104,7 +104,7 @@ EditorObject* Player::Copy()
 
 	// copy collider
 	CircleCollider* oldCollider = (CircleCollider*)this->clickCollider;
-	copy->clickCollider = new CircleCollider(oldCollider->position, oldCollider->size, oldCollider->MustCollideWithPhys());
+	copy->clickCollider = new CircleCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->MustCollideWithPhys());
 	copy->collider = copy->clickCollider;
 
 	// Copy sprites
@@ -221,14 +221,18 @@ void Player::OnAfterMove()
 	vec2 origin1 = GetPos() + vec2(groudRaycastsXshift, 0);
 	vec2 origin2 = GetPos() + vec2(-groudRaycastsXshift, 0);
 
-	bool found1 = Collider::Raycast(origin1, vec2(0, -1), &res1, collider);
-	bool found2 = Collider::Raycast(origin2, vec2(0, -1), &res2, collider);
+	Collider* hitColl1 = nullptr;
+	Collider* hitColl2 = nullptr;
+
+	bool found1 = Collider::Raycast(origin1, vec2(0, -1), &res1, collider, &hitColl1);
+	bool found2 = Collider::Raycast(origin2, vec2(0, -1), &res2, collider, &hitColl2);
 	if (found2 || found1)
 	{
 		float dist1 = glm::length(res1 - origin1);
 		float dist2 = glm::length(res2 - origin2);
 
 		float dist = min(dist1, dist2);
+		Collider* hitColl = dist1 < dist2 ? hitColl1 : hitColl2;
 
 		if (dist < floatingForceStartDist && (!isJumping || velocity.y < 0)) // Levitation
 		{
@@ -242,6 +246,11 @@ void Player::OnAfterMove()
 			velocity.y += force * GetDeltaTime();
 
 			this->lightsSprite->color = (quantity / maxFloatForceMultiplicator) * (brightLightColor - normalLightColor) + normalLightColor;
+
+			if (hitColl != nullptr)
+			{
+				SetPos(GetPos() + hitColl->deltaPos); // Move with the collider;
+			}
 		}
 		else
 		{

@@ -89,13 +89,17 @@ vec2 Prefab::DrawProperties(vec3 drawPos)
 	std::string strID = std::to_string(ID);
 	vec2 startPos = vec2(drawPos);
 
-	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
+	drawPos.y -= EditorObject::DrawProperties(drawPos).y + Editor::margin;
+
+	bool pressed;
+	drawPos.y -= Editor::UIButton(drawPos, "Reload", &pressed).y + Editor::margin;
+	if (pressed) ReloadPrefab();
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Orientation", &editorRotation, Editor::panelPropertiesX, strID + "ori").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Scale", &editorSize, Editor::panelPropertiesX, strID + "scale").y;
 
 	std::string editPathName = GetPath();
-	drawPos.y -= Editor::DrawProperty(drawPos, "Map path", &editPathName, Editor::panelPropertiesX, strID + "path").y;
+	drawPos.y -= Editor::FileSelector(drawPos, "Map path", &editPathName, &Editor::mapFiles, Editor::panelPropertiesX, strID + "path").y;
 	SetPath(editPathName);
 
 	vec2 res = vec2(drawPos) - startPos;
@@ -130,23 +134,13 @@ EditorObject* Prefab::Copy()
 
 	// copy collider
 	CircleCollider* oldCollider = (CircleCollider*)this->clickCollider;
-	newObj->clickCollider = new CircleCollider(oldCollider->position, oldCollider->size, oldCollider->MustCollideWithPhys());
+	newObj->clickCollider = new CircleCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->MustCollideWithPhys());
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 
 	newObj->SubscribeToEditorObjectFuncs();
 
 	newObj->prefabObjects = std::list<EditorObject*>();
-	for (auto it = prefabObjects.begin(); it != prefabObjects.end(); it++)
-	{
-		newObj->prefabObjects.push_back((*it)->Copy());
-
-		if (newObj->prefabObjects.back()->parentID == this->ID)
-		{
-			newObj->prefabObjects.back()->SetParent(newObj);
-		}
-	}
-
 	return newObj;
 }
 

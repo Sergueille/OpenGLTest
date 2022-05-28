@@ -30,9 +30,13 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::Start()
 {
-	if (IsPlaying()) return;
 	isPlaying = true;
 	lastInstantiationTime = Utility::time;
+
+	if (duration > 0)
+	{
+		endTime = Utility::time + duration;
+	}
 }
 
 void ParticleSystem::Stop()
@@ -67,40 +71,50 @@ void ParticleSystem::OnParticleSystemMainLoop()
 		return;
 	}
 
+	// Wait for the last particles to be destroyed
+	if (duration > 0 && endTime + particleLifetime < Utility::time)
+	{
+		Stop();
+		return;
+	}
+
 	// Add new particles
 	float deltaTime = Utility::time - lastInstantiationTime;
 	if (deltaTime > 1) deltaTime = 1; // Prevent too many particules instantiation in case of FPS drop
 
-	int newParticlesCount = (int)(particlesPerSecond * deltaTime);
-	for (int i = 0; i < newParticlesCount; i++)
+	if (duration < 0 || endTime > Utility::time) // Stop emitting at end
 	{
-		Sprite* copy = paticleTemplate->Copy();
-
-		const int precision = 10000;
-
-		if (emitCircle)
+		int newParticlesCount = (int)(particlesPerSecond * deltaTime);
+		for (int i = 0; i < newParticlesCount; i++)
 		{
-			float randomDist = ((float)(rand() % precision) / precision); // Between 0 and 1
-			float randomAngle = ((float)(rand() % precision) / precision) * 360; // Between 0 and 360
+			Sprite* copy = paticleTemplate->Copy();
 
-			copy->position = emitterPosition + vec3(
-				randomDist * cos(randomAngle) * emitterSize.x / 2,
-				randomDist * sin(randomAngle) * emitterSize.y / 2,
-				0
-			);
-		}
-		else
-		{
-			float randomX = ((float)(rand() % precision) / precision) * 2 - 1; // Between -1 and 1
-			float randomY = ((float)(rand() % precision) / precision) * 2 - 1; // Between -1 and 1
-			vec2 vecX = Rotate(vec2(emitterSize.x / 2, 0), emitterRotation) * randomX;
-			vec2 vecY = Rotate(vec2(0, emitterSize.y / 2), emitterRotation) * randomY;
-			copy->position = emitterPosition + vec3(vecX.x + vecY.x, vecX.y + vecY.y, 0);
-		}
+			const int precision = 10000;
 
-		Particle* newPart = new Particle(copy);
-		particles.push_back(newPart);
-		lastInstantiationTime = Utility::time;
+			if (emitCircle)
+			{
+				float randomDist = ((float)(rand() % precision) / precision); // Between 0 and 1
+				float randomAngle = ((float)(rand() % precision) / precision) * 360; // Between 0 and 360
+
+				copy->position = emitterPosition + vec3(
+					randomDist * cos(randomAngle) * emitterSize.x / 2,
+					randomDist * sin(randomAngle) * emitterSize.y / 2,
+					0
+				);
+			}
+			else
+			{
+				float randomX = ((float)(rand() % precision) / precision) * 2 - 1; // Between -1 and 1
+				float randomY = ((float)(rand() % precision) / precision) * 2 - 1; // Between -1 and 1
+				vec2 vecX = Rotate(vec2(emitterSize.x / 2, 0), emitterRotation) * randomX;
+				vec2 vecY = Rotate(vec2(0, emitterSize.y / 2), emitterRotation) * randomY;
+				copy->position = emitterPosition + vec3(vecX.x + vecY.x, vecX.y + vecY.y, 0);
+			}
+
+			Particle* newPart = new Particle(copy);
+			particles.push_back(newPart);
+			lastInstantiationTime = Utility::time;
+		}
 	}
 	
 	float deltaZ = 0; // Prevent Z fighting

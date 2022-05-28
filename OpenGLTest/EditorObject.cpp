@@ -89,16 +89,18 @@ vec2 EditorObject::GetLocalEditScale()
 	return editorSize;
 }
 
-
 EditorObject* EditorObject::GetParent()
 {
+	// return Editor::GetEditorObjectByIDInObjectContext(this, parentID, Editor::enabled, false);
+	// TEEEEST
+
 	if (_parent == nullptr && parentID != -1)
 	{
-		_parent = Editor::GetEditorObjectByID(parentID, Editor::enabled, false);
+		_parent = Editor::GetEditorObjectByIDInObjectContext(this, parentID, Editor::enabled, false);
 	}
 
 	if (_parent == nullptr) // Not found
-		parentID = -1; // Make sure not searching for nothig nex time
+		parentID = -1; // Make sure not searching for nothig next time
 
 	return _parent;
 }
@@ -153,7 +155,7 @@ vec3 EditorObject::SetGlobalEditPos(vec3 pos)
 void EditorObject::UpdateTransform()
 {
 	if (clickCollider)
-		clickCollider->position = GetEditPos();
+		clickCollider->SetPos(GetEditPos());
 }
 
 void EditorObject::SubscribeToEditorObjectFuncs()

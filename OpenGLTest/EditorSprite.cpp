@@ -50,7 +50,7 @@ EditorObject* EditorSprite::Copy()
 
 	// copy collider
 	RectCollider* oldCollider = (RectCollider*)this->clickCollider;
-	newObj->clickCollider = new RectCollider(oldCollider->position, oldCollider->size, oldCollider->orientation, oldCollider->MustCollideWithPhys());
+	newObj->clickCollider = new RectCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->orientation, oldCollider->MustCollideWithPhys());
 
 	// subscribe again to main loop
 	newObj->isDrawnOnMainLoop = false;
@@ -118,7 +118,7 @@ void EditorSprite::UpdateTransform()
 	this->rotate = GetEditRotation();
 	this->size = GetEditScale();
 
-	clickCollider->position = position;
+	clickCollider->SetPos(position);
 	((RectCollider*)clickCollider)->orientation = rotate;
 
 	if (texture != nullptr)

@@ -57,7 +57,7 @@ EditorObject* LogicRelay::Copy()
 
 	// copy collider
 	CircleCollider* oldCollider = (CircleCollider*)this->clickCollider;
-	newObj->clickCollider = new CircleCollider(oldCollider->position, oldCollider->size, oldCollider->MustCollideWithPhys());
+	newObj->clickCollider = new CircleCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->MustCollideWithPhys());
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 

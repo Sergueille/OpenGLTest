@@ -45,7 +45,7 @@ EditorObject* Button::Copy()
 	Button* newObj = new Button(*this);
 
 	CircleCollider* oldCollider = (CircleCollider*)clickCollider;
-	newObj->clickCollider = new CircleCollider(oldCollider->position, oldCollider->size, oldCollider->MustCollideWithPhys());
+	newObj->clickCollider = new CircleCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->MustCollideWithPhys());
 
 	newObj->btnSprite = this->btnSprite->Copy();
 

@@ -84,6 +84,8 @@ vec2 TransformModifier::DrawProperties(vec3 drawPos)
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Duration", &duration, Editor::panelPropertiesX, strID + "duration").y;
 	drawPos.y -= Editor::OptionProp(drawPos, "Ease type", (int*)&easeType, EASE_TYPE_COUNT, (const char**)&EASE_TYPE_NAMES[0], Editor::panelPropertiesX).y;
+	
+	drawPos.y -= onFinished.DrawInPanel(drawPos, "On finished").y;
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
@@ -96,7 +98,7 @@ EditorObject* TransformModifier::Copy()
 
 	// copy collider
 	CircleCollider* oldCollider = (CircleCollider*)this->clickCollider;
-	newObj->clickCollider = new CircleCollider(oldCollider->position, oldCollider->size, oldCollider->MustCollideWithPhys());
+	newObj->clickCollider = new CircleCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->MustCollideWithPhys());
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 
@@ -119,6 +121,8 @@ void TransformModifier::Load(std::map<std::string, std::string>* props)
 	int res = 0;
 	EditorSaveManager::IntProp(props, "easeType", &res);
 	easeType = (EaseType)res;
+
+	EventList::Load(&onFinished, (*props)["onFinished"]);
 }
 
 void TransformModifier::Save()
@@ -132,6 +136,7 @@ void TransformModifier::Save()
 	EditorSaveManager::WriteProp("targetSize", targetSize);
 	EditorSaveManager::WriteProp("duration", duration);
 	EditorSaveManager::WriteProp("easeType", (int)easeType);
+	EditorSaveManager::WriteProp("onFinished", onFinished.GetString());
 }
 
 void TransformModifier::Enable()
@@ -161,7 +166,7 @@ void TransformModifier::SetPosition()
 
 	moveAction = TweenManager<vec2>::Tween(vec2(targetObject->GetLocalEditPos()), obj, duration,
 		[this](vec2 value) { this->targetObject->SetEditPos(vec3(value.x, value.y, this->targetObject->GetLocalEditPos().z)); },
-		easeType);
+		easeType)->SetOnFinished([this] { onFinished.Call(this); });
 }
 
 void TransformModifier::SetRotation()
@@ -173,7 +178,7 @@ void TransformModifier::SetRotation()
 
 	roateAction = TweenManager<float>::Tween(targetObject->GetLocalEditRotation(), obj, duration,
 		[this](float value) { this->targetObject->SetEditRotation(value); },
-		easeType);
+		easeType)->SetOnFinished([this] { onFinished.Call(this); });
 }
 
 void TransformModifier::SetScale()
@@ -185,7 +190,7 @@ void TransformModifier::SetScale()
 
 	scaleAction = TweenManager<vec2>::Tween(targetObject->GetLocalEditScale(), obj, duration,
 		[this](vec2 value) { this->targetObject->SetEditScale(value); },
-		easeType);
+		easeType)->SetOnFinished([this] { onFinished.Call(this); });
 }
 
 void TransformModifier::SetAllTransforms()
