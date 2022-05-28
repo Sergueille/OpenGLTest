@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 288
+count 295
 
 object MapData {
 	mapName: ""
@@ -3678,4 +3678,70 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "4.000000, 0.500000"
 	isLit: "1"
+}
+object Checkpoint {
+	ID: "9639"
+	name: "Checkpoint"
+	position: "26.600000, 4.200000, 90.000000"
+	parent: "-1"
+}
+object Trigger {
+	ID: "9641"
+	name: ""
+	position: "57.200001, -7.200000, -8.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "9.000000, 1.000000"
+	onEnter: "9639|Save game|"
+	onExit: ""
+}
+object Trigger {
+	ID: "9643"
+	name: ""
+	position: "82.599998, -7.200000, -8.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "9.000000, 1.000000"
+	onEnter: "9639|Save game|"
+	onExit: ""
+}
+object Trigger {
+	ID: "9645"
+	name: ""
+	position: "117.200005, -7.200000, -8.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "9.000000, 1.000000"
+	onEnter: "9639|Save game|"
+	onExit: ""
+}
+object Trigger {
+	ID: "9647"
+	name: ""
+	position: "151.600006, -7.200000, -8.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "11.400001, 1.000000"
+	onEnter: "9639|Save game|"
+	onExit: ""
+}
+object Trigger {
+	ID: "9649"
+	name: ""
+	position: "147.600006, 6.200000, -8.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "9.000000, 1.000000"
+	onEnter: "9639|Save game|"
+	onExit: ""
+}
+object Trigger {
+	ID: "9651"
+	name: ""
+	position: "166.000000, 31.600000, -8.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "18.200001, 1.000000"
+	onEnter: "9639|Save game|"
+	onExit: ""
 }

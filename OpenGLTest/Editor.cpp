@@ -19,6 +19,7 @@
 #include "TransformModifier.h"
 #include "PrefabRelay.h"
 #include "Acid.h"
+#include "Checkpoint.h"
 
 #include <iostream>
 
@@ -770,6 +771,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.y -= UIButton(drawPos, "Acid", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new Acid();
+	
+	drawPos.y -= UIButton(drawPos, "Checkpoint", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new Checkpoint();
 
 	if (newObject != nullptr)
 	{

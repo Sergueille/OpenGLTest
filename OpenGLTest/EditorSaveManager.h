@@ -17,6 +17,9 @@ public:
 	static std::list<EditorObject*> levelObjectList;
 	static MapData currentMapData;
 
+	/// <summary>
+	/// The path of the level that is loaded in game
+	/// </summary>
 	static std::string filePath;
 
 	/// <summary>
@@ -91,8 +94,10 @@ public:
 	static vec4 StringToVector4(std::string s, vec4 def = vec4(0));
 
 	static void ReadPropsFile(std::string fileName, std::map<std::string, std::string>* res);
+	static void WritePropsFile(std::string fileName, std::function<void()> writer);
 
 	static void LoadUserSave(std::string fileName);
+	static void SaveUserSave(std::string fileName);
 
 	static void IndexUserSaves();
 

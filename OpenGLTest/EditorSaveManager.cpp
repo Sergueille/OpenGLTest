@@ -20,6 +20,7 @@
 #include "TransformModifier.h"
 #include "PrefabRelay.h"
 #include "Acid.h"
+#include "Checkpoint.h"
 
 using namespace glm;
 
@@ -593,6 +594,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 		newObj = new Acid();
 		newObj->Load(&props);
 	}
+	else if (objectType == "Checkpoint")
+	{
+		newObj = new Checkpoint();
+		newObj->Load(&props);
+	}
 	else
 		throw "Unknown object type for loading!";
 
@@ -715,18 +721,70 @@ void EditorSaveManager::ReadPropsFile(std::string fileName, std::map<std::string
 	}
 }
 
+void EditorSaveManager::WritePropsFile(std::string fileName, std::function<void()> writer)
+{
+	std::string path = fileName;
+
+	ofile = new std::ofstream();
+	ofile->open(path, std::ios::out);
+
+	if (!ofile->is_open())
+	{
+		std::cout << "Couldn't create props file (" << path << ")" << std::endl;
+		return;
+	}
+
+	try
+	{
+		(*ofile) << "//Props file\n\n";
+		(*ofile) << "Props {\n";
+		
+		indentation = 1;
+
+		writer();
+
+		indentation = 0;
+
+		(*ofile) << "}\n";
+		
+		std::cout << "Written props at " << path << std::endl;
+		ofile->close();
+	}
+	catch (std::exception e) // Catch exceptions to make sure the file is closed
+	{
+		std::cout << "Got an error while writing props file (" << path << "), here's what it says:" << std::endl;
+		std::cout << e.what() << std::endl;
+		ofile->close();
+	}
+}
+
 void EditorSaveManager::LoadUserSave(std::string fileName)
 {
 	std::map<std::string, std::string> props = std::map<std::string, std::string>();
 	ReadPropsFile(fileName, &props);
 
 	vec2 position = StringToVector2(props["position"]);
-	LoadLevelWithTransition(props["level"], [position] {
+	float camSize;
+	FloatProp(&props, "cameraSize", & camSize);
+
+	LoadLevelWithTransition(props["level"], [position, camSize] {
 		MenuManager::OpenMenu(MenuManager::Menu::ingame);
+
 		if (Player::ingameInstance != nullptr)
 		{
 			Player::ingameInstance->SetPos(position);
 		}
+
+		Camera::size = camSize;
+	});
+}
+
+void EditorSaveManager::SaveUserSave(std::string fileName)
+{
+	WritePropsFile(fileName, [] {
+		WriteProp("level", filePath);
+		WriteProp("position", Player::ingameInstance->GetPos());
+		WriteProp("cameraSize", Camera::size);
 	});
 }
 
