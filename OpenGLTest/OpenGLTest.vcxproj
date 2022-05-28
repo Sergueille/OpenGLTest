@@ -180,6 +180,7 @@
     <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_queue.cpp" />
     <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\core\soloud_thread.cpp" />
     <ClCompile Include="..\glad.c" />
+    <ClCompile Include="Acid.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraController.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\dr_wav.h" />
     <ClInclude Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\audiosource\wav\stb_vorbis.h" />
     <ClInclude Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\backend\miniaudio\miniaudio.h" />
+    <ClInclude Include="Acid.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraController.h" />

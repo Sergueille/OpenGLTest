@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 289
+count 288
 
 object MapData {
 	mapName: ""
@@ -3175,7 +3175,7 @@ object Light {
 	parent: "-1"
 	lightSize: "4.000000"
 	color: "0.900000, 1.000000, 1.000000, 1.000000"
-	intensity: "0.600000"
+	intensity: "0.300000"
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
@@ -3612,29 +3612,15 @@ object EditorSprite {
 object EditorSprite {
 	ID: "9112"
 	name: ""
-	position: "70.397858, -7.698505, -1.000000"
+	position: "70.397858, -7.656080, -1.000000"
 	parent: "-1"
-	size: "10.000000, 0.200000"
+	size: "10.000000, 0.110000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "wood.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 0.100000"
-	isLit: "1"
-}
-object EditorSprite {
-	ID: "9554"
-	name: ""
-	position: "61.067574, -6.115740, -1.000000"
-	parent: "-1"
-	size: "3.000000, 3.000000"
-	rotation: "0.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "plant.png"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
 	isLit: "1"
 }
 object EditorSprite {

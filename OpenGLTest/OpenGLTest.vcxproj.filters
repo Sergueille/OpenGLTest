@@ -219,6 +219,9 @@
     <ClCompile Include="PrefabRelay.cpp">
       <Filter>LevelEditor</Filter>
     </ClCompile>
+    <ClCompile Include="Acid.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -352,6 +355,9 @@
     </ClInclude>
     <ClInclude Include="PrefabRelay.h">
       <Filter>LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Acid.h">
+      <Filter>Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

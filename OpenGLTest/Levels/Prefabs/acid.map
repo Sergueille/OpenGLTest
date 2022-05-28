@@ -1,0 +1,56 @@
+// Editor map file, version 1
+
+count 4
+
+object MapData {
+	mapName: ""
+}
+object Acid {
+	ID: "5040"
+	name: ""
+	position: "0.000000, 0.000000, 5.000000"
+	parent: "-1"
+	scale: "9.400001, 3.000000"
+}
+object EditorParticleSystem {
+	ID: "5137"
+	name: ""
+	position: "-0.094864, 1.412441, -5.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "9.000000, 0.120000"
+	emitCircle: "0"
+	startVelocity: "0.000000, 0.000000"
+	endVelocity: "0.000000, 0.200000"
+	startSize: "0.000000, 0.000000"
+	endSize: "5.000000, 5.000000"
+	startColor: "0.800000, 1.000000, 0.500000, 0.500000"
+	endColor: "0.800000, 1.000000, 0.500000, 0.000000"
+	texture: "smoke1.png"
+	isLit: "1"
+	particlesPerSecond: "2.000000"
+	particleLifetime: "6.000000"
+	duration: "-1.000000"
+	autoStart: "1"
+}
+object EditorParticleSystem {
+	ID: "5242"
+	name: ""
+	position: "-0.221576, 1.452130, -5.000000"
+	parent: "-1"
+	orientation: "0.000000"
+	scale: "9.000000, 0.060000"
+	emitCircle: "0"
+	startVelocity: "0.000000, 0.000000"
+	endVelocity: "0.000000, 0.000000"
+	startSize: "0.000000, 0.000000"
+	endSize: "0.200000, 0.200000"
+	startColor: "0.800000, 1.000000, 0.500000, 0.500000"
+	endColor: "0.800000, 1.000000, 0.500000, 0.500000"
+	texture: "engine\circle.png"
+	isLit: "1"
+	particlesPerSecond: "5.000000"
+	particleLifetime: "3.000000"
+	duration: "-1.000000"
+	autoStart: "1"
+}

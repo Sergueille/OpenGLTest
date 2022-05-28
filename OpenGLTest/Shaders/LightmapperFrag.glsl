@@ -67,8 +67,11 @@ vec2 Rotate(vec2 vector, float angle)
 
 float GetFinalShadow(int light)
 {
-    float nbAngle = 5;
-    float angleStep = 0.5;
+    float nbAngle = 10;
+    float angleStep = 0.35;
+
+    bool mainPoint = GetShadow(light, texCoord);
+    if (mainPoint) return 1;
 
     vec2 lightPos = vec2(lightPos[light].x, lightPos[light].y);
     vec2 delta = texCoord - lightPos;
@@ -82,7 +85,7 @@ float GetFinalShadow(int light)
         passed += GetShadow(light, newPoint) ? 1 : 0;
     }
 
-    return passed / nbAngle / 2;
+    return passed / nbAngle;
 }
 
 bool GetShadow(int light, vec2 pos) 

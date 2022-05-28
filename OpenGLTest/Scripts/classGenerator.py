@@ -196,9 +196,9 @@ EditorObject* {class_name}::Copy()
 
 	// copy collider
 	{collName}* oldCollider = ({collName}*)this->clickCollider;
-	newObj->clickCollider = { "new RectCollider(oldCollider->position, oldCollider->size, oldCollider->orientation, oldCollider->MustCollideWithPhys());"
+	newObj->clickCollider = { "new RectCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->orientation, oldCollider->MustCollideWithPhys());"
         if not use_circle_coll else
-        "new CircleCollider(oldCollider->position, oldCollider->size, oldCollider->MustCollideWithPhys());"
+        "new CircleCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->MustCollideWithPhys());"
     }
 
     {GetSpriteCopy()}

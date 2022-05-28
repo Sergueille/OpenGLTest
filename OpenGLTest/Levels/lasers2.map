@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 56
+count 69
 
 object MapData {
 	mapName: ""
@@ -297,7 +297,7 @@ object Light {
 object EditorSprite {
 	ID: "4822"
 	name: ""
-	position: "53.200001, -26.800001, 1.000000"
+	position: "53.200001, -26.800001, 5.000000"
 	parent: "-1"
 	size: "20.200001, 15.800000"
 	rotation: "0.000000"
@@ -334,18 +334,6 @@ object EditorSprite {
 	UVend: "2.000000, 1.000000"
 	isLit: "1"
 }
-object Light {
-	ID: "4830"
-	name: ""
-	position: "55.799999, -17.000000, 0.000000"
-	parent: "-1"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-}
 object EditorSprite {
 	ID: "4832"
 	name: ""
@@ -372,22 +360,10 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 }
-object Light {
-	ID: "4836"
-	name: ""
-	position: "67.400002, -22.800001, 0.000000"
-	parent: "-1"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-}
 object EditorSprite {
 	ID: "4838"
 	name: ""
-	position: "63.000000, -33.799999, 1.000000"
+	position: "63.000000, -33.799999, 5.000000"
 	parent: "-1"
 	size: "32.000000, 15.800000"
 	rotation: "0.000000"
@@ -400,7 +376,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "4844"
 	name: ""
-	position: "77.800003, -26.800001, 1.000000"
+	position: "77.800003, -26.800001, 5.000000"
 	parent: "-1"
 	size: "11.400001, 15.800000"
 	rotation: "0.000000"
@@ -454,14 +430,14 @@ object EditorSprite {
 object Light {
 	ID: "4854"
 	name: ""
-	position: "68.599998, -13.200000, 0.000000"
+	position: "67.800003, -30.000000, 80.000000"
 	parent: "-1"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
+	lightSize: "15.000000"
+	color: "0.800000, 1.000000, 0.300000, 1.000000"
+	intensity: "0.500000"
+	rotation: "90.000000"
+	innerAngle: "90.000000"
+	outerAngle: "91.000000"
 }
 object EditorSprite {
 	ID: "4859"
@@ -490,36 +466,12 @@ object EditorSprite {
 	UVend: "2.000000, 1.000000"
 	isLit: "1"
 }
-object Light {
-	ID: "4863"
-	name: ""
-	position: "81.000000, -16.400000, 0.000000"
-	parent: "-1"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-}
-object Light {
-	ID: "4865"
-	name: ""
-	position: "87.400002, -23.400000, 0.000000"
-	parent: "-1"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-}
 object EditorSprite {
 	ID: "4873"
 	name: ""
 	position: "92.000000, 0.400000, 1.000000"
 	parent: "-1"
-	size: "18.800001, 24.200001"
+	size: "35.600002, 24.200001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -580,7 +532,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "4977"
 	name: ""
-	position: "109.400002, -33.799999, 1.000000"
+	position: "109.400002, -33.799999, 10.000000"
 	parent: "-1"
 	size: "32.000000, 15.800000"
 	rotation: "0.000000"
@@ -604,34 +556,10 @@ object EditorSprite {
 	UVend: "2.000000, 1.000000"
 	isLit: "1"
 }
-object Light {
-	ID: "4981"
-	name: ""
-	position: "102.200005, -16.600000, 0.000000"
-	parent: "-1"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-}
-object Light {
-	ID: "4983"
-	name: ""
-	position: "115.000000, -16.600000, 0.000000"
-	parent: "-1"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-}
 object EditorSprite {
 	ID: "4985"
 	name: ""
-	position: "111.800003, -0.000000, 1.000000"
+	position: "111.800003, 0.400000, 1.000000"
 	parent: "-1"
 	size: "18.800001, 24.200001"
 	rotation: "0.000000"
@@ -655,7 +583,7 @@ object Laser {
 object EditorSprite {
 	ID: "4989"
 	name: ""
-	position: "119.599998, -26.800001, 1.000000"
+	position: "119.200005, -26.800001, 1.000000"
 	parent: "-1"
 	size: "11.400001, 15.800000"
 	rotation: "0.000000"
@@ -668,7 +596,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "4991"
 	name: ""
-	position: "119.599998, -7.600000, 1.000000"
+	position: "119.200005, -7.600000, 1.000000"
 	parent: "-1"
 	size: "11.400001, 13.800000"
 	rotation: "0.000000"
@@ -681,7 +609,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "4993"
 	name: ""
-	position: "114.400002, -16.800001, 1.000000"
+	position: "114.000000, -16.800001, 1.000000"
 	parent: "-1"
 	size: "1.000000, 5.000000"
 	rotation: "0.000000"
@@ -690,4 +618,183 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+}
+object Prefab {
+	ID: "5346"
+	name: ""
+	position: "57.799999, -14.600000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "5357"
+	name: ""
+	position: "75.599998, -14.600000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Light {
+	ID: "5364"
+	name: ""
+	position: "65.400002, -13.200000, 0.000000"
+	parent: "-1"
+	lightSize: "12.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	intensity: "1.000000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+}
+object ShadowCaster {
+	ID: "5365"
+	name: ""
+	position: "61.799999, -13.000000, 100.000000"
+	parent: "-1"
+	size: "3.000000, 3.000000"
+	orientation: "0.000000"
+}
+object ShadowCaster {
+	ID: "5369"
+	name: ""
+	position: "61.799999, -21.600000, 100.000000"
+	parent: "-1"
+	size: "3.000000, 5.400000"
+	orientation: "0.000000"
+}
+object ShadowCaster {
+	ID: "5371"
+	name: ""
+	position: "77.800003, -21.600000, 100.000000"
+	parent: "-1"
+	size: "11.400001, 5.400000"
+	orientation: "0.000000"
+}
+object Prefab {
+	ID: "5427"
+	name: ""
+	position: "67.800003, -24.800001, 0.000000"
+	parent: "-1"
+	path: "prefabs\acid.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "5551"
+	name: ""
+	position: "88.000000, -24.400000, 0.000000"
+	parent: "-1"
+	path: "prefabs\acid.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "5556"
+	name: ""
+	position: "108.800003, -25.200001, 0.000000"
+	parent: "-1"
+	path: "prefabs\acid.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Light {
+	ID: "5561"
+	name: ""
+	position: "88.000000, -30.200001, 80.000000"
+	parent: "-1"
+	lightSize: "15.000000"
+	color: "0.800000, 1.000000, 0.300000, 1.000000"
+	intensity: "0.500000"
+	rotation: "90.000000"
+	innerAngle: "90.000000"
+	outerAngle: "91.000000"
+}
+object Light {
+	ID: "5563"
+	name: ""
+	position: "109.200005, -30.000000, 80.000000"
+	parent: "-1"
+	lightSize: "15.000000"
+	color: "0.800000, 1.000000, 0.300000, 1.000000"
+	intensity: "0.500000"
+	rotation: "90.000000"
+	innerAngle: "90.000000"
+	outerAngle: "91.000000"
+}
+object Prefab {
+	ID: "5567"
+	name: ""
+	position: "98.200005, -14.600000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Light {
+	ID: "5574"
+	name: ""
+	position: "91.000000, -13.200000, 0.000000"
+	parent: "-1"
+	lightSize: "12.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	intensity: "1.000000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+}
+object Light {
+	ID: "5576"
+	name: ""
+	position: "111.800003, -13.000000, 0.000000"
+	parent: "-1"
+	lightSize: "12.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	intensity: "1.000000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+}
+object Prefab {
+	ID: "5578"
+	name: ""
+	position: "118.200005, -14.600000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object ShadowCaster {
+	ID: "5587"
+	name: ""
+	position: "98.400002, -13.000000, 100.000000"
+	parent: "-1"
+	size: "11.400001, 3.000000"
+	orientation: "0.000000"
+}
+object ShadowCaster {
+	ID: "5591"
+	name: ""
+	position: "77.800003, -13.000000, 100.000000"
+	parent: "-1"
+	size: "11.400001, 3.000000"
+	orientation: "0.000000"
+}
+object ShadowCaster {
+	ID: "5593"
+	name: ""
+	position: "114.000000, -16.800001, 100.000000"
+	parent: "-1"
+	size: "1.000000, 9.200000"
+	orientation: "0.000000"
+}
+object ShadowCaster {
+	ID: "5595"
+	name: ""
+	position: "98.400002, -21.600000, 100.000000"
+	parent: "-1"
+	size: "11.400001, 5.400000"
+	orientation: "0.000000"
 }

@@ -45,3 +45,8 @@ vec4 getBright(vec4 color)
     else
         return vec4(0.0, 0.0, 0.0, 1.0);
 }
+
+vec4 lerp(vec4 a, vec4 b, float x)
+{
+    return a + (b - a) * x;
+}

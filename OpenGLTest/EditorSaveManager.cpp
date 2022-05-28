@@ -19,6 +19,7 @@
 #include "LogicRelay.h"
 #include "TransformModifier.h"
 #include "PrefabRelay.h"
+#include "Acid.h"
 
 using namespace glm;
 
@@ -585,6 +586,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "PrefabRelay")
 	{
 		newObj = new PrefabRelay();
+		newObj->Load(&props);
+	}
+	else if (objectType == "Acid")
+	{
+		newObj = new Acid();
 		newObj->Load(&props);
 	}
 	else
