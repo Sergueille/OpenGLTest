@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <random>
+#include "Camera.h"
 
 ParticleSystem::ParticleSystem()
 {
@@ -75,6 +76,15 @@ void ParticleSystem::OnParticleSystemMainLoop()
 	if (duration > 0 && endTime + particleLifetime < Utility::time)
 	{
 		Stop();
+		return;
+	}
+
+	// Pause if far from camera
+	float camDist = glm::length(Camera::position - vec2(emitterPosition));
+	float maxDist = (Camera::size * screenX / screenY) + cameraMinDist;
+	if (camDist > maxDist)
+	{
+		lastInstantiationTime = Utility::time; // Prevent creating too many particles
 		return;
 	}
 

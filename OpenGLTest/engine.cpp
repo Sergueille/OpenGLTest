@@ -177,9 +177,13 @@ int main(int argc, void* argv[])
         );
     }
 
+
     /////// GAME LOOP
     while (!glfwWindowShouldClose(window))
     {
+        // Init test variable
+        Utility::testCount = 0;
+
         // Get Time
         Utility::time = (float)glfwGetTime();
 
@@ -223,6 +227,9 @@ int main(int argc, void* argv[])
             LightManager::forceRefreshOnNextFrame = false;
             LightManager::mustReadNewFile = true;
         }
+
+        if (Utility::testCount != 0)
+            std::cout << testCount << std::endl;
 
         ///////////////////
         // GAME LOOP END //

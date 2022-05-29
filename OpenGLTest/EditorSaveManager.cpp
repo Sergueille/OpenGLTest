@@ -761,27 +761,37 @@ void EditorSaveManager::WritePropsFile(std::string fileName, std::function<void(
 void EditorSaveManager::LoadUserSave(std::string fileName)
 {
 	std::map<std::string, std::string> props = std::map<std::string, std::string>();
-	ReadPropsFile(fileName, &props);
+	ReadPropsFile("Saves\\" + fileName, &props);
+
+	currentUserSave = fileName;
+
+	LoadLevelWithTransition(props["level"], [fileName] {
+		LoadUserSaveInSameLevel(fileName);
+	});
+}
+
+void EditorSaveManager::LoadUserSaveInSameLevel(std::string fileName)
+{
+	std::map<std::string, std::string> props = std::map<std::string, std::string>();
+	ReadPropsFile("Saves\\" + fileName, &props);
+
+	currentUserSave = fileName;
 
 	vec2 position = StringToVector2(props["position"]);
 	float camSize;
-	FloatProp(&props, "cameraSize", & camSize);
+	FloatProp(&props, "cameraSize", &camSize);
 
-	LoadLevelWithTransition(props["level"], [position, camSize] {
-		MenuManager::OpenMenu(MenuManager::Menu::ingame);
+	if (Player::ingameInstance != nullptr)
+	{
+		Player::ingameInstance->SetPos(position);
+	}
 
-		if (Player::ingameInstance != nullptr)
-		{
-			Player::ingameInstance->SetPos(position);
-		}
-
-		Camera::size = camSize;
-	});
+	Camera::size = camSize;
 }
 
 void EditorSaveManager::SaveUserSave(std::string fileName)
 {
-	WritePropsFile(fileName, [] {
+	WritePropsFile("Saves\\" + fileName, [] {
 		WriteProp("level", filePath);
 		WriteProp("position", Player::ingameInstance->GetPos());
 		WriteProp("cameraSize", Camera::size);

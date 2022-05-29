@@ -1251,6 +1251,7 @@ void Editor::StartTest()
 	}
 
 	Camera::size = Camera::defaultSize;
+	EditorSaveManager::currentUserSave = "editTest.sav";
 
 	EditorSaveManager::SaveLevel();
 	CloseEditor();

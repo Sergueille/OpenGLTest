@@ -46,8 +46,6 @@ void MenuManager::OnMainLoop()
 
 	if (currentMenu == Menu::main)
 	{
-		Camera::position = vec2(0, 0);
-
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
 		bool pressed;
 
@@ -127,7 +125,7 @@ void MenuManager::OnMainLoop()
 
 			if (pressed)
 			{
-				EditorSaveManager::LoadUserSave("Saves\\" + *fileName);
+				EditorSaveManager::LoadUserSave(*fileName);
 			}
 		}
 
@@ -316,6 +314,8 @@ void MenuManager::OpenMenu(Menu menu)
 	}
 	if (currentMenu == Menu::main)
 	{
+		Camera::getTarget = nullptr;
+
 		if (EditorSaveManager::filePath != "menu_bg.map")
 		{
 			EditorSaveManager::LoadLevel("menu_bg.map", false);

@@ -97,6 +97,7 @@ public:
 	static void WritePropsFile(std::string fileName, std::function<void()> writer);
 
 	static void LoadUserSave(std::string fileName);
+	static void LoadUserSaveInSameLevel(std::string fileName);
 	static void SaveUserSave(std::string fileName);
 
 	static void IndexUserSaves();

@@ -14,6 +14,8 @@ public:
 
     Sprite* sprite = nullptr;
 
+	bool showSurface = true;
+
 	virtual vec2 DrawProperties(vec3 drawPos) override;
 	virtual void UpdateTransform() override;
 
@@ -27,5 +29,8 @@ public:
 
 private:
 	static void SetSpriteUniforms(Shader* shader, void* object);
+
+	LinkedListElement<std::function<void()>>* acidMainLoopFuncPos = nullptr;
+	void OnAcidMainLoop();
 };
 

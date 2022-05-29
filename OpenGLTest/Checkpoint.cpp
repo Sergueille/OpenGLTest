@@ -92,8 +92,7 @@ void Checkpoint::GetObjectEvents(const ObjectEvent** res, int* resCount)
 
 void Checkpoint::SaveGame()
 {
-	if (!Editor::enabled)
-		EditorSaveManager::SaveUserSave("Saves\\" + EditorSaveManager::currentUserSave);
+	EditorSaveManager::SaveUserSave(EditorSaveManager::currentUserSave);
 }
 
 void Checkpoint::UpdateTransform()

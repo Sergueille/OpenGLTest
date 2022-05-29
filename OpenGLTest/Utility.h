@@ -35,6 +35,8 @@ namespace Utility
 	extern glm::vec4 overlayColor;
 	extern float overlayZ;
 
+	extern int testCount;
+
 	/// <summary>
 	/// Projects C on AB
 	/// </summary>

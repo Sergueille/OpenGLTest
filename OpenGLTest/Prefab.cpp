@@ -185,6 +185,13 @@ void Prefab::Disable()
 
 void Prefab::GetAABB(vec2* minRes, vec2* maxRes)
 {
+	if (prefabObjects.size() == 0)
+	{
+		*minRes = GetEditPos();
+		*maxRes = GetEditPos();
+		return;
+	}
+
 	prefabObjects.front()->GetAABB(minRes, maxRes);
 
 	for (auto it = prefabObjects.begin(); it != prefabObjects.end(); it++)

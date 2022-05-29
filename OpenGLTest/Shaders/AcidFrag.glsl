@@ -13,6 +13,8 @@ uniform sampler2D lightmap;
 uniform float time;
 uniform vec2 spriteSize;
 
+uniform bool showSurface;
+
 void main()
 {
     const float noiseSize = 0.12;
@@ -25,10 +27,7 @@ void main()
     const float secNoiseSpeed = 0.1;
     vec2 secNoiseCoord = position.xy * secNoiseSize + secNoiseDir * secNoiseSpeed * time;
 
-    const float realSurfaceSize = 0.5;
-    float surfaceSize = realSurfaceSize / spriteSize.y;
-    float surfaceAmount = 1 - ((1 - texCoord.y) / surfaceSize);
-    if (surfaceAmount < 0) surfaceAmount = 0;
+    
 
     const vec4 aColor = vec4(0.7, 0.2, 0, 0.8);
     const vec4 bColor = vec4(0.05, 0.7, 0, 0.2);
@@ -37,7 +36,15 @@ void main()
     float noise = texture(mainTexture, noiseCoord).r * texture(mainTexture, secNoiseCoord).r;
     
     vec4 color = lerp(aColor, bColor, noise);
-    color = (1 - surfaceAmount) * color + (surfaceAmount * surfaceColor);
+
+    if (showSurface)
+    {
+        const float realSurfaceSize = 0.5;
+        float surfaceSize = realSurfaceSize / spriteSize.y;
+        float surfaceAmount = 1 - ((1 - texCoord.y) / surfaceSize);
+        if (surfaceAmount < 0) surfaceAmount = 0;
+        color = (1 - surfaceAmount) * color + (surfaceAmount * surfaceColor);
+    }
 
     vec4 light = vec4(texture(lightmap, lightmapCoord).rgb, 1);
 

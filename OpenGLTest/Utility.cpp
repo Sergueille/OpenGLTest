@@ -27,6 +27,8 @@ namespace Utility
 	glm::vec4 overlayColor = glm::vec4(0);
 	float overlayZ = 100;
 
+	int testCount = 0; 
+
 	float GetDeltaTime()
 	{
 		return time - lastTime;

@@ -216,7 +216,7 @@ void EditorParticleSystem::UpdateTransform()
     
     if (editorSprite != nullptr)
 	{
-		editorSprite->position = GetEditPos() + vec3(0, 0, 50);
+		editorSprite->position = GetEditPos() + vec3(0, 0, 50); 
 		editorSprite->size = vec2(Editor::gizmoSize);
 		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
 

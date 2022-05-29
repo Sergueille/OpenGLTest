@@ -359,7 +359,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "30"
 	name: ""
-	position: "105.599998, -30.400000, 0.000000"
+	position: "105.400002, -28.400000, 0.000000"
 	parent: "-1"
 	size: "19.600000, 26.800001"
 	rotation: "0.000000"
@@ -866,9 +866,9 @@ object ShadowCaster {
 object ShadowCaster {
 	ID: "1286"
 	name: ""
-	position: "115.000000, -10.000000, 10.000000"
+	position: "115.400002, -9.800000, 10.000000"
 	parent: "-1"
-	size: "4.800000, 4.800000"
+	size: "5.600000, 4.400000"
 	orientation: "0.000000"
 }
 object ShadowCaster {
@@ -2890,7 +2890,7 @@ object EditorSprite {
 object Light {
 	ID: "7326"
 	name: ""
-	position: "104.800003, -24.200001, 20.000000"
+	position: "104.599998, -21.800001, 20.000000"
 	parent: "-1"
 	lightSize: "17.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"

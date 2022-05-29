@@ -36,7 +36,7 @@ object EditorParticleSystem {
 object EditorParticleSystem {
 	ID: "5242"
 	name: ""
-	position: "-0.221576, 1.452130, -5.000000"
+	position: "-0.221576, 1.481105, -7.000000"
 	parent: "-1"
 	orientation: "0.000000"
 	scale: "9.000000, 0.060000"

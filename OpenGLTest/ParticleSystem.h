@@ -12,6 +12,11 @@ public:
 	ParticleSystem();
 	virtual ~ParticleSystem();
 
+	/// <summary>
+	/// If this psystem is further thet this distance of the camera edge, it will not be updated
+	/// </summary>
+	const float cameraMinDist = 10;
+
 	vec3 emitterPosition = vec3(0);
 	vec2 emitterSize = vec2(1);
 	float emitterRotation = 0;

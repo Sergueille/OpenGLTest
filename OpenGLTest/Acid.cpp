@@ -5,6 +5,7 @@
 #include "CircleCollider.h"
 #include "RectCollider.h"
 #include "RessourceManager.h"
+#include "Player.h"
 
 Acid::Acid() : EditorObject(vec3(0))
 {
@@ -15,6 +16,9 @@ Acid::Acid() : EditorObject(vec3(0))
 	sprite->setUniforms = &SetSpriteUniforms;
 	sprite->setUniformsObjectCall = this;
 	sprite->isLit = true;
+
+	if (!Editor::enabled)
+		acidMainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { this->OnAcidMainLoop(); });
             
 	typeName = "Acid";
 }
@@ -26,6 +30,9 @@ Acid::~Acid()
         delete sprite;
         sprite = nullptr;
     }
+
+	if (acidMainLoopFuncPos != nullptr)
+		EventManager::OnMainLoop.remove(acidMainLoopFuncPos);
 }
 
 vec2 Acid::DrawProperties(vec3 drawPos)
@@ -36,6 +43,7 @@ vec2 Acid::DrawProperties(vec3 drawPos)
 	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
 
     drawPos.y -= Editor::DrawProperty(drawPos, "Scale", &editorSize, Editor::panelPropertiesX, strID + "size").y;
+    drawPos.y -= Editor::CheckBox(drawPos, "Show surface", &showSurface, Editor::panelPropertiesX).y;
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
@@ -60,9 +68,9 @@ EditorObject* Acid::Copy()
 void Acid::Load(std::map<std::string, std::string>* props)
 {
 	EditorObject::Load(props);
-
-    
     editorSize = EditorSaveManager::StringToVector2((*props)["scale"]);
+
+	showSurface = (*props)["showSurface"] != "0";
 }
 
 void Acid::Save()
@@ -70,6 +78,7 @@ void Acid::Save()
 	EditorObject::Save();
 
     EditorSaveManager::WriteProp("scale", editorSize);
+    EditorSaveManager::WriteProp("showSurface", showSurface);
 }
 
 void Acid::Enable()
@@ -91,6 +100,19 @@ void Acid::SetSpriteUniforms(Shader* shader, void* object)
 
 	shader->SetUniform("time", Utility::time);
 	shader->SetUniform("spriteSize", acid->GetEditScale());
+	shader->SetUniform("showSurface", acid->showSurface);
+}
+
+void Acid::OnAcidMainLoop()
+{
+	if (Player::ingameInstance == nullptr) return;
+
+	vec3 res = clickCollider->CollideWith((CircleCollider*)Player::ingameInstance->collider);
+
+	if (res.z != 0) // Player is touching acid
+	{
+		EditorSaveManager::LoadUserSaveInSameLevel(EditorSaveManager::currentUserSave);
+	}
 }
 
 void Acid::UpdateTransform()

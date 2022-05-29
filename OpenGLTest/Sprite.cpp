@@ -53,16 +53,24 @@ void Sprite::Draw()
 {
     transparentQueueCopy = nullptr;
 
-    if (IsTransparent())
+    vec2 diago = vec2(size.x * (texture == nullptr ? 1 : texture->ratio), size.y);
+    float diagSize =glm::length(diago);
+    float camWidth = Camera::size * (float)screenX / (float)screenY;
+    vec2 camDelta = Abs(vec2(position) - Camera::position);
+
+    if (camDelta.x < diagSize + (camWidth / 2) && camDelta.y < diagSize + (Camera::size / 2))
     {
-        Sprite* copy = new Sprite(*this);
-        copy->isDrawnOnMainLoop = false;
-        transparentQueueCopy = copy;
-        drawQueue.push(copy);
-    }
-    else
-    {
-        DrawNow();
+        if (IsTransparent())
+        {
+            Sprite* copy = new Sprite(*this);
+            copy->isDrawnOnMainLoop = false;
+            transparentQueueCopy = copy;
+            drawQueue.push(copy);
+        }
+        else
+        {
+            DrawNow();
+        }
     }
 }
 
