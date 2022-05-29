@@ -239,8 +239,8 @@ int main(int argc, void* argv[])
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         // Clear color and depth buffer
-        glClearColor(0, 0, 0, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        // glClearColor(0, 0, 0, 1.0f);
+        // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Disable depth test
         glDisable(GL_DEPTH_TEST);
@@ -269,6 +269,8 @@ int main(int argc, void* argv[])
         // Draw render quad
         RessourceManager::shaders["screenShader"].Use();
         RessourceManager::shaders["screenShader"].SetUniform("bloomBlur", 1);
+        RessourceManager::shaders["screenShader"].SetUniform("time", Utility::time);
+        RessourceManager::shaders["screenShader"].SetUniform("corruptionAmount", corruptionAmount);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, colorTex[0]);
         glActiveTexture(GL_TEXTURE1);

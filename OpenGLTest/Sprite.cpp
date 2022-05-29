@@ -53,12 +53,20 @@ void Sprite::Draw()
 {
     transparentQueueCopy = nullptr;
 
-    vec2 diago = vec2(size.x * (texture == nullptr ? 1 : texture->ratio), size.y);
-    float diagSize =glm::length(diago);
-    float camWidth = Camera::size * (float)screenX / (float)screenY;
-    vec2 camDelta = Abs(vec2(position) - Camera::position);
+    bool isInScreen = true;
 
-    if (camDelta.x < diagSize + (camWidth / 2) && camDelta.y < diagSize + (Camera::size / 2))
+    if (!isUI)
+    {
+        vec2 diago = vec2(size.x * (texture == nullptr ? 1 : texture->ratio), size.y);
+        float diagSize = glm::length(diago);
+        float camWidth = Camera::size * (float)screenX / (float)screenY;
+        vec2 camDelta = Abs(vec2(position) - Camera::position);
+
+        isInScreen = camDelta.x < diagSize + (camWidth / 2) 
+            && camDelta.y < diagSize + (Camera::size / 2);
+    }
+
+    if (isInScreen)
     {
         if (IsTransparent())
         {

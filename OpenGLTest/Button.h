@@ -3,6 +3,8 @@
 
 #include "RessourceManager.h"
 
+constexpr int BUTTON_EVENT_COUNT = 2;
+
 class Button : public EditorObject
 {
 public:
@@ -32,6 +34,8 @@ public:
 	virtual void Save() override;
 	virtual void Load(std::map < std::string, std::string>* props) override;
 
+	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
+
 private:
 	bool isPressed;
 
@@ -39,4 +43,6 @@ private:
 
 	LinkedListElement<std::function<void(GLFWwindow* window, int key, int scancode, int action, int mods)>>* keyFuncPos;
 	void OnKeyPressed(int key, int action);
+
+	static ObjectEvent events[BUTTON_EVENT_COUNT];
 };

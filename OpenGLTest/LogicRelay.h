@@ -3,6 +3,7 @@
 #include "EditorObject.h"
 #include "Sprite.h"
 #include "RessourceManager.h"
+#include "TweenManager.h"
 
 constexpr int LOGIC_RELAY_EVENT_COUNT = 1;
 
@@ -16,6 +17,8 @@ public:
 
 	bool triggerOnStart = false;
 	EventList onTrigger;
+
+	float delay = 0;
 
     Sprite* editorSprite = nullptr;
 
@@ -36,5 +39,7 @@ public:
 
 private:
 	static const ObjectEvent events[LOGIC_RELAY_EVENT_COUNT];
+
+	TweenAction<float>* waitAction = nullptr;
 };
 

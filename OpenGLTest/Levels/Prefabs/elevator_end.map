@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 35
+count 37
 
 object MapData {
 	mapName: ""
@@ -439,4 +439,33 @@ object LogicRelay {
 	parent: "-1"
 	onTrigger: "2613|Set all transforms|3158|Set all transforms|3162|Set all transforms|"
 	triggerOnStart: "1"
+	delay: "0.100000"
+}
+object EditorSprite {
+	ID: "3211"
+	name: ""
+	position: "-4.800000, 12.200000, -20.000000"
+	parent: "-1"
+	size: "10.000000, 1.000000"
+	rotation: "-90.000000"
+	color: "0.800000, 0.800000, 0.800000, 1.000000"
+	texturePath: "truss.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "10.000000, 1.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "3226"
+	name: ""
+	position: "-5.500457, -4.006636, -25.000000"
+	parent: "-1"
+	size: "2.550000, 1.000000"
+	rotation: "-180.000000"
+	color: "0.800000, 0.800000, 0.800000, 1.000000"
+	texturePath: "decals\dust2.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "2.000000, 1.000000"
+	isLit: "1"
 }

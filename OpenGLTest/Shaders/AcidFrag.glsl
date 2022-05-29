@@ -27,8 +27,6 @@ void main()
     const float secNoiseSpeed = 0.1;
     vec2 secNoiseCoord = position.xy * secNoiseSize + secNoiseDir * secNoiseSpeed * time;
 
-    
-
     const vec4 aColor = vec4(0.7, 0.2, 0, 0.8);
     const vec4 bColor = vec4(0.05, 0.7, 0, 0.2);
     const vec4 surfaceColor = vec4(0.5, 0.7, 0.3, 1);

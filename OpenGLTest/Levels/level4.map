@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 104
+count 131
 
 object MapData {
 	mapName: ""
@@ -21,7 +21,7 @@ object EditorSprite {
 object Player {
 	ID: "1"
 	name: ""
-	position: "74.200005, 6.600000, 20.000000"
+	position: "98.000000, -31.800001, 20.000000"
 	parent: "-1"
 }
 object Prefab {
@@ -722,9 +722,9 @@ object Light {
 object EditorSprite {
 	ID: "1215"
 	name: ""
-	position: "98.400002, -44.400002, 0.000000"
+	position: "93.599998, -44.400002, 0.000000"
 	parent: "-1"
-	size: "35.400002, 23.200001"
+	size: "24.200001, 23.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -842,15 +842,15 @@ object Prefab {
 object EditorSprite {
 	ID: "2345"
 	name: ""
-	position: "98.800003, -30.600000, -10.000000"
+	position: "103.000000, -30.400000, -10.000000"
 	parent: "-1"
-	size: "16.200001, 5.600000"
+	size: "23.000000, 5.600000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "back\plaster2.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
+	UVend: "3.000000, 1.000000"
 	isLit: "1"
 }
 object ShadowCaster {
@@ -940,7 +940,7 @@ object Button {
 	position: "78.599998, -34.000000, 0.000000"
 	parent: "-1"
 	startPressed: "0"
-	onPressed: "2337|Open door|"
+	onPressed: "2337|Open door|3973|Trigger|"
 	onUnpressed: "2337|Close door|"
 }
 object Button {
@@ -1153,4 +1153,299 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+}
+object LogicRelay {
+	ID: "3973"
+	name: "Switch timer"
+	position: "79.400002, -37.799999, 50.000000"
+	parent: "-1"
+	onTrigger: "3030|Force unpress|"
+	triggerOnStart: "0"
+	delay: "4.000000"
+}
+object Prefab {
+	ID: "4401"
+	name: ""
+	position: "105.599998, -28.600000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "4408"
+	name: ""
+	position: "108.400002, -33.400002, 0.000000"
+	parent: "-1"
+	size: "7.200000, 1.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "4410"
+	name: ""
+	position: "112.599998, -28.000000, 0.000000"
+	parent: "-1"
+	size: "12.200000, 1.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "4412"
+	name: ""
+	position: "113.400002, -9.400001, 0.000000"
+	parent: "-1"
+	size: "15.800000, 27.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "4414"
+	name: ""
+	position: "126.400002, -15.000000, 0.000000"
+	parent: "-1"
+	size: "15.800000, 27.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "4416"
+	name: ""
+	position: "106.400002, -42.799999, 0.000000"
+	parent: "-1"
+	size: "11.000000, 9.800000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object Prefab {
+	ID: "4418"
+	name: ""
+	position: "113.000000, -23.000000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "4425"
+	name: ""
+	position: "108.400002, -34.000000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "4432"
+	name: ""
+	position: "111.400002, -36.200001, 0.000000"
+	parent: "-1"
+	size: "1.000000, 5.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object Prefab {
+	ID: "4434"
+	name: ""
+	position: "116.200005, -28.600000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "4436"
+	name: ""
+	position: "128.800003, -28.600000, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "4448"
+	name: ""
+	position: "124.800003, -30.400000, -10.000000"
+	parent: "-1"
+	size: "23.000000, 5.600000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\plaster2.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}
+object ShadowCaster {
+	ID: "4450"
+	name: ""
+	position: "112.800003, -28.000000, 20.000000"
+	parent: "-1"
+	size: "15.000000, 1.000000"
+	orientation: "0.000000"
+}
+object ShadowCaster {
+	ID: "4452"
+	name: ""
+	position: "111.800003, -33.400002, 20.000000"
+	parent: "-1"
+	size: "17.600000, 1.000000"
+	orientation: "0.000000"
+}
+object EditorSprite {
+	ID: "4454"
+	name: ""
+	position: "112.200005, -38.000000, -10.000000"
+	parent: "-1"
+	size: "14.000000, 8.600000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\plaster2.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "4456"
+	name: ""
+	position: "113.400002, -24.800001, -10.000000"
+	parent: "-1"
+	size: "14.000000, 5.600000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\plaster2.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}
+object Button {
+	ID: "4457"
+	name: ""
+	position: "114.200005, -26.000000, 0.000000"
+	parent: "-1"
+	startPressed: "0"
+	onPressed: ""
+	onUnpressed: ""
+}
+object Button {
+	ID: "4459"
+	name: ""
+	position: "116.200005, -40.000000, 0.000000"
+	parent: "-1"
+	startPressed: "0"
+	onPressed: ""
+	onUnpressed: ""
+}
+object EditorSprite {
+	ID: "4461"
+	name: ""
+	position: "124.000000, -30.600000, 0.000000"
+	parent: "-1"
+	size: "2.800000, 4.800000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object LogicRelay {
+	ID: "4462"
+	name: ""
+	position: "120.599998, -36.600002, 50.000000"
+	parent: "-1"
+	onTrigger: ""
+	triggerOnStart: "0"
+	delay: "0.000000"
+}
+object LogicRelay {
+	ID: "4464"
+	name: ""
+	position: "120.599998, -25.000000, 50.000000"
+	parent: "-1"
+	onTrigger: ""
+	triggerOnStart: "0"
+	delay: "0.000000"
+}
+object EditorSprite {
+	ID: "4466"
+	name: ""
+	position: "115.400002, -35.200001, 0.000000"
+	parent: "-1"
+	size: "7.200000, 4.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "4468"
+	name: ""
+	position: "115.200005, -48.600002, 0.000000"
+	parent: "-1"
+	size: "20.600000, 14.200000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "4470"
+	name: ""
+	position: "124.599998, -37.200001, 0.000000"
+	parent: "-1"
+	size: "11.200000, 8.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object Prefab {
+	ID: "4474"
+	name: ""
+	position: "115.400002, -37.600002, 0.000000"
+	parent: "-1"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object ShadowCaster {
+	ID: "4481"
+	name: ""
+	position: "111.400002, -37.400002, 20.000000"
+	parent: "-1"
+	size: "1.000000, 5.800000"
+	orientation: "0.000000"
 }

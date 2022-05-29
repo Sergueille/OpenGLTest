@@ -28,6 +28,8 @@ namespace Utility
 	float overlayZ = 100;
 
 	int testCount = 0; 
+	
+	float corruptionAmount = 0;
 
 	float GetDeltaTime()
 	{

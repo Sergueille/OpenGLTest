@@ -29,7 +29,7 @@ object TransformModifier {
 	targetPos: "0.000000, 0.000000"
 	targetRotation: "0.000000"
 	targetSize: "1.000000, 1.000000"
-	duration: "2.000000"
+	duration: "0.800000"
 	easeType: "4"
 	onFinished: "118|Start|"
 }
@@ -63,9 +63,9 @@ object PrefabRelay {
 	position: "1.000000, -3.000000, 80.000000"
 	parent: "-1"
 	eventListsCount: "2"
-	eventList0: "88|Set all transforms|42|Turn off|"
+	eventList0: "114|Cancell all|42|Turn off|88|Set all transforms|"
 	eventList0name: "Open door"
-	eventList1: "114|Set all transforms|42|Turn on|"
+	eventList1: "88|Cancell all|42|Turn on|114|Set all transforms|"
 	eventList1name: "Close door"
 }
 object EditorParticleSystem {

@@ -23,6 +23,10 @@ ObjectEvent TransformModifier::events[TRANS_MODIFIER_EVENT_COUNT] = {
 		"Set all transforms",
 		[](EditorObject* object, void* param) { ((TransformModifier*)object)->SetAllTransforms(); }
 	},
+	ObjectEvent {
+		"Cancell all",
+		[](EditorObject* object, void* param) { ((TransformModifier*)object)->CancelAll(); }
+	},
 };
 
 TransformModifier::TransformModifier() : EditorObject(vec3(0))
@@ -59,9 +63,7 @@ TransformModifier::~TransformModifier()
         editorSprite = nullptr;
     }
 
-	if (moveAction != nullptr && !moveAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(moveAction);
-	if (roateAction != nullptr && !roateAction->IsFinshedAt(Utility::time)) TweenManager<float>::Cancel(roateAction);
-	if (scaleAction != nullptr && !scaleAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(scaleAction);
+	CancelAll();
 }
 
 vec2 TransformModifier::DrawProperties(vec3 drawPos)
@@ -198,6 +200,13 @@ void TransformModifier::SetAllTransforms()
 	SetPosition();
 	SetRotation();
 	SetScale();
+}
+
+void TransformModifier::CancelAll()
+{
+	if (moveAction != nullptr && !moveAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(moveAction);
+	if (roateAction != nullptr && !roateAction->IsFinshedAt(Utility::time)) TweenManager<float>::Cancel(roateAction);
+	if (scaleAction != nullptr && !scaleAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(scaleAction);
 }
 
 void TransformModifier::UpdateTransform()

@@ -34,6 +34,9 @@ LogicRelay::~LogicRelay()
         delete editorSprite;
         editorSprite = nullptr;
     }   
+
+	if (waitAction != nullptr && !waitAction->IsFinshedAt(Utility::time))
+		TweenManager<float>::Cancel(waitAction);
 }
 
 vec2 LogicRelay::DrawProperties(vec3 drawPos)
@@ -44,6 +47,7 @@ vec2 LogicRelay::DrawProperties(vec3 drawPos)
 	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
 
 	drawPos.y -= Editor::CheckBox(drawPos, "Trigger on start", &triggerOnStart, Editor::panelPropertiesX).y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Delay", &delay, Editor::panelPropertiesX, strID + "delay").y;
 	drawPos.y -= onTrigger.DrawInPanel(drawPos, "On trigger").y;
 
 	vec2 res = vec2(drawPos) - startPos;
@@ -73,6 +77,8 @@ void LogicRelay::Load(std::map<std::string, std::string>* props)
 	EventList::Load(&onTrigger, (*props)["onTrigger"]);
 	triggerOnStart = (*props)["triggerOnStart"] == "1";
 
+	EditorSaveManager::FloatProp(props, "delay", &delay);
+
 	// Wait one second before sending auto trigger
 	if (triggerOnStart && !Editor::enabled)
 	{
@@ -86,6 +92,7 @@ void LogicRelay::Save()
 
 	EditorSaveManager::WriteProp("onTrigger", onTrigger.GetString());
 	EditorSaveManager::WriteProp("triggerOnStart", triggerOnStart);
+	EditorSaveManager::WriteProp("delay", delay);
 }
 
 void LogicRelay::Enable()
@@ -120,5 +127,16 @@ void LogicRelay::UpdateTransform()
 
 void LogicRelay::Trigger()
 {
-	onTrigger.Call(this);
+	if (delay > 0)
+	{
+		if (waitAction != nullptr && !waitAction->IsFinshedAt(Utility::time))
+			TweenManager<float>::Cancel(waitAction);
+
+		TweenManager<float>::Tween(0, 1, delay, [](float value) {}, linear)
+			->SetOnFinished([this] { onTrigger.Call(this); });
+	}
+	else
+	{
+		onTrigger.Call(this);
+	}
 }

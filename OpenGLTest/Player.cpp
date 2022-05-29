@@ -95,6 +95,12 @@ void Player::UpdateTransform()
 	else
 	{
 		collider->SetPos(GetPos()); // Re-set collider position because EditorObject will replace it by default
+
+		float deltaY = GetTimeSine((int)(floatPeriod * 1000.0f)) * floatIntensity - (floatIntensity / 2);
+		// Set sprite position
+		playerSprite->position = vec3(GetPos().x, GetPos().y + deltaY, editorPosition.z);
+		vec2 lightPos = GetPos() + height * vec2(0, -0.344);;
+		lightsSprite->position = vec3(lightPos.x, lightPos.y + deltaY, editorPosition.z + 1);
 	}
 }
 
@@ -148,13 +154,6 @@ void Player::Load(std::map<std::string, std::string>* props)
 // Handle physics
 void Player::OnAfterMove()
 {
-	float deltaY = GetTimeSine((int)(floatPeriod * 1000.0f)) * floatIntensity - (floatIntensity / 2);
-
-	// Set sprite position
-	playerSprite->position = vec3(GetPos().x, GetPos().y + deltaY, editorPosition.z);
-	vec2 lightPos = GetPos() + height * vec2(0, -0.344);;
-	lightsSprite->position = vec3(lightPos.x, lightPos.y + deltaY, editorPosition.z + 1);
-
 	float realSpeed = walkSpeed;
 
 	// Hanlde horizontal movement

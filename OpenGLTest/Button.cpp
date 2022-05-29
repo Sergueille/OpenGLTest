@@ -3,6 +3,17 @@
 #include "CircleCollider.h"
 #include "Player.h"
 
+ObjectEvent Button::events[BUTTON_EVENT_COUNT] = {
+	ObjectEvent {
+		"Force press",
+		[](EditorObject* object, void* param) { ((Button*)object)->SetState(true, true); },
+	},
+	ObjectEvent {
+		"Force unpress",
+		[](EditorObject* object, void* param) { ((Button*)object)->SetState(false, true); },
+	},
+};
+
 Button::Button(vec3 position) : EditorObject(position)
 {
 	isPressed = false;
@@ -132,6 +143,12 @@ void Button::Load(std::map<std::string, std::string>* props)
 	startPressed = (*props)["startPressed"] == "1";
 
 	SetState(startPressed, false);
+}
+
+void Button::GetObjectEvents(const ObjectEvent** res, int* resCount)
+{
+	*res = &events[0];
+	*resCount = BUTTON_EVENT_COUNT;
 }
 
 void Button::OnKeyPressed(int key, int action)

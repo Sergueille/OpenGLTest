@@ -6,6 +6,11 @@
 
 using namespace glm;
 
+constexpr float acidDeathDuration = 3;
+constexpr float acidDeathZoom = 15;
+constexpr float acidDeathCameraShift = 5;
+constexpr float acidDeathPlayerShift = 4;
+
 class Acid : public EditorObject
 {
 public:
@@ -29,6 +34,8 @@ public:
 
 private:
 	static void SetSpriteUniforms(Shader* shader, void* object);
+
+	static bool isPlayerDying;
 
 	LinkedListElement<std::function<void()>>* acidMainLoopFuncPos = nullptr;
 	void OnAcidMainLoop();

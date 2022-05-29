@@ -35,6 +35,11 @@ namespace Utility
 	extern glm::vec4 overlayColor;
 	extern float overlayZ;
 
+	/// <summary>
+	/// Amout of coruption (post-processing), between 0 and 1
+	/// </summary>
+	extern float corruptionAmount;
+
 	extern int testCount;
 
 	/// <summary>

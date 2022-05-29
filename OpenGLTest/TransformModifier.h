@@ -7,7 +7,7 @@
 
 using namespace glm;
 
-constexpr int TRANS_MODIFIER_EVENT_COUNT = 4;
+constexpr int TRANS_MODIFIER_EVENT_COUNT = 5;
 
 class TransformModifier : public EditorObject
 {
@@ -47,6 +47,8 @@ public:
 	void SetRotation();
 	void SetScale();
 	void SetAllTransforms();
+
+	void CancelAll();
 
 private:
 	EditorObject* targetObject;
