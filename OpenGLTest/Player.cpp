@@ -89,7 +89,8 @@ void Player::UpdateTransform()
 	{
 		this->SetPos(editorPosition);
 		playerSprite->position = editorPosition;
-		teleportPosSprite->position = editorPosition + vec3(teleportationDistance, 0, 0);
+		if (teleportPosSprite != nullptr)
+			teleportPosSprite->position = editorPosition + vec3(teleportationDistance, 0, 0);
 		lightsSprite->position = editorPosition + height * vec3(0, -0.344, 1);
 	}
 	else
@@ -104,6 +105,20 @@ void Player::UpdateTransform()
 	}
 }
 
+vec2 Player::DrawProperties(vec3 drawPos)
+{
+	std::string strID = std::to_string(ID);
+	vec2 startPos = vec2(drawPos);
+
+	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
+
+	drawPos.y -= Editor::CheckBox(drawPos, "Can teleport", &canTeleport, Editor::panelPropertiesX).y;
+
+	vec2 res = vec2(drawPos) - startPos;
+	res.y *= -1;
+	return res;
+}
+
 EditorObject* Player::Copy()
 {
 	Player* copy = new Player(*this);
@@ -115,7 +130,8 @@ EditorObject* Player::Copy()
 
 	// Copy sprites
 	copy->playerSprite = this->playerSprite->Copy();
-	copy->teleportPosSprite = this->teleportPosSprite->Copy(); 
+	if (this->teleportPosSprite != nullptr)
+		copy->teleportPosSprite = this->teleportPosSprite->Copy(); 
 	copy->lightsSprite = this->lightsSprite->Copy();
 
 	copy->SubscribeToMainLoop();
@@ -128,7 +144,8 @@ void Player::Enable()
 {
 	EditorObject::Enable();
 	playerSprite->DrawOnMainLoop();
-	teleportPosSprite->DrawOnMainLoop();
+	if (teleportPosSprite != nullptr) 
+		teleportPosSprite->DrawOnMainLoop();
 	lightsSprite->DrawOnMainLoop();
 	collider->enabled = true;
 	physicsEnabled = physicsWasEnabledBeforeDisabling;
@@ -138,17 +155,32 @@ void Player::Disable()
 {
 	EditorObject::Disable();
 	playerSprite->StopDrawing();
-	teleportPosSprite->StopDrawing();
+	if (teleportPosSprite != nullptr) 
+		teleportPosSprite->StopDrawing();
 	lightsSprite->StopDrawing();
 	collider->enabled = false;
 	physicsWasEnabledBeforeDisabling = physicsEnabled;
 	physicsEnabled = false;
 }
 
+void Player::Save()
+{
+	EditorObject::Save();
+	EditorSaveManager::WriteProp("canTeleport", canTeleport);
+}
+
 void Player::Load(std::map<std::string, std::string>* props)
 {
 	EditorObject::Load(props);
 	SetPos(editorPosition);
+	canTeleport = (*props)["canTeleport"] != "0";
+
+	// Don't need the sprite if no teleportation allowed
+	if (!Editor::enabled && !canTeleport)
+	{
+		delete teleportPosSprite;
+		teleportPosSprite = nullptr;
+	}
 }
 
 // Handle physics
@@ -180,36 +212,39 @@ void Player::OnAfterMove()
 		velocity.x += targetForce * GetDeltaTime(); // Apply force
 	}
 
-	// Get teleport position
-	vec2 worldMousePos = ScreenToWorld(GetMousePos());
-	vec2 mouseDirection = glm::normalize(worldMousePos - GetPos());
-	vec2 teleportPos = GetPos() + mouseDirection * teleportationDistance;
-	teleportPosSprite->position = vec3(teleportPos.x, teleportPos.y, editorPosition.z);
-
-	// Determines if teleportation not in a wall
-	CircleCollider teleportCollider = CircleCollider(teleportPos, height, false);
-	bool isColliding = teleportCollider.IsTouchingAnyCollider();
-	bool hitLaser = TeleportCollideWithLaser(teleportPos);
-	bool canTeleprt = teleportationsRemaining > 0 && !isColliding && !hitLaser;
-
-	// Set sprite color
-	teleportPosSprite->color = canTeleprt ? canTeleportColor : cannotTeleportColor;
-
 	bool isClicking = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
 
-	if (isClicking && !wasClickingLastFrame) // Click !!!
+	if (canTeleport)
 	{
-		if (canTeleprt)
-		{
-			SetPos(teleportPos);
-			velocity.y += teleportVerticalForce;
-			isJumping = false;
+		// Get teleport position
+		vec2 worldMousePos = ScreenToWorld(GetMousePos());
+		vec2 mouseDirection = glm::normalize(worldMousePos - GetPos());
+		vec2 teleportPos = GetPos() + mouseDirection * teleportationDistance;
+		teleportPosSprite->position = vec3(teleportPos.x, teleportPos.y, editorPosition.z);
 
-			teleportationsRemaining--;
-		}
-		else
+		// Determines if teleportation not in a wall
+		CircleCollider teleportCollider = CircleCollider(teleportPos, height, false);
+		bool isColliding = teleportCollider.IsTouchingAnyCollider();
+		bool hitLaser = TeleportCollideWithLaser(teleportPos);
+		bool canTeleprt = teleportationsRemaining > 0 && !isColliding && !hitLaser;
+
+		// Set sprite color
+		teleportPosSprite->color = canTeleprt ? canTeleportColor : cannotTeleportColor;
+
+		if (isClicking && !wasClickingLastFrame) // Click !!!
 		{
-			teleportPosSprite->color = cannotTeleportClickColor;
+			if (canTeleprt)
+			{
+				SetPos(teleportPos);
+				velocity.y += teleportVerticalForce;
+				isJumping = false;
+
+				teleportationsRemaining--;
+			}
+			else
+			{
+				teleportPosSprite->color = cannotTeleportClickColor;
+			}
 		}
 	}
 

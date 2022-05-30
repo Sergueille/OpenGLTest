@@ -27,7 +27,6 @@ Trigger::~Trigger()
         delete editorSprite;
         editorSprite = nullptr;
     }
-        
 }
 
 vec2 Trigger::DrawProperties(vec3 drawPos)
@@ -39,6 +38,8 @@ vec2 Trigger::DrawProperties(vec3 drawPos)
 
     drawPos.y -= Editor::DrawProperty(drawPos, "Orientation", &editorRotation, Editor::panelPropertiesX, strID + "ori").y;
     drawPos.y -= Editor::DrawProperty(drawPos, "Scale", &editorSize, Editor::panelPropertiesX, strID + "size").y;
+
+	drawPos.y -= Editor::CheckBox(drawPos, "Trigger once", &once, Editor::panelPropertiesX).y;
 
 	drawPos.y -= onEnter.DrawInPanel(drawPos, "On player enter").y;
 	drawPos.y -= onExit.DrawInPanel(drawPos, "On player exit").y;
@@ -70,6 +71,8 @@ void Trigger::Load(std::map<std::string, std::string>* props)
     EditorSaveManager::FloatProp(props, "orientation", &editorRotation);
     editorSize = EditorSaveManager::StringToVector2((*props)["scale"], vec2(1));
 
+	once = (*props)["once"] == "1";
+
 	EventList::Load(&onEnter, (*props)["onEnter"]);
 	EventList::Load(&onExit, (*props)["onExit"]);
 }
@@ -83,6 +86,8 @@ void Trigger::Save()
 
     EditorSaveManager::WriteProp("onEnter", onEnter.GetString());
     EditorSaveManager::WriteProp("onExit", onExit.GetString());
+
+    EditorSaveManager::WriteProp("once", once);
 }
 
 void Trigger::Enable()
@@ -101,22 +106,26 @@ void Trigger::DerivedOnMainLoop()
 {
 	if (!Editor::enabled && Player::ingameInstance != nullptr)
 	{
-		vec3 res = Player::ingameInstance->collider->CollideWith((RectCollider*)clickCollider);
+		if (!once || !hasAlredyTriggered)
+		{
+			vec3 res = Player::ingameInstance->collider->CollideWith((RectCollider*)clickCollider);
 
-		if (res.z != 0) // Is colliding
-		{
-			if (!collideWithPlayer)
+			if (res.z != 0) // Is colliding
 			{
-				collideWithPlayer = true;
-				onEnter.Call(this);
+				if (!collideWithPlayer)
+				{
+					hasAlredyTriggered = true;
+					collideWithPlayer = true;
+					onEnter.Call(this);
+				}
 			}
-		}
-		else
-		{
-			if (collideWithPlayer)
+			else
 			{
-				collideWithPlayer = false;
-				onExit.Call(this);
+				if (collideWithPlayer)
+				{
+					collideWithPlayer = false;
+					onExit.Call(this);
+				}
 			}
 		}
 	}

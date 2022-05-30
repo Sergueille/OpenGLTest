@@ -85,6 +85,7 @@ public:
 	bool isJumping = false;
 
 	int teleportationsRemaining = maxTeleprtationInAir;
+	bool canTeleport = true;
 
 	Sprite* playerSprite;
 	Sprite* teleportPosSprite;
@@ -95,10 +96,12 @@ public:
 
 	virtual void UpdateTransform() override;
 	virtual EditorObject* Copy() override;
+	virtual vec2 DrawProperties(vec3 drawPos) override;
 
 	virtual void Enable() override;
 	virtual void Disable() override;
 
+	virtual void Save() override;
 	virtual void Load(std::map<std::string, std::string>* props);
 
 protected:

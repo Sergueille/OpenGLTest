@@ -15,6 +15,8 @@ public:
 	EventList onEnter;
 	EventList onExit;
 
+	bool once = false;
+
     Sprite* editorSprite = nullptr;
 
 	bool collideWithPlayer = false;
@@ -31,5 +33,8 @@ public:
 	virtual void Disable() override;
 
 	virtual void DerivedOnMainLoop() override;
+
+private: 
+	bool hasAlredyTriggered = false;
 };
 

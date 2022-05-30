@@ -21,7 +21,7 @@ object EditorSprite {
 object Player {
 	ID: "1"
 	name: ""
-	position: "98.000000, -31.800001, 20.000000"
+	position: "-16.400000, 32.600002, 20.000000"
 	parent: "-1"
 }
 object Prefab {
