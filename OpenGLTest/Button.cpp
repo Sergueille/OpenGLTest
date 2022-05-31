@@ -45,7 +45,7 @@ Button::~Button()
 	delete btnSprite;
 	btnSprite = nullptr;
 
-	if (!Editor::enabled)
+	if (keyFuncPos != nullptr)
 	{
 		EventManager::OnKeyPressed.remove(keyFuncPos);
 	}

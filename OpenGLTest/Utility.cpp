@@ -80,6 +80,16 @@ namespace Utility
 		return res;
 	}
 
+	glm::vec3 WorldToScreen(glm::vec3 worldPos)
+	{
+		vec2 delta = vec2(worldPos) - Camera::position;
+		delta /= Camera::size;
+		delta *= screenY;
+		delta += vec2(screenX / 2, screenY / 2);
+
+		return vec3(delta.x, delta.y, worldPos.z);
+	}
+
 	float GetVectorAngle(glm::vec2 vector)
 	{
 		float angleRight = AngleBetween(glm::vec2(1, 0), vector);

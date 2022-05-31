@@ -71,6 +71,11 @@ namespace Utility
 	extern glm::vec2 ScreenToWorld(glm::vec2 screenPos);
 
 	/// <summary>
+	/// Get screen position from screen position (raw pixels, not 0-1)
+	/// </summary>
+	extern glm::vec3 WorldToScreen(glm::vec3 worldPos);
+
+	/// <summary>
 	/// <para> Get the intersection of two lines of equation x = a1 y + b1 and x = a2 y + b2 </para>
 	/// <para> Check that the lines are crossing before calling the function with a1 != a2 </para>
 	/// <para> However, it handles the vertical line case with a = nan </para>

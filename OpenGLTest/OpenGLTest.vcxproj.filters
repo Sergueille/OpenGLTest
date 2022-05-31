@@ -225,6 +225,9 @@
     <ClCompile Include="Checkpoint.cpp">
       <Filter>Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>LevelEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -364,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="Checkpoint.h">
       <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>LevelEditor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

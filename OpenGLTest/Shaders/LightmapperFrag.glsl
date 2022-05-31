@@ -97,8 +97,8 @@ bool GetShadow(int light, vec2 pos)
     for (int i = 0; i < nbShadowCasters; i++)
     {
         float dist =  length(lightPos[light] - shadowCastersPos[i]);
-        if (dist > lightSize[light].x + shadowCastersSize[i].x * 2
-            || dist > lightSize[light].y + shadowCastersSize[i].y * 2)
+        if (dist > lightSize[light].x * 2 + shadowCastersSize[i].x * 2
+            && dist > lightSize[light].y * 2 + shadowCastersSize[i].y * 2)
             continue;
 
         vec2 halfSize = shadowCastersSize[i] / 2.f;

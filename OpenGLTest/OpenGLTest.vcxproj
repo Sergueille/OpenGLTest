@@ -214,6 +214,7 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="TextManager.cpp" />
+    <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TransformModifier.cpp" />
     <ClCompile Include="Trigger.cpp" />
@@ -260,6 +261,7 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="stb_image_write.h" />
     <ClInclude Include="TextManager.h" />
+    <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TransformModifier.h" />
     <ClInclude Include="Trigger.h" />

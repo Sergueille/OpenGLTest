@@ -217,6 +217,7 @@ void EditorObject::Save()
 	EditorSaveManager::WriteProp("name", name);
 	EditorSaveManager::WriteProp("position", editorPosition);
 	EditorSaveManager::WriteProp("parent", parentID);
+	EditorSaveManager::WriteProp("parallax", parallax);
 }
 
 void EditorObject::Load(std::map<std::string, std::string>* props)
@@ -225,6 +226,7 @@ void EditorObject::Load(std::map<std::string, std::string>* props)
 	name = (*props)["name"];
 	ID = std::stoi((*props)["ID"]);
 	EditorSaveManager::IntProp(props, "parent", &parentID);
+	EditorSaveManager::FloatProp(props, "parallax", &parallax);
 }
 
 void EditorObject::Enable()

@@ -21,6 +21,7 @@
 #include "PrefabRelay.h"
 #include "Acid.h"
 #include "Checkpoint.h"
+#include "TextRenderer.h"
 
 using namespace glm;
 
@@ -597,6 +598,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "Checkpoint")
 	{
 		newObj = new Checkpoint();
+		newObj->Load(&props);
+	}
+	else if (objectType == "TextRenderer")
+	{
+		newObj = new TextRenderer();
 		newObj->Load(&props);
 	}
 	else

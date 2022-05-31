@@ -41,7 +41,7 @@ private:
 
 	bool interactAlreadyPressed = false;
 
-	LinkedListElement<std::function<void(GLFWwindow* window, int key, int scancode, int action, int mods)>>* keyFuncPos;
+	LinkedListElement<std::function<void(GLFWwindow* window, int key, int scancode, int action, int mods)>>* keyFuncPos = nullptr;
 	void OnKeyPressed(int key, int action);
 
 	static ObjectEvent events[BUTTON_EVENT_COUNT];
