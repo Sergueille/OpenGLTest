@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 117
+count 122
 
 object MapData {
 	mapName: ""
@@ -22,7 +22,7 @@ object EditorSprite {
 object Player {
 	ID: "94"
 	name: ""
-	position: "-51.000000, 1.600000, 20.000000"
+	position: "-59.200001, 1.600000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "0"
@@ -463,7 +463,7 @@ object EditorSprite {
 	position: "66.400002, 11.600000, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "5.200000, 40.000000"
+	size: "5.200000, 39.799999"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "back\plaster1.jpg"
@@ -611,16 +611,16 @@ object TransformModifier {
 object EditorSprite {
 	ID: "686"
 	name: ""
-	position: "71.200005, -18.200001, -10.000000"
+	position: "71.000000, -25.200001, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "41.600002, 20.200001"
+	size: "42.000000, 7.800000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "back\plaster1.jpg"
+	texturePath: "back\concrete1.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "2.000000, 2.000000"
+	UVend: "6.000000, 1.000000"
 	isLit: "1"
 }
 object Light {
@@ -943,7 +943,7 @@ object CameraController {
 object Trigger {
 	ID: "1172"
 	name: ""
-	position: "-51.000000, 2.400000, -8.000000"
+	position: "-59.200001, 2.400000, -8.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
@@ -1153,10 +1153,10 @@ object Prefab {
 object EditorSprite {
 	ID: "3138"
 	name: ""
-	position: "-47.000000, -7.600000, 0.000000"
+	position: "-55.200001, -7.600000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "32.799999, 15.800000"
+	size: "41.600002, 15.800000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -1235,7 +1235,7 @@ object EditorSprite {
 object Light {
 	ID: "3166"
 	name: ""
-	position: "-53.200001, 6.000000, 0.000000"
+	position: "-48.400002, 6.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	lightSize: "12.000000"
@@ -1248,7 +1248,7 @@ object Light {
 object EditorSprite {
 	ID: "3168"
 	name: ""
-	position: "-62.000000, 8.200000, 0.000000"
+	position: "-70.200005, 8.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "13.600000, 49.200001"
@@ -1359,7 +1359,7 @@ object ShadowCaster {
 object TextRenderer {
 	ID: "5165"
 	name: ""
-	position: "-52.799999, -1.800000, 50.000000"
+	position: "-58.200001, -2.200000, 50.000000"
 	parent: "-1"
 	parallax: "1.100000"
 	content: "Press Q and D to move the robot"
@@ -1438,4 +1438,77 @@ object Prefab {
 	path: "prefabs\neon.map"
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
+}
+object Light {
+	ID: "5695"
+	name: ""
+	position: "-59.000000, 6.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	lightSize: "12.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	intensity: "0.500000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+}
+object EditorSprite {
+	ID: "5801"
+	name: ""
+	position: "-0.476975, 2.468212, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.400000, 4.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "lift_truck1.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "5908"
+	name: ""
+	position: "56.110264, -23.763699, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.400000, 4.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "lift_truck2.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "-1.000000, 1.000000"
+	isLit: "0"
+}
+object EditorSprite {
+	ID: "6015"
+	name: ""
+	position: "71.400002, -14.200000, -20.000000"
+	parent: "-1"
+	parallax: "0.500000"
+	size: "41.600002, 17.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\plaster1.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "2.000000, 2.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "6467"
+	name: ""
+	position: "54.400002, -20.400000, -12.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.000000, 2.000000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "railing.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "2.000000, 1.000000"
+	isLit: "1"
 }

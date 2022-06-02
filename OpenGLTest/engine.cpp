@@ -48,6 +48,9 @@ int main(int argc, void* argv[])
     EditorSaveManager::IntProp(&settings, "screenY", &smallWindowHeght);
     bool displayFPS = settings["displayFPS"] == "1";
 
+    bool useMainMonitor = settings["monitor"] == "main";
+    int monitorID = useMainMonitor? 0 : std::stoi(settings["monitor"]);
+
     const char* windowName = "Teeeest!";
     const int bloomResDivide = 2;
 
@@ -61,12 +64,29 @@ int main(int argc, void* argv[])
     // Create window
     if (fullscreen)
     {
-        const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        GLFWmonitor* monitor = nullptr;
+        if (useMainMonitor)
+            monitor = glfwGetPrimaryMonitor();
+        else
+        {
+            int monitorCount;
+            GLFWmonitor** first = glfwGetMonitors(&monitorCount);
+
+            if (monitorID >= monitorCount)
+            {
+                std::cerr << "Unkown monitor index, displaying on main monitor" << std::endl;
+                monitor = glfwGetPrimaryMonitor();
+            }
+
+            monitor = *(first + monitorID);
+        }
+
+        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
         glfwWindowHint(GLFW_RED_BITS, mode->redBits);
         glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
         glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
         glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
-        Utility::window = glfwCreateWindow(mode->width, mode->height, windowName, glfwGetPrimaryMonitor(), NULL);
+        Utility::window = glfwCreateWindow(mode->width, mode->height, windowName, monitor, NULL);
 
         Utility::screenX = mode->width;
         Utility::screenY = mode->height;
