@@ -77,6 +77,8 @@ vec2 Light::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "Inner angle", &innerAngle, Editor::panelPropertiesX, strID + "inner").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Outer angle", &outerAngle, Editor::panelPropertiesX, strID + "outer").y;
 
+	drawPos.y -= Editor::DrawProperty(drawPos, "Shadow size", &shadowSize, Editor::panelPropertiesX, strID + "shadowSize").y;
+
 	return Abs(startPos - vec2(drawPos));
 }
 
@@ -91,6 +93,8 @@ void Light::Save()
 	EditorSaveManager::WriteProp("rotation", editorRotation);
 	EditorSaveManager::WriteProp("innerAngle", innerAngle);
 	EditorSaveManager::WriteProp("outerAngle", outerAngle);
+
+	EditorSaveManager::WriteProp("shadowSize", shadowSize);
 }
 
 void Light::Load(std::map<std::string, std::string>* props)
@@ -104,6 +108,8 @@ void Light::Load(std::map<std::string, std::string>* props)
 	EditorSaveManager::FloatProp(props, "rotation", &editorRotation);
 	EditorSaveManager::FloatProp(props, "innerAngle", &innerAngle);
 	EditorSaveManager::FloatProp(props, "outerAngle", &outerAngle);
+
+	EditorSaveManager::FloatProp(props, "shadowSize", &shadowSize);
 }
 
 EditorObject* Light::Copy()

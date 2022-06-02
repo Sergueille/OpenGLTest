@@ -26,10 +26,13 @@ public:
 	float particlesPerSecond = 100;
 	float duration = -1; // Set to -1 for infinite
 
+	bool deleteWhenStopped = false;
+
 	Sprite* paticleTemplate = nullptr;
 
 	vec2 startVelocity = vec2(0, 0);
 	vec2 endVelocity = vec2(0, 3);
+	bool velocityFromAngle = false;
 
 	bool changeColor = false;
 	vec4 startColor = vec4(1);
@@ -66,4 +69,6 @@ public:
 
 	Sprite* sprite = nullptr;
 	float age = 0;
+	vec2 xDirection = vec2(1, 0);
+	vec2 yDirection = vec2(0, 1);
 };

@@ -1921,10 +1921,10 @@ object EditorSprite {
 object ShadowCaster {
 	ID: "10179"
 	name: ""
-	position: "49.799999, -14.000000, 100.000000"
+	position: "49.200001, -14.000000, 100.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "15.600000, 1.000000"
+	size: "18.200001, 1.000000"
 	orientation: "0.000000"
 }
 object EditorSprite {

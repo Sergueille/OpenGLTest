@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 122
+count 132
 
 object MapData {
 	mapName: ""
@@ -54,6 +54,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object EditorSprite {
 	ID: "99"
@@ -207,6 +208,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object EditorSprite {
 	ID: "306"
@@ -484,6 +486,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object Light {
 	ID: "647"
@@ -497,6 +500,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object Light {
 	ID: "649"
@@ -510,19 +514,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
-}
-object Light {
-	ID: "651"
-	name: ""
-	position: "67.000000, -7.000000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "5.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.000000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object EditorSprite {
 	ID: "653"
@@ -592,6 +584,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object TransformModifier {
 	ID: "684"
@@ -611,56 +604,17 @@ object TransformModifier {
 object EditorSprite {
 	ID: "686"
 	name: ""
-	position: "71.000000, -25.200001, -10.000000"
+	position: "66.000000, -24.400000, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "42.000000, 7.800000"
+	size: "35.000000, 7.000000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "back\concrete1.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "6.000000, 1.000000"
+	UVend: "5.000000, 1.000000"
 	isLit: "1"
-}
-object Light {
-	ID: "688"
-	name: ""
-	position: "55.000000, -13.600000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-}
-object Light {
-	ID: "690"
-	name: ""
-	position: "76.000000, -13.200000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-}
-object Light {
-	ID: "692"
-	name: ""
-	position: "63.400002, -22.200001, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
 }
 object Trigger {
 	ID: "693"
@@ -804,6 +758,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object Light {
 	ID: "1039"
@@ -817,6 +772,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object EditorSprite {
 	ID: "1148"
@@ -831,19 +787,6 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
-}
-object Light {
-	ID: "1150"
-	name: ""
-	position: "85.599998, -21.600000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
 }
 object EditorSprite {
 	ID: "1152"
@@ -862,7 +805,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1154"
 	name: ""
-	position: "99.800003, -16.000000, 0.000000"
+	position: "100.000000, -16.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "15.600000, 11.000000"
@@ -1244,6 +1187,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object EditorSprite {
 	ID: "3168"
@@ -1271,6 +1215,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object Light {
 	ID: "4781"
@@ -1284,6 +1229,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object EditorSprite {
 	ID: "5058"
@@ -1451,6 +1397,7 @@ object Light {
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object EditorSprite {
 	ID: "5801"
@@ -1465,12 +1412,12 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
-	isLit: "0"
+	isLit: "1"
 }
 object EditorSprite {
 	ID: "5908"
 	name: ""
-	position: "56.110264, -23.763699, 0.000000"
+	position: "56.404984, -23.734228, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "4.400000, 4.400000"
@@ -1480,27 +1427,27 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "-1.000000, 1.000000"
-	isLit: "0"
+	isLit: "1"
 }
 object EditorSprite {
 	ID: "6015"
 	name: ""
-	position: "71.400002, -14.200000, -20.000000"
+	position: "71.800003, -11.600000, -20.000000"
 	parent: "-1"
 	parallax: "0.500000"
-	size: "41.600002, 17.400000"
+	size: "43.600002, 25.000000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "back\plaster1.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "2.000000, 2.000000"
+	UVend: "4.000000, 3.000000"
 	isLit: "1"
 }
 object EditorSprite {
 	ID: "6467"
 	name: ""
-	position: "54.400002, -20.400000, -12.000000"
+	position: "54.400002, -20.000000, -12.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "4.000000, 2.000000"
@@ -1511,4 +1458,193 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "2.000000, 1.000000"
 	isLit: "1"
+}
+object Prefab {
+	ID: "6574"
+	name: ""
+	position: "53.799999, -22.200001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "6578"
+	name: ""
+	position: "63.799999, -22.200001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "6582"
+	name: ""
+	position: "74.599998, -22.200001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Light {
+	ID: "6594"
+	name: ""
+	position: "57.200001, -10.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	lightSize: "20.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	intensity: "1.000000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+	shadowSize: "0.500000"
+}
+object ShadowCaster {
+	ID: "6596"
+	name: ""
+	position: "58.400002, -6.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "10.800000, 4.200000"
+	orientation: "0.000000"
+}
+object ShadowCaster {
+	ID: "6598"
+	name: ""
+	position: "74.400002, -6.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "10.800000, 4.200000"
+	orientation: "0.000000"
+}
+object Light {
+	ID: "6600"
+	name: ""
+	position: "78.599998, -11.400001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	lightSize: "20.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	intensity: "1.000000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+	shadowSize: "2.000000"
+}
+object ShadowCaster {
+	ID: "6602"
+	name: ""
+	position: "86.599998, -15.600000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "6.400000, 4.200000"
+	orientation: "0.000000"
+}
+object EditorSprite {
+	ID: "6604"
+	name: ""
+	position: "87.800003, -21.800001, -9.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "8.800000, 8.800000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\plaster2.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "6606"
+	name: ""
+	position: "58.992634, -20.021933, -12.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.000000, 2.000000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "railing_end.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "6608"
+	name: ""
+	position: "80.599998, -14.000000, -15.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.000000, 2.000000"
+	rotation: "90.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "truss.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "6610"
+	name: ""
+	position: "53.000000, -14.000000, -15.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.000000, 2.000000"
+	rotation: "90.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "truss.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "6612"
+	name: ""
+	position: "62.400002, -6.200000, -17.000000"
+	parent: "-1"
+	parallax: "0.600000"
+	size: "6.000000, 1.000000"
+	rotation: "-0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "truss.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "6.000000, 1.000000"
+	isLit: "1"
+}
+object EditorSprite {
+	ID: "6726"
+	name: ""
+	position: "88.200005, -22.200001, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.000000, 1.000000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "light_fluo_broken.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+}
+object Light {
+	ID: "6728"
+	name: ""
+	position: "88.200005, -22.200001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 0.900000, 0.900000, 1.000000"
+	intensity: "0.800000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }

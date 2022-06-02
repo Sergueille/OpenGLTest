@@ -161,7 +161,7 @@ int main(int argc, void* argv[])
     glDrawBuffers(2, attachments);
 
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-        std::cout << "Frame buffer creation failed :(" << std::endl;
+        std::cerr << "Frame buffer creation failed :(" << std::endl;
     glBindFramebuffer(GL_FRAMEBUFFER, 0); // Unbind fbo
 
     // Start event manager

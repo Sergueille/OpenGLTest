@@ -6,13 +6,14 @@ uniform vec2 lightPos[256]; // Position in UV coordinates
 uniform vec3 lightColor[256]; // Color of the light, intensity included
 uniform vec2 lightSize[256]; // Size in UV coordinates
 uniform vec3 lightAngles[256]; // Rotation, inner angle, outer angle
+uniform vec2 lightShadowSize[256]; // Size of the emiter, used for shadows
 
 uniform int nbShadowCasters = 0;
 uniform vec2 shadowCastersPos[128]; // Position in UV coordinates
 uniform float shadowCastersRot[128]; // Rotation
 uniform vec2 shadowCastersSize[128]; // Size in UV coordinates
 
-bool GetShadow(int light, vec2 pos);
+bool GetShadow(int light, vec2 pos, vec2 lightPosOverride);
 float GetFinalShadow(int light);
 
 void main()
@@ -67,36 +68,35 @@ vec2 Rotate(vec2 vector, float angle)
 
 float GetFinalShadow(int light)
 {
-    float nbAngle = 10;
-    float angleStep = 0.35;
-
-    bool mainPoint = GetShadow(light, texCoord);
-    if (mainPoint) return 1;
+    const float nbSamples = 15;
+    const float lightRadius = 0.002;
 
     vec2 lightPos = vec2(lightPos[light].x, lightPos[light].y);
     vec2 delta = texCoord - lightPos;
+    vec2 dir = normalize(delta);
+    vec2 tangent = vec2(cross(vec3(dir.xy, 0), vec3(0, 0, 1)));
 
+    float sampleStep = 2 / nbSamples;
     float passed = 0;
-    for (float angle = -nbAngle * angleStep; angle < nbAngle * angleStep - 0.01; angle += angleStep)
+    for (float i = -1 ; i <= 1 + 0.00001; i += sampleStep)
     {
-        vec2 newVect = Rotate(delta, angle);
-        vec2 newPoint = newVect + lightPos;
-        
-        passed += GetShadow(light, newPoint) ? 1 : 0;
+        vec2 lightDelta = tangent * i * lightShadowSize[light];
+        vec2 newLightPos = lightPos + lightDelta;
+        passed += GetShadow(light, texCoord, newLightPos) ? 1 : 0;
     }
 
-    return passed / nbAngle;
+    return passed / nbSamples;
 }
 
-bool GetShadow(int light, vec2 pos) 
+bool GetShadow(int light, vec2 pos, vec2 lightPosOverride) 
 {
-    float a = (pos.y - lightPos[light].y) / (pos.x - lightPos[light].x);
-    float b = lightPos[light].y - (a * lightPos[light].x);
+    float a = (pos.y - lightPosOverride.y) / (pos.x - lightPosOverride.x);
+    float b = lightPosOverride.y - (a * lightPosOverride.x);
 
     // Part of code from RectCollider
     for (int i = 0; i < nbShadowCasters; i++)
     {
-        float dist =  length(lightPos[light] - shadowCastersPos[i]);
+        float dist =  length(lightPosOverride - shadowCastersPos[i]);
         if (dist > lightSize[light].x * 2 + shadowCastersSize[i].x * 2
             && dist > lightSize[light].y * 2 + shadowCastersSize[i].y * 2)
             continue;
@@ -143,8 +143,8 @@ bool GetShadow(int light, vec2 pos)
                 if ((point.x < next.x && res.x > point.x && res.x < next.x)
                     || (point.x > next.x && res.x < point.x && res.x > next.x)) // If on side
                 {
-                    if ((pos.x > lightPos[light].x && res.x < pos.x && res.x > lightPos[light].x)
-                        || (pos.x < lightPos[light].x && res.x > pos.x && res.x < lightPos[light].x)) // If btw light and pos
+                    if ((pos.x > lightPosOverride.x && res.x < pos.x && res.x > lightPosOverride.x)
+                        || (pos.x < lightPosOverride.x && res.x > pos.x && res.x < lightPosOverride.x)) // If btw light and pos
                     {
                         return false; // Intersect
                     }

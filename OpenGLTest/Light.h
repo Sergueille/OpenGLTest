@@ -14,6 +14,8 @@ public:
 	float innerAngle = 360;
 	float outerAngle = 360;
 
+	float shadowSize = 0.5f; // Size of the emiter, used for shadows
+
 	virtual void UpdateTransform() override;
 
 	virtual EditorObject* Copy() override;

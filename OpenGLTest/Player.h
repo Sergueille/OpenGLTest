@@ -112,5 +112,7 @@ private:
 	bool wasClickingLastFrame = false;
 
 	bool TeleportCollideWithLaser(vec2 teleportPosition);
+
+	void TeleportEffect();
 };
 

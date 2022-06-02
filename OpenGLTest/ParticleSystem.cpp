@@ -18,7 +18,8 @@ ParticleSystem::~ParticleSystem()
 
 	if (psysMainLoopFuncPos != nullptr)
 	{
-		EventManager::OnMainLoop.remove(psysMainLoopFuncPos);
+		auto localPsysMainLoopFuncPos = psysMainLoopFuncPos;
+		EventManager::DoInOneFrame([localPsysMainLoopFuncPos] { EventManager::OnMainLoop.remove(localPsysMainLoopFuncPos); });
 		psysMainLoopFuncPos = nullptr;
 	}
 
@@ -50,6 +51,9 @@ void ParticleSystem::Stop()
 		delete (*particle);
 	}
 	particles.clear();
+
+	if (deleteWhenStopped)
+		delete this;
 }
 
 bool ParticleSystem::IsPlaying()
@@ -98,6 +102,7 @@ void ParticleSystem::OnParticleSystemMainLoop()
 		for (int i = 0; i < newParticlesCount; i++)
 		{
 			Sprite* copy = paticleTemplate->Copy();
+			Particle* newPart = new Particle(copy);
 
 			const int precision = 10000;
 
@@ -121,7 +126,12 @@ void ParticleSystem::OnParticleSystemMainLoop()
 				copy->position = emitterPosition + vec3(vecX.x + vecY.x, vecX.y + vecY.y, 0);
 			}
 
-			Particle* newPart = new Particle(copy);
+			if (velocityFromAngle)
+			{
+				newPart->yDirection = vec2(copy->position) - vec2(emitterPosition);
+				newPart->xDirection = Utility::Rotate(newPart->yDirection, -90);
+			}
+
 			particles.push_back(newPart);
 			lastInstantiationTime = Utility::time;
 		}
@@ -148,7 +158,8 @@ void ParticleSystem::OnParticleSystemMainLoop()
 
 		// Change & apply velocity
 		vec2 velocity = Lerp<vec2>(startVelocity, endVelocity, particle->age / particleLifetime);
-		particle->sprite->position += vec3(velocity.x, velocity.y, 0) * GetDeltaTime();
+		vec2 delta = (particle->xDirection * velocity.x + particle->yDirection * velocity.y) * GetDeltaTime();
+		particle->sprite->position += vec3(delta.x, delta.y, 0);
 		particle->sprite->position.z = emitterPosition.z + deltaZ;
 
 		if (changeColor)

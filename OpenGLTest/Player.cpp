@@ -5,6 +5,7 @@
 #include "TweenManager.h"
 
 #include <iostream>
+#include "ParticleSystem.h"
 
 using namespace glm;
 
@@ -239,6 +240,8 @@ void Player::OnAfterMove()
 				velocity.y += teleportVerticalForce;
 				isJumping = false;
 
+				TeleportEffect();
+
 				teleportationsRemaining--;
 			}
 			else
@@ -346,4 +349,44 @@ bool Player::TeleportCollideWithLaser(vec2 teleportPosition)
 	}
 
 	return false;
+}
+
+void Player::TeleportEffect()
+{
+	Sprite* pulse = new Sprite(
+		RessourceManager::GetTexture("pulse.png"),
+		vec3(GetPos().x, GetPos().y, GetEditPos().z - 1), vec2(0.1f), 0, vec4(1.1f, 0.3f, 0.3f, 1)
+	);
+	pulse->DrawOnMainLoop();
+
+	ParticleSystem* psys = new ParticleSystem();
+	psys->duration = 0.2f;
+	psys->particlesPerSecond = 200.0f;
+	psys->particleLifetime = 1.0f;
+	psys->changeSize = true;
+	psys->startSize = vec2(0.2f);
+	psys->endSize = vec2(0);
+	psys->changeColor = true;
+	psys->startColor = vec4(1, 0.2f, 0.2f, 0.9f);
+	psys->endColor = vec4(1, 0.7f, 0.7f, 0.5f);
+	psys->velocityFromAngle = true;
+	psys->startVelocity = vec2(0, 6);
+	psys->endVelocity = vec2(0, 0);
+	psys->velocityFromAngle = true;
+	psys->emitterPosition = vec3(GetPos().x, GetPos().y, 60);
+	psys->emitterSize = vec2(height);
+	psys->emitCircle = true;
+	psys->deleteWhenStopped = true;
+	psys->paticleTemplate = new Sprite(RessourceManager::GetTexture("Engine\\circle.png"), vec3(0), vec2(1), 0);
+	psys->Start();
+
+	TweenManager<float>::Tween(0, 1, 0.5f, [pulse](float value) {
+		float size = Utility::Lerp<float>(0.1f, 8, value);
+		float alpha = 1 - value;
+
+		pulse->size = vec2(size);
+		pulse->color.a = alpha;
+	}, sineOut)->SetOnFinished([pulse] {
+		delete pulse;
+	});
 }
