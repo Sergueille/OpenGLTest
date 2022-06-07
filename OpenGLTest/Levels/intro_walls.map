@@ -18,6 +18,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "2"
@@ -32,6 +33,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3"
@@ -46,6 +48,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8"
@@ -60,6 +63,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "19"
@@ -74,6 +78,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "22"
@@ -88,6 +93,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "23"
@@ -102,6 +108,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "24"
@@ -116,6 +123,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "25"
@@ -130,6 +138,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "27"
@@ -144,6 +153,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "28"
@@ -158,6 +168,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "71"
@@ -172,6 +183,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "72"
@@ -186,6 +198,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "73"
@@ -200,6 +213,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "91"
@@ -214,6 +228,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "92"
@@ -228,6 +243,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "93"
@@ -242,6 +258,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "94"
@@ -256,6 +273,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "95"
@@ -270,6 +288,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "116"
@@ -284,6 +303,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "138"
@@ -298,6 +318,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "209"
@@ -312,6 +333,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "210"
@@ -326,6 +348,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "211"
@@ -340,6 +363,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "75"
@@ -354,6 +378,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "76"
@@ -368,6 +393,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "131"
@@ -382,6 +408,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "30"
@@ -396,6 +423,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "31"
@@ -410,6 +438,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "216"
@@ -424,6 +453,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "218"
@@ -438,6 +468,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "219"
@@ -452,6 +483,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "220"
@@ -466,6 +498,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "221"
@@ -480,6 +513,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "292"
@@ -494,6 +528,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "293"
@@ -508,6 +543,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "331"
@@ -522,6 +558,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "332"
@@ -536,6 +573,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "333"
@@ -550,6 +588,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "334"
@@ -564,6 +603,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "335"
@@ -578,6 +618,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "378"
@@ -592,6 +633,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "379"
@@ -606,6 +648,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "380"
@@ -620,6 +663,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "381"
@@ -634,6 +678,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "382"
@@ -648,6 +693,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "477"
@@ -662,6 +708,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "621"
@@ -676,6 +723,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "769"
@@ -691,6 +739,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "3.000000, 0.500000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "875"
@@ -706,6 +755,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "3.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object ShadowCaster {
 	ID: "877"
@@ -730,6 +780,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "2.000000, 0.500000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "937"
@@ -745,6 +796,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "6.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object ShadowCaster {
 	ID: "938"
@@ -820,6 +872,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "3.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1009"
@@ -835,6 +888,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "3.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "1010"
@@ -873,6 +927,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "2.000000, 2.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object ShadowCaster {
 	ID: "1092"
@@ -969,6 +1024,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object ShadowCaster {
 	ID: "1387"
@@ -1051,6 +1107,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1823"
@@ -1065,6 +1122,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1825"
@@ -1079,6 +1137,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1831"
@@ -1093,6 +1152,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1837"
@@ -1107,6 +1167,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1839"
@@ -1121,6 +1182,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1841"
@@ -1135,6 +1197,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1843"
@@ -1149,6 +1212,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1845"
@@ -1163,6 +1227,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1847"
@@ -1177,6 +1242,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1849"
@@ -1191,6 +1257,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1851"
@@ -1205,6 +1272,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1853"
@@ -1219,6 +1287,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1855"
@@ -1233,6 +1302,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1855"
@@ -1248,6 +1318,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "1857"
@@ -1263,6 +1334,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "2233"
@@ -1278,6 +1350,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "2235"
@@ -1293,6 +1366,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "2239"
@@ -1308,6 +1382,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Prefab {
 	ID: "2367"
@@ -1363,6 +1438,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "2548"
@@ -1378,6 +1454,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "2550"
@@ -1393,6 +1470,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "2552"
@@ -1408,6 +1486,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Prefab {
 	ID: "2700"
@@ -1443,6 +1522,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3039"
@@ -1458,6 +1538,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "3196"
@@ -1487,6 +1568,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3380"
@@ -1502,6 +1584,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3382"
@@ -1517,6 +1600,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3407"
@@ -1532,6 +1616,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Prefab {
 	ID: "3434"
@@ -1557,6 +1642,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3438"
@@ -1572,6 +1658,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3440"
@@ -1587,6 +1674,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3442"
@@ -1602,6 +1690,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3444"
@@ -1617,6 +1706,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3448"
@@ -1632,6 +1722,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3450"
@@ -1647,6 +1738,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3649"
@@ -1662,6 +1754,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3651"
@@ -1677,6 +1770,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3653"
@@ -1692,6 +1786,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3655"
@@ -1707,6 +1802,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3657"
@@ -1722,6 +1818,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3659"
@@ -1737,6 +1834,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3661"
@@ -1752,6 +1850,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3663"
@@ -1767,6 +1866,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3698"
@@ -1782,6 +1882,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3700"
@@ -1797,6 +1898,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4122"
@@ -1812,6 +1914,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4331"
@@ -1827,6 +1930,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4333"
@@ -1842,6 +1946,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4516"
@@ -1857,6 +1962,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4522"
@@ -1872,6 +1978,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4524"
@@ -1887,6 +1994,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4712"
@@ -1902,6 +2010,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4714"
@@ -1917,6 +2026,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4716"
@@ -1932,6 +2042,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4522"
@@ -1947,6 +2058,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4936"
@@ -1962,6 +2074,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4938"
@@ -1977,6 +2090,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4940"
@@ -1992,6 +2106,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4942"
@@ -2007,6 +2122,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4944"
@@ -2022,6 +2138,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4946"
@@ -2037,6 +2154,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4948"
@@ -2052,6 +2170,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4950"
@@ -2067,6 +2186,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4952"
@@ -2082,6 +2202,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "4954"
@@ -2097,6 +2218,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5154"
@@ -2112,6 +2234,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5156"
@@ -2127,6 +2250,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5158"
@@ -2142,6 +2266,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "5160"
@@ -2171,6 +2296,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "5164"
@@ -2200,6 +2326,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5168"
@@ -2215,6 +2342,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5170"
@@ -2230,6 +2358,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5172"
@@ -2245,6 +2374,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5174"
@@ -2260,6 +2390,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5176"
@@ -2275,6 +2406,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5178"
@@ -2290,6 +2422,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5390"
@@ -2305,6 +2438,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5630"
@@ -2320,6 +2454,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5632"
@@ -2335,6 +2470,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5634"
@@ -2350,6 +2486,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5636"
@@ -2365,6 +2502,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5638"
@@ -2380,6 +2518,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5640"
@@ -2395,6 +2534,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5642"
@@ -2410,6 +2550,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5648"
@@ -2425,6 +2566,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5650"
@@ -2440,6 +2582,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5652"
@@ -2455,6 +2598,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Prefab {
 	ID: "5664"
@@ -2550,6 +2694,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5790"
@@ -2565,6 +2710,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5792"
@@ -2580,6 +2726,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5794"
@@ -2595,6 +2742,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5796"
@@ -2610,6 +2758,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5798"
@@ -2625,6 +2774,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5800"
@@ -2640,6 +2790,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5802"
@@ -2655,6 +2806,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5804"
@@ -2670,6 +2822,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "5806"
@@ -2741,6 +2894,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 0.800000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "6982"
@@ -2770,6 +2924,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "6988"
@@ -2785,6 +2940,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "6990"
@@ -2800,6 +2956,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "6992"
@@ -2829,6 +2986,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "6996"
@@ -2844,6 +3002,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "6998"
@@ -2859,6 +3018,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7000"
@@ -2874,6 +3034,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7002"
@@ -2889,6 +3050,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7004"
@@ -2904,6 +3066,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7006"
@@ -2919,6 +3082,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7008"
@@ -2934,6 +3098,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7010"
@@ -2949,6 +3114,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7012"
@@ -2964,6 +3130,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7014"
@@ -2979,6 +3146,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7016"
@@ -2994,6 +3162,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7018"
@@ -3009,6 +3178,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7020"
@@ -3024,6 +3194,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7022"
@@ -3039,6 +3210,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7024"
@@ -3054,6 +3226,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7028"
@@ -3069,6 +3242,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "4.000000, 0.500000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7030"
@@ -3084,6 +3258,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7032"
@@ -3099,6 +3274,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7034"
@@ -3114,6 +3290,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7324"
@@ -3129,6 +3306,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 0.800000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "7326"
@@ -3158,6 +3336,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object LevelEnd {
 	ID: "7726"
@@ -3192,6 +3371,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8074"
@@ -3207,6 +3387,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "6.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Prefab {
 	ID: "8076"
@@ -3232,6 +3413,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8086"
@@ -3247,6 +3429,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object ShadowCaster {
 	ID: "8088"
@@ -3271,6 +3454,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8092"
@@ -3286,6 +3470,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8094"
@@ -3301,6 +3486,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8096"
@@ -3316,6 +3502,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8098"
@@ -3331,6 +3518,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8100"
@@ -3346,6 +3534,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8102"
@@ -3361,6 +3550,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8104"
@@ -3376,6 +3566,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8106"
@@ -3391,6 +3582,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "8108"
@@ -3420,6 +3612,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8112"
@@ -3435,6 +3628,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "8173"
@@ -3478,6 +3672,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 0.800000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8179"
@@ -3493,6 +3688,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 0.800000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "8181"
@@ -3606,6 +3802,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 0.800000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "8201"
@@ -3719,6 +3916,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 0.800000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8547"
@@ -3733,6 +3931,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8549"
@@ -3747,6 +3946,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "8551"
@@ -3762,6 +3962,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "2.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object ShadowCaster {
 	ID: "8553"
@@ -3786,6 +3987,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "8617"
@@ -3839,6 +4041,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9096"
@@ -3854,6 +4057,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9098"
@@ -3869,6 +4073,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9100"
@@ -3884,6 +4089,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9102"
@@ -3899,6 +4105,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9106"
@@ -3914,6 +4121,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9110"
@@ -3929,6 +4137,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "-1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9112"
@@ -3944,6 +4153,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 0.100000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9556"
@@ -3959,6 +4169,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9558"
@@ -3974,6 +4185,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9560"
@@ -3989,6 +4201,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9562"
@@ -4004,6 +4217,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "4.000000, 0.500000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Checkpoint {
 	ID: "9639"
@@ -4097,6 +4311,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9732"
@@ -4111,6 +4326,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9734"
@@ -4125,6 +4341,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9736"
@@ -4140,6 +4357,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "3.000000, 0.500000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "9738"

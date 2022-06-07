@@ -8,8 +8,6 @@ EditorSprite::EditorSprite(glm::vec3 position, glm::vec2 size, float rotate) : S
 	SetEditScale(size);
 
 	typeName = "EditorSprite";
-
-	DrawOnMainLoop();
 }
 
 EditorSprite::~EditorSprite()
@@ -38,6 +36,7 @@ vec2 EditorSprite::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "UV end", &UVEnd, Editor::panelPropertiesX, strID + "UVend").y;
 
 	drawPos.y -= Editor::CheckBox(drawPos, "Is lit", &isLit, Editor::panelPropertiesX).y;
+	drawPos.y -= Editor::CheckBox(drawPos, "Visible only in editor", &visibleOnlyInEditor, Editor::panelPropertiesX).y;
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
@@ -53,8 +52,12 @@ EditorObject* EditorSprite::Copy()
 	newObj->clickCollider = new RectCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->orientation, oldCollider->MustCollideWithPhys());
 
 	// subscribe again to main loop
-	newObj->isDrawnOnMainLoop = false;
-	newObj->DrawOnMainLoop();
+	if (this->isDrawnOnMainLoop)
+	{
+		newObj->isDrawnOnMainLoop = false;
+		newObj->DrawOnMainLoop();
+	}
+
 	newObj->SubscribeToEditorObjectFuncs();
 
 	return newObj;
@@ -79,8 +82,12 @@ void EditorSprite::Load(std::map<std::string, std::string>* props)
 	UVEnd = EditorSaveManager::StringToVector2((*props)["UVend"], UVEnd);
 
 	isLit = (*props)["isLit"] == "1";
+	visibleOnlyInEditor = (*props)["visibleOnlyInEditor"] == "1";
 
 	EditorObject::Load(props);
+
+	if (Editor::enabled || !visibleOnlyInEditor)
+		DrawOnMainLoop();
 }
 
 void EditorSprite::Save()
@@ -95,12 +102,15 @@ void EditorSprite::Save()
 	EditorSaveManager::WriteProp("UVstart", UVStart);
 	EditorSaveManager::WriteProp("UVend", UVEnd);
 	EditorSaveManager::WriteProp("isLit", isLit);
+	EditorSaveManager::WriteProp("visibleOnlyInEditor", visibleOnlyInEditor);
 }
 
 void EditorSprite::Enable()
 {
 	EditorObject::Enable();
-	DrawOnMainLoop();
+
+	if (Editor::enabled || !visibleOnlyInEditor)
+		DrawOnMainLoop();
 	clickCollider->enabled = true;
 }
 
