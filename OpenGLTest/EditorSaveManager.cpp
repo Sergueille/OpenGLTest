@@ -22,6 +22,7 @@
 #include "Acid.h"
 #include "Checkpoint.h"
 #include "TextRenderer.h"
+#include "PhysicSimulation.h"
 
 using namespace glm;
 
@@ -605,6 +606,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 		newObj = new TextRenderer();
 		newObj->Load(&props);
 	}
+	else if (objectType == "PhysicSimulation")
+	{
+		newObj = new PhysicSimulation();
+		newObj->Load(&props);
+	}
 	else
 		throw "Unknown object type for loading!";
 
@@ -773,6 +779,7 @@ void EditorSaveManager::LoadUserSave(std::string fileName)
 
 	LoadLevelWithTransition(props["level"], [fileName] {
 		LoadUserSaveInSameLevel(fileName);
+		MenuManager::OpenMenu(MenuManager::Menu::ingame);
 	});
 }
 

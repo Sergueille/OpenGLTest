@@ -18,8 +18,8 @@ ParticleSystem::~ParticleSystem()
 
 	if (psysMainLoopFuncPos != nullptr)
 	{
-		auto localPsysMainLoopFuncPos = psysMainLoopFuncPos;
-		EventManager::DoInOneFrame([localPsysMainLoopFuncPos] { EventManager::OnMainLoop.remove(localPsysMainLoopFuncPos); });
+		EventManager::OnMainLoop.remove(psysMainLoopFuncPos);
+
 		psysMainLoopFuncPos = nullptr;
 	}
 
@@ -53,7 +53,14 @@ void ParticleSystem::Stop()
 	particles.clear();
 
 	if (deleteWhenStopped)
+	{
+		// Force remove evet on next frame to avoid corrupting event list
+		auto localPsysMainLoopFuncPos = psysMainLoopFuncPos;
+		EventManager::DoInOneFrame([localPsysMainLoopFuncPos] { EventManager::OnMainLoop.remove(localPsysMainLoopFuncPos); });
+		psysMainLoopFuncPos = nullptr;
+
 		delete this;
+	}
 }
 
 bool ParticleSystem::IsPlaying()

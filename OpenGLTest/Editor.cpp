@@ -21,6 +21,7 @@
 #include "Acid.h"
 #include "Checkpoint.h"
 #include "TextRenderer.h"
+#include "PhysicSimulation.h"
 
 #include <iostream>
 
@@ -780,6 +781,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.y -= UIButton(drawPos, "TextRenderer", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new TextRenderer();
+
+	drawPos.y -= UIButton(drawPos, "PhysicSimulation", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new PhysicSimulation();
 
 	if (newObject != nullptr)
 	{

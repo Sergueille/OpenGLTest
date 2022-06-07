@@ -31,7 +31,7 @@ object Light {
 	rotation: "-90.000000"
 	innerAngle: "85.000000"
 	outerAngle: "105.000000"
-	shadowSize: "0.200000"
+	shadowSize: "0.150000"
 }
 object EditorSprite {
 	ID: "517"

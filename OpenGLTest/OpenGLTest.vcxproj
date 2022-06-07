@@ -204,6 +204,7 @@
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
+    <ClCompile Include="PhysicSimulation.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prefab.cpp" />
     <ClCompile Include="PrefabRelay.cpp" />
@@ -250,6 +251,7 @@
     <ClInclude Include="mesh.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PhysicObject.h" />
+    <ClInclude Include="PhysicSimulation.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Prefab.h" />
     <ClInclude Include="PrefabRelay.h" />
