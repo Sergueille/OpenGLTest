@@ -7,12 +7,13 @@
 using namespace glm;
 
 constexpr const char* SIM_FILES_FOLDER = "Simulations\\";
-constexpr const char* DEBRIS_TEX_NAMES[5] = {
+constexpr const char* DEBRIS_TEX_NAMES[6] = {
 	"Engine\\notFound.png",
 	"rock_1.png",
 	"rock_2.png",
 	"rock_3.png",
 	"rock_4.png",
+	"rock_5.png",
 };
 
 constexpr int PHYS_SIM_EVENT_COUNT = 1;

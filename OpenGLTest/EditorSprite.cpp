@@ -1,5 +1,17 @@
 #include "EditorSprite.h"
 
+
+ObjectEvent EditorSprite::events[EDITOR_SPRITE_EVENT_COUNT] = {
+	ObjectEvent {
+		"Disable",
+		[](EditorObject* object, void* param) { ((EditorSprite*)object)->Disable(); },
+	},
+	ObjectEvent {
+		"Enable",
+		[](EditorObject* object, void* param) { ((EditorSprite*)object)->Enable(); },
+	},
+};
+
 EditorSprite::EditorSprite(glm::vec3 position, glm::vec2 size, float rotate) : Sprite(nullptr, position, size, rotate), EditorObject(position)
 {
 	clickCollider = new RectCollider(position, size, rotate, false);
@@ -119,6 +131,12 @@ void EditorSprite::Disable()
 	EditorObject::Disable();
 	StopDrawing();
 	clickCollider->enabled = false;
+}
+
+void EditorSprite::GetObjectEvents(const ObjectEvent** res, int* resCount)
+{
+	*res = events;
+	*resCount = EDITOR_SPRITE_EVENT_COUNT;
 }
 
 void EditorSprite::UpdateTransform()

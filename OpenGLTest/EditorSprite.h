@@ -7,11 +7,15 @@
 
 using namespace glm;
 
+constexpr int EDITOR_SPRITE_EVENT_COUNT = 2;
+
 class EditorSprite : Sprite, public EditorObject
 {
 public:
 	EditorSprite(glm::vec3 position = glm::vec3(0), glm::vec2 size = glm::vec2(1), float rotate = 0.0f);
 	~EditorSprite();
+
+	static ObjectEvent events[EDITOR_SPRITE_EVENT_COUNT];
 
 	bool visibleOnlyInEditor = false;
 
@@ -26,4 +30,6 @@ public:
 
 	virtual void Enable() override;
 	virtual void Disable() override;
+
+	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 };
