@@ -51,6 +51,11 @@ vec4 lerp(vec4 a, vec4 b, float x)
     return a + (b - a) * x;
 }
 
+vec3 lerp(vec3 a, vec3 b, float x)
+{
+    return a + (b - a) * x;
+}
+
 float random11(float p)
 {
     p = fract(p * .1031);

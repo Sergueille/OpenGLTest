@@ -220,13 +220,13 @@ void Player::OnAfterMove()
 		// Get teleport position
 		vec2 worldMousePos = ScreenToWorld(GetMousePos());
 		vec2 mouseDirection = glm::normalize(worldMousePos - GetPos());
-		vec2 teleportPos = GetPos() + mouseDirection * teleportationDistance;
-		teleportPosSprite->position = vec3(teleportPos.x, teleportPos.y, editorPosition.z);
+		teleportPosition = GetPos() + mouseDirection * teleportationDistance;
+		teleportPosSprite->position = vec3(teleportPosition.x, teleportPosition.y, editorPosition.z);
 
 		// Determines if teleportation not in a wall
-		CircleCollider teleportCollider = CircleCollider(teleportPos, height, false);
+		CircleCollider teleportCollider = CircleCollider(teleportPosition, height, false);
 		bool isColliding = teleportCollider.IsTouchingAnyCollider();
-		bool hitLaser = TeleportCollideWithLaser(teleportPos);
+		bool hitLaser = TeleportCollideWithLaser(teleportPosition);
 		bool canTeleprt = teleportationsRemaining > 0 && !isColliding && !hitLaser;
 
 		// Set sprite color
@@ -236,7 +236,7 @@ void Player::OnAfterMove()
 		{
 			if (canTeleprt)
 			{
-				SetPos(teleportPos);
+				SetPos(teleportPosition);
 				velocity.y += teleportVerticalForce;
 				isJumping = false;
 

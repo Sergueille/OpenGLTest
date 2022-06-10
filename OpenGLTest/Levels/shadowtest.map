@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 6
+count 10
 
 object MapData {
 	mapName: ""
@@ -10,6 +10,7 @@ object EditorSprite {
 	name: ""
 	position: "0.400000, -4.200000, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "25.000000, 3.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -17,18 +18,22 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object Player {
 	ID: "1"
 	name: ""
 	position: "0.000000, -0.400000, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
+	canTeleport: "1"
 }
 object EditorSprite {
 	ID: "4"
 	name: "bg"
 	position: "0.600000, 1.200000, -10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "62.200001, 62.200001"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -37,24 +42,74 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "5.000000, 5.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "14"
 	name: ""
-	position: "-6.000000, 5.800000, 0.000000"
+	position: "-5.600000, 6.000000, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	lightSize: "10.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	intensity: "1.000000"
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.300000"
 }
 object ShadowCaster {
 	ID: "15"
 	name: ""
-	position: "-5.600000, 2.600000, -2.000000"
+	position: "-17.000000, 2.600000, -2.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "3.000000, 3.000000"
 	orientation: "-180.000000"
+}
+object ShadowCaster {
+	ID: "17"
+	name: ""
+	position: "-5.600000, 2.600000, -2.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.000000, 3.000000"
+	orientation: "-180.000000"
+}
+object ShadowCaster {
+	ID: "19"
+	name: ""
+	position: "7.800000, 2.600000, -2.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.000000, 3.000000"
+	orientation: "-180.000000"
+}
+object Light {
+	ID: "21"
+	name: ""
+	position: "-17.000000, 6.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	intensity: "1.000000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+	shadowSize: "0.100000"
+}
+object Light {
+	ID: "23"
+	name: ""
+	position: "7.600000, 5.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	lightSize: "10.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	intensity: "1.000000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+	shadowSize: "0.800000"
 }

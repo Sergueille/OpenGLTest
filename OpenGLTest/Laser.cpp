@@ -191,11 +191,9 @@ vec2 Laser::DrawProperties(vec3 startPos)
 void Laser::SetType(LaserType newType)
 {
 	laserType = newType;
-	LaserSharedProps newProps = props[(int)laserType];
-	displaySprite->color = newProps.centerColor;
 
 	if (editorSprite != nullptr)
-		editorSprite->color = vec4(newProps.centerColor.x, newProps.centerColor.y, newProps.centerColor.z, editorSpriteAlpha);
+		editorSprite->color = vec4(1, 0.8f, 0.9f, editorSpriteAlpha);
 }
 
 void Laser::OnLaserMainLoop()
@@ -225,6 +223,34 @@ void Laser::OnLaserMainLoop()
 				laserCollider->SetPos(vec3(middle.x, middle.y, GetEditPos().z));
 				laserCollider->size = vec2(length, width);
 				laserCollider->orientation = GetEditRotation();
+
+				if (Player::ingameInstance != nullptr && Player::ingameInstance->canTeleport)
+				{
+					float la, lb;
+					Utility::GetLineEquationFromPoints(spriteStart, spriteEnd, &la, &lb);
+					float pa, pb;
+					Utility::GetLineEquationFromPoints(Player::ingameInstance->GetPos(), Player::ingameInstance->teleportPosition, &pa, &pb);
+					
+					bool res = Utility::SegementIntersection(
+						vec2(GetEditPos()) - (direction * 100.0f),
+						raycastRes + (direction * 100.0f),
+						Player::ingameInstance->GetPos(),
+						Player::ingameInstance->teleportPosition, 
+						&intersectionPos);
+
+					if (!res)
+					{
+						if (SqrDist(intersectionPos, Player::ingameInstance->GetPos()) <
+							SqrDist(intersectionPos, Player::ingameInstance->teleportPosition))
+						{
+							intersectionPos = Player::ingameInstance->GetPos();
+						}
+						else
+						{
+							intersectionPos = Player::ingameInstance->teleportPosition;
+						}
+					}
+				}
 			}
 
 			hasRefreshedOnce = true;
@@ -235,15 +261,14 @@ void Laser::OnLaserMainLoop()
 void Laser::SetSpriteUniforms(Shader* shader, void* object)
 {
 	Laser* laser = (Laser*)object;
-	LaserSharedProps myProps = laser->props[(int)laser->laserType];
 
-	shader->SetUniform("secColor", myProps.borderColor);
 	shader->SetUniform("mainTexture", 0);
 	RessourceManager::GetTexture("noise1.png")->Use(0);
-	shader->SetUniform("noiseSpeed", myProps.noiseSpeed);
-	shader->SetUniform("noiseSize", myProps.noiseSize);
-	shader->SetUniform("distorsionAmount", myProps.distorsionAmount);
 	shader->SetUniform("time", Utility::time);
+	shader->SetUniform("laserType", (int)laser->laserType);
+
+	if (Player::ingameInstance != nullptr && Player::ingameInstance->canTeleport && laser->enabled && laser->laserOn)
+		shader->SetUniform("intersectionPosition", laser->intersectionPos);
 }
 
 void Laser::GetObjectEvents(const ObjectEvent** res, int* resCount)

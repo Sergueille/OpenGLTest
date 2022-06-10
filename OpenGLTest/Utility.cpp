@@ -190,6 +190,7 @@ namespace Utility
 		}
 		else
 		{
+			*res = intersection; // Set the result anyway, can be useful
 			return false;
 		}
 	}
@@ -308,5 +309,15 @@ namespace Utility
 			if (max.y > resMax->y)
 				resMax->y = max.y;
 		}
+	}
+
+	float SqrLength(glm::vec2 vec)
+	{
+		return vec.x * vec.x + vec.y * vec.y;
+	}
+
+	float SqrDist(glm::vec2 a, glm::vec2 b)
+	{
+		return SqrLength(a - b);
 	}
 }

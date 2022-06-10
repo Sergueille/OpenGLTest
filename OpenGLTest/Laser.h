@@ -4,18 +4,6 @@
 
 constexpr int LASER_EVENT_COUNT = 3;
 
-/// <summary>
-/// Props of diferent types of laser
-/// </summary>
-struct LaserSharedProps
-{
-	vec4 centerColor;
-	vec4 borderColor;
-	vec2 noiseSpeed;
-	float noiseSize;
-	float distorsionAmount;
-};
-
 class Laser : public EditorObject
 {
 public:
@@ -28,23 +16,6 @@ public:
 	/// The laser will not update if the player is further than this distance
 	/// </summary>
 	const float minPlayerDist = 30;
-
-	const LaserSharedProps props[2] = {
-		LaserSharedProps {
-			vec4(1, 0.8, 0.9, 1), // centerColor
-			vec4(1, 0.3, 0.8, 0), // borderColor
-			vec2(0.7f), // noiseSpeed
-			0.3f, // noiseSize
-			0.2f, // distorsionAmount
-		},
-		LaserSharedProps {
-			vec4(0.8, 0.9, 1, 1),// centerColor
-			vec4(0.3, 0.8, 1, 0),// borderColor
-			vec2(0.7f), // noiseSpeed
-			0.3f, // noiseSize
-			0.2f, // distorsionAmount
-		},
-	};
 
 	Laser();
 	~Laser();
@@ -92,6 +63,8 @@ public:
 
 private:
 	LinkedListElement<std::function<void()>>* laserMainLoopFuncPos = nullptr;
+
+	vec2 intersectionPos = vec2(0);
 
 	bool hasRefreshedOnce = false;
 

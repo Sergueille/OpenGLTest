@@ -124,4 +124,7 @@ namespace Utility
 	{
 		return a + value * (b - a);
 	};
+
+	float SqrLength(glm::vec2 vec);
+	float SqrDist(glm::vec2 a, glm::vec2 b);
 };

@@ -91,6 +91,8 @@ public:
 	Sprite* teleportPosSprite;
 	Sprite* lightsSprite;
 
+	vec2 teleportPosition = vec2(0);
+
 	Player(vec3 position);
 	~Player();
 
