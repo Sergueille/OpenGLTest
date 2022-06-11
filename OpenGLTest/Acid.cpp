@@ -111,33 +111,9 @@ void Acid::OnAcidMainLoop()
 	if (Player::ingameInstance == nullptr) return;
 
 	vec3 res = clickCollider->CollideWith((CircleCollider*)Player::ingameInstance->collider);
-
-	if (!isPlayerDying && res.z != 0) // Player is touching acid
+	if (res.z != 0) // Player is touching acid
 	{
-		isPlayerDying = true;
-		Player::ingameInstance->physicsEnabled = false;
-
-		TweenManager<float>::Tween(Camera::size, acidDeathZoom, acidDeathDuration, [this](float value) {
-			Camera::SetSize(value);
-		}, sineIn);
-
-		TweenManager<float>::Tween(Camera::position.y, Camera::position.y - acidDeathCameraShift, acidDeathDuration, [this](float value) {
-			Camera::position.y = value;
-		}, sineIn);
-				
-		TweenManager<float>::Tween(0, 1, acidDeathDuration, [this](float value) {
-			Utility::corruptionAmount = value;
-		}, cubicOut)->SetOnFinished([] {
-			Utility::corruptionAmount = 0;
-		});
-
-		TweenManager<vec2>::Tween(Player::ingameInstance->GetPos(), vec2(Player::ingameInstance->GetPos()) - vec2(0, acidDeathPlayerShift), acidDeathDuration, [this](vec2 value) {
-			Player::ingameInstance->SetPos(vec2(value.x, value.y));
-		}, linear)->SetOnFinished([] {
-			EditorSaveManager::LoadUserSaveInSameLevel(EditorSaveManager::currentUserSave);
-			isPlayerDying = false;
-			Player::ingameInstance->physicsEnabled = true;
-		});
+		Player::ingameInstance->Kill();
 	}
 }
 

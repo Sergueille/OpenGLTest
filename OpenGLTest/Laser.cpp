@@ -42,6 +42,11 @@ Laser::Laser() : EditorObject(vec3(0, 0, 0))
 	displaySprite->setUniformsObjectCall = this;
 	displaySprite->DrawOnMainLoop();
 
+	emmiterSprite = new Sprite(RessourceManager::GetTexture("emmiter.png"), vec3(0), vec2(1), 0, vec4(1.3, 1.3, 1.3, 1));
+	emmiterSprite->DrawOnMainLoop();
+	glowSprite = new Sprite(RessourceManager::GetTexture("glow.png"), vec3(0), vec2(1.54f), 0, vec4(1));
+	glowSprite->DrawOnMainLoop();
+
 	clickCollider = new CircleCollider(vec3(0), 1, false);
 	laserCollider = new RectCollider(vec2(0), vec2(1), 0, false);
 
@@ -64,6 +69,12 @@ Laser::~Laser()
 		editorSprite = nullptr;
 	}
 
+	delete emmiterSprite;
+	emmiterSprite = nullptr;
+
+	delete glowSprite;
+	glowSprite = nullptr;
+
 	delete laserCollider;
 	laserCollider = nullptr;
 
@@ -81,6 +92,21 @@ void Laser::UpdateTransform()
 	{
 		editorSprite->position = GetEditPos() + vec3(0, 0, 1); // Bigger Z to render above laser
 	}
+
+	vec3 pos = GetEditPos();
+	float rot = GetEditRotation();
+
+	vec3 emmiterDelta = vec3(0.025, 0.4, 2);
+	vec2 rotatedDelta = Rotate(vec2(emmiterDelta.x, emmiterDelta.y), rot - 90);
+	emmiterSprite->rotate = rot - 90;
+	emmiterSprite->position = pos + vec3(rotatedDelta.x, rotatedDelta.y, emmiterDelta.z);
+
+	vec3 glowDelta = vec3(0, 0.9, 3);
+	rotatedDelta = Rotate(vec2(glowDelta.x, glowDelta.y), rot - 90);
+	glowSprite->position = pos + vec3(rotatedDelta.x, rotatedDelta.y, glowDelta.z);
+
+	vec4 colors[2] = { vec4(1, 0.5, 0.9, 1), vec4(0.5, 0.2, 0.2, 1) };
+	glowSprite->color = colors[(int)laserType];
 }
 
 void Laser::Save()
@@ -114,6 +140,8 @@ void Laser::Enable()
 {
 	EditorObject::Enable();
 	displaySprite->DrawOnMainLoop();
+	emmiterSprite->DrawOnMainLoop();
+	glowSprite->DrawOnMainLoop();
 
 	if (editorSprite != nullptr)
 		editorSprite->DrawOnMainLoop();
@@ -130,6 +158,8 @@ void Laser::Disable()
 {
 	EditorObject::Disable();
 	displaySprite->StopDrawing();
+	emmiterSprite->StopDrawing();
+	glowSprite->StopDrawing();
 
 	if (editorSprite != nullptr)
 		editorSprite->StopDrawing();
@@ -152,6 +182,8 @@ Laser* Laser::Copy()
 	}
 
 	copy->displaySprite = this->displaySprite->Copy();
+	copy->emmiterSprite = this->emmiterSprite->Copy();
+	copy->glowSprite = this->glowSprite->Copy();
 
 	CircleCollider* oldCollider = (CircleCollider*)this->clickCollider;
 	copy->clickCollider = new CircleCollider(oldCollider->GetPos(), oldCollider->size, false);
@@ -173,7 +205,7 @@ vec2 Laser::DrawProperties(vec3 startPos)
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Orientation", &this->editorRotation, Editor::panelPropertiesX, strID + "orientation").y;
 
-	std::string types[] = { "No teleportation", "Disable teleportation" };
+	std::string types[] = { "No teleportation", "Deadly" };
 	int intType = (int)laserType;
 	drawPos.y -= Editor::OptionProp(drawPos, "Type", &intType, (int)LaserType::lastValue, &types[0], Editor::panelPropertiesX).y;
 	SetType((LaserType)intType);
@@ -226,29 +258,36 @@ void Laser::OnLaserMainLoop()
 
 				if (Player::ingameInstance != nullptr && Player::ingameInstance->canTeleport)
 				{
-					float la, lb;
-					Utility::GetLineEquationFromPoints(spriteStart, spriteEnd, &la, &lb);
-					float pa, pb;
-					Utility::GetLineEquationFromPoints(Player::ingameInstance->GetPos(), Player::ingameInstance->teleportPosition, &pa, &pb);
-					
-					bool res = Utility::SegementIntersection(
-						vec2(GetEditPos()) - (direction * 100.0f),
-						raycastRes + (direction * 100.0f),
-						Player::ingameInstance->GetPos(),
-						Player::ingameInstance->teleportPosition, 
-						&intersectionPos);
-
-					if (!res)
+					if (laserType == LaserType::noTeleport)
 					{
-						if (SqrDist(intersectionPos, Player::ingameInstance->GetPos()) <
-							SqrDist(intersectionPos, Player::ingameInstance->teleportPosition))
+						float la, lb;
+						Utility::GetLineEquationFromPoints(spriteStart, spriteEnd, &la, &lb);
+						float pa, pb;
+						Utility::GetLineEquationFromPoints(Player::ingameInstance->GetPos(), Player::ingameInstance->teleportPosition, &pa, &pb);
+					
+						bool res = Utility::SegementIntersection(
+							vec2(GetEditPos()) - (direction * 100.0f),
+							raycastRes + (direction * 100.0f),
+							Player::ingameInstance->GetPos(),
+							Player::ingameInstance->teleportPosition, 
+							&intersectionPos);
+
+						if (!res)
 						{
-							intersectionPos = Player::ingameInstance->GetPos();
+							if (SqrDist(intersectionPos, Player::ingameInstance->GetPos()) <
+								SqrDist(intersectionPos, Player::ingameInstance->teleportPosition))
+							{
+								intersectionPos = Player::ingameInstance->GetPos();
+							}
+							else
+							{
+								intersectionPos = Player::ingameInstance->teleportPosition;
+							}
 						}
-						else
-						{
-							intersectionPos = Player::ingameInstance->teleportPosition;
-						}
+					}
+					else if (laserType == LaserType::deadlyLaser)
+					{
+						intersectionPos = Player::ingameInstance->GetPos();
 					}
 				}
 			}
@@ -266,9 +305,7 @@ void Laser::SetSpriteUniforms(Shader* shader, void* object)
 	RessourceManager::GetTexture("noise1.png")->Use(0);
 	shader->SetUniform("time", Utility::time);
 	shader->SetUniform("laserType", (int)laser->laserType);
-
-	if (Player::ingameInstance != nullptr && Player::ingameInstance->canTeleport && laser->enabled && laser->laserOn)
-		shader->SetUniform("intersectionPosition", laser->intersectionPos);
+	shader->SetUniform("intersectionPosition", laser->intersectionPos);
 }
 
 void Laser::GetObjectEvents(const ObjectEvent** res, int* resCount)

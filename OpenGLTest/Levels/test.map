@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 61
+count 59
 
 object MapData {
 	mapName: ""
@@ -114,42 +114,14 @@ object EditorSprite {
 object Laser {
 	ID: "13"
 	name: "TestLaser"
-	position: "-3.000000, 3.400000, -0.500000"
+	position: "6.800000, 6.200000, -0.500000"
 	parent: "-1"
 	parallax: "1.000000"
-	orientation: "270.000000"
+	orientation: "630.000000"
 	laserType: "0"
 	startOffset: "-0.100000"
 	endOffset: "0.150000"
 	startOn: "1"
-}
-object Light {
-	ID: "270"
-	name: ""
-	position: "-3.000000, 2.600000, 10.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "5.000000"
-	color: "1.000000, 0.000000, 0.900000, 1.000000"
-	intensity: "0.300000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.500000"
-}
-object Light {
-	ID: "271"
-	name: ""
-	position: "-3.000000, -0.200000, 10.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "5.000000"
-	color: "1.000000, 0.000000, 0.900000, 1.000000"
-	intensity: "0.300000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.500000"
 }
 object Light {
 	ID: "273"
@@ -195,7 +167,7 @@ object ShadowCaster {
 object Player {
 	ID: "477"
 	name: ""
-	position: "4.600000, 9.000000, 20.000000"
+	position: "3.800000, 8.600000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"

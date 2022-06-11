@@ -15,6 +15,8 @@ struct LaserData {
     vec2 noiseSpeed;
     float noiseSize;
     float distortionAmount;
+    vec3 intersectionColor;
+    float intersectionSize;
 };
 
 void main()
@@ -25,21 +27,22 @@ void main()
             vec4(0.7, 0.2, 0.6, 0),
             vec2(0.7),
             0.3,
-            0.2
+            0.2,
+            vec3(1.1, 0.1, 0.1),
+            2
         ),
         LaserData (
-            vec4(0.8, 0.8, 1, 1),
-            vec4(0.3, 0.8, 1, 0),
-            vec2(0.7),
+            vec4(1.5, 0.4, 0.4, 1),
+            vec4(0.5, 0.2, 0.2, 0),
+            vec2(0.8),
+            0.4,
             0.3,
-            0.2
+            vec3(1.5, 1.2, 0.1),
+            4
         )
     );
 
     LaserData data = props[laserType];
-
-    const vec3 intersectionColor = vec3(1, 0, 0);
-    const float intersectionSize = 2;
 
     vec4 color;
     vec4 noise = texture(noise, (position.xy * data.noiseSize) + (data.noiseSpeed * time));
@@ -56,9 +59,9 @@ void main()
         color = data.mainColor + (((deformedTexCoord.y - 0.5) * 2) * (data.secColor - data.mainColor));
     }
 
-    float intersectionIntensity = 1 - (distance(position.xy, intersectionPosition) / intersectionSize);
+    float intersectionIntensity = 1 - (distance(position.xy, intersectionPosition) / data.intersectionSize);
     if (intersectionIntensity > 0)
-        color = vec4(lerp(color.rgb, intersectionColor, intersectionIntensity), color.a);
+        color = vec4(lerp(color.rgb, data.intersectionColor, intersectionIntensity), color.a);
 
     FragColor = color;
     BrightColor = getBright(color);

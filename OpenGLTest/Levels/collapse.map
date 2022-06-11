@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 238
+count 240
 
 object MapData {
 	mapName: ""
@@ -2223,7 +2223,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "11350"
 	name: "Over1"
-	position: "32.799999, 1.600000, 50.000000"
+	position: "32.400002, 1.600000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "12.000000, 1.000000"
@@ -3575,6 +3575,38 @@ object EditorSprite {
 	rotation: "-90.000000"
 	color: "1.300000, 1.300000, 1.300000, 1.000000"
 	texturePath: "truss.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "19817"
+	name: ""
+	position: "71.599998, -13.000000, -2.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.400000, 2.400000"
+	rotation: "90.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "pipe4.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "19821"
+	name: ""
+	position: "19.800001, 5.200000, -4.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "0.400000, 0.400000"
+	rotation: "0.000000"
+	color: "1.300000, 1.300000, 1.300000, 1.000000"
+	texturePath: "lamp_red.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"

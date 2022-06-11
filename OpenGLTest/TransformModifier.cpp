@@ -204,9 +204,21 @@ void TransformModifier::SetAllTransforms()
 
 void TransformModifier::CancelAll()
 {
-	if (moveAction != nullptr && !moveAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(moveAction);
-	if (roateAction != nullptr && !roateAction->IsFinshedAt(Utility::time)) TweenManager<float>::Cancel(roateAction);
-	if (scaleAction != nullptr && !scaleAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(scaleAction);
+	if (moveAction != nullptr && !moveAction->IsFinshedAt(Utility::time))
+	{
+		TweenManager<vec2>::Cancel(moveAction);
+		moveAction = nullptr;
+	}
+	if (roateAction != nullptr && !roateAction->IsFinshedAt(Utility::time))
+	{
+		TweenManager<float>::Cancel(roateAction);
+		moveAction = nullptr;
+	}
+	if (scaleAction != nullptr && !scaleAction->IsFinshedAt(Utility::time))
+	{
+		TweenManager<vec2>::Cancel(scaleAction);
+		moveAction = nullptr;
+	}
 }
 
 void TransformModifier::UpdateTransform()

@@ -7,7 +7,7 @@ constexpr int LASER_EVENT_COUNT = 3;
 class Laser : public EditorObject
 {
 public:
-	enum class LaserType { noTeleport, disableTeleport, lastValue = disableTeleport };
+	enum class LaserType { noTeleport, deadlyLaser, lastValue = deadlyLaser };
 
 	const float width = 0.5f;
 	const float editorSpriteAlpha = 0.5f;
@@ -29,6 +29,8 @@ public:
 
 	Sprite* displaySprite = nullptr;
 	Sprite* editorSprite = nullptr;
+	Sprite* emmiterSprite = nullptr;
+	Sprite* glowSprite = nullptr;
 
 	RectCollider* laserCollider;
 

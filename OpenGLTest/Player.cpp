@@ -9,6 +9,13 @@
 
 using namespace glm;
 
+ObjectEvent Player::events[PLAYER_EVENT_COUNT] = {
+	ObjectEvent {
+		"Kill",
+		[](EditorObject* object, void* param) { ((Player*)object)->Kill(); },
+	},
+};
+
 Player* Player::ingameInstance = nullptr;
 
 Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), height, true)), EditorObject(position)
@@ -184,6 +191,42 @@ void Player::Load(std::map<std::string, std::string>* props)
 	}
 }
 
+void Player::GetObjectEvents(const ObjectEvent** res, int* resCount)
+{
+	*res = events;
+	*resCount = PLAYER_EVENT_COUNT;
+}
+
+void Player::Kill()
+{
+	if (isDying) return;
+
+	isDying = true;
+	physicsEnabled = false;
+
+	TweenManager<float>::Tween(Camera::size, deathZoom, deathDuration, [this](float value) {
+		Camera::SetSize(value);
+	}, sineIn);
+
+	TweenManager<float>::Tween(Camera::position.y, Camera::position.y - deathCameraShift, deathDuration, [this](float value) {
+		Camera::position.y = value;
+	}, sineIn);
+
+	TweenManager<float>::Tween(0, 1, deathDuration, [this](float value) {
+		Utility::corruptionAmount = value;
+	}, cubicOut)->SetOnFinished([] {
+		Utility::corruptionAmount = 0;
+	});
+
+	TweenManager<vec2>::Tween(GetPos(), vec2(GetPos()) - vec2(0, deathPlayerShift), deathDuration, [this](vec2 value) {
+		SetPos(vec2(value.x, value.y));
+	}, linear)->SetOnFinished([this] {
+		EditorSaveManager::LoadUserSaveInSameLevel(EditorSaveManager::currentUserSave);
+		isDying = false;
+		physicsEnabled = true;
+	});
+}
+
 // Handle physics
 void Player::OnAfterMove()
 {
@@ -332,7 +375,7 @@ bool Player::TeleportCollideWithLaser(vec2 teleportPosition)
 
 	for (auto it = Laser::lasers.begin(); it != Laser::lasers.end(); it++)
 	{
-		if ((*it)->laserType == Laser::LaserType::noTeleport || (*it)->laserType == Laser::LaserType::disableTeleport)
+		if ((*it)->laserType == Laser::LaserType::noTeleport)
 		{
 			bool rectColl = teleportCollider.CollideWith((*it)->laserCollider).z != 0;
 			if (rectColl)

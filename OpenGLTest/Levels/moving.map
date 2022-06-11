@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 53
+count 54
 
 object MapData {
 	mapName: ""
@@ -482,7 +482,7 @@ object Prefab {
 object Prefab {
 	ID: "805"
 	name: ""
-	position: "28.200001, 4.600000, 0.000000"
+	position: "30.200001, 4.600000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\neon.map"
@@ -636,4 +636,13 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+}
+object ShadowCaster {
+	ID: "1814"
+	name: ""
+	position: "27.800001, -4.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "5.800000, 6.600000"
+	orientation: "0.000000"
 }

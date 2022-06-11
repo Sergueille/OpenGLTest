@@ -18,6 +18,13 @@
 
 using namespace glm;
 
+constexpr int PLAYER_EVENT_COUNT = 1;
+
+constexpr float deathDuration = 3;
+constexpr float deathZoom = 15;
+constexpr float deathCameraShift = 5;
+constexpr float deathPlayerShift = 4;
+
 class Player: public PhysicObject, public EditorObject
 {
 public:
@@ -93,6 +100,8 @@ public:
 
 	vec2 teleportPosition = vec2(0);
 
+	static ObjectEvent events[PLAYER_EVENT_COUNT];
+
 	Player(vec3 position);
 	~Player();
 
@@ -106,12 +115,18 @@ public:
 	virtual void Save() override;
 	virtual void Load(std::map<std::string, std::string>* props);
 
+	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
+
+	void Kill();
+
 protected:
 	void OnAfterMove() override;
 
 private:
 	bool physicsWasEnabledBeforeDisabling = false;
 	bool wasClickingLastFrame = false;
+
+	bool isDying = false;
 
 	bool TeleportCollideWithLaser(vec2 teleportPosition);
 

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 224
+count 225
 
 object MapData {
 	mapName: ""
@@ -23,7 +23,7 @@ object EditorSprite {
 object Player {
 	ID: "1"
 	name: ""
-	position: "-16.400000, 32.200001, 20.000000"
+	position: "128.000000, -31.200001, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -2257,7 +2257,7 @@ object EditorSprite {
 object EditorParticleSystem {
 	ID: "8500"
 	name: ""
-	position: "143.242279, -34.091507, 10.000000"
+	position: "143.220306, -34.102493, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
@@ -2267,10 +2267,10 @@ object EditorParticleSystem {
 	endVelocity: "0.000000, 0.000000"
 	startSize: "0.000000, 0.000000"
 	endSize: "0.300000, 0.300000"
-	startColor: "0.800000, 1.000000, 0.600000, 0.300000"
+	startColor: "0.800000, 1.000000, 0.600000, 0.800000"
 	endColor: "0.800000, 1.000000, 0.600000, 0.000000"
 	texture: "glow.png"
-	isLit: "0"
+	isLit: "1"
 	particlesPerSecond: "30.000000"
 	particleLifetime: "3.000000"
 	duration: "-1.000000"
@@ -2519,7 +2519,7 @@ object EditorParticleSystem {
 object EditorParticleSystem {
 	ID: "11533"
 	name: ""
-	position: "172.309311, -34.107677, 10.000000"
+	position: "176.401932, -34.107677, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
@@ -2999,4 +2999,16 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "1.000000"
 	transTime: "2.000000"
+}
+object Trigger {
+	ID: "14164"
+	name: ""
+	position: "176.400009, -30.800001, -7.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "0.600000, 8.000000"
+	onEnter: "1|Kill|"
+	onExit: ""
+	once: "0"
 }

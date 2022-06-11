@@ -6,11 +6,6 @@
 
 using namespace glm;
 
-constexpr float acidDeathDuration = 3;
-constexpr float acidDeathZoom = 15;
-constexpr float acidDeathCameraShift = 5;
-constexpr float acidDeathPlayerShift = 4;
-
 class Acid : public EditorObject
 {
 public:
