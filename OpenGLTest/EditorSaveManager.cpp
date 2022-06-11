@@ -800,6 +800,11 @@ void EditorSaveManager::LoadUserSaveInSameLevel(std::string fileName)
 	}
 
 	Camera::size = camSize;
+
+	for (auto it = levelObjectList.begin(); it != levelObjectList.end(); it++)
+	{
+		(*it)->ResetIngameState();
+	}
 }
 
 void EditorSaveManager::SaveUserSave(std::string fileName)

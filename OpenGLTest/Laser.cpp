@@ -228,6 +228,18 @@ void Laser::SetType(LaserType newType)
 		editorSprite->color = vec4(1, 0.8f, 0.9f, editorSpriteAlpha);
 }
 
+void Laser::ResetIngameState()
+{
+	if (startOn)
+	{
+		TurnOn();
+	}
+	else
+	{
+		TurnOff();
+	}
+}
+
 void Laser::OnLaserMainLoop()
 {
 	if (enabled && laserOn)

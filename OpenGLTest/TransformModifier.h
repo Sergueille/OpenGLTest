@@ -43,6 +43,8 @@ public:
 
 	virtual void GetObjectEvents(const ObjectEvent** firstEvent, int* count) override;
 
+	virtual void ResetIngameState() override;
+
 	void SetPosition();
 	void SetRotation();
 	void SetScale();

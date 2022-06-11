@@ -159,6 +159,18 @@ void TransformModifier::GetObjectEvents(const ObjectEvent** firstEvent, int* cou
 	*count = TRANS_MODIFIER_EVENT_COUNT;
 }
 
+void TransformModifier::ResetIngameState()
+{
+	CancelAll();
+	
+	if (targetObject != nullptr)
+	{
+		targetObject->SetEditPos(targetStartPos);
+		targetObject->SetEditRotation(targetStartRotation);
+		targetObject->SetEditScale(targetStartScale);
+	}
+}
+
 void TransformModifier::SetPosition()
 {
 	if (targetObject == nullptr) return;

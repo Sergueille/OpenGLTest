@@ -105,6 +105,11 @@ public:
 
 	virtual void DerivedOnMainLoop() { };
 
+	/// <summary>
+	/// Called when loading user save
+	/// </summary>
+	virtual void ResetIngameState() { };
+
 protected:
 	bool enabled = true;
 	vec3 editorPosition;

@@ -32,4 +32,6 @@ public:
 	virtual void Disable() override;
 
 	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
+
+	virtual void ResetIngameState() override;
 };

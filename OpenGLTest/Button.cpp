@@ -151,6 +151,11 @@ void Button::GetObjectEvents(const ObjectEvent** res, int* resCount)
 	*resCount = BUTTON_EVENT_COUNT;
 }
 
+void Button::ResetIngameState()
+{
+	SetState(startPressed);
+}
+
 void Button::OnKeyPressed(int key, int action)
 {
 	if (key == GLFW_KEY_E && action == GLFW_PRESS)

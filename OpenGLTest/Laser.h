@@ -63,6 +63,8 @@ public:
 
 	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 
+	virtual void ResetIngameState() override;
+
 private:
 	LinkedListElement<std::function<void()>>* laserMainLoopFuncPos = nullptr;
 

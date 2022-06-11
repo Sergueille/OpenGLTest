@@ -139,6 +139,12 @@ void EditorSprite::GetObjectEvents(const ObjectEvent** res, int* resCount)
 	*resCount = EDITOR_SPRITE_EVENT_COUNT;
 }
 
+void EditorSprite::ResetIngameState()
+{
+	if (!this->enabled)
+		this->Enable();
+}
+
 void EditorSprite::UpdateTransform()
 {
 	EditorObject::UpdateTransform();

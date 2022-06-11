@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 225
+count 227
 
 object MapData {
 	mapName: ""
@@ -2604,9 +2604,9 @@ object TransformModifier {
 	targetPos: "50.000000, 0.000000"
 	targetRotation: "0.000000"
 	targetSize: "1.000000, 1.000000"
-	duration: "25.000000"
+	duration: "20.000000"
 	easeType: "1"
-	onFinished: "742|Save game|"
+	onFinished: ""
 }
 object Trigger {
 	ID: "11544"
@@ -3011,4 +3011,36 @@ object Trigger {
 	onEnter: "1|Kill|"
 	onExit: ""
 	once: "0"
+}
+object EditorSprite {
+	ID: "15746"
+	name: ""
+	position: "195.400009, -26.200001, -1.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.000000, 20.000000"
+	rotation: "90.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "pipe4.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 5.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "15748"
+	name: ""
+	position: "206.013199, -26.151388, -2.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.270000, 1.270000"
+	rotation: "-180.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "pipe_l2.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
