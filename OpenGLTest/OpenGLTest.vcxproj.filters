@@ -231,6 +231,9 @@
     <ClCompile Include="PhysicSimulation.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="TerminalManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -375,6 +378,9 @@
       <Filter>LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="PhysicSimulation.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="TerminalManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

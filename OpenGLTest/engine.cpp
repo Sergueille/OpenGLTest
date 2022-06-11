@@ -26,6 +26,7 @@ Some code from https://learnopengl.com/
 #include "EditorSprite.h"
 #include "LightManager.h"
 #include "ParticleSystem.h"
+#include "TerminalManager.h"
 
 using namespace std;
 using namespace Utility;
@@ -166,6 +167,11 @@ int main(int argc, void* argv[])
 
     // Start event manager
     EventManager::SetupEvents();
+
+    //TerminalManager::Init();
+    //TerminalManager::Write("Hello, this is a test!");
+    //TerminalManager::NewLine();
+    //TerminalManager::Write("This is a veeeery long line to test if the max line length is respected");
 
     // Load shaders
     RessourceManager::LoadBaseShaders();
