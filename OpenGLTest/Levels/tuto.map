@@ -1012,6 +1012,7 @@ object LogicRelay {
 	parent: "-1"
 	parallax: "1.000000"
 	onTrigger: "1543|Open door|"
+	onAltTrigger: ""
 	triggerOnStart: "1"
 	delay: "1.000000"
 }

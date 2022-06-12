@@ -12,6 +12,18 @@ const ObjectEvent LogicRelay::events[LOGIC_RELAY_EVENT_COUNT] = {
 		"Trigger",
 		[](EditorObject* object, void* params) { ((LogicRelay*)object)->Trigger(); }
 	},
+	ObjectEvent{
+		"Set to alternative events",
+		[](EditorObject* object, void* params) { ((LogicRelay*)object)->isAlt = true; }
+	},
+	ObjectEvent{
+		"Set to normal events",
+		[](EditorObject* object, void* params) { ((LogicRelay*)object)->isAlt = false; }
+	},
+	ObjectEvent{
+		"Toogle alternative events",
+		[](EditorObject* object, void* params) { ((LogicRelay*)object)->isAlt = !((LogicRelay*)object)->isAlt; }
+	},
 };
 
 LogicRelay::LogicRelay() : EditorObject(vec3(0))
@@ -49,6 +61,7 @@ vec2 LogicRelay::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::CheckBox(drawPos, "Trigger on start", &triggerOnStart, Editor::panelPropertiesX).y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Delay", &delay, Editor::panelPropertiesX, strID + "delay").y;
 	drawPos.y -= onTrigger.DrawInPanel(drawPos, "On trigger").y;
+	drawPos.y -= onAltTrigger.DrawInPanel(drawPos, "On alternative trigger").y;
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
@@ -75,6 +88,7 @@ void LogicRelay::Load(std::map<std::string, std::string>* props)
 	EditorObject::Load(props);
 
 	EventList::Load(&onTrigger, (*props)["onTrigger"]);
+	EventList::Load(&onAltTrigger, (*props)["onAltTrigger"]);
 	triggerOnStart = (*props)["triggerOnStart"] == "1";
 
 	EditorSaveManager::FloatProp(props, "delay", &delay);
@@ -91,6 +105,7 @@ void LogicRelay::Save()
 	EditorObject::Save();
 
 	EditorSaveManager::WriteProp("onTrigger", onTrigger.GetString());
+	EditorSaveManager::WriteProp("onAltTrigger", onAltTrigger.GetString());
 	EditorSaveManager::WriteProp("triggerOnStart", triggerOnStart);
 	EditorSaveManager::WriteProp("delay", delay);
 }
@@ -133,10 +148,20 @@ void LogicRelay::Trigger()
 			TweenManager<float>::Cancel(waitAction);
 
 		TweenManager<float>::Tween(0, 1, delay, [](float value) {}, linear)
-			->SetOnFinished([this] { onTrigger.Call(this); });
+		->SetOnFinished([this] { 
+			TriggerNow();
+		});
 	}
 	else
 	{
-		onTrigger.Call(this);
+		TriggerNow();
 	}
+}
+
+void LogicRelay::TriggerNow()
+{
+	if (isAlt)
+		onAltTrigger.Call(this);
+	else
+		onTrigger.Call(this);
 }

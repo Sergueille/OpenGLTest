@@ -5,7 +5,7 @@
 #include "RessourceManager.h"
 #include "TweenManager.h"
 
-constexpr int LOGIC_RELAY_EVENT_COUNT = 1;
+constexpr int LOGIC_RELAY_EVENT_COUNT = 4;
 
 using namespace glm;
 
@@ -17,8 +17,11 @@ public:
 
 	bool triggerOnStart = false;
 	EventList onTrigger;
+	EventList onAltTrigger;
 
 	float delay = 0;
+
+	bool isAlt = false;
 
     Sprite* editorSprite = nullptr;
 
@@ -41,5 +44,7 @@ private:
 	static const ObjectEvent events[LOGIC_RELAY_EVENT_COUNT];
 
 	TweenAction<float>* waitAction = nullptr;
+
+	void TriggerNow();
 };
 

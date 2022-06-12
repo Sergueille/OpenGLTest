@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 227
+count 229
 
 object MapData {
 	mapName: ""
@@ -23,7 +23,7 @@ object EditorSprite {
 object Player {
 	ID: "1"
 	name: ""
-	position: "128.000000, -31.200001, 20.000000"
+	position: "-16.800001, 32.200001, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -1314,6 +1314,7 @@ object LogicRelay {
 	parent: "-1"
 	parallax: "1.000000"
 	onTrigger: "3030|Force unpress|"
+	onAltTrigger: ""
 	triggerOnStart: "0"
 	delay: "4.000000"
 }
@@ -1494,10 +1495,10 @@ object ShadowCaster {
 object EditorSprite {
 	ID: "4454"
 	name: ""
-	position: "112.200005, -38.000000, -10.000000"
+	position: "115.200005, -39.400002, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "14.000000, 8.600000"
+	size: "7.800000, 4.200000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "back\plaster2.jpg"
@@ -1530,18 +1531,8 @@ object Button {
 	parent: "-1"
 	parallax: "1.000000"
 	startPressed: "0"
-	onPressed: "4464|Trigger|"
-	onUnpressed: ""
-}
-object Button {
-	ID: "4459"
-	name: "btn1"
-	position: "116.200005, -40.000000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	startPressed: "0"
-	onPressed: "4462|Trigger|"
-	onUnpressed: ""
+	onPressed: "4462|Trigger|4462|Set to alternative events|"
+	onUnpressed: "4462|Set to normal events|"
 }
 object EditorSprite {
 	ID: "4461"
@@ -1549,7 +1540,7 @@ object EditorSprite {
 	position: "124.000000, -30.600000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "2.800000, 4.800000"
+	size: "2.200000, 4.800000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -1560,21 +1551,12 @@ object EditorSprite {
 }
 object LogicRelay {
 	ID: "4462"
-	name: "btn1_rel"
-	position: "120.599998, -36.600002, 50.000000"
+	name: "big_door_rel"
+	position: "123.800003, -26.000000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	onTrigger: "4459|Force unpress|"
-	triggerOnStart: "0"
-	delay: "0.000000"
-}
-object LogicRelay {
-	ID: "4464"
-	name: "btn2_rel"
-	position: "120.599998, -25.000000, 50.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	onTrigger: "4457|Force unpress|"
+	onTrigger: ""
+	onAltTrigger: "15975|Set position|17794|Turn off|"
 	triggerOnStart: "0"
 	delay: "0.000000"
 }
@@ -2497,7 +2479,7 @@ object EditorParticleSystem {
 object EditorParticleSystem {
 	ID: "11531"
 	name: ""
-	position: "176.400223, -27.292679, 6.000000"
+	position: "176.388718, -27.279135, 6.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
@@ -3041,6 +3023,59 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object TransformModifier {
+	ID: "15975"
+	name: "big_door_trans"
+	position: "122.599998, -26.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	targetID: "4461"
+	relative: "1"
+	targetPos: "0.000000, 10.000000"
+	targetRotation: "0.000000"
+	targetSize: "1.000000, 1.000000"
+	duration: "5.000000"
+	easeType: "1"
+	onFinished: ""
+}
+object Button {
+	ID: "16206"
+	name: "btn1"
+	position: "117.200005, -39.799999, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	startPressed: "0"
+	onPressed: "4462|Trigger|4462|Set to alternative events|"
+	onUnpressed: "4462|Set to normal events|"
+}
+object Laser {
+	ID: "17794"
+	name: ""
+	position: "122.400002, -28.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "-90.000000"
+	laserType: "0"
+	startOffset: "-0.100000"
+	endOffset: "0.050000"
+	startOn: "1"
+}
+object EditorSprite {
+	ID: "18704"
+	name: ""
+	position: "108.200005, -36.000000, -10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "5.400000, 4.200000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\tiles.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.250000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
