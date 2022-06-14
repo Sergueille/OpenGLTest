@@ -23,6 +23,8 @@
 #include "Checkpoint.h"
 #include "TextRenderer.h"
 #include "PhysicSimulation.h"
+#include "PrefabCloner.h"
+#include "Radioactivity.h"
 
 using namespace glm;
 
@@ -175,7 +177,7 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 		std::list<EditorObject*>* levelList = inEditor? &Editor::editorObjects : &levelObjectList;
 		for (auto it = levelList->begin(); it != levelList->end(); it++)
 		{
-			if ((*it)->typeName == "Prefab")
+			if ((*it)->typeName == "Prefab" || (*it)->typeName == "PrefabCloner")
 			{
 				Prefab* prefab = (Prefab*)(*it);
 				prefab->ReloadPrefab();
@@ -267,7 +269,7 @@ void EditorSaveManager::LoadPrefab(Prefab* prefab)
 				newObj->SetParent(prefab);
 			}
 
-			newObj->prefabOwner = prefab;
+			newObj->contextList = &prefab->prefabObjects;
 
 			if (newObj->typeName == "PrefabRelay")
 			{
@@ -609,6 +611,16 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "PhysicSimulation")
 	{
 		newObj = new PhysicSimulation();
+		newObj->Load(&props);
+	}
+	else if (objectType == "PrefabCloner")
+	{
+		newObj = new PrefabCloner();
+		newObj->Load(&props);
+	}
+	else if (objectType == "Radioactivity")
+	{
+		newObj = new Radioactivity();
 		newObj->Load(&props);
 	}
 	else

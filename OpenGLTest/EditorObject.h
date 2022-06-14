@@ -54,9 +54,9 @@ public:
 	Collider* clickCollider;
 
 	/// <summary>
-	/// Prefab that owns this object, nullptr if not in prefab
+	/// List in wich the object must search for events, parenting, etc., for example a prefab list
 	/// </summary>
-	Prefab* prefabOwner = nullptr;
+	std::list<EditorObject*>* contextList = nullptr;
 
 	/// <summary>
 	/// Draws properties of object in the editor panel

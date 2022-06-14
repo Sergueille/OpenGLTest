@@ -104,7 +104,7 @@ void Trigger::Disable()
 
 void Trigger::DerivedOnMainLoop()
 {
-	if (!Editor::enabled && Player::ingameInstance != nullptr)
+	if (!Editor::enabled && Player::ingameInstance != nullptr && enabled)
 	{
 		if (!once || !hasAlredyTriggered)
 		{

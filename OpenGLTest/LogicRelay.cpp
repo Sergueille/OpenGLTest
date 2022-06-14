@@ -80,6 +80,12 @@ EditorObject* LogicRelay::Copy()
 
 	newObj->SubscribeToEditorObjectFuncs();
 
+	// Wait one frame before sending auto trigger
+	if (newObj->triggerOnStart && !Editor::enabled && newObj->enabled)
+	{
+		EventManager::DoInOneFrame([newObj] { newObj->Trigger(); });
+	}
+
 	return newObj;
 }
 
@@ -93,10 +99,10 @@ void LogicRelay::Load(std::map<std::string, std::string>* props)
 
 	EditorSaveManager::FloatProp(props, "delay", &delay);
 
-	// Wait one second before sending auto trigger
-	if (triggerOnStart && !Editor::enabled)
+	// Wait one frame before sending auto trigger
+	if (triggerOnStart && !Editor::enabled && enabled)
 	{
-		EventManager::DoInOneFrame([this] {this->Trigger(); });
+		EventManager::DoInOneFrame([this] { this->Trigger(); });
 	}
 }
 
@@ -142,6 +148,8 @@ void LogicRelay::UpdateTransform()
 
 void LogicRelay::Trigger()
 {
+	if (!enabled) return;
+
 	if (delay > 0)
 	{
 		if (waitAction != nullptr && !waitAction->IsFinshedAt(Utility::time))

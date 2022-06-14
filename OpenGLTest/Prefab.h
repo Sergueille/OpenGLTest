@@ -13,7 +13,7 @@ class Prefab : public EditorObject
 {
 public:
 	Prefab();
-	~Prefab();
+	virtual ~Prefab();
 
     Sprite* editorSprite = nullptr;
 
@@ -25,7 +25,7 @@ public:
 	std::string GetPath();
 	void SetPath(std::string newName);
 
-	void ReloadPrefab();
+	virtual void ReloadPrefab();
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;
 	virtual vec2 DrawActions(vec3 drawPos) override;

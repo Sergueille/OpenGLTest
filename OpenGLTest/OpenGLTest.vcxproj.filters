@@ -234,6 +234,12 @@
     <ClCompile Include="TerminalManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="PrefabCloner.cpp">
+      <Filter>LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Radioactivity.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -382,6 +388,12 @@
     </ClInclude>
     <ClInclude Include="TerminalManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="PrefabCloner.h">
+      <Filter>LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Radioactivity.h">
+      <Filter>Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

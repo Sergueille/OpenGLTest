@@ -22,6 +22,8 @@
 #include "Checkpoint.h"
 #include "TextRenderer.h"
 #include "PhysicSimulation.h"
+#include "PrefabCloner.h"
+#include "Radioactivity.h"
 
 #include <iostream>
 
@@ -785,6 +787,14 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.y -= UIButton(drawPos, "PhysicSimulation", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new PhysicSimulation();
+
+	drawPos.y -= UIButton(drawPos, "PrefabCloner", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new PrefabCloner();
+
+	drawPos.y -= UIButton(drawPos, "Radioactivity source", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new Radioactivity();
 
 	if (newObject != nullptr)
 	{
@@ -1708,13 +1718,13 @@ EditorObject* Editor::GetEditorObjectByID(int ID, bool inEditor, bool throwIfNot
 EditorObject* Editor::GetEditorObjectByIDInObjectContext(EditorObject* context, int ID, bool inEditor, bool throwIfNotFound)
 {
 	// No object or not in prefab
-	if (context == nullptr || context->prefabOwner == nullptr)
+	if (context == nullptr || context->contextList == nullptr)
 		return GetEditorObjectByID(ID, inEditor, throwIfNotFound);
 
 	// In prefab
 	if (ID != -1)
 	{
-		auto* list = &context->prefabOwner->prefabObjects;
+		auto list = context->contextList;
 		for (auto it = list->begin(); it != list->end(); it++)
 		{
 			if ((*it)->ID == ID)

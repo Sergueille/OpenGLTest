@@ -30,7 +30,7 @@ Mesh::~Mesh()
 void Mesh::DrawMesh()
 {    
     Utility::GlBindVtexArrayOptimised(VAO); // Use the vertex array
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); // Draw mesh!
+    glDrawElements(GL_TRIANGLES, icount, GL_UNSIGNED_INT, 0); // Draw mesh!
 }
 
 void Mesh::SetVertexData()

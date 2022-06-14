@@ -1969,6 +1969,7 @@ object LogicRelay {
 	parent: "-1"
 	parallax: "1.000000"
 	onTrigger: "43|Force unpress|"
+	onAltTrigger: ""
 	triggerOnStart: "0"
 	delay: "3.000000"
 }

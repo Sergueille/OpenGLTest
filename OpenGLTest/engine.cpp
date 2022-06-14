@@ -38,6 +38,10 @@ extern "C" {
 
 int main(int argc, void* argv[])
 {
+#if _DEBUG
+    std::cerr << "The game is running in debug configuration!" << std::endl;
+#endif
+
     // Read setting file
     std::map<std::string, std::string> settings = std::map<std::string, std::string>();
     EditorSaveManager::ReadPropsFile("Settings\\options.set", &settings);
@@ -133,13 +137,19 @@ int main(int argc, void* argv[])
     glGenFramebuffers(1, &fbo);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo); // Bind fbo
 
-    // Create color texture
-    unsigned int colorTex[2];
-    glGenTextures(2, colorTex);
-    for (unsigned int i = 0; i < 2; i++)
+    // Create color texture (actual color; bright color; corruption amount)
+    unsigned int colorTex[3];
+    glGenTextures(3, colorTex);
+    for (unsigned int i = 0; i < 3; i++)
     {
         glBindTexture(GL_TEXTURE_2D, colorTex[i]); // Bind colorTex
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenX, screenY, 0, GL_RGB, GL_FLOAT, NULL);
+
+        if (i == 2) // cheapest data for corruption texture
+            // glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, screenX, screenY, 0, GL_RED, GL_UNSIGNED_BYTE, NULL);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenX, screenY, 0, GL_RED, GL_FLOAT, NULL);
+        else
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenX, screenY, 0, GL_RGB, GL_FLOAT, NULL);
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -158,8 +168,8 @@ int main(int argc, void* argv[])
     // Bind render buffer to frame buffer
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
 
-    unsigned int attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 }; // MOVE THIS??
-    glDrawBuffers(2, attachments);
+    unsigned int attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 }; // MOVE THIS??
+    glDrawBuffers(3, attachments);
 
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         std::cerr << "Frame buffer creation failed :(" << std::endl;
@@ -218,7 +228,7 @@ int main(int argc, void* argv[])
 
         // Clear color and depth buffer
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
         // Enable depth testing
         glEnable(GL_DEPTH_TEST);
@@ -297,10 +307,13 @@ int main(int argc, void* argv[])
         RessourceManager::shaders["screenShader"].SetUniform("bloomBlur", 1);
         RessourceManager::shaders["screenShader"].SetUniform("time", Utility::time);
         RessourceManager::shaders["screenShader"].SetUniform("corruptionAmount", corruptionAmount);
+        RessourceManager::shaders["screenShader"].SetUniform("corruptionTexture", 2);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, colorTex[0]);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, pingpongBuffer[0]);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, colorTex[2]);
 
         // Set original viewport
         glViewport(0, 0, Utility::screenX, Utility::screenY);

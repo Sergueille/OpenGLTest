@@ -8,8 +8,8 @@ out vec2 lightmapCoord;
 
 uniform mat4 transform;
 uniform mat4 projection;
-uniform vec2 UVstart;
-uniform vec2 UVend;
+uniform vec2 UVstart = vec2(0);
+uniform vec2 UVend = vec2(1);
 
 uniform vec2 lightmapStart;
 uniform vec2 lightmapEnd;

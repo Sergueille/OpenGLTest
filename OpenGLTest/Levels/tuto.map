@@ -2432,7 +2432,7 @@ object TransformModifier {
 object EditorSprite {
 	ID: "9666"
 	name: ""
-	position: "69.200005, -13.600000, 60.000000"
+	position: "69.200005, -14.800000, 60.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "0.400000, 13.000000"
@@ -2447,7 +2447,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "9668"
 	name: ""
-	position: "63.600002, -13.600000, 60.000000"
+	position: "63.600002, -14.800000, 60.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "0.400000, 13.000000"

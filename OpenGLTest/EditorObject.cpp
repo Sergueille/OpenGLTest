@@ -160,7 +160,12 @@ void EditorObject::UpdateTransform()
 
 void EditorObject::SubscribeToEditorObjectFuncs()
 {
+#if _DEBUG
+	std::string typeName = this->typeName;
+	mainLoopFuncPos = EventManager::OnMainLoop.push_end([this, typeName] { OnMainLoop(); });
+#else
 	mainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { OnMainLoop(); });
+#endif
 }
 
 vec2 EditorObject::DrawProperties(vec3 startPos)
