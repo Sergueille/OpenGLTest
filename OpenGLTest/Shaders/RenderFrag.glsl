@@ -13,21 +13,29 @@ const float exposure = 1;
 void main()
 {
     const int tileSize = 50;
+    const float timeStepSize = 0.05;
+    const float maxOffset = 1/100.0;
 
     // Image corruption
-    const float textureAmount = 0.8;
+    const float textureAmount = 0.5;
     float realAmount = corruptionAmount;
     if (texture(corruptionTexture, texCoord).r >= 1)
         realAmount = textureAmount;
 
+    vec2 offsetCoord = texCoord;
+
     ivec2 tile = ivec2(gl_FragCoord.xy) / tileSize;
-    float rand = random13(vec3(tile.xy, time));
+    int timeStep = int(time / timeStepSize);
+    float rand = random13(vec3(tile.xy, float(timeStep)));
     if (rand > 1 - realAmount)
-        discard;
+    {
+        vec4 decal = random42(tile.xy);
+        offsetCoord += ((2 * rand) - vec2(1)) * maxOffset * realAmount;
+    }
 
     // Bloom
-    vec3 hdrColor = texture(screenTexture, texCoord).rgb;
-    vec3 bloomColor = texture(bloomBlur, texCoord).rgb;
+    vec3 hdrColor = texture(screenTexture, offsetCoord).rgb;
+    vec3 bloomColor = texture(bloomBlur, offsetCoord).rgb;
     hdrColor += bloomColor;
     vec3 result = vec3(1.0) - exp(-hdrColor * exposure);
 

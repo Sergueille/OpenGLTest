@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 18
+count 26
 
 object MapData {
 	mapName: ""
@@ -31,7 +31,7 @@ object Player {
 object EditorSprite {
 	ID: "5"
 	name: ""
-	position: "6.800000, 11.200000, 0.000000"
+	position: "6.800000, 11.199999, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "23.800001, 9.000000"
@@ -56,7 +56,7 @@ object Prefab {
 object Prefab {
 	ID: "19"
 	name: ""
-	position: "13.200000, 6.600000, 0.000000"
+	position: "12.000000, 6.600000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\neon.map"
@@ -158,7 +158,7 @@ object EditorSprite {
 object Prefab {
 	ID: "141"
 	name: ""
-	position: "23.400000, 6.600000, 0.000000"
+	position: "22.200001, 6.600000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\neon.map"
@@ -168,7 +168,7 @@ object Prefab {
 object Prefab {
 	ID: "148"
 	name: ""
-	position: "35.000000, 6.600000, 0.000000"
+	position: "33.000000, 6.600000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\neon.map"
@@ -206,8 +206,103 @@ object ShadowCaster {
 object Radioactivity {
 	ID: "207"
 	name: ""
-	position: "22.600000, -2.600000, 0.000000"
+	position: "28.800001, -2.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	nbRaycast: "100"
+	nbRaycast: "1000"
+}
+object Prefab {
+	ID: "318"
+	name: ""
+	position: "31.800001, 1.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "398"
+	name: ""
+	position: "42.200001, 1.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "8.000000, 1.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object ShadowCaster {
+	ID: "400"
+	name: ""
+	position: "42.200001, 1.800000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "8.000000, 1.000000"
+	orientation: "0.000000"
+}
+object Prefab {
+	ID: "402"
+	name: ""
+	position: "44.400002, 6.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "409"
+	name: ""
+	position: "53.400002, 11.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "23.800001, 9.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "411"
+	name: ""
+	position: "54.400002, 4.600000, -10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "23.800001, 19.800001"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\plaster2.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object Prefab {
+	ID: "413"
+	name: ""
+	position: "42.200001, 1.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "420"
+	name: ""
+	position: "54.200001, 6.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
 }

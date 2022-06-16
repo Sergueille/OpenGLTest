@@ -59,7 +59,7 @@ object Laser {
 	orientation: "-90.000000"
 	laserType: "0"
 	startOffset: "-1.000000"
-	endOffset: "0.050000"
+	endOffset: "0.150000"
 	startOn: "1"
 }
 object PrefabRelay {
