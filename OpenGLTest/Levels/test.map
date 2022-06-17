@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 57
+count 56
 
 object MapData {
 	mapName: ""
@@ -774,12 +774,4 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
-}
-object Radioactivity {
-	ID: "4205"
-	name: ""
-	position: "6.400000, 8.800000, 95.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	nbRaycast: "3000"
 }

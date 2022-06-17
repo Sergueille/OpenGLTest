@@ -46,11 +46,18 @@ SoLoud::Wav* RessourceManager::GetSound(std::string file_param)
     {
         SoLoud::Wav* newWave = new SoLoud::Wav();
         std::string fullPath = "Sounds\\" + file;
-        newWave->load(fullPath.c_str());
+        auto res = newWave->load(fullPath.c_str());
+        
+        if (res == SoLoud::FILE_LOAD_FAILED)
+        {
+            std::cerr << "Failed to load sound " << fullPath << std::endl;
+        }
+        else
+        {
+            std::cout << "Loaded sound " << fullPath << std::endl;
+        }
 
         sounds[file] = newWave;
-
-        std::cout << "Loaded sound " << fullPath << std::endl;
     }
 
     return sounds[file];

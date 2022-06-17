@@ -4,6 +4,8 @@
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 #include <string>
+#include <soloud.h>
+#include <soloud_wav.h>
 
 using namespace glm;
 
@@ -35,6 +37,11 @@ public:
 	const static int backspaceFirstLatency = 300; // milliseconds
 	const static int backspaceLatency = 30; // milliseconds
 
+	static std::string focusSound;
+	static std::string clickSound;
+	static std::string blurSound;
+	static float uiSoundsVolume;
+
 	static void OpenMenu(Menu menu);
 
 	static Menu GetCurrentMenu();
@@ -43,13 +50,14 @@ private:
 	static Menu currentMenu;
 	static bool isSetup;
 
-	static bool escPressedLastFrame;
-
 	static Menu previousMenu;
 
 	static std::string focusedTextInputID;
 	static std::string focusedTextInputValue;
 
+	static bool escPressedLastFrame;
+	static bool hoverLastFrame;
+	static bool hoverThisFrame;
 	static bool clickLastFrame;
 	static float backspaceNextTime;
 

@@ -1,0 +1,25 @@
+TEXTURES --------------------
+- textures.com
+
+SOUNDS ----------------------
+- freesound.org
+	- "Normal click" from Breviceps
+	- "UI Pop Up" from EminYILDIRIM
+	- "Score Counter 01" from rhodesmas
+	- "Selection Sounds" from johnthewizar
+	- "drone engine" from gladkiy
+
+LIBRARIES -------------------
+- GLFW (window management, os stuff)
+- GLAD (OpenGL interface)
+- GLM (OpenGL math)
+- SoLoud engine (sound engine)
+- FreeType (font loading)
+
+OTHER SOFTWARE --------------
+- Blender (graphics and physics simulation)
+- GIMP (images manipulation)
+- Wavosaur (sounds manipulation)
+
+
+

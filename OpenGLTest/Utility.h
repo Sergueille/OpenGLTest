@@ -35,6 +35,8 @@ namespace Utility
 	extern glm::vec4 overlayColor;
 	extern float overlayZ;
 
+	extern float gameSoundsVolume;
+
 	/// <summary>
 	/// Amout of coruption (post-processing), between 0 and 1
 	/// </summary>
@@ -127,4 +129,11 @@ namespace Utility
 
 	float SqrLength(glm::vec2 vec);
 	float SqrDist(glm::vec2 a, glm::vec2 b);
+
+	/// <summary>
+	/// Plays a sound
+	/// <param name="path">Name of the file, from sound base directory (must not be included in path)</param>
+	/// <param name="volume">Volume of the sound, 1 is normal</param>
+	/// </summary>
+	SoLoud::handle PlaySound(std::string path, float volume);
 };

@@ -7,6 +7,7 @@
 #include <math.h>
 #include <algorithm>
 #include "Editor.h"
+#include "RessourceManager.h"
 
 namespace Utility
 {
@@ -30,6 +31,8 @@ namespace Utility
 	int testCount = 0; 
 	
 	float corruptionAmount = 0;
+
+	float gameSoundsVolume = 1;
 
 	float GetDeltaTime()
 	{
@@ -319,5 +322,12 @@ namespace Utility
 	float SqrDist(glm::vec2 a, glm::vec2 b)
 	{
 		return SqrLength(a - b);
+	}
+
+	SoLoud::handle PlaySound(std::string path, float volume)
+	{
+		SoLoud::Wav* sound = RessourceManager::GetSound(path);
+		sound->setVolume(volume);
+		return soloud->play(*sound);
 	}
 }

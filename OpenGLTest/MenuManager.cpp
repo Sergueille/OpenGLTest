@@ -7,10 +7,10 @@
 #include "LightManager.h"
 #include "PhysicObject.h"
 #include "LogicRelay.h"
+#include <soloud.h>
 
 MenuManager::Menu MenuManager::currentMenu = Menu::none;
 bool MenuManager::isSetup = false;
-bool MenuManager::escPressedLastFrame = false;
 
 MenuManager::Menu MenuManager::previousMenu = Menu::none;
 
@@ -25,8 +25,16 @@ const vec4 MenuManager::textSelectedColor = vec4(1.3, 1.3, 1.3, 1);
 const vec4 MenuManager::textInputPlaceholderColor = vec4(0.8, 0.8, 0.8, 1);
 const vec4 MenuManager::textInputBackgroundColor = vec4(0.1, 0.1, 0.1, 1);
 
+bool MenuManager::escPressedLastFrame = false;
+bool MenuManager::hoverLastFrame = false;
+bool MenuManager::hoverThisFrame = false;
 bool MenuManager::clickLastFrame = false;
 float MenuManager::backspaceNextTime = 0;
+
+std::string MenuManager::focusSound = "focus.wav";
+std::string MenuManager::clickSound = "click.wav";
+std::string MenuManager::blurSound = "blur.wav";
+float MenuManager::uiSoundsVolume = 0.3f;
 
 void MenuManager::Setup()
 {
@@ -34,6 +42,7 @@ void MenuManager::Setup()
 
 	EventManager::OnMainLoop.push_end(OnMainLoop);
 	EventManager::OnCharPressed.push_end(OnCaracterInput);
+
 	isSetup = true;
 }
 
@@ -43,6 +52,8 @@ void MenuManager::OnMainLoop()
 		escPressedLastFrame = false;
 
 	HandleInputBackspace();
+
+	hoverThisFrame = false;
 
 	if (currentMenu == Menu::main)
 	{
@@ -163,6 +174,18 @@ void MenuManager::OnMainLoop()
 	{
 		TextManager::RenderText("Unknown menu type!", vec3(screenMargin, screenMargin, UIbaseZPos), 15);
 	}
+
+	// Handle focus sounds
+	if (hoverThisFrame && !hoverLastFrame)
+	{
+		Utility::PlaySound(focusSound, uiSoundsVolume);
+	}
+	else if (!hoverThisFrame && hoverLastFrame)
+	{
+		Utility::PlaySound(blurSound, uiSoundsVolume);
+	}
+
+	hoverLastFrame = hoverThisFrame;
 }
 
 void MenuManager::OnCaracterInput(GLFWwindow* window, unsigned int codepoint)
@@ -241,6 +264,8 @@ vec2 MenuManager::TextInput(vec3 drawPos, std::string* value, std::string placeH
 				focusedTextInputID = "";
 				focusedTextInputValue = "";
 			}
+
+			hoverThisFrame = true;
 		}
 
 		TextManager::RenderText(displayString, textPos, textSize, TextManager::right, color);
@@ -281,10 +306,15 @@ vec2 MenuManager::Button(vec3 drawPos, std::string text, bool* out, bool enabled
 				color = textHoveredColor;
 
 				if (clickLastFrame)
+				{
 					*out = true;
+					Utility::PlaySound(clickSound, uiSoundsVolume);
+				}
 
 				clickLastFrame = false;
 			}
+
+			hoverThisFrame = true;
 		}
 		else
 		{
@@ -332,6 +362,7 @@ vec2 MenuManager::PreviousMenuButton(vec3 drawPos)
 	{
 		OpenMenu(previousMenu);
 		escPressedLastFrame = true;
+		Utility::PlaySound("back.wav", uiSoundsVolume);
 	}
 
 	return size;

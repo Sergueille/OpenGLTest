@@ -15,6 +15,8 @@
 #include "Utility.h"
 #include "CircleCollider.h"
 #include "EditorObject.h"
+#include <soloud.h>
+#include <soloud_wav.h>
 
 using namespace glm;
 
@@ -78,8 +80,9 @@ public:
 	/// How much sinusoid movment the player will add to his position, in units
 	/// </summary>
 	const float floatIntensity = 0.2f;
-
 	const float groudRaycastsXshift = 0.4f;
+
+	const std::string levitationSound = "robot_motor.wav";
 
 	const vec4 canTeleportColor = vec4(0, 2, 0, 0.5f);
 	const vec4 cannotTeleportColor = vec4(2, 0, 0, 0.5f);
@@ -99,6 +102,17 @@ public:
 	Sprite* lightsSprite;
 
 	vec2 teleportPosition = vec2(0);
+
+	SoLoud::handle levitationSoundHandle;
+	const static float levSoundMinVolume;
+	const static float levSoundMaxVolume;
+	const static float levSoundMinPitch;
+	const static float levSoundMaxPitch;
+	const static float levSoundMinDist;
+	const static float levSoundMaxDist;
+	const static float levSoundSmoothAmount;
+
+	float levSoundDistortAmount = 0;
 
 	static ObjectEvent events[PLAYER_EVENT_COUNT];
 

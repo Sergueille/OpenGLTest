@@ -18,6 +18,14 @@ ObjectEvent Player::events[PLAYER_EVENT_COUNT] = {
 
 Player* Player::ingameInstance = nullptr;
 
+const float Player::levSoundMinVolume = 0.3f;
+const float Player::levSoundMaxVolume = 0.15f;
+const float Player::levSoundMinPitch = 0.8f;
+const float Player::levSoundMaxPitch = 0.4f;
+const float Player::levSoundMinDist = 0.5f;
+const float Player::levSoundMaxDist = 4.0f;
+const float Player::levSoundSmoothAmount = 0.2f; // In seconds
+
 Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), height, true)), EditorObject(position)
 {
 	playerSprite = new Sprite(RessourceManager::GetTexture("robot.png"),
@@ -54,6 +62,10 @@ Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), 
 			ingameInstance = this;
 		else
 			std::cout << "Two player instaces in game !!" << std::endl;
+
+		// Play levitation sound
+		levitationSoundHandle = PlaySound(levitationSound, Utility::gameSoundsVolume);
+		soloud->setLooping(levitationSoundHandle, true);
 	}
 
 	typeName = "Player";
@@ -87,6 +99,11 @@ Player::~Player()
 	}
 
 	ingameInstance = nullptr;
+
+	if (!Editor::enabled)
+	{
+		soloud->stop(levitationSoundHandle);
+	}
 }
 
 void Player::UpdateTransform()
@@ -313,6 +330,20 @@ void Player::OnAfterMove()
 
 		float dist = min(dist1, dist2);
 		Collider* hitColl = dist1 < dist2 ? hitColl1 : hitColl2;
+
+		// Update sound
+		float amount;
+		if (dist <= levSoundMinDist) amount = 0;
+		else amount = (dist - levSoundMinDist) / (levSoundMaxDist - levSoundMinDist);
+		if (amount > 1) amount = 1;
+
+		// Smooth to avoid brutal changes
+		levSoundDistortAmount = levSoundDistortAmount + ((amount - levSoundDistortAmount) * GetDeltaTime() / levSoundSmoothAmount);
+
+		float volume = Utility::Lerp(levSoundMinVolume, levSoundMaxVolume, levSoundDistortAmount);
+		float pitch = Utility::Lerp(levSoundMinPitch, levSoundMaxPitch, levSoundDistortAmount);
+		soloud->setVolume(levitationSoundHandle, volume * gameSoundsVolume);
+		soloud->setRelativePlaySpeed(levitationSoundHandle, pitch);
 
 		if (dist < floatingForceStartDist && (!isJumping || velocity.y < 0)) // Levitation
 		{
