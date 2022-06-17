@@ -15,6 +15,7 @@ public:
     Sprite* editorSprite = nullptr;
 
 	int nbRaycast = 72;
+	bool isRealTime = false;
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;
 	virtual void UpdateTransform() override;

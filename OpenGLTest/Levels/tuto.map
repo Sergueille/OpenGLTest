@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 266
+count 265
 
 object MapData {
 	mapName: ""
@@ -367,22 +367,6 @@ object EditorSprite {
 	size: "5.200000, 0.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	collideWithPhys: "1"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
-	visibleOnlyInEditor: "0"
-}
-object EditorSprite {
-	ID: "629"
-	name: ""
-	position: "65.589218, 6.188249, 0.000000"
-	parent: "627"
-	parallax: "1.000000"
-	size: "1.800000, 1.800000"
-	rotation: "0.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	texturePath: "railing_short.png"
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
@@ -1569,7 +1553,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "6610"
 	name: ""
-	position: "53.000000, -14.000000, -15.000000"
+	position: "53.000000, -14.000000, -14.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "2.000000, 2.000000"
@@ -3744,16 +3728,16 @@ object EditorSprite {
 object EditorSprite {
 	ID: "11082"
 	name: ""
-	position: "52.400002, -18.200001, -19.000000"
+	position: "50.799999, -18.200001, -19.000000"
 	parent: "-1"
 	parallax: "0.500000"
 	size: "2.000000, 2.000000"
 	rotation: "180.000000"
 	color: "1.000000, 1.000000, 1.000000, 0.800000"
-	texturePath: "decals\bricks.png"
+	texturePath: "decals\bricks3.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "-1.000000, 1.000000"
+	UVend: "-1.000000, -1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }

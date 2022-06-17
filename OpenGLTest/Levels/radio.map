@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 26
+count 28
 
 object MapData {
 	mapName: ""
@@ -100,7 +100,7 @@ object EditorSprite {
 	position: "23.600000, -7.800000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "35.400002, 9.000000"
+	size: "49.200001, 9.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -206,10 +206,11 @@ object ShadowCaster {
 object Radioactivity {
 	ID: "207"
 	name: ""
-	position: "28.800001, -2.200000, 0.000000"
+	position: "30.200001, -2.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	nbRaycast: "1000"
+	nbRaycast: "5000"
+	isRealTime: "0"
 }
 object Prefab {
 	ID: "318"
@@ -227,7 +228,7 @@ object EditorSprite {
 	position: "42.200001, 1.800000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "8.000000, 1.000000"
+	size: "7.800000, 1.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -242,7 +243,7 @@ object ShadowCaster {
 	position: "42.200001, 1.800000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "8.000000, 1.000000"
+	size: "7.400000, 1.000000"
 	orientation: "0.000000"
 }
 object Prefab {
@@ -305,4 +306,28 @@ object Prefab {
 	path: "prefabs\neon.map"
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "537"
+	name: ""
+	position: "45.600002, -1.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.000000, 6.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object ShadowCaster {
+	ID: "539"
+	name: ""
+	position: "45.600002, -0.800000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.000000, 5.200000"
+	orientation: "0.000000"
 }

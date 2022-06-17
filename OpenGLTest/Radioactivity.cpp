@@ -48,6 +48,7 @@ vec2 Radioactivity::DrawProperties(vec3 drawPos)
         ForceRefreshMesh();    
 
     drawPos.y -= Editor::DrawProperty(drawPos, "Raycast count", &nbRaycast, Editor::panelPropertiesX, strID + "nbRaycast").y;
+    drawPos.y -= Editor::CheckBox(drawPos, "Is realtime", &isRealTime, Editor::panelPropertiesX).y;
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
@@ -76,6 +77,7 @@ void Radioactivity::Load(std::map<std::string, std::string>* props)
 	EditorObject::Load(props);
 
     EditorSaveManager::IntProp(props, "nbRaycast", &nbRaycast);
+    isRealTime = (*props)["isRealTime"] == "1";
 }
 
 void Radioactivity::Save()
@@ -83,6 +85,7 @@ void Radioactivity::Save()
 	EditorObject::Save();
 
     EditorSaveManager::WriteProp("nbRaycast", nbRaycast);
+    EditorSaveManager::WriteProp("isRealTime", isRealTime);
 }
 
 void Radioactivity::Enable()
@@ -140,7 +143,7 @@ Mesh* Radioactivity::GetMesh()
             vec2 lastVtexPos = vec2(vertices[lastArrayPos], vertices[lastArrayPos + 1]);
             vec2 secondLastVtexPos = vec2(vertices[secondLastArrayPos], vertices[secondLastArrayPos + 1]);
 
-            vec2 lastDelta = secondLastVtexPos - lastVtexPos;
+            vec2 lastDelta = lastVtexPos - secondLastVtexPos;
             vec2 currentDelta = res - lastVtexPos;
 
             float diff = glm::dot(lastDelta, currentDelta) - glm::length(lastDelta) * glm::length(currentDelta);
@@ -202,11 +205,16 @@ void Radioactivity::UpdateTransform()
 	EditorObject::UpdateTransform();
     
     if (editorSprite != nullptr)
-	{
-		editorSprite->position = GetEditPos();
-		editorSprite->size = vec2(Editor::gizmoSize);
-		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
-	}
+    {
+        editorSprite->position = GetEditPos();
+        editorSprite->size = vec2(Editor::gizmoSize);
+        ((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
+    }
+
+    if (isRealTime)
+    {
+        ForceRefreshMesh();
+    }
 
     glDisable(GL_DEPTH_TEST);
 

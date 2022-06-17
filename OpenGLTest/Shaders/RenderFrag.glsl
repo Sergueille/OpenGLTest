@@ -30,7 +30,7 @@ void main()
     if (rand > 1 - realAmount)
     {
         vec4 decal = random42(tile.xy);
-        offsetCoord += ((2 * rand) - vec2(1)) * maxOffset * realAmount;
+        offsetCoord += ((2 * decal.xy) - vec2(1)) * maxOffset * realAmount;
     }
 
     // Bloom

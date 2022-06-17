@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 491
+count 493
 
 object MapData {
 	mapName: ""
@@ -6468,7 +6468,7 @@ object EditorSprite {
 object Prefab {
 	ID: "11324"
 	name: ""
-	position: "211.800003, 16.200001, 0.000000"
+	position: "211.800003, 14.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\fluo.map"
@@ -6478,7 +6478,7 @@ object Prefab {
 object Light {
 	ID: "5660"
 	name: ""
-	position: "211.800003, 10.600000, 15.000000"
+	position: "204.800003, 14.000000, 15.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	lightSize: "15.000000"
@@ -6492,7 +6492,7 @@ object Light {
 object EditorSprite {
 	ID: "5654"
 	name: ""
-	position: "211.800003, 10.600000, -6.000000"
+	position: "204.800003, 14.000000, -9.200000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "1.000000, 1.000000"
@@ -6511,7 +6511,7 @@ object ShadowCaster {
 	position: "210.400009, 7.400000, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "20.800001, 1.000000"
+	size: "27.200001, 1.000000"
 	orientation: "0.000000"
 }
 object EditorSprite {
@@ -7142,6 +7142,38 @@ object EditorSprite {
 	rotation: "0.000000"
 	color: "0.800000, 0.800000, 0.800000, 0.800000"
 	texturePath: "decals\bricks.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "-1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "11907"
+	name: ""
+	position: "213.600006, 9.400001, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.200000, 3.200000"
+	rotation: "0.000000"
+	color: "1.200000, 1.200000, 1.200000, 1.000000"
+	texturePath: "door_window.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "11909"
+	name: ""
+	position: "178.800003, 35.400002, -9.600000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "7.600000, 7.600000"
+	rotation: "0.000000"
+	color: "0.800000, 0.800000, 0.800000, 0.800000"
+	texturePath: "decals\bricks4.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "-1.000000, 1.000000"
