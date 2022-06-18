@@ -289,6 +289,8 @@ void EditorObject::CallEvent(std::string eventName)
 			return;
 		}
 	}
+
+	std::cerr << "Unknown event name (" << eventName << ") called on " << this->typeName << std::endl;
 }
 
 void EditorObject::GetAABB(vec2* minRes, vec2* maxRes)

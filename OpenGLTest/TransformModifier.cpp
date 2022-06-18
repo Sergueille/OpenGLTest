@@ -106,6 +106,11 @@ EditorObject* TransformModifier::Copy()
 
 	newObj->SubscribeToEditorObjectFuncs();
 
+	if (!Editor::enabled)
+		EventManager::DoInOneFrame([newObj] {
+			newObj->targetObject = Editor::GetEditorObjectByIDInObjectContext(newObj, newObj->targetID, false, false);
+		});
+
 	return newObj;
 }
 

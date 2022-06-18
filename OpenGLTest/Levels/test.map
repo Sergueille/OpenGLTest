@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 56
+count 57
 
 object MapData {
 	mapName: ""
@@ -167,7 +167,7 @@ object ShadowCaster {
 object Player {
 	ID: "477"
 	name: ""
-	position: "-3.200000, 5.200000, 20.000000"
+	position: "9.400001, 8.200000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -774,4 +774,19 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object PrefabCloner {
+	ID: "4205"
+	name: ""
+	position: "10.200000, 7.000000, 2.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\platform1.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+	cloneOnTimer: "1"
+	delay: "2.000000"
+	deleteAfterTime: "0"
+	deleteTime: "5.000000"
+	maxInstances: "5"
 }

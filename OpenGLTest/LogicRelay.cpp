@@ -81,7 +81,7 @@ EditorObject* LogicRelay::Copy()
 	newObj->SubscribeToEditorObjectFuncs();
 
 	// Wait one frame before sending auto trigger
-	if (newObj->triggerOnStart && !Editor::enabled && newObj->enabled)
+	if (newObj->triggerOnStart && !Editor::enabled)
 	{
 		EventManager::DoInOneFrame([newObj] { newObj->Trigger(); });
 	}
@@ -168,6 +168,8 @@ void LogicRelay::Trigger()
 
 void LogicRelay::TriggerNow()
 {
+	if (Editor::enabled) return;
+
 	if (isAlt)
 		onAltTrigger.Call(this);
 	else

@@ -43,7 +43,7 @@ private:
 
 struct PrefabClone
 {
-	std::list<EditorObject*> objects;
+	std::list<EditorObject*>* objects = nullptr;
 	float startTime;
 
 	~PrefabClone();

@@ -114,13 +114,13 @@ void PrefabCloner::CreateClone()
 	PrefabClone* clone = new PrefabClone();
 	clone->startTime = Utility::time;
 
-	clone->objects = std::list<EditorObject*>();
+	clone->objects = new std::list<EditorObject*>();
 	for (auto it = prefabObjects.begin(); it != prefabObjects.end(); it++)
 	{
 		(*it)->Enable();
 		EditorObject* copy = (*it)->Copy();
-		clone->objects.push_back(copy);
-		copy->contextList = &clone->objects;
+		clone->objects->push_back(copy);
+		copy->contextList = clone->objects;
 		(*it)->Disable();
 	}
 
@@ -145,7 +145,7 @@ void PrefabCloner::UpdateTransform()
 			if (Utility::time > lastTime + delay)
 			{
 				lastTime = lastTime + delay;
-				CreateClone();
+				EventManager::DoInOneFrame([this] { CreateClone(); });
 			}
 		}
 
@@ -165,9 +165,10 @@ void PrefabCloner::UpdateTransform()
 
 PrefabClone::~PrefabClone()
 {
-	for (auto it = objects.begin(); it != objects.end(); it++)
+	for (auto it = objects->begin(); it != objects->end(); it++)
 	{
 		delete (*it);
 	}
-	objects.clear();
+	objects->clear();
+	delete objects;
 }
