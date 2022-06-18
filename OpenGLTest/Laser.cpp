@@ -105,7 +105,7 @@ void Laser::UpdateTransform()
 	rotatedDelta = Rotate(vec2(glowDelta.x, glowDelta.y), rot - 90);
 	glowSprite->position = pos + vec3(rotatedDelta.x, rotatedDelta.y, glowDelta.z);
 
-	vec4 colors[2] = { vec4(1, 0.5, 0.9, 1), vec4(0.5, 0.2, 0.2, 1) };
+	vec4 colors[2] = { vec4(1, 0.5, 0.9, 1), vec4(1, 0.5, 0.5, 1) };
 	glowSprite->color = colors[(int)laserType];
 }
 
@@ -300,6 +300,11 @@ void Laser::OnLaserMainLoop()
 					else if (laserType == LaserType::deadlyLaser)
 					{
 						intersectionPos = Player::ingameInstance->GetPos();
+
+						// Kill player
+						vec3 res = Player::ingameInstance->collider->CollideWith(laserCollider);
+						if (res.z != 0)
+							Player::ingameInstance->Kill();
 					}
 				}
 			}

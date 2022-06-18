@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 86
+count 89
 
 object MapData {
 	mapName: ""
@@ -8,7 +8,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: ""
-	position: "60.799999, 35.000000, 20.000000"
+	position: "62.799999, 35.799999, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -1062,4 +1062,38 @@ object EditorSprite {
 	UVend: "3.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object Laser {
+	ID: "3205"
+	name: ""
+	position: "81.599998, 38.400002, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "630.000000"
+	laserType: "1"
+	startOffset: "-0.100000"
+	endOffset: "0.050000"
+	startOn: "1"
+}
+object Laser {
+	ID: "3207"
+	name: ""
+	position: "83.800003, 38.400002, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "630.000000"
+	laserType: "0"
+	startOffset: "-0.100000"
+	endOffset: "0.050000"
+	startOn: "1"
+}
+object Prefab {
+	ID: "3393"
+	name: ""
+	position: "88.000000, 38.400002, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
 }

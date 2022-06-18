@@ -139,7 +139,6 @@ protected:
 private:
 	bool physicsWasEnabledBeforeDisabling = false;
 	bool wasClickingLastFrame = false;
-
 	bool isDying = false;
 
 	bool TeleportCollideWithLaser(vec2 teleportPosition);
