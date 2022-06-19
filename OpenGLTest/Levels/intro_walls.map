@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 493
+count 495
 
 object MapData {
 	mapName: ""
@@ -1010,7 +1010,7 @@ object ShadowCaster {
 object Player {
 	ID: "1496"
 	name: ""
-	position: "-20.600000, 0.800000, 10.000000"
+	position: "208.600006, 9.800000, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -1087,10 +1087,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1837"
 	name: ""
-	position: "234.400009, 19.000000, 0.000000"
+	position: "235.400009, 19.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "28.600000, 24.200001"
+	size: "30.600000, 24.200001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -1177,7 +1177,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1849"
 	name: ""
-	position: "209.000000, 7.400000, 0.000000"
+	position: "213.600006, 7.400000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "25.200001, 1.000000"
@@ -1222,10 +1222,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1855"
 	name: ""
-	position: "216.600006, -6.200000, 0.000000"
+	position: "223.600006, -5.400000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "64.200005, 15.800000"
+	size: "77.400002, 15.800000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -3271,7 +3271,7 @@ object EditorSprite {
 object LevelEnd {
 	ID: "7726"
 	name: ""
-	position: "242.199997, 4.200000, 20.000000"
+	position: "251.600006, 5.200000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	nextLevel: "intro_lasers.map"
@@ -3279,12 +3279,12 @@ object LevelEnd {
 object Trigger {
 	ID: "8013"
 	name: ""
-	position: "229.800003, 4.400000, 0.000000"
+	position: "244.400009, 4.600000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
-	scale: "12.600000, 7.200000"
-	onEnter: "7726|End level|"
+	scale: "9.800000, 4.400000"
+	onEnter: "7726|End level|12507|Close door|"
 	onExit: ""
 	once: "0"
 }
@@ -3617,50 +3617,6 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "3.000000, 0.500000"
-	isLit: "1"
-	visibleOnlyInEditor: "0"
-}
-object Light {
-	ID: "8211"
-	name: ""
-	position: "200.199997, 4.200000, 20.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "17.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.500000"
-}
-object Light {
-	ID: "8213"
-	name: ""
-	position: "229.800003, 4.200000, 20.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "17.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.500000"
-}
-object EditorSprite {
-	ID: "8215"
-	name: ""
-	position: "220.400009, 4.400000, -10.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "50.600002, 5.400000"
-	rotation: "0.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "back\plaster1.jpg"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "5.000000, 0.800000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
@@ -5073,16 +5029,7 @@ object ShadowCaster {
 	position: "157.000000, 11.600000, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "1.000000, 7.400000"
-	orientation: "0.000000"
-}
-object ShadowCaster {
-	ID: "10795"
-	name: ""
-	position: "157.000000, 15.600000, 10.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "1.000000, 2.800000"
+	size: "1.000000, 10.800000"
 	orientation: "0.000000"
 }
 object ShadowCaster {
@@ -6508,10 +6455,10 @@ object EditorSprite {
 object ShadowCaster {
 	ID: "11475"
 	name: ""
-	position: "210.400009, 7.400000, 10.000000"
+	position: "219.800003, 7.400000, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "27.200001, 1.000000"
+	size: "19.400000, 1.000000"
 	orientation: "0.000000"
 }
 object EditorSprite {
@@ -7179,4 +7126,85 @@ object EditorSprite {
 	UVend: "-1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object Prefab {
+	ID: "12070"
+	name: ""
+	position: "238.400009, 4.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\transition_w_l.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "12111"
+	name: ""
+	position: "204.199997, 4.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "20.400000, 6.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "12306"
+	name: ""
+	position: "252.000000, 13.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "20.200001, 13.800000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object LogicRelay {
+	ID: "12713"
+	name: ""
+	position: "231.600006, 5.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "12507|Open door|"
+	onAltTrigger: ""
+	triggerOnStart: "1"
+	delay: "1.000000"
+}
+object EditorSprite {
+	ID: "13593"
+	name: ""
+	position: "267.399994, 4.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "10.600000, 28.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "13595"
+	name: ""
+	position: "250.000000, 5.000000, -2.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "8.000000, 8.000000"
+	rotation: "0.000000"
+	color: "0.000000, 1.000000, 0.000000, 0.200000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "1"
 }

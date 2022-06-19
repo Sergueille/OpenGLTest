@@ -314,6 +314,16 @@ namespace Utility
 		}
 	}
 
+	glm::vec2 RoundVector(glm::vec2 v)
+	{
+		return glm::vec2(std::round(v.x), std::round(v.y));
+	}
+
+	glm::vec3 RoundVector(glm::vec3 v)
+	{
+		return glm::vec3(std::round(v.x), std::round(v.y), std::round(v.z));
+	}
+
 	float SqrLength(glm::vec2 vec)
 	{
 		return vec.x * vec.x + vec.y * vec.y;

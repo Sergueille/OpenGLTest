@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 125
+count 128
 
 object MapData {
 	mapName: ""
@@ -8,7 +8,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: ""
-	position: "-33.400002, 3.400000, 20.000000"
+	position: "-38.600002, 3.400000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -1606,7 +1606,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1961"
 	name: ""
-	position: "-27.600000, 14.200000, 0.000000"
+	position: "-27.600000, 14.600000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "47.799999, 15.400001"
@@ -1616,22 +1616,6 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
-	visibleOnlyInEditor: "0"
-}
-object EditorSprite {
-	ID: "1963"
-	name: ""
-	position: "-32.200001, 4.400000, -10.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "40.600002, 5.000000"
-	rotation: "0.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "back\plaster1.jpg"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "5.000000, 1.000000"
-	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
 object Light {
@@ -1648,48 +1632,20 @@ object Light {
 	outerAngle: "360.000000"
 	shadowSize: "0.500000"
 }
-object Light {
-	ID: "1967"
-	name: ""
-	position: "-20.400000, 4.400000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.500000"
-}
-object Light {
-	ID: "1969"
-	name: ""
-	position: "-33.600002, 4.600000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "12.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.200000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.500000"
-}
 object EditorSprite {
 	ID: "2431"
 	name: ""
-	position: "-63.799999, -0.400000, 0.000000"
+	position: "-48.400002, 6.200000, -2.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "29.000000, 47.000000"
+	size: "9.200000, 8.800000"
 	rotation: "0.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	color: "0.000000, 1.000000, 0.000000, 0.200000"
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
-	visibleOnlyInEditor: "0"
+	visibleOnlyInEditor: "1"
 }
 object EditorSprite {
 	ID: "2435"
@@ -1786,4 +1742,74 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+}
+object Prefab {
+	ID: "3092"
+	name: ""
+	position: "-40.200001, 4.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\transition_w_l.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "3133"
+	name: ""
+	position: "-44.200001, 4.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\door.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object LogicRelay {
+	ID: "3140"
+	name: ""
+	position: "-43.000000, 8.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "3133|Close door|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "1.000000"
+}
+object EditorSprite {
+	ID: "3142"
+	name: ""
+	position: "-55.600002, 14.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "22.800001, 15.400001"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "3144"
+	name: ""
+	position: "-55.400002, -5.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "22.800001, 15.400001"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object ShadowCaster {
+	ID: "3145"
+	name: ""
+	position: "-16.000000, 2.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "15.800000, 1.000000"
+	orientation: "0.000000"
 }

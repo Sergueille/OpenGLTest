@@ -121,6 +121,9 @@ namespace Utility
 
 	extern void GetLevelAABB(glm::vec2* resMin, glm::vec2* resMax, bool inEditor);
 
+	extern glm::vec2 RoundVector(glm::vec2 v);
+	extern glm::vec3 RoundVector(glm::vec3 v);
+
 	template <typename T>
 	inline T Lerp(T a, T b, float value)
 	{

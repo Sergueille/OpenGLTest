@@ -8,7 +8,7 @@
 
 std::list<Light*> LightManager::lights = std::list<Light*>();
 std::list<ShadowCaster*> LightManager::shadowCasters = std::list<ShadowCaster*>();
-int LightManager::pixelsPerUnit = 20;
+int LightManager::pixelsPerUnit = 20; // Must be multiple of 2 !!
 
 unsigned int LightManager::texID = 0;
 std::string LightManager::texLevelPath = "";
@@ -30,7 +30,7 @@ void LightManager::BakeLight()
 	{
 		std::cout << "Max light count exceeded, please changhe the array sizes in the lightmapper shader" << std::endl;
 	}
-	if (lights.size() > MAX_SHADOW_CASTERS_COUNT)
+	if (shadowCasters.size() > MAX_SHADOW_CASTERS_COUNT)
 	{
 		std::cout << "Max shodow casters count exceeded, please changhe the array sizes in the lightmapper shader" << std::endl;
 	}
@@ -38,6 +38,11 @@ void LightManager::BakeLight()
 	// Get light data
 	vec2 levelMin; vec2 levelMax;
 	GetLevelAABB(&levelMin, &levelMax, Editor::enabled);
+
+	// Round to make sure the total amount of pixels is multiple of 4
+	levelMin = RoundVector(levelMin);
+	levelMax = RoundVector(levelMax);
+
 	vec2 levelSize = levelMax - levelMin;
 
 	float posArray[MAX_LIGHT_COUNT * 2] = {};
@@ -197,6 +202,10 @@ unsigned int LightManager::GetLightData()
 
 		// Update lightmap pos
 		GetLevelAABB(&lightmapMin, &lightmapMax, Editor::enabled);
+
+		// Round to make sure the total amount of pixels is multiple of 4
+		lightmapMin = RoundVector(lightmapMin);
+		lightmapMax = RoundVector(lightmapMax);
 
 		std::cout << "Loaded texture " << path << std::endl;
 		return texID;
