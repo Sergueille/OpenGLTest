@@ -33,5 +33,13 @@ public:
 
 private:
 	Mesh* mesh = nullptr;
+
+	void CreateVertex(float* vertices, int* vertexCount, vec2 pos);
+	void CreateTriangle(unsigned int* indices, int* vertexCount, int* faceCount, int raycastCount);
 };
 
+struct RaycastPoint {
+	vec2 delta;
+	float angle;
+	int coll_id;
+};

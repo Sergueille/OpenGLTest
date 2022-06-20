@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 236
+count 238
 
 object MapData {
 	mapName: ""
@@ -3167,4 +3167,24 @@ object Prefab {
 	path: "prefabs\door.map"
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
+}
+object Trigger {
+	ID: "20398"
+	name: ""
+	position: "233.000000, -46.400002, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "6.400000, 6.400000"
+	onEnter: "20399||"
+	onExit: ""
+	once: "1"
+}
+object LevelEnd {
+	ID: "20399"
+	name: ""
+	position: "238.800003, -45.799999, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	nextLevel: "moving.map"
 }

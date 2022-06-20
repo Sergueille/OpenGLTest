@@ -1,0 +1,91 @@
+// Editor map file, version 1
+
+count 7
+
+object MapData {
+	mapName: ""
+}
+object EditorSprite {
+	ID: "93"
+	name: ""
+	position: "-0.600000, -25.400000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "25.600000, 25.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object Radioactivity {
+	ID: "101"
+	name: ""
+	position: "8.200000, -2.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	nbRaycast: "72"
+	isRealTime: "1"
+}
+object EditorSprite {
+	ID: "103"
+	name: ""
+	position: "24.200001, -0.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "24.000000, 24.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "105"
+	name: ""
+	position: "-25.400000, -0.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "24.000000, 24.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "109"
+	name: ""
+	position: "-0.600000, 24.200001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "25.600000, 25.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "111"
+	name: ""
+	position: "3.200000, -0.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.600000, 2.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}

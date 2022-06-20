@@ -6,6 +6,14 @@
 #include "RectCollider.h"
 #include "RessourceManager.h"
 
+constexpr int MAX_VERT_COUNT = 256;
+constexpr int MAX_RAY_COUNT = 256;
+constexpr int MAX_COLL_COUNT = 128;
+constexpr int VERT_VAL_COUNT = 5;
+constexpr int FACE_VAL_COUNT = 3;
+constexpr float MAX_DIST = 50;
+constexpr float Z_POS = -90;
+
 Radioactivity::Radioactivity() : EditorObject(vec3(0))
 {
 	clickCollider = new CircleCollider(vec2(0), 1, false);
@@ -104,89 +112,130 @@ Mesh* Radioactivity::GetMesh()
 {
     if (mesh != nullptr) return mesh;
 
-    int vertCount = nbRaycast + 1;
-    int faceCount = nbRaycast;
-    constexpr int valuesPerVert = 5;
-    constexpr int valuesPerFace = 3;
-    constexpr float maxDist = 50;
-    constexpr float zPos = -90;
+    vec3 editPos = GetEditPos();
 
-    float* vertices = new float[vertCount * valuesPerVert];
-    unsigned int* indices = new unsigned int[faceCount * valuesPerFace];
+    // TODO: support circle colliders
+    int raycastCount = 0;
+    RaycastPoint rayPoints[MAX_RAY_COUNT] = { };
+    int coll_id = 0;
+
+    // Get raycast points for rect colliders
+    for (auto it = Collider::rectColliders.begin(); it != Collider::rectColliders.end(); it++)
+    {
+        if (!(*it)->enabled) continue;
+
+        constexpr float RECT_COLLIDER_POINTS_DELTA = 0.05f;
+        (*it)->size += vec2(RECT_COLLIDER_POINTS_DELTA, RECT_COLLIDER_POINTS_DELTA);
+        std::vector<vec2> points = (*it)->GetPoints();
+        (*it)->size -= vec2(RECT_COLLIDER_POINTS_DELTA, RECT_COLLIDER_POINTS_DELTA);
+
+        for (int j = 0; j < 4; j++)
+        {
+            rayPoints[raycastCount + j].delta = points[j] - vec2(editPos);
+            rayPoints[raycastCount + j].angle = Utility::GetVectorAngle(rayPoints[raycastCount + j].delta);
+            rayPoints[raycastCount + j].coll_id = coll_id;
+        }
+
+        raycastCount += 4;
+        coll_id++;
+    }
+
+    // Get raycast points for circle colliders
+    for (auto it = Collider::circleColliders.begin(); it != Collider::circleColliders.end(); it++)
+    {
+        if (!(*it)->enabled) continue;
+
+        constexpr float CIRCLE_COLLIDER_POINTS_DELTA = 0.025f;
+        float radius = ((*it)->size / 2) + CIRCLE_COLLIDER_POINTS_DELTA;
+
+        vec2 deltaPos = (*it)->GetPos() - vec2(editPos);
+        vec2 tangent = glm::normalize(Rotate(deltaPos, 90));
+
+        vec2 point1 = deltaPos + tangent * radius;
+        vec2 point2 = deltaPos - tangent * radius;
+
+        rayPoints[raycastCount].delta = point1;
+        rayPoints[raycastCount].angle = Utility::GetVectorAngle(point1);
+        rayPoints[raycastCount].coll_id = coll_id;
+        rayPoints[raycastCount + 1].delta = point2;
+        rayPoints[raycastCount + 1].angle = Utility::GetVectorAngle(point2);
+        rayPoints[raycastCount + 1].coll_id = coll_id;
+
+        raycastCount += 2;
+        coll_id++;
+    }
+
+    // Sort raycast points by angles
+    std::sort(rayPoints, rayPoints + raycastCount, [](RaycastPoint a, RaycastPoint b) { return a.angle < b.angle; });
+
+    // Create mesh data
+    float vertices[MAX_VERT_COUNT * VERT_VAL_COUNT] = {};
+    unsigned int indices[MAX_VERT_COUNT * FACE_VAL_COUNT] = {};
 
     // Set middle point
-    vec3 editPos = GetEditPos();
     vertices[0] = editPos.x;
     vertices[1] = editPos.y;
-    vertices[2] = zPos;
+    vertices[2] = Z_POS;
     vertices[3] = 0;
     vertices[4] = 1;
 
-    int currentVtex = 0;
-    for (int i = 0; i < nbRaycast; i++)
+    int hitColliders[MAX_COLL_COUNT] = { };
+    int hitCollidersCount = 0;
+
+    int vertexCount = 1;
+    int faceCount = 0;
+    for (int i = 0; i < raycastCount; i++)
     {
-        float tetha = i * (360.f/ (float)nbRaycast);
-        vec2 dir = Rotate(vec2(1, 0), tetha);
+        vec2 dir = rayPoints[i].delta;
         vec2 res;
 
         if (!Collider::Raycast(vec2(editPos), dir, &res))
         {
             // If nothig is hit, use max distance
-            res = vec2(editPos) + dir * maxDist;
+            res = vec2(editPos) + glm::normalize(dir) * MAX_DIST;
         }
 
-        if (i > 2 && i < nbRaycast - 1)
+        // If the ray hit behind the point, this is a corner
+        vec2 raycastHitDelta = res - vec2(editPos);
+        float targetSqrDist = dir.x * dir.x + dir.y * dir.y;
+        float raycastSqrDist = raycastHitDelta.x * raycastHitDelta.x + raycastHitDelta.y * raycastHitDelta.y;
+        if (raycastSqrDist > targetSqrDist + 0.03)
         {
-            int lastArrayPos = currentVtex * valuesPerVert;
-            int secondLastArrayPos = (currentVtex - 1) * valuesPerVert;
-
-            vec2 lastVtexPos = vec2(vertices[lastArrayPos], vertices[lastArrayPos + 1]);
-            vec2 secondLastVtexPos = vec2(vertices[secondLastArrayPos], vertices[secondLastArrayPos + 1]);
-
-            vec2 lastDelta = lastVtexPos - secondLastVtexPos;
-            vec2 currentDelta = res - lastVtexPos;
-
-            float diff = glm::dot(lastDelta, currentDelta) - glm::length(lastDelta) * glm::length(currentDelta);
-
-            // Same direction, do not need the previous vertex
-            if (abs(diff) < 0.01)
+            bool alreadyHit = false;
+            for (int coll = 0; coll < hitCollidersCount; coll++)
             {
-                vertices[lastArrayPos] = res.x;
-                vertices[lastArrayPos + 1] = res.y;
-                continue;
+                if (hitColliders[coll] == rayPoints[i].coll_id)
+                {
+                    alreadyHit = true;
+                    break;
+                }
+            }
+
+            if (alreadyHit)
+            {
+                CreateVertex(vertices, &vertexCount, dir + vec2(editPos));
+                if (i > 0) CreateTriangle(indices, &vertexCount, &faceCount, raycastCount);
+                CreateVertex(vertices, &vertexCount, res);
+            }
+            else
+            {
+                CreateVertex(vertices, &vertexCount, res);
+                if (i > 0) CreateTriangle(indices, &vertexCount, &faceCount, raycastCount);
+                CreateVertex(vertices, &vertexCount, dir + vec2(editPos));
             }
         }
-
-        int arrayPos = (currentVtex + 1) * valuesPerVert;
-        vertices[arrayPos] = res.x;
-        vertices[arrayPos + 1] = res.y;
-        vertices[arrayPos + 2] = zPos;
-        vertices[arrayPos + 3] = (float)i / (float)nbRaycast;
-        vertices[arrayPos + 4] = 0;
-
-        // set faces
-        int faceArrayPos = currentVtex * valuesPerFace;
-        indices[faceArrayPos] = 0;
-        indices[faceArrayPos + 1] = currentVtex + 1;
-
-        if (i == nbRaycast - 1)
-            indices[faceArrayPos + 2] = 1;
         else
-            indices[faceArrayPos + 2] = currentVtex + 2;
+        {
+            CreateVertex(vertices, &vertexCount, res);
+            if (i > 0) CreateTriangle(indices, &vertexCount, &faceCount, raycastCount);
 
-        currentVtex++;
-
-        //std::printf("%d:\n", currentVtex);
-        //std::printf("   %f, %f, %f, %f, %f\n", vertices[arrayPos], vertices[arrayPos+1], vertices[arrayPos+2], vertices[arrayPos+3], vertices[arrayPos+4]);
-        //std::printf("   %d, %d, %d\n", indices[faceArrayPos], indices[faceArrayPos+1], indices[faceArrayPos+2]);
+            hitColliders[hitCollidersCount] = rayPoints[i].coll_id;
+            hitCollidersCount++;
+        }
     }
 
-    std::printf("Radioactivity source baked with %d vertices\n", currentVtex);
-
-    mesh = new Mesh(vertices, (currentVtex + 1) * valuesPerVert, indices, faceCount * valuesPerFace);
-
-    delete[] vertices;
-    delete[] indices;
+    std::printf("Radioactivity source baked with %d raycasts and %d vertices\n", raycastCount, vertexCount);
+    mesh = new Mesh(vertices, vertexCount * VERT_VAL_COUNT, indices, faceCount * FACE_VAL_COUNT);
 
     return mesh;
 }
@@ -200,6 +249,32 @@ void Radioactivity::ForceRefreshMesh()
     }
 }
 
+void Radioactivity::CreateVertex(float* vertices, int* vertexCount, vec2 pos)
+{
+    int vtPos = (*vertexCount) * VERT_VAL_COUNT;
+    vertices[vtPos] = pos.x;
+    vertices[vtPos + 1] = pos.y;
+    vertices[vtPos + 2] = Z_POS;
+    vertices[vtPos + 3] = 0;
+    vertices[vtPos + 4] = 0;
+    (*vertexCount)++;
+}
+
+void Radioactivity::CreateTriangle(unsigned int* indices, int* vertexCount, int* faceCount, int raycastCount)
+{
+    // Create face
+    int idPos = (*faceCount) * FACE_VAL_COUNT;
+    indices[idPos] = 0;
+    indices[idPos + 1] = (*vertexCount) - 2;
+
+    if (*faceCount == raycastCount - 2)
+        indices[idPos + 2] = 1;
+    else
+        indices[idPos + 2] = (*vertexCount) - 1;
+
+    (*faceCount)++;
+}
+
 void Radioactivity::UpdateTransform()
 {
 	EditorObject::UpdateTransform();
@@ -211,18 +286,19 @@ void Radioactivity::UpdateTransform()
         ((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
     }
 
-    if (isRealTime)
+    if (enabled)
     {
-        ForceRefreshMesh();
+        if (isRealTime)
+            ForceRefreshMesh();
+
+        glDisable(GL_DEPTH_TEST);
+
+        Shader* shader = &RessourceManager::shaders["radioactivity"];
+        shader->Use();
+        shader->SetUniform("projection", Camera::GetOrthographicProjection());
+        shader->SetUniform("transform", glm::mat4(1.0f));
+        GetMesh()->DrawMesh();
+
+        glEnable(GL_DEPTH_TEST);
     }
-
-    glDisable(GL_DEPTH_TEST);
-
-    Shader* shader = &RessourceManager::shaders["radioactivity"];
-    shader->Use();
-    shader->SetUniform("projection", Camera::GetOrthographicProjection());
-    shader->SetUniform("transform", glm::mat4(1.0f));
-    GetMesh()->DrawMesh();
-
-    glEnable(GL_DEPTH_TEST);
 }
