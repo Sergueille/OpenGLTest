@@ -5,14 +5,26 @@
 #include "CircleCollider.h"
 #include "RectCollider.h"
 #include "RessourceManager.h"
+#include "Player.h"
+#include <cmath>
 
 constexpr int MAX_VERT_COUNT = 256;
 constexpr int MAX_RAY_COUNT = 256;
 constexpr int MAX_COLL_COUNT = 128;
 constexpr int VERT_VAL_COUNT = 5;
 constexpr int FACE_VAL_COUNT = 3;
-constexpr float MAX_DIST = 50;
 constexpr float Z_POS = -90;
+
+ObjectEvent Radioactivity::events[RADIOACTIVITY_EVENT_COUNT] = {
+    ObjectEvent {
+        "Enable realtime",
+        [](EditorObject* object, void* param) { ((Radioactivity*)object)->isRealTime = true; },
+    },
+    ObjectEvent {
+        "Disable realtime",
+        [](EditorObject* object, void* param) { ((Radioactivity*)object)->isRealTime = false; },
+    },
+};
 
 Radioactivity::Radioactivity() : EditorObject(vec3(0))
 {
@@ -55,7 +67,7 @@ vec2 Radioactivity::DrawProperties(vec3 drawPos)
     if (pressed)
         ForceRefreshMesh();    
 
-    drawPos.y -= Editor::DrawProperty(drawPos, "Raycast count", &nbRaycast, Editor::panelPropertiesX, strID + "nbRaycast").y;
+    drawPos.y -= Editor::DrawProperty(drawPos, "Max distanse", &maxDist, Editor::panelPropertiesX, strID + "maxDist").y;
     drawPos.y -= Editor::CheckBox(drawPos, "Is realtime", &isRealTime, Editor::panelPropertiesX).y;
 
 	vec2 res = vec2(drawPos) - startPos;
@@ -84,7 +96,7 @@ void Radioactivity::Load(std::map<std::string, std::string>* props)
 {
 	EditorObject::Load(props);
 
-    EditorSaveManager::IntProp(props, "nbRaycast", &nbRaycast);
+    EditorSaveManager::FloatProp(props, "maxDist", &maxDist);
     isRealTime = (*props)["isRealTime"] == "1";
 }
 
@@ -92,7 +104,7 @@ void Radioactivity::Save()
 {
 	EditorObject::Save();
 
-    EditorSaveManager::WriteProp("nbRaycast", nbRaycast);
+    EditorSaveManager::WriteProp("maxDist", maxDist);
     EditorSaveManager::WriteProp("isRealTime", isRealTime);
 }
 
@@ -106,6 +118,12 @@ void Radioactivity::Disable()
 {
 	EditorObject::Disable();
     if (editorSprite != nullptr) editorSprite->StopDrawing();
+}
+
+void Radioactivity::GetObjectEvents(const ObjectEvent** res, int* resCount)
+{
+    *res = events;
+    *resCount = RADIOACTIVITY_EVENT_COUNT;
 }
 
 Mesh* Radioactivity::GetMesh()
@@ -122,14 +140,19 @@ Mesh* Radioactivity::GetMesh()
     // Get raycast points for rect colliders
     for (auto it = Collider::rectColliders.begin(); it != Collider::rectColliders.end(); it++)
     {
-        if (!(*it)->enabled) continue;
+        if (!(*it)->enabled) continue; // Ignore if disabled
 
+        vec2 delta = (*it)->GetPos() - vec2(editPos);
+        float sqrDist = delta.x * delta.x + delta.y * delta.y;
+        if (sqrDist > maxDist * maxDist) continue; // Ignore if too far
+
+         // Grow the collider before getting the points, to make sure the raycast alway passes
         constexpr float RECT_COLLIDER_POINTS_DELTA = 0.05f;
         (*it)->size += vec2(RECT_COLLIDER_POINTS_DELTA, RECT_COLLIDER_POINTS_DELTA);
         std::vector<vec2> points = (*it)->GetPoints();
         (*it)->size -= vec2(RECT_COLLIDER_POINTS_DELTA, RECT_COLLIDER_POINTS_DELTA);
 
-        for (int j = 0; j < 4; j++)
+        for (int j = 0; j < 4; j++) // Add targets
         {
             rayPoints[raycastCount + j].delta = points[j] - vec2(editPos);
             rayPoints[raycastCount + j].angle = Utility::GetVectorAngle(rayPoints[raycastCount + j].delta);
@@ -143,17 +166,23 @@ Mesh* Radioactivity::GetMesh()
     // Get raycast points for circle colliders
     for (auto it = Collider::circleColliders.begin(); it != Collider::circleColliders.end(); it++)
     {
-        if (!(*it)->enabled) continue;
+        if (!(*it)->enabled) continue; // Ignore if disabled
+
+        vec2 delta = (*it)->GetPos() - vec2(editPos);
+        float sqrDist = delta.x * delta.x + delta.y * delta.y;
+        if (sqrDist > maxDist * maxDist) continue; // Ignore if too far
 
         constexpr float CIRCLE_COLLIDER_POINTS_DELTA = 0.025f;
-        float radius = ((*it)->size / 2) + CIRCLE_COLLIDER_POINTS_DELTA;
+        float radius = ((*it)->size / 2) + CIRCLE_COLLIDER_POINTS_DELTA; // A little bit bigger, to make sure the raycasts passes
 
+        // Get points
         vec2 deltaPos = (*it)->GetPos() - vec2(editPos);
         vec2 tangent = glm::normalize(Rotate(deltaPos, 90));
 
         vec2 point1 = deltaPos + tangent * radius;
         vec2 point2 = deltaPos - tangent * radius;
 
+        // Add targets
         rayPoints[raycastCount].delta = point1;
         rayPoints[raycastCount].angle = Utility::GetVectorAngle(point1);
         rayPoints[raycastCount].coll_id = coll_id;
@@ -179,6 +208,7 @@ Mesh* Radioactivity::GetMesh()
     vertices[3] = 0;
     vertices[4] = 1;
 
+    // Array containing all colliders that we have already hit
     int hitColliders[MAX_COLL_COUNT] = { };
     int hitCollidersCount = 0;
 
@@ -192,14 +222,13 @@ Mesh* Radioactivity::GetMesh()
         if (!Collider::Raycast(vec2(editPos), dir, &res))
         {
             // If nothig is hit, use max distance
-            res = vec2(editPos) + glm::normalize(dir) * MAX_DIST;
+            res = vec2(editPos) + glm::normalize(dir) * maxDist;
         }
 
-        // If the ray hit behind the point, this is a corner
         vec2 raycastHitDelta = res - vec2(editPos);
         float targetSqrDist = dir.x * dir.x + dir.y * dir.y;
         float raycastSqrDist = raycastHitDelta.x * raycastHitDelta.x + raycastHitDelta.y * raycastHitDelta.y;
-        if (raycastSqrDist > targetSqrDist + 0.03)
+        if (raycastSqrDist > targetSqrDist + 0.03) // If the ray hit behind the point, this is a corner
         {
             bool alreadyHit = false;
             for (int coll = 0; coll < hitCollidersCount; coll++)
@@ -222,13 +251,14 @@ Mesh* Radioactivity::GetMesh()
                 CreateVertex(vertices, &vertexCount, res);
                 if (i > 0) CreateTriangle(indices, &vertexCount, &faceCount, raycastCount);
                 CreateVertex(vertices, &vertexCount, dir + vec2(editPos));
+                hitColliders[hitCollidersCount] = rayPoints[i].coll_id;
+                hitCollidersCount++;
             }
         }
-        else
+        else // Normal procedure
         {
             CreateVertex(vertices, &vertexCount, res);
             if (i > 0) CreateTriangle(indices, &vertexCount, &faceCount, raycastCount);
-
             hitColliders[hitCollidersCount] = rayPoints[i].coll_id;
             hitCollidersCount++;
         }
@@ -288,17 +318,38 @@ void Radioactivity::UpdateTransform()
 
     if (enabled)
     {
-        if (isRealTime)
-            ForceRefreshMesh();
+        // Do not refresh if camera is too far
+        vec2 camDelta = Camera::position - vec2(GetEditPos());
+        float camSqrDist = camDelta.x * camDelta.x + camDelta.y * camDelta.y;
+        if (camSqrDist < std::pow(maxDist + Camera::size, 2))
+        {
+            if (isRealTime)
+                ForceRefreshMesh();
 
-        glDisable(GL_DEPTH_TEST);
+            glDisable(GL_DEPTH_TEST);
 
-        Shader* shader = &RessourceManager::shaders["radioactivity"];
-        shader->Use();
-        shader->SetUniform("projection", Camera::GetOrthographicProjection());
-        shader->SetUniform("transform", glm::mat4(1.0f));
-        GetMesh()->DrawMesh();
+            Shader* shader = &RessourceManager::shaders["radioactivity"];
+            shader->Use();
+            shader->SetUniform("projection", Camera::GetOrthographicProjection());
+            shader->SetUniform("transform", glm::mat4(1.0f));
+            GetMesh()->DrawMesh();
 
-        glEnable(GL_DEPTH_TEST);
+            glEnable(GL_DEPTH_TEST);
+
+            if (Player::ingameInstance != nullptr)
+            {
+                // Kill player
+                vec2 dir = Player::ingameInstance->GetPos() - vec2(GetEditPos());
+                Collider* coll;
+
+                if (Collider::Raycast(GetEditPos(), dir, nullptr, nullptr, &coll))
+                {
+                    if (coll == Player::ingameInstance->collider)
+                    {
+                        Player::ingameInstance->Kill();
+                    }
+                }
+            }            
+        }
     }
 }

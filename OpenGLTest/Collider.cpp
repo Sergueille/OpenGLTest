@@ -126,7 +126,8 @@ bool Collider::Raycast(vec2 origin, vec2 direction, vec2* result, Collider* igno
 
 	if (found)
 	{
-		*result = nearestPoint;
+		if (result != nullptr)
+			*result = nearestPoint;
 
 		if (resHitCollider != nullptr)
 			*resHitCollider = hitCollider;

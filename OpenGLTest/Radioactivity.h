@@ -6,6 +6,8 @@
 
 using namespace glm;
 
+constexpr int RADIOACTIVITY_EVENT_COUNT = 2;
+
 class Radioactivity : public EditorObject
 {
 public:
@@ -14,8 +16,10 @@ public:
 
     Sprite* editorSprite = nullptr;
 
-	int nbRaycast = 72;
+	float maxDist = 0;
 	bool isRealTime = false;
+
+	static ObjectEvent events[RADIOACTIVITY_EVENT_COUNT];
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;
 	virtual void UpdateTransform() override;
@@ -27,6 +31,8 @@ public:
 
 	virtual void Enable() override;
 	virtual void Disable() override;
+
+	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 
 	Mesh* GetMesh();
 	void ForceRefreshMesh();
