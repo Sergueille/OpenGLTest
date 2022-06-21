@@ -34,11 +34,15 @@ public:
 
 	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 
+	virtual void ResetIngameState() override;
+
 	Mesh* GetMesh();
 	void ForceRefreshMesh();
 
 private:
 	Mesh* mesh = nullptr;
+
+	bool startedRealtime = false;
 
 	void CreateVertex(float* vertices, int* vertexCount, vec2 pos);
 	void CreateTriangle(unsigned int* indices, int* vertexCount, int* faceCount, int raycastCount);

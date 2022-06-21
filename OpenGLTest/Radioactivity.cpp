@@ -98,6 +98,8 @@ void Radioactivity::Load(std::map<std::string, std::string>* props)
 
     EditorSaveManager::FloatProp(props, "maxDist", &maxDist);
     isRealTime = (*props)["isRealTime"] == "1";
+
+    startedRealtime = isRealTime;
 }
 
 void Radioactivity::Save()
@@ -124,6 +126,11 @@ void Radioactivity::GetObjectEvents(const ObjectEvent** res, int* resCount)
 {
     *res = events;
     *resCount = RADIOACTIVITY_EVENT_COUNT;
+}
+
+void Radioactivity::ResetIngameState()
+{
+    isRealTime = startedRealtime;
 }
 
 Mesh* Radioactivity::GetMesh()

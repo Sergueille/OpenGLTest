@@ -33,9 +33,6 @@ EditorParticleSystem::EditorParticleSystem() : EditorObject(vec3(0))
 	changeSize = true;
 	changeColor = true;
 	paticleTemplate = new Sprite(nullptr, vec3(0));
-
-	if (autoStart)
-		EventManager::DoInOneFrame([this] { Start(); });
             
 	typeName = "EditorParticleSystem";
 }
@@ -142,6 +139,9 @@ void EditorParticleSystem::Load(std::map<std::string, std::string>* props)
 	EditorSaveManager::FloatProp(props, "particleLifetime", &particleLifetime);
 
 	autoStart = (*props)["autoStart"] != "0";
+	
+	if (autoStart)
+		EventManager::DoInOneFrame([this] { Start(); });
 }
 
 void EditorParticleSystem::Save()
@@ -208,6 +208,14 @@ void EditorParticleSystem::GetObjectEvents(const ObjectEvent** res, int* resCoun
 {
 	*res = &events[0];
 	*resCount = PSYS_EVENT_COUNT;
+}
+
+void EditorParticleSystem::ResetIngameState()
+{
+	if (!autoStart)
+	{
+		Stop();
+	}
 }
 
 void EditorParticleSystem::UpdateTransform()
