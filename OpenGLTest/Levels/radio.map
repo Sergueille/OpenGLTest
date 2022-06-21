@@ -320,7 +320,7 @@ object Radioactivity {
 	parent: "-1"
 	parallax: "1.000000"
 	maxDist: "15.000000"
-	isRealTime: "1"
+	isRealTime: "0"
 }
 object EditorSprite {
 	ID: "704"
@@ -1123,7 +1123,7 @@ object Light {
 	parent: "-1"
 	parallax: "1.000000"
 	lightSize: "15.000000"
-	color: "0.500000, 1.000000, 0.200000, 1.000000"
+	color: "0.600000, 1.000000, 0.400000, 1.000000"
 	intensity: "0.300000"
 	rotation: "90.000000"
 	innerAngle: "89.000000"
@@ -1137,7 +1137,7 @@ object Light {
 	parent: "-1"
 	parallax: "1.000000"
 	lightSize: "15.000000"
-	color: "0.500000, 1.000000, 0.200000, 1.000000"
+	color: "0.600000, 1.000000, 0.400000, 1.000000"
 	intensity: "0.300000"
 	rotation: "90.000000"
 	innerAngle: "89.000000"
