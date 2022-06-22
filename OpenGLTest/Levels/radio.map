@@ -701,7 +701,7 @@ object ShadowCaster {
 object Radioactivity {
 	ID: "854"
 	name: ""
-	position: "67.800003, 0.000000, 5.000000"
+	position: "67.000000, 0.000000, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	maxDist: "15.000000"
@@ -1133,7 +1133,7 @@ object Light {
 object Light {
 	ID: "2457"
 	name: ""
-	position: "67.200005, -2.400000, 20.000000"
+	position: "66.800003, -2.400000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	lightSize: "15.000000"
@@ -1147,7 +1147,7 @@ object Light {
 object EditorSprite {
 	ID: "2459"
 	name: ""
-	position: "67.599998, -0.200000, 0.000000"
+	position: "66.800003, -0.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "3.400000, 3.400000"

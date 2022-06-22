@@ -1455,7 +1455,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "5019"
 	name: ""
-	position: "132.199997, -12.200000, 5.000000"
+	position: "132.199997, -11.600000, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "19.000000, 26.000000"
