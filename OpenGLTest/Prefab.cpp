@@ -138,8 +138,6 @@ EditorObject* Prefab::Copy()
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	newObj->prefabObjects = std::list<EditorObject*>();
 	return newObj;
 }
@@ -216,14 +214,21 @@ void Prefab::GetObjectEvents(const ObjectEvent** res, int* resCount)
 	*res = &events[0];
 }
 
-void Prefab::UpdateTransform()
+void Prefab::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
+
+	if (!enabled) return;
 
 	if (editorSprite != nullptr)
 	{
 		editorSprite->position = GetEditPos() + vec3(0, 0, 50);
 		editorSprite->size = vec2(Editor::gizmoSize);
 		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
+	}
+
+	for (auto it = prefabObjects.begin(); it != prefabObjects.end(); it++)
+	{
+		(*it)->OnMainLoop();
 	}
 }

@@ -10,8 +10,6 @@ EditorObject::EditorObject(vec3 position)
 
 	this->ID = Editor::IDmax;
 	Editor::IDmax++;
-
-	SubscribeToEditorObjectFuncs();
 }
 
 EditorObject::~EditorObject()
@@ -20,12 +18,6 @@ EditorObject::~EditorObject()
 	{
 		delete clickCollider;
 		clickCollider = nullptr;
-	}
-
-	if (mainLoopFuncPos != nullptr)
-	{
-		EventManager::OnMainLoop.remove(mainLoopFuncPos);
-		mainLoopFuncPos = nullptr;
 	}
 }
 
@@ -152,22 +144,6 @@ vec3 EditorObject::SetGlobalEditPos(vec3 pos)
 	return editorPosition;
 }
 
-void EditorObject::UpdateTransform()
-{
-	if (clickCollider)
-		clickCollider->SetPos(GetEditPos());
-}
-
-void EditorObject::SubscribeToEditorObjectFuncs()
-{
-#if _DEBUG
-	std::string typeName = this->typeName;
-	mainLoopFuncPos = EventManager::OnMainLoop.push_end([this, typeName] { OnMainLoop(); });
-#else
-	mainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { OnMainLoop(); });
-#endif
-}
-
 vec2 EditorObject::DrawProperties(vec3 startPos)
 {
 	std::string strID = std::to_string(ID);
@@ -240,7 +216,6 @@ void EditorObject::Enable()
 
 	enabled = true;
 	clickCollider->enabled = true;
-	SubscribeToEditorObjectFuncs();
 }
 
 void EditorObject::Disable()
@@ -249,12 +224,6 @@ void EditorObject::Disable()
 
 	enabled = false;
 	clickCollider->enabled = false;
-
-	if (mainLoopFuncPos != nullptr)
-	{
-		EventManager::OnMainLoop.remove(mainLoopFuncPos);
-		mainLoopFuncPos = nullptr;
-	}
 }
 
 bool EditorObject::IsEnabled()
@@ -302,8 +271,8 @@ void EditorObject::OnMainLoop()
 {
 	if (!enabled) return;
 
-	UpdateTransform();
-	DerivedOnMainLoop();
+	if (clickCollider)
+		clickCollider->SetPos(GetEditPos());
 }
 
 EventList::EventList()

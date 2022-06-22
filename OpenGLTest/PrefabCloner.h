@@ -27,7 +27,7 @@ public:
 	virtual void ReloadPrefab() override;
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;
-	virtual void UpdateTransform() override;
+	virtual void OnMainLoop() override;
 
 	virtual void Load(std::map<std::string, std::string>* props) override;
 	virtual void Save() override;

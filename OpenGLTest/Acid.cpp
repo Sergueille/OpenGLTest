@@ -19,9 +19,6 @@ Acid::Acid() : EditorObject(vec3(0))
 	sprite->setUniforms = &SetSpriteUniforms;
 	sprite->setUniformsObjectCall = this;
 	sprite->isLit = true;
-
-	if (!Editor::enabled)
-		acidMainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { this->OnAcidMainLoop(); });
             
 	typeName = "Acid";
 }
@@ -33,9 +30,6 @@ Acid::~Acid()
         delete sprite;
         sprite = nullptr;
     }
-
-	if (acidMainLoopFuncPos != nullptr)
-		EventManager::OnMainLoop.remove(acidMainLoopFuncPos);
 }
 
 vec2 Acid::DrawProperties(vec3 drawPos)
@@ -62,8 +56,6 @@ EditorObject* Acid::Copy()
 	newObj->clickCollider = new RectCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->orientation, oldCollider->MustCollideWithPhys());
 
     newObj->sprite = this->sprite->Copy();
-
-	newObj->SubscribeToEditorObjectFuncs();
 
 	return newObj;
 }
@@ -106,22 +98,22 @@ void Acid::SetSpriteUniforms(Shader* shader, void* object)
 	shader->SetUniform("showSurface", acid->showSurface);
 }
 
-void Acid::OnAcidMainLoop()
+void Acid::OnMainLoop()
 {
-	if (Player::ingameInstance == nullptr) return;
+	EditorObject::OnMainLoop();
 
-	vec3 res = clickCollider->CollideWith((CircleCollider*)Player::ingameInstance->collider);
-	if (res.z != 0) // Player is touching acid
-	{
-		Player::ingameInstance->Kill();
-	}
-}
-
-void Acid::UpdateTransform()
-{
-	EditorObject::UpdateTransform();
+	if (!enabled) return;
     
 	sprite->position = GetEditPos();
 	sprite->size = GetEditScale();
 	((RectCollider*)clickCollider)->size = GetEditScale();
+
+	if (Player::ingameInstance != nullptr)
+	{
+		vec3 res = clickCollider->CollideWith((CircleCollider*)Player::ingameInstance->collider);
+		if (res.z != 0) // Player is touching acid
+		{
+			Player::ingameInstance->Kill();
+		}
+	}
 }

@@ -239,6 +239,8 @@ int main(int argc, void* argv[])
 
         Camera::UpdateCamera();
 
+        EditorSaveManager::OnMainLoop();
+
         // Display the FPS
         if (!Editor::enabled && displayFPS)
             TextManager::RenderText(std::to_string(GetFPS()) + " FPS",

@@ -68,7 +68,7 @@ public:
 	virtual vec2 DrawActions(vec3 drawPos);
 
 	/// <summary>
-	/// Returns a copy of the object. When overriding, DONT'T FORGET TO CALL copy->SubscribeToMainLoop()
+	/// Returns a copy of the object
 	/// </summary>
 	/// <returns></returns>
 	virtual EditorObject* Copy() = 0;
@@ -103,12 +103,12 @@ public:
 	virtual void OnSelected() { };
 	virtual void OnUnselected() { };
 
-	virtual void DerivedOnMainLoop() { };
-
 	/// <summary>
 	/// Called when loading user save
 	/// </summary>
 	virtual void ResetIngameState() { };
+
+	virtual void OnMainLoop();
 
 protected:
 	bool enabled = true;
@@ -116,18 +116,8 @@ protected:
 	float editorRotation;
 	vec2 editorSize = vec2(1);
 
-	/// <summary>
-	/// Call this to replace collider, sprites, etc.
-	/// </summary>
-	virtual void UpdateTransform();
-
-	void SubscribeToEditorObjectFuncs();
-	void OnMainLoop();
-
 private:
 	EditorObject* _parent = nullptr;
-
-	LinkedListElement<std::function<void()>>* mainLoopFuncPos = nullptr;
 };
 
 struct EventList

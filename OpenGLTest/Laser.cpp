@@ -51,8 +51,6 @@ Laser::Laser() : EditorObject(vec3(0, 0, 0))
 	laserCollider = new RectCollider(vec2(0), vec2(1), 0, false);
 
 	lasers.push_back(this);
-
-	laserMainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { this->OnLaserMainLoop(); });
 	typeName = "Laser";
 
 	SetType(laserType);
@@ -79,14 +77,13 @@ Laser::~Laser()
 	laserCollider = nullptr;
 
 	lasers.remove(this);
-
-	if (enabled)
-		EventManager::OnMainLoop.remove(laserMainLoopFuncPos);
 }
 
-void Laser::UpdateTransform()
+void Laser::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
+
+	if (!enabled) return;
 
 	if (editorSprite != nullptr)
 	{
@@ -107,6 +104,77 @@ void Laser::UpdateTransform()
 
 	vec4 colors[2] = { vec4(1, 0.5, 0.9, 1), vec4(1, 0.5, 0.5, 1) };
 	glowSprite->color = colors[(int)laserType];
+
+	if (laserOn)
+	{
+		float playerDist = Player::ingameInstance == nullptr
+			? 0
+			: glm::length(Player::ingameInstance->GetPos() - vec2(GetEditPos()));
+
+		if (Editor::enabled || playerDist < minPlayerDist || !hasRefreshedOnce) // Refresh anyway for the first time to relpace the sprite correctly
+		{
+			vec2 raycastRes;
+			vec2 direction = Utility::Rotate(vec2(1, 0), GetEditRotation());
+			if (Collider::Raycast(GetEditPos(), direction, &raycastRes))
+			{
+				vec2 spriteStart = vec2(GetEditPos()) + (direction * startOffset);
+				vec2 spriteEnd = raycastRes + (direction * endOffset);
+
+				vec2 middle = (spriteStart + spriteEnd) / 2.f;
+				float length = glm::length(spriteStart - spriteEnd);
+
+				displaySprite->position = vec3(middle.x, middle.y, GetEditPos().z);
+				displaySprite->size = vec2(length, width);
+				displaySprite->rotate = GetEditRotation();
+
+				laserCollider->SetPos(vec3(middle.x, middle.y, GetEditPos().z));
+				laserCollider->size = vec2(length, width);
+				laserCollider->orientation = GetEditRotation();
+
+				if (Player::ingameInstance != nullptr && Player::ingameInstance->canTeleport)
+				{
+					if (laserType == LaserType::noTeleport)
+					{
+						float la, lb;
+						Utility::GetLineEquationFromPoints(spriteStart, spriteEnd, &la, &lb);
+						float pa, pb;
+						Utility::GetLineEquationFromPoints(Player::ingameInstance->GetPos(), Player::ingameInstance->teleportPosition, &pa, &pb);
+
+						bool res = Utility::SegementIntersection(
+							vec2(GetEditPos()) - (direction * 100.0f),
+							raycastRes + (direction * 100.0f),
+							Player::ingameInstance->GetPos(),
+							Player::ingameInstance->teleportPosition,
+							&intersectionPos);
+
+						if (!res)
+						{
+							if (SqrDist(intersectionPos, Player::ingameInstance->GetPos()) <
+								SqrDist(intersectionPos, Player::ingameInstance->teleportPosition))
+							{
+								intersectionPos = Player::ingameInstance->GetPos();
+							}
+							else
+							{
+								intersectionPos = Player::ingameInstance->teleportPosition;
+							}
+						}
+					}
+					else if (laserType == LaserType::deadlyLaser)
+					{
+						intersectionPos = Player::ingameInstance->GetPos();
+
+						// Kill player
+						vec3 res = Player::ingameInstance->collider->CollideWith(laserCollider);
+						if (res.z != 0)
+							Player::ingameInstance->Kill();
+					}
+				}
+			}
+
+			hasRefreshedOnce = true;
+		}
+	}
 }
 
 void Laser::Save()
@@ -148,8 +216,6 @@ void Laser::Enable()
 
 	laserCollider->enabled = true;
 
-	laserMainLoopFuncPos = EventManager::OnMainLoop.push_end([this] { this->OnLaserMainLoop(); });
-
 	if (laserOn)
 		lasers.push_back(this);
 }
@@ -165,8 +231,6 @@ void Laser::Disable()
 		editorSprite->StopDrawing();
 
 	laserCollider->enabled = false;
-
-	EventManager::OnMainLoop.remove(laserMainLoopFuncPos);
 
 	if (laserOn)
 		lasers.remove(this);
@@ -189,9 +253,6 @@ Laser* Laser::Copy()
 	copy->clickCollider = new CircleCollider(oldCollider->GetPos(), oldCollider->size, false);
 
 	copy->laserCollider = new RectCollider(vec2(0), vec2(1), 0, false);
-
-	copy->SubscribeToEditorObjectFuncs();
-	copy->laserMainLoopFuncPos = EventManager::OnMainLoop.push_end([copy] { copy->OnLaserMainLoop(); });
 
 	return copy;
 }
@@ -237,80 +298,6 @@ void Laser::ResetIngameState()
 	else
 	{
 		TurnOff();
-	}
-}
-
-void Laser::OnLaserMainLoop()
-{
-	if (enabled && laserOn)
-	{
-		float playerDist = Player::ingameInstance == nullptr
-			? 0 
-			: glm::length(Player::ingameInstance->GetPos() - vec2(GetEditPos()));
-
-		if (Editor::enabled || playerDist < minPlayerDist || !hasRefreshedOnce) // Refresh anyway for the first time to relpace the sprite correctly
-		{
-			vec2 raycastRes;
-			vec2 direction = Utility::Rotate(vec2(1, 0), GetEditRotation());
-			if (Collider::Raycast(GetEditPos(), direction, &raycastRes))
-			{
-				vec2 spriteStart = vec2(GetEditPos()) + (direction * startOffset);
-				vec2 spriteEnd = raycastRes + (direction * endOffset);
-
-				vec2 middle = (spriteStart + spriteEnd) / 2.f;
-				float length = glm::length(spriteStart - spriteEnd);
-
-				displaySprite->position = vec3(middle.x, middle.y, GetEditPos().z);
-				displaySprite->size = vec2(length, width);
-				displaySprite->rotate = GetEditRotation();
-
-				laserCollider->SetPos(vec3(middle.x, middle.y, GetEditPos().z));
-				laserCollider->size = vec2(length, width);
-				laserCollider->orientation = GetEditRotation();
-
-				if (Player::ingameInstance != nullptr && Player::ingameInstance->canTeleport)
-				{
-					if (laserType == LaserType::noTeleport)
-					{
-						float la, lb;
-						Utility::GetLineEquationFromPoints(spriteStart, spriteEnd, &la, &lb);
-						float pa, pb;
-						Utility::GetLineEquationFromPoints(Player::ingameInstance->GetPos(), Player::ingameInstance->teleportPosition, &pa, &pb);
-					
-						bool res = Utility::SegementIntersection(
-							vec2(GetEditPos()) - (direction * 100.0f),
-							raycastRes + (direction * 100.0f),
-							Player::ingameInstance->GetPos(),
-							Player::ingameInstance->teleportPosition, 
-							&intersectionPos);
-
-						if (!res)
-						{
-							if (SqrDist(intersectionPos, Player::ingameInstance->GetPos()) <
-								SqrDist(intersectionPos, Player::ingameInstance->teleportPosition))
-							{
-								intersectionPos = Player::ingameInstance->GetPos();
-							}
-							else
-							{
-								intersectionPos = Player::ingameInstance->teleportPosition;
-							}
-						}
-					}
-					else if (laserType == LaserType::deadlyLaser)
-					{
-						intersectionPos = Player::ingameInstance->GetPos();
-
-						// Kill player
-						vec3 res = Player::ingameInstance->collider->CollideWith(laserCollider);
-						if (res.z != 0)
-							Player::ingameInstance->Kill();
-					}
-				}
-			}
-
-			hasRefreshedOnce = true;
-		}		
 	}
 }
 

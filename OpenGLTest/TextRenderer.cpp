@@ -54,8 +54,6 @@ EditorObject* TextRenderer::Copy()
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	return newObj;
 }
 
@@ -93,9 +91,11 @@ void TextRenderer::Disable()
     if (editorSprite != nullptr) editorSprite->StopDrawing();
 }
 
-void TextRenderer::UpdateTransform()
+void TextRenderer::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
+
+	if (!enabled) return;
     
     if (editorSprite != nullptr)
 	{

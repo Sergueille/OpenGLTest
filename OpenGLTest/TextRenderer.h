@@ -19,7 +19,7 @@ public:
 	vec4 color = vec4(1);
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;
-	virtual void UpdateTransform() override;
+	virtual void OnMainLoop() override;
 
 	virtual EditorObject* Copy() override;
 
@@ -28,8 +28,5 @@ public:
 
 	virtual void Enable() override;
 	virtual void Disable() override;
-
-private:
-	LinkedListElement<std::function<void()>>* textMainLoopFuncPos = nullptr;
 };
 

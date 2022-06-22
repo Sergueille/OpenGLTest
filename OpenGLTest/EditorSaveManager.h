@@ -102,6 +102,8 @@ public:
 
 	static void IndexUserSaves();
 
+	static void OnMainLoop();
+
 private:
 	static std::ofstream* ofile;
 	static std::ifstream* ifile;

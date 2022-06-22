@@ -78,8 +78,6 @@ EditorObject* LogicRelay::Copy()
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	// Wait one frame before sending auto trigger
 	if (newObj->triggerOnStart && !Editor::enabled)
 	{
@@ -134,11 +132,11 @@ void LogicRelay::GetObjectEvents(const ObjectEvent** res, int* resCount)
 	*resCount = LOGIC_RELAY_EVENT_COUNT;
 }
 
-void LogicRelay::UpdateTransform()
+void LogicRelay::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
     
-    if (editorSprite != nullptr)
+    if (enabled && editorSprite != nullptr)
 	{
 		editorSprite->position = GetEditPos();
 		editorSprite->size = vec2(Editor::gizmoSize);

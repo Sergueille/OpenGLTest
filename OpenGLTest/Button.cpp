@@ -60,14 +60,12 @@ EditorObject* Button::Copy()
 
 	newObj->btnSprite = this->btnSprite->Copy();
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	return newObj;
 }
 
-void Button::UpdateTransform()
+void Button::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
 	btnSprite->position = GetEditPos();
 }
 

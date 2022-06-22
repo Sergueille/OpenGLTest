@@ -840,3 +840,11 @@ void EditorSaveManager::IndexUserSaves()
 		userSaves.push_back(fileName);
 	}
 }
+
+void EditorSaveManager::OnMainLoop()
+{
+	for (auto it = levelObjectList.begin(); it != levelObjectList.end(); it++)
+	{
+		(*it)->OnMainLoop();
+	}
+}

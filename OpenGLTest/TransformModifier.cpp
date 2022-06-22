@@ -104,8 +104,6 @@ EditorObject* TransformModifier::Copy()
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	if (!Editor::enabled)
 		EventManager::DoInOneFrame([newObj] {
 			newObj->targetObject = Editor::GetEditorObjectByIDInObjectContext(newObj, newObj->targetID, false, false);
@@ -238,11 +236,11 @@ void TransformModifier::CancelAll()
 	}
 }
 
-void TransformModifier::UpdateTransform()
+void TransformModifier::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
     
-    if (editorSprite != nullptr)
+    if (enabled && editorSprite != nullptr)
 	{
 		editorSprite->position = GetEditPos();
 		editorSprite->size = vec2(Editor::gizmoSize);

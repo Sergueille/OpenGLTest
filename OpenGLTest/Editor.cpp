@@ -444,6 +444,11 @@ void Editor::OnMainLoop()
 	DrawPanel();
 	DrawInfoBar();
 	HandleInputBackspace();
+
+	for (auto it = editorObjects.begin(); it != editorObjects.end(); it++)
+	{
+		(*it)->OnMainLoop();
+	}
 }
 
 void Editor::HandleTools()

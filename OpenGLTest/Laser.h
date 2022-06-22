@@ -43,7 +43,7 @@ public:
 	/// </summary>
 	float endOffset = 0.05f;
 
-	virtual void UpdateTransform() override;
+	virtual void OnMainLoop() override;
 
 	virtual void Save() override;
 	virtual void Load(std::map<std::string, std::string>* props) override;
@@ -66,13 +66,9 @@ public:
 	virtual void ResetIngameState() override;
 
 private:
-	LinkedListElement<std::function<void()>>* laserMainLoopFuncPos = nullptr;
-
 	vec2 intersectionPos = vec2(0);
-
 	bool hasRefreshedOnce = false;
 
-	void OnLaserMainLoop();
 	static void SetSpriteUniforms(Shader* shader, void* object);
 
 	static const ObjectEvent events[LASER_EVENT_COUNT];

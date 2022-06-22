@@ -55,6 +55,32 @@ vec2 EditorSprite::DrawProperties(vec3 drawPos)
 	return res;
 }
 
+void EditorSprite::OnMainLoop()
+{
+	EditorObject::OnMainLoop();
+
+	if (!enabled) return;
+
+	this->position = GetEditPos();
+	this->rotate = GetEditRotation();
+	this->size = GetEditScale();
+
+	clickCollider->SetPos(position);
+	((RectCollider*)clickCollider)->orientation = rotate;
+
+	if (texture != nullptr)
+	{
+		((RectCollider*)clickCollider)->size = Abs(size * vec2(texture->ratio, 1));
+	}
+	else
+	{
+		((RectCollider*)clickCollider)->size = Abs(size);
+	}
+
+	if (Editor::enabled || !visibleOnlyInEditor)
+		Draw();
+}
+
 EditorObject* EditorSprite::Copy()
 {
 	EditorSprite* newObj = new EditorSprite(*this);
@@ -62,15 +88,6 @@ EditorObject* EditorSprite::Copy()
 	// copy collider
 	RectCollider* oldCollider = (RectCollider*)this->clickCollider;
 	newObj->clickCollider = new RectCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->orientation, oldCollider->MustCollideWithPhys());
-
-	// subscribe again to main loop
-	if (this->isDrawnOnMainLoop)
-	{
-		newObj->isDrawnOnMainLoop = false;
-		newObj->DrawOnMainLoop();
-	}
-
-	newObj->SubscribeToEditorObjectFuncs();
 
 	return newObj;
 }
@@ -97,9 +114,6 @@ void EditorSprite::Load(std::map<std::string, std::string>* props)
 	visibleOnlyInEditor = (*props)["visibleOnlyInEditor"] == "1";
 
 	EditorObject::Load(props);
-
-	if (Editor::enabled || !visibleOnlyInEditor)
-		DrawOnMainLoop();
 }
 
 void EditorSprite::Save()
@@ -120,16 +134,12 @@ void EditorSprite::Save()
 void EditorSprite::Enable()
 {
 	EditorObject::Enable();
-
-	if (Editor::enabled || !visibleOnlyInEditor)
-		DrawOnMainLoop();
 	clickCollider->enabled = true;
 }
 
 void EditorSprite::Disable()
 {
 	EditorObject::Disable();
-	StopDrawing();
 	clickCollider->enabled = false;
 }
 
@@ -143,24 +153,4 @@ void EditorSprite::ResetIngameState()
 {
 	if (!this->enabled)
 		this->Enable();
-}
-
-void EditorSprite::UpdateTransform()
-{
-	EditorObject::UpdateTransform();
-	this->position = GetEditPos();
-	this->rotate = GetEditRotation();
-	this->size = GetEditScale();
-
-	clickCollider->SetPos(position);
-	((RectCollider*)clickCollider)->orientation = rotate;
-
-	if (texture != nullptr)
-	{
-		((RectCollider*)clickCollider)->size = Abs(size * vec2(texture->ratio, 1));
-	}
-	else
-	{
-		((RectCollider*)clickCollider)->size = Abs(size);
-	}
 }

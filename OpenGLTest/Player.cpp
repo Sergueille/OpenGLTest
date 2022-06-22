@@ -106,9 +106,9 @@ Player::~Player()
 	}
 }
 
-void Player::UpdateTransform()
+void Player::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
 
 	if (Editor::enabled && enabled)
 	{
@@ -118,7 +118,7 @@ void Player::UpdateTransform()
 			teleportPosSprite->position = editorPosition + vec3(teleportationDistance, 0, 0);
 		lightsSprite->position = editorPosition + height * vec3(0, -0.344, 1);
 	}
-	else
+	else if (enabled)
 	{
 		collider->SetPos(GetPos()); // Re-set collider position because EditorObject will replace it by default
 
@@ -160,7 +160,6 @@ EditorObject* Player::Copy()
 	copy->lightsSprite = this->lightsSprite->Copy();
 
 	copy->SubscribeToMainLoop();
-	copy->SubscribeToEditorObjectFuncs();
 
 	return copy;
 }

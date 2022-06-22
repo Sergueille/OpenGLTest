@@ -87,8 +87,6 @@ EditorObject* Radioactivity::Copy()
 
     newObj->mesh = nullptr;
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	return newObj;
 }
 
@@ -312,9 +310,10 @@ void Radioactivity::CreateTriangle(unsigned int* indices, int* vertexCount, int*
     (*faceCount)++;
 }
 
-void Radioactivity::UpdateTransform()
+void Radioactivity::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
+    if (!enabled) return;
     
     if (editorSprite != nullptr)
     {
@@ -323,40 +322,37 @@ void Radioactivity::UpdateTransform()
         ((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
     }
 
-    if (enabled)
+    // Do not refresh if camera is too far
+    vec2 camDelta = Camera::position - vec2(GetEditPos());
+    float camSqrDist = camDelta.x * camDelta.x + camDelta.y * camDelta.y;
+    if (camSqrDist < std::pow(maxDist + Camera::size, 2))
     {
-        // Do not refresh if camera is too far
-        vec2 camDelta = Camera::position - vec2(GetEditPos());
-        float camSqrDist = camDelta.x * camDelta.x + camDelta.y * camDelta.y;
-        if (camSqrDist < std::pow(maxDist + Camera::size, 2))
+        if (isRealTime)
+            ForceRefreshMesh();
+
+        glDisable(GL_DEPTH_TEST);
+
+        Shader* shader = &RessourceManager::shaders["radioactivity"];
+        shader->Use();
+        shader->SetUniform("projection", Camera::GetOrthographicProjection());
+        shader->SetUniform("transform", glm::mat4(1.0f));
+        GetMesh()->DrawMesh();
+
+        glEnable(GL_DEPTH_TEST);
+
+        if (Player::ingameInstance != nullptr)
         {
-            if (isRealTime)
-                ForceRefreshMesh();
+            // Kill player
+            vec2 dir = Player::ingameInstance->GetPos() - vec2(GetEditPos());
+            Collider* coll;
 
-            glDisable(GL_DEPTH_TEST);
-
-            Shader* shader = &RessourceManager::shaders["radioactivity"];
-            shader->Use();
-            shader->SetUniform("projection", Camera::GetOrthographicProjection());
-            shader->SetUniform("transform", glm::mat4(1.0f));
-            GetMesh()->DrawMesh();
-
-            glEnable(GL_DEPTH_TEST);
-
-            if (Player::ingameInstance != nullptr)
+            if (Collider::Raycast(GetEditPos(), dir, nullptr, nullptr, &coll))
             {
-                // Kill player
-                vec2 dir = Player::ingameInstance->GetPos() - vec2(GetEditPos());
-                Collider* coll;
-
-                if (Collider::Raycast(GetEditPos(), dir, nullptr, nullptr, &coll))
+                if (coll == Player::ingameInstance->collider)
                 {
-                    if (coll == Player::ingameInstance->collider)
-                    {
-                        Player::ingameInstance->Kill();
-                    }
+                    Player::ingameInstance->Kill();
                 }
-            }            
-        }
+            }
+        }            
     }
 }

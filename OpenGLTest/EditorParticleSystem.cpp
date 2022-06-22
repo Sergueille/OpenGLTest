@@ -101,10 +101,8 @@ EditorObject* EditorParticleSystem::Copy()
     if (previewSprite != nullptr) newObj->previewSprite = this->previewSprite->Copy();
     if (paticleTemplate != nullptr) newObj->paticleTemplate = this->paticleTemplate->Copy();
 
-	newObj->SubscribeToEditorObjectFuncs();
-	newObj->SubscribeToPerticleSysEvents();
-
 	newObj->particles = std::list<Particle*>();
+	newObj->SubscribeToPerticleSysEvents();
 
 	return newObj;
 }
@@ -218,9 +216,9 @@ void EditorParticleSystem::ResetIngameState()
 	}
 }
 
-void EditorParticleSystem::UpdateTransform()
+void EditorParticleSystem::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
     
     if (editorSprite != nullptr)
 	{

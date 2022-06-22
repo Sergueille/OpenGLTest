@@ -64,8 +64,6 @@ EditorObject* LevelEnd::Copy()
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	return newObj;
 }
 
@@ -93,11 +91,11 @@ void LevelEnd::Disable()
     if (editorSprite != nullptr) editorSprite->StopDrawing();
 }
 
-void LevelEnd::UpdateTransform()
+void LevelEnd::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
     
-    if (editorSprite != nullptr)
+    if (enabled && editorSprite != nullptr)
 	{
 		editorSprite->position = editorPosition;
 		editorSprite->size = vec2(Editor::gizmoSize);

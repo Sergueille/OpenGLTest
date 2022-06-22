@@ -79,8 +79,6 @@ EditorObject* PhysicSimulation::Copy()
 	newObj->objects = nullptr;
 	newObj->isSimulating = false;
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	return newObj;
 }
 
@@ -248,9 +246,10 @@ void PhysicSimulation::GetObjectEvents(const ObjectEvent** res, int* resCount)
 	*resCount = PHYS_SIM_EVENT_COUNT;
 }
 
-void PhysicSimulation::UpdateTransform()
+void PhysicSimulation::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
+	if (!enabled) return;
     
     if (editorSprite != nullptr)
 	{

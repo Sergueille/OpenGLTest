@@ -119,7 +119,7 @@ public:
 	Player(vec3 position);
 	~Player();
 
-	virtual void UpdateTransform() override;
+	virtual void OnMainLoop() override;
 	virtual EditorObject* Copy() override;
 	virtual vec2 DrawProperties(vec3 drawPos) override;
 

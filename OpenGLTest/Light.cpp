@@ -30,11 +30,11 @@ Light::~Light()
 	}
 }
 
-void Light::UpdateTransform()
+void Light::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
 
-	if (editorSprite != nullptr)
+	if (enabled && editorSprite != nullptr)
 	{
 		editorSprite->position = GetEditPos();
 		editorSprite->size = vec2(Editor::gizmoSize);
@@ -124,8 +124,6 @@ EditorObject* Light::Copy()
 		copy->editorSprite = this->editorSprite->Copy();
 		LightManager::lights.push_back(copy);
 	}
-
-	copy->SubscribeToEditorObjectFuncs();
 
 	return copy;
 }

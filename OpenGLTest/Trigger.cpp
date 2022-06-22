@@ -59,8 +59,6 @@ EditorObject* Trigger::Copy()
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	return newObj;
 }
 
@@ -102,9 +100,21 @@ void Trigger::Disable()
     if (editorSprite != nullptr) editorSprite->StopDrawing();
 }
 
-void Trigger::DerivedOnMainLoop()
+void Trigger::OnMainLoop()
 {
-	if (!Editor::enabled && Player::ingameInstance != nullptr && enabled)
+	EditorObject::OnMainLoop();
+	if (!enabled) return;
+    
+	if (editorSprite != nullptr)
+	{
+		editorSprite->position = GetEditPos();
+		editorSprite->size = GetEditScale();
+		editorSprite->rotate = GetEditRotation();
+	}
+	((RectCollider*)clickCollider)->size = GetEditScale();
+	((RectCollider*)clickCollider)->orientation = GetEditRotation();
+
+	if (!Editor::enabled && Player::ingameInstance != nullptr)
 	{
 		if (!once || !hasAlredyTriggered)
 		{
@@ -133,18 +143,4 @@ void Trigger::DerivedOnMainLoop()
 	{
 		collideWithPlayer = false;
 	}
-}
-
-void Trigger::UpdateTransform()
-{
-	EditorObject::UpdateTransform();
-    
-	if (editorSprite != nullptr)
-	{
-		editorSprite->position = GetEditPos();
-		editorSprite->size = GetEditScale();
-		editorSprite->rotate = GetEditRotation();
-	}
-	((RectCollider*)clickCollider)->size = GetEditScale();
-	((RectCollider*)clickCollider)->orientation = GetEditRotation();
 }

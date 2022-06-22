@@ -29,7 +29,7 @@ public:
 	static ObjectEvent events[CAM_CONTROL_EVENT_COUNT];
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;
-	virtual void UpdateTransform() override;
+	virtual void OnMainLoop() override;
 
 	virtual EditorObject* Copy() override;
 

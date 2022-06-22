@@ -57,8 +57,6 @@ EditorObject* Checkpoint::Copy()
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	return newObj;
 }
 
@@ -95,11 +93,11 @@ void Checkpoint::SaveGame()
 	EditorSaveManager::SaveUserSave(EditorSaveManager::currentUserSave);
 }
 
-void Checkpoint::UpdateTransform()
+void Checkpoint::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
     
-    if (editorSprite != nullptr)
+    if (enabled && editorSprite != nullptr)
 	{
 		editorSprite->position = GetEditPos();
 		editorSprite->size = vec2(Editor::gizmoSize);

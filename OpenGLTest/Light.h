@@ -16,7 +16,7 @@ public:
 
 	float shadowSize = 0.5f; // Size of the emiter, used for shadows
 
-	virtual void UpdateTransform() override;
+	virtual void OnMainLoop() override;
 
 	virtual EditorObject* Copy() override;
 

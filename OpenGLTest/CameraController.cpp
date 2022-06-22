@@ -67,8 +67,6 @@ EditorObject* CameraController::Copy()
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	return newObj;
 }
 
@@ -116,11 +114,11 @@ void CameraController::SetZoomWithProps()
 	SetZoom(zoom, transTime);
 }
 
-void CameraController::UpdateTransform()
+void CameraController::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
     
-    if (editorSprite != nullptr)
+    if (enabled && editorSprite != nullptr)
 	{
 		editorSprite->position = editorPosition;
 		editorSprite->size = vec2(Editor::gizmoSize);

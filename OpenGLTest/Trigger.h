@@ -22,7 +22,7 @@ public:
 	bool collideWithPlayer = false;
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;
-	virtual void UpdateTransform() override;
+	virtual void OnMainLoop() override;
 
 	virtual EditorObject* Copy() override;
 
@@ -31,8 +31,6 @@ public:
 
 	virtual void Enable() override;
 	virtual void Disable() override;
-
-	virtual void DerivedOnMainLoop() override;
 
 private: 
 	bool hasAlredyTriggered = false;

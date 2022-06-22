@@ -134,9 +134,18 @@ void PrefabCloner::CreateClone()
 	}
 }
 
-void PrefabCloner::UpdateTransform()
+void PrefabCloner::OnMainLoop()
 {
-	Prefab::UpdateTransform();
+	Prefab::OnMainLoop();
+	if (!enabled) return;
+
+	for (auto clone = clonedObjects.begin(); clone != clonedObjects.end(); clone++)
+	{
+		for (auto obj = (*clone)->objects->begin(); obj != (*clone)->objects->end(); obj++)
+		{
+			(*obj)->OnMainLoop();
+		}
+	}
 
 	if (!Editor::enabled)
 	{

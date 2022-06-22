@@ -39,11 +39,11 @@ ShadowCaster::~ShadowCaster()
 	}
 }
 
-void ShadowCaster::UpdateTransform()
+void ShadowCaster::OnMainLoop()
 {
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
 
-	if (!Editor::enabled) return;
+	if (!enabled || !Editor::enabled) return;
 
 	editorSprite->position = GetEditPos();
 
@@ -105,7 +105,6 @@ EditorObject* ShadowCaster::Copy()
 		LightManager::shadowCasters.push_back(copy);
 	}
 
-	copy->SubscribeToEditorObjectFuncs();
 	return copy;
 }
 

@@ -20,7 +20,7 @@ public:
 	EventList onPressed;
 	EventList onUnpressed;
 
-	virtual void UpdateTransform() override;
+	virtual void OnMainLoop() override;
 	virtual EditorObject* Copy() override;
 
 	virtual void Enable();
