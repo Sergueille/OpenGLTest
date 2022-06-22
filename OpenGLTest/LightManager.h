@@ -18,10 +18,6 @@ public:
 
 	static void ForceRefreshLightmaps();
 
-	static vec2 lightmapMin;
-	static vec2 lightmapMax;
-
-	static bool forceRefreshOnNextFrame;
 	static bool mustReadNewFile;
 	static std::string texLevelPath;
 

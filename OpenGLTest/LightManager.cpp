@@ -13,10 +13,6 @@ int LightManager::pixelsPerUnit = 20; // Must be multiple of 2 !!
 unsigned int LightManager::texID = 0;
 std::string LightManager::texLevelPath = "";
 
-vec2 LightManager::lightmapMin = vec2(0);
-vec2 LightManager::lightmapMax = vec2(0);
-
-bool LightManager::forceRefreshOnNextFrame = false;
 bool LightManager::mustReadNewFile = false;
 
 void LightManager::BakeLight()
@@ -160,8 +156,8 @@ void LightManager::BakeLight()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0); // Unbind fbo
 	glViewport(0, 0, Utility::screenX, Utility::screenY);
 
-	lightmapMin = levelMin;
-	lightmapMax = levelMax;
+	Editor::currentMapData.lightmapStart = levelMin;
+	Editor::currentMapData.lightmapEnd = levelMax;
 
 	delete[] pixels;
 
@@ -200,13 +196,6 @@ unsigned int LightManager::GetLightData()
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGB, GL_FLOAT, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
-		// Update lightmap pos
-		GetLevelAABB(&lightmapMin, &lightmapMax, Editor::enabled);
-
-		// Round to make sure the total amount of pixels is multiple of 4
-		lightmapMin = RoundVector(lightmapMin);
-		lightmapMax = RoundVector(lightmapMax);
-
 		std::cout << "Loaded texture " << path << std::endl;
 		return texID;
 	}
@@ -222,5 +211,5 @@ unsigned int LightManager::GetLightData()
 
 void LightManager::ForceRefreshLightmaps()
 {
-	forceRefreshOnNextFrame = true;
+	mustReadNewFile = true;
 }

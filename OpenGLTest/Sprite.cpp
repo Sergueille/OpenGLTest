@@ -136,8 +136,18 @@ void Sprite::DrawNow()
     if (isLit)
     {
         realShader->SetUniform("isLit", true);
-        realShader->SetUniform("lightmapStart", LightManager::lightmapMin);
-        realShader->SetUniform("lightmapEnd", LightManager::lightmapMax);
+
+        if (Editor::enabled)
+        {
+            realShader->SetUniform("lightmapStart", Editor::currentMapData.lightmapStart);
+            realShader->SetUniform("lightmapEnd", Editor::currentMapData.lightmapEnd);
+        }
+        else
+        {
+            realShader->SetUniform("lightmapStart", EditorSaveManager::currentMapData.lightmapStart);
+            realShader->SetUniform("lightmapEnd", EditorSaveManager::currentMapData.lightmapEnd);
+        }
+
         realShader->SetUniform("lightmap", 1);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, LightManager::GetLightData());

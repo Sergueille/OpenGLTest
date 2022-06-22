@@ -222,8 +222,7 @@ void EditorSaveManager::LoadLevelWithTransition(std::string path, std::function<
 		// Fade out
 		TweenManager<float>::Tween(1, 0, 2, [](float value) {
 			overlayColor = vec4(0, 0, 0, value);
-			}, linear)
-		->SetCondition([] { return !LightManager::forceRefreshOnNextFrame; });
+		}, linear);
 
 		// Set camera instantly
 		if (Camera::getTarget != nullptr)
@@ -326,6 +325,8 @@ void EditorSaveManager::WriteObject(MapData obj)
 {
 	StartObject("MapData");
 	WriteProp("mapName", obj.mapName);
+	WriteProp("lightmapStart", obj.lightmapStart);
+	WriteProp("lightmapEnd", obj.lightmapEnd);
 	EndObject();
 }
 
@@ -515,6 +516,8 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	{
 		MapData newData = MapData();
 		newData.mapName = props["mapName"];
+		newData.lightmapStart = StringToVector2(props["lightmapStart"]);
+		newData.lightmapEnd = StringToVector2(props["lightmapEnd"]);
 
 		if (prefab != nullptr)
 			prefab->mapData = newData;

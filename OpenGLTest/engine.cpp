@@ -259,13 +259,6 @@ int main(int argc, void* argv[])
         // Draw transparent sprites
         Sprite::DrawAll();
 
-        // Update lightmap if needed
-        if (LightManager::forceRefreshOnNextFrame)
-        {
-            LightManager::forceRefreshOnNextFrame = false;
-            LightManager::mustReadNewFile = true;
-        }
-
         if (Utility::testCount != 0)
             std::cout << testCount << std::endl;
 

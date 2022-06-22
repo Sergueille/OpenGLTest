@@ -4,6 +4,8 @@ count 238
 
 object MapData {
 	mapName: ""
+	lightmapStart: "-38.000000, -78.000000"
+	lightmapEnd: "257.000000, 68.000000"
 }
 object EditorSprite {
 	ID: "0"
@@ -181,7 +183,7 @@ object Light {
 object ShadowCaster {
 	ID: "225"
 	name: ""
-	position: "4.800000, 7.800000, 20.000000"
+	position: "7.000000, 7.800000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "5.000000, 5.000000"

@@ -311,6 +311,8 @@ private:
 struct MapData
 {
 	std::string mapName = "";
+	vec2 lightmapStart;
+	vec2 lightmapEnd;
 };
 
 /// <summary>
