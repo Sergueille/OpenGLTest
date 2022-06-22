@@ -109,13 +109,12 @@ void LightManager::BakeLight()
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo); // Bind fbo
 	unsigned int colorTex;
 	glGenTextures(1, &colorTex);
-	glBindTexture(GL_TEXTURE_2D, colorTex); // Bind colorTex
+	BindTexture2D(colorTex); // Bind colorTex
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, resolution.x, resolution.y, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glBindTexture(GL_TEXTURE_2D, 0); // Unbind colorTex
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTex, 0); // Bind color texture to buffer
 	glViewport(0, 0, resolution.x, resolution.y);
 
@@ -192,7 +191,7 @@ unsigned int LightManager::GetLightData()
 	{
 		// Create texture
 		glGenTextures(1, &texID);
-		glBindTexture(GL_TEXTURE_2D, texID);
+		BindTexture2D(texID);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGB, GL_FLOAT, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 

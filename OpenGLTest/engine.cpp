@@ -57,7 +57,9 @@ int main(int argc, void* argv[])
     int monitorID = useMainMonitor? 0 : std::stoi(settings["monitor"]);
 
     const char* windowName = "Teeeest!";
+
     const int bloomResDivide = 2;
+    //const int bloomResDivide = 4;
 
     // Init GLFW
     glfwInit();
@@ -142,7 +144,7 @@ int main(int argc, void* argv[])
     glGenTextures(3, colorTex);
     for (unsigned int i = 0; i < 3; i++)
     {
-        glBindTexture(GL_TEXTURE_2D, colorTex[i]); // Bind colorTex
+        BindTexture2D(colorTex[i]); // Bind colorTex
 
         if (i == 2) // cheapest data for corruption texture
             // glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, screenX, screenY, 0, GL_RED, GL_UNSIGNED_BYTE, NULL);
@@ -154,7 +156,6 @@ int main(int argc, void* argv[])
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glBindTexture(GL_TEXTURE_2D, 0); // Unbind colorTex
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, colorTex[i], 0); // Bind color texture to buffer
     }
 
@@ -202,7 +203,7 @@ int main(int argc, void* argv[])
     for (unsigned int i = 0; i < 2; i++)
     {
         glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[i]);
-        glBindTexture(GL_TEXTURE_2D, pingpongBuffer[i]);
+        BindTexture2D(pingpongBuffer[i]);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenX / bloomResDivide, screenY / bloomResDivide, 0, GL_RGB, GL_FLOAT, NULL);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -213,6 +214,8 @@ int main(int argc, void* argv[])
         );
     }
 
+    // Set bg color
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
     /////// GAME LOOP
     while (!glfwWindowShouldClose(window))
@@ -227,7 +230,6 @@ int main(int argc, void* argv[])
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
         // Clear color and depth buffer
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
         // Enable depth testing
@@ -290,7 +292,7 @@ int main(int argc, void* argv[])
             glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[horizontal]);
             RessourceManager::shaders["screenBlur"].SetUniform("horizontal", horizontal);
             RessourceManager::shaders["screenBlur"].SetUniform("offsetSize", i > 1? firstOffsetSize : secondOffsetSize);
-            glBindTexture(GL_TEXTURE_2D, first_iteration ? colorTex[1] : pingpongBuffer[!horizontal]);
+            BindTexture2D(first_iteration ? colorTex[1] : pingpongBuffer[!horizontal]);
             SpriteRenderer::GetMesh()->DrawMesh();
             horizontal = !horizontal;
             first_iteration = false;
@@ -303,12 +305,9 @@ int main(int argc, void* argv[])
         RessourceManager::shaders["screenShader"].SetUniform("time", Utility::time);
         RessourceManager::shaders["screenShader"].SetUniform("corruptionAmount", corruptionAmount);
         RessourceManager::shaders["screenShader"].SetUniform("corruptionTexture", 2);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, colorTex[0]);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, pingpongBuffer[0]);
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, colorTex[2]);
+        BindTexture2D(colorTex[0], 0);
+        BindTexture2D(pingpongBuffer[0], 1);
+        BindTexture2D(colorTex[2], 2);
 
         // Set original viewport
         glViewport(0, 0, Utility::screenX, Utility::screenY);

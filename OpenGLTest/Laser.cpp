@@ -113,6 +113,9 @@ void Laser::OnMainLoop()
 
 		if (Editor::enabled || playerDist < minPlayerDist || !hasRefreshedOnce) // Refresh anyway for the first time to relpace the sprite correctly
 		{
+			if (displaySprite != nullptr)
+				displaySprite->DrawOnMainLoop(); // NOCHECK
+
 			vec2 raycastRes;
 			vec2 direction = Utility::Rotate(vec2(1, 0), GetEditRotation());
 			if (Collider::Raycast(GetEditPos(), direction, &raycastRes))
@@ -173,6 +176,11 @@ void Laser::OnMainLoop()
 			}
 
 			hasRefreshedOnce = true;
+		}
+		else
+		{
+			if (displaySprite != nullptr)
+				displaySprite->StopDrawing(); // NOCHECK
 		}
 	}
 }

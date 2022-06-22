@@ -340,4 +340,18 @@ namespace Utility
 		sound->setVolume(volume);
 		return soloud->play(*sound);
 	}
+
+	unsigned int lastBoundTexture = -1;
+	int lastTextureAttachement = -1;
+	void BindTexture2D(unsigned int texture, int attachement)
+	{
+		if (lastBoundTexture == texture && lastTextureAttachement == attachement) return;
+
+		lastBoundTexture = texture;
+		lastTextureAttachement = attachement;
+
+		Utility::testCount++;
+		glActiveTexture(GL_TEXTURE0 + attachement);
+		glBindTexture(GL_TEXTURE_2D, texture);
+	}
 }

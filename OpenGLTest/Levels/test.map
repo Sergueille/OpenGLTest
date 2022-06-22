@@ -4,6 +4,8 @@ count 57
 
 object MapData {
 	mapName: ""
+	lightmapStart: "-42.000000, -48.000000"
+	lightmapEnd: "56.000000, 27.000000"
 }
 object EditorSprite {
 	ID: "30"

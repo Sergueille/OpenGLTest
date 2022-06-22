@@ -139,4 +139,8 @@ namespace Utility
 	/// <param name="volume">Volume of the sound, 1 is normal</param>
 	/// </summary>
 	SoLoud::handle PlaySound(std::string path, float volume);
+
+	void BindTexture2D(unsigned int texture, int attachement = 0);
+	extern unsigned int lastBoundTexture;
+	extern int lastTextureAttachement;
 };

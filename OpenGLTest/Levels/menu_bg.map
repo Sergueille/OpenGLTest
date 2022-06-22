@@ -4,12 +4,15 @@ count 71
 
 object MapData {
 	mapName: ""
+	lightmapStart: "-39.000000, -27.000000"
+	lightmapEnd: "48.000000, 30.000000"
 }
 object EditorSprite {
 	ID: "1"
 	name: ""
 	position: "17.520515, -14.066666, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "30.800001, 16.800001"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -17,12 +20,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "3"
 	name: ""
 	position: "-6.346151, -9.199999, 5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "18.000000, 13.000000"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -30,12 +35,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "5"
 	name: ""
 	position: "-0.012819, 0.733333, 5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "18.000000, 1.000000"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -43,12 +50,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "7"
 	name: ""
 	position: "-19.546150, -1.000000, 5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "18.000000, 17.600000"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -56,12 +65,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "9"
 	name: ""
 	position: "0.364960, 15.133333, 5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "30.800001, 16.800001"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -69,12 +80,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "11"
 	name: ""
 	position: "-22.546150, 17.600000, 5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "25.000000, 16.800001"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -82,12 +95,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "13"
 	name: ""
 	position: "30.253849, 9.800001, 5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "30.800001, 16.800001"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -95,12 +110,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "15"
 	name: ""
 	position: "20.698296, -0.688889, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "19.200001, 1.000000"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -108,12 +125,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "17"
 	name: ""
 	position: "-1.746152, 4.400000, 5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.000000, 5.200000"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -121,12 +140,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "19"
 	name: ""
 	position: "13.053849, -0.800000, 5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.000000, 5.200000"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -134,12 +155,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "21"
 	name: ""
 	position: "24.653851, 1.000000, 5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.000000, 5.200000"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -147,12 +170,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "26"
 	name: ""
 	position: "5.579890, 1.736979, -10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "15.000000, 4.800000"
 	rotation: "-20.000000"
 	color: "0.800000, 0.800000, 0.800000, 1.000000"
@@ -161,12 +186,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "3.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "32"
 	name: ""
 	position: "-2.209172, -1.536979, -10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "15.000000, 4.800000"
 	rotation: "-20.000000"
 	color: "0.900000, 0.900000, 0.900000, 1.000000"
@@ -175,12 +202,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "3.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "34"
 	name: ""
 	position: "-8.873634, 7.018110, -10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "15.000000, 4.800000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -189,12 +218,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "3.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "36"
 	name: ""
 	position: "19.853848, 2.400000, -10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "15.000000, 4.800000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -203,12 +234,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "3.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "38"
 	name: ""
 	position: "20.184708, -3.555475, -10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "15.000000, 4.800000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -217,12 +250,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.500000, 0.500000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Prefab {
 	ID: "39"
 	name: ""
 	position: "3.615811, 4.917004, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	path: "prefabs\neon.map"
 	ori: "-20.000000"
 	scale: "1.000000, 1.000000"
@@ -232,6 +267,7 @@ object Prefab {
 	name: ""
 	position: "2.071800, -0.660346, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	path: "prefabs\neon_half.map"
 	ori: "-20.000000"
 	scale: "1.000000, 1.000000"
@@ -241,6 +277,7 @@ object Prefab {
 	name: ""
 	position: "-5.146152, 2.000000, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	path: "prefabs\neon.map"
 	ori: "-20.000000"
 	scale: "1.000000, 1.000000"
@@ -250,6 +287,7 @@ object Prefab {
 	name: ""
 	position: "-4.702950, 7.926252, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	path: "prefabs\neon.map"
 	ori: "-20.000000"
 	scale: "1.000000, 1.000000"
@@ -259,6 +297,7 @@ object EditorSprite {
 	name: ""
 	position: "10.253848, 1.600000, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "0.460000, 0.460000"
 	rotation: "-20.000000"
 	color: "1.200000, 1.200000, 1.200000, 1.000000"
@@ -267,12 +306,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "66"
 	name: ""
 	position: "15.853849, -1.600000, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "0.460000, 0.460000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -281,36 +322,42 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "67"
 	name: ""
 	position: "10.253848, 1.600000, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	lightSize: "5.000000"
 	color: "1.000000, 0.200000, 0.000000, 1.000000"
 	intensity: "0.500000"
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object Light {
 	ID: "71"
 	name: ""
 	position: "15.853849, -1.600000, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	lightSize: "6.000000"
 	color: "1.000000, 1.000000, 0.600000, 1.000000"
 	intensity: "1.000000"
 	rotation: "0.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }
 object Prefab {
 	ID: "73"
 	name: ""
 	position: "17.968822, 5.232109, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	path: "prefabs\neon.map"
 	ori: "-20.000000"
 	scale: "1.000000, 1.000000"
@@ -320,6 +367,7 @@ object ShadowCaster {
 	name: ""
 	position: "0.853848, 0.400000, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.200000, 0.200000"
 	orientation: "-0.000000"
 }
@@ -328,6 +376,7 @@ object ShadowCaster {
 	name: ""
 	position: "2.453848, -0.200000, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.200000, 0.200000"
 	orientation: "-0.000000"
 }
@@ -336,6 +385,7 @@ object ShadowCaster {
 	name: ""
 	position: "4.253848, -0.800000, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.200000, 0.200000"
 	orientation: "-0.000000"
 }
@@ -344,6 +394,7 @@ object ShadowCaster {
 	name: ""
 	position: "-0.746152, 1.000000, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.200000, 0.200000"
 	orientation: "-0.000000"
 }
@@ -352,6 +403,7 @@ object ShadowCaster {
 	name: ""
 	position: "-2.346152, 1.600000, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.200000, 0.200000"
 	orientation: "-0.000000"
 }
@@ -360,6 +412,7 @@ object ShadowCaster {
 	name: ""
 	position: "-3.746152, 2.200000, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.800000, 0.200000"
 	orientation: "-0.000000"
 }
@@ -368,6 +421,7 @@ object ShadowCaster {
 	name: ""
 	position: "-5.546150, 2.800000, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.200000, 0.200000"
 	orientation: "-0.000000"
 }
@@ -376,6 +430,7 @@ object ShadowCaster {
 	name: ""
 	position: "-7.546151, 3.400000, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.200000, 0.200000"
 	orientation: "-0.000000"
 }
@@ -384,6 +439,7 @@ object EditorSprite {
 	name: ""
 	position: "-0.272788, 3.375755, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "3.800000, 3.800000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -392,12 +448,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "251"
 	name: ""
 	position: "-3.955596, 4.719269, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "3.800000, 3.800000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -406,12 +464,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "253"
 	name: ""
 	position: "14.300384, 4.166058, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "3.800000, 3.800000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -420,12 +480,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "255"
 	name: ""
 	position: "3.204541, -3.752769, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "3.800000, 3.800000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -434,12 +496,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "257"
 	name: ""
 	position: "-10.005968, 6.292372, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.800000, 2.800000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -448,12 +512,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "259"
 	name: ""
 	position: "-6.790356, -1.598299, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.030000, 1.030000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -462,12 +528,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "261"
 	name: ""
 	position: "-5.478454, -2.104092, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.030000, 1.030000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -476,12 +544,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "263"
 	name: ""
 	position: "-5.431034, -1.029281, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.030000, 1.030000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -490,12 +560,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "265"
 	name: ""
 	position: "4.253848, 1.000000, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.600000, 2.600000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -504,12 +576,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "267"
 	name: ""
 	position: "5.154795, 3.434131, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.600000, 2.600000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -518,12 +592,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "269"
 	name: ""
 	position: "5.154795, 0.668073, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.600000, 2.600000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -532,12 +608,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "271"
 	name: ""
 	position: "6.103157, 2.438349, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.370000, 1.370000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -546,12 +624,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "273"
 	name: ""
 	position: "7.415058, 2.059005, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.370000, 1.370000"
 	rotation: "70.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -560,12 +640,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "275"
 	name: ""
 	position: "7.019907, 0.920970, 1.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.300000, 1.300000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -574,12 +656,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "279"
 	name: ""
 	position: "5.154795, 0.668073, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.600000, 2.600000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -588,12 +672,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "348"
 	name: ""
 	position: "6.357062, -0.900106, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.600000, 2.600000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -602,12 +688,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "352"
 	name: ""
 	position: "8.825820, 2.019695, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.370000, 1.370000"
 	rotation: "160.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -616,12 +704,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "354"
 	name: ""
 	position: "9.528993, 3.133845, 1.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.300000, 1.300000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -630,12 +720,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "356"
 	name: ""
 	position: "5.372789, 1.268183, 1.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "0.940000, 0.940000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -644,12 +736,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Laser {
 	ID: "357"
 	name: ""
 	position: "14.636198, 0.894099, 10.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	orientation: "-110.000000"
 	laserType: "0"
 	startOffset: "-0.100000"
@@ -661,6 +755,7 @@ object EditorSprite {
 	name: ""
 	position: "11.380349, -1.561358, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.600000, 2.600000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -669,12 +764,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "361"
 	name: ""
 	position: "12.268982, 0.860607, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.600000, 2.600000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -683,12 +780,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "363"
 	name: ""
 	position: "14.968689, 0.034064, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.200000, 1.200000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -697,12 +796,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "365"
 	name: ""
 	position: "16.989281, -0.697664, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.200000, 1.200000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -711,12 +812,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "367"
 	name: ""
 	position: "19.049595, -1.440069, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.200000, 1.200000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -725,12 +828,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "369"
 	name: ""
 	position: "21.086639, -2.184375, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "1.200000, 1.200000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -739,12 +844,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "371"
 	name: ""
 	position: "-6.395697, 5.374310, 0.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "3.400000, 3.400000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -753,12 +860,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "373"
 	name: ""
 	position: "-9.324136, 5.869727, 1.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "2.380000, 2.380000"
 	rotation: "-20.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
@@ -767,12 +876,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "375"
 	name: ""
 	position: "-7.951633, -0.790833, -2.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "3.040000, 3.040000"
 	rotation: "-30.400000"
 	color: "0.800000, 0.800000, 0.800000, 1.000000"
@@ -781,12 +892,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "377"
 	name: ""
 	position: "-8.766308, -0.372487, -3.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "3.040000, 3.040000"
 	rotation: "-20.000000"
 	color: "0.700000, 0.700000, 0.700000, 1.000000"
@@ -795,12 +908,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "378"
 	name: ""
 	position: "-12.746151, -6.200000, 20.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "29.600000, 29.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -809,12 +924,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "380"
 	name: ""
 	position: "-16.875750, 8.000000, 30.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "21.800001, 21.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -823,12 +940,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "382"
 	name: ""
 	position: "-12.675750, -7.600000, 40.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "29.600000, 29.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -837,12 +956,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
 	ID: "828"
 	name: ""
 	position: "-22.014118, -11.400000, 5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "30.800001, 16.800001"
 	rotation: "-20.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -850,12 +971,14 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object CameraController {
 	ID: "1192"
 	name: ""
 	position: "3.724250, 6.200000, 50.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	zoom: "0.700000"
 	transTime: "15.000000"
 }
@@ -864,6 +987,7 @@ object EditorSprite {
 	name: ""
 	position: "-16.675749, 5.600000, 25.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	size: "21.800001, 21.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
@@ -872,12 +996,16 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object LogicRelay {
 	ID: "1566"
 	name: ""
 	position: "2.124250, 6.800000, 100.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	onTrigger: "1192|Set zoom|"
+	onAltTrigger: ""
 	triggerOnStart: "1"
+	delay: "0.000000"
 }

@@ -11,6 +11,8 @@
 
 #include "shader.h"
 
+#include "Utility.h"
+
 std::string Shader::utilShaderText = "";
 unsigned int Shader::currentlyUsed = 0;
 

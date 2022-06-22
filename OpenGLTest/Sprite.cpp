@@ -106,7 +106,7 @@ void Sprite::DrawNow()
     // No texture? ratio of 1
     float ratio = texture == nullptr ? 1 : texture->ratio;
 
-    realShader->Use(); // TODO optimise if shader already used
+    realShader->Use();
     glm::mat4 transform = glm::mat4(1.0f); // Transformation matrix
     transform = glm::translate(transform, position); // Translate
     // transform = glm::translate(transform, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // Translate to pivot // TODO: chage pivot
@@ -149,8 +149,7 @@ void Sprite::DrawNow()
         }
 
         realShader->SetUniform("lightmap", 1);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, LightManager::GetLightData());
+        BindTexture2D(LightManager::GetLightData(), 1);
     }
     else
     {
@@ -168,8 +167,6 @@ void Sprite::DrawNow()
     // Get mesh and draw
     SpriteRenderer::GetMesh();
     SpriteRenderer::mesh->DrawMesh();
-
-    glActiveTexture(GL_TEXTURE0); // Make sure stays 0
 }
 
 void Sprite::DrawAll()

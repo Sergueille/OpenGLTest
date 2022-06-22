@@ -46,7 +46,7 @@ namespace TextManager {
             // generate texture
             unsigned int texture;
             glGenTextures(1, &texture);
-            glBindTexture(GL_TEXTURE_2D, texture);
+            Utility::BindTexture2D(texture);
             glTexImage2D(
                 GL_TEXTURE_2D,
                 0,
@@ -107,7 +107,6 @@ namespace TextManager {
         shader->SetUniform("projection", Camera::GetUIProjection());
 
         glUniform3f(glGetUniformLocation(shader->ID, "textColor"), color.x, color.y, color.z);
-        glActiveTexture(GL_TEXTURE0);
         Utility::GlBindVtexArrayOptimised(VAO);
 
         if (align == left)
@@ -127,8 +126,6 @@ namespace TextManager {
         {
             DrawChar(*c, &currentX, &currentY, scale, pos);
         }
-
-        glBindTexture(GL_TEXTURE_2D, 0);
 
         return glm::vec2(currentX - pos.x, pos.y - currentY + scale * 64.f) ;
     }
@@ -162,7 +159,7 @@ namespace TextManager {
             };
 
             // render glyph texture over quad
-            glBindTexture(GL_TEXTURE_2D, ch.textureID);
+            Utility::BindTexture2D(ch.textureID);
             // update content of VBO memory
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);

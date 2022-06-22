@@ -3,6 +3,7 @@
 #include <glad/glad.h> 
 
 #include "Texture.h"
+#include "Utility.h"
 
 Texture::Texture(std::string path)
 {
@@ -18,7 +19,7 @@ Texture::Texture(std::string path)
 	{
 		// Create texture
 		glGenTextures(1, &ID);
-		glBindTexture(GL_TEXTURE_2D, ID);
+		Utility::BindTexture2D(ID);
 
 		isOpaque = nrChannels < 4;
 		int type = nrChannels == 3 ? GL_RGB : GL_RGBA;
@@ -45,6 +46,5 @@ Texture::Texture() { }
 
 void Texture::Use(int unit)
 {
-	glActiveTexture(GL_TEXTURE0 + unit);
-	glBindTexture(GL_TEXTURE_2D, ID);
+	Utility::BindTexture2D(ID, unit);
 }
