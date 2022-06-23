@@ -26,6 +26,7 @@
 #include "PrefabCloner.h"
 #include "Radioactivity.h"
 #include "SoundPoint.h"
+#include "SoundArea.h"
 
 using namespace glm;
 
@@ -630,6 +631,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "SoundPoint")
 	{
 		newObj = new SoundPoint();
+		newObj->Load(&props);
+	}
+	else if (objectType == "SoundArea")
+	{
+		newObj = new SoundArea();
 		newObj->Load(&props);
 	}
 	else

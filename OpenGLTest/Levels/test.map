@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 57
+count 58
 
 object MapData {
 	mapName: ""
@@ -169,7 +169,7 @@ object ShadowCaster {
 object Player {
 	ID: "477"
 	name: ""
-	position: "9.400001, 8.200000, 20.000000"
+	position: "12.000000, 3.400000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -777,17 +777,29 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
-object SoundPoint {
-	ID: "4259"
+object SoundArea {
+	ID: "4205"
 	name: ""
-	position: "0.000000, 6.800000, 50.000000"
+	position: "12.600000, 6.400000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	soundName: "click.wav"
-	volume: "0.100000"
-	spatial: "1"
-	minDist: "0.000000"
-	maxDist: "20.000000"
-	autoStart: "1"
-	loop: "1"
+	editorSize: "22.600000, 10.800000"
+	soundName: "soundscape_wind1.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "3.000000"
+	fadeOut: "3.000000"
+}
+object SoundArea {
+	ID: "4313"
+	name: ""
+	position: "-11.800000, 5.600000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "25.800001, 19.200001"
+	soundName: "soundscape_industrial3.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "3.000000"
+	fadeOut: "3.000000"
 }

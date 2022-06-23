@@ -25,6 +25,7 @@
 #include "PrefabCloner.h"
 #include "Radioactivity.h"
 #include "SoundPoint.h"
+#include "SoundArea.h"
 
 #include <iostream>
 
@@ -805,6 +806,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.y -= UIButton(drawPos, "Sound Point", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new SoundPoint();
+
+	drawPos.y -= UIButton(drawPos, "Sound Area", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new SoundArea();
 
 	if (newObject != nullptr)
 	{

@@ -246,6 +246,9 @@
     <ClCompile Include="SoundPoint.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="SoundArea.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -402,6 +405,9 @@
       <Filter>Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="SoundPoint.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundArea.h">
       <Filter>Audio</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 265
+count 269
 
 object MapData {
 	mapName: ""
@@ -25,7 +25,7 @@ object EditorSprite {
 object Player {
 	ID: "94"
 	name: ""
-	position: "-59.400002, 1.400000, 20.000000"
+	position: "44.000000, 3.800000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "0"
@@ -1028,27 +1028,27 @@ object TextRenderer {
 	position: "3.200000, -1.600000, 50.000000"
 	parent: "-1"
 	parallax: "1.100000"
-	content: "Press Z or SPACE to jump"
+	content: "Appuyez sur Z ou ESPACE pour sauter"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
 }
 object TextRenderer {
 	ID: "2717"
 	name: ""
-	position: "43.000000, 0.200000, 50.000000"
+	position: "40.799999, -0.200000, 50.000000"
 	parent: "-1"
 	parallax: "1.100000"
-	content: "Hold Z or SPACE to jump higher"
+	content: "Laissez appuyer plus longtemps pour sauter plus haut"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
 }
 object TextRenderer {
 	ID: "2719"
 	name: ""
-	position: "-38.000000, -1.800000, 50.000000"
+	position: "-40.799999, -2.200000, 50.000000"
 	parent: "-1"
 	parallax: "1.100000"
-	content: "Press E to interact"
+	content: "Appuyez sur E pour interagir"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
 }
@@ -1271,7 +1271,7 @@ object TextRenderer {
 	position: "-58.200001, -2.200000, 50.000000"
 	parent: "-1"
 	parallax: "1.100000"
-	content: "Press Q and D to move the robot"
+	content: "Appuyez sur Q et D pour bouger le robot"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
 }
@@ -2388,7 +2388,7 @@ object EditorSprite {
 object TransformModifier {
 	ID: "8080"
 	name: "door right trans"
-	position: "70.599998, -19.200001, 50.000000"
+	position: "70.599998, -21.200001, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	targetID: "8076"
@@ -2403,7 +2403,7 @@ object TransformModifier {
 object TransformModifier {
 	ID: "8082"
 	name: "door left trans"
-	position: "62.200001, -19.200001, 50.000000"
+	position: "62.000000, -21.200001, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	targetID: "8074"
@@ -3774,4 +3774,56 @@ object EditorSprite {
 	UVend: "1.000000, 10.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object SoundArea {
+	ID: "11214"
+	name: ""
+	position: "-4.600000, 7.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "56.799999, 16.800001"
+	soundName: "soundscape_industrial1.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "3.000000"
+	fadeOut: "3.000000"
+}
+object SoundArea {
+	ID: "11216"
+	name: ""
+	position: "-52.400002, 8.400001, 40.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "26.600000, 20.800001"
+	soundName: "soundscape_wind1.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "3.000000"
+	fadeOut: "3.000000"
+}
+object SoundArea {
+	ID: "11739"
+	name: ""
+	position: "49.000000, 10.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "50.600002, 36.400002"
+	soundName: "soundscape_industrial3.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "3.000000"
+	fadeOut: "3.000000"
+}
+object SoundArea {
+	ID: "12930"
+	name: ""
+	position: "70.599998, -19.200001, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "43.000000, 22.000000"
+	soundName: "soundscape_industrial2.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "3.000000"
+	fadeOut: "3.000000"
 }

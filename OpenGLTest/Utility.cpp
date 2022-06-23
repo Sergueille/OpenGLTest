@@ -33,6 +33,7 @@ namespace Utility
 	float corruptionAmount = 0;
 
 	float gameSoundsVolume = 1;
+	float musicVolume = 1;
 
 	float GetDeltaTime()
 	{

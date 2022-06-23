@@ -4,6 +4,8 @@ count 6
 
 object MapData {
 	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
 }
 object Light {
 	ID: "619"
@@ -47,6 +49,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object Light {
 	ID: "1"

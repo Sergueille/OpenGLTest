@@ -1,22 +1,27 @@
 // Editor map file, version 1
 
-count 4
+count 6
 
 object MapData {
 	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
 }
 object Acid {
 	ID: "5040"
 	name: ""
 	position: "0.000000, 0.000000, 5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	scale: "9.400001, 3.000000"
+	showSurface: "1"
 }
 object EditorParticleSystem {
 	ID: "5137"
 	name: ""
 	position: "-0.094864, 1.412441, -5.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "9.000000, 0.120000"
 	emitCircle: "0"
@@ -38,6 +43,7 @@ object EditorParticleSystem {
 	name: ""
 	position: "-0.221576, 1.481105, -7.000000"
 	parent: "-1"
+	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "9.000000, 0.060000"
 	emitCircle: "0"
@@ -53,4 +59,32 @@ object EditorParticleSystem {
 	particleLifetime: "3.000000"
 	duration: "-1.000000"
 	autoStart: "1"
+}
+object SoundPoint {
+	ID: "5243"
+	name: ""
+	position: "-2.400000, 2.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "acid.wav"
+	volume: "1.000000"
+	spatial: "1"
+	minDist: "1.000000"
+	maxDist: "20.000000"
+	autoStart: "1"
+	loop: "1"
+}
+object SoundPoint {
+	ID: "5245"
+	name: ""
+	position: "2.800000, 2.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "acid.wav"
+	volume: "1.000000"
+	spatial: "1"
+	minDist: "1.000000"
+	maxDist: "20.000000"
+	autoStart: "1"
+	loop: "1"
 }

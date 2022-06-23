@@ -3,15 +3,27 @@ TEXTURES --------------------
 
 SOUNDS ----------------------
 - freesound.org
-	- "Normal click" from Breviceps
-	- "UI Pop Up" from EminYILDIRIM
-	- "Score Counter 01" from rhodesmas
-	- "Selection Sounds" from johnthewizar
-	- "drone engine" from gladkiy
+	- "Normal click" by Breviceps
+	- "UI Pop Up" by EminYILDIRIM
+	- "Score Counter 01" by rhodesmas
+	- "Selection Sounds" by johnthewizar
+	- "drone engine" by gladkiy
+    - "yellowstone boiling mud" by tim.kahn
+    - "archi_soundscape_electric1" by ElanHickler
+    - "dreary_tunnels" by j1987
+    - "rain in pipes" by voho
+    - "PC Computer Fan" by earthsounds
+    - "Computer Fan Ambience" by BenjaminNelan
+    - "metro subway Montreal fluorescent light buzz" by kyles
+    - "neon sign stereo closeup" by kyles
+    - "IndustrialNoiseRhitmic" by klankbeeld
+    - "Industrial texture" by dersinnsspace
+    - "Industrial crane movement" by dersinnsspace
+    - "Ambience, Machine Factory, A" by InspectorJ 
 
 LIBRARIES -------------------
 - GLFW (window management, os stuff)
-- GLAD (OpenGL interface)
+- GLAD (OpenGL API provider)
 - GLM (OpenGL math)
 - SoLoud engine (sound engine)
 - FreeType (font loading)

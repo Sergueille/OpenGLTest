@@ -36,6 +36,7 @@ namespace Utility
 	extern float overlayZ;
 
 	extern float gameSoundsVolume;
+	extern float musicVolume;
 
 	/// <summary>
 	/// Amout of coruption (post-processing), between 0 and 1

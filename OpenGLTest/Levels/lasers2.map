@@ -4,6 +4,8 @@ count 255
 
 object MapData {
 	mapName: ""
+	lightmapStart: "-43.000000, -80.000000"
+	lightmapEnd: "225.000000, 50.000000"
 }
 object Player {
 	ID: "0"

@@ -214,6 +214,7 @@
     <ClCompile Include="RessourceManager.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="ShadowCaster.cpp" />
+    <ClCompile Include="SoundArea.cpp" />
     <ClCompile Include="SoundPoint.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stb_image.cpp" />
@@ -265,6 +266,7 @@
     <ClInclude Include="RessourceManager.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="ShadowCaster.h" />
+    <ClInclude Include="SoundArea.h" />
     <ClInclude Include="SoundPoint.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="stb_image.h" />
