@@ -98,7 +98,8 @@ Player::~Player()
 		collider = nullptr;
 	}
 
-	ingameInstance = nullptr;
+	if (ingameInstance == this)
+		ingameInstance = nullptr;
 
 	if (!Editor::enabled)
 	{

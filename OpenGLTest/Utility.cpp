@@ -350,7 +350,6 @@ namespace Utility
 		lastBoundTexture = texture;
 		lastTextureAttachement = attachement;
 
-		Utility::testCount++;
 		glActiveTexture(GL_TEXTURE0 + attachement);
 		glBindTexture(GL_TEXTURE_2D, texture);
 	}

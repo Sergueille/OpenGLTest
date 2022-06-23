@@ -261,8 +261,10 @@ int main(int argc, void* argv[])
         // Draw transparent sprites
         Sprite::DrawAll();
 
+#if _DEBUG
         if (Utility::testCount != 0)
             std::cout << testCount << std::endl;
+#endif
 
         ///////////////////
         // GAME LOOP END //

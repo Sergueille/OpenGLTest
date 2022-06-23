@@ -1,9 +1,11 @@
 // Editor map file, version 1
 
-count 75
+count 86
 
 object MapData {
 	mapName: ""
+	lightmapStart: "-41.000000, -34.000000"
+	lightmapEnd: "63.000000, 59.000000"
 }
 object EditorSprite {
 	ID: "93"
@@ -23,7 +25,7 @@ object EditorSprite {
 object Player {
 	ID: "94"
 	name: ""
-	position: "15.000000, -1.000000, 20.000000"
+	position: "-1.400000, -0.000000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -236,7 +238,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "197"
 	name: ""
-	position: "0.000000, 36.799999, 0.000000"
+	position: "-0.000000, 34.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "13.400001, 13.400001"
@@ -251,7 +253,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "199"
 	name: ""
-	position: "0.000000, 50.200001, 0.000000"
+	position: "0.000000, 52.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "13.400001, 13.400001"
@@ -357,12 +359,12 @@ object TransformModifier {
 	parallax: "1.000000"
 	targetID: "202"
 	relative: "1"
-	targetPos: "0.000000, 47.000000"
+	targetPos: "0.000000, 48.000000"
 	targetRotation: "0.000000"
 	targetSize: "1.000000, 1.000000"
-	duration: "42.000000"
+	duration: "43.000000"
 	easeType: "0"
-	onFinished: ""
+	onFinished: "1419|Stop|"
 }
 object LogicRelay {
 	ID: "369"
@@ -407,7 +409,7 @@ object Button {
 object EditorSprite {
 	ID: "548"
 	name: ""
-	position: "15.400001, 7.400000, 5.000000"
+	position: "15.400001, 5.400000, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "3.000000, 1.000000"
@@ -442,7 +444,7 @@ object Prefab {
 object ShadowCaster {
 	ID: "646"
 	name: ""
-	position: "15.400001, 7.400000, 50.000000"
+	position: "15.400001, 5.400000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "3.000000, 1.000000"
@@ -774,7 +776,7 @@ object EditorSprite {
 object Prefab {
 	ID: "2280"
 	name: ""
-	position: "10.600000, 35.799999, 0.000000"
+	position: "10.600000, 39.200001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\fluo.map"
@@ -784,7 +786,7 @@ object Prefab {
 object Prefab {
 	ID: "2282"
 	name: ""
-	position: "18.000000, 35.799999, 0.000000"
+	position: "18.000000, 39.200001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\fluo.map"
@@ -824,10 +826,10 @@ object Laser {
 object EditorSprite {
 	ID: "3825"
 	name: ""
-	position: "28.400000, 37.400002, 0.000000"
+	position: "28.400000, 44.799999, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "13.400001, 6.800000"
+	size: "13.400001, 19.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -839,10 +841,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "3827"
 	name: ""
-	position: "10.200000, 42.799999, 5.000000"
+	position: "14.200000, 42.799999, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "23.200001, 1.000000"
+	size: "15.800000, 1.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -879,26 +881,6 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
-object Prefab {
-	ID: "3833"
-	name: ""
-	position: "10.600000, 52.400002, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	path: "prefabs\fluo.map"
-	ori: "0.000000"
-	scale: "1.000000, 1.000000"
-}
-object Prefab {
-	ID: "3835"
-	name: ""
-	position: "18.000000, 52.400002, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	path: "prefabs\fluo.map"
-	ori: "0.000000"
-	scale: "1.000000, 1.000000"
-}
 object ShadowCaster {
 	ID: "4109"
 	name: ""
@@ -911,43 +893,19 @@ object ShadowCaster {
 object ShadowCaster {
 	ID: "4179"
 	name: ""
-	position: "10.600000, 33.400002, 50.000000"
+	position: "20.800001, 33.799999, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "3.000000, 1.000000"
+	size: "5.800000, 2.200000"
 	orientation: "0.000000"
 }
 object EditorSprite {
 	ID: "4181"
 	name: ""
-	position: "10.600000, 33.400002, 5.000000"
+	position: "20.800001, 33.799999, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "3.000000, 1.000000"
-	rotation: "0.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	collideWithPhys: "1"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
-	visibleOnlyInEditor: "0"
-}
-object ShadowCaster {
-	ID: "4183"
-	name: ""
-	position: "18.000000, 38.000000, 50.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "3.000000, 1.000000"
-	orientation: "0.000000"
-}
-object EditorSprite {
-	ID: "4185"
-	name: ""
-	position: "18.000000, 38.000000, 5.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "3.000000, 1.000000"
+	size: "5.800000, 2.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -959,25 +917,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "4326"
 	name: ""
-	position: "22.200001, 43.000000, 0.000000"
+	position: "6.200000, 43.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "1.000000, 6.800000"
-	rotation: "0.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	collideWithPhys: "1"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
-	visibleOnlyInEditor: "0"
-}
-object EditorSprite {
-	ID: "4328"
-	name: ""
-	position: "28.400000, 48.799999, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "13.400001, 6.800000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -1000,4 +943,191 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+}
+object Laser {
+	ID: "4542"
+	name: ""
+	position: "6.800000, 37.400002, -4.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	laserType: "0"
+	startOffset: "-0.100000"
+	endOffset: "0.050000"
+	startOn: "1"
+}
+object ShadowCaster {
+	ID: "4544"
+	name: ""
+	position: "7.800000, 34.400002, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "5.800000, 1.000000"
+	orientation: "0.000000"
+}
+object EditorSprite {
+	ID: "4546"
+	name: ""
+	position: "7.800000, 34.400002, 5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "5.800000, 1.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object Laser {
+	ID: "4548"
+	name: ""
+	position: "17.800001, 33.200001, -4.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "180.000000"
+	laserType: "0"
+	startOffset: "-0.100000"
+	endOffset: "0.050000"
+	startOn: "1"
+}
+object Prefab {
+	ID: "4690"
+	name: ""
+	position: "14.400001, 52.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "4835"
+	name: ""
+	position: "48.600002, -1.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "29.400000, 38.600002"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "4837"
+	name: ""
+	position: "48.600002, 35.799999, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "29.400000, 38.600002"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object ShadowCaster {
+	ID: "4839"
+	name: ""
+	position: "14.400001, 12.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "16.800001, 1.000000"
+	orientation: "0.000000"
+}
+object ShadowCaster {
+	ID: "4841"
+	name: ""
+	position: "14.400001, 27.600000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "16.800001, 1.000000"
+	orientation: "0.000000"
+}
+object Prefab {
+	ID: "4843"
+	name: ""
+	position: "9.400001, 30.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object ShadowCaster {
+	ID: "4847"
+	name: ""
+	position: "14.200000, 42.799999, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "16.800001, 1.000000"
+	orientation: "0.000000"
+}
+object EditorSprite {
+	ID: "5147"
+	name: ""
+	position: "1.800000, 43.000000, -9.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "8.000000, 5.000000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\plaster_damaged1.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.600000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "5149"
+	name: ""
+	position: "-8.200000, 43.799999, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "12.600000, 19.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object ShadowCaster {
+	ID: "5151"
+	name: ""
+	position: "6.200000, 42.600002, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.000000, 10.400001"
+	orientation: "0.000000"
+}
+object Prefab {
+	ID: "5153"
+	name: ""
+	position: "1.800000, 45.200001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\neon_half.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Trigger {
+	ID: "5163"
+	name: ""
+	position: "10.600000, 43.600002, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "8.200000, 0.800000"
+	onEnter: "370|Save game|"
+	onExit: ""
+	once: "1"
 }
