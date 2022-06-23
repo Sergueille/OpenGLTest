@@ -3804,10 +3804,10 @@ object SoundArea {
 object SoundArea {
 	ID: "11739"
 	name: ""
-	position: "49.000000, 10.000000, 50.000000"
+	position: "43.200001, 10.000000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	editorSize: "50.600002, 36.400002"
+	editorSize: "35.799999, 36.400002"
 	soundName: "soundscape_industrial3.wav"
 	volume: "1.000000"
 	isMusic: "0"

@@ -5,6 +5,7 @@
 namespace EventManager 
 {
 	LinkedList<std::function<void()>> OnMainLoop = LinkedList<std::function<void()>>();
+	LinkedList<std::function<void()>> OnAfterMainLoop = LinkedList<std::function<void()>>();
 	LinkedList<std::function<void()>> OnExitApp = LinkedList<std::function<void()>>();
 	LinkedList<GLFWmousebuttonfun> OnClick = LinkedList<GLFWmousebuttonfun>();
 	LinkedList<GLFWscrollfun> OnScroll = LinkedList<GLFWscrollfun>();

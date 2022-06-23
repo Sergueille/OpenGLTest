@@ -8,18 +8,23 @@ SOUNDS ----------------------
 	- "Score Counter 01" by rhodesmas
 	- "Selection Sounds" by johnthewizar
 	- "drone engine" by gladkiy
-    - "yellowstone boiling mud" by tim.kahn
-    - "archi_soundscape_electric1" by ElanHickler
-    - "dreary_tunnels" by j1987
-    - "rain in pipes" by voho
-    - "PC Computer Fan" by earthsounds
-    - "Computer Fan Ambience" by BenjaminNelan
-    - "metro subway Montreal fluorescent light buzz" by kyles
-    - "neon sign stereo closeup" by kyles
-    - "IndustrialNoiseRhitmic" by klankbeeld
-    - "Industrial texture" by dersinnsspace
-    - "Industrial crane movement" by dersinnsspace
-    - "Ambience, Machine Factory, A" by InspectorJ 
+    	- "yellowstone boiling mud" by tim.kahn
+    	- "archi_soundscape_electric1" by ElanHickler
+	- "dreary_tunnels" by j1987
+    	- "rain in pipes" by voho
+    	- "PC Computer Fan" by earthsounds
+    	- "Computer Fan Ambience" by BenjaminNelan
+    	- "metro subway Montreal fluorescent light buzz" by kyles
+    	- "neon sign stereo closeup" by kyles
+    	- "IndustrialNoiseRhitmic" by klankbeeld
+    	- "Industrial texture" by dersinnsspace
+    	- "Industrial crane movement" by dersinnsspace
+    	- "Ambience, Machine Factory, A" by InspectorJ 
+	- "Air Extractor Fan, Public Toilets, A" by InspectorJ
+	- "2_Lift_ON" by ValentinPetiteau
+	- "3_Lift_STOP" by ValentinPetiteau
+	- "1_Lift_START" by ValentinPetiteau
+	- "Stream, Running Water | Aviemore Scotland" by BurghRecords
 
 LIBRARIES -------------------
 - GLFW (window management, os stuff)

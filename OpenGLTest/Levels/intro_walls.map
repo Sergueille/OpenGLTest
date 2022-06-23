@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 505
+count 506
 
 object MapData {
 	mapName: ""
@@ -7343,6 +7343,19 @@ object SoundArea {
 	parallax: "1.000000"
 	editorSize: "15.000000, 11.200000"
 	soundName: "soundscape_industrial1.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "3.000000"
+	fadeOut: "3.000000"
+}
+object SoundArea {
+	ID: "20797"
+	name: ""
+	position: "146.600006, 19.200001, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "20.200001, 43.600002"
+	soundName: "soundscape_industrial3.wav"
 	volume: "1.000000"
 	isMusic: "0"
 	fadeIn: "3.000000"

@@ -1,9 +1,11 @@
 // Editor map file, version 1
 
-count 45
+count 47
 
 object MapData {
 	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
 }
 object EditorSprite {
 	ID: "152"
@@ -657,4 +659,32 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+}
+object SoundPoint {
+	ID: "3226"
+	name: "start"
+	position: "1.400000, 1.400000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "lift_start.wav"
+	volume: "0.700000"
+	spatial: "0"
+	minDist: "1.000000"
+	maxDist: "20.000000"
+	autoStart: "0"
+	loop: "0"
+}
+object SoundPoint {
+	ID: "3228"
+	name: "on"
+	position: "1.400000, 0.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "lift_on.wav"
+	volume: "0.700000"
+	spatial: "0"
+	minDist: "1.000000"
+	maxDist: "20.000000"
+	autoStart: "0"
+	loop: "1"
 }

@@ -240,7 +240,6 @@ int main(int argc, void* argv[])
         /////////////////////
 
         Camera::UpdateCamera();
-
         EditorSaveManager::OnMainLoop();
 
         // Display the FPS
@@ -253,6 +252,7 @@ int main(int argc, void* argv[])
         EventManager::Call(&EventManager::nextFrameActions);
         EventManager::nextFrameActions = LinkedList<std::function<void()>>();
         EventManager::Call(&EventManager::OnMainLoop);
+        EventManager::Call(&EventManager::OnAfterMainLoop);
 
         overlaySprite->color = overlayColor;
         overlaySprite->position.z = overlayZ;

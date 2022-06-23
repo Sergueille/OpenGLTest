@@ -13,7 +13,7 @@ constexpr int MAX_RAY_COUNT = 256;
 constexpr int MAX_COLL_COUNT = 128;
 constexpr int VERT_VAL_COUNT = 5;
 constexpr int FACE_VAL_COUNT = 3;
-constexpr float Z_POS = -90;
+constexpr float Z_POS = 90;
 
 ObjectEvent Radioactivity::events[RADIOACTIVITY_EVENT_COUNT] = {
     ObjectEvent {
@@ -37,6 +37,8 @@ Radioactivity::Radioactivity() : EditorObject(vec3(0))
     }
             
 	typeName = "Radioactivity";
+
+    mainLoopFuncPos = EventManager::OnAfterMainLoop.push_end([this] { this->OnAfterMainLoop(); });
 }
 
 Radioactivity::~Radioactivity()
@@ -51,7 +53,9 @@ Radioactivity::~Radioactivity()
     {
         delete mesh;
         mesh = nullptr;
-    }        
+    }
+
+    EventManager::OnAfterMainLoop.remove(mainLoopFuncPos);
 }
 
 vec2 Radioactivity::DrawProperties(vec3 drawPos)
@@ -85,6 +89,7 @@ EditorObject* Radioactivity::Copy()
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
 
+    newObj->mainLoopFuncPos = EventManager::OnAfterMainLoop.push_end([newObj] { newObj->OnAfterMainLoop(); });
     newObj->mesh = nullptr;
 
 	return newObj;
@@ -310,17 +315,9 @@ void Radioactivity::CreateTriangle(unsigned int* indices, int* vertexCount, int*
     (*faceCount)++;
 }
 
-void Radioactivity::OnMainLoop()
+void Radioactivity::OnAfterMainLoop()
 {
-	EditorObject::OnMainLoop();
     if (!enabled) return;
-    
-    if (editorSprite != nullptr)
-    {
-        editorSprite->position = GetEditPos();
-        editorSprite->size = vec2(Editor::gizmoSize);
-        ((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
-    }
 
     // Do not refresh if camera is too far
     vec2 camDelta = Camera::position - vec2(GetEditPos());
@@ -353,6 +350,19 @@ void Radioactivity::OnMainLoop()
                     Player::ingameInstance->Kill();
                 }
             }
-        }            
+        }
+    }
+}
+
+void Radioactivity::OnMainLoop()
+{
+	EditorObject::OnMainLoop();
+    if (!enabled) return;
+    
+    if (editorSprite != nullptr)
+    {
+        editorSprite->position = GetEditPos();
+        editorSprite->size = vec2(Editor::gizmoSize);
+        ((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
     }
 }

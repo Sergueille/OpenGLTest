@@ -12,6 +12,7 @@ using namespace Utility;
 namespace EventManager
 {
 	extern LinkedList<std::function<void()>> OnMainLoop;
+	extern LinkedList<std::function<void()>> OnAfterMainLoop;
 	extern LinkedList<std::function<void()>> OnExitApp;
 	extern LinkedList<GLFWmousebuttonfun> OnClick;
 	extern LinkedList<GLFWscrollfun> OnScroll;

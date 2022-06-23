@@ -42,10 +42,14 @@ public:
 private:
 	Mesh* mesh = nullptr;
 
+	LinkedListElement<std::function<void()>>* mainLoopFuncPos = nullptr;
+
 	bool startedRealtime = false;
 
 	void CreateVertex(float* vertices, int* vertexCount, vec2 pos);
 	void CreateTriangle(unsigned int* indices, int* vertexCount, int* faceCount, int raycastCount);
+
+	void OnAfterMainLoop();
 };
 
 struct RaycastPoint {
