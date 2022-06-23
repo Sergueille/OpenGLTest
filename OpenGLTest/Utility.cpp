@@ -34,6 +34,8 @@ namespace Utility
 
 	float gameSoundsVolume = 1;
 	float musicVolume = 1;
+	float globalVolume = 1;
+	float globalVolumeOverride = 1;
 
 	float GetDeltaTime()
 	{

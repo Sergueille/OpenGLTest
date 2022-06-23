@@ -1012,7 +1012,7 @@ object ShadowCaster {
 object Player {
 	ID: "1496"
 	name: ""
-	position: "40.000000, -4.600000, 10.000000"
+	position: "-19.600000, 1.400000, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"

@@ -7,6 +7,17 @@
 #include "RessourceManager.h"
 #include "Player.h"
 
+ObjectEvent SoundPoint::events[SOUND_POINT_EVENT_COUNT] = {
+	ObjectEvent {
+		"Play sound",
+		[](EditorObject* object, void* param) { ((SoundPoint*)object)->PlaySound(); }
+	},
+	ObjectEvent {
+		"Stop sound",
+		[](EditorObject* object, void* param) { ((SoundPoint*)object)->StopSound(); }
+	},
+};
+
 SoundPoint::SoundPoint() : EditorObject(vec3(0))
 {
 	clickCollider = new CircleCollider(vec2(0), 1, false);
@@ -83,9 +94,9 @@ void SoundPoint::Load(std::map<std::string, std::string>* props)
 	autoStart = (*props)["autoStart"] == "1";
 	loop = (*props)["loop"] == "1";
 
-	if (autoStart)
+	if (!Editor::enabled && autoStart)
 	{
-		PlaySound();
+		EventManager::DoInOneFrame([this] { this->PlaySound(); });
 	}
 }
 
@@ -107,7 +118,7 @@ void SoundPoint::Enable()
 	EditorObject::Enable();
     if (editorSprite != nullptr) editorSprite->DrawOnMainLoop();
 	
-	if (autoStart)
+	if (playingBeforeDisabled)
 		PlaySound();
 }
 
@@ -115,7 +126,15 @@ void SoundPoint::Disable()
 {
 	EditorObject::Disable();
     if (editorSprite != nullptr) editorSprite->StopDrawing();
+
+	playingBeforeDisabled = isPlaying;
 	StopSound();
+}
+
+void SoundPoint::GetObjectEvents(const ObjectEvent** res, int* resCount)
+{
+	*res = events;
+	*resCount = SOUND_POINT_EVENT_COUNT;
 }
 
 void SoundPoint::PlaySound()

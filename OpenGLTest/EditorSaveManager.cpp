@@ -213,6 +213,7 @@ void EditorSaveManager::LoadLevelWithTransition(std::string path, std::function<
 
 	TweenManager<float>::Tween(0, 1, 2, [](float value) {
 		overlayColor = vec4(0, 0, 0, value);
+		globalVolumeOverride = 1 - value;
 	}, linear)
 	->SetOnFinished([path, onLoad] {
 		// Load next level
@@ -224,6 +225,7 @@ void EditorSaveManager::LoadLevelWithTransition(std::string path, std::function<
 		// Fade out
 		TweenManager<float>::Tween(1, 0, 2, [](float value) {
 			overlayColor = vec4(0, 0, 0, value);
+			globalVolumeOverride = 1 - value;
 		}, linear);
 
 		// Set camera instantly

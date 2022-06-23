@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 47
+count 48
 
 object MapData {
 	mapName: ""
@@ -167,7 +167,7 @@ object Trigger {
 	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "3.000000, 4.000000"
-	onEnter: "2614|Trigger|"
+	onEnter: "2614|Trigger|3226|Play sound|3235|Trigger|"
 	onExit: ""
 	once: "0"
 }
@@ -687,4 +687,15 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "1"
+}
+object LogicRelay {
+	ID: "3235"
+	name: "sound relay"
+	position: "2.600000, -1.000000, 80.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "3228|Play sound|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "0.800000"
 }

@@ -17,8 +17,8 @@ public:
 
 	std::string soundName;
 	float volume = 1;
-	float fadeIn = 3;
-	float fadeOut = 3;
+	float fadeIn = 1;
+	float fadeOut = 1;
 	bool isMusic = false;
 
 	bool isPlaying = false;

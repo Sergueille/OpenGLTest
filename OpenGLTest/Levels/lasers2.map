@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 255
+count 260
 
 object MapData {
 	mapName: ""
@@ -10,7 +10,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: ""
-	position: "-21.600000, 29.400000, 20.000000"
+	position: "-21.200001, 29.400000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -3632,4 +3632,71 @@ object EditorSprite {
 	UVend: "1.000000, 0.500000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object SoundPoint {
+	ID: "13135"
+	name: ""
+	position: "91.599998, -21.600000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "water_splash.wav"
+	volume: "2.000000"
+	spatial: "1"
+	minDist: "1.000000"
+	maxDist: "20.000000"
+	autoStart: "1"
+	loop: "1"
+}
+object SoundPoint {
+	ID: "14033"
+	name: ""
+	position: "154.199997, -21.200001, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "water_splash.wav"
+	volume: "2.000000"
+	spatial: "1"
+	minDist: "1.000000"
+	maxDist: "20.000000"
+	autoStart: "1"
+	loop: "1"
+}
+object SoundArea {
+	ID: "14034"
+	name: ""
+	position: "93.200005, -19.200001, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "62.200001, 18.600000"
+	soundName: "soundscape_wind1.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "3.000000"
+	fadeOut: "3.000000"
+}
+object SoundArea {
+	ID: "15386"
+	name: ""
+	position: "139.199997, -3.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "39.200001, 5.800000"
+	soundName: "neon1.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "2.000000"
+	fadeOut: "2.000000"
+}
+object SoundArea {
+	ID: "15839"
+	name: ""
+	position: "142.199997, -8.800000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "37.600002, 5.200000"
+	soundName: "soundscape_wind2.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "2.000000"
+	fadeOut: "2.000000"
 }

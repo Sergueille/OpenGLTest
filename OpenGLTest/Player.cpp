@@ -64,7 +64,7 @@ Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), 
 			std::cout << "Two player instaces in game !!" << std::endl;
 
 		// Play levitation sound
-		levitationSoundHandle = PlaySound(levitationSound, Utility::gameSoundsVolume);
+		levitationSoundHandle = PlaySound(levitationSound, 0);
 		soloud->setLooping(levitationSoundHandle, true);
 	}
 

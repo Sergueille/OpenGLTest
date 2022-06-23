@@ -1,9 +1,11 @@
 // Editor map file, version 1
 
-count 37
+count 38
 
 object MapData {
 	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
 }
 object EditorSprite {
 	ID: "152"
@@ -99,12 +101,12 @@ object EditorSprite {
 	parallax: "1.000000"
 	size: "1.000000, 1.000000"
 	rotation: "0.000000"
-	color: "1.000000, 0.000000, 0.000000, 0.000000"
+	color: "1.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
-	visibleOnlyInEditor: "0"
+	visibleOnlyInEditor: "1"
 }
 object EditorSprite {
 	ID: "2611"
@@ -121,16 +123,6 @@ object EditorSprite {
 	isLit: "0"
 	visibleOnlyInEditor: "0"
 }
-object Button {
-	ID: "2612"
-	name: ""
-	position: "-10.400001, -0.400000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	startPressed: "0"
-	onPressed: "2462|Open door|"
-	onUnpressed: ""
-}
 object TransformModifier {
 	ID: "2613"
 	name: "Elevator move"
@@ -144,7 +136,7 @@ object TransformModifier {
 	targetSize: "1.000000, 1.000000"
 	duration: "5.000000"
 	easeType: "2"
-	onFinished: "2462|Open door|"
+	onFinished: "2462|Open door|3233|Stop sound|3235|Play sound|"
 }
 object Laser {
 	ID: "2908"
@@ -161,7 +153,7 @@ object Laser {
 object EditorSprite {
 	ID: "3009"
 	name: "Ground"
-	position: "-18.400000, -1.800000, 0.000000"
+	position: "-18.400000, 1.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "20.400000, 35.799999"
@@ -480,7 +472,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "3211"
 	name: "Ground"
-	position: "-7.800000, -15.800000, 10.000000"
+	position: "-7.800000, -15.800001, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "25.400000, 22.600000"
@@ -499,6 +491,7 @@ object LogicRelay {
 	parent: "-1"
 	parallax: "1.000000"
 	onTrigger: "2613|Set all transforms|3158|Set all transforms|3162|Set all transforms|"
+	onAltTrigger: ""
 	triggerOnStart: "1"
 	delay: "0.100000"
 }
@@ -533,4 +526,32 @@ object EditorSprite {
 	UVend: "2.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object SoundPoint {
+	ID: "3233"
+	name: ""
+	position: "-5.800000, 0.000000, 50.000000"
+	parent: "2609"
+	parallax: "1.000000"
+	soundName: "lift_on.wav"
+	volume: "0.700000"
+	spatial: "1"
+	minDist: "10.000000"
+	maxDist: "20.000000"
+	autoStart: "1"
+	loop: "1"
+}
+object SoundPoint {
+	ID: "3235"
+	name: "sound end"
+	position: "-5.000000, 0.000000, 50.000000"
+	parent: "2609"
+	parallax: "1.000000"
+	soundName: "lift_stop.wav"
+	volume: "0.700000"
+	spatial: "1"
+	minDist: "10.000000"
+	maxDist: "20.000000"
+	autoStart: "0"
+	loop: "0"
 }

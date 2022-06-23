@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 224
+count 228
 
 object MapData {
 	mapName: ""
@@ -3148,4 +3148,56 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object SoundArea {
+	ID: "5146"
+	name: ""
+	position: "-30.000000, 5.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "32.000000, 6.400000"
+	soundName: "neon2.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
+}
+object SoundArea {
+	ID: "5551"
+	name: ""
+	position: "19.000000, -0.600000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "81.599998, 5.200000"
+	soundName: "soundscape_wind1.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
+}
+object SoundArea {
+	ID: "5553"
+	name: ""
+	position: "32.600002, 12.400001, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "16.200001, 11.600000"
+	soundName: "water.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
+}
+object SoundArea {
+	ID: "5555"
+	name: ""
+	position: "24.000000, -7.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "39.200001, 8.000000"
+	soundName: "soundscape_wind2.wav"
+	volume: "0.700000"
+	isMusic: "0"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
 }

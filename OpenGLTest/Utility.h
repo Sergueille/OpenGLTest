@@ -35,8 +35,10 @@ namespace Utility
 	extern glm::vec4 overlayColor;
 	extern float overlayZ;
 
-	extern float gameSoundsVolume;
-	extern float musicVolume;
+	extern float gameSoundsVolume; // DO NOT CHANGE, should be changed only by user settings
+	extern float musicVolume; // DO NOT CHANGE, should be changed only by user settings
+	extern float globalVolume; // DO NOT CHANGE, should be changed only by user settings, change globalVolumeOverride instead
+	extern float globalVolumeOverride;
 
 	/// <summary>
 	/// Amout of coruption (post-processing), between 0 and 1
