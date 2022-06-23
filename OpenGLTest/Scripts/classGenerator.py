@@ -38,7 +38,7 @@ public:
     }
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;
-	virtual void UpdateTransform() override;
+	virtual void OnMainLoop() override;
 
 	virtual EditorObject* Copy() override;
 
@@ -203,8 +203,6 @@ EditorObject* {class_name}::Copy()
 
     {GetSpriteCopy()}
 
-	newObj->SubscribeToEditorObjectFuncs();
-
 	return newObj;
 }}
 
@@ -248,9 +246,10 @@ void {class_name}::Disable()
     {GetSpriteDisable()}
 }}
 
-void {class_name}::UpdateTransform()
+void {class_name}::OnMainLoop()
 {{
-	EditorObject::UpdateTransform();
+	EditorObject::OnMainLoop();
+	if (!enabled) return;
     {GetSpriteUpdateTransform()}
 }}
 """

@@ -24,6 +24,7 @@
 #include "PhysicSimulation.h"
 #include "PrefabCloner.h"
 #include "Radioactivity.h"
+#include "SoundPoint.h"
 
 #include <iostream>
 
@@ -801,6 +802,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	if (pressed)
 		newObject = (EditorObject*)new Radioactivity();
 
+	drawPos.y -= UIButton(drawPos, "Sound Point", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new SoundPoint();
+
 	if (newObject != nullptr)
 	{
 		AddObject(newObject);
@@ -1319,6 +1324,7 @@ void Editor::IndexFiles()
 	for (const auto& entry : std::filesystem::recursive_directory_iterator(soundsDir))
 	{
 		std::string fileName = ToLower(entry.path().string());
+		fileName = fileName.substr(soundsDir.length() + 1, soundsDir.length() - soundsDir.length() - 1); // Remove "sounds\"
 		soundFiles.push_back(fileName);
 	}
 

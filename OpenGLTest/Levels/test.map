@@ -777,18 +777,17 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
-object PrefabCloner {
-	ID: "4205"
+object SoundPoint {
+	ID: "4259"
 	name: ""
-	position: "10.200000, 7.000000, 2.000000"
+	position: "0.000000, 6.800000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	path: "prefabs\platform1.map"
-	ori: "0.000000"
-	scale: "1.000000, 1.000000"
-	cloneOnTimer: "1"
-	delay: "2.000000"
-	deleteAfterTime: "0"
-	deleteTime: "5.000000"
-	maxInstances: "5"
+	soundName: "click.wav"
+	volume: "0.100000"
+	spatial: "1"
+	minDist: "0.000000"
+	maxDist: "20.000000"
+	autoStart: "1"
+	loop: "1"
 }

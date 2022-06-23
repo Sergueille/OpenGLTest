@@ -28,6 +28,9 @@
     <Filter Include="Light">
       <UniqueIdentifier>{8f12c53b-0070-4da7-8c2f-2b0f2e47c052}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{d49691fe-f9da-4cab-82f9-2b11913fa3d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp">
@@ -240,6 +243,9 @@
     <ClCompile Include="Radioactivity.cpp">
       <Filter>Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="SoundPoint.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -394,6 +400,9 @@
     </ClInclude>
     <ClInclude Include="Radioactivity.h">
       <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundPoint.h">
+      <Filter>Audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -337,8 +337,9 @@ namespace Utility
 	SoLoud::handle PlaySound(std::string path, float volume)
 	{
 		SoLoud::Wav* sound = RessourceManager::GetSound(path);
-		sound->setVolume(volume);
-		return soloud->play(*sound);
+		SoLoud::handle handle = soloud->play(*sound);
+		soloud->setVolume(handle, volume);
+		return handle;
 	}
 
 	unsigned int lastBoundTexture = -1;
