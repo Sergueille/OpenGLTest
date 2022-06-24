@@ -147,6 +147,8 @@ Mesh* Radioactivity::GetMesh()
     RaycastPoint rayPoints[MAX_RAY_COUNT] = { };
     int coll_id = 0;
 
+    //auto begin = std::chrono::high_resolution_clock::now();
+
     // Get raycast points for rect colliders
     for (auto it = Collider::rectColliders.begin(); it != Collider::rectColliders.end(); it++)
     {
@@ -274,7 +276,11 @@ Mesh* Radioactivity::GetMesh()
         }
     }
 
-    std::printf("Radioactivity source baked with %d raycasts and %d vertices\n", raycastCount, vertexCount);
+    //auto end = std::chrono::high_resolution_clock::now();
+    //int duration = (int)std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
+    //std::printf("%d microseconds\n", duration);
+
+    //std::printf("Radioactivity source baked with %d raycasts and %d vertices\n", raycastCount, vertexCount);
     mesh = new Mesh(vertices, vertexCount * VERT_VAL_COUNT, indices, faceCount * FACE_VAL_COUNT);
 
     return mesh;

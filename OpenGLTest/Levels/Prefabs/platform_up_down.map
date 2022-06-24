@@ -1,0 +1,86 @@
+// Editor map file, version 1
+
+count 7
+
+object MapData {
+	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
+}
+object EditorSprite {
+	ID: "1"
+	name: ""
+	position: "0.000000, 0.000000, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.400000, 9.200000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object TransformModifier {
+	ID: "2"
+	name: "down"
+	position: "3.600000, -0.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	targetID: "1"
+	relative: "1"
+	targetPos: "0.000000, -4.000000"
+	targetRotation: "0.000000"
+	targetSize: "1.000000, 1.000000"
+	duration: "2.000000"
+	easeType: "0"
+	onFinished: "7|Trigger|"
+}
+object TransformModifier {
+	ID: "3"
+	name: "up"
+	position: "3.600000, 0.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	targetID: "1"
+	relative: "1"
+	targetPos: "0.000000, 0.000000"
+	targetRotation: "0.000000"
+	targetSize: "1.000000, 1.000000"
+	duration: "2.000000"
+	easeType: "0"
+	onFinished: "5|Trigger|"
+}
+object PrefabRelay {
+	ID: "4"
+	name: ""
+	position: "3.600000, -1.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	eventListsCount: "1"
+	eventList0: "2|Set position|"
+	eventList0name: "Start"
+}
+object LogicRelay {
+	ID: "5"
+	name: "down relay"
+	position: "4.400000, 0.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "2|Set position|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "1.000000"
+}
+object LogicRelay {
+	ID: "7"
+	name: "up relay"
+	position: "2.800000, 0.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "3|Set position|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "1.000000"
+}
