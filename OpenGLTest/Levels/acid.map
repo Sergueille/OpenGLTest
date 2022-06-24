@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 86
+count 89
 
 object MapData {
 	mapName: ""
@@ -25,7 +25,7 @@ object EditorSprite {
 object Player {
 	ID: "94"
 	name: ""
-	position: "-1.400000, -0.000000, 20.000000"
+	position: "-19.400000, 30.200001, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -364,7 +364,7 @@ object TransformModifier {
 	targetSize: "1.000000, 1.000000"
 	duration: "43.000000"
 	easeType: "0"
-	onFinished: "1419|Stop|"
+	onFinished: "1419|Stop|5401|Stop sound|"
 }
 object LogicRelay {
 	ID: "369"
@@ -372,7 +372,7 @@ object LogicRelay {
 	position: "25.000000, -3.400000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	onTrigger: "364|Set position|744|Turn off|1357|Start|1355|Start|1353|Start|"
+	onTrigger: "364|Set position|744|Turn off|1357|Start|1355|Start|1353|Start|5401|Play sound|"
 	onAltTrigger: ""
 	triggerOnStart: "0"
 	delay: "1.000000"
@@ -1130,4 +1130,46 @@ object Trigger {
 	onEnter: "370|Save game|"
 	onExit: ""
 	once: "1"
+}
+object SoundPoint {
+	ID: "5237"
+	name: ""
+	position: "-14.599999, 0.000000, 50.000000"
+	parent: "202"
+	parallax: "1.000000"
+	soundName: "acid.wav"
+	volume: "1.000000"
+	spatial: "1"
+	minDist: "10.000000"
+	maxDist: "20.000000"
+	autoStart: "1"
+	loop: "1"
+}
+object SoundPoint {
+	ID: "5239"
+	name: ""
+	position: "-4.000000, 0.000000, 50.000000"
+	parent: "202"
+	parallax: "1.000000"
+	soundName: "acid.wav"
+	volume: "1.000000"
+	spatial: "1"
+	minDist: "10.000000"
+	maxDist: "20.000000"
+	autoStart: "1"
+	loop: "1"
+}
+object SoundPoint {
+	ID: "5401"
+	name: ""
+	position: "-9.400000, 0.000000, 50.000000"
+	parent: "202"
+	parallax: "1.000000"
+	soundName: "water_splash.wav"
+	volume: "2.000000"
+	spatial: "1"
+	minDist: "15.000000"
+	maxDist: "30.000000"
+	autoStart: "0"
+	loop: "1"
 }

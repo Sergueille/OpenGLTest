@@ -25,6 +25,8 @@ SOUNDS ----------------------
 	- "3_Lift_STOP" by ValentinPetiteau
 	- "1_Lift_START" by ValentinPetiteau
 	- "Stream, Running Water | Aviemore Scotland" by BurghRecords
+	- "unfa's Laser Weapon Sounds" by unfa
+	- "Large hydraulic door" by nooly
 
 LIBRARIES -------------------
 - GLFW (window management, os stuff)

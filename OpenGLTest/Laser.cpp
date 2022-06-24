@@ -77,6 +77,7 @@ Laser::~Laser()
 	laserCollider = nullptr;
 
 	lasers.remove(this);
+	StopLoopSound();
 }
 
 void Laser::OnMainLoop()
@@ -175,12 +176,37 @@ void Laser::OnMainLoop()
 				}
 			}
 
+			// Get distance between camera and line
+			vec2 editPos = vec2(GetEditPos());
+			vec3 h = Utility::Project(editPos, raycastRes, Camera::position);
+			float camDist;
+
+			if (h.z < 0) // editPos is the nearest point
+			{
+				camDist = glm::distance(Camera::position, editPos);
+			}
+			else if (h.z > glm::distance(editPos, raycastRes)) // raycastRes is the nearest point
+			{
+				camDist = glm::distance(Camera::position, raycastRes);
+			}
+			else // H is the nearest point
+			{
+				camDist = glm::distance(Camera::position, vec2(h));
+			}
+
+			soundsAttenuation = (camDist - soundsMinDist) / (soundsMaxDist - soundsMinDist);
+			if (soundsAttenuation > 1) soundsAttenuation = 1;
+			if (soundsAttenuation < 0) soundsAttenuation = 0;
+			soundsAttenuation = 1 - soundsAttenuation;
+
+			soloud->setVolume(loopSound, Utility::gameSoundsVolume * soundOnVolume * soundsAttenuation);
+
 			hasRefreshedOnce = true;
 		}
 		else
 		{
 			if (displaySprite != nullptr)
-				displaySprite->StopDrawing(); // NOCHECK
+				displaySprite->StopDrawing();
 		}
 	}
 }
@@ -208,6 +234,7 @@ void Laser::Load(std::map<std::string, std::string>* props)
 	startOn = (*props)["startOn"] != "0";
 
 	if (!Editor::enabled && !startOn) TurnOff();
+	else if (startOn) StartLoopSound();
 
 	EditorObject::Load(props);
 }
@@ -242,6 +269,27 @@ void Laser::Disable()
 
 	if (laserOn)
 		lasers.remove(this);
+
+	StopLoopSound();
+}
+
+void Laser::StartLoopSound()
+{
+	if (!Editor::enabled && !isPlayingLoopSound)
+	{
+		isPlayingLoopSound = true;
+		loopSound = Utility::PlaySound("laser_on.wav", Utility::gameSoundsVolume * soundOnVolume * soundsAttenuation);
+		soloud->setLooping(loopSound, true);
+	}
+}
+
+void Laser::StopLoopSound()
+{
+	if (isPlayingLoopSound)
+	{
+		soloud->stop(loopSound);
+		isPlayingLoopSound = false;
+	}
 }
 
 Laser* Laser::Copy()
@@ -335,6 +383,9 @@ void Laser::TurnOn()
 	displaySprite->DrawOnMainLoop();
 
 	lasers.push_back(this);
+
+	Utility::PlaySound("laser_start.wav", Utility::gameSoundsVolume * soundStartVolume);
+	StartLoopSound();
 }
 
 void Laser::TurnOff()
@@ -346,6 +397,9 @@ void Laser::TurnOff()
 	displaySprite->StopDrawing();
 
 	lasers.remove(this);
+
+	Utility::PlaySound("laser_stop.wav", Utility::gameSoundsVolume * soundStopVolume); 
+	StopLoopSound();
 }
 
 void Laser::ToggleOnOff()

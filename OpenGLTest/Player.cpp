@@ -406,7 +406,7 @@ bool Player::TeleportCollideWithLaser(vec2 teleportPosition)
 
 	for (auto it = Laser::lasers.begin(); it != Laser::lasers.end(); it++)
 	{
-		if ((*it)->laserType == Laser::LaserType::noTeleport)
+		if ((*it)->laserType == Laser::LaserType::noTeleport) 
 		{
 			bool rectColl = teleportCollider.CollideWith((*it)->laserCollider).z != 0;
 			if (rectColl)

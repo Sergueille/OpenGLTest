@@ -98,6 +98,8 @@ void SoundPoint::Load(std::map<std::string, std::string>* props)
 	{
 		EventManager::DoInOneFrame([this] { this->PlaySound(); });
 	}
+
+	RessourceManager::GetSound(soundName); // Make sure the sound is loaded to prevent FPS drop during the level
 }
 
 void SoundPoint::Save()

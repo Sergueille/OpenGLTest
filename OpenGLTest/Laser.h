@@ -1,6 +1,7 @@
 #pragma once
 #include "EditorObject.h"
 #include "RectCollider.h"
+#include <soloud.h>
 
 constexpr int LASER_EVENT_COUNT = 3;
 
@@ -11,6 +12,12 @@ public:
 
 	const float width = 0.5f;
 	const float editorSpriteAlpha = 0.5f;
+
+	const float soundOnVolume = 0.1f;
+	const float soundStartVolume = 0.6f;
+	const float soundStopVolume = 0.8f;
+	const float soundsMinDist = 2;
+	const float soundsMaxDist = 9;
 
 	/// <summary>
 	/// The laser will not update if the player is further than this distance
@@ -65,9 +72,16 @@ public:
 
 	virtual void ResetIngameState() override;
 
+	void StartLoopSound();
+	void StopLoopSound();
+
 private:
 	vec2 intersectionPos = vec2(0);
 	bool hasRefreshedOnce = false;
+
+	float soundsAttenuation = 0;
+	SoLoud::handle loopSound;
+	bool isPlayingLoopSound;
 
 	static void SetSpriteUniforms(Shader* shader, void* object);
 

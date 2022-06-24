@@ -79,6 +79,8 @@ void SoundArea::Load(std::map<std::string, std::string>* props)
 	isMusic = (*props)["isMusic"] == "1";
 	EditorSaveManager::FloatProp(props, "fadeIn", &fadeIn);
 	EditorSaveManager::FloatProp(props, "fadeOut", &fadeOut);
+
+	RessourceManager::GetSound(soundName); // Make sure the sound is loaded to prevent FPS drop during the level
 }
 
 void SoundArea::Save()

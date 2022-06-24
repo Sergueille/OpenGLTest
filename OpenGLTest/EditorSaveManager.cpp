@@ -219,18 +219,20 @@ void EditorSaveManager::LoadLevelWithTransition(std::string path, std::function<
 		// Load next level
 		EditorSaveManager::LoadLevel(path, false);
 
-		if (onLoad != nullptr)
-			onLoad();
+		EventManager::DoInOneFrame([onLoad] {
+			if (onLoad != nullptr)
+				onLoad();
 
-		// Fade out
-		TweenManager<float>::Tween(1, 0, 2, [](float value) {
-			overlayColor = vec4(0, 0, 0, value);
-			globalVolumeOverride = 1 - value;
-		}, linear);
+			// Fade out
+			TweenManager<float>::Tween(1, 0, 2, [](float value) {
+				overlayColor = vec4(0, 0, 0, value);
+				globalVolumeOverride = 1 - value;
+				}, linear);
 
-		// Set camera instantly
-		if (Camera::getTarget != nullptr)
-			Camera::position = Camera::getTarget();
+			// Set camera instantly
+			if (Camera::getTarget != nullptr)
+				Camera::position = Camera::getTarget();
+		});
 	});
 }
 
