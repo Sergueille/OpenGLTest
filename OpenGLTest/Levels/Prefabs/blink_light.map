@@ -1,0 +1,47 @@
+// Editor map file, version 1
+
+count 4
+
+object MapData {
+	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
+}
+object EditorSprite {
+	ID: "13034"
+	name: ""
+	position: "0.000000, 0.000000, 1.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "0.210000, 0.210000"
+	rotation: "0.000000"
+	color: "1.000000, 0.000000, 0.000000, 1.000000"
+	texturePath: "glow.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object LogicRelay {
+	ID: "0"
+	name: ""
+	position: "0.200000, 0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "13034|Disable|3|Trigger|"
+	onAltTrigger: ""
+	triggerOnStart: "1"
+	delay: "1.000000"
+}
+object LogicRelay {
+	ID: "3"
+	name: ""
+	position: "-0.200000, -0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "13034|Enable|0|Trigger|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "1.000000"
+}
