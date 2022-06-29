@@ -1,17 +1,19 @@
 // Editor map file, version 1
 
-count 10
+count 9
 
 object MapData {
 	mapName: ""
+	lightmapStart: "-31.000000, -30.000000"
+	lightmapEnd: "32.000000, 32.000000"
 }
 object EditorSprite {
 	ID: "0"
 	name: ""
-	position: "0.400000, -4.200000, 0.000000"
+	position: "-2.400000, -8.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "25.000000, 3.200000"
+	size: "25.000000, 9.400001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -23,7 +25,7 @@ object EditorSprite {
 object Player {
 	ID: "1"
 	name: ""
-	position: "0.000000, -0.400000, 0.000000"
+	position: "-8.600000, -1.800000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -44,72 +46,62 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
-object Light {
-	ID: "14"
+object Prefab {
+	ID: "24"
 	name: ""
-	position: "-5.600000, 6.000000, 0.000000"
+	position: "-8.800000, 1.600000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.000000"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "31"
+	name: ""
+	position: "-2.200000, 3.400000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "31.200001, 3.400000"
 	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.300000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object Prefab {
+	ID: "33"
+	name: ""
+	position: "9.400001, 1.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "40"
+	name: ""
+	position: "-4.200000, -0.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.000000, 5.200000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
 object ShadowCaster {
-	ID: "15"
+	ID: "109"
 	name: ""
-	position: "-17.000000, 2.600000, -2.000000"
+	position: "-4.200000, -0.800000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "3.000000, 3.000000"
-	orientation: "-180.000000"
-}
-object ShadowCaster {
-	ID: "17"
-	name: ""
-	position: "-5.600000, 2.600000, -2.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "3.000000, 3.000000"
-	orientation: "-180.000000"
-}
-object ShadowCaster {
-	ID: "19"
-	name: ""
-	position: "7.800000, 2.600000, -2.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "3.000000, 3.000000"
-	orientation: "-180.000000"
-}
-object Light {
-	ID: "21"
-	name: ""
-	position: "-17.000000, 6.000000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.000000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.100000"
-}
-object Light {
-	ID: "23"
-	name: ""
-	position: "7.600000, 5.600000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "10.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.000000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.800000"
+	size: "1.000000, 6.400000"
+	orientation: "0.000000"
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Documentation</title>
+</head>
+<body>
+    <div class="left-panel">
+        <a class="btn" href="index.html">Retour à l'accueil</a>
+        <p class="sum-title">Sommaire:</p>
+        <ul id="summary"></ul>
+        <script src="summary.js" defer="defer"></script>
+    </div>
+    <div class="page">
+        <h2>Evenements et logique</h2>
+        <p>
+            Avec l'éditeur de niveaux, vous pouvez faire des tâches très complexes sans toucher au code source. 
+            Ce quide va vous apprendre à utiliser les évenements et ajouter de la logique au niveau.
+        </p>
+        <h3 id="btn-and-lasers">Boutons et lasers</h3>
+        <img src="Images\events_laser.png" class="float-r">
+        <p>
+            Cas le plus simple: vous voulez activer et désactiver un laser avec un bouton.<br>
+            Pour commencer, ajoutez un bouton et un laser. Ouvrez ensuite les propriétés du bouton.<br><br>
+
+            Vous pouvez voir deux <b>évenements</b>. Un évenement est une liste de chose à faire qui sera déclenchée par le bouton.<br>
+            En dessous de "On pressed", Cliquez sur "Add event target", puis cliquez sur "No object", et cliquez enfin sur le laser.<br>
+            Changez ensuite la propriété "event" juste en dessous, pour sélectionner "Turn off".<br><br>
+
+            Faites la même chose pour l'évenement "On unpressed", mais cette fois-ci pour allumer le laser.<br>
+        </p>
+        <h3 id="limited-time" class="clear">Temps limité</h3>
+        <img src="Images\relay_ex.png" class="float-r">
+        <p>
+            Maintenant, essayons de faire un bouton à temps limité.<br>
+            Gardez les object du paragraphe précedent, et ajoutez un Logic relay (et pas un Prefab relay).<br>
+            Il s'agit simplement d'un intermédiaire pour les évenements: il reçoit un évenement et en appelle d'autres.<br>
+            <br>
+            Assurez-vous de lui donner une position Z élevée pour ne pas le perdre derrière les autres objects.<br>
+            Donnez-lui un délai de 3 secondes et ajoutez un évenement comme dans l'image ci-contre.<br>
+            <br>
+            Dans les propriétés du bouton, ajouter un élement à "On pressed", sélectionnez le relai que vous venez de créer,
+            et sélectionner l'évenement "trigger".<br>
+            <br>
+            Quand le joueur appuiera sur le bouton, cela déclenchera le relai, qui, au bout de 3 secondes, va désactiver le bouton.
+        </p>
+        <h3 class="clear" id="prefabs">Les évenements dans les prefabs</h3>
+        <img src="Images\prefab_evens_ex.png" class="float-r">
+        <p>
+            Les prefabs peuvent recevoir leur propres évenements. Essayez de créer un prefab, avec comme fichier "prefabs\door.map".<br>
+            Modifiez ensuite le bouton pour qu'il ouvre et ferme la porte comme dans l'image.<br>
+            Ces évenements ont étés créés par un Prefab relay
+        </p>
+    </div>
+</body>
+</html>

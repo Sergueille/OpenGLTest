@@ -177,7 +177,7 @@ void TransformModifier::ResetIngameState()
 void TransformModifier::SetPosition()
 {
 	if (targetObject == nullptr) return;
-	if (moveAction != nullptr && !moveAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(moveAction);
+	//if (moveAction != nullptr && !moveAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(moveAction);
 
 	vec2 obj = relative ? vec2(targetStartPos) + targetPos : targetPos;
 
@@ -189,7 +189,7 @@ void TransformModifier::SetPosition()
 void TransformModifier::SetRotation()
 {
 	if (targetObject == nullptr) return;
-	if (roateAction != nullptr && !roateAction->IsFinshedAt(Utility::time)) TweenManager<float>::Cancel(roateAction);
+	//if (roateAction != nullptr && !roateAction->IsFinshedAt(Utility::time)) TweenManager<float>::Cancel(roateAction);
 
 	float obj = relative ? targetStartRotation + targetRotation : targetRotation;
 
@@ -201,7 +201,7 @@ void TransformModifier::SetRotation()
 void TransformModifier::SetScale()
 {
 	if (targetObject == nullptr) return;
-	if (scaleAction != nullptr && !scaleAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(scaleAction);
+	//if (scaleAction != nullptr && !scaleAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(scaleAction);
 
 	vec2 obj = relative ? targetStartScale * targetSize : targetSize;
 

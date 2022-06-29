@@ -2,10 +2,13 @@
     --bg-dd: #101010;
     --bg-d: #151515;
     --bg: #202020;
-    --bg-l: #252525;
-    --bg-ll: #303030;
+    --bg-l: #353535;
+    --bg-ll: #454545;
     --txt: #dddddd;
     --prim: #158f15;
+    --prim-d: #0e630e;
+
+    box-sizing: border-box;
 }
 
 body {
@@ -15,10 +18,95 @@ body {
 }
 
 .page {
-    margin: 2em 15% 2em 15%;
+    margin: 2rem 10rem 2rem 25rem;
+}
+
+.left-panel {
+    position: fixed;
+    padding: 1rem;
+    width: 21rem;
+    margin-left: 2rem;
+
+    background-color: var(--bg-l);
+    border-radius: 10px;
 }
 
 a {
     color: var(--prim);
     text-decoration: none;
+}
+
+.btn,
+button {
+    display: inline-block;
+    color: var(--txt);
+    border: none;
+    border-radius: 5px;
+    background-color: var(--bg-ll);
+    padding: 5px 10px;
+
+    transition: 200ms;
+}
+
+.btn:hover,
+button:hover {
+    transform: scale(110%);
+}
+
+.float-r {
+    height: 15rem;
+    float: right;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.float-l {
+    height: 15rem;
+    float: left;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+}
+
+.clear {
+    clear: both;
+}
+
+.hotkey {
+    background-color: #505050;
+    font-size: 0.8rem;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.2rem;
+}
+
+.warn {
+    display: block;
+    margin: 1rem 0;
+}
+
+.warn::before {
+    content: "";
+    background: url("Images\\caution.png");
+    background-size: 1.5rem;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 1.5rem;
+    width: 1.5rem;
+    transform: translateY(0.4rem);
+}
+
+.sum-title {
+    font-weight: 600;
+}
+
+#summary {
+    margin-top: -1rem;
+}
+
+#summary>li>a {
+    color: var(--txt);
+    transition: 200ms;
+}
+
+#summary>li>a:hover {
+    color: var(--prim);
 }

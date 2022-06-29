@@ -40,6 +40,7 @@ void main()
         const float realSurfaceSize = 0.5;
         float surfaceSize = realSurfaceSize / spriteSize.y;
         float surfaceAmount = 1 - ((1 - texCoord.y) / surfaceSize);
+        surfaceAmount += noise;
         if (surfaceAmount < 0) surfaceAmount = 0;
         color = (1 - surfaceAmount) * color + (surfaceAmount * surfaceColor);
     }

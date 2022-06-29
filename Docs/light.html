@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Documentation</title>
+</head>
+<body>
+    <div class="left-panel">
+        <a class="btn" href="index.html">Retour à l'accueil</a>
+        <p class="sum-title">Sommaire:</p>
+        <ul id="summary"></ul>
+        <script src="summary.js" defer="defer"></script>
+    </div>
+    <div class="page">
+        <h2>Que la lumière soit!</h2>
+        <p>
+            La lumière, c'est trèèèès important! Elle peut rendre vorte niveau magnifique comm elle peut le rendre atroce.<br>
+            L'éclairage est calculé par l'éditeur et est mis dans une <b>lightmap</b> (une grosse texture). 
+            L'éclairage n'a alors pas besoin d'être calculé en temps réel.<br>
+            Toutes les lumières sont donc absolmuent STATIQUES. Les déplacer ou les désactiver pendant le niveau ne fera rien.<br>
+        </p>
+        <h3 id="btn-and-lasers">Comment éclairer</h3>
+        <p>
+            Pour la plupart de l'éclairage, utilisez des prefabs tout prêts:
+            <ul>
+                <li>prefabs\neon.map: un néon fonctionnel</li>
+                <li>prefabs\neon_half.map: un néon a moitié cassé</li>
+                <li>prefabs\fluo.map: une lampe fluorescente</li>
+            </ul>
+
+            N'ésitez pas a ajouter quelques Point light avec une intensité faible et un grand rayon pour équilibrer l'éclairage.<br>
+            Vous pouvez également donner une intensité négative pour assombrir.<br>
+            Si l'éclairage est vraiment trop fort, changez la couleur du fond de la prièce, per exemple (0.8, 0.8, 0.8).<br>
+            <br>
+            Ajoutez également des petites lumières qui viennent du décor (un ordinateur par exemple)
+
+        </p>
+        <h3 id="shadows">Ajouter des ombres</h3>
+        <img src="Images\no_shadow_ex.png" class="float-l">
+        <img src="Images\shadow_ex.png" class="float-r">
+        <p>
+            Si vous créez plusieurs pièce, vous allez voir qu'il y a un problème: la lumière passe à travers les murs!<br>
+        </p>
+        <p>
+            Pour éviter cela, ajoutez un Shadow caster et donnez-lui la même forme que le mur (en changeant sa taille).
+            Recalculez l'éclairage et la lumière disparait!
+        </p>
+        <p class="clear">
+            Vous pouvez également utiliser les Shadow casters pour faire des effets d'ombres.
+        </p>
+        <img src="Images\shadow_ex2.png" class="float-l clear">
+    </div>
+</body>
+</html>

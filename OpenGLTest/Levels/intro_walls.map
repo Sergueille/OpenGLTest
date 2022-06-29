@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 506
+count 510
 
 object MapData {
 	mapName: ""
@@ -5019,10 +5019,10 @@ object ShadowCaster {
 object ShadowCaster {
 	ID: "10791"
 	name: ""
-	position: "164.000000, 30.600000, 10.000000"
+	position: "166.800003, 30.600000, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "14.800000, 1.000000"
+	size: "19.600000, 1.000000"
 	orientation: "0.000000"
 }
 object ShadowCaster {
@@ -7360,4 +7360,64 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+}
+object EditorSprite {
+	ID: "21003"
+	name: ""
+	position: "164.600006, 24.800001, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.400000, 3.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "projector1.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object SoundPoint {
+	ID: "21005"
+	name: ""
+	position: "164.800003, 24.600000, 10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "computer.wav"
+	volume: "0.700000"
+	spatial: "1"
+	minDist: "5.000000"
+	maxDist: "10.000000"
+	autoStart: "1"
+	loop: "1"
+}
+object Light {
+	ID: "21007"
+	name: ""
+	position: "164.800003, 25.000000, 1.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	lightSize: "5.000000"
+	color: "0.600000, 0.800000, 1.000000, 1.000000"
+	intensity: "0.500000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+	shadowSize: "0.500000"
+}
+object EditorSprite {
+	ID: "21211"
+	name: ""
+	position: "167.205704, 22.539217, 1.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.000000, 2.000000"
+	rotation: "360.000000"
+	color: "0.700000, 0.700000, 0.700000, 1.000000"
+	texturePath: "chair_knocked4.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
