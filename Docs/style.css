@@ -5,6 +5,7 @@
     --bg-l: #353535;
     --bg-ll: #454545;
     --txt: #dddddd;
+    --txt-d: #aaa;
     --prim: #158f15;
     --prim-d: #0e630e;
 
@@ -12,6 +13,7 @@
 }
 
 body {
+    margin: 0;
     background-color: var(--bg);
     color: var(--txt);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -23,12 +25,11 @@ body {
 
 .left-panel {
     position: fixed;
-    padding: 1rem;
-    width: 21rem;
-    margin-left: 2rem;
+    padding: 1rem 1rem 0 1rem;
+    width: 23rem;
 
     background-color: var(--bg-l);
-    border-radius: 10px;
+    border-radius: 0 20px 20px 0;
 }
 
 a {
@@ -53,18 +54,27 @@ button:hover {
     transform: scale(110%);
 }
 
-.float-r {
+h2, h3 {
+    border-bottom: 1px solid var(--bg-ll);
+    margin: 2rem 0 1rem 0;
+}
+
+.float-r,
+.float-l {
+    margin-bottom: 2rem;
     height: 15rem;
+    border-radius: 10px;
+}
+
+.float-r {
     float: right;
     margin-left: 2rem;
-    margin-bottom: 2rem;
 }
 
 .float-l {
     height: 15rem;
     float: left;
     margin-right: 2rem;
-    margin-bottom: 2rem;
 }
 
 .clear {
@@ -109,4 +119,60 @@ button:hover {
 
 #summary>li>a:hover {
     color: var(--prim);
+}
+
+.bg {
+    background: url("Images/bg.png");
+    background-size: 40%;
+    width: 100vw;
+    height: 25vh;
+}
+
+#props:before,
+#in:before,
+#out:before {
+    display: inline-block;
+    content: "";
+    background-size: contain !important;
+    filter: invert();
+    height: 1.5em;
+    width: 1.5em;
+    transform: translateY(0.2em);
+    margin-right: 0.5rem;
+}
+
+#props:before {
+    background: url("Images/props.png");
+}
+
+#out:before {
+    background: url("Images/forward.png");
+}
+
+#in:before {
+    background: url("Images/forward.png");
+    transform: rotate(180deg) translateY(-0.2em);
+}
+
+.prop-name {
+    font-weight: 600;
+}
+
+.prop-type {
+    font-weight: 400;
+    color: var(--txt-d);
+}
+
+.prop-type:before {
+    content: " ("
+}
+
+.prop-type:after {
+    content: ")"
+}
+
+.prop-desc {
+    display: block;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
 }

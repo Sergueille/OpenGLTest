@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="..\style.css">
     <title>Documentation</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
         <a class="btn" href="index.html">Retour à l'accueil</a>
         <p class="sum-title">Sommaire:</p>
         <ul id="summary"></ul>
-        <script src="summary.js" defer="defer"></script>
+        <script src="..\summary.js" defer="defer"></script>
     </div>
     <div class="page">
         <h2>Prise en main de l'éditeur</h2>
@@ -31,7 +31,7 @@
             </ul>
         </p>
         <h3 id="first level">Créer son premier niveau</h3>
-        <img src="Images\file.png" class="float-l">
+        <img src="..\Images\file.png" class="float-l">
         <p>
             Avant de commencer, il faut indiquer le chemin du fichier.<br>
             Dans le panneau de gauche, ouvrez l'onglet "File", et entrez "mylevel.map" à coté de "File path"<br>
@@ -44,8 +44,8 @@
             Maintenant, il faudrait une plateforme pour qu'il puisse tenir dessus.<br>
             Toujours dans l'onglet "Add", cliquez sur "Sprite". Félicitations, voici votre plateforme! Il faut maintenant la déplacer.<br>
         </p>
-        <img src="Images\platform.png" class="float-r">
-        <h3 id="move">Déplacer les objects</h3>
+        <h3 id="move">Déplacer les objets</h3>
+        <img src="..\Images\platform.png" class="float-r">
         <p>
             Les racourcis sont les mêmes que ceux de blender.<br>
             Assurez vous que la plateforme est sélectionnée en cliquant dessus.<br>
@@ -54,7 +54,7 @@
                 <li>Sur <span class="hotkey">R</span> pour tourner,</li>
                 <li>Et enfin sur <span class="hotkey">S</span> pour changer de taille.</li>
             </ul>
-            Déplacez ensuite votre curseur, pous cliquez pour valider. Appuyez sur <span class="hotkey">Echap</span> pour annuler.<br>
+            Déplacez ensuite votre curseur, puis cliquez pour valider. Appuyez sur <span class="hotkey">Echap</span> pour annuler.<br>
             Maintenez <span class="hotkey">Ctrl</span> enfoncé pour désactiver le snapping.<br>
             Appuyez sur <span class="hotkey">X</span> ou <span class="hotkey">Y</span> pour ne modifier qu'un seul axe.<br>
             Essayez de faire que votre plateforme ressemble à l'image en face.
@@ -64,8 +64,8 @@
             Utilisez le clic molette (oui cliquez sur la molette) et glissez pour déplacer la caméra.<br>
             Utilitsez la molette normalement pour zoomer.
         </p>
-        <h3 id="props" class="clear">Modifier les objects</h3>
-        <img src="Images\color.png" class="float-l">
+        <h3 id="modify" class="clear">Modifier les objets</h3>
+        <img src="..\Images\color.png" class="float-l">
         <p>
             Pour modifier l'object sélectionné, ouvrez l'onglet "Props".<br>
             Changez la couleur de la plateforme comme sur l'image, en modifiant la propriété "Color", afin de la rendre noire.<br>
@@ -76,7 +76,7 @@
             Plus Z est grand, plus l'object est devant.
         </p>
         <h3 id="more-platforms" class="clear">Plus de plateformes!</h3>
-        <img src="Images\mult_plat.png" class="float-r">
+        <img src="..\Images\mult_plat.png" class="float-r">
         <p>
             Voici d'autres commandes utiles:
             <ul>
@@ -85,19 +85,19 @@
                 <li>Copiez et collez la sélection avec <span class="hotkey">Ctrl</span>+<span class="hotkey">C</span>
                 et <span class="hotkey">Ctrl</span>+<span class="hotkey">V</span> (pas très stable)</li>
                 <li>Annulez la denière action avec <span class="hotkey">Ctrl</span>+<span class="hotkey">Z</span></li>
-                <li>Sélectionnez plusieurs objects en maintenant <span class="hotkey">Shift</span> en même temps que vous cliquez. 
+                <li>Sélectionnez plusieurs objets en maintenant <span class="hotkey">Shift</span> en même temps que vous cliquez. 
                     Cela vous permettera de les bouger ou de les supprimer ensemble par exemple.</li>
             </ul>
 
             <div class="warn">
                 Ne pas utiliser la commande <span class="hotkey">Ctrl</span>+<span class="hotkey">Y</span> (refaire), 
-                qui ne marche pas bien et peut perdre certains objects
+                qui ne marche pas bien et peut perdre certains objets
             </div>
 
             Essayez de créer un plafond et des murs comme dans l'image.
         </p>
         <h3 id="textures" class="clear">Des textures!</h3>
-        <img src="Images\back.png" class="float-r">
+        <img src="..\Images\back.png" class="float-r">
         <p>
             Il est temps de décorer un peu notre niveau.<br>
             Créez un nouveau sprite et assurez-vous que:
@@ -109,23 +109,23 @@
 
             Modifiez ensuite la propriété "Texture test" (faudrait changer le nom un jour), et entrez "plant.png".
             Vous pouvez cliquer sour les noms qui apparaissent en dessous.<br>
-            Si vous voyez un croix rouge, c'est que vous avez mal écrit le nom du fichier<br>
+            Si vous voyez une croix rouge, c'est que vous avez mal écrit le nom du fichier<br>
 
             Notez que le sprite a automatiquement adapté sa largeur pour correspondre à l'image.<br>
-            Créez également un fond pour la pièce avec un autre sprite en lui donnant la texture "back\plaster1.jpg", un une position Z de -10
+            Créez également un fond pour la pièce avec un autre sprite en lui donnant la texture "back\plaster1.jpg", et une position Z de -10
 
             <div class="warn">
                 Si deux object texturés on le même indice Z, ils risquent de clignoter, ce qui sera du plus mauvais effet.
             </div>
         </p>
         <h3 id="light" class="clear">Que la lumière soit!</h3>
-        <img src="Images\light_ex.png" class="float-l">
+        <img src="..\Images\light_ex.png" class="float-l">
         <p>
             Pourquoi le joueur est tout noir? C'est parce que il n'y a pas encore d'éclairage!<br>
-            Changez les proprtiétés de la plante et du fond: pour ces deux objects, activez "Is Lit". Ils deviennent tout noirs également.<br><br>
+            Changez les proprtiétés de la plante et du fond: pour ces deux objets, activez "Is Lit". Ils deviennent tout noirs également.<br><br>
 
             Pour remédier à ce problème, ouvrez l'onglet "Add" et ajoutez une PointLight.<br>
-            Donnez-lui ensuite une position Z de 50, pour qu'elle apparaisse devant les autres objects.<br>
+            Donnez-lui ensuite une position Z de 50, pour qu'elle apparaisse devant les autres objets.<br>
             Demandez ensuite à l'éditeur de calculer l'éclairage du niveau avec 
             <span class="hotkey">Ctrl</span>+<span class="hotkey">Alt</span>+<span class="hotkey">B</span><br>
 
@@ -133,8 +133,8 @@
         </p>
         <h3 id="prefabs" class="clear">Les prefabs ou la flemme organisée</h3>
         <p>
-            Vous avez la flemme de recopier un grand nombre d'objects et de les modifier un à un? Moi aussi! C'est por cela que j'ai fait les Prefabs.<br>
-            Ils permettent d'insérer les objects d'un autre fichier .map à l'intérieur de votre niveau.<br>
+            Vous avez la flemme de recopier un grand nombre d'objets et de les modifier un à un? Moi aussi! C'est por cela que j'ai fait les Prefabs.<br>
+            Ils permettent d'insérer les objets d'un autre fichier .map à l'intérieur de votre niveau.<br>
             Si vous modifiez le fichier original, tous les prefabs qui utilisent ce fichier changeront également.<br><br>
 
             Par exemple, ajoutez un prefab à votre niveau, et donnez la valeur "prefabs\neon.map" à "map path".<br>

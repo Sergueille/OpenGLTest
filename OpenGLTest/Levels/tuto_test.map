@@ -1,11 +1,11 @@
 // Editor map file, version 1
 
-count 11
+count 16
 
 object MapData {
 	mapName: ""
-	lightmapStart: "-20.000000, -7.000000"
-	lightmapEnd: "21.000000, 24.000000"
+	lightmapStart: "-20.000000, -15.000000"
+	lightmapEnd: "31.000000, 24.000000"
 }
 object Player {
 	ID: "95"
@@ -46,24 +46,9 @@ object EditorSprite {
 	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
-	ID: "101"
-	name: ""
-	position: "13.600000, 11.800000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "14.200000, 17.800001"
-	rotation: "0.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	collideWithPhys: "1"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
-	visibleOnlyInEditor: "0"
-}
-object EditorSprite {
 	ID: "103"
 	name: ""
-	position: "1.400000, 15.000000, 0.000000"
+	position: "2.200000, 15.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "18.400000, 17.800001"
@@ -117,23 +102,101 @@ object Prefab {
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
 }
-object Button {
-	ID: "119"
+object EditorSprite {
+	ID: "240"
 	name: ""
-	position: "-2.000000, 0.200000, 0.000000"
+	position: "18.600000, 1.200000, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	startPressed: "0"
-	onPressed: "185|Open door|"
-	onUnpressed: "185|Close door|"
+	size: "24.400000, 24.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\plaster1.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
 object Prefab {
-	ID: "185"
+	ID: "242"
 	name: ""
-	position: "9.400001, 0.800000, 0.000000"
+	position: "15.800000, -3.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	path: "prefabs\door.map"
+	path: "prefabs\fluo.map"
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "248"
+	name: ""
+	position: "15.600000, 10.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "250"
+	name: ""
+	position: "26.400000, -3.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "256"
+	name: ""
+	position: "26.400000, 9.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "260"
+	name: ""
+	position: "13.400001, -1.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.800000, 0.800000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object TransformModifier {
+	ID: "261"
+	name: ""
+	position: "16.200001, -1.800000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	targetID: "260"
+	relative: "1"
+	targetPos: "0.000000, 5.000000"
+	targetRotation: "0.000000"
+	targetSize: "1.000000, 1.000000"
+	duration: "2.000000"
+	easeType: "3"
+	onFinished: ""
+}
+object Trigger {
+	ID: "262"
+	name: ""
+	position: "13.400001, -0.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "3.400000, 3.400000"
+	onEnter: "261|Set position|"
+	onExit: ""
+	once: "0"
 }

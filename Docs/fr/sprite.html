@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\style.css">
+    <title>Documentation</title>
+</head>
+<body>
+    <div class="left-panel">
+        <a class="btn" href="index.html">Retour à l'accueil</a>
+        <p class="sum-title">Sommaire:</p>
+        <ul id="summary"></ul>
+        <script src="..\summary.js" defer="defer"></script>
+    </div>
+    <div class="page">
+        <h2>Sprite (EditorSprite)</h2>
+        <p>
+            Cet objet permet d'afficher une image ou de créer une collision.
+        </p>
+        <h3 id="props">Propriétés</h3>
+        <ul>
+            <li>
+                <span class="prop-name">Size</span><span class="prop-type">vec2</span>
+                <span class="prop-desc">
+                    La taille du sprite. Sa largeur sera multipliée du ratio de la texture utilisée, mais sa hauteur restera la même.
+                </span>
+            </li>
+            <li>
+                <span class="prop-name">Orientation</span><span class="prop-type">float</span>
+                <span class="prop-desc">
+                    L'orientation du sprite, en degrés, sens inverse des aiguilles d'un montre.
+                </span>
+            </li>
+            <li>
+                <span class="prop-name">Color</span><span class="prop-type">vec4</span>
+                <span class="prop-desc">
+                    Couleur du sprite. Si il y a une texture, elle sera multipliée par la couleur de la texture.
+                </span>
+            </li>
+            <li>
+                <span class="prop-name">Collide with physics</span><span class="prop-type">bool</span>
+                <span class="prop-desc">
+                    Si activé, les objets physiques vont interagir avec le sprite. Le collisionneur sera toujours un rectangle.
+                </span>
+            </li>
+            <li>
+                <span class="prop-name">Texture test</span><span class="prop-type">texture</span>
+                <span class="prop-desc">
+                    La texture a utiliser. Si aucune, le sprite affichera une couleur unie.
+                </span>
+            </li>
+            <li>
+                <span class="prop-name">UV start</span><span class="prop-type">vec2</span>
+                <span class="prop-desc">
+                    La position du coin en bas à gauche sur la texture. Par exemple si UV start est (0.5, 0.5),
+                    le milieu de la texture sera sur le coin inferieur gauche.
+                </span>
+            </li>
+            <li>
+                <span class="prop-name">UV end</span><span class="prop-type">vec2</span>
+                <span class="prop-desc">
+                    La position du coin en haut à droite sur la texture. Par exemple si UV end est (2, 2),
+                    la texture sera répetée 2 fois.
+                </span>
+            </li>
+            <li>
+                <span class="prop-name">Is lit</span><span class="prop-type">bool</span>
+                <span class="prop-desc">
+                    Si activé, le sprite sera éclairé. Sinon, les couleurs ne sont pas modifiées.
+                </span>
+            </li>
+            <li>
+                <span class="prop-name">Visible only in editor</span><span class="prop-type">bool</span>
+                <span class="prop-desc">
+                    Si activé, le sprite ne sera pas visible pendant le jeu. Utile pour créer des collisioneurs invisibles.
+                </span>
+            </li>
+        </ul>
+        <h3 id="out">Evenements sortants</h3>
+        <p>
+            Pas d'évenements sortants.
+        </p>
+        <h3 id="in">Evenements entarnts</h3>
+        <ul>
+            <li>
+                <span class="prop-name">Disable</span>
+                <span class="prop-desc">
+                    La sprite sera invisible et la collision sera désactivée
+                </span>
+            </li>
+            <li>
+                <span class="prop-name">Enable</span>
+                <span class="prop-desc">
+                    Le sprite reprend l'état qu'il avait avant d'être désactivé
+                </span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
