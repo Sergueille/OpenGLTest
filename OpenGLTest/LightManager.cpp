@@ -45,7 +45,7 @@ void LightManager::BakeLight()
 	float colorArray[MAX_LIGHT_COUNT * 3] = {};
 	float sizeArray[MAX_LIGHT_COUNT * 2] = {};
 	float angleArray[MAX_LIGHT_COUNT * 3] = {};
-	float shadowSizeArray[MAX_LIGHT_COUNT * 2] = {};
+	float shadowSizeArray[MAX_LIGHT_COUNT * 3] = {};
 
 	int i = 0;
 	for (auto it = lights.begin(); it != lights.end(); it++, i++)
@@ -70,8 +70,9 @@ void LightManager::BakeLight()
 			angleArray[3 * i + 1] = (*it)->innerAngle;
 			angleArray[3 * i + 2] = (*it)->outerAngle;
 
-			shadowSizeArray[2 * i] = (*it)->shadowSize / levelSize.x;
-			shadowSizeArray[2 * i + 1] = (*it)->shadowSize / levelSize.y;
+			shadowSizeArray[3 * i] = (*it)->shadowSize / levelSize.x;
+			shadowSizeArray[3 * i + 1] = (*it)->shadowSize / levelSize.y;
+			shadowSizeArray[3 * i + 2] = (*it)->shadowSize;
 		}
 	}
 
@@ -125,17 +126,12 @@ void LightManager::BakeLight()
 	shader->SetUniform3f("lightColor", colorArray, (int)lights.size());
 	shader->SetUniform2f("lightSize", sizeArray, (int)lights.size());
 	shader->SetUniform3f("lightAngles", angleArray, (int)lights.size());
-	shader->SetUniform2f("lightShadowSize", shadowSizeArray, (int)lights.size());
+	shader->SetUniform3f("lightShadowSize", shadowSizeArray, (int)lights.size());
 
 	shader->SetUniform("nbShadowCasters", (int)shadowCasters.size());
 	shader->SetUniform2f("shadowCastersPos", shadowPos, (int)shadowCasters.size());
 	shader->SetUniform("shadowCastersRot", shadowRot, (int)shadowCasters.size());
 	shader->SetUniform2f("shadowCastersSize", shadowScale, (int)shadowCasters.size());
-
-	vec2 quadSize = vec2(screenX, screenY);
-	quadSize.x /= (float)resolution.x;
-	quadSize.y /= (float)resolution.y;
-	shader->SetUniform("quadSize", quadSize);
 
 	// Reder
 	SpriteRenderer::GetMesh()->DrawMesh(); // steal the quad of the sprite renderer

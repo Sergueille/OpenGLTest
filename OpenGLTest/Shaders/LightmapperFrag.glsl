@@ -6,7 +6,7 @@ uniform vec2 lightPos[256]; // Position in UV coordinates
 uniform vec3 lightColor[256]; // Color of the light, intensity included
 uniform vec2 lightSize[256]; // Size in UV coordinates
 uniform vec3 lightAngles[256]; // Rotation, inner angle, outer angle
-uniform vec2 lightShadowSize[256]; // Size of the emiter, used for shadows
+uniform vec3 lightShadowSize[256]; // Size of the emiter, used for shadows (UV size x, UV size y, world size)
 
 uniform int nbShadowCasters = 0;
 uniform vec2 shadowCastersPos[128]; // Position in UV coordinates
@@ -68,24 +68,26 @@ vec2 Rotate(vec2 vector, float angle)
 
 float GetFinalShadow(int light)
 {
-    const float nbSamples = 15;
-    const float lightRadius = 0.002;
-
     vec2 lightPos = vec2(lightPos[light].x, lightPos[light].y);
     vec2 delta = texCoord - lightPos;
+
+    float nbSamples = 11.0 * lightShadowSize[light].z + 2;
+
     vec2 dir = normalize(delta);
     vec2 tangent = vec2(cross(vec3(dir.xy, 0), vec3(0, 0, 1)));
 
-    float sampleStep = 2 / nbSamples;
+    float sampleStep = 2.0 / nbSamples;
     float passed = 0;
+    float iterations = 0;
     for (float i = -1 ; i <= 1 + 0.00001; i += sampleStep)
     {
-        vec2 lightDelta = tangent * i * lightShadowSize[light];
+        vec2 lightDelta = tangent * i * lightShadowSize[light].xy;
         vec2 newLightPos = lightPos + lightDelta;
         passed += GetShadow(light, texCoord, newLightPos) ? 1 : 0;
+        iterations += 1;
     }
 
-    return passed / nbSamples;
+    return passed / iterations;
 }
 
 bool GetShadow(int light, vec2 pos, vec2 lightPosOverride) 

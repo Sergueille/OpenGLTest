@@ -288,7 +288,7 @@ object Prefab {
 object EditorSprite {
 	ID: "3361"
 	name: "Ground"
-	position: "8.400001, -30.600000, 0.000000"
+	position: "10.000000, -20.200001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "29.800001, 34.000000"
