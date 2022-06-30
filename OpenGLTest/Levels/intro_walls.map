@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 510
+count 513
 
 object MapData {
 	mapName: ""
@@ -2790,6 +2790,8 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "0.800000"
 	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
 }
 object CameraController {
 	ID: "6653"
@@ -2799,6 +2801,8 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "1.000000"
 	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
 }
 object Trigger {
 	ID: "6655"
@@ -7027,6 +7031,8 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "1.200000"
 	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
 }
 object CameraController {
 	ID: "11738"
@@ -7036,6 +7042,8 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "1.000000"
 	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
 }
 object Trigger {
 	ID: "11740"
@@ -7415,6 +7423,48 @@ object EditorSprite {
 	rotation: "360.000000"
 	color: "0.700000, 0.700000, 0.700000, 1.000000"
 	texturePath: "chair_knocked4.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object Prefab {
+	ID: "21415"
+	name: ""
+	position: "0.200000, 9.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\ambient_explo_small.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "21627"
+	name: ""
+	position: "19.600000, 1.400000, -4.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.200000, 3.200000"
+	rotation: "0.000000"
+	color: "0.800000, 0.800000, 0.800000, 1.000000"
+	texturePath: "server1.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "21629"
+	name: ""
+	position: "142.000000, 7.400000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.000000, 3.000000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "crate_pile.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 420
+count 418
 
 object MapData {
 	mapName: ""
@@ -1362,17 +1362,6 @@ object Prefab {
 	path: "prefabs\door.map"
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
-}
-object LogicRelay {
-	ID: "3140"
-	name: ""
-	position: "-43.000000, 8.200000, 50.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	onTrigger: "3133|Close door|"
-	onAltTrigger: ""
-	triggerOnStart: "0"
-	delay: "1.000000"
 }
 object EditorSprite {
 	ID: "3142"
@@ -2952,19 +2941,6 @@ object EditorSprite {
 	visibleOnlyInEditor: "0"
 }
 object SoundArea {
-	ID: "5146"
-	name: ""
-	position: "-30.000000, 5.000000, 50.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	editorSize: "32.000000, 6.400000"
-	soundName: "neon2.wav"
-	volume: "1.000000"
-	isMusic: "0"
-	fadeIn: "1.000000"
-	fadeOut: "1.000000"
-}
-object SoundArea {
 	ID: "5551"
 	name: ""
 	position: "19.000000, -0.600000, 50.000000"
@@ -2993,10 +2969,10 @@ object SoundArea {
 object SoundArea {
 	ID: "5555"
 	name: ""
-	position: "24.000000, -7.000000, 50.000000"
+	position: "23.600000, -10.000000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	editorSize: "39.200001, 8.000000"
+	editorSize: "39.200001, 13.400001"
 	soundName: "soundscape_wind2.wav"
 	volume: "0.700000"
 	isMusic: "0"
@@ -3738,6 +3714,8 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "1.100000"
 	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
 }
 object EditorSprite {
 	ID: "6994"

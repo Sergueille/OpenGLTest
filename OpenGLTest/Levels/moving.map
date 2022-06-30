@@ -48,10 +48,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "22"
 	name: "Moving"
-	position: "8.800000, -1.200000, 5.000000"
+	position: "9.000000, -1.200000, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "5.400000, 0.600000"
+	size: "6.200000, 0.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"

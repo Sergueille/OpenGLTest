@@ -7,7 +7,7 @@
 
 using namespace glm;
 
-constexpr int CAM_CONTROL_EVENT_COUNT = 1;
+constexpr int CAM_CONTROL_EVENT_COUNT = 2;
 
 class CameraController : public EditorObject
 {
@@ -25,6 +25,9 @@ public:
 	/// Duration of the zoom transition
 	/// </summary>
 	float transTime = 2.f;
+
+	float shakeIntensity = 1;
+	float shakeDuration = 2;
 
 	static ObjectEvent events[CAM_CONTROL_EVENT_COUNT];
 
@@ -51,6 +54,8 @@ public:
 	/// Set camera zoom with objects props
 	/// </summary>
 	void SetZoomWithProps();
+
+	void Shake();
 
 private:
 	TweenAction<float>* zoomTweenAction = nullptr;

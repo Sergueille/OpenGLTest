@@ -15,6 +15,12 @@ ObjectEvent CameraController::events[CAM_CONTROL_EVENT_COUNT] =
 			((CameraController*)object)->SetZoomWithProps();
 		},
 	},
+	ObjectEvent {
+		"Shake",
+		[](EditorObject* object, void* param) {
+			((CameraController*)object)->Shake();
+		},
+	},
 };
 
 CameraController::CameraController() : EditorObject(vec3(0))
@@ -51,6 +57,8 @@ vec2 CameraController::DrawProperties(vec3 drawPos)
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Zoom", &zoom, Editor::panelPropertiesX, strID + "zoom").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Trans. duration", &transTime, Editor::panelPropertiesX, strID + "duration").y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Shake intensity", &shakeIntensity, Editor::panelPropertiesX, strID + "shakeIntensity").y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Shake duration", &shakeDuration, Editor::panelPropertiesX, strID + "shakeDuration").y;
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
@@ -76,6 +84,8 @@ void CameraController::Load(std::map<std::string, std::string>* props)
 
 	EditorSaveManager::FloatProp(props, "zoom", &zoom);
 	EditorSaveManager::FloatProp(props, "transTime", &transTime);
+	EditorSaveManager::FloatProp(props, "shakeIntensity", &shakeIntensity);
+	EditorSaveManager::FloatProp(props, "shakeDuration", &shakeDuration);
 }
 
 void CameraController::Save()
@@ -84,6 +94,8 @@ void CameraController::Save()
 
 	EditorSaveManager::WriteProp("zoom", zoom);
 	EditorSaveManager::WriteProp("transTime", transTime);
+	EditorSaveManager::WriteProp("shakeIntensity", shakeIntensity);
+	EditorSaveManager::WriteProp("shakeDuration", shakeDuration);
 }
 
 void CameraController::Enable()
@@ -120,8 +132,19 @@ void CameraController::OnMainLoop()
     
     if (enabled && editorSprite != nullptr)
 	{
-		editorSprite->position = editorPosition;
+		editorSprite->position = GetEditPos();
 		editorSprite->size = vec2(Editor::gizmoSize);
 		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
 	}
+}
+
+void CameraController::Shake()
+{
+	TweenManager<float>::Tween(shakeIntensity, 0, shakeDuration, [] (float value) {
+		float xShift = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * value;
+		float yShift = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * value;
+		Camera::deltaPos = vec2(xShift, yShift);
+	}, EaseType::sineOut)->SetOnFinished([] {
+		Camera::deltaPos = vec2(0);
+	});	
 }

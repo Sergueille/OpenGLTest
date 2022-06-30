@@ -12,6 +12,7 @@ namespace Camera
 	extern const float defaultSize;
 
 	extern glm::vec2 position;
+	extern glm::vec2 deltaPos;
 	extern std::function<glm::vec2()> getTarget;
 	extern glm::vec2 velocity;
 

@@ -1,0 +1,117 @@
+// Editor map file, version 1
+
+count 10
+
+object MapData {
+	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
+}
+object SoundPoint {
+	ID: "0"
+	name: ""
+	position: "0.000000, 2.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "explosion_distant1.wav"
+	volume: "1.000000"
+	spatial: "0"
+	minDist: "1.000000"
+	maxDist: "20.000000"
+	autoStart: "0"
+	loop: "0"
+}
+object CameraController {
+	ID: "1"
+	name: ""
+	position: "-2.200000, 2.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	zoom: "1.000000"
+	transTime: "2.000000"
+	shakeIntensity: "0.300000"
+	shakeDuration: "1.500000"
+}
+object SoundPoint {
+	ID: "3"
+	name: ""
+	position: "0.000000, 0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "explosion_distant2.wav"
+	volume: "1.000000"
+	spatial: "0"
+	minDist: "1.000000"
+	maxDist: "20.000000"
+	autoStart: "0"
+	loop: "0"
+}
+object CameraController {
+	ID: "5"
+	name: ""
+	position: "-2.200000, 0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	zoom: "1.000000"
+	transTime: "2.000000"
+	shakeIntensity: "0.300000"
+	shakeDuration: "1.300000"
+}
+object LogicRelay {
+	ID: "6"
+	name: ""
+	position: "2.200000, 2.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "0|Play sound|1|Shake|8|Trigger|"
+	onAltTrigger: ""
+	triggerOnStart: "1"
+	delay: "3.000000"
+}
+object LogicRelay {
+	ID: "8"
+	name: ""
+	position: "2.200000, -0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "3|Play sound|5|Shake|14|Trigger|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "4.000000"
+}
+object CameraController {
+	ID: "10"
+	name: ""
+	position: "-2.200000, -2.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	zoom: "1.000000"
+	transTime: "2.000000"
+	shakeIntensity: "0.400000"
+	shakeDuration: "0.500000"
+}
+object SoundPoint {
+	ID: "12"
+	name: ""
+	position: "0.000000, -2.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "explosion_small.wav"
+	volume: "0.700000"
+	spatial: "0"
+	minDist: "1.000000"
+	maxDist: "20.000000"
+	autoStart: "0"
+	loop: "0"
+}
+object LogicRelay {
+	ID: "14"
+	name: ""
+	position: "2.200000, -2.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "12|Play sound|10|Shake|6|Trigger|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "4.000000"
+}

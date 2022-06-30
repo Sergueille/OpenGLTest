@@ -14,6 +14,7 @@ namespace Camera
 	const float scrollSmoothAmount = 15;
 
 	glm::vec2 position = glm::vec2(0);
+	glm::vec2 deltaPos = glm::vec2(0);
 	std::function<glm::vec2()> getTarget = NULL;
 	glm::vec2 velocity = glm::vec2(0);
 
@@ -29,9 +30,11 @@ namespace Camera
 
 	glm::mat4 GetOrthographicProjection()
 	{
+		glm::vec2 realPos = position + deltaPos;
+
 		float halfSize = size / 2;
 		float XhalfSize = (halfSize / Utility::screenY) * Utility::screenX;
-		return glm::ortho(position.x - XhalfSize, position.x + XhalfSize, position.y - halfSize, position.y + halfSize, -10000.f, 10000.f);
+		return glm::ortho(realPos.x - XhalfSize, realPos.x + XhalfSize, realPos.y - halfSize, realPos.y + halfSize, -10000.f, 10000.f);
 	}
 
 	glm::mat4 GetUIProjection()

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 201
+count 202
 
 object MapData {
 	mapName: ""
@@ -25,7 +25,7 @@ object EditorSprite {
 object Player {
 	ID: "94"
 	name: ""
-	position: "26.600000, 51.000000, 20.000000"
+	position: "-133.400009, 44.000000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -362,7 +362,7 @@ object LogicRelay {
 	position: "25.000000, -3.400000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	onTrigger: "364|Set position|744|Turn off|1357|Start|1355|Start|1353|Start|5401|Play sound|"
+	onTrigger: "364|Set position|1357|Start|1355|Start|1353|Start|5401|Play sound|"
 	onAltTrigger: ""
 	triggerOnStart: "0"
 	delay: "1.000000"
@@ -393,7 +393,7 @@ object Button {
 	parent: "-1"
 	parallax: "1.000000"
 	startPressed: "0"
-	onPressed: "369|Trigger|842|Set zoom|1419|Start|"
+	onPressed: "369|Trigger|842|Set zoom|1419|Start|744|Turn off|12979|Turn on|"
 	onUnpressed: ""
 }
 object EditorSprite {
@@ -475,6 +475,8 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "1.200000"
 	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
 }
 object EditorSprite {
 	ID: "1040"
@@ -2584,4 +2586,16 @@ object Button {
 	startPressed: "0"
 	onPressed: "11736|Open door|"
 	onUnpressed: "11736|Close door|"
+}
+object Laser {
+	ID: "12979"
+	name: ""
+	position: "5.200000, 3.200000, -4.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "-90.000000"
+	laserType: "0"
+	startOffset: "-0.100000"
+	endOffset: "0.050000"
+	startOn: "0"
 }
