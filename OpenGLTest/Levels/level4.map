@@ -2443,6 +2443,8 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "0.800000"
 	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
 }
 object Light {
 	ID: "12069"
@@ -2748,6 +2750,8 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "1.000000"
 	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
 }
 object Trigger {
 	ID: "12579"
@@ -2769,6 +2773,8 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "1.200000"
 	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
 }
 object Trigger {
 	ID: "12583"
@@ -2790,6 +2796,8 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "1.000000"
 	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
 }
 object Trigger {
 	ID: "14164"

@@ -25,7 +25,7 @@ object EditorSprite {
 object Player {
 	ID: "94"
 	name: ""
-	position: "-59.600002, 0.800000, 20.000000"
+	position: "81.200005, -22.400000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "0"
@@ -1036,7 +1036,7 @@ object TextRenderer {
 	position: "3.200000, -1.600000, 50.000000"
 	parent: "-1"
 	parallax: "1.100000"
-	content: "Appuyez sur Z ou ESPACE pour sauter"
+	content: "jump"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
 }
@@ -1046,7 +1046,7 @@ object TextRenderer {
 	position: "40.799999, -0.200000, 50.000000"
 	parent: "-1"
 	parallax: "1.100000"
-	content: "Laissez appuyer plus longtemps pour sauter plus haut"
+	content: "jump_long"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
 }
@@ -1056,7 +1056,7 @@ object TextRenderer {
 	position: "-40.799999, -2.200000, 50.000000"
 	parent: "-1"
 	parallax: "1.100000"
-	content: "Appuyez sur E pour interagir"
+	content: "interact"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
 }
@@ -1279,7 +1279,7 @@ object TextRenderer {
 	position: "-58.200001, -2.200000, 50.000000"
 	parent: "-1"
 	parallax: "1.100000"
-	content: "Appuyez sur Q et D pour bouger le robot"
+	content: "horizontal"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
 }

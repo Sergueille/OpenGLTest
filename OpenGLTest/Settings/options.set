@@ -2,7 +2,7 @@
 // An error in this file can cause crashes
 
 Props {
-    fullscreen: "1" // "1" for full screen
+    fullscreen: "0" // "1" for full screen
     screenX: "1280" //  If not in fullscreen, size of the window
     screenY: "720"
     displayFPS: "1" // Displays FPS at the top right of the screen

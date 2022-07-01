@@ -69,7 +69,8 @@ private:
 
 	static void HandleInputBackspace();
 
-	static vec2 TextInput(vec3 drawPos, std::string* value, std::string placeHolder, std::string ID);
-	static vec2 Button(vec3 drawPos, std::string text, bool* out, bool enabled = true);
+	static vec2 TextInput(vec3 drawPos, std::string* value, std::string placeHolderKey, std::string ID);
+	static vec2 Button(vec3 drawPos, std::string key, bool* out, bool enabled = true, bool noLocale = false);
+	static vec2 LocalText(std::string key, glm::vec3 pos, float scale);
 };
 

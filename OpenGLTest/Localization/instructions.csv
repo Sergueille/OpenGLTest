@@ -1,0 +1,8 @@
+"key","en","fr"
+"horizontal","Press % and % to move the robot","Appuyez sur % et % pour déplacer le robot"
+"interact","Press % to interact","Appuyez sur % pour intéragir"
+"jump","Press % or % to jump","Appuyez sur % ou % pour sauter"
+"jump_long","Hold to jump higher","Appuyez plus longtemps pour sauter plus haut"
+"teleport","Left clic to teleport","Clic gauche pour téléporter"
+"jump_before","Jump before teleporting to go higher","Sautez avant de vous téléporter pour aller plus haut"
+"2_max","You can only teleport twice without touching the ground","Vous ne pouvez vous téléporter que deux fois sans toucher le sol"

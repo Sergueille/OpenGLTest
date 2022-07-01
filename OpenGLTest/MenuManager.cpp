@@ -7,6 +7,7 @@
 #include "LightManager.h"
 #include "PhysicObject.h"
 #include "LogicRelay.h"
+#include "LocalizationManager.h"
 #include <soloud.h>
 
 MenuManager::Menu MenuManager::currentMenu = Menu::none;
@@ -60,21 +61,21 @@ void MenuManager::OnMainLoop()
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
 		bool pressed;
 
-		drawPos.y -= TextManager::RenderText("Title here", drawPos, titleScale).y + margin;
+		drawPos.y -= TextManager::RenderText("Title here", drawPos, titleScale, TextManager::right, textColor).y + margin;
 
-		drawPos.y -= Button(drawPos, "New game", &pressed).y + margin;
+		drawPos.y -= Button(drawPos, "new_game", &pressed).y + margin;
 		if (pressed)
 		{
 			OpenMenu(Menu::newGame);
 		}
 
-		drawPos.y -= Button(drawPos, "Load", &pressed).y + margin;
+		drawPos.y -= Button(drawPos, "load", &pressed).y + margin;
 		if (pressed)
 		{
 			OpenMenu(Menu::load);
 		}
 
-		drawPos.y -= Button(drawPos, "Open level editor", &pressed).y + margin;
+		drawPos.y -= Button(drawPos, "level_editor", &pressed).y + margin;
 		if (pressed)
 		{
 			EditorSaveManager::ClearGameLevel();
@@ -82,7 +83,7 @@ void MenuManager::OnMainLoop()
 			Editor::OpenEditor();
 		}
 
-		drawPos.y -= Button(drawPos, "Quit", &pressed).y + margin;
+		drawPos.y -= Button(drawPos, "quit", &pressed).y + margin;
 		if (pressed)
 		{
 			glfwSetWindowShouldClose(window, 1);
@@ -95,9 +96,9 @@ void MenuManager::OnMainLoop()
 
 		Sprite(vec3(0, 0, Editor::UIBaseZPos - 5), vec3(screenX, screenY, Editor::UIBaseZPos - 5), vec4(0, 0, 0, 0.3)).Draw();
 
-		drawPos.y -= TextManager::RenderText("The game is paused", drawPos, titleScale).y + margin;
+		drawPos.y -= LocalText("paused_label", drawPos, titleScale).y + margin;
 
-		drawPos.y -= Button(drawPos, "Resume", &pressed).y + margin;
+		drawPos.y -= Button(drawPos, "resume", &pressed).y + margin;
 		if (pressed || (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS && !escPressedLastFrame))
 		{
 			OpenMenu(Menu::ingame);
@@ -105,7 +106,7 @@ void MenuManager::OnMainLoop()
 			escPressedLastFrame = true;
 		}
 
-		Button(drawPos, "Back to main menu", &pressed);
+		Button(drawPos, "back_to_main", &pressed);
 		if (pressed)
 		{
 			EditorSaveManager::ClearGameLevel();
@@ -128,11 +129,11 @@ void MenuManager::OnMainLoop()
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
 		bool pressed;
 
-		drawPos.y -= TextManager::RenderText("Load a save file:", drawPos, titleScale).y + margin;
+		drawPos.y -= LocalText("load", drawPos, titleScale).y + margin;
 
 		for (auto fileName = EditorSaveManager::userSaves.begin(); fileName != EditorSaveManager::userSaves.end(); fileName++)
 		{
-			drawPos.y -= Button(drawPos, *fileName, &pressed).y;
+			drawPos.y -= Button(drawPos, *fileName, &pressed, true, true).y;
 
 			if (pressed)
 			{
@@ -148,15 +149,15 @@ void MenuManager::OnMainLoop()
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
 		bool pressed;
 
-		drawPos.y -= TextManager::RenderText("Start a new game:", drawPos, titleScale).y + margin;
-		TextManager::RenderText("Please choose a name for your save file:", drawPos, textSize);
+		drawPos.y -= LocalText("new_game", drawPos, titleScale).y + margin;
+		LocalText("new_game_label", drawPos, textSize);
 		drawPos.y -= smallMargin;
 
 		std::string fileName = "";
-		drawPos.y -= TextInput(drawPos, &fileName, "File name...", "loadPath").y;
+		drawPos.y -= TextInput(drawPos, &fileName, "filename_placeholder", "loadPath").y;
 		drawPos.y -= textSize + smallMargin;
 
-		drawPos.y -= Button(drawPos, "Play", &pressed, fileName != "").y + margin;
+		drawPos.y -= Button(drawPos, "play", &pressed, fileName != "").y + margin;
 		if (pressed)
 		{
 			EditorSaveManager::currentUserSave = fileName + ".sav";
@@ -196,7 +197,7 @@ void MenuManager::OnCaracterInput(GLFWwindow* window, unsigned int codepoint)
 	}
 }
 
-vec2 MenuManager::TextInput(vec3 drawPos, std::string* value, std::string placeHolder, std::string ID)
+vec2 MenuManager::TextInput(vec3 drawPos, std::string* value, std::string placeHolderKey, std::string ID)
 {
 	vec2 inputRect = vec2(textInputWidth, textInputHeight);
 	Sprite(drawPos + vec3(0, -inputRect.y, -1), drawPos + vec3(inputRect.x, 0, -1), textInputBackgroundColor).Draw();
@@ -223,7 +224,8 @@ vec2 MenuManager::TextInput(vec3 drawPos, std::string* value, std::string placeH
 	}
 	else
 	{
-		std::string displayString = value->length() == 0 ? placeHolder : *value;
+		std::u8string placeHolder = LocalizationManager::GetLocale(placeHolderKey);
+		std::u8string displayString = value->length() == 0 ? placeHolder : std::u8string(value->begin(), value->end());
 
 		vec2 mousePos = Utility::GetMousePos();
 		mousePos.y *= -1;
@@ -273,8 +275,10 @@ vec2 MenuManager::TextInput(vec3 drawPos, std::string* value, std::string placeH
 	}
 }
 
-vec2 MenuManager::Button(vec3 drawPos, std::string text, bool* out, bool enabled)
+vec2 MenuManager::Button(vec3 drawPos, std::string key, bool* out, bool enabled, bool noLocale)
 {
+	std::u8string text = noLocale ? std::u8string(key.begin(), key.end()) : LocalizationManager::GetLocale(key);
+
 	vec4 color;
 	vec2 textRect = TextManager::GetRect(text, textSize);
 
@@ -326,6 +330,14 @@ vec2 MenuManager::Button(vec3 drawPos, std::string text, bool* out, bool enabled
 	return textRect;
 }
 
+vec2 MenuManager::LocalText(std::string key, glm::vec3 pos, float scale)
+{
+	return TextManager::RenderText(
+		LocalizationManager::GetLocale(key),
+		pos, scale, TextManager::right, textColor, false
+	);
+}
+
 MenuManager::Menu MenuManager::GetCurrentMenu()
 {
 	return currentMenu;
@@ -356,7 +368,7 @@ void MenuManager::OpenMenu(Menu menu)
 vec2 MenuManager::PreviousMenuButton(vec3 drawPos)
 {
 	bool pressed;
-	vec2 size = Button(drawPos, "Back", &pressed);
+	vec2 size = Button(drawPos, "back", &pressed);
 
 	if (pressed || (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS && !escPressedLastFrame))
 	{

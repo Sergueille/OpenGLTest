@@ -5,7 +5,7 @@
 #include "MenuManager.h"
 #include "Editor.h"
 
-const vec4 TerminalManager::textColor = vec4(0.1, 0.7, 0.1, 1);
+const vec4 TerminalManager::textColor = vec4(0.3, 0.8, 0.3, 1);
 const vec4 TerminalManager::bgColor = vec4(0.2f, 0.2f, 0.2f, 0.6f);
 std::vector<std::string> TerminalManager::lines = std::vector<std::string>();
 
@@ -58,7 +58,7 @@ void TerminalManager::OnMainLoop()
 		MenuManager::GetCurrentMenu() == MenuManager::Menu::none) && !Editor::enabled)
 	{
 		vec3 pos = vec3(screenMargin, Utility::screenY - screenMargin - textSize, zPos + 1); // Top-left corner pos
-		vec2 size = TextManager::RenderText(GetAllText(), pos, textSize, TextManager::right, textColor); // Draw text
+		vec2 size = TextManager::RenderText(GetAllText(), pos, textSize, TextManager::right, textColor, true); // Draw text
 
 		// Draw background
 		Sprite(

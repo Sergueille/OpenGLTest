@@ -5,6 +5,7 @@
 #include "CircleCollider.h"
 #include "RectCollider.h"
 #include "RessourceManager.h"
+#include "LocalizationManager.h"
 
 TextRenderer::TextRenderer() : EditorObject(vec3(0))
 {
@@ -108,5 +109,5 @@ void TextRenderer::OnMainLoop()
 	vec3 screenPos = Utility::WorldToScreen(GetEditPos());
 	screenPos.z = GetEditPos().z;
 
-	TextManager::RenderText(content, screenPos, screenSize, TextManager::right, color);
+	TextManager::RenderText(LocalizationManager::GetLocale(content), screenPos, screenSize, TextManager::right, color);
 }

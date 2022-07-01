@@ -27,6 +27,7 @@ Some code from https://learnopengl.com/
 #include "LightManager.h"
 #include "ParticleSystem.h"
 #include "TerminalManager.h"
+#include "LocalizationManager.h"
 
 using namespace std;
 using namespace Utility;
@@ -183,6 +184,9 @@ int main(int argc, void* argv[])
     //TerminalManager::Write("Hello, this is a test!");
     //TerminalManager::NewLine();
     //TerminalManager::Write("This is a veeeery long line to test if the max line length is respected");
+
+    // Load localization
+    LocalizationManager::LoadLanguage(LocalizationManager::Language::french);
 
     // Load shaders
     RessourceManager::LoadBaseShaders();
@@ -341,6 +345,8 @@ int main(int argc, void* argv[])
     // Clean sound engine
     Utility::soloud->deinit();
     delete Utility::soloud;
+
+    LocalizationManager::Clear();
 
     // Clean GLFW memory
     glfwTerminate();

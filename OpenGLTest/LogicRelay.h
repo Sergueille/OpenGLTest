@@ -45,6 +45,9 @@ private:
 
 	TweenAction<float>* waitAction = nullptr;
 
+	bool mustTrigger = false;
+	float beforeDelayTime = 0;
+
 	void TriggerNow();
 };
 

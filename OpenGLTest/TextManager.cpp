@@ -8,38 +8,69 @@
 #include FT_FREETYPE_H 
 
 namespace TextManager {
-    std::map<char, Character> characters;
+    std::map<char8_t, Character> characters;
+    std::map<char8_t, Character> charactersMono;
     unsigned int VAO, VBO;
 
-    int TextManager::Init() {
+    int TextManager::Init() 
+    {
         // Init library
         FT_Library ft;
         if (FT_Init_FreeType(&ft))
         {
-            std::cout << "Could not init FreeType Library" << std::endl;
+            std::cerr << "Could not init FreeType Library" << std::endl;
             return -1;
         }
-
-        // Load font
-        FT_Face face;
-        if (FT_New_Face(ft, "fonts/arial.ttf", 0, &face))
-        {
-            std::cout << "Failed to load font" << std::endl;
-            return -1;
-        }
-
-        // Set font resolution
-        FT_Set_Pixel_Sizes(face, 0, 64); // TEST
 
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // disable byte-alignment restriction
 
-        // Load chars
-        for (unsigned char c = 0; c < 128; c++)
+        LoadFont(ft, "fonts\\arial.ttf", &characters);
+        LoadFont(ft, "fonts\\IBMPlexMono.ttf", &charactersMono);
+
+        FT_Done_FreeType(ft);
+
+        // Load text shader
+        RessourceManager::LoadShader("Shaders\\FontVtex.glsl", "Shaders\\FontFrag.glsl", "text");
+
+        // Create VBO for dynamic mesh
+        glGenVertexArrays(1, &VAO);
+        glGenBuffers(1, &VBO);
+        Utility::GlBindVtexArrayOptimised(VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 5, NULL, GL_DYNAMIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        return 0;
+    }
+
+    void LoadFont(FT_Library lib, const char* fontName, std::map<char8_t, Character>* map)
+    {
+        // Load font
+        FT_Face face;
+        if (FT_New_Face(lib, fontName, 0, &face))
         {
+            std::cerr << "Failed to load font" << std::endl;
+            return;
+        }
+
+        // Set font resolution
+        FT_Set_Pixel_Sizes(face, 0, 64);
+
+        const char8_t* chars = u8" \nazertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890,;:!ù^$*=)ç_-('\"é&?./§%¨£µ+°~#{[|`\\^@]}âêîôû^àèìòù<>äëïöü¨";
+
+        // Load chars
+        for (char8_t* c = (char8_t*)&chars[0]; *c != '\0'; c++)
+        {
+            unsigned int glyph_index = FT_Get_Char_Index(face, *c);
+
             // load character glyph 
-            if (FT_Load_Char(face, c, FT_LOAD_RENDER))
+            if (FT_Load_Glyph(face, glyph_index, FT_LOAD_RENDER))
             {
-                std::cout << "Failed to load Glyph " << c << std::endl;
+                std::cerr << "Failed to load Glyph " << glyph_index << std::endl;
                 continue;
             }
 
@@ -73,39 +104,27 @@ namespace TextManager {
                 (unsigned int)face->glyph->advance.x
             };
 
-            characters.insert(std::pair<char, Character>(c, character));
+            map->insert(std::pair<char8_t, Character>(*c, character));
         }
+
+        std::cout << "Loaded font " << fontName << std::endl;
 
         // Free ressources
         FT_Done_Face(face);
-        FT_Done_FreeType(ft);
-
-        // Load text shader
-        RessourceManager::LoadShader("Shaders\\FontVtex.glsl", "Shaders\\FontFrag.glsl", "text");
-
-        // Create VBO for dynamic mesh
-        glGenVertexArrays(1, &VAO);
-        glGenBuffers(1, &VBO);
-        Utility::GlBindVtexArrayOptimised(VAO);
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 5, NULL, GL_DYNAMIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-        return 0;
     }
 
-    glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align, glm::vec3 color) {
+    glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align, glm::vec3 color, bool mono)
+    {
+        return RenderText(std::u8string(text.begin(), text.end()), pos, scale, align, color, mono);
+    }
+
+    glm::vec2 RenderText(std::u8string text, glm::vec3 pos, float scale, text_align align, glm::vec3 color, bool mono)
+    {
         scale /= 64;
 
         Shader* shader = &RessourceManager::shaders["text"];
         shader->Use();
-
         shader->SetUniform("projection", Camera::GetUIProjection());
-
         glUniform3f(glGetUniformLocation(shader->ID, "textColor"), color.x, color.y, color.z);
         Utility::GlBindVtexArrayOptimised(VAO);
 
@@ -124,13 +143,13 @@ namespace TextManager {
         // iterate through all characters
         for (auto c = text.begin(); c != text.end(); c++)
         {
-            DrawChar(*c, &currentX, &currentY, scale, pos);
+            DrawChar(*c, &currentX, &currentY, scale, pos, mono);
         }
 
         return glm::vec2(currentX - pos.x, pos.y - currentY + scale * 64.f) ;
     }
 
-    void DrawChar(char c, float* currentX, float* currentY, float scale, glm::vec3 pos)
+    void DrawChar(char8_t c, float* currentX, float* currentY, float scale, glm::vec3 pos, bool mono)
     {
         if (c == '\n')
         {
@@ -140,7 +159,7 @@ namespace TextManager {
         }
         else
         {
-            Character ch = characters[c];
+            Character ch = mono ? charactersMono[c] : characters[c];
 
             float xpos = *currentX + ch.bearing.x * scale;
             float ypos = *currentY - (ch.size.y - ch.bearing.y) * scale;
@@ -172,7 +191,12 @@ namespace TextManager {
         }
     }
 
-    glm::vec2 GetRect(std::string text, float size)
+    glm::vec2 GetRect(std::string text, float size, bool mono)
+    {
+        return GetRect(std::u8string(text.begin(), text.end()), size, mono);
+    }
+
+    glm::vec2 GetRect(std::u8string text, float size, bool mono)
     {
         float X = 0;
         float maxX = 0;
@@ -181,7 +205,7 @@ namespace TextManager {
         // iterate through all characters
         for (auto c = text.begin(); c != text.end(); c++)
         {
-            Character ch = characters[*c];
+            Character ch = mono ? charactersMono[*c] : characters[*c];
 
             if (*c == '\n')
             {

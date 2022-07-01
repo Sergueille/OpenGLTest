@@ -6,6 +6,7 @@
 #include "RectCollider.h"
 #include "RessourceManager.h"
 #include "TweenManager.h"
+#include "Utility.h"
 
 const ObjectEvent LogicRelay::events[LOGIC_RELAY_EVENT_COUNT] = {
 	ObjectEvent{
@@ -142,6 +143,12 @@ void LogicRelay::OnMainLoop()
 		editorSprite->size = vec2(Editor::gizmoSize);
 		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
 	}
+
+	if (mustTrigger && beforeDelayTime + delay < Utility::time)
+	{
+		mustTrigger = false;
+		TriggerNow();
+	}
 }
 
 void LogicRelay::Trigger()
@@ -150,13 +157,8 @@ void LogicRelay::Trigger()
 
 	if (delay > 0)
 	{
-		if (waitAction != nullptr && !waitAction->IsFinshedAt(Utility::time))
-			TweenManager<float>::Cancel(waitAction);
-
-		TweenManager<float>::Tween(0, 1, delay, [](float value) {}, linear)
-		->SetOnFinished([this] { 
-			TriggerNow();
-		});
+		mustTrigger = true;
+		beforeDelayTime = Utility::time;
 	}
 	else
 	{
