@@ -2,7 +2,7 @@ TEXTURES --------------------
 - textures.com
 
 SOUNDS ----------------------
-- freesound.org
+- freesound.org (may not be exact)
 	- "Normal click" by Breviceps
 	- "UI Pop Up" by EminYILDIRIM
 	- "Score Counter 01" by rhodesmas
@@ -31,6 +31,10 @@ SOUNDS ----------------------
     - "distant explosions" by Kostrava
     - "Explosion" by Iwiploppenisse
     - "Emergency Siren" by onderwish
+    - "Big stereo metal hit" by LPA134
+    - "engine" by organicmanpl
+    - "Engine Train Idle" by Wakerone
+    - "Single clicks Keyboard Sound" by StrikeWhistler
 
 LIBRARIES -------------------
 - GLFW (window management, os stuff)

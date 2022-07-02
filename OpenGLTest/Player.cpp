@@ -18,6 +18,10 @@ ObjectEvent Player::events[PLAYER_EVENT_COUNT] = {
 		"Turn on",
 		[](EditorObject* object, void* param) { ((Player*)object)->isOn = true; },
 	},
+	ObjectEvent {
+		"Give teleportation",
+		[](EditorObject* object, void* param) { ((Player*)object)->GiveTeleportation(); },
+	},
 };
 
 Player* Player::ingameInstance = nullptr;
@@ -211,8 +215,12 @@ void Player::Load(std::map<std::string, std::string>* props)
 	// Don't need the sprite if no teleportation allowed
 	if (!Editor::enabled && !canTeleport)
 	{
-		delete teleportPosSprite;
-		teleportPosSprite = nullptr;
+		teleportPosSprite->StopDrawing();
+	}
+
+	if (!Editor::enabled)
+	{
+		Camera::position = GetEditPos();
 	}
 }
 
@@ -478,4 +486,10 @@ void Player::TeleportEffect()
 	}, sineOut)->SetOnFinished([pulse] {
 		delete pulse;
 	});
+}
+
+void Player::GiveTeleportation()
+{
+	teleportPosSprite->DrawOnMainLoop();
+	canTeleport = true;
 }

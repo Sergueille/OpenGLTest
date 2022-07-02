@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 361
+count 362
 
 object MapData {
 	mapName: ""
@@ -5142,13 +5142,13 @@ object LogicRelay {
 	parallax: "1.000000"
 	onTrigger: "4364|Write|21790|Set zoom|"
 	onAltTrigger: ""
-	triggerOnStart: "1"
+	triggerOnStart: "0"
 	delay: "5.000000"
 }
 object EditorSprite {
 	ID: "21140"
 	name: "over"
-	position: "-58.600002, 4.200000, 80.000000"
+	position: "-56.799999, 4.200000, 80.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "70.599998, 45.799999"
@@ -5192,4 +5192,16 @@ object LogicRelay {
 	onAltTrigger: ""
 	triggerOnStart: "0"
 	delay: "8.000000"
+}
+object Trigger {
+	ID: "22081"
+	name: ""
+	position: "-59.799999, 1.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "2.600000, 2.600000"
+	onEnter: "4523|Trigger|"
+	onExit: ""
+	once: "1"
 }

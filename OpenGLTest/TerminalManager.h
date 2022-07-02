@@ -21,6 +21,11 @@ public:
 
 	static float terminalWidth;
 
+	static float soundVolume;
+	static float maxPitch;
+	static float minPitch;
+	static float soundTime;
+
 	static void Init();
 
 	static std::vector<std::string> lines;
@@ -46,4 +51,6 @@ private:
 	static std::string charsToWrite;// Characters waiting to be written
 	static float writeStartTime; // Time when the last character was printed
 	static int writtenChars;
+
+	static float lastSoundTime;
 };

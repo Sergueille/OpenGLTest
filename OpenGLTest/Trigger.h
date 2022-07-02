@@ -20,6 +20,7 @@ public:
 	EventList onExit;
 
 	bool once = false;
+	bool needPlayerInteraction = false;
 
     Sprite* editorSprite = nullptr;
 

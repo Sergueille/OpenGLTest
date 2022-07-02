@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 468
+count 469
 
 object MapData {
 	mapName: ""
@@ -25,7 +25,7 @@ object EditorSprite {
 object Player {
 	ID: "477"
 	name: ""
-	position: "88.800003, -26.200001, 20.000000"
+	position: "-23.000000, 3.000000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "0"
@@ -4661,11 +4661,11 @@ object EditorSprite {
 object EditorSprite {
 	ID: "28153"
 	name: "coll disable"
-	position: "111.250626, -50.968540, 30.000000"
+	position: "111.542252, -50.931030, 30.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "2.200000, 3.000000"
-	rotation: "-110.000000"
+	rotation: "-102.199997"
 	color: "0.000000, 1.000000, 0.000000, 0.200000"
 	collideWithPhys: "1"
 	UVstart: "0.000000, 0.000000"
@@ -6905,4 +6905,19 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+}
+object EditorSprite {
+	ID: "36260"
+	name: ""
+	position: "174.200012, -54.400002, 30.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.400000, 0.730000"
+	rotation: "-180.000000"
+	color: "0.000000, 1.000000, 0.000000, 0.200000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "1"
 }

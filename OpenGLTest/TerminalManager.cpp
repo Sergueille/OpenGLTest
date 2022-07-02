@@ -14,6 +14,12 @@ std::string TerminalManager::charsToWrite = "";
 float TerminalManager::writeStartTime = 0;
 int TerminalManager::writtenChars = 0;
 
+float TerminalManager::soundVolume = 0.5f;
+float TerminalManager::maxPitch = 1.1f;
+float TerminalManager::minPitch = 0.9f;
+float TerminalManager::soundTime = 0.04f;
+float TerminalManager::lastSoundTime = 0;
+
 void TerminalManager::Init()
 {
 	EventManager::OnMainLoop.push_end(OnMainLoop);
@@ -99,6 +105,16 @@ void TerminalManager::OnMainLoop()
 
 			if (writtenChars >= charsToWrite.length())
 				charsToWrite = "";
+
+			// Play sound
+			if (lastSoundTime + soundTime < Utility::time)
+			{
+				lastSoundTime = Utility::time;
+
+				float pitch = Lerp(minPitch, maxPitch, (float)rand() / (float)RAND_MAX);
+				SoLoud::handle handle = Utility::PlaySound("keyboard1.wav", soundVolume * Utility::gameSoundsVolume);
+				soloud->setRelativePlaySpeed(handle, pitch);
+			}
 		}
 	}
 }

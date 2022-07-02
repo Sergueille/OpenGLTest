@@ -74,6 +74,7 @@ vec2 EditorParticleSystem::DrawProperties(vec3 drawPos)
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Start velocity", &startVelocity, Editor::panelPropertiesX, strID + "startVel").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "End velocity", &endVelocity, Editor::panelPropertiesX, strID + "endVel").y + Editor::margin;
+    drawPos.y -= Editor::CheckBox(drawPos, "Velocity from angle", &velocityFromAngle, Editor::panelPropertiesX).y;
 
     drawPos.y -= Editor::DrawProperty(drawPos, "Start scale", &startSize, Editor::panelPropertiesX, strID + "startsize").y;
     drawPos.y -= Editor::DrawProperty(drawPos, "End scale", &endSize, Editor::panelPropertiesX, strID + "endsize").y + Editor::margin;
@@ -118,6 +119,7 @@ void EditorParticleSystem::Load(std::map<std::string, std::string>* props)
     EditorSaveManager::FloatProp(props, "duration", &duration);
 
 	emitCircle = (*props)["emitCircle"] == "1";
+	velocityFromAngle = (*props)["velocityFromAngle"] == "1";
 
 	startSize = EditorSaveManager::StringToVector2((*props)["startSize"]);
 	endSize = EditorSaveManager::StringToVector2((*props)["endSize"]);
@@ -150,6 +152,7 @@ void EditorParticleSystem::Save()
     EditorSaveManager::WriteProp("scale", editorSize);
 
     EditorSaveManager::WriteProp("emitCircle", emitCircle);
+    EditorSaveManager::WriteProp("velocityFromAngle", velocityFromAngle);
 
     EditorSaveManager::WriteProp("startVelocity", startVelocity);
     EditorSaveManager::WriteProp("endVelocity", endVelocity);

@@ -51,6 +51,7 @@ vec2 Trigger::DrawProperties(vec3 drawPos)
     drawPos.y -= Editor::DrawProperty(drawPos, "Scale", &editorSize, Editor::panelPropertiesX, strID + "size").y;
 
 	drawPos.y -= Editor::CheckBox(drawPos, "Trigger once", &once, Editor::panelPropertiesX).y;
+	drawPos.y -= Editor::CheckBox(drawPos, "Need player interaction", &needPlayerInteraction, Editor::panelPropertiesX).y;
 
 	drawPos.y -= onEnter.DrawInPanel(drawPos, "On player enter").y;
 	drawPos.y -= onExit.DrawInPanel(drawPos, "On player exit").y;
@@ -81,6 +82,7 @@ void Trigger::Load(std::map<std::string, std::string>* props)
     editorSize = EditorSaveManager::StringToVector2((*props)["scale"], vec2(1));
 
 	once = (*props)["once"] == "1";
+	needPlayerInteraction = (*props)["needPlayerInteraction"] == "1";
 
 	EventList::Load(&onEnter, (*props)["onEnter"]);
 	EventList::Load(&onExit, (*props)["onExit"]);
@@ -97,6 +99,7 @@ void Trigger::Save()
     EditorSaveManager::WriteProp("onExit", onExit.GetString());
 
     EditorSaveManager::WriteProp("once", once);
+    EditorSaveManager::WriteProp("needPlayerInteraction", needPlayerInteraction);
 }
 
 void Trigger::Enable()
@@ -134,6 +137,7 @@ void Trigger::OnMainLoop()
 	if (!Editor::enabled && Player::ingameInstance != nullptr)
 	{
 		if (!once || !hasAlredyTriggered)
+		if (!needPlayerInteraction || glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
 		{
 			vec3 res = Player::ingameInstance->collider->CollideWith((RectCollider*)clickCollider);
 
