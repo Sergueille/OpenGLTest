@@ -20,7 +20,7 @@
 
 using namespace glm;
 
-constexpr int PLAYER_EVENT_COUNT = 1;
+constexpr int PLAYER_EVENT_COUNT = 2;
 
 constexpr float deathDuration = 3;
 constexpr float deathZoom = 15;
@@ -89,6 +89,7 @@ public:
 	const vec4 cannotTeleportClickColor = vec4(1.6f, 1, 0, 0.5f);
 	vec4 normalLightColor = vec4(2, 2, 2, 1);
 	vec4 brightLightColor = vec4(8, 4, 4, 1);
+	vec4 offLightColor = vec4(0.2, 0, 0, 1);
 
 	static Player* ingameInstance;
 
@@ -96,6 +97,8 @@ public:
 
 	int teleportationsRemaining = maxTeleprtationInAir;
 	bool canTeleport = true;
+
+	bool isOn = true;
 
 	Sprite* playerSprite;
 	Sprite* teleportPosSprite;

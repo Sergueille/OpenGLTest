@@ -1,4 +1,4 @@
-#include "TextManager.h"
+ï»¿#include "TextManager.h"
 
 #include "Utility.h"
 #include "RessourceManager.h"
@@ -60,12 +60,12 @@ namespace TextManager {
         // Set font resolution
         FT_Set_Pixel_Sizes(face, 0, 64);
 
-        const char8_t* chars = u8" \nazertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890,;:!ù^$*=)ç_-('\"é&?./§%¨£µ+°~#{[|`\\^@]}âêîôû^àèìòù<>äëïöü¨";
+        std::u8string chars = u8"Ã© \nazertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890,;:!?./Â§^<>$*&\"'(-_)=#{[|`\\^@]}+";
 
         // Load chars
-        for (char8_t* c = (char8_t*)&chars[0]; *c != '\0'; c++)
+        for (int i = 0; i < chars.length(); i++)
         {
-            unsigned int glyph_index = FT_Get_Char_Index(face, *c);
+            int glyph_index = FT_Get_Char_Index(face, chars[i]);
 
             // load character glyph 
             if (FT_Load_Glyph(face, glyph_index, FT_LOAD_RENDER))
@@ -104,7 +104,7 @@ namespace TextManager {
                 (unsigned int)face->glyph->advance.x
             };
 
-            map->insert(std::pair<char8_t, Character>(*c, character));
+            map->insert(std::pair<char8_t, Character>(chars[i], character));
         }
 
         std::cout << "Loaded font " << fontName << std::endl;

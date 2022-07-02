@@ -26,6 +26,7 @@
 #include "Radioactivity.h"
 #include "SoundPoint.h"
 #include "SoundArea.h"
+#include "TerminalWriter.h"
 
 #include <iostream>
 
@@ -810,6 +811,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.y -= UIButton(drawPos, "Sound Area", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new SoundArea();
+
+	drawPos.y -= UIButton(drawPos, "Terminal writer", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new TerminalWriter();
 
 	if (newObject != nullptr)
 	{

@@ -6,11 +6,15 @@
 
 using namespace glm;
 
+constexpr int TRIGGER_EVENT_COUNT = 2;
+
 class Trigger : public EditorObject
 {
 public:
 	Trigger();
 	~Trigger();
+
+	static ObjectEvent events[TRIGGER_EVENT_COUNT];
 
 	EventList onEnter;
 	EventList onExit;
@@ -31,6 +35,8 @@ public:
 
 	virtual void Enable() override;
 	virtual void Disable() override;
+
+	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 
 private: 
 	bool hasAlredyTriggered = false;

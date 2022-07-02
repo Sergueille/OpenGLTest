@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 356
+count 361
 
 object MapData {
 	mapName: ""
@@ -25,10 +25,11 @@ object EditorSprite {
 object Player {
 	ID: "94"
 	name: ""
-	position: "81.200005, -22.400000, 20.000000"
+	position: "-59.762867, 0.762866, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "0"
+	isOn: "0"
 }
 object EditorSprite {
 	ID: "96"
@@ -868,26 +869,14 @@ object CameraController {
 	shakeIntensity: "1.000000"
 	shakeDuration: "2.000000"
 }
-object Trigger {
-	ID: "1172"
-	name: ""
-	position: "-59.200001, 2.400000, -8.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "0.000000"
-	scale: "3.800000, 4.600000"
-	onEnter: "1174|Set zoom|"
-	onExit: ""
-	once: "0"
-}
 object CameraController {
 	ID: "1174"
 	name: ""
-	position: "0.200000, -2.400000, 50.000000"
+	position: "-59.400002, 12.800000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	zoom: "0.850000"
-	transTime: "2.000000"
+	transTime: "5.000000"
 	shakeIntensity: "1.000000"
 	shakeDuration: "2.000000"
 }
@@ -5127,4 +5116,80 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object TerminalWriter {
+	ID: "4364"
+	name: ""
+	position: "-59.000000, -0.600000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	count: "8"
+	key0: "t_boot"
+	key1: "t_boot2"
+	key2: "t_boot3"
+	key3: "t_boot4"
+	key4: "t_boot5"
+	key5: "t_boot6"
+	key6: "t_boot7"
+	key7: "t_boot8"
+	onFinished: "21142|Trigger|21936|Trigger|"
+}
+object LogicRelay {
+	ID: "4523"
+	name: ""
+	position: "-60.000000, -0.600000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "4364|Write|21790|Set zoom|"
+	onAltTrigger: ""
+	triggerOnStart: "1"
+	delay: "5.000000"
+}
+object EditorSprite {
+	ID: "21140"
+	name: "over"
+	position: "-58.600002, 4.200000, 80.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "70.599998, 45.799999"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object LogicRelay {
+	ID: "21142"
+	name: "over disable"
+	position: "-60.000000, -1.800000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "21140|Disable|1174|Set zoom|4364|Clear terminal|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "1.500000"
+}
+object CameraController {
+	ID: "21790"
+	name: ""
+	position: "-61.000000, 12.800000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	zoom: "0.500000"
+	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
+}
+object LogicRelay {
+	ID: "21936"
+	name: "player on"
+	position: "-59.000000, -1.800000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "94|Turn on|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "8.000000"
 }

@@ -7,6 +7,17 @@
 #include "RessourceManager.h"
 #include "Player.h"
 
+ObjectEvent Trigger::events[TRIGGER_EVENT_COUNT] = {
+	ObjectEvent {
+		"Enable",
+		[](EditorObject* object, void* param) { ((Trigger*)object)->Enable(); }
+	},
+	ObjectEvent {
+		"Disable",
+		[](EditorObject* object, void* param) { ((Trigger*)object)->Disable(); }
+	},
+};
+
 Trigger::Trigger() : EditorObject(vec3(0))
 {
 	clickCollider = new RectCollider(vec2(0), vec2(1), 0, false);
@@ -98,6 +109,12 @@ void Trigger::Disable()
 {
 	EditorObject::Disable();
     if (editorSprite != nullptr) editorSprite->StopDrawing();
+}
+
+void Trigger::GetObjectEvents(const ObjectEvent** res, int* resCount)
+{
+	*res = events;
+	*resCount = TRIGGER_EVENT_COUNT;
 }
 
 void Trigger::OnMainLoop()

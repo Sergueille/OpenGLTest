@@ -180,11 +180,6 @@ int main(int argc, void* argv[])
     // Start event manager
     EventManager::SetupEvents();
 
-    //TerminalManager::Init();
-    //TerminalManager::Write("Hello, this is a test!");
-    //TerminalManager::NewLine();
-    //TerminalManager::Write("This is a veeeery long line to test if the max line length is respected");
-
     // Load localization
     LocalizationManager::LoadLanguage(LocalizationManager::Language::french);
 
@@ -217,6 +212,9 @@ int main(int argc, void* argv[])
             GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pingpongBuffer[i], 0
         );
     }
+
+    // TEST
+    TerminalManager::Init();
 
     // Set bg color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);

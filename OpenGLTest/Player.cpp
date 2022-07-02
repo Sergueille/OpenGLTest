@@ -14,6 +14,10 @@ ObjectEvent Player::events[PLAYER_EVENT_COUNT] = {
 		"Kill",
 		[](EditorObject* object, void* param) { ((Player*)object)->Kill(); },
 	},
+	ObjectEvent {
+		"Turn on",
+		[](EditorObject* object, void* param) { ((Player*)object)->isOn = true; },
+	},
 };
 
 Player* Player::ingameInstance = nullptr;
@@ -123,7 +127,8 @@ void Player::OnMainLoop()
 	{
 		collider->SetPos(GetPos()); // Re-set collider position because EditorObject will replace it by default
 
-		float deltaY = GetTimeSine((int)(floatPeriod * 1000.0f)) * floatIntensity - (floatIntensity / 2);
+		float deltaY = isOn ? GetTimeSine((int)(floatPeriod * 1000.0f)) * floatIntensity - (floatIntensity / 2) : 0;
+
 		// Set sprite position
 		playerSprite->position = vec3(GetPos().x, GetPos().y + deltaY, editorPosition.z);
 		vec2 lightPos = GetPos() + height * vec2(0, -0.344);;
@@ -139,6 +144,7 @@ vec2 Player::DrawProperties(vec3 drawPos)
 	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
 
 	drawPos.y -= Editor::CheckBox(drawPos, "Can teleport", &canTeleport, Editor::panelPropertiesX).y;
+	drawPos.y -= Editor::CheckBox(drawPos, "Start on", &isOn, Editor::panelPropertiesX).y;
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
@@ -192,6 +198,7 @@ void Player::Save()
 {
 	EditorObject::Save();
 	EditorSaveManager::WriteProp("canTeleport", canTeleport);
+	EditorSaveManager::WriteProp("isOn", isOn);
 }
 
 void Player::Load(std::map<std::string, std::string>* props)
@@ -199,6 +206,7 @@ void Player::Load(std::map<std::string, std::string>* props)
 	EditorObject::Load(props);
 	SetPos(editorPosition);
 	canTeleport = (*props)["canTeleport"] != "0";
+	isOn = (*props)["isOn"] != "0";
 
 	// Don't need the sprite if no teleportation allowed
 	if (!Editor::enabled && !canTeleport)
@@ -247,6 +255,13 @@ void Player::Kill()
 // Handle physics
 void Player::OnAfterMove()
 {
+	if (!isOn)
+	{
+		soloud->setVolume(levitationSoundHandle, 0);
+		this->lightsSprite->color = offLightColor;
+		return;
+	}
+
 	float realSpeed = walkSpeed;
 
 	// Hanlde horizontal movement

@@ -6,6 +6,8 @@
 
 using namespace glm;
 
+constexpr float charPerSec = 50;
+
 class TerminalManager
 {
 public:
@@ -15,10 +17,9 @@ public:
 	static const int textSize = 20; // Size of a line of text, in pixels
 	static const int screenMargin = 10; // Plxels between the text and the border of the screen
 	static const int nbLines = 6; // Nb of lines diplayed
-	static const int maxCharInLine = 50; // Max characters in one line
+	static const int maxCharInLine = 100; // Width of the terminal
 
-	static const std::string botLogStart;
-	static const std::string communicationStart;
+	static float terminalWidth;
 
 	static void Init();
 
@@ -37,6 +38,12 @@ public:
 	/// </summary>
 	static void NewLine();
 
+	static void ClearTerminal();
+
 private:
 	static void OnMainLoop();
+
+	static std::string charsToWrite;// Characters waiting to be written
+	static float writeStartTime; // Time when the last character was printed
+	static int writtenChars;
 };

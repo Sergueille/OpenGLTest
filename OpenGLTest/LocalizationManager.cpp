@@ -12,6 +12,7 @@ void LocalizationManager::LoadLanguage(Language lang)
 	data = std::map<std::string, std::u8string>(); // Discard old data
 	ReadFile("instructions.csv");
 	ReadFile("ui.csv");
+	ReadFile("terminal.csv");
 }
 
 std::u8string LocalizationManager::GetLocale(std::string key)

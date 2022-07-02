@@ -27,6 +27,8 @@
 #include "Radioactivity.h"
 #include "SoundPoint.h"
 #include "SoundArea.h"
+#include "TerminalWriter.h"
+#include "TerminalManager.h"
 
 using namespace glm;
 
@@ -142,6 +144,8 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 		ClearGameLevel();
 		filePath = path;
 	}
+
+	TerminalManager::ClearTerminal();
 
 	std::cout << "Loading level " << path << std::endl;
 
@@ -640,6 +644,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "SoundArea")
 	{
 		newObj = new SoundArea();
+		newObj->Load(&props);
+	}
+	else if (objectType == "TerminalWriter")
+	{
+		newObj = new TerminalWriter();
 		newObj->Load(&props);
 	}
 	else
