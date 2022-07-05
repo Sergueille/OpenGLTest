@@ -3,6 +3,7 @@
 #include "EditorObject.h"
 #include "Sprite.h"
 #include "RessourceManager.h"
+#include "EditorSprite.h"
 
 using namespace glm;
 
@@ -18,6 +19,8 @@ public:
 
 	float maxDist = 0;
 	bool isRealTime = false;
+
+	int regionID = -1;
 
 	static ObjectEvent events[RADIOACTIVITY_EVENT_COUNT];
 

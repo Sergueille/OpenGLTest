@@ -61,6 +61,7 @@ vec2 SoundPoint::DrawProperties(vec3 drawPos)
 
 	drawPos.y -= Editor::CheckBox(drawPos, "Auto start", &autoStart, Editor::panelPropertiesX).y;
 	drawPos.y -= Editor::CheckBox(drawPos, "Is looping", &loop, Editor::panelPropertiesX).y;
+	drawPos.y -= Editor::CheckBox(drawPos, "Don't play if too far", &dontPlayIfTooFar, Editor::panelPropertiesX).y;
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
@@ -93,6 +94,7 @@ void SoundPoint::Load(std::map<std::string, std::string>* props)
 
 	autoStart = (*props)["autoStart"] == "1";
 	loop = (*props)["loop"] == "1";
+	dontPlayIfTooFar = (*props)["dontPlayIfTooFar"] == "1";
 
 	if (!Editor::enabled && autoStart)
 	{
@@ -113,6 +115,7 @@ void SoundPoint::Save()
 	EditorSaveManager::WriteProp("maxDist", maxDist);
 	EditorSaveManager::WriteProp("autoStart", autoStart);
 	EditorSaveManager::WriteProp("loop", loop);
+	EditorSaveManager::WriteProp("dontPlayIfTooFar", dontPlayIfTooFar);
 }
 
 void SoundPoint::Enable()
@@ -142,9 +145,15 @@ void SoundPoint::GetObjectEvents(const ObjectEvent** res, int* resCount)
 void SoundPoint::PlaySound()
 {
 	if (isPlaying) StopSound();
-	isPlaying = true;
 
-	handle = Utility::PlaySound(soundName, Utility::gameSoundsVolume * volume);
+	if (dontPlayIfTooFar)
+	{
+		float dist = glm::length(Camera::position - vec2(GetEditPos()));
+		if (dist > maxDist) return;
+	}
+
+	isPlaying = true;
+	handle = Utility::PlaySound(soundName, spatial ? 0 : Utility::gameSoundsVolume * volume);
 	soloud->setLooping(handle, loop);
 }
 

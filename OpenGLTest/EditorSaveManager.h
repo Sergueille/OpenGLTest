@@ -47,6 +47,11 @@ public:
 	static std::list<std::string> userSaves;
 
 	/// <summary>
+	/// Is loading or destroying level, use this to avoid modifying objects during this time
+	/// </summary>
+	static bool isLoading;
+
+	/// <summary>
 	/// Destroy all editor objects
 	/// </summary>
 	static void ClearEditorLevel();

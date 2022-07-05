@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 202
+count 203
 
 object MapData {
 	mapName: ""
@@ -29,6 +29,7 @@ object Player {
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
+	isOn: "1"
 }
 object EditorSprite {
 	ID: "98"
@@ -385,6 +386,7 @@ object Trigger {
 	onEnter: "370|Save game|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object Button {
 	ID: "372"
@@ -535,6 +537,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "21.600000, 0.400000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "0.000000, 0.000000"
 	endVelocity: "0.000000, 0.500000"
 	startSize: "0.200000, 0.200000"
@@ -557,6 +560,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "0.200000, 0.400000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "2.000000, 0.000000"
 	endVelocity: "0.000000, -20.000000"
 	startSize: "0.500000, 0.500000"
@@ -579,6 +583,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "0.200000, 0.400000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "2.000000, 0.000000"
 	endVelocity: "0.000000, -25.000000"
 	startSize: "0.500000, 0.500000"
@@ -601,6 +606,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "0.200000, 0.400000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "2.500000, 0.000000"
 	endVelocity: "0.000000, -30.000000"
 	startSize: "0.500000, 0.500000"
@@ -623,6 +629,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "21.600000, 0.400000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "0.000000, 1.000000"
 	endVelocity: "0.000000, 1.500000"
 	startSize: "0.200000, 0.200000"
@@ -1122,6 +1129,7 @@ object Trigger {
 	onEnter: "370|Save game|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object SoundPoint {
 	ID: "5237"
@@ -1136,6 +1144,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "5239"
@@ -1150,6 +1159,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "5401"
@@ -1164,6 +1174,7 @@ object SoundPoint {
 	maxDist: "30.000000"
 	autoStart: "0"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object EditorSprite {
 	ID: "5476"
@@ -1430,6 +1441,7 @@ object Trigger {
 	onEnter: "370|Save game|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object Prefab {
 	ID: "5888"
@@ -1481,7 +1493,7 @@ object LogicRelay {
 	onTrigger: "5995|Start|"
 	onAltTrigger: ""
 	triggerOnStart: "1"
-	delay: "4.000000"
+	delay: "3.700000"
 }
 object LogicRelay {
 	ID: "6345"
@@ -1492,7 +1504,7 @@ object LogicRelay {
 	onTrigger: "6218|Start|"
 	onAltTrigger: ""
 	triggerOnStart: "1"
-	delay: "1.000000"
+	delay: "0.500000"
 }
 object Prefab {
 	ID: "6709"
@@ -1651,6 +1663,7 @@ object Trigger {
 	onEnter: "370|Save game|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object LogicRelay {
 	ID: "7054"
@@ -1658,10 +1671,10 @@ object LogicRelay {
 	position: "-82.599998, -19.600000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	onTrigger: "6740|Start|6748|Start|"
+	onTrigger: "6748|Start|"
 	onAltTrigger: ""
 	triggerOnStart: "1"
-	delay: "1.000000"
+	delay: "1.500000"
 }
 object EditorSprite {
 	ID: "7342"
@@ -2312,6 +2325,7 @@ object Trigger {
 	onEnter: "370|Save game|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object EditorSprite {
 	ID: "9531"
@@ -2598,4 +2612,15 @@ object Laser {
 	startOffset: "-0.100000"
 	endOffset: "0.050000"
 	startOn: "0"
+}
+object LogicRelay {
+	ID: "13622"
+	name: ""
+	position: "-80.599998, -19.600000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "6740|Start|"
+	onAltTrigger: ""
+	triggerOnStart: "1"
+	delay: "1.000000"
 }

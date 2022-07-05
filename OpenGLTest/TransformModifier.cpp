@@ -177,45 +177,48 @@ void TransformModifier::ResetIngameState()
 void TransformModifier::SetPosition()
 {
 	if (targetObject == nullptr) return;
-	//if (moveAction != nullptr && !moveAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(moveAction);
-
 	vec2 obj = relative ? vec2(targetStartPos) + targetPos : targetPos;
 
 	moveAction = TweenManager<vec2>::Tween(vec2(targetObject->GetLocalEditPos()), obj, duration,
-		[this](vec2 value) { this->targetObject->SetEditPos(vec3(value.x, value.y, this->targetObject->GetLocalEditPos().z)); },
+		[this](vec2 value) { 
+			if (!EditorSaveManager::isLoading)
+				this->targetObject->SetEditPos(vec3(value.x, value.y, this->targetObject->GetLocalEditPos().z)); 
+		},
 	easeType)->SetOnFinished([this] { 
 		onFinished.Call(this); 
-		this->moveAction = nullptr; // TEEEEST
+		this->moveAction = nullptr;
 	});
 }
 
 void TransformModifier::SetRotation()
 {
 	if (targetObject == nullptr) return;
-	//if (roateAction != nullptr && !roateAction->IsFinshedAt(Utility::time)) TweenManager<float>::Cancel(roateAction);
-
 	float obj = relative ? targetStartRotation + targetRotation : targetRotation;
 
 	roateAction = TweenManager<float>::Tween(targetObject->GetLocalEditRotation(), obj, duration,
-		[this](float value) { this->targetObject->SetEditRotation(value); },
+		[this](float value) { 
+			if (!EditorSaveManager::isLoading)
+				this->targetObject->SetEditRotation(value); 
+		},
 	easeType)->SetOnFinished([this] { 
 		onFinished.Call(this);
-		this->roateAction = nullptr; // TEEEEST
+		this->roateAction = nullptr;
 	});
 }
 
 void TransformModifier::SetScale()
 {
 	if (targetObject == nullptr) return;
-	//if (scaleAction != nullptr && !scaleAction->IsFinshedAt(Utility::time)) TweenManager<vec2>::Cancel(scaleAction);
-
 	vec2 obj = relative ? targetStartScale * targetSize : targetSize;
 
 	scaleAction = TweenManager<vec2>::Tween(targetObject->GetLocalEditScale(), obj, duration,
-		[this](vec2 value) { this->targetObject->SetEditScale(value); },
+		[this](vec2 value) {
+			if (!EditorSaveManager::isLoading)
+				this->targetObject->SetEditScale(value); 
+		},
 	easeType)->SetOnFinished([this] { 
 		onFinished.Call(this);
-		this->scaleAction = nullptr; // TEEEEST
+		this->scaleAction = nullptr;
 	});
 }
 

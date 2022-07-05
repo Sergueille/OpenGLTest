@@ -74,6 +74,12 @@ vec2 Radioactivity::DrawProperties(vec3 drawPos)
     drawPos.y -= Editor::DrawProperty(drawPos, "Max distanse", &maxDist, Editor::panelPropertiesX, strID + "maxDist").y;
     drawPos.y -= Editor::CheckBox(drawPos, "Is realtime", &isRealTime, Editor::panelPropertiesX).y;
 
+    EditorObject* obj = Editor::GetEditorObjectByID(regionID, true, false);
+    drawPos.y -= Editor::ObjectSelector(drawPos, "Region", &obj, Editor::panelPropertiesX, strID + "region").y;
+    if (obj != nullptr)
+        regionID = obj->ID;
+    else regionID = -1;
+
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
 	return res;
@@ -100,6 +106,7 @@ void Radioactivity::Load(std::map<std::string, std::string>* props)
 	EditorObject::Load(props);
 
     EditorSaveManager::FloatProp(props, "maxDist", &maxDist);
+    EditorSaveManager::IntProp(props, "regionID", &regionID);
     isRealTime = (*props)["isRealTime"] == "1";
 
     startedRealtime = isRealTime;
@@ -111,6 +118,7 @@ void Radioactivity::Save()
 
     EditorSaveManager::WriteProp("maxDist", maxDist);
     EditorSaveManager::WriteProp("isRealTime", isRealTime);
+    EditorSaveManager::WriteProp("regionID", regionID);
 }
 
 void Radioactivity::Enable()
@@ -142,10 +150,18 @@ Mesh* Radioactivity::GetMesh()
 
     vec3 editPos = GetEditPos();
 
-    // TODO: support circle colliders
     int raycastCount = 0;
     RaycastPoint rayPoints[MAX_RAY_COUNT] = { };
     int coll_id = 0;
+
+    EditorSprite* region = nullptr;
+    if (regionID != -1)
+    {
+        EditorObject* obj = Editor::GetEditorObjectByIDInObjectContext(this, regionID, Editor::enabled, false);
+
+        if (obj != nullptr)
+            region = (EditorSprite*)obj;
+    }
 
     //auto begin = std::chrono::high_resolution_clock::now();
 
@@ -166,12 +182,16 @@ Mesh* Radioactivity::GetMesh()
 
         for (int j = 0; j < 4; j++) // Add targets
         {
-            rayPoints[raycastCount + j].delta = points[j] - vec2(editPos);
-            rayPoints[raycastCount + j].angle = Utility::GetVectorAngle(rayPoints[raycastCount + j].delta);
-            rayPoints[raycastCount + j].coll_id = coll_id;
+            CircleCollider coll(points[j], 0.01, false);
+            if (region == nullptr || region->clickCollider->CollideWith(&coll).z != 0)
+            {
+                rayPoints[raycastCount].delta = points[j] - vec2(editPos);
+                rayPoints[raycastCount].angle = Utility::GetVectorAngle(rayPoints[raycastCount].delta);
+                rayPoints[raycastCount].coll_id = coll_id;
+                raycastCount += 1;
+            }
         }
 
-        raycastCount += 4;
         coll_id++;
     }
 
@@ -280,7 +300,7 @@ Mesh* Radioactivity::GetMesh()
     //int duration = (int)std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
     //std::printf("%d microseconds\n", duration);
 
-    //std::printf("Radioactivity source baked with %d raycasts and %d vertices\n", raycastCount, vertexCount);
+    std::printf("Radioactivity source baked with %d raycasts and %d vertices\n", raycastCount, vertexCount);
     mesh = new Mesh(vertices, vertexCount * VERT_VAL_COUNT, indices, faceCount * FACE_VAL_COUNT);
 
     return mesh;

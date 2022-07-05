@@ -31,6 +31,8 @@ public:
 
 	bool isPlaying = false;
 
+	bool dontPlayIfTooFar = false;
+
 	virtual vec2 DrawProperties(vec3 drawPos) override;
 	virtual void OnMainLoop() override;
 

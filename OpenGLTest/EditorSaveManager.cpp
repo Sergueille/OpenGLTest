@@ -49,9 +49,13 @@ std::string EditorSaveManager::currentUserSave = "";
 
 std::list<std::string> EditorSaveManager::userSaves = std::list<std::string>();
 
+bool EditorSaveManager::isLoading = false;
+
 void EditorSaveManager::ClearEditorLevel()
 {
 	std::cout << "Clearing editor level"  << std::endl;
+
+	isLoading = true;
 
 	// Destroy all objects
 	Editor::SelectObject(nullptr);
@@ -66,17 +70,23 @@ void EditorSaveManager::ClearEditorLevel()
 
 	Editor::currentMapData = MapData();
 	Editor::IDmax = 0;
+
+	isLoading = false;
 }
 
 void EditorSaveManager::ClearGameLevel()
 {
 	std::cout << "Clearing game level" << std::endl;
 
+	isLoading = true;
+
 	for (auto r = levelObjectList.begin(); r != levelObjectList.end(); r++)
 	{
 		delete *r;
 	}
 	levelObjectList.clear();
+
+	isLoading = false;
 }
 
 void EditorSaveManager::SaveLevel()
@@ -133,6 +143,8 @@ void EditorSaveManager::SaveLevel()
 
 void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 {
+	isLoading = true;
+
 	if (inEditor)
 	{
 		Editor::currentFilePath = path;
@@ -198,6 +210,7 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 	catch (std::exception e) // Catch exceptions to make sure the file is closed
 	{
 		ifile->close();
+		isLoading = false;
 		Editor::infoBarText = "Got an error while loading level file, see console for details";
 		std::cout << "Got an error while loading level file, here's what it says:" << std::endl;
 		std::cout << e.what() << std::endl;
@@ -212,6 +225,8 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 			ClearGameLevel();
 		}
 	}
+
+	isLoading = false;
 }
 
 void EditorSaveManager::LoadLevelWithTransition(std::string path, std::function<void()> onLoad)
@@ -246,6 +261,8 @@ void EditorSaveManager::LoadLevelWithTransition(std::string path, std::function<
 void EditorSaveManager::LoadPrefab(Prefab* prefab)
 {
 	if (prefab->GetPath() == "") return;
+
+	isLoading = true;
 
 	std::cout << "Loading prefab " << prefab->GetPath() << std::endl;
 
@@ -303,10 +320,13 @@ void EditorSaveManager::LoadPrefab(Prefab* prefab)
 				prefab->ReloadPrefab();
 			}
 		}
+
+		isLoading = false;
 	}
 	catch (std::exception e) // Catch exceptions to make sure the file is closed
 	{
 		ifile->close();
+		isLoading = false;
 		std::cout << "Got an error while loading prefab file, here's what it says:" << std::endl;
 		std::cout << e.what() << std::endl;
 	}

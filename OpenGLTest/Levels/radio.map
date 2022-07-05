@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 116
+count 118
 
 object MapData {
 	mapName: ""
@@ -25,10 +25,11 @@ object EditorSprite {
 object Player {
 	ID: "1"
 	name: ""
-	position: "91.200005, 3.400000, 20.000000"
+	position: "90.200005, 3.000000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
+	isOn: "1"
 }
 object EditorSprite {
 	ID: "5"
@@ -323,6 +324,7 @@ object Radioactivity {
 	parallax: "1.000000"
 	maxDist: "15.000000"
 	isRealTime: "0"
+	regionID: "-1"
 }
 object EditorSprite {
 	ID: "704"
@@ -708,6 +710,7 @@ object Radioactivity {
 	parallax: "1.000000"
 	maxDist: "20.000000"
 	isRealTime: "0"
+	regionID: "-1"
 }
 object EditorSprite {
 	ID: "856"
@@ -992,6 +995,7 @@ object Trigger {
 	onEnter: "585|Enable realtime|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Trigger {
 	ID: "1515"
@@ -1004,6 +1008,7 @@ object Trigger {
 	onEnter: "585|Disable realtime|854|Enable realtime|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Trigger {
 	ID: "1517"
@@ -1016,6 +1021,7 @@ object Trigger {
 	onEnter: "585|Enable realtime|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Trigger {
 	ID: "1519"
@@ -1028,6 +1034,7 @@ object Trigger {
 	onEnter: "854|Enable realtime|2532|Disable realtime|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object EditorSprite {
 	ID: "1947"
@@ -1055,6 +1062,7 @@ object Trigger {
 	onEnter: "2156|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Checkpoint {
 	ID: "2156"
@@ -1074,6 +1082,7 @@ object Trigger {
 	onEnter: "2156|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Trigger {
 	ID: "2305"
@@ -1086,6 +1095,7 @@ object Trigger {
 	onEnter: "2156|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object EditorSprite {
 	ID: "2454"
@@ -1198,8 +1208,9 @@ object Radioactivity {
 	position: "105.800003, -2.600000, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	maxDist: "30.000000"
+	maxDist: "50.000000"
 	isRealTime: "0"
+	regionID: "4797"
 }
 object EditorSprite {
 	ID: "2534"
@@ -1311,7 +1322,7 @@ object LogicRelay {
 	onTrigger: "2541|Open door|"
 	onAltTrigger: ""
 	triggerOnStart: "1"
-	delay: "0.000000"
+	delay: "1.000000"
 }
 object LogicRelay {
 	ID: "2554"
@@ -1331,8 +1342,8 @@ object Button {
 	parent: "-1"
 	parallax: "1.000000"
 	startPressed: "0"
-	onPressed: "2554|Trigger|2541|Close door|"
-	onUnpressed: "2541|Open door|"
+	onPressed: "2554|Trigger|2541|Close door|3739|Open door|"
+	onUnpressed: "2541|Open door|3739|Close door|"
 }
 object EditorSprite {
 	ID: "2557"
@@ -1466,11 +1477,52 @@ object Trigger {
 	onEnter: "854|Disable realtime|2532|Enable realtime|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object EditorSprite {
 	ID: "3319"
 	name: ""
-	position: "133.800003, -14.200000, 0.000000"
+	position: "142.800003, -12.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "21.800001, 18.200001"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object Prefab {
+	ID: "3739"
+	name: ""
+	position: "134.600006, -0.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\door_no_laser.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "4797"
+	name: ""
+	position: "124.200005, -1.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "43.400002, 9.200000"
+	rotation: "0.000000"
+	color: "1.000000, 0.000000, 1.000000, 0.200000"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "5014"
+	name: ""
+	position: "134.600006, -13.800000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "21.800001, 18.200001"
@@ -1483,12 +1535,12 @@ object EditorSprite {
 	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
-	ID: "3321"
+	ID: "5018"
 	name: ""
-	position: "139.400009, 2.600000, 0.000000"
+	position: "143.600006, -0.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "9.000000, 6.600000"
+	size: "9.800000, 6.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -1496,14 +1548,4 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
-}
-object Prefab {
-	ID: "3739"
-	name: ""
-	position: "136.600006, -2.800000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	path: "prefabs\door.map"
-	ori: "0.000000"
-	scale: "1.000000, 1.000000"
 }

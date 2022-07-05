@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 362
+count 364
 
 object MapData {
 	mapName: ""
@@ -599,6 +599,7 @@ object Trigger {
 	onEnter: "684|Set all transforms|1574|Close door|929|Set all transforms|931|Set all transforms|13838|Play sound|13843|Trigger|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object EditorSprite {
 	ID: "919"
@@ -834,6 +835,7 @@ object Trigger {
 	onEnter: "1166|Set zoom|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object CameraController {
 	ID: "1166"
@@ -857,6 +859,7 @@ object Trigger {
 	onEnter: "1170|Set zoom|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object CameraController {
 	ID: "1170"
@@ -891,6 +894,7 @@ object Trigger {
 	onEnter: "1300|Set zoom|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object CameraController {
 	ID: "1300"
@@ -2013,6 +2017,7 @@ object Trigger {
 	onEnter: "18858|Play sound|19788|Trigger|19790|Trigger|19792|Shake|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object LevelEnd {
 	ID: "7547"
@@ -5133,6 +5138,7 @@ object TerminalWriter {
 	key6: "t_boot7"
 	key7: "t_boot8"
 	onFinished: "21142|Trigger|21936|Trigger|"
+	writeRandom: "0"
 }
 object LogicRelay {
 	ID: "4523"
@@ -5148,7 +5154,7 @@ object LogicRelay {
 object EditorSprite {
 	ID: "21140"
 	name: "over"
-	position: "-56.799999, 4.200000, 80.000000"
+	position: "-71.200005, -46.799999, 80.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "70.599998, 45.799999"
@@ -5204,4 +5210,37 @@ object Trigger {
 	onEnter: "4523|Trigger|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
+}
+object EditorSprite {
+	ID: "22227"
+	name: ""
+	position: "2.200000, 6.200000, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.000000, 2.000000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "panel2.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "22229"
+	name: ""
+	position: "88.200005, -20.200001, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.400000, 1.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "panel2.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
 }

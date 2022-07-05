@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 7
+count 9
 
 object MapData {
 	mapName: ""
@@ -35,7 +35,7 @@ object TransformModifier {
 	targetSize: "1.000000, 1.000000"
 	duration: "2.000000"
 	easeType: "0"
-	onFinished: "7|Trigger|"
+	onFinished: "7|Trigger|8|Stop sound|10|Play sound|"
 }
 object TransformModifier {
 	ID: "3"
@@ -50,7 +50,7 @@ object TransformModifier {
 	targetSize: "1.000000, 1.000000"
 	duration: "2.000000"
 	easeType: "0"
-	onFinished: "5|Trigger|"
+	onFinished: "5|Trigger|8|Stop sound|10|Play sound|"
 }
 object PrefabRelay {
 	ID: "4"
@@ -68,7 +68,7 @@ object LogicRelay {
 	position: "4.400000, 0.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	onTrigger: "2|Set position|"
+	onTrigger: "2|Set position|8|Play sound|"
 	onAltTrigger: ""
 	triggerOnStart: "0"
 	delay: "1.000000"
@@ -79,8 +79,38 @@ object LogicRelay {
 	position: "2.800000, 0.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	onTrigger: "3|Set position|"
+	onTrigger: "3|Set position|8|Play sound|"
 	onAltTrigger: ""
 	triggerOnStart: "0"
 	delay: "1.000000"
+}
+object SoundPoint {
+	ID: "8"
+	name: "motor"
+	position: "-0.800000, 1.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "engine.wav"
+	volume: "1.000000"
+	spatial: "1"
+	minDist: "4.000000"
+	maxDist: "30.000000"
+	autoStart: "0"
+	loop: "1"
+	dontPlayIfTooFar: "1"
+}
+object SoundPoint {
+	ID: "10"
+	name: "clac"
+	position: "0.600000, 1.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "clac.wav"
+	volume: "0.400000"
+	spatial: "1"
+	minDist: "4.000000"
+	maxDist: "30.000000"
+	autoStart: "0"
+	loop: "0"
+	dontPlayIfTooFar: "1"
 }

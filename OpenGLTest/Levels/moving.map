@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 187
+count 189
 
 object MapData {
 	mapName: ""
@@ -2383,4 +2383,25 @@ object Prefab {
 	path: "prefabs\fluo.map"
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
+}
+object Trigger {
+	ID: "12022"
+	name: ""
+	position: "203.800003, -26.800001, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "5.400000, 5.400000"
+	onEnter: "12023|End level|"
+	onExit: ""
+	once: "1"
+	needPlayerInteraction: "0"
+}
+object LevelEnd {
+	ID: "12023"
+	name: ""
+	position: "208.800003, -26.600000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	nextLevel: "acid.map"
 }
