@@ -183,7 +183,10 @@ void TransformModifier::SetPosition()
 
 	moveAction = TweenManager<vec2>::Tween(vec2(targetObject->GetLocalEditPos()), obj, duration,
 		[this](vec2 value) { this->targetObject->SetEditPos(vec3(value.x, value.y, this->targetObject->GetLocalEditPos().z)); },
-		easeType)->SetOnFinished([this] { onFinished.Call(this); });
+	easeType)->SetOnFinished([this] { 
+		onFinished.Call(this); 
+		this->moveAction = nullptr; // TEEEEST
+	});
 }
 
 void TransformModifier::SetRotation()
@@ -195,7 +198,10 @@ void TransformModifier::SetRotation()
 
 	roateAction = TweenManager<float>::Tween(targetObject->GetLocalEditRotation(), obj, duration,
 		[this](float value) { this->targetObject->SetEditRotation(value); },
-		easeType)->SetOnFinished([this] { onFinished.Call(this); });
+	easeType)->SetOnFinished([this] { 
+		onFinished.Call(this);
+		this->roateAction = nullptr; // TEEEEST
+	});
 }
 
 void TransformModifier::SetScale()
@@ -207,7 +213,10 @@ void TransformModifier::SetScale()
 
 	scaleAction = TweenManager<vec2>::Tween(targetObject->GetLocalEditScale(), obj, duration,
 		[this](vec2 value) { this->targetObject->SetEditScale(value); },
-		easeType)->SetOnFinished([this] { onFinished.Call(this); });
+	easeType)->SetOnFinished([this] { 
+		onFinished.Call(this);
+		this->scaleAction = nullptr; // TEEEEST
+	});
 }
 
 void TransformModifier::SetAllTransforms()
@@ -219,20 +228,20 @@ void TransformModifier::SetAllTransforms()
 
 void TransformModifier::CancelAll()
 {
-	if (moveAction != nullptr && !moveAction->IsFinshedAt(Utility::time))
+	if (moveAction != nullptr)
 	{
 		TweenManager<vec2>::Cancel(moveAction);
 		moveAction = nullptr;
 	}
-	if (roateAction != nullptr && !roateAction->IsFinshedAt(Utility::time))
+	if (roateAction != nullptr)
 	{
 		TweenManager<float>::Cancel(roateAction);
-		moveAction = nullptr;
+		roateAction = nullptr;
 	}
-	if (scaleAction != nullptr && !scaleAction->IsFinshedAt(Utility::time))
+	if (scaleAction != nullptr)
 	{
 		TweenManager<vec2>::Cancel(scaleAction);
-		moveAction = nullptr;
+		scaleAction = nullptr;
 	}
 }
 

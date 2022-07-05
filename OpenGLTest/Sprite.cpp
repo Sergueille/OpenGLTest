@@ -159,6 +159,8 @@ void Sprite::DrawNow()
     realShader->SetUniform("UVstart", UVStart);
     realShader->SetUniform("UVend", UVEnd);
 
+    realShader->SetUniform("time", Utility::time);
+
     if (setUniforms != nullptr && setUniformsObjectCall != nullptr)
     {
         setUniforms(realShader, setUniformsObjectCall);

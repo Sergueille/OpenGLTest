@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 354
+count 356
 
 object MapData {
 	mapName: ""
@@ -5130,4 +5130,30 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object Trigger {
+	ID: "17800"
+	name: ""
+	position: "54.000000, -16.600000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "11.200000, 5.200000"
+	onEnter: "17801|Write|"
+	onExit: ""
+	once: "1"
+	needPlayerInteraction: "0"
+}
+object TerminalWriter {
+	ID: "17801"
+	name: ""
+	position: "54.000000, -19.800001, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	count: "3"
+	key0: "t_acid1"
+	key1: "t_acid2"
+	key2: "t_acid3"
+	onFinished: "17801|Clear terminal|"
+	writeRandom: "0"
 }

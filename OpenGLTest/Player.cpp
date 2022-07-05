@@ -45,7 +45,8 @@ Player::Player(vec3 position) : PhysicObject(new CircleCollider(vec2(position), 
 	teleportPosSprite = new Sprite(RessourceManager::GetTexture("robot.png"),
 		position + vec3(teleportationDistance, 0, 0),
 		glm::vec2(height), 0,
-		canTeleportColor);
+		canTeleportColor,
+		&RessourceManager::shaders["teleport"]);
 	teleportPosSprite->DrawOnMainLoop();
 
 	lightsSprite = new Sprite(RessourceManager::GetTexture("robot_lights.png"),

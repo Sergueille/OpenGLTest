@@ -89,5 +89,6 @@ void RessourceManager::LoadBaseShaders()
     RessourceManager::LoadShader("Shaders\\LightmapperVtex.glsl", "Shaders\\LightmapperFrag.glsl", "lightmapper");
     RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\AcidFrag.glsl", "acid");
     RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\RadioFrag.glsl", "radioactivity");
+    RessourceManager::LoadShader("Shaders\\SpriteVertexShader.glsl", "Shaders\\TeleportFrag.glsl", "teleport");
 }
 

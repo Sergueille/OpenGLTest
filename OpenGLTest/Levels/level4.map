@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 327
+count 335
 
 object MapData {
 	mapName: ""
@@ -3730,7 +3730,7 @@ object SoundArea {
 	parent: "-1"
 	parallax: "1.000000"
 	editorSize: "21.200001, 4.600000"
-	soundName: "water.wav"
+	soundName: "neon1.wav"
 	volume: "1.000000"
 	isMusic: "0"
 	fadeIn: "1.000000"
@@ -4579,5 +4579,113 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.500000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object SoundArea {
+	ID: "24496"
+	name: ""
+	position: "31.800001, 29.200001, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "5.800000, 39.600002"
+	soundName: "soundscape_wind1.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
+}
+object Trigger {
+	ID: "24498"
+	name: ""
+	position: "-5.800000, 2.600000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "8.000000, 6.400000"
+	onEnter: "24499|Write|"
+	onExit: ""
+	once: "1"
+	needPlayerInteraction: "0"
+}
+object TerminalWriter {
+	ID: "24499"
+	name: ""
+	position: "-3.800000, -0.400000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	count: "3"
+	key0: "t_lvl4_1"
+	key1: "t_lvl4_2"
+	key2: "t_lvl4_3"
+	onFinished: "26329|Trigger|"
+	writeRandom: "0"
+}
+object LogicRelay {
+	ID: "26329"
+	name: ""
+	position: "-3.800000, -1.600000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "24499|Clear terminal|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "5.000000"
+}
+object EditorSprite {
+	ID: "26941"
+	name: ""
+	position: "74.015327, -37.798645, 30.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.400000, 1.800000"
+	rotation: "14.300000"
+	color: "0.000000, 1.000000, 0.000000, 0.200000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "1"
+}
+object EditorSprite {
+	ID: "26943"
+	name: ""
+	position: "73.479729, -37.826572, 30.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.400000, 1.800000"
+	rotation: "-15.599998"
+	color: "0.000000, 1.000000, 0.000000, 0.200000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "1"
+}
+object SoundArea {
+	ID: "27557"
+	name: ""
+	position: "31.600000, 7.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "26.600000, 4.600000"
+	soundName: "neon1.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
+}
+object EditorSprite {
+	ID: "27559"
+	name: ""
+	position: "214.000000, -59.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "20.600000, 31.200001"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
 	visibleOnlyInEditor: "0"
 }
