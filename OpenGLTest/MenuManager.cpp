@@ -161,7 +161,7 @@ void MenuManager::OnMainLoop()
 		if (pressed)
 		{
 			EditorSaveManager::currentUserSave = fileName + ".sav";
-			EditorSaveManager::LoadLevelWithTransition("intro_walls.map", [] { OpenMenu(Menu::ingame); });
+			EditorSaveManager::LoadLevelWithTransition("tuto.map", [] { OpenMenu(Menu::ingame); });
 		}
 
 		drawPos.y -= margin;

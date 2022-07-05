@@ -7869,14 +7869,14 @@ object TerminalWriter {
 object Trigger {
 	ID: "27351"
 	name: ""
-	position: "18.200001, -16.400000, -9.000000"
+	position: "19.200001, -16.400000, -9.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
-	scale: "4.400000, 4.400000"
+	scale: "23.000000, 4.400000"
 	onEnter: "27353|Write|"
 	onExit: ""
-	once: "0"
+	once: "1"
 	needPlayerInteraction: "0"
 }
 object TerminalWriter {

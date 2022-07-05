@@ -20,6 +20,8 @@ public:
 	std::vector<std::string> keys;
 	EventList onFinished;
 
+	bool writeRandom = false; // Write a random line instead of all
+
     Sprite* editorSprite = nullptr;
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;

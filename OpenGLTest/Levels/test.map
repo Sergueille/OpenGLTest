@@ -173,6 +173,7 @@ object Player {
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
+	isOn: "1"
 }
 object Prefab {
 	ID: "560"
@@ -700,6 +701,7 @@ object Trigger {
 	onEnter: "3587|Start simulation|3881|Start|4048|Start|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object EditorParticleSystem {
 	ID: "3881"
@@ -710,6 +712,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "8.000000, 2.800000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "0.000000, 0.000000"
 	endVelocity: "0.000000, 0.000000"
 	startSize: "2.000000, 2.000000"
@@ -748,6 +751,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "0.000000, 0.200000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "3.000000, 0.000000"
 	endVelocity: "0.000000, 0.000000"
 	startSize: "0.300000, 0.300000"

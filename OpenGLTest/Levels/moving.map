@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 183
+count 187
 
 object MapData {
 	mapName: ""
@@ -14,6 +14,7 @@ object Player {
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
+	isOn: "1"
 }
 object EditorSprite {
 	ID: "1"
@@ -48,7 +49,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "22"
 	name: "Moving"
-	position: "9.000000, -1.200000, 5.000000"
+	position: "9.200000, -1.200000, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "6.200000, 0.600000"
@@ -161,20 +162,6 @@ object Prefab {
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
 }
-object Light {
-	ID: "69"
-	name: ""
-	position: "15.600000, 5.400000, 50.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "20.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "1.000000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.500000"
-}
 object ShadowCaster {
 	ID: "72"
 	name: ""
@@ -254,11 +241,12 @@ object Trigger {
 	onEnter: "306|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object TransformModifier {
 	ID: "402"
 	name: "down"
-	position: "13.000000, -1.200000, 0.000000"
+	position: "13.600000, -1.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	targetID: "22"
@@ -273,7 +261,7 @@ object TransformModifier {
 object TransformModifier {
 	ID: "404"
 	name: "up"
-	position: "13.000000, -0.000000, 0.000000"
+	position: "13.600000, 0.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	targetID: "22"
@@ -306,6 +294,7 @@ object Trigger {
 	onEnter: "402|Set position|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object Prefab {
 	ID: "678"
@@ -383,7 +372,7 @@ object EditorSprite {
 	position: "-11.800000, 12.600000, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "14.000000, 6.200000"
+	size: "9.800000, 6.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -854,6 +843,7 @@ object Trigger {
 	onEnter: "306|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object PrefabCloner {
 	ID: "2013"
@@ -987,6 +977,7 @@ object Trigger {
 	onEnter: "306|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Laser {
 	ID: "2547"
@@ -1101,6 +1092,7 @@ object Trigger {
 	onEnter: "306|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object EditorSprite {
 	ID: "3695"
@@ -1414,15 +1406,6 @@ object ShadowCaster {
 	size: "6.200000, 7.000000"
 	orientation: "0.000000"
 }
-object ShadowCaster {
-	ID: "5011"
-	name: ""
-	position: "94.599998, 42.000000, 50.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "6.200000, 7.000000"
-	orientation: "0.000000"
-}
 object EditorSprite {
 	ID: "5015"
 	name: ""
@@ -1509,6 +1492,7 @@ object Trigger {
 	onEnter: "306|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object EditorSprite {
 	ID: "5299"
@@ -1850,6 +1834,7 @@ object Trigger {
 	onEnter: "306|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object ShadowCaster {
 	ID: "5502"
@@ -1970,15 +1955,6 @@ object EditorSprite {
 	visibleOnlyInEditor: "0"
 }
 object ShadowCaster {
-	ID: "7490"
-	name: ""
-	position: "167.000000, 34.799999, 50.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "4.600000, 4.600000"
-	orientation: "0.000000"
-}
-object ShadowCaster {
 	ID: "7492"
 	name: ""
 	position: "174.400009, 33.600002, 50.000000"
@@ -2030,6 +2006,7 @@ object Trigger {
 	onEnter: "306|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Light {
 	ID: "7812"
@@ -2316,4 +2293,94 @@ object ShadowCaster {
 	parallax: "1.000000"
 	size: "5.600000, 2.200000"
 	orientation: "0.000000"
+}
+object EditorSprite {
+	ID: "11001"
+	name: ""
+	position: "76.000000, -5.800000, 5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "30.600000, 35.200001"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "11003"
+	name: ""
+	position: "127.000000, 42.400002, 5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "30.600000, 35.200001"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "11005"
+	name: ""
+	position: "121.000000, -14.400001, 5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "17.000000, 21.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "11007"
+	name: ""
+	position: "-12.400001, 36.600002, 5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "22.400000, 29.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object Prefab {
+	ID: "11009"
+	name: ""
+	position: "8.400001, 4.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "11013"
+	name: ""
+	position: "19.000000, 4.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "11287"
+	name: ""
+	position: "14.600000, -6.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
 }

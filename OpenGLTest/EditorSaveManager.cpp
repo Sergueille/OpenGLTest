@@ -191,6 +191,9 @@ void EditorSaveManager::LoadLevel(std::string path, bool inEditor)
 		}
 
 		LightManager::ForceRefreshLightmaps();
+
+		if (!inEditor)
+			Camera::SetSize(Camera::defaultSize);
 	}
 	catch (std::exception e) // Catch exceptions to make sure the file is closed
 	{

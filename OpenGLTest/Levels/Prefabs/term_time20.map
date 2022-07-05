@@ -1,0 +1,70 @@
+// Editor map file, version 1
+
+count 6
+
+object MapData {
+	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
+}
+object PrefabRelay {
+	ID: "0"
+	name: ""
+	position: "-0.000000, 1.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	eventListsCount: "2"
+	eventList0: "4|Trigger|2|Set to alternative events|"
+	eventList0name: "Start timer"
+	eventList1: "2|Set to normal events|"
+	eventList1name: "Disable timer"
+}
+object TerminalWriter {
+	ID: "1"
+	name: ""
+	position: "1.000000, -0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	count: "6"
+	key0: "t_time1"
+	key1: "t_time2"
+	key2: "t_time3"
+	key3: "t_time4"
+	key4: "t_time_long1"
+	key5: "t_time_long2"
+	onFinished: ""
+	writeRandom: "1"
+}
+object LogicRelay {
+	ID: "2"
+	name: "switch"
+	position: "0.000000, 0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: ""
+	onAltTrigger: "1|Write|6|Trigger|"
+	triggerOnStart: "0"
+	delay: "0.000000"
+}
+object LogicRelay {
+	ID: "4"
+	name: "timer"
+	position: "-1.000000, -0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "2|Trigger|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "20.000000"
+}
+object LogicRelay {
+	ID: "6"
+	name: "clear term"
+	position: "-0.000000, -1.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "1|Clear terminal|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "10.000000"
+}

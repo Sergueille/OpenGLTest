@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 418
+count 430
 
 object MapData {
 	mapName: ""
@@ -10,10 +10,11 @@ object MapData {
 object Player {
 	ID: "0"
 	name: ""
-	position: "-40.400002, 3.600000, 20.000000"
+	position: "-38.400002, 3.200000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
+	isOn: "1"
 }
 object EditorSprite {
 	ID: "2"
@@ -1319,6 +1320,7 @@ object Trigger {
 	onEnter: "2486|End level|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object LevelEnd {
 	ID: "2486"
@@ -3705,6 +3707,7 @@ object Trigger {
 	onEnter: "6327|Set zoom|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object CameraController {
 	ID: "6327"
@@ -4822,6 +4825,7 @@ object Trigger {
 	onEnter: "15541|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Trigger {
 	ID: "15545"
@@ -4834,6 +4838,7 @@ object Trigger {
 	onEnter: "15541|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Trigger {
 	ID: "15547"
@@ -4846,6 +4851,7 @@ object Trigger {
 	onEnter: "15541|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Trigger {
 	ID: "15549"
@@ -4858,6 +4864,7 @@ object Trigger {
 	onEnter: "15541|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object EditorSprite {
 	ID: "15553"
@@ -4938,7 +4945,7 @@ object ShadowCaster {
 object EditorSprite {
 	ID: "15567"
 	name: ""
-	position: "153.600006, 5.000000, -5.000000"
+	position: "153.600006, 4.800000, -5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "4.200000, 4.200000"
@@ -5399,6 +5406,7 @@ object Trigger {
 	onEnter: "15541|Save game|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Prefab {
 	ID: "16447"
@@ -5975,4 +5983,156 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object Trigger {
+	ID: "18140"
+	name: ""
+	position: "1.600000, -0.400000, -7.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "9.200000, 5.400000"
+	onEnter: "18141|Write|"
+	onExit: ""
+	once: "1"
+	needPlayerInteraction: "0"
+}
+object TerminalWriter {
+	ID: "18141"
+	name: ""
+	position: "-3.000000, -4.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	count: "3"
+	key0: "t_laser1"
+	key1: "t_laser2"
+	key2: "t_laser3"
+	onFinished: ""
+	writeRandom: "0"
+}
+object Trigger {
+	ID: "19459"
+	name: ""
+	position: "16.000000, -13.600000, -7.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "9.200000, 5.400000"
+	onEnter: "19461|Write|"
+	onExit: ""
+	once: "1"
+	needPlayerInteraction: "0"
+}
+object TerminalWriter {
+	ID: "19461"
+	name: ""
+	position: "16.600000, -17.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	count: "2"
+	key0: "t_laser4"
+	key1: "t_laser5"
+	onFinished: ""
+	writeRandom: "0"
+}
+object Trigger {
+	ID: "20123"
+	name: ""
+	position: "39.600002, -8.400001, -7.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "6.800000, 3.000000"
+	onEnter: "19461|Clear terminal|"
+	onExit: ""
+	once: "1"
+	needPlayerInteraction: "0"
+}
+object Prefab {
+	ID: "20363"
+	name: ""
+	position: "92.599998, 26.200001, 10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\term_time20.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Trigger {
+	ID: "20370"
+	name: ""
+	position: "100.000000, 4.600000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "10.200000, 4.400000"
+	onEnter: "20363|Start timer|"
+	onExit: ""
+	once: "1"
+	needPlayerInteraction: "0"
+}
+object Trigger {
+	ID: "20372"
+	name: ""
+	position: "110.599998, 10.600000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "10.200000, 4.400000"
+	onEnter: "20363|Disable timer|"
+	onExit: ""
+	once: "0"
+	needPlayerInteraction: "0"
+}
+object Trigger {
+	ID: "21043"
+	name: ""
+	position: "124.800003, 4.800000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "18.600000, 4.400000"
+	onEnter: "20363|Start timer|"
+	onExit: ""
+	once: "1"
+	needPlayerInteraction: "0"
+}
+object Trigger {
+	ID: "21045"
+	name: ""
+	position: "140.400009, 10.200000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "10.200000, 4.400000"
+	onEnter: "20363|Disable timer|"
+	onExit: ""
+	once: "0"
+	needPlayerInteraction: "0"
+}
+object Trigger {
+	ID: "21047"
+	name: ""
+	position: "156.800003, 4.800000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "25.400000, 4.400000"
+	onEnter: "20363|Start timer|"
+	onExit: ""
+	once: "1"
+	needPlayerInteraction: "0"
+}
+object Trigger {
+	ID: "21049"
+	name: ""
+	position: "174.400009, 10.400001, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "10.200000, 4.400000"
+	onEnter: "20363|Disable timer|"
+	onExit: ""
+	once: "0"
+	needPlayerInteraction: "0"
 }

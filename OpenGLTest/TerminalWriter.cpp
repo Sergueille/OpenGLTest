@@ -48,6 +48,7 @@ vec2 TerminalWriter::DrawProperties(vec3 drawPos)
 	bool pressed;
 
 	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
+	drawPos.y -= Editor::CheckBox(drawPos, "Random line", &writeRandom, Editor::panelPropertiesX).y;
 	drawPos.y -= Editor::margin;
 
 	for (int i = 0; i < keys.size(); i++)
@@ -106,6 +107,8 @@ void TerminalWriter::Load(std::map<std::string, std::string>* props)
 	}
 
 	EventList::Load(&onFinished, (*props)["onFinished"]);
+
+	writeRandom = (*props)["writeRandom"] == "1";
 }
 
 void TerminalWriter::Save()
@@ -120,6 +123,8 @@ void TerminalWriter::Save()
 	}
 
 	EditorSaveManager::WriteProp("onFinished", onFinished.GetString());	
+
+	EditorSaveManager::WriteProp("writeRandom", writeRandom);
 }
 
 void TerminalWriter::Enable()
@@ -159,18 +164,26 @@ void TerminalWriter::OnMainLoop()
 		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
 	}
 
-	if (shouldWrite && Utility::time > nextWriteTime)
+	if (shouldWrite)
 	{
-		if (writePos >= keys.size())
+		if (!writeRandom && Utility::time > nextWriteTime)
+		{
+			if (writePos >= keys.size())
+			{
+				shouldWrite = false;
+				onFinished.Call(this);
+			}
+			else
+			{
+				TerminalManager::Write(keys[writePos]);
+				nextWriteTime = Utility::time + ((float)LocalizationManager::GetLocale(keys[writePos]).length() / (float)charPerSec) + timeBetweenLines;
+				writePos++;
+			}
+		}
+		else if (writeRandom)
 		{
 			shouldWrite = false;
-			onFinished.Call(this);
-		}
-		else
-		{
-			TerminalManager::Write(keys[writePos]);
-			nextWriteTime = Utility::time + ((float)LocalizationManager::GetLocale(keys[writePos]).length() / (float)charPerSec) + timeBetweenLines;
-			writePos++;
+			TerminalManager::Write(keys[rand() % keys.size()]);
 		}
 	}
 }

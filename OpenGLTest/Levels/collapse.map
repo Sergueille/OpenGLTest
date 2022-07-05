@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 469
+count 470
 
 object MapData {
 	mapName: ""
@@ -431,6 +431,7 @@ object Trigger {
 	onEnter: "3587|Start simulation|3881|Start|4048|Start|11350|Disable|11352|Disable|11354|Disable|24644|Shake|25077|Play sound|25079|Play sound|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object EditorParticleSystem {
 	ID: "3881"
@@ -441,6 +442,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "8.000000, 2.800000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "0.000000, 0.000000"
 	endVelocity: "0.000000, 0.000000"
 	startSize: "2.000000, 2.000000"
@@ -479,6 +481,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "0.000000, 0.200000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "3.000000, 0.000000"
 	endVelocity: "0.000000, 0.000000"
 	startSize: "0.300000, 0.300000"
@@ -1838,6 +1841,7 @@ object EditorParticleSystem {
 	orientation: "-25.000000"
 	scale: "8.000000, 4.200000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "0.000000, 0.000000"
 	endVelocity: "0.000000, 0.000000"
 	startSize: "2.000000, 2.000000"
@@ -1860,6 +1864,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "8.000000, 1.200000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "0.000000, 0.000000"
 	endVelocity: "0.000000, 0.000000"
 	startSize: "2.000000, 2.000000"
@@ -1884,6 +1889,7 @@ object Trigger {
 	onEnter: "5237|Start simulation|5582|Start|5587|Trigger|10196|Trigger|11736|Disable|11740|Disable|11738|Disable|25031|Shake|25769|Play sound|25767|Play sound|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object LogicRelay {
 	ID: "5587"
@@ -2027,6 +2033,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "0.000000, 0.200000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "0.000000, 3.000000"
 	endVelocity: "0.000000, 0.000000"
 	startSize: "0.300000, 0.300000"
@@ -2169,6 +2176,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "10.800000, 12.600000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "0.000000, 0.000000"
 	endVelocity: "0.000000, 0.000000"
 	startSize: "3.000000, 3.000000"
@@ -3170,6 +3178,7 @@ object Trigger {
 	onEnter: "13812|Start simulation|15174|Set zoom|17552|Trigger|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object EditorSprite {
 	ID: "14911"
@@ -3281,6 +3290,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "14.000000, 5.400000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "0.000000, 0.000000"
 	endVelocity: "0.000000, 0.000000"
 	startSize: "3.000000, 3.000000"
@@ -4631,6 +4641,7 @@ object Trigger {
 	onEnter: "28149|Trigger|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object LogicRelay {
 	ID: "28149"
@@ -4713,6 +4724,7 @@ object TerminalWriter {
 	key4: "t_col5"
 	key5: "t_col6"
 	onFinished: "28283|Set to alternative events|"
+	writeRandom: "0"
 }
 object TerminalWriter {
 	ID: "28215"
@@ -4724,6 +4736,7 @@ object TerminalWriter {
 	key0: "t_jump1"
 	key1: "t_jump2"
 	onFinished: "29090|Set to alternative events|"
+	writeRandom: "0"
 }
 object EditorSprite {
 	ID: "28271"
@@ -4798,6 +4811,7 @@ object Trigger {
 	onEnter: "28283|Trigger|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object LogicRelay {
 	ID: "28283"
@@ -4830,6 +4844,7 @@ object TerminalWriter {
 	count: "1"
 	key0: "t_jump3"
 	onFinished: "29096|Set to alternative events|"
+	writeRandom: "0"
 }
 object Trigger {
 	ID: "29094"
@@ -4842,6 +4857,7 @@ object Trigger {
 	onEnter: "29090|Trigger|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object LogicRelay {
 	ID: "29096"
@@ -4865,6 +4881,7 @@ object Trigger {
 	onEnter: "29096|Trigger|"
 	onExit: ""
 	once: "0"
+	needPlayerInteraction: "0"
 }
 object Light {
 	ID: "30249"
@@ -5086,6 +5103,7 @@ object Trigger {
 	onEnter: "30722|Save game|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object Prefab {
 	ID: "30728"
@@ -5108,6 +5126,7 @@ object Trigger {
 	onEnter: "30728|Open door|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object Trigger {
 	ID: "30737"
@@ -5117,9 +5136,10 @@ object Trigger {
 	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "4.600000, 5.000000"
-	onEnter: "30728|Close door|30722|Save game|31220|Write|"
+	onEnter: "30728|Close door|31220|Write|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object EditorSprite {
 	ID: "30739"
@@ -5270,6 +5290,7 @@ object TerminalWriter {
 	key0: "t_expl1"
 	key1: "t_expl2"
 	onFinished: "32593|Open door|"
+	writeRandom: "0"
 }
 object TerminalWriter {
 	ID: "31636"
@@ -5283,6 +5304,7 @@ object TerminalWriter {
 	key2: "t_expl5"
 	key3: "t_expl6"
 	onFinished: "34277|Open door|"
+	writeRandom: "0"
 }
 object EditorSprite {
 	ID: "32056"
@@ -6102,6 +6124,7 @@ object Trigger {
 	onEnter: "31636|Write|32593|Close door|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object EditorSprite {
 	ID: "33168"
@@ -6739,6 +6762,7 @@ object Trigger {
 	onEnter: "34868|End level|"
 	onExit: ""
 	once: "1"
+	needPlayerInteraction: "0"
 }
 object Light {
 	ID: "34863"
@@ -6920,4 +6944,17 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "1"
+}
+object Trigger {
+	ID: "36357"
+	name: ""
+	position: "150.400009, -53.600002, -3.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "8.400001, 1.200000"
+	onEnter: "30722|Save game|"
+	onExit: ""
+	once: "0"
+	needPlayerInteraction: "0"
 }
