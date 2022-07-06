@@ -3948,6 +3948,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "13840"
@@ -3962,6 +3963,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "13842"
@@ -3976,6 +3978,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object LogicRelay {
 	ID: "13843"
@@ -4656,6 +4659,7 @@ object SoundPoint {
 	maxDist: "15.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object EditorSprite {
 	ID: "18713"
@@ -4781,6 +4785,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object LogicRelay {
 	ID: "19788"
@@ -5154,7 +5159,7 @@ object LogicRelay {
 object EditorSprite {
 	ID: "21140"
 	name: "over"
-	position: "-71.200005, -46.799999, 80.000000"
+	position: "-42.400002, 6.600000, 80.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "70.599998, 45.799999"
