@@ -6,21 +6,25 @@
 #include <string>
 #include <soloud.h>
 #include <soloud_wav.h>
+#include <list>
 
 using namespace glm;
 
 class MenuManager
 {
-	// TODO: currently using editor UI functions, but need to implement ingameUI specific ones after
-
 public:
-	enum class Menu { none, main, ingame, paused, load, newGame };
+	enum class Menu { none, main, ingame, paused, load, newGame, options, graphics, audio };
 
 	const static int UIbaseZPos = 1000;
 	const static int margin = 30;
 	const static int smallMargin = 10;
 	const static int screenMargin = 100;
 	const static int titleScale = 40;
+	const static int propsScale = 200;
+
+	const static int sliderWidth = 300;
+	const static int sliderHeight = 15;
+	const static int sliderHandleSize = 30;
 
 	const static int textSize = 25;
 
@@ -42,15 +46,16 @@ public:
 	static std::string blurSound;
 	static float uiSoundsVolume;
 
+	static std::list<Menu> menuPath;
+
 	static void OpenMenu(Menu menu);
+	static void PreviousMenu();
 
 	static Menu GetCurrentMenu();
 
 private:
 	static Menu currentMenu;
 	static bool isSetup;
-
-	static Menu previousMenu;
 
 	static std::string focusedTextInputID;
 	static std::string focusedTextInputValue;
@@ -72,5 +77,6 @@ private:
 	static vec2 TextInput(vec3 drawPos, std::string* value, std::string placeHolderKey, std::string ID);
 	static vec2 Button(vec3 drawPos, std::string key, bool* out, bool enabled = true, bool noLocale = false);
 	static vec2 LocalText(std::string key, glm::vec3 pos, float scale);
+	static vec2 Slider(vec3 drawPos, std::string label, float* value, float min = 0, float max = 1, bool percentage = false);
 };
 

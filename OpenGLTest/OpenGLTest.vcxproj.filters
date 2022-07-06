@@ -255,6 +255,9 @@
     <ClCompile Include="TerminalWriter.cpp">
       <Filter>LevelEditor</Filter>
     </ClCompile>
+    <ClCompile Include="SettingsManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -421,6 +424,9 @@
     </ClInclude>
     <ClInclude Include="TerminalWriter.h">
       <Filter>LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

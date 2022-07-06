@@ -28,6 +28,7 @@ Some code from https://learnopengl.com/
 #include "ParticleSystem.h"
 #include "TerminalManager.h"
 #include "LocalizationManager.h"
+#include "SettingsManager.h"
 
 using namespace std;
 using namespace Utility;
@@ -43,86 +44,8 @@ int main(int argc, void* argv[])
     std::cerr << "The game is running in debug configuration!" << std::endl;
 #endif
 
-    // Read setting file
-    std::map<std::string, std::string> settings = std::map<std::string, std::string>();
-    EditorSaveManager::ReadPropsFile("Settings\\options.set", &settings);
-
-    bool fullscreen = settings["fullscreen"] == "1";
-    int smallWindowWidth = 1820;
-    EditorSaveManager::IntProp(&settings, "screenX", &smallWindowWidth);
-    int smallWindowHeght = 720;
-    EditorSaveManager::IntProp(&settings, "screenY", &smallWindowHeght);
-    bool displayFPS = settings["displayFPS"] == "1";
-
-    bool useMainMonitor = settings["monitor"] == "main";
-    int monitorID = useMainMonitor? 0 : std::stoi(settings["monitor"]);
-
-    const char* windowName = "Teeeest!";
-
-    const int bloomResDivide = 2;
-    //const int bloomResDivide = 4;
-
-    // Init GLFW
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-
-    // Create window
-    if (fullscreen)
-    {
-        GLFWmonitor* monitor = nullptr;
-        if (useMainMonitor)
-            monitor = glfwGetPrimaryMonitor();
-        else
-        {
-            int monitorCount;
-            GLFWmonitor** first = glfwGetMonitors(&monitorCount);
-
-            if (monitorID >= monitorCount)
-            {
-                std::cerr << "Unkown monitor index, displaying on main monitor" << std::endl;
-                monitor = glfwGetPrimaryMonitor();
-            }
-
-            monitor = *(first + monitorID);
-        }
-
-        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-        glfwWindowHint(GLFW_RED_BITS, mode->redBits);
-        glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
-        glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
-        glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
-        Utility::window = glfwCreateWindow(mode->width, mode->height, windowName, monitor, NULL);
-
-        Utility::screenX = mode->width;
-        Utility::screenY = mode->height;
-    }
-    else
-    {
-        Utility::window = glfwCreateWindow(smallWindowWidth, smallWindowHeght, windowName, NULL, NULL);
-
-        Utility::screenX = smallWindowWidth;
-        Utility::screenY = smallWindowHeght;
-    }
-    if (window == NULL) 
-    {
-        cout << "Failed to create GLFW window" << endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
-
-    // Init GLAD (get gl API)
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        cout << "Failed to initialize GLAD" << endl;
-        return -1;
-    }
-
-    // Setup OpenGL viewport
-    glViewport(0, 0, Utility::screenX, Utility::screenY);
+    SettingsManager::ReadSettings();
+    SettingsManager::CreateGLFWWindow();
 
     // Init sound engine
     Utility::soloud = new SoLoud::Soloud();
@@ -134,48 +57,6 @@ int main(int argc, void* argv[])
     // Eable blend
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    // Create frame buffer
-    unsigned int fbo;
-    glGenFramebuffers(1, &fbo);
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo); // Bind fbo
-
-    // Create color texture (actual color; bright color; corruption amount)
-    unsigned int colorTex[3];
-    glGenTextures(3, colorTex);
-    for (unsigned int i = 0; i < 3; i++)
-    {
-        BindTexture2D(colorTex[i]); // Bind colorTex
-
-        if (i == 2) // cheapest data for corruption texture
-            // glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, screenX, screenY, 0, GL_RED, GL_UNSIGNED_BYTE, NULL);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenX, screenY, 0, GL_RED, GL_FLOAT, NULL);
-        else
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenX, screenY, 0, GL_RGB, GL_FLOAT, NULL);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, colorTex[i], 0); // Bind color texture to buffer
-    }
-
-    // Create depth and stencil render buffer
-    unsigned int rbo;
-    glGenRenderbuffers(1, &rbo);
-    glBindRenderbuffer(GL_RENDERBUFFER, rbo); // Bind rbo
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, screenX, screenY);
-    glBindRenderbuffer(GL_RENDERBUFFER, 0); // Unbind rbo
-
-    // Bind render buffer to frame buffer
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
-
-    unsigned int attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 }; // MOVE THIS??
-    glDrawBuffers(3, attachments);
-
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-        std::cerr << "Frame buffer creation failed :(" << std::endl;
-    glBindFramebuffer(GL_FRAMEBUFFER, 0); // Unbind fbo
 
     // Start event manager
     EventManager::SetupEvents();
@@ -194,26 +75,6 @@ int main(int argc, void* argv[])
     // Create overlay sprite
     Sprite* overlaySprite = new Sprite(vec3(0, 0, overlayZ), vec3(screenX, screenY, overlayZ), overlayColor);
 
-    // Create bloom blur buffers
-    unsigned int pingpongFBO[2];
-    unsigned int pingpongBuffer[2];
-    glGenFramebuffers(2, pingpongFBO);
-    glGenTextures(2, pingpongBuffer); 
-    for (unsigned int i = 0; i < 2; i++)
-    {
-        glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[i]);
-        BindTexture2D(pingpongBuffer[i]);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenX / bloomResDivide, screenY / bloomResDivide, 0, GL_RGB, GL_FLOAT, NULL);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glFramebufferTexture2D(
-            GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pingpongBuffer[i], 0
-        );
-    }
-
-    // TEST
     TerminalManager::Init();
 
     // Set bg color
@@ -229,7 +90,7 @@ int main(int argc, void* argv[])
         Utility::time = (float)glfwGetTime();
 
         // Bind frame buffer
-        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+        glBindFramebuffer(GL_FRAMEBUFFER, SettingsManager::FBO);
 
         // Clear color and depth buffer
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -245,7 +106,7 @@ int main(int argc, void* argv[])
         EditorSaveManager::OnMainLoop();
 
         // Display the FPS
-        if (!Editor::enabled && displayFPS)
+        if (!Editor::enabled && SettingsManager::settings["displayFPS"] == "1")
             TextManager::RenderText(std::to_string(GetFPS()) + " FPS",
                 glm::vec3(screenX - Editor::margin, screenY - Editor::margin - Editor::textSize, Editor::UIBaseZPos),
                 Editor::textSize, TextManager::left);
@@ -296,10 +157,10 @@ int main(int argc, void* argv[])
         const float secondOffsetSize = 1;
         for (unsigned int i = 0; i < amount; i++)
         {
-            glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[horizontal]);
+            glBindFramebuffer(GL_FRAMEBUFFER, SettingsManager::pingpongFBO[horizontal]);
             RessourceManager::shaders["screenBlur"].SetUniform("horizontal", horizontal);
             RessourceManager::shaders["screenBlur"].SetUniform("offsetSize", i > 1? firstOffsetSize : secondOffsetSize);
-            BindTexture2D(first_iteration ? colorTex[1] : pingpongBuffer[!horizontal]);
+            BindTexture2D(first_iteration ? SettingsManager::colorTex[1] : SettingsManager::pingpongBuffer[!horizontal]);
             SpriteRenderer::GetMesh()->DrawMesh();
             horizontal = !horizontal;
             first_iteration = false;
@@ -312,9 +173,9 @@ int main(int argc, void* argv[])
         RessourceManager::shaders["screenShader"].SetUniform("time", Utility::time);
         RessourceManager::shaders["screenShader"].SetUniform("corruptionAmount", corruptionAmount);
         RessourceManager::shaders["screenShader"].SetUniform("corruptionTexture", 2);
-        BindTexture2D(colorTex[0], 0);
-        BindTexture2D(pingpongBuffer[0], 1);
-        BindTexture2D(colorTex[2], 2);
+        BindTexture2D(SettingsManager::colorTex[0], 0);
+        BindTexture2D(SettingsManager::pingpongBuffer[0], 1);
+        BindTexture2D(SettingsManager::colorTex[2], 2);
 
         // Set original viewport
         glViewport(0, 0, Utility::screenX, Utility::screenY);

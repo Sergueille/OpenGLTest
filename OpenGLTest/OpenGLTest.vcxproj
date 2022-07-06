@@ -79,7 +79,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>D:\alexis\Logiciels\GLFW\include;D:\alexis\Logiciels\GLAD\include;D:\alexis\Logiciels\glm;D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\include;D:\alexis\Logiciels\Soloud\soloud20200207\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\alexis\Logiciels\GLFW\lib-vc2022;D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\release dll\win64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\alexis\Logiciels\GLFW\lib-vc2022;D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\release static\vs2015-2022\win64;$(LibraryPath)</LibraryPath>
     <SourcePath>D:\alexis\Logiciels\GLAD\src;D:\alexis\Logiciels\Soloud\soloud20200207\src;D:\alexis\Logiciels\Soloud\soloud20200207\src\core;$(SourcePath)</SourcePath>
     <ExcludePath>$(ExcludePath)</ExcludePath>
     <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
@@ -87,7 +87,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\include;D:\alexis\Logiciels\glm;D:\alexis\Logiciels\GLAD\include;D:\alexis\Logiciels\Soloud\soloud20200207\include;D:\alexis\Logiciels\GLFW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\release dll\win64;D:\alexis\Logiciels\GLFW\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\alexis\Logiciels\GLFW\lib-vc2022;D:\alexis\Logiciels\freetype-windows-binaries-2.11.1\release static\vs2015-2022\win64;$(LibraryPath)</LibraryPath>
     <SourcePath>D:\alexis\Logiciels\Soloud\soloud20200207\src\core;D:\alexis\Logiciels\Soloud\soloud20200207\src;D:\alexis\Logiciels\GLAD\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -213,6 +213,7 @@
     <ClCompile Include="Radioactivity.cpp" />
     <ClCompile Include="RectCollider.cpp" />
     <ClCompile Include="RessourceManager.cpp" />
+    <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="ShadowCaster.cpp" />
     <ClCompile Include="SoundArea.cpp" />
@@ -267,6 +268,7 @@
     <ClInclude Include="Radioactivity.h" />
     <ClInclude Include="RectCollider.h" />
     <ClInclude Include="RessourceManager.h" />
+    <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="ShadowCaster.h" />
     <ClInclude Include="SoundArea.h" />

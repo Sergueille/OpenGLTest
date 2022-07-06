@@ -60,7 +60,7 @@ namespace TextManager {
         // Set font resolution
         FT_Set_Pixel_Sizes(face, 0, 64);
 
-        std::u8string chars = u8"é \nazertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890,;:!?./§^<>$*&\"'(-_)=#{[|`\\^@]}+";
+        std::u8string chars = u8"é \nazertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890,;:!?./§^<>$*&\"'(-_)=#{[|`\\^@]}+%";
 
         // Load chars
         for (int i = 0; i < chars.length(); i++)

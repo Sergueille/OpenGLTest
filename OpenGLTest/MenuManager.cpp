@@ -9,11 +9,10 @@
 #include "LogicRelay.h"
 #include "LocalizationManager.h"
 #include <soloud.h>
+#include "SettingsManager.h"
 
 MenuManager::Menu MenuManager::currentMenu = Menu::none;
 bool MenuManager::isSetup = false;
-
-MenuManager::Menu MenuManager::previousMenu = Menu::none;
 
 std::string MenuManager::focusedTextInputID = "";
 std::string MenuManager::focusedTextInputValue = "";
@@ -37,6 +36,8 @@ std::string MenuManager::clickSound = "click.wav";
 std::string MenuManager::blurSound = "blur.wav";
 float MenuManager::uiSoundsVolume = 0.3f;
 
+std::list<MenuManager::Menu> MenuManager::menuPath = std::list<Menu>();
+
 void MenuManager::Setup()
 {
 	if (isSetup) return;
@@ -54,13 +55,12 @@ void MenuManager::OnMainLoop()
 
 	HandleInputBackspace();
 
+	bool pressed;
 	hoverThisFrame = false;
 
 	if (currentMenu == Menu::main)
 	{
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
-		bool pressed;
-
 		drawPos.y -= TextManager::RenderText("Title here", drawPos, titleScale, TextManager::right, textColor).y + margin;
 
 		drawPos.y -= Button(drawPos, "new_game", &pressed).y + margin;
@@ -73,6 +73,12 @@ void MenuManager::OnMainLoop()
 		if (pressed)
 		{
 			OpenMenu(Menu::load);
+		}
+		
+		drawPos.y -= Button(drawPos, "options", &pressed).y + margin;
+		if (pressed)
+		{
+			OpenMenu(Menu::options);
 		}
 
 		drawPos.y -= Button(drawPos, "level_editor", &pressed).y + margin;
@@ -92,8 +98,6 @@ void MenuManager::OnMainLoop()
 	else if (currentMenu == Menu::paused)
 	{
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
-		bool pressed;
-
 		Sprite(vec3(0, 0, Editor::UIBaseZPos - 5), vec3(screenX, screenY, Editor::UIBaseZPos - 5), vec4(0, 0, 0, 0.3)).Draw();
 
 		drawPos.y -= LocalText("paused_label", drawPos, titleScale).y + margin;
@@ -127,8 +131,6 @@ void MenuManager::OnMainLoop()
 	else if (currentMenu == Menu::load)
 	{
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
-		bool pressed;
-
 		drawPos.y -= LocalText("load", drawPos, titleScale).y + margin;
 
 		for (auto fileName = EditorSaveManager::userSaves.begin(); fileName != EditorSaveManager::userSaves.end(); fileName++)
@@ -147,8 +149,6 @@ void MenuManager::OnMainLoop()
 	else if (currentMenu == Menu::newGame)
 	{
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
-		bool pressed;
-
 		drawPos.y -= LocalText("new_game", drawPos, titleScale).y + margin;
 		LocalText("new_game_label", drawPos, textSize);
 		drawPos.y -= smallMargin;
@@ -166,6 +166,72 @@ void MenuManager::OnMainLoop()
 
 		drawPos.y -= margin;
 		PreviousMenuButton(drawPos).y;
+	}
+	else if (currentMenu == Menu::options)
+	{
+		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
+		drawPos.y -= LocalText("options", drawPos, titleScale).y + margin;
+
+		drawPos.y -= Button(drawPos, "graphics", &pressed).y + margin;
+		if (pressed)
+		{
+			OpenMenu(Menu::graphics);
+		}
+
+		drawPos.y -= Button(drawPos, "audio", &pressed).y + margin;
+		if (pressed)
+		{
+			OpenMenu(Menu::audio);
+		}
+
+		drawPos.y -= margin;
+		PreviousMenuButton(drawPos).y;
+	}
+	else if (currentMenu == Menu::graphics)
+	{
+		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
+		drawPos.y -= LocalText("graphics", drawPos, titleScale).y + margin;
+
+		bool fullscreen = SettingsManager::settings["fullscreen"] == "1";
+		drawPos.y -= Editor::CheckBox(drawPos, "Fullscreen", &fullscreen, propsScale).y + margin;
+		SettingsManager::settings["fullscreen"] = fullscreen ? "1" : "0";
+
+		if (fullscreen)
+		{
+			bool useMain = SettingsManager::settings["monitor"] == "main";
+			drawPos.y -= Editor::CheckBox(drawPos, "Use main monitor", &useMain, propsScale).y + margin;
+			SettingsManager::settings["monitor"] = useMain ? "main" : "0";
+		}
+		else
+		{
+			drawPos.y -= Editor::DrawProperty(drawPos, "X", &screenX, propsScale, "screenX").y + margin;
+			drawPos.y -= Editor::DrawProperty(drawPos, "Y", &screenY, propsScale, "screenY").y + margin;
+			SettingsManager::settings["screenX"] = std::to_string(screenX);
+			SettingsManager::settings["screenY"] = std::to_string(screenY);
+		}
+
+		drawPos.y -= margin;
+
+		drawPos.x += Button(drawPos, "apply", &pressed).x + margin;
+		if (pressed)
+		{
+			SettingsManager::SaveSettings();
+			SettingsManager::CreateGLFWWindow();
+		}
+
+		PreviousMenuButton(drawPos).x;
+	}
+	else if (currentMenu == Menu::audio)
+	{
+		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
+		drawPos.y -= LocalText("audio", drawPos, titleScale).y + margin;
+
+		float val = SettingsManager::GetFloatSetting("globalVolume");
+		drawPos.y -= Slider(drawPos, "global_volume", &val, 0, 2, true).y + margin;
+		SettingsManager::SetFloatSetting("globalVolume", val);
+		globalVolume = val;
+
+		PreviousMenuButton(drawPos).x;
 	}
 	else if (currentMenu == Menu::none)
 	{
@@ -343,11 +409,22 @@ MenuManager::Menu MenuManager::GetCurrentMenu()
 	return currentMenu;
 }
 
+void MenuManager::PreviousMenu()
+{
+	if (menuPath.size() == 0) return;
+
+	OpenMenu(menuPath.back());
+	menuPath.pop_back();
+	menuPath.pop_back();
+	Utility::PlaySound("back.wav", uiSoundsVolume);
+}
+
 void MenuManager::OpenMenu(Menu menu)
 {
 	if (!isSetup) Setup();
 
-	previousMenu = currentMenu;
+	menuPath.push_back(currentMenu);
+
 	currentMenu = menu;
 
 	if (currentMenu == Menu::load)
@@ -372,9 +449,8 @@ vec2 MenuManager::PreviousMenuButton(vec3 drawPos)
 
 	if (pressed || (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS && !escPressedLastFrame))
 	{
-		OpenMenu(previousMenu);
+		PreviousMenu();
 		escPressedLastFrame = true;
-		Utility::PlaySound("back.wav", uiSoundsVolume);
 	}
 
 	return size;
@@ -422,4 +498,72 @@ void MenuManager::HandleInputBackspace()
 			backspaceNextTime = 0;
 		}
 	}
+}
+
+vec2 MenuManager::Slider(vec3 drawPos, std::string label, float* value, float min, float max, bool percentage)
+{
+	float deltaStartX = propsScale + margin;
+	float deltaEndX = propsScale + margin + sliderWidth;
+	float middleY = (drawPos.y + drawPos.y + textSize) / 2;
+
+	vec2 mousePos = Utility::GetMousePos();
+	mousePos.y *= -1;
+	mousePos.y += Utility::screenY;
+
+	bool hoverX = mousePos.x > drawPos.x + deltaStartX - (sliderHandleSize / 2) 
+		&& mousePos.x < drawPos.x + deltaEndX + (sliderHandleSize / 2);
+	bool hoverY = mousePos.y > drawPos.y 
+		&& mousePos.y < drawPos.y + textSize;
+
+	vec4 color;
+	if (hoverX && hoverY)
+	{
+		color = textHoveredColor;
+
+		if (glfwGetMouseButton(window, 0) == GLFW_PRESS)
+		{
+			float relativePos = (mousePos.x - drawPos.x - deltaStartX) / (deltaEndX - deltaStartX);
+			*value = min + relativePos * (max - min);
+			if (*value < min) *value = min;
+			if (*value > max) *value = max;
+		}
+	}
+	else
+	{
+		color = textColor;
+	}
+
+	float normVal = (*value - min) / (max - min);
+	float handleX = Lerp(drawPos.x + propsScale + margin, drawPos.x + deltaEndX, normVal);
+
+	Sprite(
+		vec3(drawPos.x + propsScale + margin, middleY - sliderHeight / 2, drawPos.y),
+		vec3(drawPos.x + propsScale + margin + sliderWidth, middleY + sliderHeight / 2, drawPos.y),
+		vec4(0.2, 0.2, 0.2, 0.5)
+	).Draw();
+
+	Sprite handle = Sprite(
+		vec3(handleX - sliderHandleSize / 2, middleY - sliderHandleSize / 2, drawPos.z + 1),
+		vec3(handleX + sliderHandleSize / 2, middleY + sliderHandleSize / 2, drawPos.z + 1),
+		color
+	);
+
+	handle.texture = RessourceManager::GetTexture("Engine\\circle.png");
+	handle.Draw();
+
+	std::u8string local = LocalizationManager::GetLocale(label);
+	TextManager::RenderText(local, drawPos, textSize, TextManager::right, color);
+
+	char buffer[20];
+
+	if (percentage)
+		sprintf(buffer, "%d %%", static_cast<int>(*value * 100));
+	else
+		sprintf(buffer, "%.2f", *value);
+
+
+	std::string valueText(buffer);
+	vec2 valueSize = TextManager::RenderText(valueText, drawPos + vec3(deltaEndX + margin, 0, 0), textSize, TextManager::right, color);
+
+	return vec2(deltaEndX + margin + valueSize.x, textSize);
 }

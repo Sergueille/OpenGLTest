@@ -1,11 +1,13 @@
-// User options of the game: appearance, resolution, volume...
-// An error in this file can cause crashes
-// The game must be restarted to apply changes
+//Props file
 
 Props {
-    fullscreen: "1" // "1" for full screen, "0" for window
-    screenX: "1280" //  If not in fullscreen, size of the window
-    screenY: "720"
-    displayFPS: "1" // "1" et display FPS at the top right of the screen
-    monitor: "main" // If fullscreen, index of the monitor (starting from 0), or "main" to use the main monitor
+	displayFPS: "1"
+	fullscreen: "0"
+	monitor: "main"
+	screenX: "1600"
+	screenY: "900"
+	globalVolume: "1"
+	gameSoundsVolume: "1"
+	musicVolume: "1"
+	uiVolume: "1"
 }

@@ -16,7 +16,6 @@ builder.Selection(project, False)\
     .add_dir("Simulations")\
     .add_dir("Localization")\
     .add_dir_abs(base + "\\Docs")\
-    .add_file_abs("D:\\alexis\\Logiciels\\freetype-windows-binaries-2.11.1\\release dll\\win64\\freetype.dll").ignore_path()\
     .copy_to(build)
 
 builder.create_dir(build + "\\Saves")
