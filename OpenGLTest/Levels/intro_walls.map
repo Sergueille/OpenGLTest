@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 543
+count 546
 
 object MapData {
 	mapName: ""
@@ -4021,10 +4021,10 @@ object ShadowCaster {
 object TextRenderer {
 	ID: "10118"
 	name: ""
-	position: "-23.000000, -1.600000, 40.000000"
+	position: "-22.600000, -1.600000, 40.000000"
 	parent: "-1"
 	parallax: "1.100000"
-	content: "teleport"
+	content: "teleport_aim"
 	fontSize: "0.700000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
 }
@@ -7174,6 +7174,7 @@ object SoundPoint {
 	maxDist: "10.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "15198"
@@ -7188,6 +7189,7 @@ object SoundPoint {
 	maxDist: "10.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "15200"
@@ -7202,6 +7204,7 @@ object SoundPoint {
 	maxDist: "10.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "15204"
@@ -7216,6 +7219,7 @@ object SoundPoint {
 	maxDist: "10.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "15208"
@@ -7230,6 +7234,7 @@ object SoundPoint {
 	maxDist: "10.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "15212"
@@ -7244,6 +7249,7 @@ object SoundPoint {
 	maxDist: "10.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "15214"
@@ -7258,6 +7264,7 @@ object SoundPoint {
 	maxDist: "10.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "15422"
@@ -7272,6 +7279,7 @@ object SoundPoint {
 	maxDist: "10.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundArea {
 	ID: "17765"
@@ -7328,6 +7336,7 @@ object SoundPoint {
 	maxDist: "10.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object Light {
 	ID: "21007"
@@ -7414,6 +7423,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object Trigger {
 	ID: "21839"
@@ -7448,6 +7458,7 @@ object TerminalWriter {
 	count: "1"
 	key0: "t_power1"
 	onFinished: "21837|Play sound|22564|Trigger|26386|Trigger|"
+	writeRandom: "0"
 }
 object LogicRelay {
 	ID: "22564"
@@ -7463,7 +7474,7 @@ object LogicRelay {
 object EditorSprite {
 	ID: "22566"
 	name: "over"
-	position: "-14.400001, 5.000000, 45.000000"
+	position: "-14.000000, 7.000000, 45.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "35.799999, 21.400000"
@@ -7488,6 +7499,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object EditorSprite {
 	ID: "23503"
@@ -7825,7 +7837,7 @@ object Trigger {
 	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "3.200000, 3.200000"
-	onEnter: "26173|Write|1496|Give teleportation|27565|Stop|27567|Start|"
+	onEnter: "26173|Write|1496|Give teleportation|27565|Stop|27567|Start|27782|Trigger|"
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "1"
@@ -7844,6 +7856,7 @@ object TerminalWriter {
 	key4: "t_tele5"
 	key5: "t_tele6"
 	onFinished: ""
+	writeRandom: "0"
 }
 object LogicRelay {
 	ID: "26386"
@@ -7865,6 +7878,7 @@ object TerminalWriter {
 	count: "1"
 	key0: "t_power2"
 	onFinished: ""
+	writeRandom: "0"
 }
 object Trigger {
 	ID: "27351"
@@ -7889,6 +7903,7 @@ object TerminalWriter {
 	key0: "t_tele7"
 	key1: "t_tele8"
 	onFinished: "27353|Clear terminal|"
+	writeRandom: "0"
 }
 object EditorParticleSystem {
 	ID: "27565"
@@ -7916,7 +7931,7 @@ object EditorParticleSystem {
 object EditorParticleSystem {
 	ID: "27567"
 	name: ""
-	position: "-13.417573, 2.046577, 0.000000"
+	position: "-13.417573, 2.046577, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
@@ -7935,4 +7950,40 @@ object EditorParticleSystem {
 	particleLifetime: "5.000000"
 	duration: "0.200000"
 	autoStart: "0"
+}
+object EditorSprite {
+	ID: "27780"
+	name: "over text"
+	position: "-20.200001, -2.400000, 45.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "18.400000, 4.000000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object LogicRelay {
+	ID: "27782"
+	name: "over delay"
+	position: "-20.200001, -3.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "27780|Disable|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "6.000000"
+}
+object TextRenderer {
+	ID: "28540"
+	name: ""
+	position: "-23.000000, -2.600000, 40.000000"
+	parent: "-1"
+	parallax: "1.100000"
+	content: "teleport"
+	fontSize: "0.700000"
+	color: "0.500000, 0.500000, 0.500000, 1.000000"
 }

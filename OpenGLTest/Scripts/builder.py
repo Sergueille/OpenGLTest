@@ -140,10 +140,13 @@ class Selection:
         """
         Remove a file from selection (relative or absolute path)
         """
-        for i in range(len(self.files)):
+        i = 0
+        while i < len(self.files):
             file = self.files[i]
             if file.path == path or file.rel_path == path:
                 del self.files[i]
+            else:
+                i += 1
 
         return self
 
@@ -266,6 +269,9 @@ def create_dir(path, ensure_empty=False):
 
     return path
 
+def create_readme(path, content):
+    with open(path, "w") as file:
+        file.write(content)
 
 def get_file_name(path):
     last_slash = path.rindex("\\")

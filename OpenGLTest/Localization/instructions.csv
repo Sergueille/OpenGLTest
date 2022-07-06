@@ -3,6 +3,7 @@
 "interact","Press E to interact","Appuyez sur E pour intéragir"
 "jump","Press W or SPACE to jump","Appuyez sur Z ou ESPACE pour sauter"
 "jump_long","Hold to jump higher","Appuyez plus longtemps pour sauter plus haut"
+"teleport_aim","Use the mouse to aim","Utilisez la souris pour viser"
 "teleport","Left clic to teleport","Clic gauche pour téléporter"
 "jump_before","Jump before teleporting to go higher","Sautez avant de vous téléporter pour aller plus haut"
 "2_max","You can only teleport twice without touching the ground","Vous ne pouvez vous téléporter que deux fois sans toucher le sol"
