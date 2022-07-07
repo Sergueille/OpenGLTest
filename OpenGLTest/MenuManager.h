@@ -20,11 +20,14 @@ public:
 	const static int smallMargin = 10;
 	const static int screenMargin = 100;
 	const static int titleScale = 40;
-	const static int propsScale = 200;
+	const static int propsScale = 300;
 
 	const static int sliderWidth = 300;
 	const static int sliderHeight = 15;
 	const static int sliderHandleSize = 30;
+
+	const static int toggleSize = 30;
+	const static int toggleInnerSize = 20;
 
 	const static int textSize = 25;
 
@@ -77,6 +80,12 @@ private:
 	static vec2 TextInput(vec3 drawPos, std::string* value, std::string placeHolderKey, std::string ID);
 	static vec2 Button(vec3 drawPos, std::string key, bool* out, bool enabled = true, bool noLocale = false);
 	static vec2 LocalText(std::string key, glm::vec3 pos, float scale);
-	static vec2 Slider(vec3 drawPos, std::string label, float* value, float min = 0, float max = 1, bool percentage = false);
+	static vec2 Slider(vec3 drawPos, std::string label, float* value, float min = 0, float max = 1, bool percentage = false, bool useInt = false);
+	static vec2 SettingSlider(vec3 drawPos, std::string label, std::string key, float min = 0, float max = 1, bool percentage = false);
+	static vec2 SettingIntSlider(vec3 drawPos, std::string label, std::string key, int min = 0, int max = 2);
+	static vec2 Toggle(vec3 drawPos, std::string label, bool* value);
+	static vec2 SettingToggle(vec3 drawPos, std::string label, std::string key);
+
+	static bool IsMouseInBox(vec2 start, vec2 end);
 };
 

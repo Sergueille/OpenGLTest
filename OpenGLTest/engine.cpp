@@ -38,6 +38,14 @@ extern "C" {
     _declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 }
 
+// OpenGL error callback
+void GLAPIENTRY MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+{
+    fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+        (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
+        type, severity, message);
+}
+
 int main(int argc, void* argv[])
 {
 #if _DEBUG
@@ -46,6 +54,11 @@ int main(int argc, void* argv[])
 
     SettingsManager::ReadSettings();
     SettingsManager::CreateGLFWWindow();
+    SettingsManager::ApplySettings();
+
+    // Set error callback
+    glEnable(GL_DEBUG_OUTPUT);
+    glDebugMessageCallback(MessageCallback, 0);
 
     // Init sound engine
     Utility::soloud = new SoLoud::Soloud();

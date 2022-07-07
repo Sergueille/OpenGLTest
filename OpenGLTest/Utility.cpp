@@ -340,8 +340,7 @@ namespace Utility
 	SoLoud::handle PlaySound(std::string path, float volume)
 	{
 		SoLoud::Wav* sound = RessourceManager::GetSound(path);
-		SoLoud::handle handle = soloud->play(*sound);
-		soloud->setVolume(handle, volume);
+		SoLoud::handle handle = soloud->play(*sound, volume);
 		return handle;
 	}
 

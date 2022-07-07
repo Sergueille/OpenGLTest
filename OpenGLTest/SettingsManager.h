@@ -20,8 +20,11 @@ public:
 	static void ReadSettings();
 	static void CreateGLFWWindow();
 	static void SaveSettings();
+	static void ApplySettings();
 
 	static float GetFloatSetting(std::string key);
+	static int GetIntSetting(std::string key);
 	static void SetFloatSetting(std::string key, float val);
+	static void SetIntSetting(std::string key, int val);
 };
 

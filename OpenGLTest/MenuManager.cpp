@@ -192,22 +192,36 @@ void MenuManager::OnMainLoop()
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
 		drawPos.y -= LocalText("graphics", drawPos, titleScale).y + margin;
 
-		bool fullscreen = SettingsManager::settings["fullscreen"] == "1";
-		drawPos.y -= Editor::CheckBox(drawPos, "Fullscreen", &fullscreen, propsScale).y + margin;
-		SettingsManager::settings["fullscreen"] = fullscreen ? "1" : "0";
+		drawPos.y -= SettingToggle(drawPos, "fullscreen", "fullscreen").y + margin;
 
-		if (fullscreen)
+		if (SettingsManager::settings["fullscreen"] == "1")
 		{
-			bool useMain = SettingsManager::settings["monitor"] == "main";
-			drawPos.y -= Editor::CheckBox(drawPos, "Use main monitor", &useMain, propsScale).y + margin;
-			SettingsManager::settings["monitor"] = useMain ? "main" : "0";
+			int count;
+			glfwGetMonitors(&count);
+
+			if (count > 1)
+			{
+				bool useMain = SettingsManager::settings["monitor"] == "main";
+				drawPos.y -= Toggle(drawPos, "use_main", &useMain).y + margin;
+
+				if (useMain)
+				{
+					SettingsManager::settings["monitor"] = "main";
+				}
+				else
+				{
+					if (SettingsManager::settings["monitor"] == "main") SettingsManager::settings["monitor"] = "0";
+					drawPos.y -= SettingIntSlider(drawPos, "monitor_id", "monitor", 0, count - 1).y + margin;
+				}
+			}
+			else
+			{
+				SettingsManager::settings["monitor"] = "main";
+			}
 		}
 		else
 		{
-			drawPos.y -= Editor::DrawProperty(drawPos, "X", &screenX, propsScale, "screenX").y + margin;
-			drawPos.y -= Editor::DrawProperty(drawPos, "Y", &screenY, propsScale, "screenY").y + margin;
-			SettingsManager::settings["screenX"] = std::to_string(screenX);
-			SettingsManager::settings["screenY"] = std::to_string(screenY);
+
 		}
 
 		drawPos.y -= margin;
@@ -226,11 +240,14 @@ void MenuManager::OnMainLoop()
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
 		drawPos.y -= LocalText("audio", drawPos, titleScale).y + margin;
 
-		float val = SettingsManager::GetFloatSetting("globalVolume");
-		drawPos.y -= Slider(drawPos, "global_volume", &val, 0, 2, true).y + margin;
-		SettingsManager::SetFloatSetting("globalVolume", val);
-		globalVolume = val;
+		drawPos.y -= SettingSlider(drawPos, "global_volume", "globalVolume", 0, 2, true).y + margin;
+		drawPos.y -= SettingSlider(drawPos, "sounds_volume", "gameSoundsVolume", 0, 2, true).y + margin;
+		drawPos.y -= SettingSlider(drawPos, "music_volume", "musicVolume", 0, 2, true).y + margin;
+		drawPos.y -= SettingSlider(drawPos, "ui_volume", "uiVolume", 0, 2, true).y + margin;
 
+		SettingsManager::ApplySettings();
+
+		drawPos.y -= margin;
 		PreviousMenuButton(drawPos).x;
 	}
 	else if (currentMenu == Menu::none)
@@ -364,7 +381,7 @@ vec2 MenuManager::Button(vec3 drawPos, std::string key, bool* out, bool enabled,
 
 		*out = false;
 
-		if (hoverX && hoverY)
+		if (IsMouseInBox(drawPos, drawPos + vec3(textRect.x, textRect.y, 0)))
 		{
 			if (glfwGetMouseButton(Utility::window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 			{
@@ -500,23 +517,18 @@ void MenuManager::HandleInputBackspace()
 	}
 }
 
-vec2 MenuManager::Slider(vec3 drawPos, std::string label, float* value, float min, float max, bool percentage)
+vec2 MenuManager::Slider(vec3 drawPos, std::string label, float* value, float min, float max, bool percentage, bool useInt)
 {
-	float deltaStartX = propsScale + margin;
-	float deltaEndX = propsScale + margin + sliderWidth;
-	float middleY = (drawPos.y + drawPos.y + textSize) / 2;
+	int deltaStartX = propsScale + margin;
+	int deltaEndX = propsScale + margin + sliderWidth;
+	int middleY = ((int)drawPos.y + (int)drawPos.y + textSize) / 2;
 
 	vec2 mousePos = Utility::GetMousePos();
 	mousePos.y *= -1;
 	mousePos.y += Utility::screenY;
 
-	bool hoverX = mousePos.x > drawPos.x + deltaStartX - (sliderHandleSize / 2) 
-		&& mousePos.x < drawPos.x + deltaEndX + (sliderHandleSize / 2);
-	bool hoverY = mousePos.y > drawPos.y 
-		&& mousePos.y < drawPos.y + textSize;
-
 	vec4 color;
-	if (hoverX && hoverY)
+	if (IsMouseInBox(drawPos + vec3(deltaStartX, 0, 0), drawPos + vec3(deltaEndX, textSize, 0)))
 	{
 		color = textHoveredColor;
 
@@ -526,7 +538,11 @@ vec2 MenuManager::Slider(vec3 drawPos, std::string label, float* value, float mi
 			*value = min + relativePos * (max - min);
 			if (*value < min) *value = min;
 			if (*value > max) *value = max;
+
+			if (useInt) *value = std::round(*value);
 		}
+
+		hoverThisFrame = true;
 	}
 	else
 	{
@@ -559,11 +575,123 @@ vec2 MenuManager::Slider(vec3 drawPos, std::string label, float* value, float mi
 	if (percentage)
 		sprintf(buffer, "%d %%", static_cast<int>(*value * 100));
 	else
-		sprintf(buffer, "%.2f", *value);
+	{
+		if (useInt)
+			sprintf(buffer, "%d", static_cast<int>(*value));
+		else
+			sprintf(buffer, "%.2f", *value);
+	}
 
 
 	std::string valueText(buffer);
 	vec2 valueSize = TextManager::RenderText(valueText, drawPos + vec3(deltaEndX + margin, 0, 0), textSize, TextManager::right, color);
 
 	return vec2(deltaEndX + margin + valueSize.x, textSize);
+}
+
+vec2 MenuManager::SettingSlider(vec3 drawPos, std::string label, std::string key, float min, float max, bool percentage)
+{
+	float val = SettingsManager::GetFloatSetting(key);
+	vec2 size = Slider(drawPos, label, &val, min, max, percentage);
+	SettingsManager::SetFloatSetting(key, val);
+	return size;
+}
+
+vec2 MenuManager::SettingIntSlider(vec3 drawPos, std::string label, std::string key, int min, int max)
+{
+	int val = SettingsManager::GetIntSetting(key);
+	float fval = static_cast<float>(val);
+	vec2 size = Slider(drawPos, label, &fval, static_cast<float>(min), static_cast<float>(max), false, true);
+	val = static_cast<int>(fval);
+	SettingsManager::SetIntSetting(key, val);
+	return size;
+}
+
+vec2 MenuManager::Toggle(vec3 drawPos, std::string label, bool* value)
+{
+	int middleY = ((int)drawPos.y + (int)drawPos.y + textSize) / 2;
+	vec3 start = vec3(drawPos.x + propsScale, middleY - (toggleSize / 2), drawPos.z);
+	vec3 end = vec3(drawPos.x + propsScale + toggleSize, middleY + (toggleSize / 2), drawPos.z);
+	int middleX = ((int)drawPos.x + propsScale + (int)drawPos.x + propsScale + toggleSize) / 2;
+
+	bool hover = IsMouseInBox(start, end);
+
+	vec4 color;
+	if (hover)
+	{
+		color = textHoveredColor;
+
+		if (glfwGetMouseButton(window, 0) == GLFW_PRESS)
+		{
+			clickLastFrame = true;
+		}
+		else
+		{
+			if (clickLastFrame)
+			{
+				*value = !(*value);
+			}
+
+			clickLastFrame = false;
+		}
+
+		hoverThisFrame = true;
+	}
+	else
+	{
+		color = textColor;
+	}
+
+	Sprite(
+		start,
+		end,
+		vec4(0.2, 0.2, 0.2, 0.5)
+	).Draw();
+
+	if (*value || hover)
+	{
+		if (!(*value)) color = vec4(1, 1, 1, 0.2);
+
+		Sprite(
+			vec3(middleX - (toggleInnerSize / 2), middleY - (toggleInnerSize / 2), drawPos.z + 1),
+			vec3(middleX + (toggleInnerSize / 2), middleY + (toggleInnerSize / 2), drawPos.z + 1),
+			color
+		).Draw();		
+	}
+
+	std::u8string local = LocalizationManager::GetLocale(label);
+	TextManager::RenderText(local, drawPos, textSize, TextManager::right, color);
+
+	return vec2(propsScale + toggleSize, textSize);
+}
+
+vec2 MenuManager::SettingToggle(vec3 drawPos, std::string label, std::string key)
+{
+	bool val = SettingsManager::settings[key] == "1";
+	vec2 size = Toggle(drawPos, label, &val);
+	SettingsManager::settings[key] = val ? "1" : "0";
+	return size;
+}
+
+bool MenuManager::IsMouseInBox(vec2 start, vec2 end)
+{
+	vec2 mousePos = Utility::GetMousePos();
+	mousePos.y *= -1;
+	mousePos.y += Utility::screenY;
+
+	if (start.x > end.x)
+	{
+		float tmp = end.x;
+		end.x = start.x;
+		start.x = tmp;
+	}
+
+	if (start.y > end.y)
+	{
+		float tmp = end.y;
+		end.y = start.y;
+		start.y = tmp;
+	}
+
+	return mousePos.x > start.x && mousePos.x < end.x&& mousePos.y > start.y && mousePos.y < end.y;
 }

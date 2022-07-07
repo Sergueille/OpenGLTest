@@ -1,6 +1,7 @@
 #include "SettingsManager.h"
 
 #include "EditorSaveManager.h"
+#include "MenuManager.h"
 
 std::map<std::string, std::string> SettingsManager::settings = std::map<std::string, std::string>();
 
@@ -28,8 +29,6 @@ void SettingsManager::CreateGLFWWindow()
         glfwDestroyWindow(window);
     }
 
-    windowCreated = true;
-
     bool fullscreen = SettingsManager::settings["fullscreen"] == "1";
     int smallWindowWidth = 1820;
     EditorSaveManager::IntProp(&SettingsManager::settings, "screenX", &smallWindowWidth);
@@ -44,8 +43,8 @@ void SettingsManager::CreateGLFWWindow()
 
     // Init GLFW
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
@@ -95,11 +94,12 @@ void SettingsManager::CreateGLFWWindow()
     glfwMakeContextCurrent(window);
 
     // Init GLAD (get gl API)
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return;
-    }
+    if (!windowCreated)
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        {
+            std::cout << "Failed to initialize GLAD" << std::endl;
+            return;
+        }
 
     // Setup OpenGL viewport
     glViewport(0, 0, Utility::screenX, Utility::screenY);
@@ -160,6 +160,8 @@ void SettingsManager::CreateGLFWWindow()
             GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pingpongBuffer[i], 0
         );
     }
+
+    windowCreated = true;
 }
 
 void SettingsManager::SaveSettings()
@@ -172,12 +174,30 @@ void SettingsManager::SaveSettings()
     });
 }
 
+void SettingsManager::ApplySettings()
+{
+    Utility::globalVolume = stof(settings["globalVolume"]);
+    Utility::musicVolume = stof(settings["musicVolume"]);
+    Utility::gameSoundsVolume = stof(settings["gameSoundsVolume"]);
+    MenuManager::uiSoundsVolume = stof(settings["uiVolume"]);
+}
+
 float SettingsManager::GetFloatSetting(std::string key)
 {
     return stof(settings[key]);
 }
 
+int SettingsManager::GetIntSetting(std::string key)
+{
+    return stoi(settings[key]);
+}
+
 void SettingsManager::SetFloatSetting(std::string key, float val)
+{
+    settings[key] = std::to_string(val);
+}
+
+void SettingsManager::SetIntSetting(std::string key, int val)
 {
     settings[key] = std::to_string(val);
 }
