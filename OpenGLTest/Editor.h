@@ -13,7 +13,7 @@
 
 using namespace glm;
 
-constexpr int EDITOR_ACTIONS_COUNT = 19;
+constexpr int EDITOR_ACTIONS_COUNT = 27;
 
 class EditorObject;
 struct MapData;

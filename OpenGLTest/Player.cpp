@@ -424,6 +424,8 @@ void Player::OnAfterMove()
 			}
 		}
 	}
+
+	SetEditPos(vec3(GetPos().x, GetPos().y, GetEditPos().z); // TODO: can be optimised
 }
 
 bool Player::TeleportCollideWithLaser(vec2 teleportPosition)

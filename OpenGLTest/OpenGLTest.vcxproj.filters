@@ -261,6 +261,9 @@
     <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\filter\soloud_lofifilter.cpp">
       <Filter>SoLoud</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectFollower.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -429,6 +432,9 @@
       <Filter>LevelEditor</Filter>
     </ClInclude>
     <ClInclude Include="SettingsManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFollower.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

@@ -204,6 +204,7 @@
     <ClCompile Include="LogicRelay.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="ObjectFollower.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="PhysicSimulation.cpp" />
@@ -259,6 +260,7 @@
     <ClInclude Include="LogicRelay.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="mesh.h" />
+    <ClInclude Include="ObjectFollower.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="PhysicSimulation.h" />

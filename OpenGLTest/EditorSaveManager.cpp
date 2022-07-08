@@ -29,6 +29,7 @@
 #include "SoundArea.h"
 #include "TerminalWriter.h"
 #include "TerminalManager.h"
+#include "ObjectFollower.h"
 
 using namespace glm;
 
@@ -672,6 +673,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "TerminalWriter")
 	{
 		newObj = new TerminalWriter();
+		newObj->Load(&props);
+	}
+	else if (objectType == "ObjectFollower")
+	{
+		newObj = new ObjectFollower();
 		newObj->Load(&props);
 	}
 	else

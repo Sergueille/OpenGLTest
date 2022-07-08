@@ -27,6 +27,7 @@
 #include "SoundPoint.h"
 #include "SoundArea.h"
 #include "TerminalWriter.h"
+#include "ObjectFollower.h"
 
 #include <iostream>
 
@@ -172,7 +173,7 @@ EditorAction Editor::editorActions[EDITOR_ACTIONS_COUNT] = {
 		},
 	},
 	EditorAction {
-		"Test level",
+		"Test level at beginning",
 		"Test the current level",
 		GLFW_KEY_T,
 		true,
@@ -181,6 +182,24 @@ EditorAction Editor::editorActions[EDITOR_ACTIONS_COUNT] = {
 		[] {
 			if (enabled) // Start test
 				StartTest();
+			else // End test
+				EndTest();
+		},
+		false,
+	},
+	EditorAction {
+		"Test level at last save",
+		"Test the current level, the player will be at the last checkpoint",
+		GLFW_KEY_T,
+		true,
+		true,
+		false,
+		[] {
+			if (enabled) // Start test
+			{
+				StartTest();
+				EditorSaveManager::LoadUserSaveInSameLevel("editTest.sav");
+			}
 			else // End test
 				EndTest();
 		},
@@ -289,6 +308,28 @@ EditorAction Editor::editorActions[EDITOR_ACTIONS_COUNT] = {
 		},
 	},
 	EditorAction{
+		"Index files",
+		"Index again all files",
+		GLFW_KEY_R,
+		true,
+		false,
+		true,
+		[] {
+			IndexFiles();
+		},
+	},
+	EditorAction{
+		"Reload level",
+		"Destroy and load the current level from file",
+		GLFW_KEY_R,
+		true,
+		false,
+		false,
+		[] {
+			EditorSaveManager::LoadLevel(currentFilePath, true);
+		},
+	},
+	EditorAction{
 		"Copy",
 		"Copy selected objects",
 		GLFW_KEY_C,
@@ -320,6 +361,66 @@ EditorAction Editor::editorActions[EDITOR_ACTIONS_COUNT] = {
 		[] {
 			DestroyEditor();
 			MenuManager::OpenMenu(MenuManager::Menu::main);
+		},
+	},
+	EditorAction{
+		"Focus on props tab",
+		"Enable the props tab in the left panel",
+		GLFW_KEY_P,
+		false,
+		true,
+		false,
+		[] {
+			currentPanelWindow = PanelWindow::properties;
+		},
+	},
+	EditorAction{
+		"Focus on add tab",
+		"Enable the object palette tab in the left panel",
+		GLFW_KEY_Q,
+		false,
+		true,
+		false,
+		[] {
+			currentPanelWindow = PanelWindow::add;
+		},
+	},
+	EditorAction{
+		"Focus on file tab",
+		"Enable the file tab in the left panel",
+		GLFW_KEY_F,
+		false,
+		true,
+		false,
+		[] {
+			currentPanelWindow = PanelWindow::file;
+		},
+	},
+	EditorAction{
+		"Focus on settings tab",
+		"Enable the settings tab in the left panel",
+		GLFW_KEY_S,
+		false,
+		true,
+		false,
+		[] {
+			currentPanelWindow = PanelWindow::settings;
+		},
+	},
+	EditorAction{
+		"Focus on Z property",
+		"Focus on the Z text input of the first selected object",
+		GLFW_KEY_W,
+		false,
+		true,
+		false,
+		[] {
+			if (focusedTextInputID == "" && GetSelectedObject() != nullptr)
+			{
+				currentPanelWindow = PanelWindow::properties;
+				focusedTextInputID = std::to_string(GetSelectedObject()->ID) + "posZ";
+				focusedTextInputValue = "";
+			}
 		},
 	},
 };
@@ -815,6 +916,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.y -= UIButton(drawPos, "Terminal writer", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new TerminalWriter();
+
+	drawPos.y -= UIButton(drawPos, "Object follower", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new ObjectFollower();
 
 	if (newObject != nullptr)
 	{
@@ -1314,6 +1419,7 @@ bool Editor::isOverUI(vec2 point)
 
 void Editor::IndexFiles() 
 {
+	textureFiles.clear();
 	std::string imagesDir = "Images";
 	for (const auto& entry : std::filesystem::recursive_directory_iterator(imagesDir))
 	{
@@ -1322,6 +1428,7 @@ void Editor::IndexFiles()
 		textureFiles.push_back(fileName);
 	}
 
+	mapFiles.clear();
 	std::string mapDir = "Levels";
 	for (const auto& entry : std::filesystem::recursive_directory_iterator(mapDir))
 	{
@@ -1330,6 +1437,7 @@ void Editor::IndexFiles()
 		mapFiles.push_back(fileName);
 	}
 
+	soundFiles.clear();
 	std::string soundsDir = "Sounds";
 	for (const auto& entry : std::filesystem::recursive_directory_iterator(soundsDir))
 	{

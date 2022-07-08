@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 58
+count 62
 
 object MapData {
 	mapName: ""
@@ -55,7 +55,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "117"
 	name: "background"
-	position: "-3.400000, 4.400000, -5.000000"
+	position: "-3.400000, 4.400000, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "53.799999, 45.000000"
@@ -116,7 +116,7 @@ object EditorSprite {
 object Laser {
 	ID: "13"
 	name: "TestLaser"
-	position: "6.800000, 6.200000, -0.500000"
+	position: "6.800000, 6.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "630.000000"
@@ -806,4 +806,57 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+}
+object Checkpoint {
+	ID: "4471"
+	name: ""
+	position: "5.600000, 13.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+}
+object Trigger {
+	ID: "4472"
+	name: ""
+	position: "-3.200000, 4.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "3.400000, 1.000000"
+	onEnter: "4471|Save game|"
+	onExit: ""
+	once: "0"
+	needPlayerInteraction: "0"
+}
+object ObjectFollower {
+	ID: "5127"
+	name: ""
+	position: "-10.004836, 2.496125, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	targetID: "477"
+	acceleration: "5.000000"
+	maxSpeed: "10.000000"
+	drag: "0.800000"
+	targetRadius: "0.200000"
+	rotateTowardsTarget: "1"
+	rotateSpeed: "180.000000"
+	collideWithPhysics: "0"
+	bounce: "0.300000"
+	mustFollow: "1"
+}
+object EditorSprite {
+	ID: "5728"
+	name: ""
+	position: "0.000000, 0.000000, -50.000000"
+	parent: "5127"
+	parallax: "1.000000"
+	size: "1.000000, 1.000000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
 }
