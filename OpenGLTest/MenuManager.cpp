@@ -38,6 +38,8 @@ float MenuManager::uiSoundsVolume = 0.3f;
 
 std::list<MenuManager::Menu> MenuManager::menuPath = std::list<Menu>();
 
+float MenuManager::buttonTransitionValue = 0;
+
 void MenuManager::Setup()
 {
 	if (isSetup) return;
@@ -135,7 +137,7 @@ void MenuManager::OnMainLoop()
 
 		for (auto fileName = EditorSaveManager::userSaves.begin(); fileName != EditorSaveManager::userSaves.end(); fileName++)
 		{
-			drawPos.y -= Button(drawPos, *fileName, &pressed, true, true).y;
+			drawPos.y -= Button(drawPos, *fileName, &pressed, true, true).y + margin;
 
 			if (pressed)
 			{
@@ -271,10 +273,19 @@ void MenuManager::OnMainLoop()
 	if (hoverThisFrame && !hoverLastFrame)
 	{
 		Utility::PlaySound(focusSound, uiSoundsVolume);
+
+		TweenManager<float>::Tween(0, 1, (float)buttonBarTransition / 1000.f, [](float value) {
+			buttonTransitionValue = value;
+		}, cubicInOut);
 	}
 	else if (!hoverThisFrame && hoverLastFrame)
 	{
 		Utility::PlaySound(blurSound, uiSoundsVolume);
+	}
+
+	if (!hoverThisFrame)
+	{
+		buttonTransitionValue = 0;
 	}
 
 	hoverLastFrame = hoverThisFrame;
@@ -373,6 +384,8 @@ vec2 MenuManager::Button(vec3 drawPos, std::string key, bool* out, bool enabled,
 	vec4 color;
 	vec2 textRect = TextManager::GetRect(text, textSize);
 
+	float shift = 0;
+
 	if (!enabled)
 	{
 		color = textDisabledColor;
@@ -409,6 +422,16 @@ vec2 MenuManager::Button(vec3 drawPos, std::string key, bool* out, bool enabled,
 				clickLastFrame = false;
 			}
 
+			int barOverflow = (buttonBarHeight - textSize) / 2;
+
+			Sprite(
+				drawPos + vec3(0, textSize + barOverflow + buttonBarYShift, 0),
+				drawPos + vec3(buttonBarWidth * buttonTransitionValue, -barOverflow + buttonBarYShift, 0),
+				color
+			).Draw();
+
+			shift = (buttonBarWidth + buttonBarMargin) * buttonTransitionValue;
+
 			hoverThisFrame = true;
 		}
 		else
@@ -417,7 +440,7 @@ vec2 MenuManager::Button(vec3 drawPos, std::string key, bool* out, bool enabled,
 		}
 	}
 
-	TextManager::RenderText(text, drawPos, textSize, TextManager::right, color);
+	TextManager::RenderText(text, drawPos + vec3(shift, 0, 0), textSize, TextManager::right, color);
 	return textRect;
 }
 

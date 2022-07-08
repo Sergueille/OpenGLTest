@@ -22,6 +22,12 @@ public:
 	const static int titleScale = 40;
 	const static int propsScale = 300;
 
+	const static int buttonBarHeight = 35;
+	const static int buttonBarWidth = 5;
+	const static int buttonBarMargin = 10;
+	const static int buttonBarYShift = -4;
+	const static int buttonBarTransition = 300; // milliseconds
+
 	const static int sliderWidth = 300;
 	const static int sliderHeight = 15;
 	const static int sliderHandleSize = 30;
@@ -87,5 +93,7 @@ private:
 	static vec2 SettingToggle(vec3 drawPos, std::string label, std::string key);
 
 	static bool IsMouseInBox(vec2 start, vec2 end);
+
+	static float buttonTransitionValue;
 };
 

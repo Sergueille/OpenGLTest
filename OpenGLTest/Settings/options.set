@@ -5,7 +5,7 @@ Props {
 	fullscreen: "0"
 	gameSoundsVolume: "1.000000"
 	globalVolume: "1.006667"
-	monitor: "1"
+	monitor: "main"
 	musicVolume: "1.000000"
 	screenX: "1600"
 	screenY: "900"
