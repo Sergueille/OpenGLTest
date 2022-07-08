@@ -21,6 +21,7 @@ public:
 	const float gravityAcceleration = 50;
 
 	bool physicsEnabled = true;
+	bool useGravity = true;
 
 	/// <summary>
 	/// If true, pause all the physic simulation, used for pause menu

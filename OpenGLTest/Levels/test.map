@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 62
+count 64
 
 object MapData {
 	mapName: ""
@@ -169,7 +169,7 @@ object ShadowCaster {
 object Player {
 	ID: "477"
 	name: ""
-	position: "3.000000, 8.200000, 20.000000"
+	position: "2.600000, 8.200000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -827,29 +827,11 @@ object Trigger {
 	once: "0"
 	needPlayerInteraction: "0"
 }
-object ObjectFollower {
-	ID: "5127"
-	name: ""
-	position: "-10.004836, 2.496125, 50.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "0.000000"
-	targetID: "477"
-	acceleration: "5.000000"
-	maxSpeed: "10.000000"
-	drag: "0.800000"
-	targetRadius: "0.200000"
-	rotateTowardsTarget: "1"
-	rotateSpeed: "180.000000"
-	collideWithPhysics: "0"
-	bounce: "0.300000"
-	mustFollow: "1"
-}
 object EditorSprite {
 	ID: "5728"
 	name: ""
 	position: "0.000000, 0.000000, -50.000000"
-	parent: "5127"
+	parent: "-1"
 	parallax: "1.000000"
 	size: "1.000000, 1.000000"
 	rotation: "0.000000"
@@ -859,4 +841,35 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+}
+object Prefab {
+	ID: "6164"
+	name: ""
+	position: "-14.600000, 7.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\rocket.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object LogicRelay {
+	ID: "6334"
+	name: ""
+	position: "-10.600000, 1.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "6164|Launch|6622|Launch|"
+	onAltTrigger: ""
+	triggerOnStart: "1"
+	delay: "1.000000"
+}
+object Prefab {
+	ID: "6622"
+	name: ""
+	position: "-14.600000, 1.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\rocket.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
 }

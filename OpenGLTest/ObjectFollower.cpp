@@ -5,8 +5,24 @@
 #include "CircleCollider.h"
 #include "RectCollider.h"
 #include "RessourceManager.h"
+#include "Player.h"
 
-ObjectFollower::ObjectFollower() : EditorObject(vec3(0))
+ObjectEvent ObjectFollower::events[OBJECT_FOLLOWER_EVENT_COUNT] = {
+	ObjectEvent {
+		"Start following",
+		[](EditorObject* object, void* param) {
+			((ObjectFollower*)object)->mustFollow = true;
+		}
+	},
+	ObjectEvent {
+		"Stop following",
+		[](EditorObject* object, void* param) {
+			((ObjectFollower*)object)->mustFollow = false;
+		}
+	},
+};
+
+ObjectFollower::ObjectFollower() : EditorObject(vec3(0)), PhysicObject(collideCollider)
 {
 	clickCollider = new CircleCollider(vec2(0), 1, false);
 
@@ -14,7 +30,14 @@ ObjectFollower::ObjectFollower() : EditorObject(vec3(0))
     {
         editorSprite = new Sprite(RessourceManager::GetTexture("Engine\\objectFollower.png"), vec3(0), vec2(1), 0);
         editorSprite->DrawOnMainLoop();
+
+		colliderSprite = new Sprite(nullptr, GetEditPos(), vec2(1), 0.0f, vec4(0.5, 1, 0, 0.2));
     }
+
+	collideCollider = new CircleCollider(vec2(0), 0, false);
+	collider = collideCollider;
+	physicsEnabled = false;
+	useGravity = false;
             
 	typeName = "ObjectFollower";
 }
@@ -26,7 +49,19 @@ ObjectFollower::~ObjectFollower()
         delete editorSprite;
         editorSprite = nullptr;
     }
-        
+
+	if (collideCollider != nullptr)
+	{
+		delete collideCollider;
+		collideCollider = nullptr;
+		collider = nullptr;
+	}
+
+	if (colliderSprite != nullptr)
+	{
+		delete colliderSprite;
+		colliderSprite = nullptr;
+	}
 }
 
 vec2 ObjectFollower::DrawProperties(vec3 drawPos)
@@ -38,9 +73,13 @@ vec2 ObjectFollower::DrawProperties(vec3 drawPos)
 
     drawPos.y -= Editor::DrawProperty(drawPos, "Start orientation", &editorRotation, Editor::panelPropertiesX, strID + "ori").y + Editor::margin;
 
-	_target = targetID == -1 ? nullptr : Editor::GetEditorObjectByIDInObjectContext(this, targetID, true, false);
-    drawPos.y -= Editor::ObjectSelector(drawPos, "Target", &_target, Editor::panelPropertiesX, strID + "target").y + Editor::margin;
-	targetID = _target == nullptr ? -1 : _target->ID;
+	if (!followPlayer)
+	{
+		_target = targetID == -1 ? nullptr : Editor::GetEditorObjectByIDInObjectContext(this, targetID, true, false);
+		drawPos.y -= Editor::ObjectSelector(drawPos, "Target", &_target, Editor::panelPropertiesX, strID + "target").y;
+		targetID = _target == nullptr ? -1 : _target->ID;
+	}
+	drawPos.y -= Editor::CheckBox(drawPos, "Follow player", &followPlayer, Editor::panelPropertiesX).y + Editor::margin;
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Acceleration", &acceleration, Editor::panelPropertiesX, strID + "acceleration").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Max speed", &maxSpeed, Editor::panelPropertiesX, strID + "maxSpeed").y;
@@ -57,7 +96,8 @@ vec2 ObjectFollower::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::CheckBox(drawPos, "Collide with phys.", &collideWithPhysics, Editor::panelPropertiesX).y;
 	if (rotateTowardsTarget)
 	{
-		drawPos.y -= Editor::DrawProperty(drawPos, "Bounce", &bounce, Editor::panelPropertiesX, strID + "bounce").y;
+		drawPos.y -= Editor::DrawProperty(drawPos, "Bounce", &bounce, Editor::panelPropertiesX, strID + "bounce").y + Editor::margin;
+		drawPos.y -= Editor::DrawProperty(drawPos, "Collider size", &colliderSize, Editor::panelPropertiesX, strID + "size").y + Editor::margin;
 	}
 
 	drawPos.y -= Editor::CheckBox(drawPos, "Must follow", &mustFollow, Editor::panelPropertiesX).y;
@@ -76,6 +116,13 @@ EditorObject* ObjectFollower::Copy()
 	newObj->clickCollider = new CircleCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->MustCollideWithPhys());
 
     if (editorSprite != nullptr) newObj->editorSprite = this->editorSprite->Copy();
+    if (colliderSprite != nullptr) newObj->colliderSprite = this->colliderSprite->Copy();
+
+    if (collideCollider != nullptr) 
+		newObj->collideCollider = new CircleCollider(collideCollider->GetPos(), collideCollider->size, true);
+	newObj->_target = nullptr;
+
+	newObj->SubscribeToMainLoop();
 
 	return newObj;
 }
@@ -85,6 +132,9 @@ void ObjectFollower::Load(std::map<std::string, std::string>* props)
 	EditorObject::Load(props);
 
     EditorSaveManager::FloatProp(props, "orientation", &editorRotation);
+	while (editorRotation > 360) editorRotation -= 360;
+	while (editorRotation < 0) editorRotation += 360;
+    EditorSaveManager::FloatProp(props, "colliderSize", &colliderSize);
 
     EditorSaveManager::FloatProp(props, "acceleration", &acceleration);
     EditorSaveManager::FloatProp(props, "maxSpeed", &maxSpeed);
@@ -100,13 +150,25 @@ void ObjectFollower::Load(std::map<std::string, std::string>* props)
 	mustFollow = (*props)["mustFollow"] == "1";
 
     EditorSaveManager::IntProp(props, "targetID", &targetID);
+	followPlayer = (*props)["followPlayer"] == "1";
 	if (!Editor::enabled)
 	{
-		_target = targetID == -1 ? nullptr : Editor::GetEditorObjectByIDInObjectContext(this, targetID, false, false);
+		if (followPlayer)
+		{
+			_target = (EditorObject*)Player::ingameInstance;
+		}
+		else
+		{
+			_target = targetID == -1 ? nullptr : Editor::GetEditorObjectByIDInObjectContext(this, targetID, false, false);
+		}
 
 		if (_target == nullptr)
-			fprintf(stderr, "Object follower (%s) has no target!", this->name);
+			fprintf(stderr, "Object follower (%s) has no target!", this->name.c_str());
 	}
+
+	physicsEnabled = !Editor::enabled;
+	collideCollider->SetCollideWithPhys(physicsEnabled);
+	SetPos(GetEditPos());
 }
 
 void ObjectFollower::Save()
@@ -114,7 +176,9 @@ void ObjectFollower::Save()
 	EditorObject::Save();
 
     EditorSaveManager::WriteProp("orientation", editorRotation);
+    EditorSaveManager::WriteProp("editorSize", editorSize);
     EditorSaveManager::WriteProp("targetID", targetID);
+    EditorSaveManager::WriteProp("followPlayer", followPlayer);
     EditorSaveManager::WriteProp("acceleration", acceleration);
     EditorSaveManager::WriteProp("maxSpeed", maxSpeed);
     EditorSaveManager::WriteProp("drag", drag);
@@ -124,6 +188,7 @@ void ObjectFollower::Save()
     EditorSaveManager::WriteProp("collideWithPhysics", collideWithPhysics);
     EditorSaveManager::WriteProp("bounce", bounce);
     EditorSaveManager::WriteProp("mustFollow", mustFollow);
+    EditorSaveManager::WriteProp("colliderSize", colliderSize);
 }
 
 void ObjectFollower::Enable()
@@ -138,6 +203,75 @@ void ObjectFollower::Disable()
     if (editorSprite != nullptr) editorSprite->StopDrawing();
 }
 
+void ObjectFollower::GetObjectEvents(const ObjectEvent** res, int* resCount)
+{
+	*res = events;
+	*resCount = OBJECT_FOLLOWER_EVENT_COUNT;
+}
+
+void ObjectFollower::OnBeforeMove()
+{
+	if (!physicsEnabled) return;
+
+	SetPos(vec2(GetEditPos()));
+
+	if (mustFollow && _target != nullptr)
+	{
+		vec2 delta = _target->GetEditPos() - GetEditPos();
+		float sqrDist = Utility::SqrLength(delta);
+
+		if (sqrDist > targetRadius * targetRadius)
+		{
+			velocity += glm::normalize(delta) * acceleration * GetDeltaTime(); // Acceleration
+
+			if (Utility::SqrLength(velocity) > maxSpeed * maxSpeed) // Sound clamp velocity
+			{
+				velocity = glm::normalize(velocity) * maxSpeed;
+			}
+		}
+
+		if (rotateTowardsTarget)
+		{
+			while (editorRotation > 360) editorRotation -= 360; // Make sure is less than 360
+
+			float targetAngle = Utility::GetVectorAngle(velocity);
+			float angleDist = targetAngle - editorRotation;
+
+			if (angleDist > 180) editorRotation += 360;
+
+			if (targetAngle > editorRotation)
+				editorRotation += min(angleDist, rotateSpeed * GetDeltaTime());
+			else
+				editorRotation -= min(angleDist, rotateSpeed * GetDeltaTime());
+		}
+	}
+
+	// Drag
+	if (drag * GetDeltaTime() > glm::length(velocity))
+	{
+		velocity = vec2(0);
+	}
+	else
+	{
+		velocity -= glm::normalize(velocity) * drag * GetDeltaTime();
+	}
+}
+
+void ObjectFollower::OnAfterMove()
+{
+	SetGlobalEditPos(vec3(GetPos().x, GetPos().y, GetEditPos().z));
+}
+
+void ObjectFollower::OnSelected()
+{
+	colliderSprite->DrawOnMainLoop();
+}
+
+void ObjectFollower::OnUnselected()
+{
+	colliderSprite->StopDrawing();
+}
+
 void ObjectFollower::OnMainLoop()
 {
 	EditorObject::OnMainLoop();
@@ -150,35 +284,16 @@ void ObjectFollower::OnMainLoop()
 		((CircleCollider*)clickCollider)->size = Editor::gizmoSize;
 	}
 
-	if (!Editor::enabled)
+	if (colliderSprite != nullptr)
 	{
-		if (mustFollow && _target != nullptr)
-		{
-			vec2 delta = _target->GetEditPos() - GetEditPos();
-			float sqrDist = Utility::SqrLength(delta);
+		colliderSprite->position = GetEditPos();
+		colliderSprite->size = GetEditScale();
+		colliderSprite->rotate = GetEditRotation();
+	}
 
-			if (sqrDist > targetRadius * targetRadius)
-			{
-				velocity += glm::normalize(delta) * acceleration * GetDeltaTime(); // Acceleration
-
-				if (Utility::SqrLength(velocity) > maxSpeed * maxSpeed) // Sound clamp velocity
-				{
-					velocity = glm::normalize(velocity) * maxSpeed;
-				}
-			}
-		}
-
-		// Drag
-		if (drag * GetDeltaTime() > glm::length(velocity))
-		{
-			velocity = vec2(0);
-		}
-		else
-		{
-			velocity -= glm::normalize(velocity) * drag * GetDeltaTime();
-		}
-
-		// Apply velocity
-		SetGlobalEditPos(GetEditPos() + vec3(velocity.x, velocity.y, 0) * GetDeltaTime());
+	if (collideWithPhysics)
+	{
+		collideCollider->SetPos(vec2(GetPos()));
+		collideCollider->size = colliderSize;
 	}
 }

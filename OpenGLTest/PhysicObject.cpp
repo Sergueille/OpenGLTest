@@ -49,7 +49,8 @@ void PhysicObject::OnMainLoop()
 		return;
 
 	// Gravity
-	velocity.y -= gravityAcceleration * Utility::GetDeltaTime();
+	if (useGravity)
+		velocity.y -= gravityAcceleration * Utility::GetDeltaTime();
 
 	// Move player
 	SetPos(position + velocity * Utility::GetDeltaTime());
