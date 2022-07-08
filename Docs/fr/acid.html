@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\style.css">
+    <title>Documentation</title>
+</head>
+<body>
+    <div class="left-panel">
+        <a class="btn" href="index.html">Retour à l'accueil</a>
+        <p class="sum-title">Sommaire:</p>
+        <ul id="summary"></ul>
+        <script src="..\summary.js" defer="defer"></script>
+    </div>
+    <div class="page">
+        <h2>Faire un bassin d'acide</h2>
+        <p>
+            Cette page va vous montrer comment créer un bassin d'acide 
+            "parfaitement sur et sans danger pour les organismes vivants et les appareils electriques".
+        </p>
+        <h3 id="prefab">Le prefab</h3>
+        <image src="..\Images\acid_split.png" class="float-l"></image>
+        <p>
+            Il existe un type d'objet "acid", mais il n'émettra pas de particules ou de son.<br>
+            Utilitsez alors le prefab "prefabs\acid.map".<br>
+            Pour des grands bassins, placez-en plusieurs côte-à-côte.<br>
+            En dessous des prefabs, ajoutez un objet acid et décochez "Show surface" dans ses propriétés.<br>
+            Si l'acide dépasse sur le sol, donnez au sol une position Z plus élevée (autour de 10)<br>
+        </p>
+        <h3 id="prefab" class="clear">De la lumière</h3>
+        <image src="..\Images\acid_light.png" class="float-r"></image>
+        <p>
+            Ajoutez ensuite une PointLight avec un grand rayon et une couleur verte comme dans l'image en face.<br>
+            Pensez également a donner une valeur élevée pour "Shadow size"<br>
+            <span class="warn">
+                Les propriétés InnerAngle et OuterAngle servent a éviter que cette PointLight éclaire en dessous,
+                ce qui permet d'accélerer le calcul de l'éclairage
+            </span>
+        </p>
+        <h3 id="particles" class="clear">Des particules!</h3>
+        <image src="..\Images\acid_pipe.png" class="float-l"></image>
+        <p>
+            Quand des objets entrent en contact avec de l'acide, ajoutez des particules sur la surface de contact.<br>
+            Vous pouvez voler les valeurs dans les niveaux officiels (par exemple dans "lasers2.map")<br><br>
+            Pour créer un jet d'acide, utilisez de la même façon un système de particules,
+            avec un trigger qui déclenche la mort du joueur (en envoyant un évenement au joueur)<br>
+        </p>
+    </div>
+</body>
+</html>

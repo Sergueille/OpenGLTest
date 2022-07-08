@@ -248,6 +248,12 @@ void MenuManager::OnMainLoop()
 		SettingsManager::ApplySettings();
 
 		drawPos.y -= margin;
+
+		drawPos.x += Button(drawPos, "save", &pressed).x + margin;
+		if (pressed)
+		{
+			SettingsManager::SaveSettings();
+		}
 		PreviousMenuButton(drawPos).x;
 	}
 	else if (currentMenu == Menu::none)

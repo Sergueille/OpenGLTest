@@ -35,23 +35,48 @@
             Vous pouvez également donner une intensité négative pour assombrir.<br>
             Si l'éclairage est vraiment trop fort, changez la couleur du fond de la prièce, per exemple (0.8, 0.8, 0.8).<br>
             <br>
-            Ajoutez également des petites lumières qui viennent du décor (un ordinateur par exemple)
-
+            Ajoutez également des petites lumières qui viennent du décor (un ordinateur par exemple).
         </p>
         <h3 id="shadows">Ajouter des ombres</h3>
         <img src="..\Images\no_shadow_ex.png" class="float-l">
-        <img src="..\Images\shadow_ex.png" class="float-r">
         <p>
             Si vous créez plusieurs pièce, vous allez voir qu'il y a un problème: la lumière passe à travers les murs!<br>
         </p>
+        <p class="clear"></p>
+        <img src="..\Images\shadow_ex.png" class="float-l">
         <p>
             Pour éviter cela, ajoutez un Shadow caster et donnez-lui la même forme que le mur (en changeant sa taille).
             Recalculez l'éclairage et la lumière disparait!
         </p>
-        <p class="clear">
+        <h3 id="more-shadows" class="clear">Encore plus d'ombres!</h3>
+        <img src="..\Images\shadow_ex2.png" class="float-l">
+        <p>
             Vous pouvez également utiliser les Shadow casters pour faire des effets d'ombres.
+
+            <span class="warn">
+                N'en abusez pas, ils augementent le temps de calcul d'éclairage, et il ne peut y en avoir que 128 par map
+            </span>
+
+            <span class="warn">
+                L'inerieur du ShadowCaster sera tout noir, on peut vite perdre un objet dedans.
+            </span>
         </p>
-        <img src="..\Images\shadow_ex2.png" class="float-l clear">
+        <p class="clear"></p>
+        <img src="..\Images\shadow_size.png" class="float-l">
+        <p>
+            La propriété "Shadow size" des PointLight contrôle l'apparence des ombres.<br>
+            Si la valeur est proche de 0, l'ombre sera très nette, à l'inverse, plus la valeur est grande, plus les ombres seront floues.<br>
+
+            <span class="warn">
+                Si le PointLight est à côté d'un mur, une valeur trop grande causera des ombres inexactes
+            </span>
+        </p>
+        <h3 class="clear" id="limitations">On se calme sur la lumière!</h3>
+        <p>
+            Les sources de lumières sont a utiliser avec modération (256 maximum par map). <br>
+            Sur des grandes maps, au moment de calculer l'éclairage, votre carte graphique risque 
+            de ne plus avoir assez de mémoire et fera planter le jeu.<br>
+        </p>
     </div>
 </body>
 </html>
