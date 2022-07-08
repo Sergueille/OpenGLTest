@@ -384,7 +384,9 @@ void Laser::TurnOn()
 
 	lasers.push_back(this);
 
-	Utility::PlaySound("laser_start.wav", Utility::gameSoundsVolume * soundStartVolume);
+	float camDist = glm::length(Camera::position - (vec2)this->GetEditPos());
+	float attenuation = Utility::GetSoundAttenuation(camDist, onOffSoundMinDist, onOffSoundMaxDist);
+	Utility::PlaySound("laser_start.wav", Utility::gameSoundsVolume * soundStartVolume * attenuation);
 	StartLoopSound();
 }
 
@@ -398,7 +400,9 @@ void Laser::TurnOff()
 
 	lasers.remove(this);
 
-	Utility::PlaySound("laser_stop.wav", Utility::gameSoundsVolume * soundStopVolume); 
+	float camDist = glm::length(Camera::position - (vec2)this->GetEditPos());
+	float attenuation = Utility::GetSoundAttenuation(camDist, onOffSoundMinDist, onOffSoundMaxDist);
+	Utility::PlaySound("laser_stop.wav", Utility::gameSoundsVolume * soundStopVolume * attenuation);
 	StopLoopSound();
 }
 

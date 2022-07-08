@@ -25,7 +25,7 @@ object EditorSprite {
 object Prefab {
 	ID: "2462"
 	name: "Elevator door"
-	position: "-2.400000, 0.000000, 0.000000"
+	position: "-2.400000, 0.000000, 2.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\door_elevator_right.map"
@@ -540,6 +540,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "3235"
@@ -554,4 +555,5 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }

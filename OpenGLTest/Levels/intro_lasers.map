@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 430
+count 432
 
 object MapData {
 	mapName: ""
@@ -6135,4 +6135,36 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+}
+object EditorSprite {
+	ID: "22566"
+	name: ""
+	position: "42.400002, -13.400001, -4.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.400000, 4.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "cables3.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "22574"
+	name: ""
+	position: "27.400000, -12.800000, -3.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.200000, 3.200000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "cables4.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
 }

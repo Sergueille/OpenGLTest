@@ -253,7 +253,9 @@ void MenuManager::OnMainLoop()
 		if (pressed)
 		{
 			SettingsManager::SaveSettings();
+			PreviousMenu();
 		}
+
 		PreviousMenuButton(drawPos).x;
 	}
 	else if (currentMenu == Menu::none)

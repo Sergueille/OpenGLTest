@@ -8,6 +8,7 @@ Some code from https://learnopengl.com/
 #include <GLFW/glfw3.h>
 #include <soloud.h>
 #include <soloud_wav.h>
+#include <soloud_lofifilter.h>
 
 #include "MenuManager.h"
 #include "Editor.h"
@@ -92,6 +93,11 @@ int main(int argc, void* argv[])
 
     // Set bg color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
+    Utility::lofiFilter = new SoLoud::LofiFilter();
+    Utility::soloud->setGlobalFilter(0, lofiFilter);
+    Utility::soloud->setFilterParameter(0, 0, SoLoud::LofiFilter::WET, 0);
+    lofiFilter->setParams(5, 10);
 
     /////// GAME LOOP
     while (!glfwWindowShouldClose(window))
@@ -207,14 +213,15 @@ int main(int argc, void* argv[])
         Utility::lastTime = Utility::time;
     }
 
-    Editor::DestroyEditor();
-
     EventManager::Call(&EventManager::OnExitApp);
+
+    Editor::DestroyEditor();
 
     // Clear ressources
     RessourceManager::Clear();
 
     // Clean sound engine
+    delete Utility::lofiFilter;
     Utility::soloud->deinit();
     delete Utility::soloud;
 

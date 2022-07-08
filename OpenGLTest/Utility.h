@@ -6,6 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <GLFW/glfw3.h>
 #include <soloud.h>
+#include <soloud_lofifilter.h>
 #include <string>
 
 namespace Utility
@@ -46,6 +47,8 @@ namespace Utility
 	extern float corruptionAmount;
 
 	extern int testCount;
+
+	extern SoLoud::LofiFilter* lofiFilter;
 
 	/// <summary>
 	/// Projects C on AB
@@ -146,4 +149,6 @@ namespace Utility
 	void BindTexture2D(unsigned int texture, int attachement = 0);
 	extern unsigned int lastBoundTexture;
 	extern int lastTextureAttachement;
+
+	float GetSoundAttenuation(float dist, float maxDist, float minDist);
 };

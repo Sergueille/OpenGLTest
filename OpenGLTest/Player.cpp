@@ -5,6 +5,7 @@
 #include "TweenManager.h"
 
 #include <iostream>
+#include <soloud_lofifilter.h>
 #include "ParticleSystem.h"
 
 using namespace glm;
@@ -252,6 +253,12 @@ void Player::Kill()
 		Utility::corruptionAmount = 0;
 	});
 
+	TweenManager<float>::Tween(0, 1, deathDuration, [](float value) {
+		Utility::soloud->setFilterParameter(0, 0, SoLoud::LofiFilter::WET, value);
+	}, linear)->SetOnFinished([] {
+		Utility::soloud->setFilterParameter(0, 0, SoLoud::LofiFilter::WET, 0);
+	});
+
 	TweenManager<vec2>::Tween(GetPos(), vec2(GetPos()) - vec2(0, deathPlayerShift), deathDuration, [this](vec2 value) {
 		SetPos(vec2(value.x, value.y));
 	}, linear)->SetOnFinished([this] {
@@ -430,7 +437,7 @@ bool Player::TeleportCollideWithLaser(vec2 teleportPosition)
 
 	for (auto it = Laser::lasers.begin(); it != Laser::lasers.end(); it++)
 	{
-		if ((*it)->laserType == Laser::LaserType::noTeleport) 
+		if ((*it)->laserType == Laser::LaserType::noTeleport && (*it)->IsEnabled() && (*it)->laserOn) 
 		{
 			bool rectColl = teleportCollider.CollideWith((*it)->laserCollider).z != 0;
 			if (rectColl)

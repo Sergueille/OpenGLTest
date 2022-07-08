@@ -3536,6 +3536,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "14033"
@@ -3550,6 +3551,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "1"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object SoundArea {
 	ID: "14034"

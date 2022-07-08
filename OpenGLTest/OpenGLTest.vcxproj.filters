@@ -258,6 +258,9 @@
     <ClCompile Include="SettingsManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Logiciels\Soloud\soloud20200207\src\filter\soloud_lofifilter.cpp">
+      <Filter>SoLoud</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">

@@ -25,7 +25,7 @@ object EditorSprite {
 object Player {
 	ID: "94"
 	name: ""
-	position: "56.799999, 64.000000, 20.000000"
+	position: "57.000000, 64.200005, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -2617,11 +2617,11 @@ object LogicRelay {
 object Prefab {
 	ID: "13844"
 	name: ""
-	position: "95.599998, 58.000000, 0.000000"
+	position: "95.657440, 57.971279, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\leaning1.map"
-	ori: "-10.000000"
+	ori: "-11.300000"
 	scale: "1.000000, 1.000000"
 }
 object EditorSprite {
@@ -2630,7 +2630,7 @@ object EditorSprite {
 	position: "78.000000, 50.600002, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "23.800001, 13.400001"
+	size: "23.400000, 17.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -2719,10 +2719,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "14157"
 	name: ""
-	position: "67.599998, 76.200005, 0.000000"
+	position: "65.200005, 76.200005, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "15.800000, 14.200000"
+	size: "22.200001, 14.200000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -3018,10 +3018,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "15693"
 	name: ""
-	position: "69.976234, 68.613068, 10.000000"
+	position: "69.803795, 68.613068, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "2.600000, 2.400000"
+	size: "2.200000, 2.400000"
 	rotation: "-5.000000"
 	color: "0.000000, 1.000000, 0.000000, 0.200000"
 	collideWithPhys: "1"

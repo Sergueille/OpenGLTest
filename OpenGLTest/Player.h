@@ -25,7 +25,7 @@ constexpr int PLAYER_EVENT_COUNT = 3;
 constexpr float deathDuration = 3;
 constexpr float deathZoom = 15;
 constexpr float deathCameraShift = 5;
-constexpr float deathPlayerShift = 4;
+constexpr float deathPlayerShift = 1;
 
 class Player: public PhysicObject, public EditorObject
 {

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 48
+count 50
 
 object MapData {
 	mapName: ""
@@ -162,14 +162,15 @@ object LogicRelay {
 object Trigger {
 	ID: "2807"
 	name: ""
-	position: "-3.800000, -0.000000, 0.000000"
+	position: "-4.600000, 0.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
-	scale: "3.000000, 4.000000"
-	onEnter: "2614|Trigger|3226|Play sound|3235|Trigger|"
+	scale: "4.200000, 4.000000"
+	onEnter: "2614|Trigger|3226|Play sound|3235|Trigger|3242|Enable|"
 	onExit: ""
-	once: "0"
+	once: "1"
+	needPlayerInteraction: "0"
 }
 object Laser {
 	ID: "2908"
@@ -673,6 +674,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "3228"
@@ -687,6 +689,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "1"
+	dontPlayIfTooFar: "0"
 }
 object LogicRelay {
 	ID: "3235"
@@ -698,4 +701,30 @@ object LogicRelay {
 	onAltTrigger: ""
 	triggerOnStart: "0"
 	delay: "0.800000"
+}
+object EditorSprite {
+	ID: "3242"
+	name: "coll"
+	position: "-11.000000, 0.000000, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "5.600000, 4.200000"
+	rotation: "0.000000"
+	color: "0.000000, 1.000000, 0.000000, 0.200000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object LogicRelay {
+	ID: "3243"
+	name: ""
+	position: "-11.200000, -3.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "3242|Disable|"
+	onAltTrigger: ""
+	triggerOnStart: "1"
+	delay: "1.000000"
 }

@@ -18,6 +18,8 @@ public:
 	const float soundStopVolume = 0.8f;
 	const float soundsMinDist = 2;
 	const float soundsMaxDist = 9;
+	const float onOffSoundMinDist = 10;
+	const float onOffSoundMaxDist = 35;
 
 	/// <summary>
 	/// The laser will not update if the player is further than this distance

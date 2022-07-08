@@ -37,6 +37,8 @@ namespace Utility
 	float globalVolume = 1;
 	float globalVolumeOverride = 1;
 
+	SoLoud::LofiFilter* lofiFilter = nullptr;
+
 	float GetDeltaTime()
 	{
 		return time - lastTime;
@@ -355,5 +357,13 @@ namespace Utility
 
 		glActiveTexture(GL_TEXTURE0 + attachement);
 		glBindTexture(GL_TEXTURE_2D, texture);
+	}
+
+	float GetSoundAttenuation(float dist, float maxDist, float minDist)
+	{
+		float attenuation = (dist - maxDist) / (minDist - maxDist);
+		if (attenuation > 1) attenuation = 1;
+		if (attenuation < 0) attenuation = 0;
+		return 1 - attenuation;
 	}
 }
