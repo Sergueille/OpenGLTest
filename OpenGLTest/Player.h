@@ -20,7 +20,7 @@
 
 using namespace glm;
 
-constexpr int PLAYER_EVENT_COUNT = 3;
+constexpr int PLAYER_EVENT_COUNT = 5;
 
 constexpr float deathDuration = 3;
 constexpr float deathZoom = 15;
@@ -137,6 +137,7 @@ public:
 	void Kill();
 
 	void GiveTeleportation();
+	void RemoveTeleportation();
 
 protected:
 	void OnAfterMove() override;

@@ -23,6 +23,14 @@ ObjectEvent Player::events[PLAYER_EVENT_COUNT] = {
 		"Give teleportation",
 		[](EditorObject* object, void* param) { ((Player*)object)->GiveTeleportation(); },
 	},
+	ObjectEvent {
+		"Turn off",
+		[](EditorObject* object, void* param) { ((Player*)object)->isOn = false; },
+	},
+	ObjectEvent {
+		"Remove teleportation",
+		[](EditorObject* object, void* param) { ((Player*)object)->RemoveTeleportation(); },
+	},
 };
 
 Player* Player::ingameInstance = nullptr;
@@ -502,4 +510,10 @@ void Player::GiveTeleportation()
 {
 	teleportPosSprite->DrawOnMainLoop();
 	canTeleport = true;
+}
+
+void Player::RemoveTeleportation()
+{
+	teleportPosSprite->StopDrawing();
+	canTeleport = false;
 }

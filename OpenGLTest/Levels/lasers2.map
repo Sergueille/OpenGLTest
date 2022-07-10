@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 356
+count 361
 
 object MapData {
 	mapName: ""
@@ -752,6 +752,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "5817"
@@ -765,6 +766,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "5819"
@@ -778,6 +780,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "5821"
@@ -791,6 +794,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "6044"
@@ -852,6 +856,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "6128"
@@ -1443,6 +1448,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "6790"
@@ -1456,6 +1462,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorParticleSystem {
 	ID: "6791"
@@ -1661,7 +1668,7 @@ object EditorSprite {
 	texturePath: "back\plaster1.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "2.000000, 1.000000"
+	UVend: "4.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
@@ -1787,7 +1794,7 @@ object EditorSprite {
 	texturePath: "back\plaster1.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "2.000000, 1.000000"
+	UVend: "4.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
@@ -1887,6 +1894,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object LevelEnd {
 	ID: "9389"
@@ -4811,6 +4819,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "17502"
@@ -4824,6 +4833,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "17504"
@@ -4837,6 +4847,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "17506"
@@ -4850,6 +4861,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "17508"
@@ -4863,6 +4875,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "17510"
@@ -4876,6 +4889,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "17514"
@@ -5145,6 +5159,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object TerminalWriter {
 	ID: "17801"
@@ -5158,4 +5173,84 @@ object TerminalWriter {
 	key2: "t_acid3"
 	onFinished: "17801|Clear terminal|"
 	writeRandom: "0"
+}
+object EditorSprite {
+	ID: "18051"
+	name: ""
+	position: "171.400009, -23.800001, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.400000, 3.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "door.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "18053"
+	name: ""
+	position: "181.693115, -25.096905, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "0.800000, 0.800000"
+	rotation: "360.000000"
+	color: "0.800000, 0.800000, 0.800000, 1.000000"
+	texturePath: "mine_base.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "18055"
+	name: ""
+	position: "179.477783, -25.107672, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "0.800000, 0.800000"
+	rotation: "360.000000"
+	color: "0.800000, 0.800000, 0.800000, 1.000000"
+	texturePath: "mine_base.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "18057"
+	name: ""
+	position: "180.000000, -29.000000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.400000, 3.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "door_window_dark.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "18059"
+	name: ""
+	position: "189.800003, -29.000000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.400000, 3.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "door_window_bright.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
 }
