@@ -35,6 +35,8 @@ SOUNDS ----------------------
     - "engine" by organicmanpl
     - "Engine Train Idle" by Wakerone
     - "Single clicks Keyboard Sound" by StrikeWhistler
+    - "ShortLaserSound" by tjcason
+    - "artMotorB" by hanstimm
 
 LIBRARIES -------------------
 - GLFW (window management, os stuff)

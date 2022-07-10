@@ -49,10 +49,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "22"
 	name: "Moving"
-	position: "9.200000, -1.200000, 5.000000"
+	position: "9.600000, -1.200000, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "6.200000, 0.600000"
+	size: "7.000000, 0.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -242,6 +242,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object TransformModifier {
 	ID: "402"
@@ -251,7 +252,7 @@ object TransformModifier {
 	parallax: "1.000000"
 	targetID: "22"
 	relative: "0"
-	targetPos: "8.400000, -12.800000"
+	targetPos: "9.600000, -12.800000"
 	targetRotation: "0.000000"
 	targetSize: "1.000000, 1.000000"
 	duration: "3.000000"
@@ -266,10 +267,10 @@ object TransformModifier {
 	parallax: "1.000000"
 	targetID: "22"
 	relative: "0"
-	targetPos: "8.400000, -1.200000"
+	targetPos: "9.600000, -1.200000"
 	targetRotation: "0.000000"
 	targetSize: "1.000000, 1.000000"
-	duration: "4.000000"
+	duration: "8.000000"
 	easeType: "3"
 	onFinished: ""
 }
@@ -295,6 +296,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Prefab {
 	ID: "678"
@@ -473,7 +475,7 @@ object Prefab {
 object Prefab {
 	ID: "805"
 	name: ""
-	position: "30.200001, 4.600000, 0.000000"
+	position: "28.600000, 4.600000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\neon.map"
@@ -844,6 +846,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object PrefabCloner {
 	ID: "2013"
@@ -978,6 +981,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Laser {
 	ID: "2547"
@@ -1093,6 +1097,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "3695"
@@ -1493,6 +1498,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "5299"
@@ -1835,6 +1841,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object ShadowCaster {
 	ID: "5502"
@@ -2007,6 +2014,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Light {
 	ID: "7812"
@@ -2396,6 +2404,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object LevelEnd {
 	ID: "12023"

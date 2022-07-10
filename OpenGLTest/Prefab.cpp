@@ -214,6 +214,14 @@ void Prefab::GetObjectEvents(const ObjectEvent** res, int* resCount)
 	*res = &events[0];
 }
 
+void Prefab::ResetIngameState()
+{
+	for (auto it = prefabObjects.begin(); it != prefabObjects.end(); it++)
+	{
+		(*it)->ResetIngameState();
+	}
+}
+
 void Prefab::OnMainLoop()
 {
 	EditorObject::OnMainLoop();

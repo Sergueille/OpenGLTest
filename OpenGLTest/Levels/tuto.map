@@ -600,6 +600,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "919"
@@ -836,6 +837,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object CameraController {
 	ID: "1166"
@@ -860,6 +862,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object CameraController {
 	ID: "1170"
@@ -895,6 +898,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object CameraController {
 	ID: "1300"
@@ -2018,6 +2022,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object LevelEnd {
 	ID: "7547"
@@ -5216,6 +5221,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "22227"

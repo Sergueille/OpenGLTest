@@ -96,7 +96,6 @@ vec2 ObjectFollower::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::CheckBox(drawPos, "Collide with phys.", &collideWithPhysics, Editor::panelPropertiesX).y;
 	if (rotateTowardsTarget)
 	{
-		drawPos.y -= Editor::DrawProperty(drawPos, "Bounce", &bounce, Editor::panelPropertiesX, strID + "bounce").y + Editor::margin;
 		drawPos.y -= Editor::DrawProperty(drawPos, "Collider size", &colliderSize, Editor::panelPropertiesX, strID + "size").y + Editor::margin;
 	}
 
@@ -145,9 +144,9 @@ void ObjectFollower::Load(std::map<std::string, std::string>* props)
     EditorSaveManager::FloatProp(props, "rotateSpeed", &rotateSpeed);
 
 	collideWithPhysics = (*props)["collideWithPhysics"] == "1";
-	EditorSaveManager::FloatProp(props, "bounce", &bounce);
 
 	mustFollow = (*props)["mustFollow"] == "1";
+	startMustFollow = mustFollow;
 
     EditorSaveManager::IntProp(props, "targetID", &targetID);
 	followPlayer = (*props)["followPlayer"] == "1";
@@ -169,6 +168,9 @@ void ObjectFollower::Load(std::map<std::string, std::string>* props)
 	physicsEnabled = !Editor::enabled;
 	collideCollider->SetCollideWithPhys(physicsEnabled);
 	SetPos(GetEditPos());
+
+	startPos = GetLocalEditPos();
+	startRot = GetLocalEditRotation();
 }
 
 void ObjectFollower::Save()
@@ -186,7 +188,6 @@ void ObjectFollower::Save()
     EditorSaveManager::WriteProp("rotateTowardsTarget", rotateTowardsTarget);
     EditorSaveManager::WriteProp("rotateSpeed", rotateSpeed);
     EditorSaveManager::WriteProp("collideWithPhysics", collideWithPhysics);
-    EditorSaveManager::WriteProp("bounce", bounce);
     EditorSaveManager::WriteProp("mustFollow", mustFollow);
     EditorSaveManager::WriteProp("colliderSize", colliderSize);
 }
@@ -237,12 +238,21 @@ void ObjectFollower::OnBeforeMove()
 			float targetAngle = Utility::GetVectorAngle(velocity);
 			float angleDist = targetAngle - editorRotation;
 
-			if (angleDist > 180) editorRotation += 360;
+			if (angleDist > 180)
+			{
+				editorRotation += 360;
+				angleDist = 360 - angleDist;
+			}
+			if (angleDist < -180)
+			{
+				editorRotation -= 360;
+				angleDist = 360 - angleDist;
+			}
 
 			if (targetAngle > editorRotation)
-				editorRotation += min(angleDist, rotateSpeed * GetDeltaTime());
+				editorRotation += AbsMin(angleDist, rotateSpeed * GetDeltaTime());
 			else
-				editorRotation -= min(angleDist, rotateSpeed * GetDeltaTime());
+				editorRotation -= AbsMin(angleDist, rotateSpeed * GetDeltaTime());
 		}
 	}
 
@@ -270,6 +280,14 @@ void ObjectFollower::OnSelected()
 void ObjectFollower::OnUnselected()
 {
 	colliderSprite->StopDrawing();
+}
+
+void ObjectFollower::ResetIngameState()
+{
+	mustFollow = startMustFollow;
+
+	SetEditPos(startPos);
+	SetEditRotation(startRot);
 }
 
 void ObjectFollower::OnMainLoop()

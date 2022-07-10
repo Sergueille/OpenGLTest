@@ -109,6 +109,10 @@ EditorObject* TransformModifier::Copy()
 			newObj->targetObject = Editor::GetEditorObjectByIDInObjectContext(newObj, newObj->targetID, false, false);
 		});
 
+	newObj->moveAction = nullptr;
+	newObj->roateAction = nullptr;
+	newObj->scaleAction = nullptr;
+
 	return newObj;
 }
 
@@ -154,6 +158,8 @@ void TransformModifier::Disable()
 {
 	EditorObject::Disable();
     if (editorSprite != nullptr) editorSprite->StopDrawing();
+
+	CancelAll(); // TEST
 }
 
 void TransformModifier::GetObjectEvents(const ObjectEvent** firstEvent, int* count)

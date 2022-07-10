@@ -66,7 +66,10 @@ namespace Utility
 
 	float AngleBetween(glm::vec2 a, glm::vec2 b)
 	{
-		return acos(glm::dot(a, b) / glm::length(a) / glm::length(b)) * Utility::RadToDeg;
+		float val = glm::dot(a, b) / glm::length(a) / glm::length(b);
+		if (val < -1) val = -1;
+		if (val > 1) val = 1;
+		return acos(val) * Utility::RadToDeg;
 	}
 
 	glm::vec2 GetMousePos()

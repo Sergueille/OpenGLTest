@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 343
+count 344
 
 object MapData {
 	mapName: ""
@@ -221,6 +221,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object ShadowCaster {
 	ID: "745"
@@ -1332,6 +1333,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "5765"
@@ -1345,6 +1347,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "6343"
@@ -1358,6 +1361,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "6491"
@@ -2245,6 +2249,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "11546"
@@ -2258,6 +2263,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "11548"
@@ -2271,6 +2277,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object CameraController {
 	ID: "11549"
@@ -2602,6 +2609,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object CameraController {
 	ID: "12581"
@@ -2626,6 +2634,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object CameraController {
 	ID: "12585"
@@ -2650,6 +2659,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "15746"
@@ -2956,6 +2966,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object LevelEnd {
 	ID: "20399"
@@ -3002,6 +3013,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "20673"
@@ -3015,6 +3027,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "20675"
@@ -3028,6 +3041,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "20677"
@@ -3041,6 +3055,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "20679"
@@ -3054,6 +3069,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "20681"
@@ -3067,6 +3083,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Prefab {
 	ID: "20683"
@@ -4607,6 +4624,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object TerminalWriter {
 	ID: "24499"
@@ -4718,7 +4736,7 @@ object EditorSprite {
 	texturePath: "cables2.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
+	UVend: "-1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
@@ -4750,7 +4768,7 @@ object EditorSprite {
 	texturePath: "cables2.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
+	UVend: "-1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
@@ -4816,5 +4834,20 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "29042"
+	name: ""
+	position: "225.000000, -32.000000, 10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.400000, 2.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
 	visibleOnlyInEditor: "0"
 }

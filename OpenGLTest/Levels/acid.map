@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 248
+count 250
 
 object MapData {
 	mapName: ""
@@ -25,7 +25,7 @@ object EditorSprite {
 object Player {
 	ID: "94"
 	name: ""
-	position: "57.000000, 64.200005, 20.000000"
+	position: "-133.600006, 44.000000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -387,6 +387,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Button {
 	ID: "372"
@@ -1130,6 +1131,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object SoundPoint {
 	ID: "5237"
@@ -1442,6 +1444,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Prefab {
 	ID: "5888"
@@ -1664,6 +1667,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object LogicRelay {
 	ID: "7054"
@@ -2326,6 +2330,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "9531"
@@ -2766,7 +2771,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "14163"
 	name: ""
-	position: "70.193924, 68.806076, -2.000000"
+	position: "70.193924, 68.806076, 1.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "3.200000, 3.200000"
@@ -2969,6 +2974,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "15687"
@@ -3298,4 +3304,26 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+}
+object LevelEnd {
+	ID: "18947"
+	name: ""
+	position: "136.800003, 40.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	nextLevel: "intro_rockets.map"
+}
+object Trigger {
+	ID: "18948"
+	name: ""
+	position: "130.199997, 39.799999, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "6.600000, 6.600000"
+	onEnter: "18947|End level|"
+	onExit: ""
+	once: "0"
+	needPlayerInteraction: "0"
+	killPlayer: "0"
 }

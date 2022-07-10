@@ -166,6 +166,12 @@ void LogicRelay::Trigger()
 	}
 }
 
+void LogicRelay::ResetIngameState()
+{
+	isAlt = false;
+	if (triggerOnStart) Trigger();
+}
+
 void LogicRelay::TriggerNow()
 {
 	if (Editor::enabled) return;

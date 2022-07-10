@@ -29,7 +29,6 @@ public:
 	float rotateSpeed = 180; // deg.s-1
 
 	bool collideWithPhysics = false;
-	float bounce = 0.3f; // force is multiplied by this after collision
 	float colliderSize = 1;
 
 	bool mustFollow = true;
@@ -55,9 +54,15 @@ public:
 	virtual void OnSelected() override;
 	virtual void OnUnselected() override;
 
+	virtual void ResetIngameState() override;
+
 private:
 	EditorObject* _target = nullptr;
 	CircleCollider* collideCollider;
 	Sprite* colliderSprite;
+
+	bool startMustFollow;
+	vec3 startPos;
+	float startRot;
 };
 

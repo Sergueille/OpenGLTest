@@ -171,6 +171,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Laser {
 	ID: "2908"
@@ -715,7 +716,7 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
-	visibleOnlyInEditor: "0"
+	visibleOnlyInEditor: "1"
 }
 object LogicRelay {
 	ID: "3243"

@@ -40,6 +40,8 @@ public:
 
 	void Trigger();
 
+	virtual void ResetIngameState() override;
+
 private:
 	static const ObjectEvent events[LOGIC_RELAY_EVENT_COUNT];
 

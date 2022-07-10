@@ -22,6 +22,8 @@ public:
 	bool once = false;
 	bool needPlayerInteraction = false;
 
+	bool killPlayer = false;
+
     Sprite* editorSprite = nullptr;
 
 	bool collideWithPlayer = false;
@@ -38,6 +40,8 @@ public:
 	virtual void Disable() override;
 
 	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
+
+	virtual void ResetIngameState() override;
 
 private: 
 	bool hasAlredyTriggered = false;

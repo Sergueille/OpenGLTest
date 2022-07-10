@@ -151,4 +151,18 @@ namespace Utility
 	extern int lastTextureAttachement;
 
 	float GetSoundAttenuation(float dist, float maxDist, float minDist);
+
+	template <typename T>
+	T AbsMin(T a, T b)
+	{
+		if (abs(a) < abs(b)) return a;
+		else return b;
+	}
+
+	template <typename T>
+	T AbsMax(T a, T b)
+	{
+		if (abs(a) > abs(b)) return a;
+		else return b;
+	}
 };

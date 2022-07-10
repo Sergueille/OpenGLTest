@@ -44,6 +44,8 @@ public:
 
 	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 
+	virtual void ResetIngameState() override;
+
 private:
 	std::string prefabPath = "";
 	

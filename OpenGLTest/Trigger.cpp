@@ -52,6 +52,7 @@ vec2 Trigger::DrawProperties(vec3 drawPos)
 
 	drawPos.y -= Editor::CheckBox(drawPos, "Trigger once", &once, Editor::panelPropertiesX).y;
 	drawPos.y -= Editor::CheckBox(drawPos, "Need player interaction", &needPlayerInteraction, Editor::panelPropertiesX).y;
+	drawPos.y -= Editor::CheckBox(drawPos, "Kill player", &killPlayer, Editor::panelPropertiesX).y;
 
 	drawPos.y -= onEnter.DrawInPanel(drawPos, "On player enter").y;
 	drawPos.y -= onExit.DrawInPanel(drawPos, "On player exit").y;
@@ -83,6 +84,7 @@ void Trigger::Load(std::map<std::string, std::string>* props)
 
 	once = (*props)["once"] == "1";
 	needPlayerInteraction = (*props)["needPlayerInteraction"] == "1";
+	killPlayer = (*props)["killPlayer"] == "1";
 
 	EventList::Load(&onEnter, (*props)["onEnter"]);
 	EventList::Load(&onExit, (*props)["onExit"]);
@@ -100,6 +102,7 @@ void Trigger::Save()
 
     EditorSaveManager::WriteProp("once", once);
     EditorSaveManager::WriteProp("needPlayerInteraction", needPlayerInteraction);
+    EditorSaveManager::WriteProp("killPlayer", killPlayer);
 }
 
 void Trigger::Enable()
@@ -118,6 +121,11 @@ void Trigger::GetObjectEvents(const ObjectEvent** res, int* resCount)
 {
 	*res = events;
 	*resCount = TRIGGER_EVENT_COUNT;
+}
+
+void Trigger::ResetIngameState()
+{
+	hasAlredyTriggered = false;
 }
 
 void Trigger::OnMainLoop()
@@ -143,6 +151,11 @@ void Trigger::OnMainLoop()
 
 			if (res.z != 0) // Is colliding
 			{
+				if (killPlayer)
+				{
+					Player::ingameInstance->Kill();
+				}
+
 				if (!collideWithPlayer)
 				{
 					hasAlredyTriggered = true;
