@@ -10,15 +10,15 @@ public:
 
 	static Language currentLanguage;
 
-	static std::map<std::string, std::u8string> data;
+	static std::map<std::string, std::string> data;
 
 	static void LoadLanguage(Language lang);
-	static std::u8string GetLocale(std::string key);
+	static std::string GetLocale(std::string key);
 	static void Clear();
 
 private:
 	static void ReadFile(std::string path);
-	static void DiscardUntil(std::basic_ifstream<char8_t>* ifile, char target);
-	static std::u8string ReadValue(std::basic_ifstream<char8_t>* ifile);
+	static void DiscardUntil(std::ifstream* ifile, char target);
+	static std::string ReadValue(std::ifstream* ifile);
 };
 

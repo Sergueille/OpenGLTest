@@ -1,9 +1,11 @@
 // Editor map file, version 1
 
-count 7
+count 10
 
 object MapData {
 	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
 }
 object TransformModifier {
 	ID: "88"
@@ -33,7 +35,7 @@ object TransformModifier {
 	targetSize: "1.000000, 1.000000"
 	duration: "0.800000"
 	easeType: "4"
-	onFinished: "118|Start|"
+	onFinished: "118|Start|122|Play sound|"
 }
 object EditorSprite {
 	ID: "23"
@@ -69,9 +71,9 @@ object PrefabRelay {
 	parent: "-1"
 	parallax: "1.000000"
 	eventListsCount: "2"
-	eventList0: "114|Cancell all|42|Turn off|88|Set all transforms|"
+	eventList0: "114|Cancell all|42|Turn off|88|Set all transforms|119|Play sound|"
 	eventList0name: "Open door"
-	eventList1: "88|Cancell all|42|Turn on|114|Set all transforms|"
+	eventList1: "88|Cancell all|42|Turn on|114|Set all transforms|121|Play sound|"
 	eventList1name: "Close door"
 }
 object EditorParticleSystem {
@@ -83,6 +85,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "1.200000, 0.040000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "0.000000, 0.000000"
 	endVelocity: "0.000000, 2.000000"
 	startSize: "0.200000, 0.200000"
@@ -95,4 +98,49 @@ object EditorParticleSystem {
 	particleLifetime: "2.000000"
 	duration: "0.100000"
 	autoStart: "0"
+}
+object SoundPoint {
+	ID: "119"
+	name: "open sound"
+	position: "-0.400000, 2.600000, 80.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "door_open.wav"
+	volume: "1.000000"
+	spatial: "1"
+	minDist: "5.000000"
+	maxDist: "20.000000"
+	autoStart: "0"
+	loop: "0"
+	dontPlayIfTooFar: "0"
+}
+object SoundPoint {
+	ID: "121"
+	name: "close sound"
+	position: "0.400000, 2.600000, 80.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "door_close.wav"
+	volume: "1.000000"
+	spatial: "1"
+	minDist: "5.000000"
+	maxDist: "20.000000"
+	autoStart: "0"
+	loop: "0"
+	dontPlayIfTooFar: "0"
+}
+object SoundPoint {
+	ID: "122"
+	name: "clac sound"
+	position: "0.000000, -3.400000, 80.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "metal_hit.wav"
+	volume: "1.000000"
+	spatial: "1"
+	minDist: "5.000000"
+	maxDist: "20.000000"
+	autoStart: "0"
+	loop: "0"
+	dontPlayIfTooFar: "0"
 }

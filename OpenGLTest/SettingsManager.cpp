@@ -162,6 +162,7 @@ void SettingsManager::CreateGLFWWindow()
     }
 
     windowCreated = true;
+    std::cout << "Created window" << std::endl;
 }
 
 void SettingsManager::SaveSettings()

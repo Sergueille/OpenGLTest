@@ -2,7 +2,7 @@ TEXTURES --------------------
 - textures.com
 
 SOUNDS ----------------------
-- freesound.org (may not be exact)
+- freesound.org (some sounds may be unused or modified)
 	- "Normal click" by Breviceps
 	- "UI Pop Up" by EminYILDIRIM
 	- "Score Counter 01" by rhodesmas
@@ -37,6 +37,7 @@ SOUNDS ----------------------
     - "Single clicks Keyboard Sound" by StrikeWhistler
     - "ShortLaserSound" by tjcason
     - "artMotorB" by hanstimm
+    - "tunnel 2" by lollosound
 
 LIBRARIES -------------------
 - GLFW (window management, os stuff)

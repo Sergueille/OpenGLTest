@@ -8,8 +8,8 @@
 #include FT_FREETYPE_H 
 
 namespace TextManager {
-    std::map<char8_t, Character> characters;
-    std::map<char8_t, Character> charactersMono;
+    std::map<int, Character> characters;
+    std::map<int, Character> charactersMono;
     unsigned int VAO, VBO;
 
     int TextManager::Init() 
@@ -47,7 +47,7 @@ namespace TextManager {
         return 0;
     }
 
-    void LoadFont(FT_Library lib, const char* fontName, std::map<char8_t, Character>* map)
+    void LoadFont(FT_Library lib, const char* fontName, std::map<int, Character>* map)
     {
         // Load font
         FT_Face face;
@@ -60,15 +60,36 @@ namespace TextManager {
         // Set font resolution
         FT_Set_Pixel_Sizes(face, 0, 64);
 
-        std::u8string chars = u8"é \nazertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890,;:!?./§^<>$*&\"'(-_)=#{[|`\\^@]}+%";
+        std::u8string chars = u8" \nazertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890,;:!?./§^<>$*&\"'(-_)=#{[|`\\^@]}+%éèêëàâäàiîïìoôöòuûüùç";
+
+        int halfchar = 0;
 
         // Load chars
         for (int i = 0; i < chars.length(); i++)
         {
-            int glyph_index = FT_Get_Char_Index(face, chars[i]);
+            if (halfchar == 0 && chars[i] > 128)
+            {
+                halfchar = (int)chars[i];
+                continue;
+            }
+           
+            int utfcode;
+            int glyph_index;
+            if (halfchar != 0)
+            {
+                utfcode = (halfchar << 8) + (int)chars[i];
+                glyph_index = (utfcode & 0b111111) + ((utfcode & 0b11111100000000) >> 2);
+                halfchar = 0;
+            }
+            else
+            {
+                utfcode = chars[i];
+                glyph_index = chars[i];
+            }
+
 
             // load character glyph 
-            if (FT_Load_Glyph(face, glyph_index, FT_LOAD_RENDER))
+            if (FT_Load_Glyph(face, FT_Get_Char_Index(face, glyph_index), FT_LOAD_RENDER))
             {
                 std::cerr << "Failed to load Glyph " << glyph_index << std::endl;
                 continue;
@@ -104,7 +125,7 @@ namespace TextManager {
                 (unsigned int)face->glyph->advance.x
             };
 
-            map->insert(std::pair<char8_t, Character>(chars[i], character));
+            map->insert(std::pair<int, Character>(utfcode, character));
         }
 
         std::cout << "Loaded font " << fontName << std::endl;
@@ -114,11 +135,6 @@ namespace TextManager {
     }
 
     glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align, glm::vec3 color, bool mono)
-    {
-        return RenderText(std::u8string(text.begin(), text.end()), pos, scale, align, color, mono);
-    }
-
-    glm::vec2 RenderText(std::u8string text, glm::vec3 pos, float scale, text_align align, glm::vec3 color, bool mono)
     {
         scale /= 64;
 
@@ -140,16 +156,35 @@ namespace TextManager {
         float currentX = pos.x;
         float currentY = pos.y;
 
+        int halfchar = 0;
+
         // iterate through all characters
         for (auto c = text.begin(); c != text.end(); c++)
         {
-            DrawChar(*c, &currentX, &currentY, scale, pos, mono);
+            if (halfchar == 0 && *c < 0)
+            {
+                halfchar = (int)(unsigned char)*c;
+                continue;
+            }
+
+            int charID;
+            if (halfchar != 0)
+            {
+                charID = (halfchar << 8) + (int)(unsigned char)*c;
+                halfchar = 0;
+            }
+            else
+            {
+                charID = *c;
+            }
+
+            DrawChar(charID, &currentX, &currentY, scale, pos, mono);
         }
 
         return glm::vec2(currentX - pos.x, pos.y - currentY + scale * 64.f) ;
     }
 
-    void DrawChar(char8_t c, float* currentX, float* currentY, float scale, glm::vec3 pos, bool mono)
+    void DrawChar(int c, float* currentX, float* currentY, float scale, glm::vec3 pos, bool mono)
     {
         if (c == '\n')
         {
@@ -193,18 +228,32 @@ namespace TextManager {
 
     glm::vec2 GetRect(std::string text, float size, bool mono)
     {
-        return GetRect(std::u8string(text.begin(), text.end()), size, mono);
-    }
-
-    glm::vec2 GetRect(std::u8string text, float size, bool mono)
-    {
         float X = 0;
         float maxX = 0;
         float Y = size * 64 * 64;
 
+        int halfchar = 0;
+
         // iterate through all characters
         for (auto c = text.begin(); c != text.end(); c++)
         {
+            if (halfchar == 0 && *c > 128)
+            {
+                halfchar = (int)*c;
+                continue;
+            }
+
+            int charID;
+            if (halfchar != 0)
+            {
+                charID = (halfchar << 8) + (int)*c;
+                halfchar = 0;
+            }
+            else
+            {
+                charID = *c;
+            }
+
             Character ch = mono ? charactersMono[*c] : characters[*c];
 
             if (*c == '\n')

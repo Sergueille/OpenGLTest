@@ -326,8 +326,8 @@ vec2 MenuManager::TextInput(vec3 drawPos, std::string* value, std::string placeH
 	}
 	else
 	{
-		std::u8string placeHolder = LocalizationManager::GetLocale(placeHolderKey);
-		std::u8string displayString = value->length() == 0 ? placeHolder : std::u8string(value->begin(), value->end());
+		std::string placeHolder = LocalizationManager::GetLocale(placeHolderKey);
+		std::string displayString = value->length() == 0 ? placeHolder : *value;
 
 		vec2 mousePos = Utility::GetMousePos();
 		mousePos.y *= -1;
@@ -379,7 +379,7 @@ vec2 MenuManager::TextInput(vec3 drawPos, std::string* value, std::string placeH
 
 vec2 MenuManager::Button(vec3 drawPos, std::string key, bool* out, bool enabled, bool noLocale)
 {
-	std::u8string text = noLocale ? std::u8string(key.begin(), key.end()) : LocalizationManager::GetLocale(key);
+	std::string text = noLocale ? key : LocalizationManager::GetLocale(key);
 
 	vec4 color;
 	vec2 textRect = TextManager::GetRect(text, textSize);
@@ -598,7 +598,7 @@ vec2 MenuManager::Slider(vec3 drawPos, std::string label, float* value, float mi
 	handle.texture = RessourceManager::GetTexture("Engine\\circle.png");
 	handle.Draw();
 
-	std::u8string local = LocalizationManager::GetLocale(label);
+	std::string local = LocalizationManager::GetLocale(label);
 	TextManager::RenderText(local, drawPos, textSize, TextManager::right, color);
 
 	char buffer[20];
@@ -690,7 +690,7 @@ vec2 MenuManager::Toggle(vec3 drawPos, std::string label, bool* value)
 		).Draw();		
 	}
 
-	std::u8string local = LocalizationManager::GetLocale(label);
+	std::string local = LocalizationManager::GetLocale(label);
 	TextManager::RenderText(local, drawPos, textSize, TextManager::right, color);
 
 	return vec2(propsScale + toggleSize, textSize);

@@ -51,6 +51,8 @@ int main(int argc, void* argv[])
 {
 #if _DEBUG
     std::cerr << "The game is running in debug configuration!" << std::endl;
+#else
+    std::cout << "The game will start in a few seconds. Please don't close this window." << std::endl;
 #endif
 
     SettingsManager::ReadSettings();

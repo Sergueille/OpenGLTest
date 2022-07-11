@@ -41,8 +41,7 @@ std::string TerminalManager::GetAllText()
 
 void TerminalManager::Write(std::string key)
 {
-	std::u8string textu8 = LocalizationManager::GetLocale("t_begin") + LocalizationManager::GetLocale(key);
-	std::string text = std::string(textu8.begin(), textu8.end());
+	std::string text = LocalizationManager::GetLocale("t_begin") + LocalizationManager::GetLocale(key);
 
 	if (lines[lines.size() - 1].length() > 0)
 		NewLine();

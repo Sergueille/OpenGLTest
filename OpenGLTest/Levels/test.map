@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 64
+count 62
 
 object MapData {
 	mapName: ""
@@ -101,10 +101,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "154"
 	name: "Platform"
-	position: "6.600000, 6.800000, 0.000000"
+	position: "6.600000, 9.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "10.200000, 1.000000"
+	size: "10.200000, 5.000000"
 	rotation: "-180.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -112,18 +112,6 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
-}
-object Laser {
-	ID: "13"
-	name: "TestLaser"
-	position: "6.800000, 6.200000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "630.000000"
-	laserType: "0"
-	startOffset: "-0.100000"
-	endOffset: "0.150000"
-	startOn: "1"
 }
 object Light {
 	ID: "273"
@@ -151,10 +139,10 @@ object ShadowCaster {
 object ShadowCaster {
 	ID: "472"
 	name: ""
-	position: "6.600000, 6.800000, 10.000000"
+	position: "6.600000, 9.600000, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "10.200000, 1.000000"
+	size: "10.200000, 6.200000"
 	orientation: "-0.000000"
 }
 object ShadowCaster {
@@ -169,7 +157,7 @@ object ShadowCaster {
 object Player {
 	ID: "477"
 	name: ""
-	position: "2.600000, 8.200000, 20.000000"
+	position: "-3.000000, 6.000000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -186,19 +174,9 @@ object Prefab {
 	scale: "1.000000, 1.000000"
 }
 object Prefab {
-	ID: "562"
-	name: ""
-	position: "6.200000, 10.800000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	path: "prefabs\neon.map"
-	ori: "0.000000"
-	scale: "1.000000, 1.000000"
-}
-object Prefab {
 	ID: "627"
 	name: ""
-	position: "3.200000, 6.200000, 0.000000"
+	position: "3.200000, 6.400000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\neon.map"
@@ -279,7 +257,7 @@ object Prefab {
 object Prefab {
 	ID: "2544"
 	name: ""
-	position: "10.000000, 6.200000, 0.000000"
+	position: "10.000000, 6.400000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\neon.map"
@@ -702,6 +680,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorParticleSystem {
 	ID: "3881"
@@ -826,6 +805,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "5728"
@@ -842,16 +822,6 @@ object EditorSprite {
 	isLit: "0"
 	visibleOnlyInEditor: "0"
 }
-object Prefab {
-	ID: "6164"
-	name: ""
-	position: "-14.600000, 7.800000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	path: "prefabs\rocket.map"
-	ori: "0.000000"
-	scale: "1.000000, 1.000000"
-}
 object LogicRelay {
 	ID: "6334"
 	name: ""
@@ -864,12 +834,26 @@ object LogicRelay {
 	delay: "1.000000"
 }
 object Prefab {
-	ID: "6622"
+	ID: "6835"
 	name: ""
-	position: "-14.600000, 1.600000, 0.000000"
+	position: "7.400000, 4.400000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	path: "prefabs\rocket.map"
+	path: "prefabs\door.map"
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
+}
+object Trigger {
+	ID: "6960"
+	name: ""
+	position: "7.000000, 4.200000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "9.400001, 5.800000"
+	onEnter: "6835|Open door|"
+	onExit: "6835|Close door|"
+	once: "0"
+	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
