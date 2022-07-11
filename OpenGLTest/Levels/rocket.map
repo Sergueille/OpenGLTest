@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 152
+count 153
 
 object MapData {
 	mapName: ""
@@ -1026,7 +1026,7 @@ object TransformModifier {
 	targetRotation: "0.000000"
 	targetSize: "1.000000, 1.000000"
 	duration: "40.000000"
-	easeType: "3"
+	easeType: "1"
 	onFinished: "8934|Open door|9182|Stop sound|9188|Play sound|"
 }
 object TransformModifier {
@@ -1216,7 +1216,7 @@ object TransformModifier {
 	targetRotation: "3600.000000"
 	targetSize: "1.000000, 1.000000"
 	duration: "40.000000"
-	easeType: "3"
+	easeType: "1"
 	onFinished: ""
 }
 object EditorSprite {
@@ -1262,7 +1262,7 @@ object TransformModifier {
 	targetRotation: "-3600.000000"
 	targetSize: "1.000000, 1.000000"
 	duration: "40.000000"
-	easeType: "3"
+	easeType: "1"
 	onFinished: ""
 }
 object TransformModifier {
@@ -1537,7 +1537,7 @@ object Trigger {
 object Trigger {
 	ID: "11052"
 	name: ""
-	position: "-105.800003, -4.200000, 0.000000"
+	position: "-105.800003, -4.200000, -8.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
@@ -1556,7 +1556,7 @@ object Trigger {
 	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "37.200001, 2.800000"
-	onEnter: "10799|Launch|"
+	onEnter: "10799|Launch|11753|Launch|10805|Launch|"
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
@@ -2002,4 +2002,16 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+}
+object Laser {
+	ID: "22973"
+	name: ""
+	position: "-2.399998, -3.000000, 0.000000"
+	parent: "8914"
+	parallax: "1.000000"
+	orientation: "180.000000"
+	laserType: "0"
+	startOffset: "-0.100000"
+	endOffset: "0.050000"
+	startOn: "1"
 }

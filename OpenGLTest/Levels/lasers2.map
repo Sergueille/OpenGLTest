@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 361
+count 363
 
 object MapData {
 	mapName: ""
@@ -5253,4 +5253,32 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object Trigger {
+	ID: "18321"
+	name: ""
+	position: "25.400000, 0.400000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "10.600000, 4.800000"
+	onEnter: "17493|Start timer|"
+	onExit: ""
+	once: "0"
+	needPlayerInteraction: "0"
+	killPlayer: "0"
+}
+object Trigger {
+	ID: "18323"
+	name: ""
+	position: "36.000000, -11.400001, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "5.800000, 4.800000"
+	onEnter: "17493|Disable timer|"
+	onExit: ""
+	once: "0"
+	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
