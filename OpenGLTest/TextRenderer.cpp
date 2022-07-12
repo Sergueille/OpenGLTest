@@ -109,5 +109,5 @@ void TextRenderer::OnMainLoop()
 	vec3 screenPos = Utility::WorldToScreen(GetEditPos());
 	screenPos.z = GetEditPos().z;
 
-	TextManager::RenderText(LocalizationManager::GetLocale(content), screenPos, screenSize, TextManager::right, color);
+	TextManager::RenderText(LocalizationManager::GetLocale(content), screenPos, screenSize, TextManager::center, color);
 }

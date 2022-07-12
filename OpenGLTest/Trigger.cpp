@@ -142,7 +142,7 @@ void Trigger::OnMainLoop()
 	((RectCollider*)clickCollider)->size = GetEditScale();
 	((RectCollider*)clickCollider)->orientation = GetEditRotation();
 
-	if (!Editor::enabled && Player::ingameInstance != nullptr)
+	if (!Editor::enabled && Player::ingameInstance != nullptr && !EditorSaveManager::isLoading)
 	{
 		if (!once || !hasAlredyTriggered)
 		if (!needPlayerInteraction || glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)

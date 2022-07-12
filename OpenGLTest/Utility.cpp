@@ -93,7 +93,7 @@ namespace Utility
 
 	glm::vec3 WorldToScreen(glm::vec3 worldPos)
 	{
-		vec2 delta = vec2(worldPos) - Camera::position;
+		vec2 delta = vec2(worldPos) - Camera::position - Camera::deltaPos;
 		delta /= Camera::size;
 		delta *= screenY;
 		delta += vec2(screenX / 2, screenY / 2);

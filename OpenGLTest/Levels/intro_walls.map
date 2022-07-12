@@ -7437,7 +7437,7 @@ object LogicRelay {
 object EditorSprite {
 	ID: "22566"
 	name: "over"
-	position: "-14.400001, 6.800000, 45.000000"
+	position: "-14.600000, 7.600000, 45.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "35.799999, 21.400000"
@@ -7918,7 +7918,7 @@ object EditorParticleSystem {
 object EditorSprite {
 	ID: "27780"
 	name: "over text"
-	position: "-20.200001, -2.400000, 45.000000"
+	position: "-20.000000, -2.400000, 45.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "18.400000, 4.000000"

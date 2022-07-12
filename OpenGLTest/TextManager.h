@@ -40,7 +40,9 @@ namespace TextManager{
     /// <param name="scale">The size of the text in pixels</param>
     /// <param name="color">The color of the text</param>
     /// <returns>The size of the text area</returns>
-    glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align = right, glm::vec3 color = glm::vec3(1, 1, 1), bool mono = false);
+    glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align, glm::vec4 color, bool mono = false);
+    glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align, glm::vec3 color, bool mono = false);
+    glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align = right);
 
     /// <summary>
     /// INTERNAL - Draw a char

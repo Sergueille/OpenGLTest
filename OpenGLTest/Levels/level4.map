@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 423
+count 428
 
 object MapData {
 	mapName: ""
@@ -977,7 +977,7 @@ object EditorSprite {
 	position: "113.400002, -9.400001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "15.800000, 27.000000"
+	size: "42.200001, 27.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -2486,16 +2486,6 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
-object Prefab {
-	ID: "12278"
-	name: ""
-	position: "238.800003, -28.200001, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	path: "prefabs\elevator.map"
-	ori: "0.000000"
-	scale: "1.000000, 1.000000"
-}
 object EditorSprite {
 	ID: "12330"
 	name: ""
@@ -2520,22 +2510,6 @@ object Prefab {
 	path: "prefabs\neon.map"
 	ori: "0.000000"
 	scale: "1.000000, 1.000000"
-}
-object EditorSprite {
-	ID: "12339"
-	name: ""
-	position: "227.000000, -28.200001, -10.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "7.200000, 4.200000"
-	rotation: "0.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "back\plaster1.jpg"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "1"
-	visibleOnlyInEditor: "0"
 }
 object Prefab {
 	ID: "12341"
@@ -4813,21 +4787,6 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
-object EditorSprite {
-	ID: "29042"
-	name: ""
-	position: "225.000000, -32.000000, 10.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "2.400000, 2.600000"
-	rotation: "0.000000"
-	color: "0.000000, 0.000000, 0.000000, 1.000000"
-	collideWithPhys: "1"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "0"
-	visibleOnlyInEditor: "0"
-}
 object ShadowCaster {
 	ID: "29328"
 	name: ""
@@ -5600,13 +5559,13 @@ object EditorSprite {
 object EditorSprite {
 	ID: "29704"
 	name: ""
-	position: "110.173958, -36.895050, -2.000000"
+	position: "117.200005, -38.600002, -2.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "2.000000, 2.000000"
+	size: "0.600000, 0.600000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "toilet.png"
+	texturePath: "panel3.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
@@ -6080,10 +6039,10 @@ object SoundPoint {
 	soundName: "door_open.wav"
 	volume: "1.000000"
 	spatial: "1"
-	minDist: "1.000000"
-	maxDist: "20.000000"
-	autoStart: "1"
-	loop: "1"
+	minDist: "10.000000"
+	maxDist: "40.000000"
+	autoStart: "0"
+	loop: "0"
 	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
@@ -6095,9 +6054,116 @@ object SoundPoint {
 	soundName: "metal_hit.wav"
 	volume: "1.000000"
 	spatial: "1"
-	minDist: "1.000000"
-	maxDist: "20.000000"
-	autoStart: "1"
-	loop: "1"
+	minDist: "10.000000"
+	maxDist: "40.000000"
+	autoStart: "0"
+	loop: "0"
 	dontPlayIfTooFar: "0"
+}
+object EditorSprite {
+	ID: "31196"
+	name: ""
+	position: "39.400002, -27.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "18.600000, 12.800000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "31198"
+	name: ""
+	position: "128.000000, -49.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "18.600000, 12.800000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "31200"
+	name: ""
+	position: "-38.400002, 21.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "7.200000, 67.400002"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object TextRenderer {
+	ID: "31494"
+	name: ""
+	position: "117.097389, -38.678947, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	content: "door_switch1"
+	fontSize: "0.250000"
+	color: "0.800000, 0.800000, 0.800000, 0.020000"
+}
+object EditorSprite {
+	ID: "31498"
+	name: ""
+	position: "110.000000, -36.799999, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.200000, 2.200000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "toilet.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object TextRenderer {
+	ID: "31500"
+	name: ""
+	position: "113.943245, -24.695402, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	content: "door_switch2"
+	fontSize: "0.250000"
+	color: "0.800000, 0.800000, 0.800000, 0.020000"
+}
+object EditorSprite {
+	ID: "31502"
+	name: ""
+	position: "114.000000, -24.600000, -2.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "0.600000, 0.600000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "panel3.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object Prefab {
+	ID: "32517"
+	name: ""
+	position: "238.800003, -28.200001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\elevator.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
 }

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 38
+count 40
 
 object MapData {
 	mapName: ""
@@ -25,7 +25,7 @@ object EditorSprite {
 object Prefab {
 	ID: "2462"
 	name: "Elevator door"
-	position: "-2.400000, 0.000000, 2.000000"
+	position: "-2.400000, 0.000000, 6.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\door_elevator_right.map"
@@ -487,12 +487,12 @@ object EditorSprite {
 object LogicRelay {
 	ID: "3218"
 	name: ""
-	position: "-0.000000, -6.200000, 50.000000"
+	position: "-0.000000, -6.400000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	onTrigger: "2613|Set all transforms|3158|Set all transforms|3162|Set all transforms|"
+	onTrigger: "2613|Set all transforms|3158|Set all transforms|3162|Set all transforms|3245|Save game|3233|Play sound|"
 	onAltTrigger: ""
-	triggerOnStart: "1"
+	triggerOnStart: "0"
 	delay: "0.100000"
 }
 object EditorSprite {
@@ -538,7 +538,7 @@ object SoundPoint {
 	spatial: "1"
 	minDist: "10.000000"
 	maxDist: "20.000000"
-	autoStart: "1"
+	autoStart: "0"
 	loop: "1"
 	dontPlayIfTooFar: "0"
 }
@@ -556,4 +556,25 @@ object SoundPoint {
 	autoStart: "0"
 	loop: "0"
 	dontPlayIfTooFar: "0"
+}
+object Trigger {
+	ID: "3244"
+	name: ""
+	position: "-5.400000, 29.800001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "6.400000, 3.800000"
+	onEnter: "3218|Trigger|"
+	onExit: ""
+	once: "1"
+	needPlayerInteraction: "0"
+	killPlayer: "0"
+}
+object Checkpoint {
+	ID: "3245"
+	name: ""
+	position: "0.800000, 4.400000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
 }

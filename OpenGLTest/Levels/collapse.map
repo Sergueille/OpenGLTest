@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 472
+count 474
 
 object MapData {
 	mapName: ""
@@ -432,6 +432,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorParticleSystem {
 	ID: "3881"
@@ -1890,6 +1891,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object LogicRelay {
 	ID: "5587"
@@ -3179,6 +3181,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "14911"
@@ -4471,6 +4474,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "25079"
@@ -4485,6 +4489,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "25767"
@@ -4499,6 +4504,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "25769"
@@ -4513,6 +4519,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "25771"
@@ -4527,6 +4534,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object Prefab {
 	ID: "25818"
@@ -4551,6 +4559,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object SoundPoint {
 	ID: "26588"
@@ -4565,6 +4574,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object SoundArea {
 	ID: "27365"
@@ -4603,6 +4613,7 @@ object SoundPoint {
 	maxDist: "20.000000"
 	autoStart: "0"
 	loop: "0"
+	dontPlayIfTooFar: "0"
 }
 object EditorSprite {
 	ID: "28091"
@@ -4642,6 +4653,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object LogicRelay {
 	ID: "28149"
@@ -4812,6 +4824,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object LogicRelay {
 	ID: "28283"
@@ -4858,6 +4871,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object LogicRelay {
 	ID: "29096"
@@ -4882,6 +4896,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Light {
 	ID: "30249"
@@ -5104,6 +5119,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Prefab {
 	ID: "30728"
@@ -5127,6 +5143,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Trigger {
 	ID: "30737"
@@ -5140,6 +5157,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "30739"
@@ -6125,6 +6143,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "33168"
@@ -6763,6 +6782,7 @@ object Trigger {
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object Light {
 	ID: "34863"
@@ -6957,6 +6977,7 @@ object Trigger {
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
+	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "36454"
@@ -6989,4 +7010,24 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+}
+object TextRenderer {
+	ID: "36563"
+	name: ""
+	position: "88.272339, -15.477376, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	content: "exit"
+	fontSize: "0.250000"
+	color: "1.000000, 1.000000, 1.000000, 0.020000"
+}
+object TextRenderer {
+	ID: "36672"
+	name: ""
+	position: "119.506348, -20.675587, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	content: "exit"
+	fontSize: "0.250000"
+	color: "1.000000, 1.000000, 1.000000, 0.100000"
 }

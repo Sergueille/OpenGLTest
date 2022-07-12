@@ -5164,7 +5164,7 @@ object LogicRelay {
 object EditorSprite {
 	ID: "21140"
 	name: "over"
-	position: "-50.400002, 8.800000, 80.000000"
+	position: "-48.600002, 7.000000, 80.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "40.400002, 24.000000"

@@ -2,9 +2,15 @@
 #include "RectCollider.h"
 #include "CircleCollider.h"
 #include "Utility.h"
+#include <iostream>
 
 std::list<CircleCollider*> Collider::circleColliders = std::list<CircleCollider*>();
 std::list<RectCollider*> Collider::rectColliders = std::list<RectCollider*>();
+
+Collider::Collider()
+{
+
+}
 
 Collider::~Collider() { }
 
@@ -43,7 +49,9 @@ bool Collider::IsTouchingAnyCollider()
 			vec3 res = this->CollideWith(*coll);
 
 			if (res.z != 0)
+			{
 				return true;
+			}
 		}
 	}
 
@@ -56,7 +64,9 @@ bool Collider::IsTouchingAnyCollider()
 			vec3 res = this->CollideWith(*coll);
 
 			if (res.z != 0)
+			{
 				return true;
+			}
 		}
 	}
 

@@ -60,7 +60,7 @@ namespace TextManager {
         // Set font resolution
         FT_Set_Pixel_Sizes(face, 0, 64);
 
-        std::u8string chars = u8" \nazertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890,;:!?./§^<>$*&\"'(-_)=#{[|`\\^@]}+%éèêëàâäàiîïìoôöòuûüùçËÄÏÖÜÇ";
+        std::u8string chars = u8" \nazertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890,;:!?./§^<>$*&\"'(-_)=#{[|`\\^@]}+%éèêëàâäàiîïìoôöòuûüùçÂÊÎÔÛËÄÏÖÜÇ";
 
         int halfchar = 0;
 
@@ -134,14 +134,14 @@ namespace TextManager {
         FT_Done_Face(face);
     }
 
-    glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align, glm::vec3 color, bool mono)
+    glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align, glm::vec4 color, bool mono)
     {
         scale /= 64;
 
         Shader* shader = &RessourceManager::shaders["text"];
         shader->Use();
         shader->SetUniform("projection", Camera::GetUIProjection());
-        glUniform3f(glGetUniformLocation(shader->ID, "textColor"), color.x, color.y, color.z);
+        shader->SetUniform("textColor", color);
         Utility::GlBindVtexArrayOptimised(VAO);
 
         if (align == left)
@@ -182,6 +182,16 @@ namespace TextManager {
         }
 
         return glm::vec2(currentX - pos.x, pos.y - currentY + scale * 64.f) ;
+    }
+
+    glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align, glm::vec3 color, bool mono)
+    {
+        return RenderText(text, pos, scale, align, glm::vec4(color.x, color.y, color.z, 1), mono);
+    }
+
+    glm::vec2 RenderText(std::string text, glm::vec3 pos, float scale, text_align align)
+    {
+        return RenderText(text, pos, scale, align, glm::vec4(1), false);
     }
 
     void DrawChar(int c, float* currentX, float* currentY, float scale, glm::vec3 pos, bool mono)

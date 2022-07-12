@@ -13,6 +13,7 @@ class Collider
 	friend class PhysicObject;
 
 public:
+	Collider();
 	virtual ~Collider();
 
 	static std::list<CircleCollider*> circleColliders;

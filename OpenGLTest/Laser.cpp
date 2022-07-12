@@ -112,7 +112,7 @@ void Laser::OnMainLoop()
 			? 0
 			: glm::length(Player::ingameInstance->GetPos() - vec2(GetEditPos()));
 
-		if (Editor::enabled || playerDist < minPlayerDist || !hasRefreshedOnce) // Refresh anyway for the first time to relpace the sprite correctly
+		if (!EditorSaveManager::isLoading && (Editor::enabled || playerDist < minPlayerDist || !hasRefreshedOnce)) // Refresh anyway for the first time to relpace the sprite correctly
 		{
 			if (displaySprite != nullptr)
 				displaySprite->DrawOnMainLoop(); // NOCHECK
@@ -174,6 +174,8 @@ void Laser::OnMainLoop()
 							Player::ingameInstance->Kill();
 					}
 				}
+
+				hasRefreshedOnce = true;
 			}
 
 			// Get distance between camera and line
@@ -200,13 +202,6 @@ void Laser::OnMainLoop()
 			soundsAttenuation = 1 - soundsAttenuation;
 
 			soloud->setVolume(loopSound, Utility::gameSoundsVolume * soundOnVolume * soundsAttenuation);
-
-			hasRefreshedOnce = true;
-		}
-		else
-		{
-			if (displaySprite != nullptr)
-				displaySprite->StopDrawing();
 		}
 	}
 }

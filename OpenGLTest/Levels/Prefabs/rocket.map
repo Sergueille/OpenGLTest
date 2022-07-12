@@ -10,7 +10,7 @@ object MapData {
 object EditorSprite {
 	ID: "94"
 	name: ""
-	position: "0.000000, 0.000000, -50.000000"
+	position: "0.000000, -0.000000, -50.000000"
 	parent: "95"
 	parallax: "1.000000"
 	size: "1.200000, 1.200000"
@@ -45,7 +45,7 @@ object ObjectFollower {
 }
 object EditorParticleSystem {
 	ID: "96"
-	name: ""
+	name: "smoke"
 	position: "-0.400000, -0.000000, -51.000000"
 	parent: "95"
 	parallax: "1.000000"
@@ -127,7 +127,7 @@ object LogicRelay {
 	position: "1.000000, -0.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	onTrigger: "103|Play sound|100|Stop sound|106|Start|108|Start|94|Disable|110|Shake|"
+	onTrigger: "103|Play sound|100|Stop sound|106|Start|108|Start|94|Disable|110|Shake|96|Stop|"
 	onAltTrigger: ""
 	triggerOnStart: "0"
 	delay: "0.000000"

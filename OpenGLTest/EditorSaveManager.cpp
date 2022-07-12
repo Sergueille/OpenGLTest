@@ -263,7 +263,7 @@ void EditorSaveManager::LoadPrefab(Prefab* prefab)
 {
 	if (prefab->GetPath() == "") return;
 
-	isLoading = true;
+	//isLoading = true;
 
 	std::cout << "Loading prefab " << prefab->GetPath() << std::endl;
 
@@ -322,12 +322,12 @@ void EditorSaveManager::LoadPrefab(Prefab* prefab)
 			}
 		}
 
-		isLoading = false;
+		//isLoading = false;
 	}
 	catch (std::exception e) // Catch exceptions to make sure the file is closed
 	{
 		ifile->close();
-		isLoading = false;
+		//isLoading = false;
 		std::cout << "Got an error while loading prefab file, here's what it says:" << std::endl;
 		std::cout << e.what() << std::endl;
 	}
