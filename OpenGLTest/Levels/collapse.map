@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 474
+count 478
 
 object MapData {
 	mapName: ""
@@ -6985,7 +6985,7 @@ object EditorSprite {
 	position: "88.599998, -15.400001, -5.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "2.000000, 2.000000"
+	size: "3.600000, 3.600000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "panel1.png"
@@ -6998,10 +6998,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "36456"
 	name: ""
-	position: "119.800003, -20.600000, -5.000000"
+	position: "119.983856, -20.523924, -5.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "2.000000, 2.000000"
+	size: "3.600000, 3.600000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "panel1.png"
@@ -7014,11 +7014,11 @@ object EditorSprite {
 object TextRenderer {
 	ID: "36563"
 	name: ""
-	position: "88.272339, -15.477376, 0.000000"
+	position: "88.064537, -15.560496, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	content: "exit"
-	fontSize: "0.250000"
+	fontSize: "0.500000"
 	color: "1.000000, 1.000000, 1.000000, 0.020000"
 }
 object TextRenderer {
@@ -7028,6 +7028,46 @@ object TextRenderer {
 	parent: "-1"
 	parallax: "1.000000"
 	content: "exit"
-	fontSize: "0.250000"
+	fontSize: "0.500000"
 	color: "1.000000, 1.000000, 1.000000, 0.100000"
+}
+object Prefab {
+	ID: "36781"
+	name: ""
+	position: "96.000000, -17.800001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\rotating_light.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "36899"
+	name: ""
+	position: "19.800001, 5.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\rotating_light.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "36908"
+	name: ""
+	position: "49.000000, 0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\rotating_light.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "36917"
+	name: ""
+	position: "71.000000, -0.400000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\rotating_light.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
 }

@@ -1,0 +1,98 @@
+// Editor map file, version 1
+
+count 7
+
+object MapData {
+	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
+}
+object EditorSprite {
+	ID: "16541"
+	name: ""
+	position: "-0.000000, -0.000000, -0.050000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.600000, 2.600000"
+	rotation: "0.000000"
+	color: "1.000000, 0.000000, 0.000000, 0.400000"
+	texturePath: "glow.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "16545"
+	name: ""
+	position: "4.087069, 0.000000, -0.100000"
+	parent: "16547"
+	parallax: "1.000000"
+	size: "4.580000, 4.310000"
+	rotation: "0.000000"
+	color: "1.200000, 0.000000, 0.000000, 0.500000"
+	texturePath: "spotlight.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "16546"
+	name: ""
+	position: "-4.087069, 0.000000, -0.200000"
+	parent: "16547"
+	parallax: "1.000000"
+	size: "4.580000, 4.310000"
+	rotation: "180.000000"
+	color: "1.200000, 0.000000, 0.000000, 0.500000"
+	texturePath: "spotlight.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "16547"
+	name: ""
+	position: "0.000000, 0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.000000, 1.000000"
+	rotation: "0.000000"
+	color: "1.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "1"
+}
+object TransformModifier {
+	ID: "16548"
+	name: ""
+	position: "1.400000, -1.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	targetID: "16547"
+	relative: "1"
+	targetPos: "0.000000, 0.000000"
+	targetRotation: "360000.000000"
+	targetSize: "1.000000, 1.000000"
+	duration: "3000.000000"
+	easeType: "0"
+	onFinished: ""
+}
+object LogicRelay {
+	ID: "16549"
+	name: ""
+	position: "0.800000, -1.200000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "16548|Set all transforms|"
+	onAltTrigger: ""
+	triggerOnStart: "1"
+	delay: "0.000000"
+}

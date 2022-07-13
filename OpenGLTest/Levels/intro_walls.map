@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 562
+count 563
 
 object MapData {
 	mapName: ""
@@ -7437,7 +7437,7 @@ object LogicRelay {
 object EditorSprite {
 	ID: "22566"
 	name: "over"
-	position: "-14.600000, 7.600000, 45.000000"
+	position: "-14.600000, 6.400000, 45.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "35.799999, 21.400000"
@@ -8260,4 +8260,14 @@ object Light {
 	innerAngle: "90.000000"
 	outerAngle: "91.000000"
 	shadowSize: "0.100000"
+}
+object Prefab {
+	ID: "31408"
+	name: ""
+	position: "57.000000, 7.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\vent_light.map"
+	ori: "0.000000"
+	scale: "0.800000, 0.800000"
 }

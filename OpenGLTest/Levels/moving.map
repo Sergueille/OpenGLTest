@@ -10,7 +10,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: ""
-	position: "-31.600000, 30.200001, 20.000000"
+	position: "163.400009, 39.000000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -1918,7 +1918,7 @@ object Light {
 object Light {
 	ID: "7484"
 	name: ""
-	position: "181.600006, 29.800001, 50.000000"
+	position: "181.600281, 29.824245, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	lightSize: "10.000000"
@@ -3651,22 +3651,6 @@ object EditorSprite {
 	visibleOnlyInEditor: "0"
 }
 object EditorSprite {
-	ID: "15004"
-	name: ""
-	position: "40.657803, 13.857803, -4.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	size: "3.000000, 3.000000"
-	rotation: "-0.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "cables4.png"
-	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
-	isLit: "1"
-	visibleOnlyInEditor: "0"
-}
-object EditorSprite {
 	ID: "15006"
 	name: ""
 	position: "48.059036, 13.256667, -1.000000"
@@ -3830,4 +3814,14 @@ object ShadowCaster {
 	parallax: "1.000000"
 	size: "6.200000, 3.400000"
 	orientation: "0.000000"
+}
+object Prefab {
+	ID: "16844"
+	name: ""
+	position: "181.600006, 29.800001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\vent_light.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
 }
