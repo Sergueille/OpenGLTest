@@ -60,3 +60,5 @@
 "t_time_long1","","Prenez votre temps surtout..."
 "t_time_long2","","Faites un effort, c'est ridicule."
 "t_moving_door","","D'après les plans, cette porte est contrôlée par le même interrupteur que la plateforme mobile en dessous."
+"t_red_l1","","Les lasers rouges ne vous empêcheront pas de vous téléporter."
+"t_red_l2","","Par contre, si vous les touchez, ils vous tueront."

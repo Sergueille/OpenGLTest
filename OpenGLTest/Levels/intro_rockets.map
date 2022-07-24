@@ -1,11 +1,11 @@
 // Editor map file, version 1
 
-count 88
+count 103
 
 object MapData {
 	mapName: ""
 	lightmapStart: "-37.000000, -34.000000"
-	lightmapEnd: "122.000000, 52.000000"
+	lightmapEnd: "133.000000, 55.000000"
 }
 object Player {
 	ID: "0"
@@ -632,10 +632,10 @@ object Prefab {
 object EditorSprite {
 	ID: "2015"
 	name: ""
-	position: "38.000000, 33.200001, 0.000000"
+	position: "38.000000, 35.799999, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "38.000000, 12.600000"
+	size: "38.000000, 17.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -999,7 +999,7 @@ object ShadowCaster {
 object ShadowCaster {
 	ID: "2813"
 	name: ""
-	position: "42.799999, 22.000000, 50.000000"
+	position: "41.799999, 22.000000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "19.200001, 1.000000"
@@ -1045,4 +1045,171 @@ object ShadowCaster {
 	parallax: "1.000000"
 	size: "6.200000, 4.200000"
 	orientation: "0.000000"
+}
+object ShadowCaster {
+	ID: "3858"
+	name: ""
+	position: "59.000000, 28.200001, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "17.000000, 2.000000"
+	orientation: "0.000000"
+}
+object Prefab {
+	ID: "3860"
+	name: ""
+	position: "62.000000, 40.600002, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object ShadowCaster {
+	ID: "3864"
+	name: ""
+	position: "59.200001, 19.400000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "18.000000, 6.000000"
+	orientation: "0.000000"
+}
+object Prefab {
+	ID: "3866"
+	name: ""
+	position: "76.400002, 40.600002, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "3870"
+	name: ""
+	position: "66.200005, 49.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "38.000000, 12.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object Prefab {
+	ID: "3874"
+	name: ""
+	position: "75.943573, 36.548397, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\rocket.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Trigger {
+	ID: "4222"
+	name: ""
+	position: "70.599998, 37.400002, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "6.600000, 3.400000"
+	onEnter: "3874|Launch|"
+	onExit: ""
+	once: "1"
+	needPlayerInteraction: "0"
+	killPlayer: "0"
+}
+object EditorSprite {
+	ID: "4559"
+	name: ""
+	position: "84.599998, 37.799999, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.000000, 7.200000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "4561"
+	name: ""
+	position: "96.000000, 46.200001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "23.800001, 12.600000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}
+object Prefab {
+	ID: "4563"
+	name: ""
+	position: "90.400002, 39.799999, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object ShadowCaster {
+	ID: "4570"
+	name: ""
+	position: "84.599998, 38.400002, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.000000, 10.600000"
+	orientation: "0.000000"
+}
+object ShadowCaster {
+	ID: "4817"
+	name: ""
+	position: "69.800003, 33.600002, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.800000, 4.200000"
+	orientation: "0.000000"
+}
+object Prefab {
+	ID: "5161"
+	name: ""
+	position: "115.599998, 37.799999, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\elevator.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object Trigger {
+	ID: "5229"
+	name: ""
+	position: "110.599998, 20.400000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "6.200000, 6.200000"
+	onEnter: "5230|End level|"
+	onExit: ""
+	once: "0"
+	needPlayerInteraction: "0"
+	killPlayer: "0"
+}
+object LevelEnd {
+	ID: "5230"
+	name: ""
+	position: "115.599998, 21.200001, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	nextLevel: "rocket.map"
 }

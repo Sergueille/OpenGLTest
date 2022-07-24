@@ -155,7 +155,7 @@ object ShadowCaster {
 object Player {
 	ID: "477"
 	name: ""
-	position: "42.600002, -23.600000, 20.000000"
+	position: "-190.000000, 35.600002, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"

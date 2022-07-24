@@ -4,6 +4,8 @@ count 7
 
 object MapData {
 	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
 }
 object EditorSprite {
 	ID: "1"
@@ -33,7 +35,7 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
-	isLit: "0"
+	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
 object LogicRelay {
@@ -55,10 +57,10 @@ object TransformModifier {
 	parallax: "1.000000"
 	targetID: "8"
 	relative: "1"
-	targetPos: "0.000000, -40.000000"
+	targetPos: "0.000000, -50.000000"
 	targetRotation: "0.000000"
 	targetSize: "1.000000, 1.000000"
-	duration: "20.000000"
+	duration: "25.000000"
 	easeType: "0"
 	onFinished: ""
 }
@@ -73,7 +75,7 @@ object TransformModifier {
 	targetPos: "0.000000, 0.000000"
 	targetRotation: "-3600.000000"
 	targetSize: "1.000000, 1.000000"
-	duration: "10.000000"
+	duration: "25.000000"
 	easeType: "0"
 	onFinished: ""
 }

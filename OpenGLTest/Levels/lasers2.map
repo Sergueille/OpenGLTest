@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 363
+count 367
 
 object MapData {
 	mapName: ""
@@ -1902,7 +1902,7 @@ object LevelEnd {
 	position: "210.600006, -49.400002, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	nextLevel: "level4.map"
+	nextLevel: "lasers3.map"
 }
 object EditorSprite {
 	ID: "10177"
@@ -5193,7 +5193,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "18053"
 	name: ""
-	position: "181.693115, -25.096905, -8.000000"
+	position: "181.729584, -25.107845, -8.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "0.800000, 0.800000"
@@ -5281,4 +5281,67 @@ object Trigger {
 	once: "0"
 	needPlayerInteraction: "0"
 	killPlayer: "0"
+}
+object EditorSprite {
+	ID: "19416"
+	name: ""
+	position: "164.800003, -17.200001, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.400000, 3.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "door.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "19418"
+	name: ""
+	position: "162.400009, -16.800001, -6.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.800000, 6.000000"
+	rotation: "180.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "pipe4.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "2.000000, 3.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "19420"
+	name: ""
+	position: "159.400009, -16.600000, -6.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.800000, 4.800000"
+	rotation: "180.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "pipe4.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "2.000000, 2.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+}
+object EditorSprite {
+	ID: "19422"
+	name: ""
+	position: "37.000000, -33.799999, 5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "20.200001, 15.800000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
 }

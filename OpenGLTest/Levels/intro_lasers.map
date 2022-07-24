@@ -985,7 +985,7 @@ object EditorSprite {
 	texturePath: "back\plaster1.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "2.000000, 1.000000"
+	UVend: "4.000000, 2.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 }
@@ -1269,7 +1269,7 @@ object EditorSprite {
 	position: "197.400009, 7.400000, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "31.000000, 14.200000"
+	size: "31.600000, 14.200000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "back\plaster2.jpg"

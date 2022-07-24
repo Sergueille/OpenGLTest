@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 9
+count 10
 
 object MapData {
 	mapName: ""
@@ -127,4 +127,19 @@ object LogicRelay {
 	onAltTrigger: ""
 	triggerOnStart: "1"
 	delay: "0.000000"
+}
+object SoundPoint {
+	ID: "16550"
+	name: ""
+	position: "0.000000, 0.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "soundscape_wind1.wav"
+	volume: "1.000000"
+	spatial: "1"
+	minDist: "3.000000"
+	maxDist: "20.000000"
+	autoStart: "1"
+	loop: "1"
+	dontPlayIfTooFar: "0"
 }

@@ -1,0 +1,34 @@
+// Editor map file, version 1
+
+count 3
+
+object MapData {
+	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
+}
+object Prefab {
+	ID: "0"
+	name: ""
+	position: "-35.799999, 0.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\elevator_end.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "50"
+	name: ""
+	position: "-16.200001, -10.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "28.600000, 18.200001"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+}

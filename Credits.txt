@@ -38,18 +38,19 @@ SOUNDS ----------------------
     - "ShortLaserSound" by tjcason
     - "artMotorB" by hanstimm
     - "tunnel 2" by lollosound
+    - "Splash, Jumping, D.wav" by InspectorJ
 
-LIBRARIES -------------------
+SOFTWARE --------------
+- Visual Studio and Visual Studio Code (IDE and text editor)
+- Blender (graphics and physics simulation)
+- GIMP (images manipulation)
+- Wavosaur (sounds manipulation)
+
+C++ LIBRARIES -------------------
 - GLFW (window management, os stuff)
 - GLAD (OpenGL API provider)
 - GLM (OpenGL math)
 - SoLoud engine (sound engine)
 - FreeType (font loading)
-
-OTHER SOFTWARE --------------
-- Blender (graphics and physics simulation)
-- GIMP (images manipulation)
-- Wavosaur (sounds manipulation)
-
 
 
