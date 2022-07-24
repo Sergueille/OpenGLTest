@@ -1,6 +1,5 @@
 #include "EditorSprite.h"
 
-
 ObjectEvent EditorSprite::events[EDITOR_SPRITE_EVENT_COUNT] = {
 	ObjectEvent {
 		"Disable",
@@ -9,6 +8,10 @@ ObjectEvent EditorSprite::events[EDITOR_SPRITE_EVENT_COUNT] = {
 	ObjectEvent {
 		"Enable",
 		[](EditorObject* object, void* param) { ((EditorSprite*)object)->Enable(); },
+	},
+	ObjectEvent {
+		"Fade",
+		[](EditorObject* object, void* param) { ((EditorSprite*)object)->Fade(((EditorSprite*)object)->fadeDuration); },
 	},
 };
 
@@ -26,6 +29,12 @@ EditorSprite::~EditorSprite()
 {
 	delete clickCollider;
 	clickCollider = nullptr;
+
+	if (fadeAction != nullptr)
+	{
+		TweenManager<float>::Cancel(fadeAction);
+		fadeAction = nullptr;
+	}
 }
 
 vec2 EditorSprite::DrawProperties(vec3 drawPos)
@@ -49,6 +58,8 @@ vec2 EditorSprite::DrawProperties(vec3 drawPos)
 
 	drawPos.y -= Editor::CheckBox(drawPos, "Is lit", &isLit, Editor::panelPropertiesX).y;
 	drawPos.y -= Editor::CheckBox(drawPos, "Visible only in editor", &visibleOnlyInEditor, Editor::panelPropertiesX).y;
+
+	drawPos.y -= Editor::DrawProperty(drawPos, "Fade duration", &fadeDuration, Editor::panelPropertiesX, strID + "fadeDuration").y;
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
@@ -89,6 +100,8 @@ EditorObject* EditorSprite::Copy()
 	RectCollider* oldCollider = (RectCollider*)this->clickCollider;
 	newObj->clickCollider = new RectCollider(oldCollider->GetPos(), oldCollider->size, oldCollider->orientation, oldCollider->MustCollideWithPhys());
 
+	newObj->fadeAction = nullptr;
+
 	return newObj;
 }
 
@@ -113,6 +126,8 @@ void EditorSprite::Load(std::map<std::string, std::string>* props)
 	isLit = (*props)["isLit"] == "1";
 	visibleOnlyInEditor = (*props)["visibleOnlyInEditor"] == "1";
 
+	EditorSaveManager::FloatProp(props, "fadeDuration", &fadeDuration);
+
 	EditorObject::Load(props);
 }
 
@@ -129,6 +144,7 @@ void EditorSprite::Save()
 	EditorSaveManager::WriteProp("UVend", UVEnd);
 	EditorSaveManager::WriteProp("isLit", isLit);
 	EditorSaveManager::WriteProp("visibleOnlyInEditor", visibleOnlyInEditor);
+	EditorSaveManager::WriteProp("fadeDuration", fadeDuration);
 }
 
 void EditorSprite::Enable()
@@ -153,4 +169,19 @@ void EditorSprite::ResetIngameState()
 {
 	if (!this->enabled)
 		this->Enable();
+}
+
+void EditorSprite::Fade(float duration)
+{
+	if (fadeAction != nullptr)
+		TweenManager<float>::Cancel(fadeAction);
+
+	float startAlpha = color.a;
+	fadeAction = TweenManager<float>::Tween(1, 0, duration, [this, startAlpha](float value) {
+		this->color.a = startAlpha * value;
+	}, sineInOut)->SetOnFinished([this, startAlpha] {
+		this->Disable();
+		this->color.a = startAlpha;
+		fadeAction = nullptr;
+	});
 }

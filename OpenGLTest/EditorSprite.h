@@ -4,10 +4,12 @@
 #include "Sprite.h"
 #include "RectCollider.h"
 #include "RessourceManager.h"
+#include "TweenManager.h"
+#include "TWeenAction.h"
 
 using namespace glm;
 
-constexpr int EDITOR_SPRITE_EVENT_COUNT = 2;
+constexpr int EDITOR_SPRITE_EVENT_COUNT = 3;
 
 class EditorSprite : Sprite, public EditorObject
 {
@@ -18,6 +20,7 @@ public:
 	static ObjectEvent events[EDITOR_SPRITE_EVENT_COUNT];
 
 	bool visibleOnlyInEditor = false;
+	float fadeDuration = 1;
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;
 	virtual void OnMainLoop() override;
@@ -34,4 +37,9 @@ public:
 	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 
 	virtual void ResetIngameState() override;
+
+	virtual void Fade(float duration);
+
+private:
+	TweenAction<float>* fadeAction = nullptr;
 };
