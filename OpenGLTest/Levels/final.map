@@ -31,4 +31,5 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
