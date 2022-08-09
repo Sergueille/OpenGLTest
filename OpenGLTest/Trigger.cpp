@@ -172,6 +172,10 @@ void Trigger::OnMainLoop()
 				}
 			}
 		}
+		else if (needPlayerInteraction)
+		{
+			collideWithPlayer = false;
+		}
 	}
 	else
 	{

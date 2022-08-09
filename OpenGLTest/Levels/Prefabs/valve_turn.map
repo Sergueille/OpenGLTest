@@ -1,0 +1,51 @@
+// Editor map file, version 1
+
+count 4
+
+object MapData {
+	mapName: ""
+	lightmapStart: "0.000000, 0.000000"
+	lightmapEnd: "0.000000, 0.000000"
+}
+object EditorSprite {
+	ID: "0"
+	name: ""
+	position: "0.000000, 0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.000000, 1.000000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "valve.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object PrefabRelay {
+	ID: "1"
+	name: ""
+	position: "-1.000000, 0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	eventListsCount: "1"
+	eventList0: "2|Set rotation|"
+	eventList0name: "Turn"
+}
+object TransformModifier {
+	ID: "2"
+	name: ""
+	position: "1.000000, 0.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	targetID: "0"
+	relative: "1"
+	targetPos: "0.000000, 0.000000"
+	targetRotation: "90.000000"
+	targetSize: "1.000000, 1.000000"
+	duration: "1.000000"
+	easeType: "3"
+	onFinished: ""
+}
