@@ -38,7 +38,8 @@ SOUNDS ----------------------
     - "ShortLaserSound" by tjcason
     - "artMotorB" by hanstimm
     - "tunnel 2" by lollosound
-    - "Splash, Jumping, D.wav" by InspectorJ
+    - "Splash, Jumping, D" by InspectorJ
+    - "squeak_01" by joedeshon
 
 SOFTWARE --------------
 - Visual Studio and Visual Studio Code (IDE and text editor)

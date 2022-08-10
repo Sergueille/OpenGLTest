@@ -60,7 +60,7 @@ namespace TextManager {
         // Set font resolution
         FT_Set_Pixel_Sizes(face, 0, 64);
 
-        std::u8string chars = u8" \nazertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890,;:!?./§^<>$*&\"'(-_)=#{[|`\\^@]}+%éèêëàâäàiîïìoôöòuûüùçÂÊÎÔÛËÄÏÖÜÇ";
+        std::u8string chars = u8" \nazertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890,;:!?./§^<>$*&\"'°(-_)=#{[|`\\^@]}+%éèêëàâäàiîïìoôöòuûüùçÂÊÎÔÛËÄÏÖÜÇ";
 
         int halfchar = 0;
 

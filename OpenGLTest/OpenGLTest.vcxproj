@@ -224,6 +224,7 @@
     <ClCompile Include="SoundPoint.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stb_image.cpp" />
+    <ClCompile Include="TemperatureManager.cpp" />
     <ClCompile Include="TerminalManager.cpp" />
     <ClCompile Include="TerminalWriter.cpp" />
     <ClCompile Include="TextManager.cpp" />
@@ -281,6 +282,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="stb_image_write.h" />
+    <ClInclude Include="TemperatureManager.h" />
     <ClInclude Include="TerminalManager.h" />
     <ClInclude Include="TerminalWriter.h" />
     <ClInclude Include="TextManager.h" />

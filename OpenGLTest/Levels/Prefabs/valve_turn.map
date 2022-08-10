@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 4
+count 7
 
 object MapData {
 	mapName: ""
@@ -31,7 +31,7 @@ object PrefabRelay {
 	parent: "-1"
 	parallax: "1.000000"
 	eventListsCount: "1"
-	eventList0: "2|Set rotation|"
+	eventList0: "2|Set rotation|3|Trigger|2681|Play sound|"
 	eventList0name: "Turn"
 }
 object TransformModifier {
@@ -48,4 +48,45 @@ object TransformModifier {
 	duration: "1.000000"
 	easeType: "3"
 	onFinished: ""
+}
+object SoundPoint {
+	ID: "2678"
+	name: ""
+	position: "-0.000000, -0.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "water_splash.wav"
+	volume: "1.500000"
+	spatial: "1"
+	minDist: "20.000000"
+	maxDist: "30.000000"
+	autoStart: "0"
+	loop: "1"
+	dontPlayIfTooFar: "0"
+}
+object LogicRelay {
+	ID: "3"
+	name: "sound relay"
+	position: "0.000000, -1.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "2678|Play sound|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "1.100000"
+}
+object SoundPoint {
+	ID: "2681"
+	name: ""
+	position: "0.000000, 1.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "squeak.wav"
+	volume: "0.900000"
+	spatial: "0"
+	minDist: "20.000000"
+	maxDist: "30.000000"
+	autoStart: "0"
+	loop: "0"
+	dontPlayIfTooFar: "0"
 }

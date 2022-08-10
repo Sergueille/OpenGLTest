@@ -28,6 +28,7 @@
 #include "SoundArea.h"
 #include "TerminalWriter.h"
 #include "ObjectFollower.h"
+#include "TemperatureManager.h"
 
 #include <iostream>
 
@@ -920,6 +921,10 @@ void Editor::DrawAddTab(vec3 drawPos)
 	drawPos.y -= UIButton(drawPos, "Object follower", &pressed).y;
 	if (pressed)
 		newObject = (EditorObject*)new ObjectFollower();
+
+	drawPos.y -= UIButton(drawPos, "Temperature manager", &pressed).y;
+	if (pressed)
+		newObject = (EditorObject*)new TemperatureManager();
 
 	if (newObject != nullptr)
 	{

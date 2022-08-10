@@ -30,6 +30,7 @@
 #include "TerminalWriter.h"
 #include "TerminalManager.h"
 #include "ObjectFollower.h"
+#include "TemperatureManager.h"
 
 using namespace glm;
 
@@ -678,6 +679,11 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "ObjectFollower")
 	{
 		newObj = new ObjectFollower();
+		newObj->Load(&props);
+	}
+	else if (objectType == "TemperatureManager")
+	{
+		newObj = new TemperatureManager();
 		newObj->Load(&props);
 	}
 	else

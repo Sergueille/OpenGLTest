@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 131
+count 132
 
 object MapData {
 	mapName: ""
@@ -1781,7 +1781,7 @@ object LogicRelay {
 	parent: "-1"
 	parallax: "1.000000"
 	onTrigger: ""
-	onAltTrigger: "2214|Turn|2444|Set to normal events|2666|Trigger|2676|Start|2672|Start|2674|Start|2670|Start|2668|Start|2678|Play sound|"
+	onAltTrigger: "2214|Turn|2444|Set to normal events|2666|Trigger|2676|Start|2672|Start|2674|Start|2670|Start|2668|Start|"
 	triggerOnStart: "0"
 	delay: "0.000000"
 }
@@ -1926,25 +1926,10 @@ object EditorParticleSystem {
 	duration: "10.000000"
 	autoStart: "0"
 }
-object SoundPoint {
-	ID: "2678"
-	name: ""
-	position: "40.000000, 4.400000, 50.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	soundName: "water_splash.wav"
-	volume: "1.500000"
-	spatial: "0"
-	minDist: "1.000000"
-	maxDist: "20.000000"
-	autoStart: "0"
-	loop: "1"
-	dontPlayIfTooFar: "0"
-}
 object EditorSprite {
 	ID: "2680"
 	name: "over"
-	position: "31.800001, 10.000000, 10.000000"
+	position: "33.200001, 7.600000, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "41.000000, 32.400002"
@@ -1975,4 +1960,30 @@ object LevelEnd {
 	parent: "-1"
 	parallax: "1.000000"
 	nextLevel: "reactor.map"
+}
+object SoundArea {
+	ID: "2885"
+	name: ""
+	position: "-9.200000, 0.800000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "57.600002, 5.600000"
+	soundName: "soundscape_wind3.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
+}
+object SoundArea {
+	ID: "2887"
+	name: ""
+	position: "40.200001, 15.800000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "23.200001, 13.200000"
+	soundName: "soundscape_wind1.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
 }
