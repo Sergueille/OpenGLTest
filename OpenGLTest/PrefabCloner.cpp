@@ -134,6 +134,11 @@ void PrefabCloner::CreateClone()
 	}
 }
 
+void PrefabCloner::ResetIngameState()
+{
+	// HACK: Death of player caused prefab cloner to stop, so removed function
+}
+
 void PrefabCloner::OnMainLoop()
 {
 	Prefab::OnMainLoop();

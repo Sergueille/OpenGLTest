@@ -84,6 +84,7 @@ vec2 EditorParticleSystem::DrawProperties(vec3 drawPos)
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Particle texture", &paticleTemplate->texture, Editor::panelPropertiesX, strID + "tex").y;
 	drawPos.y -= Editor::CheckBox(drawPos, "Is lit", &paticleTemplate->isLit, Editor::panelPropertiesX).y;
+	drawPos.y -= Editor::CheckBox(drawPos, "Ignore distance optilization", &ignoreDistanceOptimization, Editor::panelPropertiesX).y;
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
@@ -139,6 +140,7 @@ void EditorParticleSystem::Load(std::map<std::string, std::string>* props)
 	EditorSaveManager::FloatProp(props, "particleLifetime", &particleLifetime);
 
 	autoStart = (*props)["autoStart"] != "0";
+	ignoreDistanceOptimization = (*props)["ignoreDistanceOptimization"] == "1";
 	
 	if (autoStart)
 		EventManager::DoInOneFrame([this] { Start(); });
@@ -170,6 +172,7 @@ void EditorParticleSystem::Save()
 	EditorSaveManager::WriteProp("duration", duration);
 
 	EditorSaveManager::WriteProp("autoStart", autoStart);
+	EditorSaveManager::WriteProp("ignoreDistanceOptimization", ignoreDistanceOptimization);
 }
 
 void EditorParticleSystem::Enable()

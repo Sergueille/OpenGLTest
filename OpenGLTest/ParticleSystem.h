@@ -27,6 +27,8 @@ public:
 	float duration = -1; // Set to -1 for infinite
 
 	bool deleteWhenStopped = false;
+	// If false, the PS will be stopped if far from camera. Use this for big PS
+	bool ignoreDistanceOptimization = false;
 
 	Sprite* paticleTemplate = nullptr;
 

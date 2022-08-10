@@ -369,7 +369,7 @@ void Radioactivity::OnAfterMainLoop()
             vec2 dir = Player::ingameInstance->GetPos() - vec2(GetEditPos());
             Collider* coll;
 
-            if (abs(dir.x) > 0.02) // TEST: prevent raycast error when almost vertical
+            if (abs(dir.x) > 0.1) // TEST: prevent raycast error when almost vertical
             if (Collider::Raycast(GetEditPos(), dir, nullptr, nullptr, &coll))
             {
                 if (coll == Player::ingameInstance->collider)

@@ -91,12 +91,15 @@ void ParticleSystem::OnParticleSystemMainLoop()
 	}
 
 	// Pause if far from camera
-	float camDist = glm::length(Camera::position - vec2(emitterPosition));
-	float maxDist = (Camera::size * screenX / screenY) + cameraMinDist;
-	if (camDist > maxDist)
+	if (!ignoreDistanceOptimization)
 	{
-		lastInstantiationTime = Utility::time; // Prevent creating too many particles
-		return;
+		float camDist = glm::length(Camera::position - vec2(emitterPosition));
+		float maxDist = (Camera::size * screenX / screenY) + cameraMinDist;
+		if (camDist > maxDist)
+		{
+			lastInstantiationTime = Utility::time; // Prevent creating too many particles
+			return;
+		}
 	}
 
 	// Add new particles

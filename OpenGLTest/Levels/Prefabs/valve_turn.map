@@ -73,7 +73,7 @@ object LogicRelay {
 	onTrigger: "2678|Play sound|"
 	onAltTrigger: ""
 	triggerOnStart: "0"
-	delay: "1.100000"
+	delay: "0.500000"
 }
 object SoundPoint {
 	ID: "2681"

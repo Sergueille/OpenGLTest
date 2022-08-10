@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 179
+count 178
 
 object MapData {
 	mapName: ""
@@ -455,19 +455,8 @@ object Button {
 	parent: "-1"
 	parallax: "1.000000"
 	startPressed: "0"
-	onPressed: "304|Close door|882|Trigger|"
+	onPressed: "304|Close door|"
 	onUnpressed: "304|Open door|"
-}
-object LogicRelay {
-	ID: "882"
-	name: ""
-	position: "47.200001, -18.200001, 50.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	onTrigger: "881|Force unpress|"
-	onAltTrigger: ""
-	triggerOnStart: "0"
-	delay: "4.000000"
 }
 object LogicRelay {
 	ID: "978"
@@ -1223,6 +1212,7 @@ object EditorParticleSystem {
 	particleLifetime: "3.000000"
 	duration: "-1.000000"
 	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }
 object EditorParticleSystem {
 	ID: "8266"
@@ -1246,6 +1236,7 @@ object EditorParticleSystem {
 	particleLifetime: "3.000000"
 	duration: "-1.000000"
 	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }
 object Prefab {
 	ID: "8268"
@@ -2204,6 +2195,7 @@ object EditorParticleSystem {
 	particleLifetime: "0.700000"
 	duration: "-1.000000"
 	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }
 object SoundPoint {
 	ID: "13135"
@@ -2242,6 +2234,7 @@ object EditorParticleSystem {
 	particleLifetime: "3.000000"
 	duration: "-1.000000"
 	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }
 object EditorSprite {
 	ID: "8937"

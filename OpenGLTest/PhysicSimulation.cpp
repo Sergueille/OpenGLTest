@@ -240,6 +240,16 @@ void PhysicSimulation::StartSimulation()
 	isSimulating = true;
 }
 
+void PhysicSimulation::ResetIngameState()
+{
+	isSimulating = false;
+	for (int i = 0; i < objectCount; i++)
+	{
+		objects[i].SetSpritePos(this, 0);
+		objects[i].SetSpriteRot(this, 0);
+	}
+}
+
 void PhysicSimulation::GetObjectEvents(const ObjectEvent** res, int* resCount)
 {
 	*res = events;

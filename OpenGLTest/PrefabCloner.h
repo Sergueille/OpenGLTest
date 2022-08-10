@@ -37,6 +37,8 @@ public:
 
 	void CreateClone();
 
+	virtual void ResetIngameState() override;
+
 private:
 	float lastTime = 0;
 };

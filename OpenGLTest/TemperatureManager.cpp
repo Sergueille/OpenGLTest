@@ -60,7 +60,9 @@ vec2 TemperatureManager::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "TextColor", &textColor, Editor::panelPropertiesX, strID + "textColor", true).y + Editor::margin;
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Text", &localKey, Editor::panelPropertiesX, strID + "localKey").y;
-	drawPos.y -= TextManager::RenderText(LocalizationManager::GetLocale(localKey), drawPos, Editor::textSize).y;
+	drawPos.y -= TextManager::RenderText(LocalizationManager::GetLocale(localKey), drawPos, Editor::textSize).y + Editor::margin;
+
+	drawPos.y -= onReachMax.DrawInPanel(drawPos, "On reach max").y;
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;

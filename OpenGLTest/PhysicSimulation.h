@@ -46,6 +46,8 @@ public:
 
 	void StartSimulation();
 
+	virtual void ResetIngameState() override;
+
 	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 
 private:
