@@ -671,6 +671,7 @@ object EditorParticleSystem {
 	particleLifetime: "5.000000"
 	duration: "0.100000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object EditorParticleSystem {
 	ID: "911"
@@ -694,6 +695,7 @@ object EditorParticleSystem {
 	particleLifetime: "5.000000"
 	duration: "0.100000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object LogicRelay {
 	ID: "912"
@@ -1833,6 +1835,7 @@ object EditorParticleSystem {
 	particleLifetime: "0.800000"
 	duration: "10.000000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object EditorParticleSystem {
 	ID: "2670"
@@ -1856,6 +1859,7 @@ object EditorParticleSystem {
 	particleLifetime: "0.800000"
 	duration: "10.000000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object EditorParticleSystem {
 	ID: "2672"
@@ -1879,6 +1883,7 @@ object EditorParticleSystem {
 	particleLifetime: "0.800000"
 	duration: "10.000000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object EditorParticleSystem {
 	ID: "2674"
@@ -1902,6 +1907,7 @@ object EditorParticleSystem {
 	particleLifetime: "0.800000"
 	duration: "10.000000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object EditorParticleSystem {
 	ID: "2676"
@@ -1925,6 +1931,7 @@ object EditorParticleSystem {
 	particleLifetime: "0.800000"
 	duration: "10.000000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object EditorSprite {
 	ID: "2680"

@@ -135,6 +135,7 @@ void TemperatureManager::Start()
 	isActive = true;
 	currentTemp = static_cast<float>(startTemperature);
 	startTime = Utility::time;
+	eventAlreadySent = false;
 }
 
 void TemperatureManager::Sub()

@@ -63,6 +63,8 @@
 "t_react11","","Ok, la temperature baisse, retrournez sur vos pas."
 "t_react12","","La deuxième valve est au dessus de vous."
 "t_react13","","Plus que deux valves à tourner. Les autres sont à droite du réacteur."
+"t_react14","","Plus qu'une! Elle devrait être en bas à droite."
+"t_react_fail","","Plus que quleques secondes... Au revoir."
 "t_time1","","Je ne voudrais pas vous presser, mais vous avez un réacteur au bord de l'explosion à éteindre."
 "t_time2","","Le réacteur va bientôt exploser, il faudrait se dépêcher un peu non?"
 "t_time3","","C'est si difficile que ça de passer? Vraiment, j'aurais fait ça en deux secondes."
