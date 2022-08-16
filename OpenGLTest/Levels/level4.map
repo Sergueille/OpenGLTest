@@ -1,10 +1,10 @@
 // Editor map file, version 1
 
-count 429
+count 430
 
 object MapData {
 	mapName: ""
-	lightmapStart: "-38.000000, -78.000000"
+	lightmapStart: "-42.000000, -78.000000"
 	lightmapEnd: "257.000000, 68.000000"
 }
 object EditorSprite {
@@ -1955,6 +1955,7 @@ object EditorParticleSystem {
 	particleLifetime: "3.000000"
 	duration: "-1.000000"
 	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }
 object EditorParticleSystem {
 	ID: "11337"
@@ -1978,6 +1979,7 @@ object EditorParticleSystem {
 	particleLifetime: "1.000000"
 	duration: "-1.000000"
 	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }
 object EditorSprite {
 	ID: "11339"
@@ -2186,6 +2188,7 @@ object EditorParticleSystem {
 	particleLifetime: "1.000000"
 	duration: "-1.000000"
 	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }
 object EditorParticleSystem {
 	ID: "11531"
@@ -2209,6 +2212,7 @@ object EditorParticleSystem {
 	particleLifetime: "1.000000"
 	duration: "-1.000000"
 	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }
 object EditorParticleSystem {
 	ID: "11533"
@@ -2232,6 +2236,7 @@ object EditorParticleSystem {
 	particleLifetime: "3.000000"
 	duration: "-1.000000"
 	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }
 object Button {
 	ID: "11535"
@@ -2941,7 +2946,7 @@ object Laser {
 object Button {
 	ID: "18953"
 	name: ""
-	position: "30.400000, 34.799999, 0.000000"
+	position: "31.600000, 34.799999, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	startPressed: "0"
@@ -5306,6 +5311,7 @@ object EditorParticleSystem {
 	particleLifetime: "1.000000"
 	duration: "-1.000000"
 	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }
 object EditorSprite {
 	ID: "29365"
@@ -6203,6 +6209,7 @@ object EditorParticleSystem {
 	particleLifetime: "0.700000"
 	duration: "3.000000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object EditorParticleSystem {
 	ID: "30031"
@@ -6226,6 +6233,7 @@ object EditorParticleSystem {
 	particleLifetime: "0.700000"
 	duration: "3.000000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object TerminalWriter {
 	ID: "30034"
@@ -6459,4 +6467,18 @@ object SoundPoint {
 	autoStart: "0"
 	loop: "1"
 	dontPlayIfTooFar: "0"
+}
+object Light {
+	ID: "33110"
+	name: ""
+	position: "31.600000, 34.799999, 20.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	lightSize: "8.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	intensity: "0.400000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+	shadowSize: "0.500000"
 }

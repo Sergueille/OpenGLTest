@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 62
+count 63
 
 object MapData {
 	mapName: ""
@@ -21,6 +21,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "88"
@@ -36,6 +37,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "95"
@@ -51,6 +53,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "117"
@@ -67,6 +70,7 @@ object EditorSprite {
 	UVend: "6.000000, 5.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "151"
@@ -82,6 +86,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "153"
@@ -97,6 +102,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "154"
@@ -112,6 +118,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object Light {
 	ID: "273"
@@ -208,6 +215,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object Prefab {
 	ID: "790"
@@ -233,6 +241,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object Prefab {
 	ID: "870"
@@ -278,6 +287,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3546"
@@ -293,6 +303,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object PhysicSimulation {
 	ID: "3587"
@@ -317,6 +328,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object Prefab {
 	ID: "3631"
@@ -342,6 +354,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3640"
@@ -357,6 +370,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3642"
@@ -372,6 +386,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3644"
@@ -387,6 +402,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3646"
@@ -402,6 +418,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3648"
@@ -417,6 +434,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3694"
@@ -433,6 +451,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3696"
@@ -449,6 +468,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3698"
@@ -465,6 +485,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3700"
@@ -481,6 +502,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3702"
@@ -497,6 +519,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3704"
@@ -513,6 +536,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3706"
@@ -529,6 +553,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3708"
@@ -545,6 +570,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3754"
@@ -561,6 +587,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3756"
@@ -577,6 +604,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3758"
@@ -593,6 +621,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3760"
@@ -609,6 +638,7 @@ object EditorSprite {
 	UVend: "6.000000, 5.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3762"
@@ -625,6 +655,7 @@ object EditorSprite {
 	UVend: "6.000000, 5.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object Prefab {
 	ID: "3764"
@@ -651,6 +682,7 @@ object EditorSprite {
 	UVend: "3.000000, 1.500000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3773"
@@ -667,6 +699,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object Trigger {
 	ID: "3774"
@@ -704,6 +737,7 @@ object EditorParticleSystem {
 	particleLifetime: "5.000000"
 	duration: "0.100000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object EditorSprite {
 	ID: "4040"
@@ -720,6 +754,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorParticleSystem {
 	ID: "4048"
@@ -743,6 +778,7 @@ object EditorParticleSystem {
 	particleLifetime: "0.500000"
 	duration: "-1.000000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object EditorSprite {
 	ID: "4050"
@@ -759,6 +795,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object SoundArea {
 	ID: "4205"
@@ -821,6 +858,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object LogicRelay {
 	ID: "6334"
@@ -856,4 +894,17 @@ object Trigger {
 	once: "0"
 	needPlayerInteraction: "0"
 	killPlayer: "0"
+}
+object SoundArea {
+	ID: "7131"
+	name: ""
+	position: "-8.400001, 5.400000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "30.400000, 17.000000"
+	soundName: "1_base.ogg"
+	volume: "0.200000"
+	isMusic: "1"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
 }

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 178
+count 177
 
 object MapData {
 	mapName: ""
@@ -745,10 +745,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "3665"
 	name: ""
-	position: "60.400002, -6.400000, 10.000000"
+	position: "60.400002, -7.000000, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "12.600000, 7.800000"
+	size: "12.600000, 7.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -825,10 +825,10 @@ object Trigger {
 object EditorSprite {
 	ID: "4384"
 	name: ""
-	position: "66.200005, 1.600000, 10.000000"
+	position: "66.200005, 0.800000, 10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "1.000000, 8.200000"
+	size: "1.000000, 9.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -857,10 +857,10 @@ object EditorSprite {
 object Laser {
 	ID: "4965"
 	name: ""
-	position: "60.000000, 11.200000, 0.000000"
+	position: "77.599998, 16.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	orientation: "0.000000"
+	orientation: "270.000000"
 	laserType: "0"
 	startOffset: "-1.000000"
 	endOffset: "0.700000"
@@ -969,18 +969,6 @@ object Button {
 	startPressed: "0"
 	onPressed: "4965|Turn off|"
 	onUnpressed: "4965|Turn on|"
-}
-object Laser {
-	ID: "6007"
-	name: ""
-	position: "86.000000, 15.000000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "0.000000"
-	laserType: "0"
-	startOffset: "-1.000000"
-	endOffset: "0.700000"
-	startOn: "1"
 }
 object Prefab {
 	ID: "6311"

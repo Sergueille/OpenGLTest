@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 323
+count 325
 
 object MapData {
 	mapName: ""
@@ -290,7 +290,7 @@ object Button {
 	parallax: "1.000000"
 	startPressed: "0"
 	onPressed: "404|Set position|678|Close door|12319|Set all transforms|15624|Set to normal events|"
-	onUnpressed: "402|Set position|678|Open door|12321|Set all transforms|15624|Set to alternative events|"
+	onUnpressed: "402|Set position|678|Open door|12321|Set all transforms|15624|Set to alternative events|30370|Trigger|"
 }
 object Trigger {
 	ID: "407"
@@ -1012,7 +1012,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "2551"
 	name: ""
-	position: "82.599998, 49.600002, 5.000000"
+	position: "82.599998, 49.599998, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "30.200001, 22.200001"
@@ -1503,18 +1503,6 @@ object ShadowCaster {
 	parallax: "1.000000"
 	size: "8.790000, 1.100000"
 	orientation: "0.000000"
-}
-object Laser {
-	ID: "5474"
-	name: ""
-	position: "152.199997, 25.400000, 0.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "720.000000"
-	laserType: "1"
-	startOffset: "-0.100000"
-	endOffset: "0.050000"
-	startOn: "1"
 }
 object EditorSprite {
 	ID: "5476"
@@ -3594,7 +3582,7 @@ object Trigger {
 	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "16.200001, 4.000000"
-	onEnter: "15624|Trigger|"
+	onEnter: "15624|Trigger|30370|Set to alternative events|"
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
@@ -4642,4 +4630,43 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "30028"
+	name: ""
+	position: "115.000000, 11.200000, -3.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "0.400000, 0.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "exit1.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object LogicRelay {
+	ID: "30370"
+	name: "write switch 2"
+	position: "-5.200000, -21.200001, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: ""
+	onAltTrigger: "30372|Write|30370|Set to normal events|"
+	triggerOnStart: "0"
+	delay: "0.000000"
+}
+object TerminalWriter {
+	ID: "30372"
+	name: ""
+	position: "-3.400000, -21.200001, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	count: "1"
+	key0: "t_moving_door2"
+	onFinished: ""
+	writeRandom: "0"
 }
