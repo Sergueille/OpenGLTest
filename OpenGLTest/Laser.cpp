@@ -204,6 +204,8 @@ void Laser::OnMainLoop()
 			soloud->setVolume(loopSound, Utility::gameSoundsVolume * soundOnVolume * soundsAttenuation);
 		}
 	}
+
+	emmiterSprite->isLit = !laserOn;
 }
 
 void Laser::Save()
@@ -237,17 +239,19 @@ void Laser::Load(std::map<std::string, std::string>* props)
 void Laser::Enable()
 {
 	EditorObject::Enable();
-	displaySprite->DrawOnMainLoop();
 	emmiterSprite->DrawOnMainLoop();
-	glowSprite->DrawOnMainLoop();
 
 	if (editorSprite != nullptr)
 		editorSprite->DrawOnMainLoop();
 
 	laserCollider->enabled = true;
 
-	if (laserOn)
+	if (laserOn) 
+	{
+		displaySprite->DrawOnMainLoop();
+		glowSprite->DrawOnMainLoop();
 		lasers.push_back(this);
+	}
 }
 
 void Laser::Disable()
@@ -376,6 +380,7 @@ void Laser::TurnOn()
 	laserOn = true;
 
 	displaySprite->DrawOnMainLoop();
+	glowSprite->DrawOnMainLoop();
 
 	lasers.push_back(this);
 
@@ -392,6 +397,7 @@ void Laser::TurnOff()
 	laserOn = false;
 
 	displaySprite->StopDrawing();
+	glowSprite->StopDrawing();
 
 	lasers.remove(this);
 
