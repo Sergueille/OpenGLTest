@@ -6,8 +6,8 @@
 #include "Editor.h"
 #include "LocalizationManager.h"
 
-const vec4 TerminalManager::textColor = vec4(0.3, 0.8, 0.3, 1);
-const vec4 TerminalManager::bgColor = vec4(0, 0, 0, 0.6f);
+const vec4 TerminalManager::textColor = vec4(1.f, 3.f, 1.f, 1.f); // Higher than real because the terminal background will be rendered on top of it
+const vec4 TerminalManager::bgColor = vec4(0, 0, 0, 0.8f);
 std::vector<std::string> TerminalManager::lines = std::vector<std::string>();
 float TerminalManager::terminalWidth = 0;
 std::string TerminalManager::charsToWrite = "";
@@ -46,7 +46,32 @@ void TerminalManager::Write(std::string key)
 	if (lines[lines.size() - 1].length() > 0)
 		NewLine();
 
-	charsToWrite = text;
+	// Add line breaks to prevent line overflow
+	std::string newText = "";
+	int lastSpacePos = 0;
+	int lineLength = 0;
+	for (int i = 0; i < text.length(); i++)
+	{
+		if (text[i] > 0) // Ignore UTF-8 semi-chars
+			lineLength++;
+
+		if (text[i] == ' ')
+			lastSpacePos = i;
+
+		if (lineLength >= maxCharInLine - 2)
+		{
+			lineLength = 0;
+
+			if (lastSpacePos < i)
+				newText = newText.substr(0, lastSpacePos) + "\n" + newText.substr(lastSpacePos + 1, newText.length() - lastSpacePos - 1);
+			else
+				newText = newText.substr(0, lastSpacePos) + "\n";
+		}
+
+		newText += text[i];
+	}
+
+	charsToWrite = newText;
 	writeStartTime = Utility::time;
 	writtenChars = 0;
 }
@@ -74,13 +99,15 @@ void TerminalManager::OnMainLoop()
 
 		if (allText.length() > 1)
 		{
-			vec3 pos = vec3(screenMargin, Utility::screenY - screenMargin - textSize, zPos + 1); // Top-left corner pos
+			vec3 pos = vec3(screenMargin, Utility::screenY - screenMargin - textSize, zPos); // Top-left corner pos
 			vec2 size = TextManager::RenderText(allText, pos, textSize, TextManager::right, textColor, true); // Draw text
 
 			// Draw background
+			//	 Drawn on top of text because, as a transparent sprite, it will be rendered after the text
+			//	 If it's under the text, blending will be incorrect
 			Sprite(
 				vec3(0, Utility::screenY, zPos),
-				vec3(terminalWidth + 2 * screenMargin, Utility::screenY - 2 * screenMargin - size.y + textSize, zPos),
+				vec3(terminalWidth + 2 * screenMargin, Utility::screenY - 2 * screenMargin - textSize * lines.size(), zPos + 1),
 				bgColor
 			).Draw();
 		}
@@ -94,10 +121,10 @@ void TerminalManager::OnMainLoop()
 
 			for (int pos = writtenChars; pos < shouldWrite; pos++)
 			{
-				if (lines[lines.size() - 1].length() == maxCharInLine)
+				if (charsToWrite[pos] == '\n')
 					NewLine();
-
-				lines[lines.size() - 1] += charsToWrite[pos];
+				else
+					lines[lines.size() - 1] += charsToWrite[pos];
 			}
 
 			writtenChars = shouldWrite;

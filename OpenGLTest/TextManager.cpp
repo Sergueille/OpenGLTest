@@ -247,16 +247,16 @@ namespace TextManager {
         // iterate through all characters
         for (auto c = text.begin(); c != text.end(); c++)
         {
-            if (halfchar == 0 && *c > 128)
+            if (halfchar == 0 && *c < 0)
             {
-                halfchar = (int)*c;
+                halfchar = (int)(unsigned char)*c;
                 continue;
             }
 
             int charID;
             if (halfchar != 0)
             {
-                charID = (halfchar << 8) + (int)*c;
+                charID = (halfchar << 8) + (int)(unsigned char)*c;
                 halfchar = 0;
             }
             else
@@ -264,9 +264,9 @@ namespace TextManager {
                 charID = *c;
             }
 
-            Character ch = mono ? charactersMono[*c] : characters[*c];
+            Character ch = mono ? charactersMono[charID] : characters[charID];
 
-            if (*c == '\n')
+            if (charID == '\n')
             {
                 X = 0;
                 Y += size * 64 * 64;

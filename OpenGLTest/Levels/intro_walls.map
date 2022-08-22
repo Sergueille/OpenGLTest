@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 577
+count 580
 
 object MapData {
 	mapName: ""
@@ -42,7 +42,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "3"
 	name: ""
-	position: "12.400001, 11.200001, 0.000000"
+	position: "12.400000, 11.200001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "41.799999, 15.000000"
@@ -7641,7 +7641,7 @@ object EditorSprite {
 	size: "3.400000, 3.400000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "projector1.png"
+	texturePath: "projector_off.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
@@ -7663,20 +7663,6 @@ object SoundPoint {
 	autoStart: "1"
 	loop: "1"
 	dontPlayIfTooFar: "0"
-}
-object Light {
-	ID: "21007"
-	name: ""
-	position: "164.800003, 25.000000, 1.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "5.000000"
-	color: "0.600000, 0.800000, 1.000000, 1.000000"
-	intensity: "0.500000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.500000"
 }
 object EditorSprite {
 	ID: "21211"
@@ -7804,7 +7790,7 @@ object LogicRelay {
 object EditorSprite {
 	ID: "22566"
 	name: "over"
-	position: "-14.000000, 5.400000, 45.000000"
+	position: "-14.600000, 6.800000, 45.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "35.799999, 21.400000"
@@ -8848,7 +8834,7 @@ object SoundArea {
 	parallax: "1.000000"
 	editorSize: "48.200001, 53.799999"
 	soundName: "1_high.ogg"
-	volume: "0.150000"
+	volume: "0.100000"
 	isMusic: "1"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
@@ -8921,4 +8907,76 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "36409"
+	name: ""
+	position: "-13.518111, 2.018649, -4.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "5.000000, 5.000000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "container.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object Light {
+	ID: "36411"
+	name: ""
+	position: "-13.565557, 2.150686, 20.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	lightSize: "8.000000"
+	color: "1.000000, 0.400000, 0.200000, 1.000000"
+	intensity: "0.600000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+	shadowSize: "0.500000"
+}
+object EditorSprite {
+	ID: "36413"
+	name: ""
+	position: "-13.600000, 8.329410, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.000000, 8.000000"
+	rotation: "0.000000"
+	color: "0.800000, 0.800000, 0.800000, 1.000000"
+	texturePath: "pipe4.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 2.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorParticleSystem {
+	ID: "36415"
+	name: ""
+	position: "-13.600000, -0.000000, 40.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "1.430000, 0.200000"
+	emitCircle: "0"
+	velocityFromAngle: "0"
+	startVelocity: "0.000000, 1.000000"
+	endVelocity: "0.000000, 1.000000"
+	startSize: "0.300000, 0.300000"
+	endSize: "0.000000, 0.000000"
+	startColor: "2.000000, 0.600000, 0.400000, 0.000000"
+	endColor: "2.000000, 0.600000, 0.400000, 0.200000"
+	texture: "glow.png"
+	isLit: "0"
+	particlesPerSecond: "20.000000"
+	particleLifetime: "4.000000"
+	duration: "-1.000000"
+	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 432
+count 441
 
 object MapData {
 	mapName: ""
@@ -147,10 +147,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "222"
 	name: ""
-	position: "13.000000, 28.200001, 0.000000"
+	position: "13.000000, 21.200001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "33.000000, 37.799999"
+	size: "33.000000, 23.800001"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -2946,7 +2946,7 @@ object Laser {
 object Button {
 	ID: "18953"
 	name: ""
-	position: "31.600000, 34.799999, 0.000000"
+	position: "25.000000, 35.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	startPressed: "0"
@@ -2992,7 +2992,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "19671"
 	name: ""
-	position: "19.200001, 51.200001, 0.000000"
+	position: "19.200001, 49.200001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "20.600000, 23.400000"
@@ -3705,7 +3705,7 @@ object EditorSprite {
 	position: "39.400002, 29.800001, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "10.000000, 25.000000"
+	size: "9.800000, 25.000000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "back\bricks.jpg"
@@ -3842,6 +3842,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }
 object SoundArea {
 	ID: "22976"
@@ -3855,6 +3856,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }
 object EditorSprite {
 	ID: "23536"
@@ -4763,6 +4765,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }
 object Trigger {
 	ID: "24498"
@@ -4846,6 +4849,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }
 object EditorSprite {
 	ID: "27559"
@@ -6260,6 +6264,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }
 object SoundArea {
 	ID: "30314"
@@ -6273,6 +6278,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }
 object SoundArea {
 	ID: "30316"
@@ -6286,6 +6292,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }
 object Prefab {
 	ID: "30599"
@@ -6468,20 +6475,6 @@ object SoundPoint {
 	loop: "1"
 	dontPlayIfTooFar: "0"
 }
-object Light {
-	ID: "33110"
-	name: ""
-	position: "31.600000, 34.799999, 20.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	lightSize: "8.000000"
-	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	intensity: "0.400000"
-	rotation: "0.000000"
-	innerAngle: "360.000000"
-	outerAngle: "360.000000"
-	shadowSize: "0.500000"
-}
 object EditorSprite {
 	ID: "33413"
 	name: ""
@@ -6509,6 +6502,142 @@ object EditorSprite {
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "door_rail.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object ShadowCaster {
+	ID: "33731"
+	name: ""
+	position: "28.000000, 31.400000, 20.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.000000, 3.400000"
+	orientation: "0.000000"
+}
+object ShadowCaster {
+	ID: "33733"
+	name: ""
+	position: "28.000000, 39.200001, 20.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.000000, 3.400000"
+	orientation: "0.000000"
+}
+object EditorSprite {
+	ID: "33735"
+	name: ""
+	position: "16.000000, 35.400002, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "14.200000, 5.200000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object Light {
+	ID: "33737"
+	name: ""
+	position: "24.000000, 36.600002, 20.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	lightSize: "8.000000"
+	color: "1.000000, 0.300000, 0.200000, 1.000000"
+	intensity: "0.800000"
+	rotation: "0.000000"
+	innerAngle: "360.000000"
+	outerAngle: "360.000000"
+	shadowSize: "0.500000"
+}
+object EditorSprite {
+	ID: "33739"
+	name: ""
+	position: "24.000000, 36.600002, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "0.400000, 0.400000"
+	rotation: "0.000000"
+	color: "1.200000, 1.200000, 1.200000, 1.000000"
+	texturePath: "lamp_red.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "33741"
+	name: ""
+	position: "26.200001, 35.400002, -10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "6.600000, 4.800000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "back\concrete1.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.200000, 0.800000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "33743"
+	name: ""
+	position: "26.195753, 36.600002, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "0.800000, 0.800000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "panel3.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object TextRenderer {
+	ID: "33746"
+	name: ""
+	position: "26.095520, 36.493729, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	content: "door_switch4"
+	fontSize: "0.250000"
+	color: "0.800000, 0.300000, 0.200000, 0.500000"
+}
+object TextRenderer {
+	ID: "33748"
+	name: ""
+	position: "33.000000, 7.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	content: "door2"
+	fontSize: "0.700000"
+	color: "0.000000, 0.000000, 0.000000, 0.300000"
+}
+object EditorSprite {
+	ID: "33750"
+	name: ""
+	position: "29.000000, 35.200001, -4.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.000000, 1.000000"
+	rotation: "90.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.700000"
+	texturePath: "decals\yellow_strip.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"

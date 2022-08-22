@@ -11,6 +11,8 @@
 "fall","Falling risk","Risque de chute"
 "door1","GATE A-15","PORTAIL A-15"
 "door_switch3","GATE A-15 CONTROL","CONTRÔLE PORTAIL A-15"
+"door2","GATE B-17","PORTAIL B-17"
+"door_switch4","GATE B-17 CONTROL","CONTRÔLE PORTAIL B-17"
 "sign1a","","IL EST INTERDIT DE"
 "sign1b","","MONTER SUR LES PLATEFORMES"
 "react_signA","","Réacteur"

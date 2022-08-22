@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 371
+count 374
 
 object MapData {
 	mapName: ""
@@ -3968,6 +3968,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+	syncAreaID: "-1"
 }
 object SoundArea {
 	ID: "11216"
@@ -3981,6 +3982,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+	syncAreaID: "-1"
 }
 object SoundArea {
 	ID: "11739"
@@ -3994,6 +3996,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+	syncAreaID: "-1"
 }
 object SoundArea {
 	ID: "12930"
@@ -4007,6 +4010,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+	syncAreaID: "-1"
 }
 object EditorSprite {
 	ID: "13060"
@@ -5229,6 +5233,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+	syncAreaID: "-1"
 }
 object EditorSprite {
 	ID: "20976"
@@ -5624,6 +5629,57 @@ object EditorSprite {
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "24239"
+	name: ""
+	position: "80.400002, -23.000000, -9.500000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.400000, 4.200000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.300000"
+	texturePath: "decals\dust1.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "-1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "24241"
+	name: ""
+	position: "52.799999, -23.600000, -9.500000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.400000, 4.200000"
+	rotation: "90.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.400000"
+	texturePath: "decals\dust1.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "24243"
+	name: ""
+	position: "59.400002, -23.000000, -9.400000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "8.400000, 4.200000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.200000"
+	texturePath: "decals\dust2.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "2.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"

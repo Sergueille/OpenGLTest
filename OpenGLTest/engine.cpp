@@ -93,9 +93,6 @@ int main(int argc, void* argv[])
 
     TerminalManager::Init();
 
-    // Set bg color
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-
     Utility::lofiFilter = new SoLoud::LofiFilter();
     Utility::soloud->setGlobalFilter(0, lofiFilter);
     Utility::soloud->setFilterParameter(0, 0, SoLoud::LofiFilter::WET, 0);
@@ -112,6 +109,12 @@ int main(int argc, void* argv[])
 
         // Bind frame buffer
         glBindFramebuffer(GL_FRAMEBUFFER, SettingsManager::FBO);
+
+        // Set bg color
+        if (Editor::enabled)
+            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        else
+            glClearColor(0.f, 0.f, 0.f, 1.f);
 
         // Clear color and depth buffer
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
