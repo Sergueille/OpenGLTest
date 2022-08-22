@@ -46,6 +46,11 @@ vec2 SoundArea::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "Volume", &volume, Editor::panelPropertiesX, strID + "volume").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Fade in duration", &fadeIn, Editor::panelPropertiesX, strID + "fadeIn").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Fade out duration", &fadeOut, Editor::panelPropertiesX, strID + "fadeOut").y;
+	
+	syncArea = Editor::GetEditorObjectByID(syncAreaID, true, false);
+	drawPos.y -= Editor::ObjectSelector(drawPos, "Sync with", &syncArea, Editor::panelPropertiesX, strID + "syncAreaID").y;
+	if (syncArea != nullptr)
+		syncAreaID = syncArea->ID;
 
 	drawPos.y -= Editor::CheckBox(drawPos, "Is music", &isMusic, Editor::panelPropertiesX).y;
 
@@ -79,6 +84,7 @@ void SoundArea::Load(std::map<std::string, std::string>* props)
 	isMusic = (*props)["isMusic"] == "1";
 	EditorSaveManager::FloatProp(props, "fadeIn", &fadeIn);
 	EditorSaveManager::FloatProp(props, "fadeOut", &fadeOut);
+	EditorSaveManager::IntProp(props, "syncAreaID", &syncAreaID);
 
 	RessourceManager::GetSound(soundName); // Make sure the sound is loaded to prevent FPS drop during the level
 }
@@ -93,6 +99,7 @@ void SoundArea::Save()
 	EditorSaveManager::WriteProp("isMusic", isMusic);
 	EditorSaveManager::WriteProp("fadeIn", fadeIn);
 	EditorSaveManager::WriteProp("fadeOut", fadeOut);
+	EditorSaveManager::WriteProp("syncAreaID", syncAreaID);
 }
 
 void SoundArea::Enable()
@@ -114,8 +121,9 @@ void SoundArea::PlaySound()
 	if (isPlaying) StopSound();
 	isPlaying = true;
 
-	handle = Utility::PlaySound(soundName, Utility::gameSoundsVolume * volume);
+	handle = Utility::PlaySound(soundName, 0); // Temporary volume
 	soloud->setLooping(handle, true);
+	soloud->setInaudibleBehavior(handle, true, false); // Prevent pausing when off (sync with other)
 }
 
 void SoundArea::StopSound()
@@ -146,6 +154,9 @@ void SoundArea::OnMainLoop()
 
 	if (!Editor::enabled && Player::ingameInstance != nullptr)
 	{
+		if (syncArea == nullptr && syncAreaID != -1)
+			syncArea = Editor::GetEditorObjectByID(syncAreaID, false, false);
+
 		RectCollider coll(GetEditPos(), GetEditScale(), 0, false);
 		vec3 res = Player::ingameInstance->collider->CollideWith(&coll);
 
@@ -164,7 +175,7 @@ void SoundArea::OnMainLoop()
 
 		if ((isMusic && mainMusicArea == this) || (!isMusic && mainArea == this)) // Increase volume
 		{
-			if (!isPlaying) PlaySound();
+			if (!isPlaying && syncArea == nullptr) PlaySound(); // Do not restart if sync with other
 
 			relativeVolume += GetDeltaTime() / fadeIn;
 			if (relativeVolume > 1) relativeVolume = 1;
@@ -175,8 +186,21 @@ void SoundArea::OnMainLoop()
 			if (relativeVolume < 0)
 			{
 				relativeVolume = 0;
+
+				if (syncArea == nullptr) // Do not stop if sync with other
 				StopSound();
 			}
+		}
+
+		// Sync with other
+		if (syncArea != nullptr)
+		{
+			SoundArea* _syncArea = (SoundArea*)syncArea;
+
+			if (!isPlaying && _syncArea->isPlaying)
+				PlaySound();
+			else if (isPlaying && !_syncArea->isPlaying)
+				StopSound();
 		}
 
 		if (isPlaying) // Update volume

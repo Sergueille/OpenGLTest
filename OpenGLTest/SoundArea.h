@@ -20,6 +20,7 @@ public:
 	float fadeIn = 1;
 	float fadeOut = 1;
 	bool isMusic = false;
+	int syncAreaID = -1;
 
 	bool isPlaying = false;
 
@@ -43,5 +44,6 @@ private:
 
 	SoLoud::handle handle;
 	float relativeVolume = 0;
+	EditorObject* syncArea = nullptr;
 };
 

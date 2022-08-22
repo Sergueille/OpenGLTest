@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 572
+count 577
 
 object MapData {
 	mapName: ""
@@ -1273,7 +1273,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1857"
 	name: ""
-	position: "16.000000, 0.800000, 0.000000"
+	position: "16.000000, 0.800000, -1.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "2.200000, 2.200000"
@@ -1290,7 +1290,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "2233"
 	name: ""
-	position: "15.800000, 0.600000, 2.000000"
+	position: "15.800000, 0.600000, -0.500000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "1.800000, 1.800000"
@@ -3750,7 +3750,7 @@ object EditorSprite {
 	size: "19.800001, 45.000000"
 	rotation: "0.000000"
 	color: "0.900000, 0.900000, 0.900000, 1.000000"
-	texturePath: "back\plaster2.jpg"
+	texturePath: "back\concrete_2.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "2.000000, 4.500000"
@@ -4673,10 +4673,10 @@ object EditorSprite {
 	size: "22.800001, 10.000000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
-	texturePath: "back\plaster1.jpg"
+	texturePath: "back\concrete_2.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "5.000000, 2.000000"
+	UVend: "3.000000, 1.500000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
@@ -5828,16 +5828,16 @@ object EditorSprite {
 object EditorSprite {
 	ID: "11045"
 	name: ""
-	position: "169.000000, 35.400002, -10.000000"
+	position: "169.000000, 35.703323, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "25.000000, 10.000000"
 	rotation: "0.000000"
 	color: "0.900000, 0.900000, 0.900000, 1.000000"
-	texturePath: "back\plaster2.jpg"
+	texturePath: "back\concrete_2.png"
 	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "2.500000, 1.000000"
+	UVstart: "0.000000, -0.600000"
+	UVend: "2.500000, 0.400000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
@@ -7630,6 +7630,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+	syncAreaID: "-1"
 }
 object EditorSprite {
 	ID: "21003"
@@ -8174,6 +8175,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+	syncAreaID: "-1"
 }
 object Trigger {
 	ID: "26171"
@@ -8678,6 +8680,7 @@ object SoundArea {
 	isMusic: "1"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+	syncAreaID: "-1"
 }
 object EditorSprite {
 	ID: "32090"
@@ -8836,4 +8839,86 @@ object Light {
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
 	shadowSize: "0.200000"
+}
+object SoundArea {
+	ID: "32550"
+	name: ""
+	position: "157.000000, 23.600000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "48.200001, 53.799999"
+	soundName: "1_high.ogg"
+	volume: "0.150000"
+	isMusic: "1"
+	fadeIn: "3.000000"
+	fadeOut: "3.000000"
+	syncAreaID: "32083"
+}
+object EditorSprite {
+	ID: "36181"
+	name: ""
+	position: "21.400000, -10.200000, -9.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.000000, 4.000000"
+	rotation: "180.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.500000"
+	texturePath: "decals\dust1.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "36183"
+	name: ""
+	position: "34.200001, -4.800000, -9.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.800000, 2.800000"
+	rotation: "180.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.500000"
+	texturePath: "decals\dust1.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "-1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "36185"
+	name: ""
+	position: "137.000000, -17.600000, -9.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.600000, 2.200000"
+	rotation: "180.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.500000"
+	texturePath: "decals\dust2.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "-1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "36187"
+	name: ""
+	position: "16.000000, 0.800000, -9.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.600000, 2.200000"
+	rotation: "180.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.500000"
+	texturePath: "decals\dust2.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "-1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
