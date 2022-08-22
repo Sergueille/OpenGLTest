@@ -10,4 +10,5 @@ Props {
 	screenX: "1600"
 	screenY: "900"
 	uiVolume: "0.506667"
+    minFPS: "20"
 }

@@ -809,6 +809,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+	syncAreaID: "-1"
 }
 object SoundArea {
 	ID: "4313"
@@ -822,6 +823,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "3.000000"
 	fadeOut: "3.000000"
+	syncAreaID: "-1"
 }
 object Checkpoint {
 	ID: "4471"
@@ -907,4 +909,5 @@ object SoundArea {
 	isMusic: "1"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }

@@ -59,6 +59,9 @@ int main(int argc, void* argv[])
     SettingsManager::CreateGLFWWindow();
     SettingsManager::ApplySettings();
 
+    float minFPS = SettingsManager::GetFloatSetting("minFPS");
+    float maxDeltaTime = 1 / minFPS;
+
     // Set error callback
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, 0);
@@ -98,6 +101,8 @@ int main(int argc, void* argv[])
     Utility::soloud->setFilterParameter(0, 0, SoLoud::LofiFilter::WET, 0);
     lofiFilter->setParams(5, 10);
 
+    float lastRealTime = 0;
+
     /////// GAME LOOP
     while (!glfwWindowShouldClose(window))
     {
@@ -105,7 +110,10 @@ int main(int argc, void* argv[])
         Utility::testCount = 0;
 
         // Get Time
-        Utility::time = (float)glfwGetTime();
+        float realTime = (float)glfwGetTime();
+        float realDeltaTime = realTime - lastRealTime;
+        if (realDeltaTime > maxDeltaTime) realDeltaTime = maxDeltaTime;
+        Utility::time = Utility::lastTime + realDeltaTime;
 
         // Bind frame buffer
         glBindFramebuffer(GL_FRAMEBUFFER, SettingsManager::FBO);
@@ -216,6 +224,7 @@ int main(int argc, void* argv[])
         FPSvaluePos %= FPS_NB_VALUES;
 
         Utility::lastTime = Utility::time;
+        lastRealTime = realTime;
     }
 
     EventManager::Call(&EventManager::OnExitApp);
