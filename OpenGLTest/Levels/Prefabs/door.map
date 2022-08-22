@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 10
+count 13
 
 object MapData {
 	mapName: ""
@@ -51,6 +51,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object Laser {
 	ID: "42"
@@ -98,6 +99,7 @@ object EditorParticleSystem {
 	particleLifetime: "2.000000"
 	duration: "0.100000"
 	autoStart: "0"
+	ignoreDistanceOptimization: "0"
 }
 object SoundPoint {
 	ID: "119"
@@ -143,4 +145,55 @@ object SoundPoint {
 	autoStart: "0"
 	loop: "0"
 	dontPlayIfTooFar: "0"
+}
+object EditorSprite {
+	ID: "122"
+	name: ""
+	position: "0.000000, -0.100000, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.420000, 4.600000"
+	rotation: "0.000000"
+	color: "1.300000, 1.300000, 1.300000, 0.600000"
+	texturePath: "door_rail.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "124"
+	name: ""
+	position: "-0.000000, -2.000000, -4.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "0.490000, 0.690000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "door_base.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "126"
+	name: ""
+	position: "0.000000, 1.811876, -4.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "0.490000, 0.690000"
+	rotation: "180.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "door_base.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 325
+count 329
 
 object MapData {
 	mapName: ""
@@ -1229,10 +1229,10 @@ object Laser {
 object EditorSprite {
 	ID: "4863"
 	name: ""
-	position: "113.200005, 10.000000, -10.000000"
+	position: "113.400002, 10.000000, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "19.200001, 5.600000"
+	size: "19.000000, 5.600000"
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "back\plaster1.jpg"
@@ -3826,7 +3826,7 @@ object EditorSprite {
 object TextRenderer {
 	ID: "19994"
 	name: ""
-	position: "61.200001, 37.600002, 0.000000"
+	position: "62.838341, 37.600002, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	content: "sign1a"
@@ -3836,7 +3836,7 @@ object TextRenderer {
 object TextRenderer {
 	ID: "19996"
 	name: ""
-	position: "61.200001, 37.200001, 0.000000"
+	position: "62.838341, 37.200001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	content: "sign1b"
@@ -4669,4 +4669,72 @@ object TerminalWriter {
 	key0: "t_moving_door2"
 	onFinished: ""
 	writeRandom: "0"
+}
+object EditorSprite {
+	ID: "30718"
+	name: ""
+	position: "97.000000, 36.000000, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.200000, 1.400000"
+	rotation: "450.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.500000"
+	texturePath: "decals\yellow_strip.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "0.500000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "30722"
+	name: ""
+	position: "58.000000, 36.000000, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.200000, 1.400000"
+	rotation: "630.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.500000"
+	texturePath: "decals\yellow_strip.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "0.500000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "30724"
+	name: ""
+	position: "104.599998, 10.000000, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.200000, 1.400000"
+	rotation: "630.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.500000"
+	texturePath: "decals\yellow_strip.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "0.500000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "30726"
+	name: ""
+	position: "151.400009, 10.000000, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.200000, 1.400000"
+	rotation: "810.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.500000"
+	texturePath: "decals\yellow_strip.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "0.500000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 155
+count 156
 
 object MapData {
 	mapName: ""
@@ -2081,10 +2081,10 @@ object EditorSprite {
 object Laser {
 	ID: "22973"
 	name: ""
-	position: "-2.399998, -3.000000, 0.000000"
+	position: "-7.199999, -3.000000, 0.000000"
 	parent: "8914"
 	parallax: "1.000000"
-	orientation: "180.000000"
+	orientation: "360.000000"
 	laserType: "0"
 	startOffset: "-0.100000"
 	endOffset: "0.050000"
@@ -2111,4 +2111,20 @@ object Trigger {
 	once: "0"
 	needPlayerInteraction: "0"
 	killPlayer: "0"
+}
+object EditorSprite {
+	ID: "23736"
+	name: ""
+	position: "-2.496716, -3.000000, 20.000000"
+	parent: "8914"
+	parallax: "1.000000"
+	size: "0.400000, 0.800000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }

@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 208
+count 209
 
 object MapData {
 	mapName: ""
@@ -3026,6 +3026,23 @@ object EditorSprite {
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "6996"
+	name: ""
+	position: "64.800003, 12.800000, -6.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.200000, 4.200000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "curtain.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
 }

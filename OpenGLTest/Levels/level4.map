@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 430
+count 432
 
 object MapData {
 	mapName: ""
@@ -2761,10 +2761,10 @@ object TransformModifier {
 	parallax: "1.000000"
 	targetID: "4461"
 	relative: "1"
-	targetPos: "0.000000, 10.000000"
+	targetPos: "0.000000, 4.400000"
 	targetRotation: "0.000000"
 	targetSize: "1.000000, 1.000000"
-	duration: "5.000000"
+	duration: "4.000000"
 	easeType: "1"
 	onFinished: "30902|Play sound|"
 }
@@ -6204,7 +6204,7 @@ object EditorParticleSystem {
 	startColor: "1.000000, 1.000000, 1.000000, 0.500000"
 	endColor: "1.000000, 1.000000, 1.000000, 0.000000"
 	texture: "smoke1.png"
-	isLit: "0"
+	isLit: "1"
 	particlesPerSecond: "60.000000"
 	particleLifetime: "0.700000"
 	duration: "3.000000"
@@ -6228,7 +6228,7 @@ object EditorParticleSystem {
 	startColor: "1.000000, 1.000000, 1.000000, 0.500000"
 	endColor: "1.000000, 1.000000, 1.000000, 0.000000"
 	texture: "smoke1.png"
-	isLit: "0"
+	isLit: "1"
 	particlesPerSecond: "60.000000"
 	particleLifetime: "0.700000"
 	duration: "3.000000"
@@ -6333,7 +6333,7 @@ object SoundPoint {
 	parent: "-1"
 	parallax: "1.000000"
 	soundName: "metal_hit.wav"
-	volume: "1.000000"
+	volume: "0.800000"
 	spatial: "1"
 	minDist: "10.000000"
 	maxDist: "40.000000"
@@ -6481,4 +6481,38 @@ object Light {
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
 	shadowSize: "0.500000"
+}
+object EditorSprite {
+	ID: "33413"
+	name: ""
+	position: "124.000000, -30.400000, -5.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.600000, 2.600000"
+	rotation: "90.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.500000"
+	texturePath: "decals\yellow_strip.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "0.500000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "33415"
+	name: ""
+	position: "124.000000, -30.800001, -2.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "5.000000, 5.200000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "door_rail.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }

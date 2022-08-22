@@ -19,7 +19,7 @@ object Light {
 	rotation: "-90.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
-	shadowSize: "0.500000"
+	shadowSize: "0.200000"
 }
 object Light {
 	ID: "282"
@@ -50,6 +50,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object Light {
 	ID: "1"
@@ -63,7 +64,7 @@ object Light {
 	rotation: "-90.000000"
 	innerAngle: "360.000000"
 	outerAngle: "360.000000"
-	shadowSize: "0.500000"
+	shadowSize: "0.200000"
 }
 object EditorParticleSystem {
 	ID: "1608"
@@ -74,6 +75,7 @@ object EditorParticleSystem {
 	orientation: "0.000000"
 	scale: "3.200000, 1.400000"
 	emitCircle: "0"
+	velocityFromAngle: "0"
 	startVelocity: "0.000000, 0.100000"
 	endVelocity: "0.000000, -0.250000"
 	startSize: "0.000000, 0.000000"
@@ -86,4 +88,5 @@ object EditorParticleSystem {
 	particleLifetime: "5.000000"
 	duration: "-1.000000"
 	autoStart: "1"
+	ignoreDistanceOptimization: "0"
 }

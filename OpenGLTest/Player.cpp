@@ -7,6 +7,7 @@
 #include <iostream>
 #include <soloud_lofifilter.h>
 #include "ParticleSystem.h"
+#include "TerminalManager.h"
 
 using namespace glm;
 
@@ -270,6 +271,7 @@ void Player::Kill()
 	TweenManager<vec2>::Tween(GetPos(), vec2(GetPos()) - vec2(0, deathPlayerShift), deathDuration, [this](vec2 value) {
 		SetPos(vec2(value.x, value.y));
 	}, linear)->SetOnFinished([this] {
+		TerminalManager::ClearTerminal();
 		EditorSaveManager::LoadUserSaveInSameLevel(EditorSaveManager::currentUserSave);
 		isDying = false;
 		physicsEnabled = true;
