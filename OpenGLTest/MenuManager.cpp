@@ -223,8 +223,13 @@ void MenuManager::OnMainLoop()
 		}
 		else
 		{
-
+			float res = SettingsManager::GetFloatSetting("screenY");
+			drawPos.y -= Slider(drawPos, "win_size", &res, 540, 1080, false, true).y + margin;
+			SettingsManager::SetIntSetting("screenY", (int)res);
+			SettingsManager::SetIntSetting("screenX", (int)(res * 16.f / 9.f));
 		}
+
+		drawPos.y -= SettingIntSlider(drawPos, "min_fps", "minFPS", 10, 120).y + margin;
 
 		drawPos.y -= margin;
 

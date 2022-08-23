@@ -18,15 +18,16 @@ void SettingsManager::ReadSettings()
 
 void SettingsManager::CreateGLFWWindow()
 {
+    GLFWwindow* oldWindow = nullptr;
     if (windowCreated) // Delete previous window
     {
-        glDeleteFramebuffers(1, &FBO);
-        glDeleteFramebuffers(2, &pingpongFBO[0]);
+        // glDeleteFramebuffers(1, &FBO);
+        // glDeleteFramebuffers(2, &pingpongFBO[0]);
 
-        glDeleteTextures(3, &colorTex[0]);
-        glDeleteBuffers(2, &pingpongBuffer[0]);
+        // glDeleteTextures(3, &colorTex[0]);
+        // glDeleteBuffers(2, &pingpongBuffer[0]);
 
-        glfwDestroyWindow(window);
+        oldWindow = Utility::window;
     }
 
     bool fullscreen = SettingsManager::settings["fullscreen"] == "1";
@@ -73,14 +74,14 @@ void SettingsManager::CreateGLFWWindow()
         glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
         glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
         glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
-        Utility::window = glfwCreateWindow(mode->width, mode->height, windowName, monitor, NULL);
+        Utility::window = glfwCreateWindow(mode->width, mode->height, windowName, monitor, oldWindow);
 
         Utility::screenX = mode->width;
         Utility::screenY = mode->height;
     }
     else
     {
-        Utility::window = glfwCreateWindow(smallWindowWidth, smallWindowHeght, windowName, NULL, NULL);
+        Utility::window = glfwCreateWindow(smallWindowWidth, smallWindowHeght, windowName, NULL, oldWindow);
 
         Utility::screenX = smallWindowWidth;
         Utility::screenY = smallWindowHeght;
@@ -93,13 +94,23 @@ void SettingsManager::CreateGLFWWindow()
     }
     glfwMakeContextCurrent(window);
 
+    // SetupOpenGL();
+
+    if (windowCreated)
+        glfwDestroyWindow(oldWindow);
+
+    windowCreated = true;
+    std::cout << "Created window" << std::endl;
+}
+
+void SettingsManager::SetupOpenGL()
+{
     // Init GLAD (get gl API)
-    if (!windowCreated)
-        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-        {
-            std::cout << "Failed to initialize GLAD" << std::endl;
-            return;
-        }
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return;
+    }
 
     // Setup OpenGL viewport
     glViewport(0, 0, Utility::screenX, Utility::screenY);
@@ -161,8 +172,7 @@ void SettingsManager::CreateGLFWWindow()
         );
     }
 
-    windowCreated = true;
-    std::cout << "Created window" << std::endl;
+    std::cout << "OpenGL setup done" << std::endl;
 }
 
 void SettingsManager::SaveSettings()

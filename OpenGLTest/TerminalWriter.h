@@ -6,7 +6,7 @@
 
 using namespace glm;
 
-constexpr int TERM_WRIT_EVENT_COUNT = 2;
+constexpr int TERM_WRIT_EVENT_COUNT = 3;
 constexpr float timeBetweenLines = 2.0f;
 
 class TerminalWriter : public EditorObject
@@ -38,6 +38,7 @@ public:
 	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 
 	void Write();
+	void Cancel();
 
 private:
 	float nextWriteTime = 0;

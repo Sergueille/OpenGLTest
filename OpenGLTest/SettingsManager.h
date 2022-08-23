@@ -19,6 +19,7 @@ public:
 
 	static void ReadSettings();
 	static void CreateGLFWWindow();
+	static void SetupOpenGL();
 	static void SaveSettings();
 	static void ApplySettings();
 

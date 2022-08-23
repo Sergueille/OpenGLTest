@@ -17,6 +17,10 @@ ObjectEvent TerminalWriter::events[TERM_WRIT_EVENT_COUNT] = {
 		"Clear terminal",
 		[](EditorObject* object, void* param) { TerminalManager::ClearTerminal(); },
 	},
+	ObjectEvent {
+		"Cancel",
+		[](EditorObject* object, void* param) { ((TerminalWriter*)object)->Cancel(); },
+	},
 };
 
 TerminalWriter::TerminalWriter() : EditorObject(vec3(0))
@@ -150,6 +154,12 @@ void TerminalWriter::Write()
 	nextWriteTime = 0;
 	shouldWrite = true;
 	writePos = 0;
+}
+
+void TerminalWriter::Cancel()
+{
+	shouldWrite = false;
+	onFinished.Call(this);
 }
 
 void TerminalWriter::OnMainLoop()

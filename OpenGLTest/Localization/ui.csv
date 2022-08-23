@@ -27,4 +27,6 @@
 "fullscreen","Fullscreen","Plein écran"
 "use_main","Use main monitor","Utiliser l'écran principal"
 "monitor_id","Monitor index","Numéro de l'écran"
+"min_fps","Minimum FSP","FPS minimum"
+"win_size","Window height","Hauteur de la fenêtre"
 "react_temp","","Température du réacteur:"

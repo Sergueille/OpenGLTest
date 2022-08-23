@@ -2,13 +2,13 @@
 
 Props {
 	displayFPS: "1"
-	fullscreen: "0"
+	fullscreen: "1"
 	gameSoundsVolume: "1.000000"
 	globalVolume: "1.006667"
+	minFPS: "10"
 	monitor: "main"
 	musicVolume: "1.000000"
 	screenX: "1600"
 	screenY: "900"
 	uiVolume: "0.506667"
-    minFPS: "20"
 }
