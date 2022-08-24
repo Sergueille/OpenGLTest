@@ -36,6 +36,8 @@ std::string MenuManager::clickSound = "click.wav";
 std::string MenuManager::blurSound = "blur.wav";
 float MenuManager::uiSoundsVolume = 0.3f;
 
+int MenuManager::selectedChapter = 0;
+
 std::list<MenuManager::Menu> MenuManager::menuPath = std::list<Menu>();
 
 float MenuManager::buttonTransitionValue = 0;
@@ -63,7 +65,7 @@ void MenuManager::OnMainLoop()
 	if (currentMenu == Menu::main)
 	{
 		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
-		drawPos.y -= TextManager::RenderText("Title here", drawPos, titleScale, TextManager::right, textColor).y + margin;
+		drawPos.y -= TextManager::RenderText(SettingsManager::gameConfig["gameName"], drawPos, titleScale, TextManager::right, textColor).y + margin;
 
 		drawPos.y -= Button(drawPos, "new_game", &pressed).y + margin;
 		if (pressed)
@@ -155,18 +157,76 @@ void MenuManager::OnMainLoop()
 		LocalText("new_game_label", drawPos, textSize);
 		drawPos.y -= smallMargin;
 
+		// Draw input field
 		std::string fileName = "";
 		drawPos.y -= TextInput(drawPos, &fileName, "filename_placeholder", "loadPath").y;
-		drawPos.y -= textSize + smallMargin;
+		drawPos.y -= textSize + margin;
 
+		// Draw chapters
+		int unlockedChapters = 2;
+
+		int drawX = (int)drawPos.x;
+		int chapterIconWidth = chapterInconHeight * 16 / 9;
+		int chapterCount = std::stoi(SettingsManager::gameConfig["chapterCount"]);
+		int maxChaptersInLine = 3;
+		int lineHeight = chapterInconHeight + textSize + margin;
+		for (int i = 0; i < chapterCount; i++)
+		{
+			// Line break
+			if (i > 0 && i % maxChaptersInLine == 0)
+			{
+				drawPos.x = (float)drawX;
+				drawPos.y -= lineHeight;
+			}
+
+			bool hover = IsMouseInBox(
+				drawPos + vec3(0, textSize, 0),
+				drawPos + vec3(chapterIconWidth, -chapterInconHeight - smallMargin, 0));
+
+			if (i < unlockedChapters && hover && glfwGetMouseButton(window, 0) == GLFW_PRESS)
+				selectedChapter = i;
+
+			// Choose color
+			vec4 color;
+			if (i == selectedChapter)
+				color = vec4(1.2, 1.2, 1.2, 1);
+			else if (i < unlockedChapters && hover)
+				color = vec4(1);
+			else if (i < unlockedChapters)
+				color = vec4(0.7, 0.7, 0.7, 1);
+			else
+				color = vec4(0.3, 0.3, 0.3, 0.5);
+
+			// Chapter name
+			std::string locale = LocalizationManager::GetLocale("chapter") + " " + std::to_string(i + 1);
+			TextManager::RenderText(locale, drawPos, textSize, TextManager::right, color, false).y;
+
+			// Chapter image
+			int shiftX = (chapterIconWidth - chapterInconHeight) / 2;
+			Sprite icon = Sprite(
+				vec3(drawPos.x + shiftX, drawPos.y - chapterInconHeight - smallMargin, UIbaseZPos),
+				vec3(drawPos.x + shiftX + chapterInconHeight, drawPos.y - smallMargin, UIbaseZPos),
+				color
+			);
+			icon.texture = RessourceManager::GetTexture("Chapters\\" + std::to_string(i) + ".png");
+			icon.Draw();
+
+			drawPos.x += chapterIconWidth + smallMargin;
+		}
+		drawPos.x = (float)drawX;
+		drawPos.y -= lineHeight;
+
+		// Draw buttons
+		drawPos.y -= margin;
 		drawPos.y -= Button(drawPos, "play", &pressed, fileName != "").y + margin;
 		if (pressed)
 		{
 			EditorSaveManager::currentUserSave = fileName + ".sav";
-			EditorSaveManager::LoadLevelWithTransition("tuto.map", [] { OpenMenu(Menu::ingame); });
-		}
 
-		drawPos.y -= margin;
+			std::string mapKey = "chapterMap" + std::to_string(selectedChapter);
+			std::string map = SettingsManager::gameConfig[mapKey];
+			EditorSaveManager::LoadLevelWithTransition(map, [] { OpenMenu(Menu::ingame); });
+		}
 		PreviousMenuButton(drawPos).y;
 	}
 	else if (currentMenu == Menu::options)
@@ -185,6 +245,8 @@ void MenuManager::OnMainLoop()
 		{
 			OpenMenu(Menu::audio);
 		}
+
+		drawPos.y -= SettingToggle(drawPos, "display_fps", "displayFPS").y + margin;
 
 		drawPos.y -= margin;
 		PreviousMenuButton(drawPos).y;
@@ -477,6 +539,7 @@ void MenuManager::OpenMenu(Menu menu)
 	if (!isSetup) Setup();
 
 	menuPath.push_back(currentMenu);
+	focusedTextInputID = "";
 
 	currentMenu = menu;
 
@@ -488,9 +551,9 @@ void MenuManager::OpenMenu(Menu menu)
 	{
 		Camera::getTarget = nullptr;
 
-		if (EditorSaveManager::filePath != "menu_bg.map")
+		if (EditorSaveManager::filePath != SettingsManager::gameConfig["menuMap"])
 		{
-			EditorSaveManager::LoadLevel("menu_bg.map", false);
+			EditorSaveManager::LoadLevel(SettingsManager::gameConfig["menuMap"], false);
 		}
 	}
 }

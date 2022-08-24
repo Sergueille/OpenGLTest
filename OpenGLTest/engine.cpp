@@ -55,6 +55,7 @@ int main(int argc, void* argv[])
     std::cout << "The game will start in a few seconds. Please don't close this window." << std::endl;
 #endif
 
+    SettingsManager::ReadGameConfig();
     SettingsManager::ReadSettings();
     SettingsManager::CreateGLFWWindow();
     SettingsManager::SetupOpenGL();

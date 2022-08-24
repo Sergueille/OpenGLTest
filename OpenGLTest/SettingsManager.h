@@ -9,6 +9,7 @@ class SettingsManager
 {
 public:
 	static std::map<std::string, std::string> settings;
+	static std::map<std::string, std::string> gameConfig;
 
 	static unsigned int FBO;
 	static unsigned int colorTex[3];
@@ -18,6 +19,8 @@ public:
 	static bool windowCreated;
 
 	static void ReadSettings();
+	static void ReadGameConfig();
+
 	static void CreateGLFWWindow();
 	static void SetupOpenGL();
 	static void SaveSettings();

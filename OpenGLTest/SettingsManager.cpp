@@ -4,6 +4,7 @@
 #include "MenuManager.h"
 
 std::map<std::string, std::string> SettingsManager::settings = std::map<std::string, std::string>();
+std::map<std::string, std::string> SettingsManager::gameConfig = std::map<std::string, std::string>();
 
 unsigned int SettingsManager::FBO;
 unsigned int SettingsManager::colorTex[3];
@@ -14,6 +15,11 @@ bool SettingsManager::windowCreated = false;
 void SettingsManager::ReadSettings()
 {
 	EditorSaveManager::ReadPropsFile("Settings\\options.set", &settings);
+}
+
+void SettingsManager::ReadGameConfig()
+{
+    EditorSaveManager::ReadPropsFile("Settings\\gameConfig.set", &gameConfig);
 }
 
 void SettingsManager::CreateGLFWWindow()
@@ -40,7 +46,7 @@ void SettingsManager::CreateGLFWWindow()
     bool useMainMonitor = SettingsManager::settings["monitor"] == "main";
     int monitorID = useMainMonitor ? 0 : std::stoi(SettingsManager::settings["monitor"]);
 
-    const char* windowName = "Teeeest!";
+    const char* windowName = gameConfig["gameName"].c_str();
 
     // Init GLFW
     glfwInit();

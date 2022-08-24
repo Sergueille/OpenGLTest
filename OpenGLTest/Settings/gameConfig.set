@@ -1,0 +1,11 @@
+
+Props {
+    gameName: "[Title]"
+    menuMap: "menu_bg.map"
+    chapterCount: "5"
+    chapterMap0: "tuto.map"
+    chapterMap1: "intro_walls.map"
+    chapterMap2: "lvl_4.map"
+    chapterMap3: "intro_rockets.map"
+    chapterMap4: "final.map"
+}

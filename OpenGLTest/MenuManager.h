@@ -50,6 +50,10 @@ public:
 	const static int backspaceFirstLatency = 300; // milliseconds
 	const static int backspaceLatency = 30; // milliseconds
 
+	const static int chapterInconHeight = 150;
+
+	static int selectedChapter;
+
 	static std::string focusSound;
 	static std::string clickSound;
 	static std::string blurSound;
