@@ -31,6 +31,7 @@
 #include "TerminalManager.h"
 #include "ObjectFollower.h"
 #include "TemperatureManager.h"
+#include "SettingsManager.h"
 
 using namespace glm;
 
@@ -889,6 +890,21 @@ void EditorSaveManager::SaveUserSave(std::string fileName)
 		WriteProp("position", Player::ingameInstance->GetPos());
 		WriteProp("cameraSize", Camera::size);
 	});
+
+	// Unlock chapters
+	if (fileName != "editTest.sav") // If not editor test
+	{
+		int chapterCount = std::stoi(SettingsManager::gameConfig["chapterCount"]);
+		for (int i = 0; i < chapterCount; i++)
+		{
+			std::string map = SettingsManager::gameConfig["chapterMap" + std::to_string(i)];
+			if (map == filePath)
+			{
+				SettingsManager::progress["unlockedChapters"] = std::to_string(i + 1);
+				SettingsManager::SaveProgress();
+			}
+		}
+	}
 }
 
 void EditorSaveManager::IndexUserSaves()

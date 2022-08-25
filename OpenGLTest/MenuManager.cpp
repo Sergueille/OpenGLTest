@@ -163,8 +163,7 @@ void MenuManager::OnMainLoop()
 		drawPos.y -= textSize + margin;
 
 		// Draw chapters
-		int unlockedChapters = 2;
-
+		int unlockedChapters = std::stoi(SettingsManager::progress["unlockedChapters"]);
 		int drawX = (int)drawPos.x;
 		int chapterIconWidth = chapterInconHeight * 16 / 9;
 		int chapterCount = std::stoi(SettingsManager::gameConfig["chapterCount"]);

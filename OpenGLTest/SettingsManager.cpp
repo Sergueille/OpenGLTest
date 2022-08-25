@@ -5,6 +5,7 @@
 
 std::map<std::string, std::string> SettingsManager::settings = std::map<std::string, std::string>();
 std::map<std::string, std::string> SettingsManager::gameConfig = std::map<std::string, std::string>();
+std::map<std::string, std::string> SettingsManager::progress = std::map<std::string, std::string>();
 
 unsigned int SettingsManager::FBO;
 unsigned int SettingsManager::colorTex[3];
@@ -12,14 +13,11 @@ unsigned int SettingsManager::pingpongFBO[2];
 unsigned int SettingsManager::pingpongBuffer[2];
 bool SettingsManager::windowCreated = false;
 
-void SettingsManager::ReadSettings()
+void SettingsManager::ReadAllSettings()
 {
 	EditorSaveManager::ReadPropsFile("Settings\\options.set", &settings);
-}
-
-void SettingsManager::ReadGameConfig()
-{
     EditorSaveManager::ReadPropsFile("Settings\\gameConfig.set", &gameConfig);
+    EditorSaveManager::ReadPropsFile("Settings\\progress.set", &progress);
 }
 
 void SettingsManager::CreateGLFWWindow()
@@ -189,6 +187,16 @@ void SettingsManager::SaveSettings()
             EditorSaveManager::WriteProp(pair.first, pair.second);
         }
     });
+}
+
+void SettingsManager::SaveProgress()
+{
+    EditorSaveManager::WritePropsFile("Settings\\progress.set", [] {
+        for (auto& pair : progress)
+        {
+            EditorSaveManager::WriteProp(pair.first, pair.second);
+        }
+        });
 }
 
 void SettingsManager::ApplySettings()

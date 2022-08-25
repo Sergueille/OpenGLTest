@@ -5,7 +5,7 @@ Props {
     chapterCount: "5"
     chapterMap0: "tuto.map"
     chapterMap1: "intro_walls.map"
-    chapterMap2: "lvl_4.map"
+    chapterMap2: "level4.map"
     chapterMap3: "intro_rockets.map"
     chapterMap4: "final.map"
 }

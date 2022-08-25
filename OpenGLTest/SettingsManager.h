@@ -10,6 +10,7 @@ class SettingsManager
 public:
 	static std::map<std::string, std::string> settings;
 	static std::map<std::string, std::string> gameConfig;
+	static std::map<std::string, std::string> progress;
 
 	static unsigned int FBO;
 	static unsigned int colorTex[3];
@@ -18,13 +19,14 @@ public:
 
 	static bool windowCreated;
 
-	static void ReadSettings();
-	static void ReadGameConfig();
+	static void ReadAllSettings();
 
 	static void CreateGLFWWindow();
 	static void SetupOpenGL();
-	static void SaveSettings();
 	static void ApplySettings();
+
+	static void SaveSettings();
+	static void SaveProgress();
 
 	static float GetFloatSetting(std::string key);
 	static int GetIntSetting(std::string key);

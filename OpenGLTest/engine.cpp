@@ -55,8 +55,8 @@ int main(int argc, void* argv[])
     std::cout << "The game will start in a few seconds. Please don't close this window." << std::endl;
 #endif
 
-    SettingsManager::ReadGameConfig();
-    SettingsManager::ReadSettings();
+    SettingsManager::ReadAllSettings();
+
     SettingsManager::CreateGLFWWindow();
     SettingsManager::SetupOpenGL();
     SettingsManager::ApplySettings();
@@ -71,6 +71,7 @@ int main(int argc, void* argv[])
     // Init sound engine
     Utility::soloud = new SoLoud::Soloud();
     Utility::soloud->init();
+    std::cout << "Started SoLoud engine" << std::endl;
 
     // Init text manager
     TextManager::Init();

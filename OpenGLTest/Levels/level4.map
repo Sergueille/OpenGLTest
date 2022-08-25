@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 441
+count 442
 
 object MapData {
 	mapName: ""
@@ -278,10 +278,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "775"
 	name: ""
-	position: "43.600002, 16.200001, 0.000000"
+	position: "43.200001, 16.200001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "7.600000, 13.800000"
+	size: "8.400001, 13.800000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -2902,7 +2902,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "18948"
 	name: ""
-	position: "43.600002, 23.800001, 0.000000"
+	position: "42.799999, 23.800001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "7.600000, 8.600000"
@@ -3729,16 +3729,16 @@ object Prefab {
 object ShadowCaster {
 	ID: "21847"
 	name: ""
-	position: "41.200001, 26.400000, 20.000000"
+	position: "41.000000, 26.000000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "2.800000, 3.400000"
+	size: "4.000000, 4.200000"
 	orientation: "0.000000"
 }
 object Prefab {
 	ID: "21849"
 	name: ""
-	position: "37.200001, 25.400000, 0.000000"
+	position: "36.799686, 25.400000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\fluo.map"
@@ -3765,7 +3765,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "21855"
 	name: ""
-	position: "38.600002, 18.800001, -5.000000"
+	position: "37.883656, 18.800001, -5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "1.800000, 1.800000"
@@ -6644,4 +6644,18 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
+}
+object SoundArea {
+	ID: "34053"
+	name: ""
+	position: "40.000000, 22.400000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "101.000000, 65.000000"
+	soundName: "2.wav"
+	volume: "0.900000"
+	isMusic: "1"
+	fadeIn: "1.000000"
+	fadeOut: "3.000000"
+	syncAreaID: "-1"
 }

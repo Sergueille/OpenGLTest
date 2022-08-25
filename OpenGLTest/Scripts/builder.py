@@ -269,7 +269,7 @@ def create_dir(path, ensure_empty=False):
 
     return path
 
-def create_readme(path, content):
+def create_file(path, content):
     with open(path, "w") as file:
         file.write(content)
 
