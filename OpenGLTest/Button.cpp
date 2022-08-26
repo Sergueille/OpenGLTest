@@ -2,6 +2,7 @@
 
 #include "CircleCollider.h"
 #include "Player.h"
+#include "InputManager.h"
 
 ObjectEvent Button::events[BUTTON_EVENT_COUNT] = {
 	ObjectEvent {
@@ -156,7 +157,9 @@ void Button::ResetIngameState()
 
 void Button::OnKeyPressed(int key, int action)
 {
-	if (key == GLFW_KEY_E && action == GLFW_PRESS)
+	if ((key == InputManager::GetPrimKey(InputManager::KeyBinding::use) || 
+		key == InputManager::GetAltKey(InputManager::KeyBinding::use))
+		&& action == GLFW_PRESS)
 	{
 		if (!interactAlreadyPressed)
 		{

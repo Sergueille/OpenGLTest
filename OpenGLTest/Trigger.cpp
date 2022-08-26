@@ -6,6 +6,7 @@
 #include "RectCollider.h"
 #include "RessourceManager.h"
 #include "Player.h"
+#include "InputManager.h"
 
 ObjectEvent Trigger::events[TRIGGER_EVENT_COUNT] = {
 	ObjectEvent {
@@ -145,7 +146,7 @@ void Trigger::OnMainLoop()
 	if (!Editor::enabled && Player::ingameInstance != nullptr && !EditorSaveManager::isLoading)
 	{
 		if (!once || !hasAlredyTriggered)
-		if (!needPlayerInteraction || glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+		if (!needPlayerInteraction || InputManager::IsPressed(InputManager::KeyBinding::use))
 		{
 			vec3 res = Player::ingameInstance->collider->CollideWith((RectCollider*)clickCollider);
 
