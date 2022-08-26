@@ -267,6 +267,9 @@
     <ClCompile Include="TemperatureManager.cpp">
       <Filter>Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -442,6 +445,9 @@
     </ClInclude>
     <ClInclude Include="TemperatureManager.h">
       <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

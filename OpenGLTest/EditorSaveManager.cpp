@@ -895,7 +895,8 @@ void EditorSaveManager::SaveUserSave(std::string fileName)
 	if (fileName != "editTest.sav") // If not editor test
 	{
 		int chapterCount = std::stoi(SettingsManager::gameConfig["chapterCount"]);
-		for (int i = 0; i < chapterCount; i++)
+		int unlocked = std::stoi(SettingsManager::progress["unlockedChapters"]);
+		for (int i = unlocked; i < chapterCount; i++)
 		{
 			std::string map = SettingsManager::gameConfig["chapterMap" + std::to_string(i)];
 			if (map == filePath)

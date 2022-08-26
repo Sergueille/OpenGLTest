@@ -61,7 +61,7 @@ int main(int argc, void* argv[])
     SettingsManager::SetupOpenGL();
     SettingsManager::ApplySettings();
 
-    float minFPS = SettingsManager::GetFloatSetting("minFPS");
+    const float minFPS = 20;
     float maxDeltaTime = 1 / minFPS;
 
     // Set error callback
@@ -84,7 +84,7 @@ int main(int argc, void* argv[])
     EventManager::SetupEvents();
 
     // Load localization
-    LocalizationManager::LoadLanguage(LocalizationManager::Language::french);
+    LocalizationManager::LoadLanguage((LocalizationManager::Language)SettingsManager::GetIntSetting("language"));
 
     // Load shaders
     RessourceManager::LoadBaseShaders();

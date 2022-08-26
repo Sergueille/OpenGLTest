@@ -10,6 +10,7 @@
 #include "LocalizationManager.h"
 #include <soloud.h>
 #include "SettingsManager.h"
+#include "InputManager.h"
 
 MenuManager::Menu MenuManager::currentMenu = Menu::none;
 bool MenuManager::isSetup = false;
@@ -41,6 +42,9 @@ int MenuManager::selectedChapter = 0;
 std::list<MenuManager::Menu> MenuManager::menuPath = std::list<Menu>();
 
 float MenuManager::buttonTransitionValue = 0;
+
+int MenuManager::setKeyID = -1;
+bool MenuManager::setKeyPrim = false;
 
 void MenuManager::Setup()
 {
@@ -239,6 +243,12 @@ void MenuManager::OnMainLoop()
 			OpenMenu(Menu::graphics);
 		}
 
+		drawPos.y -= Button(drawPos, "controls", &pressed).y + margin;
+		if (pressed)
+		{
+			OpenMenu(Menu::controls);
+		}
+
 		drawPos.y -= Button(drawPos, "audio", &pressed).y + margin;
 		if (pressed)
 		{
@@ -247,8 +257,25 @@ void MenuManager::OnMainLoop()
 
 		drawPos.y -= SettingToggle(drawPos, "display_fps", "displayFPS").y + margin;
 
-		drawPos.y -= margin;
-		PreviousMenuButton(drawPos).y;
+		LocalText("language", drawPos, textSize);
+		drawPos.y -= Button(drawPos + vec3(propsScale, 0, 0), "language_name", &pressed).y;
+
+		if (pressed)
+		{
+			int langID = (int)LocalizationManager::currentLanguage;
+			langID++;
+			langID %= (int)LocalizationManager::Language::langCount;
+			SettingsManager::SetIntSetting("language", langID);
+			LocalizationManager::LoadLanguage((LocalizationManager::Language)langID);
+		}
+
+		drawPos.y -= margin; 
+		Button(drawPos, "back", &pressed).x;
+		if (pressed)
+		{
+			SettingsManager::SaveSettings();
+			PreviousMenu();
+		}
 	}
 	else if (currentMenu == Menu::graphics)
 	{
@@ -290,8 +317,6 @@ void MenuManager::OnMainLoop()
 			SettingsManager::SetIntSetting("screenX", (int)(res * 16.f / 9.f));
 		}
 
-		drawPos.y -= SettingIntSlider(drawPos, "min_fps", "minFPS", 10, 120).y + margin;
-
 		drawPos.y -= margin;
 
 		drawPos.x += Button(drawPos, "apply", &pressed).x + margin;
@@ -301,7 +326,7 @@ void MenuManager::OnMainLoop()
 			SettingsManager::CreateGLFWWindow();
 		}
 
-		PreviousMenuButton(drawPos).x;
+		PreviousMenuButton(drawPos);
 	}
 	else if (currentMenu == Menu::audio)
 	{
@@ -317,14 +342,77 @@ void MenuManager::OnMainLoop()
 
 		drawPos.y -= margin;
 
-		drawPos.x += Button(drawPos, "save", &pressed).x + margin;
+		Button(drawPos, "back", &pressed);
 		if (pressed)
 		{
 			SettingsManager::SaveSettings();
 			PreviousMenu();
 		}
+	}
+	else if (currentMenu == Menu::controls)
+	{
+		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
+		drawPos.y -= LocalText("controls", drawPos, titleScale).y + margin;
 
-		PreviousMenuButton(drawPos).x;
+		if (setKeyID == -1)
+		{
+			for (int i = 0; i < (int)InputManager::KeyBinding::keyCount; i++)
+			{
+				std::string str_i = std::to_string(i);
+				InputManager::KeyBinding keybind = (InputManager::KeyBinding)i;
+
+				LocalText("action" + str_i, drawPos, textSize);
+
+				Button(
+					drawPos + vec3(propsScale, 0, 0),
+					InputManager::GetKeyName(keybind, true),
+					&pressed, true, true
+				);
+
+				if (pressed)
+				{
+					setKeyID = i;
+					setKeyPrim = true;
+				}
+
+				Button(
+					drawPos + vec3(2 * propsScale, 0, 0),
+					InputManager::GetKeyName(keybind, false),
+					&pressed, true, true
+				);
+
+				if (pressed)
+				{
+					setKeyID = i;
+					setKeyPrim = false;
+				}
+
+				drawPos.y -= textSize + smallMargin;
+			}
+
+			drawPos.y -= margin;
+
+			PreviousMenuButton(drawPos);
+		}
+		else
+		{
+			drawPos.x += LocalText("press_key", drawPos, textSize).x + smallMargin;
+			LocalText("action" + std::to_string(setKeyID), drawPos, textSize);
+
+			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+				setKeyID = -1;
+			else
+			{
+				for (int i = 0; i < 400; i++)
+				{
+					if (glfwGetKey(window, i) == GLFW_PRESS)
+					{
+						InputManager::SetKey((InputManager::KeyBinding)setKeyID, i, setKeyPrim);
+						setKeyID = -1;
+					}
+				}
+			}
+		}
 	}
 	else if (currentMenu == Menu::none)
 	{
@@ -748,12 +836,13 @@ vec2 MenuManager::Toggle(vec3 drawPos, std::string label, bool* value)
 
 	if (*value || hover)
 	{
-		if (!(*value)) color = vec4(1, 1, 1, 0.2);
+		vec4 spriteColor = color;
+		if (!(*value)) spriteColor = vec4(1, 1, 1, 0.2);
 
 		Sprite(
 			vec3(middleX - (toggleInnerSize / 2), middleY - (toggleInnerSize / 2), drawPos.z + 1),
 			vec3(middleX + (toggleInnerSize / 2), middleY + (toggleInnerSize / 2), drawPos.z + 1),
-			color
+			spriteColor
 		).Draw();		
 	}
 

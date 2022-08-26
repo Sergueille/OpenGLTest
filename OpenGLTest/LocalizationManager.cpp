@@ -8,6 +8,8 @@ std::map<std::string, std::string> LocalizationManager::data = std::map<std::str
 
 void LocalizationManager::LoadLanguage(Language lang)
 {
+	std::cout << "Loading localizations files" << std::endl;
+
 	currentLanguage = lang;
 	data = std::map<std::string, std::string>(); // Discard old data
 	ReadFile("instructions.csv");

@@ -8,6 +8,7 @@
 #include <soloud_lofifilter.h>
 #include "ParticleSystem.h"
 #include "TerminalManager.h"
+#include "InputManager.h"
 
 using namespace glm;
 
@@ -291,14 +292,14 @@ void Player::OnAfterMove()
 	float realSpeed = walkSpeed;
 
 	// Hanlde horizontal movement
-	if (glfwGetKey(Utility::window, GLFW_KEY_A) == GLFW_PRESS)
+	if (InputManager::IsPressed(InputManager::KeyBinding::left))
 	{
 		float deltaVelocity = (-realSpeed) - velocity.x; // Difference of velocity to reach target velocity
 		float targetForce = deltaVelocity / GetDeltaTime(); // Get force to apply to reach target velocity
 		if (targetForce < -walkMaxForce) targetForce = -walkMaxForce; // Clamp force value
 		velocity.x += targetForce * GetDeltaTime(); // Apply force
 	}
-	else if (glfwGetKey(Utility::window, GLFW_KEY_D) == GLFW_PRESS)
+	else if (InputManager::IsPressed(InputManager::KeyBinding::right))
 	{
 		float deltaVelocity = realSpeed - velocity.x; // Difference of velocity to reach target velocity
 		float targetForce = deltaVelocity / GetDeltaTime(); // Get force to apply to reach target velocity
@@ -417,7 +418,7 @@ void Player::OnAfterMove()
 
 			teleportationsRemaining = maxTeleprtationInAir;
 
-			if (glfwGetKey(Utility::window, GLFW_KEY_W) == GLFW_PRESS || glfwGetKey(Utility::window, GLFW_KEY_SPACE) == GLFW_PRESS)
+			if (InputManager::IsPressed(InputManager::KeyBinding::jump))
 			{
 				velocity.y = jumpForce;
 				isJumping = true;

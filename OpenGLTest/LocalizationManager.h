@@ -6,7 +6,7 @@
 class LocalizationManager
 {
 public:
-	enum class Language { english, french, maxVal = french, langCount = maxVal + 1 };
+	enum class Language { english, french, langCount };
 
 	static Language currentLanguage;
 

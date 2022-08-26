@@ -13,7 +13,7 @@ using namespace glm;
 class MenuManager
 {
 public:
-	enum class Menu { none, main, ingame, paused, load, newGame, options, graphics, audio };
+	enum class Menu { none, main, ingame, paused, load, newGame, options, graphics, audio, controls };
 
 	const static int UIbaseZPos = 1000;
 	const static int margin = 30;
@@ -58,6 +58,9 @@ public:
 	static std::string clickSound;
 	static std::string blurSound;
 	static float uiSoundsVolume;
+
+	static int setKeyID;
+	static bool setKeyPrim;
 
 	static std::list<Menu> menuPath;
 

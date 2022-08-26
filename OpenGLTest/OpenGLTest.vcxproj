@@ -197,6 +197,7 @@
     <ClCompile Include="EditorSprite.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="LevelEnd.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="EditorSaveManager.h" />
     <ClInclude Include="EditorSprite.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="LevelEnd.h" />
     <ClInclude Include="Light.h" />
