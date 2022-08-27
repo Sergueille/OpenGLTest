@@ -329,14 +329,14 @@ void Player::OnAfterMove()
 		CircleCollider teleportCollider = CircleCollider(teleportPosition, height, false);
 		bool isColliding = teleportCollider.IsTouchingAnyCollider();
 		bool hitLaser = TeleportCollideWithLaser(teleportPosition);
-		bool canTeleprt = teleportationsRemaining > 0 && !isColliding && !hitLaser;
+		bool canTeleportNow = teleportationsRemaining > 0 && !isColliding && !hitLaser;
 
 		// Set sprite color
-		teleportPosSprite->color = canTeleprt ? canTeleportColor : cannotTeleportColor;
+		teleportPosSprite->color = canTeleportNow ? canTeleportColor : cannotTeleportColor;
 
 		if (isClicking && !wasClickingLastFrame) // Click !!!
 		{
-			if (canTeleprt)
+			if (canTeleportNow)
 			{
 				SetPos(teleportPosition);
 				velocity.y += teleportVerticalForce;
@@ -348,8 +348,13 @@ void Player::OnAfterMove()
 			}
 			else
 			{
-				teleportPosSprite->color = cannotTeleportClickColor;
+				Utility::PlaySound("bass.wav", Utility::gameSoundsVolume * 0.75f);
 			}
+		}
+		
+		if (!canTeleportNow && isClicking)
+		{
+			teleportPosSprite->color = cannotTeleportClickColor;
 		}
 	}
 
@@ -507,6 +512,25 @@ void Player::TeleportEffect()
 	}, sineOut)->SetOnFinished([pulse] {
 		delete pulse;
 	});
+
+	// Souds
+	float vol = Utility::gameSoundsVolume;
+	float pitch = teleportationsRemaining > 1 ? 0.7 : 0.8;
+	pitch += (float)rand() / RAND_MAX * 0.07;
+
+	SoLoud::handle h;
+	if (rand() % 2 > 0)
+	{
+		h = Utility::PlaySound("teleport1.wav", vol * 0.35f);
+	}
+	else
+	{
+		h = Utility::PlaySound("teleport2.wav", vol * 0.35f);
+	}
+	soloud->setRelativePlaySpeed(h, pitch);
+
+	h = Utility::PlaySound("bass.wav", vol * 0.8f);
+	soloud->setRelativePlaySpeed(h, pitch);
 }
 
 void Player::GiveTeleportation()

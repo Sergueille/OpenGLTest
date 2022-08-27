@@ -4252,6 +4252,9 @@ object TextRenderer {
 	content: "teleport_aim"
 	fontSize: "0.700000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object EditorSprite {
 	ID: "10578"
@@ -8324,6 +8327,9 @@ object TextRenderer {
 	content: "teleport"
 	fontSize: "0.700000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object Trigger {
 	ID: "28754"

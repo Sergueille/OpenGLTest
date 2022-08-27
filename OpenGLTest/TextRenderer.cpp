@@ -40,6 +40,27 @@ vec2 TextRenderer::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "Font size", &fontSize, Editor::panelPropertiesX, strID + "fontSize").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Color", &color, Editor::panelPropertiesX, strID + "color", true).y;
 
+	drawPos.y -= Editor::CheckBox(drawPos, "Insert key names", &insertKeyNames, Editor::panelPropertiesX).y;
+
+	if (insertKeyNames)
+	{
+		const char** keyBiningsNames = new const char* [5] {"Left", "Right", "Jump", "Down", "Use" };
+
+		int value = (int)keyName1;
+		drawPos.y -= Editor::OptionProp(
+			drawPos, "First key", 
+			&value, (int)InputManager::KeyBinding::keyCount - 1, 
+			keyBiningsNames, Editor::panelPropertiesX).y;
+		keyName1 = (InputManager::KeyBinding)value;
+
+		value = (int)keyName2;
+		drawPos.y -= Editor::OptionProp(
+			drawPos, "Second key",
+			&value, (int)InputManager::KeyBinding::keyCount - 1,
+			keyBiningsNames, Editor::panelPropertiesX).y;
+		keyName2 = (InputManager::KeyBinding)value;
+	}
+
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
 	return res;
@@ -65,6 +86,14 @@ void TextRenderer::Load(std::map<std::string, std::string>* props)
 	content = (*props)["content"];
 	EditorSaveManager::FloatProp(props, "fontSize", &fontSize);
 	color = EditorSaveManager::StringToVector4((*props)["color"], vec4(1));
+
+	insertKeyNames = (*props)["insertKeyNames"] == "1";
+
+	int keyint;
+	EditorSaveManager::IntProp(props, "keyName1", &keyint);
+	keyName1 = (InputManager::KeyBinding)keyint;
+	EditorSaveManager::IntProp(props, "keyName2", &keyint);
+	keyName2 = (InputManager::KeyBinding)keyint;
 }
 
 void TextRenderer::Save()
@@ -74,6 +103,10 @@ void TextRenderer::Save()
 	EditorSaveManager::WriteProp("content", content);
 	EditorSaveManager::WriteProp("fontSize", fontSize);
 	EditorSaveManager::WriteProp("color", color);
+
+	EditorSaveManager::WriteProp("insertKeyNames", insertKeyNames);
+	EditorSaveManager::WriteProp("keyName1", (int)keyName1);
+	EditorSaveManager::WriteProp("keyName2", (int)keyName2);
 }
 
 void TextRenderer::Enable()
@@ -109,5 +142,12 @@ void TextRenderer::OnMainLoop()
 	vec3 screenPos = Utility::WorldToScreen(GetEditPos());
 	screenPos.z = GetEditPos().z;
 
-	TextManager::RenderText(LocalizationManager::GetLocale(content), screenPos, screenSize, TextManager::center, color);
+	std::string txt = LocalizationManager::GetLocale(content);
+
+	if (insertKeyNames)
+	{
+		txt = std::vformat(txt, std::make_format_args(InputManager::GetKeyName(keyName1, true), InputManager::GetKeyName(keyName2, true)));
+	}
+
+	TextManager::RenderText(txt, screenPos, screenSize, TextManager::center, color);
 }

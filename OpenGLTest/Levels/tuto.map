@@ -1073,6 +1073,9 @@ object TextRenderer {
 	content: "jump"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
+	insertKeyNames: "1"
+	keyName1: "2"
+	keyName2: "0"
 }
 object TextRenderer {
 	ID: "2717"
@@ -1083,6 +1086,9 @@ object TextRenderer {
 	content: "jump_long"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object TextRenderer {
 	ID: "2719"
@@ -1093,6 +1099,9 @@ object TextRenderer {
 	content: "interact"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
+	insertKeyNames: "1"
+	keyName1: "4"
+	keyName2: "0"
 }
 object EditorSprite {
 	ID: "3129"
@@ -1324,6 +1333,9 @@ object TextRenderer {
 	content: "horizontal"
 	fontSize: "0.500000"
 	color: "0.500000, 0.500000, 0.500000, 1.000000"
+	insertKeyNames: "1"
+	keyName1: "0"
+	keyName2: "1"
 }
 object EditorSprite {
 	ID: "5569"

@@ -40,6 +40,8 @@ SOUNDS ----------------------
     - "tunnel 2" by lollosound
     - "Splash, Jumping, D" by InspectorJ
     - "squeak_01" by joedeshon
+    - "BASS 0205" by zgump
+    - "teleport" by outroelison
 
 SOFTWARE --------------
 - Visual Studio and Visual Studio Code (IDE and text editor)

@@ -1481,6 +1481,9 @@ vec2 Editor::OptionProp(vec3 startPos, std::string name, int* value, int max, co
 {
 	vec3 drawPos = startPos;
 
+	if (*value < 0) *value = 0;
+	if (*value > max) *value = max;
+
 	TextManager::RenderText(name + ":", drawPos, textSize);
 	drawPos.x += propX;
 

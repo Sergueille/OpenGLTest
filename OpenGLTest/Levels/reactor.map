@@ -1,11 +1,11 @@
 // Editor map file, version 1
 
-count 563
+count 559
 
 object MapData {
 	mapName: ""
-	lightmapStart: "-98.000000, -17.000000"
-	lightmapEnd: "100.000000, 100.000000"
+	lightmapStart: "-98.000000, -15.000000"
+	lightmapEnd: "96.000000, 98.000000"
 }
 object Player {
 	ID: "0"
@@ -1329,7 +1329,7 @@ object EditorSprite {
 object Radioactivity {
 	ID: "1406"
 	name: ""
-	position: "-60.400002, 31.800001, 5.000000"
+	position: "-60.400002, 31.600000, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	maxDist: "15.000000"
@@ -1358,20 +1358,6 @@ object Checkpoint {
 	position: "-18.800001, 28.000000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-}
-object Trigger {
-	ID: "1586"
-	name: ""
-	position: "-42.799999, 37.000000, -1.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "0.000000"
-	scale: "6.400000, 0.800000"
-	onEnter: "1584|Save game|"
-	onExit: ""
-	once: "1"
-	needPlayerInteraction: "0"
-	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "2119"
@@ -2000,20 +1986,6 @@ object LogicRelay {
 	delay: "1.100000"
 }
 object Trigger {
-	ID: "3555"
-	name: ""
-	position: "-27.600000, 55.400002, -1.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "0.000000"
-	scale: "8.600000, 0.800000"
-	onEnter: "1584|Save game|"
-	onExit: ""
-	once: "1"
-	needPlayerInteraction: "0"
-	killPlayer: "0"
-}
-object Trigger {
 	ID: "3655"
 	name: ""
 	position: "-30.000000, 38.400002, -1.000000"
@@ -2186,10 +2158,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "5138"
 	name: ""
-	position: "0.600000, 63.400002, 0.000000"
+	position: "-1.200000, 63.400002, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "20.800001, 7.800000"
+	size: "18.400000, 7.800000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -2210,20 +2182,6 @@ object Laser {
 	startOffset: "-0.100000"
 	endOffset: "0.050000"
 	startOn: "1"
-}
-object Trigger {
-	ID: "5141"
-	name: ""
-	position: "-27.000000, 56.600002, -7.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "0.000000"
-	scale: "10.600000, 3.800000"
-	onEnter: "5139|Turn off|"
-	onExit: ""
-	once: "1"
-	needPlayerInteraction: "0"
-	killPlayer: "0"
 }
 object EditorSprite {
 	ID: "5391"
@@ -4810,34 +4768,6 @@ object LogicRelay {
 	triggerOnStart: "0"
 	delay: "0.300000"
 }
-object Trigger {
-	ID: "13467"
-	name: ""
-	position: "-75.400002, 37.000000, -1.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "0.000000"
-	scale: "6.400000, 0.800000"
-	onEnter: "1584|Save game|"
-	onExit: ""
-	once: "1"
-	needPlayerInteraction: "0"
-	killPlayer: "0"
-}
-object Trigger {
-	ID: "13469"
-	name: ""
-	position: "-69.800003, 38.600002, -7.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "0.000000"
-	scale: "3.800000, 3.800000"
-	onEnter: "645|Open door|5139|Turn off|"
-	onExit: ""
-	once: "1"
-	needPlayerInteraction: "0"
-	killPlayer: "0"
-}
 object EditorSprite {
 	ID: "13630"
 	name: ""
@@ -5487,7 +5417,7 @@ object EditorSprite {
 object Radioactivity {
 	ID: "854"
 	name: ""
-	position: "52.600002, 34.200001, 5.000000"
+	position: "52.600002, 33.600002, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	maxDist: "20.000000"
@@ -6074,7 +6004,7 @@ object LogicRelay {
 	position: "80.400002, 35.000000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	onTrigger: "2991|Stop|14762|Start|14764|Trigger|17579|Open door|20082|Open door|"
+	onTrigger: "2991|Stop|14762|Start|14764|Trigger|17579|Open door|20082|Open door|1584|Save game|"
 	onAltTrigger: ""
 	triggerOnStart: "0"
 	delay: "1.100000"
@@ -6500,7 +6430,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "15643"
 	name: ""
-	position: "17.800001, 60.000000, 0.000000"
+	position: "14.213984, 60.000000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "13.600000, 1.000000"
@@ -6516,10 +6446,10 @@ object EditorSprite {
 object EditorSprite {
 	ID: "15645"
 	name: ""
-	position: "29.200001, 62.400002, 0.000000"
+	position: "27.000000, 62.400002, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "18.800001, 5.600000"
+	size: "19.600000, 5.600000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -6535,7 +6465,7 @@ object EditorSprite {
 	position: "17.800001, 65.400002, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "19.000000, 1.000000"
+	size: "19.800001, 1.000000"
 	rotation: "0.000000"
 	color: "0.000000, 0.000000, 0.000000, 1.000000"
 	collideWithPhys: "1"
@@ -6596,7 +6526,7 @@ object EditorSprite {
 object Radioactivity {
 	ID: "15669"
 	name: ""
-	position: "19.600000, 66.599998, 5.000000"
+	position: "20.539286, 66.599998, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	maxDist: "20.000000"
@@ -6654,7 +6584,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "15701"
 	name: ""
-	position: "19.400000, 66.800003, 0.000000"
+	position: "20.137373, 66.800003, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "3.400000, 3.400000"
@@ -6671,16 +6601,16 @@ object EditorSprite {
 object ShadowCaster {
 	ID: "15703"
 	name: ""
-	position: "17.000000, 60.000000, 50.000000"
+	position: "13.200000, 60.000000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	size: "16.200001, 1.000000"
+	size: "15.000000, 1.000000"
 	orientation: "0.000000"
 }
 object ShadowCaster {
 	ID: "15709"
 	name: ""
-	position: "17.600000, 65.400002, 50.000000"
+	position: "15.200000, 65.400002, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "16.200001, 1.000000"
@@ -6725,7 +6655,7 @@ object ShadowCaster {
 object EditorSprite {
 	ID: "15969"
 	name: ""
-	position: "15.200000, 62.600002, -10.000000"
+	position: "12.601829, 62.600002, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "9.200000, 4.600000"
@@ -6742,7 +6672,7 @@ object EditorSprite {
 object Prefab {
 	ID: "15971"
 	name: ""
-	position: "15.400001, 64.800003, 0.000000"
+	position: "12.801829, 64.800003, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\neon.map"
@@ -7215,48 +7145,6 @@ object TerminalWriter {
 	onFinished: ""
 	writeRandom: "0"
 }
-object Trigger {
-	ID: "17597"
-	name: ""
-	position: "15.200000, 60.799999, -1.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "0.000000"
-	scale: "8.800000, 0.800000"
-	onEnter: "1584|Save game|"
-	onExit: ""
-	once: "1"
-	needPlayerInteraction: "0"
-	killPlayer: "0"
-}
-object Trigger {
-	ID: "17599"
-	name: ""
-	position: "31.600000, 37.000000, -1.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "0.000000"
-	scale: "8.800000, 0.800000"
-	onEnter: "1584|Save game|"
-	onExit: ""
-	once: "1"
-	needPlayerInteraction: "0"
-	killPlayer: "0"
-}
-object Trigger {
-	ID: "19133"
-	name: ""
-	position: "29.000000, 38.799999, -8.000000"
-	parent: "-1"
-	parallax: "1.000000"
-	orientation: "0.000000"
-	scale: "8.800000, 4.600000"
-	onEnter: "17579|Open door|"
-	onExit: ""
-	once: "0"
-	needPlayerInteraction: "0"
-	killPlayer: "0"
-}
 object EditorSprite {
 	ID: "19412"
 	name: ""
@@ -7719,7 +7607,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "19478"
 	name: ""
-	position: "12.200000, 62.200001, -6.000000"
+	position: "9.601829, 62.200001, -6.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "3.400000, 3.400000"
@@ -7736,7 +7624,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "19480"
 	name: ""
-	position: "18.200001, 63.400002, -6.000000"
+	position: "15.601830, 63.400002, -6.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "3.400000, 3.400000"
@@ -8366,7 +8254,7 @@ object Trigger {
 	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "4.400000, 4.400000"
-	onEnter: "20112|Close door|"
+	onEnter: "20112|Close door|20792|Trigger|"
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
@@ -8504,6 +8392,58 @@ object EditorSprite {
 	rotation: "0.000000"
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "pipe4.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object LevelEnd {
+	ID: "20791"
+	name: ""
+	position: "35.799999, 19.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	nextLevel: "end.map"
+}
+object LogicRelay {
+	ID: "20792"
+	name: ""
+	position: "34.600002, 19.000000, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "20791|End level|"
+	onAltTrigger: ""
+	triggerOnStart: "0"
+	delay: "1.000000"
+}
+object EditorSprite {
+	ID: "20794"
+	name: ""
+	position: "9.000000, 66.599998, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.600000, 1.400000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "20796"
+	name: ""
+	position: "17.400000, 56.799999, -6.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.400000, 3.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "door.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"

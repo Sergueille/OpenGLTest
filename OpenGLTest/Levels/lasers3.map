@@ -4850,6 +4850,9 @@ object TextRenderer {
 	content: "sector8"
 	fontSize: "0.800000"
 	color: "0.000000, 0.000000, 0.000000, 0.300000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object EditorSprite {
 	ID: "15226"

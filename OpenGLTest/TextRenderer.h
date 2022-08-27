@@ -3,6 +3,7 @@
 #include "EditorObject.h"
 #include "Sprite.h"
 #include "RessourceManager.h"
+#include "InputManager.h"
 
 using namespace glm;
 
@@ -17,6 +18,10 @@ public:
 	std::string content;
 	float fontSize = 1;
 	vec4 color = vec4(1);
+
+	bool insertKeyNames = false;
+	InputManager::KeyBinding keyName1 = (InputManager::KeyBinding)0;
+	InputManager::KeyBinding keyName2 = (InputManager::KeyBinding)0;
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;
 	virtual void OnMainLoop() override;
