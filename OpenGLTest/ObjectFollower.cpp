@@ -11,13 +11,13 @@ ObjectEvent ObjectFollower::events[OBJECT_FOLLOWER_EVENT_COUNT] = {
 	ObjectEvent {
 		"Start following",
 		[](EditorObject* object, void* param) {
-			((ObjectFollower*)object)->mustFollow = true;
+			((ObjectFollower*)object)->StartFollowing();
 		}
 	},
 	ObjectEvent {
 		"Stop following",
 		[](EditorObject* object, void* param) {
-			((ObjectFollower*)object)->mustFollow = false;
+			((ObjectFollower*)object)->StopFollowing();
 		}
 	},
 };
@@ -101,6 +101,8 @@ vec2 ObjectFollower::DrawProperties(vec3 drawPos)
 
 	drawPos.y -= Editor::CheckBox(drawPos, "Must follow", &mustFollow, Editor::panelPropertiesX).y;
 
+	drawPos.y -= Editor::DrawProperty(drawPos, "Stop follow dist.", &stopFollowingAfterDistance, Editor::panelPropertiesX, strID + "stopFollowingAfterDistance").y;
+
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
 	return res;
@@ -148,6 +150,8 @@ void ObjectFollower::Load(std::map<std::string, std::string>* props)
 	mustFollow = (*props)["mustFollow"] == "1";
 	startMustFollow = mustFollow;
 
+	EditorSaveManager::FloatProp(props, "stopFollowingAfterDistance", &stopFollowingAfterDistance);
+
     EditorSaveManager::IntProp(props, "targetID", &targetID);
 	followPlayer = (*props)["followPlayer"] == "1";
 	if (!Editor::enabled)
@@ -165,8 +169,8 @@ void ObjectFollower::Load(std::map<std::string, std::string>* props)
 			fprintf(stderr, "Object follower (%s) has no target!", this->name.c_str());
 	}
 
-	physicsEnabled = !Editor::enabled;
-	collideCollider->SetCollideWithPhys(physicsEnabled);
+	physicsEnabled = false;
+	collideCollider->SetCollideWithPhys(!Editor::enabled);
 	SetPos(GetEditPos());
 
 	startPos = GetLocalEditPos();
@@ -190,6 +194,7 @@ void ObjectFollower::Save()
     EditorSaveManager::WriteProp("collideWithPhysics", collideWithPhysics);
     EditorSaveManager::WriteProp("mustFollow", mustFollow);
     EditorSaveManager::WriteProp("colliderSize", colliderSize);
+    EditorSaveManager::WriteProp("stopFollowingAfterDistance", stopFollowingAfterDistance);
 }
 
 void ObjectFollower::Enable()
@@ -254,6 +259,12 @@ void ObjectFollower::OnBeforeMove()
 			else
 				editorRotation -= AbsMin(angleDist, rotateSpeed * GetDeltaTime());
 		}
+
+		// Too far
+		if (stopFollowingAfterDistance > 0 && sqrDist > stopFollowingAfterDistance * stopFollowingAfterDistance)
+		{
+			StopFollowing();
+		}
 	}
 
 	// Drag
@@ -284,10 +295,25 @@ void ObjectFollower::OnUnselected()
 
 void ObjectFollower::ResetIngameState()
 {
-	mustFollow = startMustFollow;
+	if (startMustFollow)
+		StartFollowing();
+	else
+		StopFollowing();
 
 	SetEditPos(startPos);
 	SetEditRotation(startRot);
+}
+
+void ObjectFollower::StartFollowing()
+{
+	mustFollow = true;
+	physicsEnabled = true;
+}
+
+void ObjectFollower::StopFollowing()
+{
+	mustFollow = false;
+	physicsEnabled = false;
 }
 
 void ObjectFollower::OnMainLoop()

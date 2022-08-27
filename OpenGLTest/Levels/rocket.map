@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 206
+count 220
 
 object MapData {
 	mapName: ""
@@ -2708,4 +2708,153 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
+}
+object Prefab {
+	ID: "25894"
+	name: ""
+	position: "42.200001, -17.800001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "180.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "25898"
+	name: ""
+	position: "52.799999, -17.800001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "180.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "25902"
+	name: ""
+	position: "76.800003, -17.800001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "180.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "25906"
+	name: ""
+	position: "86.800003, -17.800001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "180.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "25910"
+	name: ""
+	position: "66.800003, -9.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "180.000000"
+	scale: "1.000000, 1.000000"
+}
+object Prefab {
+	ID: "25914"
+	name: ""
+	position: "66.400002, -29.600000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\fluo.map"
+	ori: "180.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "25918"
+	name: "background"
+	position: "63.000000, -15.800000, -10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "55.000000, 45.000000"
+	rotation: "0.000000"
+	color: "0.800000, 0.800000, 0.800000, 1.000000"
+	texturePath: "back\plaster1.jpg"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "6.000000, 5.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object ShadowCaster {
+	ID: "25920"
+	name: ""
+	position: "55.000000, -11.800000, 10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "5.400000, 5.000000"
+	orientation: "-0.000000"
+}
+object ShadowCaster {
+	ID: "25922"
+	name: ""
+	position: "55.000000, -28.600000, 10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "5.400000, 5.000000"
+	orientation: "-0.000000"
+}
+object ShadowCaster {
+	ID: "25924"
+	name: ""
+	position: "78.000000, -28.600000, 10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "5.400000, 5.000000"
+	orientation: "-0.000000"
+}
+object ShadowCaster {
+	ID: "25926"
+	name: ""
+	position: "78.000000, -11.800000, 10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "5.400000, 5.000000"
+	orientation: "-0.000000"
+}
+object EditorSprite {
+	ID: "25928"
+	name: "background"
+	position: "98.400002, -23.800001, -9.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "14.000000, 4.600000"
+	rotation: "0.000000"
+	color: "0.800000, 0.800000, 0.800000, 1.000000"
+	texturePath: "back\concrete_2.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "6.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object ShadowCaster {
+	ID: "25930"
+	name: ""
+	position: "91.000000, -22.000000, 10.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "1.000000, 8.200000"
+	orientation: "-0.000000"
+}
+object Prefab {
+	ID: "25932"
+	name: ""
+	position: "98.000000, -22.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\neon.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
 }

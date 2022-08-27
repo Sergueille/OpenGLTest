@@ -31,6 +31,8 @@ public:
 	bool collideWithPhysics = false;
 	float colliderSize = 1;
 
+	float stopFollowingAfterDistance = -1;
+
 	bool mustFollow = true;
 
     Sprite* editorSprite = nullptr;
@@ -55,6 +57,9 @@ public:
 	virtual void OnUnselected() override;
 
 	virtual void ResetIngameState() override;
+
+	void StartFollowing();
+	void StopFollowing();
 
 private:
 	EditorObject* _target = nullptr;

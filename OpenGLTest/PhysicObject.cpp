@@ -37,7 +37,7 @@ void PhysicObject::OnMainLoop()
 {
 	if (!physicsEnabled || disableAllPhysics)
 		return;
-
+	
 	this->OnBeforeMove();
 
 	// Skip if no colliders
