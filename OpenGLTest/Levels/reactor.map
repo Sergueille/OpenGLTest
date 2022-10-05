@@ -1,10 +1,10 @@
 // Editor map file, version 1
 
-count 559
+count 560
 
 object MapData {
 	mapName: ""
-	lightmapStart: "-98.000000, -15.000000"
+	lightmapStart: "-98.000000, -16.000000"
 	lightmapEnd: "96.000000, 98.000000"
 }
 object Player {
@@ -1329,7 +1329,7 @@ object EditorSprite {
 object Radioactivity {
 	ID: "1406"
 	name: ""
-	position: "-60.400002, 31.600000, 5.000000"
+	position: "-60.600002, 31.600000, 5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	maxDist: "15.000000"
@@ -1944,10 +1944,11 @@ object TemperatureManager {
 	startTemperature: "500"
 	maxTemperature: "3000"
 	duration: "60"
-	subAmount: "1000"
-	subDuration: "2"
+	subAmount: "500"
+	highlightDuration: "3"
 	localKey: "react_temp"
 	textColor: "1.000000, 0.200000, 0.200000"
+	textHighlightColor: "2.000000, 2.000000, 0.000000"
 	onReachMax: "9779|Trigger|"
 }
 object EditorParticleSystem {
@@ -5369,7 +5370,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "860"
 	name: ""
-	position: "41.600002, 41.600002, 0.000000"
+	position: "41.600002, 42.200001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "4.600000, 1.000000"
@@ -5385,7 +5386,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1125"
 	name: ""
-	position: "52.400002, 41.600002, 0.000000"
+	position: "52.400002, 42.200001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "3.600000, 1.000000"
@@ -5401,7 +5402,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "1123"
 	name: ""
-	position: "62.200001, 41.600002, 0.000000"
+	position: "62.200001, 42.200001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "4.000000, 1.000000"
@@ -5692,7 +5693,7 @@ object ShadowCaster {
 object ShadowCaster {
 	ID: "14450"
 	name: ""
-	position: "52.400002, 41.600002, 50.000000"
+	position: "52.400002, 42.200001, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "3.600000, 1.000000"
@@ -5701,7 +5702,7 @@ object ShadowCaster {
 object ShadowCaster {
 	ID: "14452"
 	name: ""
-	position: "41.400002, 41.600002, 50.000000"
+	position: "41.400002, 42.200001, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "5.000000, 1.000000"
@@ -5710,7 +5711,7 @@ object ShadowCaster {
 object ShadowCaster {
 	ID: "14454"
 	name: ""
-	position: "62.600002, 41.600002, 50.000000"
+	position: "62.600002, 42.200001, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "4.800000, 1.000000"
@@ -8450,4 +8451,18 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
+}
+object Trigger {
+	ID: "21111"
+	name: ""
+	position: "-25.000000, 14.600000, -7.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "10.600000, 6.800000"
+	onEnter: "2991|Start|1584|Save game|"
+	onExit: ""
+	once: "0"
+	needPlayerInteraction: "0"
+	killPlayer: "0"
 }

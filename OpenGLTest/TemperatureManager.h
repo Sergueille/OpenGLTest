@@ -18,9 +18,10 @@ public:
 	int maxTemperature;
 	int duration;
 	int subAmount;
-	int subDuration;
+	int highlightDuration;
 	std::string localKey;
 	vec3 textColor;
+	vec3 textHighlightColor;
 	EventList onReachMax;
 
 	static ObjectEvent events[TEMP_MANAGER_EVENT_COUNT];
@@ -41,6 +42,8 @@ public:
 
 	virtual void GetObjectEvents(const ObjectEvent** res, int* resCount) override;
 
+	virtual void ResetIngameState() override;
+
 	void Start();
 	void Sub();
 	void Stop();
@@ -49,4 +52,6 @@ private:
 	bool isActive = false;
 	float startTime;
 	bool eventAlreadySent = false;
+	float subValue = 0;
+	float lastHighlightTime = 0;
 };

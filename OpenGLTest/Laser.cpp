@@ -203,6 +203,10 @@ void Laser::OnMainLoop()
 
 			soloud->setVolume(loopSound, Utility::gameSoundsVolume * soundOnVolume * soundsAttenuation);
 		}
+		else
+		{
+			soloud->setVolume(loopSound, 0);
+		}
 	}
 
 	emmiterSprite->isLit = !laserOn;
@@ -284,11 +288,8 @@ void Laser::StartLoopSound()
 
 void Laser::StopLoopSound()
 {
-	if (isPlayingLoopSound)
-	{
-		soloud->stop(loopSound);
-		isPlayingLoopSound = false;
-	}
+	soloud->stop(loopSound);
+	isPlayingLoopSound = false;
 }
 
 Laser* Laser::Copy()

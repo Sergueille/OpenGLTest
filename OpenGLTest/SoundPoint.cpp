@@ -7,6 +7,8 @@
 #include "RessourceManager.h"
 #include "Player.h"
 
+constexpr int SOUND_CAMERA_DIST = 10;
+
 ObjectEvent SoundPoint::events[SOUND_POINT_EVENT_COUNT] = {
 	ObjectEvent {
 		"Play sound",
@@ -185,5 +187,9 @@ void SoundPoint::OnMainLoop()
 		if (attenuation > 1) attenuation = 1;
 
 		soloud->setVolume(handle, Utility::gameSoundsVolume * volume * attenuation);
+
+		float deltaX = GetEditPos().x - Camera::position.x;
+		float alpha = atan(deltaX / SOUND_CAMERA_DIST);
+		soloud->setPan(handle, alpha / HALF_PI);
 	}
 }

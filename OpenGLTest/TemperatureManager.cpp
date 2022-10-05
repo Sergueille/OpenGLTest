@@ -56,8 +56,9 @@ vec2 TemperatureManager::DrawProperties(vec3 drawPos)
 	drawPos.y -= Editor::DrawProperty(drawPos, "Max temperature", &maxTemperature, Editor::panelPropertiesX, strID + "maxTemperature").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Duration", &duration, Editor::panelPropertiesX, strID + "duration").y;
 	drawPos.y -= Editor::DrawProperty(drawPos, "Sub amount", &subAmount, Editor::panelPropertiesX, strID + "subAmount").y;
-	drawPos.y -= Editor::DrawProperty(drawPos, "Sub duration", &subDuration, Editor::panelPropertiesX, strID + "subDuration").y;
-	drawPos.y -= Editor::DrawProperty(drawPos, "TextColor", &textColor, Editor::panelPropertiesX, strID + "textColor", true).y + Editor::margin;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Highlight duration", &highlightDuration, Editor::panelPropertiesX, strID + "highlightDuration").y;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Text color", &textColor, Editor::panelPropertiesX, strID + "textColor", true).y + Editor::margin;
+	drawPos.y -= Editor::DrawProperty(drawPos, "Text highlighgt color", &textHighlightColor, Editor::panelPropertiesX, strID + "textHighlightColor", true).y + Editor::margin;
 
 	drawPos.y -= Editor::DrawProperty(drawPos, "Text", &localKey, Editor::panelPropertiesX, strID + "localKey").y;
 	drawPos.y -= TextManager::RenderText(LocalizationManager::GetLocale(localKey), drawPos, Editor::textSize).y + Editor::margin;
@@ -90,8 +91,9 @@ void TemperatureManager::Load(std::map<std::string, std::string>* props)
 	EditorSaveManager::IntProp(props, "maxTemperature", &maxTemperature);
 	EditorSaveManager::IntProp(props, "duration", &duration);
 	EditorSaveManager::IntProp(props, "subAmount", &subAmount);
-	EditorSaveManager::IntProp(props, "subDuration", &subDuration);
+	EditorSaveManager::IntProp(props, "highlightDuration", &highlightDuration);
 	textColor = EditorSaveManager::StringToVector3((*props)["textColor"], vec3(1));
+	textHighlightColor = EditorSaveManager::StringToVector3((*props)["textHighlightColor"], vec3(1));
 	localKey = (*props)["localKey"];
 	EventList::Load(&onReachMax, (*props)["onReachMax"]);
 }
@@ -104,9 +106,10 @@ void TemperatureManager::Save()
 	EditorSaveManager::WriteProp("maxTemperature", maxTemperature);
 	EditorSaveManager::WriteProp("duration", duration);
 	EditorSaveManager::WriteProp("subAmount", subAmount);
-	EditorSaveManager::WriteProp("subDuration", subDuration);
+	EditorSaveManager::WriteProp("highlightDuration", highlightDuration);
 	EditorSaveManager::WriteProp("localKey", localKey);
 	EditorSaveManager::WriteProp("textColor", textColor);
+	EditorSaveManager::WriteProp("textHighlightColor", textHighlightColor);
 	EditorSaveManager::WriteProp("onReachMax", onReachMax.GetString());
 }
 
@@ -128,19 +131,27 @@ void TemperatureManager::GetObjectEvents(const ObjectEvent** res, int* resCount)
 	*resCount = TEMP_MANAGER_EVENT_COUNT;
 }
 
+void TemperatureManager::ResetIngameState()
+{
+	Stop();
+}
+
 void TemperatureManager::Start()
 {
 	if (isActive) return;
 
 	isActive = true;
+	subValue = 0;
 	currentTemp = static_cast<float>(startTemperature);
 	startTime = Utility::time;
 	eventAlreadySent = false;
+	lastHighlightTime = Utility::time;
 }
 
 void TemperatureManager::Sub()
 {
-
+	subValue += subAmount;
+	lastHighlightTime = Utility::time;
 }
 
 void TemperatureManager::Stop()
@@ -167,10 +178,10 @@ void TemperatureManager::OnMainLoop()
 
 		currentTemp = Utility::Lerp(startTemperature, maxTemperature, t);
 
-		if (currentTemp >= maxTemperature)
-		{
-			currentTemp = maxTemperature;
+		float realTemp = currentTemp - subValue;
 
+		if (realTemp >= maxTemperature)
+		{
 			if (!eventAlreadySent)
 			{
 				onReachMax.Call(this);
@@ -178,13 +189,18 @@ void TemperatureManager::OnMainLoop()
 			}
 		}
 
+		t = (Utility::time - lastHighlightTime) / highlightDuration;
+		if (t > 1) t = 1;
+
+		vec3 color = Utility::Lerp(textHighlightColor, textColor, t);
+ 
 		// Display
-		std::string txt = LocalizationManager::GetLocale(localKey) + " " + std::to_string(currentTemp) + "°C";
+		std::string txt = LocalizationManager::GetLocale(localKey) + " " + std::to_string(realTemp) + "°C";
 		vec3 pos = vec3(
 			TerminalManager::screenMargin, 
 			TerminalManager::screenMargin, 
 			TerminalManager::zPos);
 
-		TextManager::RenderText(txt, pos, TerminalManager::textSize, TextManager::right, textColor, true);
+		TextManager::RenderText(txt, pos, TerminalManager::textSize, TextManager::right, color, true);
 	}
 }
