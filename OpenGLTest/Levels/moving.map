@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 329
+count 331
 
 object MapData {
 	mapName: ""
@@ -265,7 +265,7 @@ object TransformModifier {
 	targetSize: "1.000000, 1.000000"
 	duration: "3.000000"
 	easeType: "3"
-	onFinished: ""
+	onFinished: "8|Stop sound|10|Play sound|"
 }
 object TransformModifier {
 	ID: "404"
@@ -280,7 +280,7 @@ object TransformModifier {
 	targetSize: "1.000000, 1.000000"
 	duration: "8.000000"
 	easeType: "3"
-	onFinished: ""
+	onFinished: "8|Stop sound|10|Play sound|"
 }
 object Button {
 	ID: "405"
@@ -289,8 +289,8 @@ object Button {
 	parent: "-1"
 	parallax: "1.000000"
 	startPressed: "0"
-	onPressed: "404|Set position|678|Close door|12319|Set all transforms|15624|Set to normal events|"
-	onUnpressed: "402|Set position|678|Open door|12321|Set all transforms|15624|Set to alternative events|30370|Trigger|"
+	onPressed: "404|Set position|678|Close door|12319|Set all transforms|15624|Set to normal events|8|Play sound|"
+	onUnpressed: "402|Set position|678|Open door|12321|Set all transforms|15624|Set to alternative events|30370|Trigger|8|Play sound|"
 }
 object Trigger {
 	ID: "407"
@@ -300,7 +300,7 @@ object Trigger {
 	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "7.200000, 4.000000"
-	onEnter: "402|Set position|12321|Set all transforms|"
+	onEnter: "402|Set position|12321|Set all transforms|8|Play sound|"
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
@@ -2227,6 +2227,7 @@ object LevelEnd {
 	parent: "-1"
 	parallax: "1.000000"
 	nextLevel: "acid.map"
+	returnToMenu: "0"
 }
 object EditorSprite {
 	ID: "12309"
@@ -3563,6 +3564,9 @@ object TextRenderer {
 	content: "door1"
 	fontSize: "0.600000"
 	color: "0.600000, 0.200000, 0.200000, 0.400000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object TextRenderer {
 	ID: "15307"
@@ -3573,6 +3577,9 @@ object TextRenderer {
 	content: "door_switch3"
 	fontSize: "0.245000"
 	color: "0.800000, 0.800000, 0.800000, 0.020000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object Trigger {
 	ID: "15606"
@@ -3832,6 +3839,9 @@ object TextRenderer {
 	content: "sign1a"
 	fontSize: "0.400000"
 	color: "0.000000, 0.000000, 0.000000, 0.300000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object TextRenderer {
 	ID: "19996"
@@ -3842,6 +3852,9 @@ object TextRenderer {
 	content: "sign1b"
 	fontSize: "0.400000"
 	color: "0.000000, 0.000000, 0.000000, 0.300000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object EditorSprite {
 	ID: "21250"
@@ -3967,6 +3980,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }
 object EditorSprite {
 	ID: "26017"
@@ -3996,6 +4010,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }
 object SoundArea {
 	ID: "26021"
@@ -4009,6 +4024,7 @@ object SoundArea {
 	isMusic: "0"
 	fadeIn: "1.000000"
 	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }
 object Light {
 	ID: "26363"
@@ -4737,4 +4753,34 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
+}
+object SoundPoint {
+	ID: "8"
+	name: "motor"
+	position: "-5.800000, -0.200000, 50.000000"
+	parent: "12313"
+	parallax: "1.000000"
+	soundName: "engine.wav"
+	volume: "1.000000"
+	spatial: "1"
+	minDist: "4.000000"
+	maxDist: "30.000000"
+	autoStart: "0"
+	loop: "1"
+	dontPlayIfTooFar: "1"
+}
+object SoundPoint {
+	ID: "10"
+	name: "clac"
+	position: "-4.800000, -0.200000, 50.000000"
+	parent: "12313"
+	parallax: "1.000000"
+	soundName: "clac.wav"
+	volume: "0.400000"
+	spatial: "1"
+	minDist: "4.000000"
+	maxDist: "30.000000"
+	autoStart: "0"
+	loop: "0"
+	dontPlayIfTooFar: "1"
 }

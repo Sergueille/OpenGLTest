@@ -7,6 +7,7 @@
 #include "RessourceManager.h"
 #include "TweenManager.h"
 #include "LightManager.h"
+#include "MenuManager.h"
 
 const ObjectEvent LevelEnd::events[LEVEL_END_EVENT_COUNT] =
 {
@@ -47,7 +48,12 @@ vec2 LevelEnd::DrawProperties(vec3 drawPos)
 
 	drawPos.y -= EditorObject::DrawProperties(drawPos).y;
 
-	drawPos.y -= Editor::FileSelector(drawPos, "Next level", &nextLevel, &Editor::mapFiles, Editor::panelPropertiesX, strID + "nextLevel").y;
+	drawPos.y -= Editor::CheckBox(drawPos, "Return to menu", &returnToMenu, Editor::panelPropertiesX).y;
+
+	if (!returnToMenu)
+	{
+		drawPos.y -= Editor::FileSelector(drawPos, "Next level", &nextLevel, &Editor::mapFiles, Editor::panelPropertiesX, strID + "nextLevel").y;
+	}
 
 	vec2 res = vec2(drawPos) - startPos;
 	res.y *= -1;
@@ -71,12 +77,14 @@ void LevelEnd::Load(std::map<std::string, std::string>* props)
 {
 	EditorObject::Load(props);
 	nextLevel = (*props)["nextLevel"];
+	returnToMenu = (*props)["returnToMenu"] == "1";
 }
 
 void LevelEnd::Save()
 {
 	EditorObject::Save();
 	EditorSaveManager::WriteProp("nextLevel", nextLevel);
+	EditorSaveManager::WriteProp("returnToMenu", returnToMenu);
 }
 
 void LevelEnd::Enable()
@@ -113,5 +121,16 @@ void LevelEnd::EndLevel()
 {
 	if (isEndingLevel) return;
 	isEndingLevel = true;
-	EditorSaveManager::LoadLevelWithTransition(nextLevel);
+
+	if (returnToMenu)
+	{
+		EventManager::DoInOneFrame([] {
+			EditorSaveManager::ClearGameLevel();
+			MenuManager::OpenMenu(MenuManager::Menu::main);
+		});
+	}
+	else
+	{
+		EditorSaveManager::LoadLevelWithTransition(nextLevel);
+	}
 }

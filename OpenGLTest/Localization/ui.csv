@@ -53,3 +53,7 @@
 "unknown_key","Unknown key","Touche inconnue"
 "language","Language","Langue"
 "language_name","English","Français"
+"open_editor","Open the level editor?","Ouvrir l'éditeur de niveaux?"
+"editor_warning1","","L'éditeur de niveau est experimental, et ne fonctionne pas très bien."
+"editor_warning2","","Vous pourrez trouver une documentation donnée avec les fichiers du jeu à:"
+"editor_warning3","","Docs\fr\index.html"

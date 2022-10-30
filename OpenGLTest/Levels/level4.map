@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 442
+count 445
 
 object MapData {
 	mapName: ""
@@ -670,7 +670,7 @@ object EditorSprite {
 	texturePath: "back\plaster2.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "3.000000, 1.000000"
+	UVend: "4.500000, 1.500000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
@@ -1382,7 +1382,7 @@ object Trigger {
 object Trigger {
 	ID: "6343"
 	name: ""
-	position: "74.200005, -8.400001, 0.000000"
+	position: "73.800003, -8.200000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
@@ -2308,7 +2308,7 @@ object TransformModifier {
 	targetSize: "1.000000, 1.000000"
 	duration: "20.000000"
 	easeType: "1"
-	onFinished: "32813|Stop sound|"
+	onFinished: "32813|Stop sound|10|Play sound|"
 }
 object Trigger {
 	ID: "11544"
@@ -3045,6 +3045,7 @@ object LevelEnd {
 	parent: "-1"
 	parallax: "1.000000"
 	nextLevel: "moving.map"
+	returnToMenu: "0"
 }
 object SoundPoint {
 	ID: "20662"
@@ -4105,7 +4106,7 @@ object EditorSprite {
 	texturePath: "back\plaster2.jpg"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
-	UVend: "1.000000, 1.000000"
+	UVend: "1.500000, 1.500000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
@@ -4382,7 +4383,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "24170"
 	name: ""
-	position: "71.198265, -36.363560, -4.500000"
+	position: "70.549286, -36.350315, -4.500000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "0.310000, 0.310000"
@@ -6405,6 +6406,9 @@ object TextRenderer {
 	content: "door_switch1"
 	fontSize: "0.250000"
 	color: "0.800000, 0.800000, 0.800000, 0.020000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object EditorSprite {
 	ID: "31498"
@@ -6432,6 +6436,9 @@ object TextRenderer {
 	content: "door_switch2"
 	fontSize: "0.250000"
 	color: "0.800000, 0.800000, 0.800000, 0.020000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object EditorSprite {
 	ID: "31502"
@@ -6617,6 +6624,9 @@ object TextRenderer {
 	content: "door_switch4"
 	fontSize: "0.250000"
 	color: "0.800000, 0.300000, 0.200000, 0.500000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object TextRenderer {
 	ID: "33748"
@@ -6627,6 +6637,9 @@ object TextRenderer {
 	content: "door2"
 	fontSize: "0.700000"
 	color: "0.000000, 0.000000, 0.000000, 0.300000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object EditorSprite {
 	ID: "33750"
@@ -6658,4 +6671,53 @@ object SoundArea {
 	fadeIn: "1.000000"
 	fadeOut: "3.000000"
 	syncAreaID: "-1"
+}
+object SoundPoint {
+	ID: "10"
+	name: "clac"
+	position: "0.000000, -0.333335, 50.000000"
+	parent: "11357"
+	parallax: "1.000000"
+	soundName: "clac.wav"
+	volume: "0.300000"
+	spatial: "1"
+	minDist: "4.000000"
+	maxDist: "30.000000"
+	autoStart: "0"
+	loop: "0"
+	dontPlayIfTooFar: "1"
+}
+object EditorSprite {
+	ID: "34356"
+	name: ""
+	position: "59.400002, 8.000000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.000000, 3.000000"
+	rotation: "180.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.600000"
+	texturePath: "decals\stain1.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "34358"
+	name: ""
+	position: "74.200005, -11.600000, -8.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "3.000000, 1.000000"
+	rotation: "180.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.600000"
+	texturePath: "decals\stain1.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.600000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }

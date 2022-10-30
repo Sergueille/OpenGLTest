@@ -17,6 +17,7 @@ public:
     Sprite* editorSprite = nullptr;
 
 	std::string nextLevel;
+	bool returnToMenu = false;
 
 	virtual vec2 DrawProperties(vec3 drawPos) override;
 	virtual void OnMainLoop() override;

@@ -92,9 +92,16 @@ void MenuManager::OnMainLoop()
 		drawPos.y -= Button(drawPos, "level_editor", &pressed).y + margin;
 		if (pressed)
 		{
-			EditorSaveManager::ClearGameLevel();
-			OpenMenu(Menu::none);
-			Editor::OpenEditor();
+			if (SettingsManager::progress["editorWarning"] == "0")
+			{
+				EditorSaveManager::ClearGameLevel();
+				OpenMenu(Menu::none);
+				Editor::OpenEditor();
+			}
+			else
+			{
+				OpenMenu(Menu::editorWarning);
+			}
 		}
 
 		drawPos.y -= Button(drawPos, "quit", &pressed).y + margin;
@@ -413,6 +420,30 @@ void MenuManager::OnMainLoop()
 				}
 			}
 		}
+	}
+	else if (currentMenu == Menu::editorWarning)
+	{
+		vec3 drawPos = vec3(screenMargin, screenY - screenMargin, UIbaseZPos);
+		drawPos.y -= LocalText("open_editor", drawPos, titleScale).y + margin;
+
+		drawPos.y -= LocalText("editor_warning1", drawPos, textSize).y;
+		drawPos.y -= LocalText("editor_warning2", drawPos, textSize).y;
+		drawPos.y -= LocalText("editor_warning3", drawPos, textSize).y;
+
+		drawPos.y -= margin;
+
+		drawPos.x += Button(drawPos, "continue", &pressed).x + margin;
+		if (pressed)
+		{
+			SettingsManager::progress["editorWarning"] = "0";
+			SettingsManager::SaveProgress();
+
+			EditorSaveManager::ClearGameLevel();
+			OpenMenu(Menu::none);
+			Editor::OpenEditor();
+		}
+
+		PreviousMenuButton(drawPos);
 	}
 	else if (currentMenu == Menu::none)
 	{

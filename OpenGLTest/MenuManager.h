@@ -13,7 +13,7 @@ using namespace glm;
 class MenuManager
 {
 public:
-	enum class Menu { none, main, ingame, paused, load, newGame, options, graphics, audio, controls };
+	enum class Menu { none, main, ingame, paused, load, newGame, options, graphics, audio, controls, editorWarning };
 
 	const static int UIbaseZPos = 1000;
 	const static int margin = 30;

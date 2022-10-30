@@ -1,5 +1,6 @@
 //Props file
 
 Props {
-	unlockedChapters: "3"
+	editorWarning: "0"
+	unlockedChapters: "5"
 }

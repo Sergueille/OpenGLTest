@@ -48,6 +48,7 @@ Props {
 builder.create_file(build + "\\Settings\\progress.set", """
 Props {
     unlockedChapters: "1"
+    editorWarning: "1"
 }
 """)
 

@@ -655,7 +655,7 @@ void EditorSaveManager::ReadObject(bool inEditor, Prefab* prefab)
 	else if (objectType == "PrefabCloner")
 	{
 		newObj = new PrefabCloner();
-		newObj->Load(&props);
+		newObj->Load(&props);	
 	}
 	else if (objectType == "Radioactivity")
 	{
