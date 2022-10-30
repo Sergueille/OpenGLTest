@@ -56,7 +56,7 @@ private:
 	EditorObject* targetObject;
 
 	TweenAction<vec2>* moveAction = nullptr;
-	TweenAction<float>* roateAction = nullptr;
+	TweenAction<float>* rotateAction = nullptr;
 	TweenAction<vec2>* scaleAction = nullptr;
 
 	vec3 targetStartPos;

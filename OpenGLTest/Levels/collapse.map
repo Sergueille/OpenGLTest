@@ -7181,6 +7181,7 @@ object LevelEnd {
 	parent: "-1"
 	parallax: "1.000000"
 	nextLevel: "intro_walls.map"
+	returnToMenu: "0"
 }
 object EditorSprite {
 	ID: "34870"
@@ -7375,6 +7376,9 @@ object TextRenderer {
 	content: "exit"
 	fontSize: "0.500000"
 	color: "1.000000, 1.000000, 1.000000, 0.020000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object TextRenderer {
 	ID: "36672"
@@ -7385,6 +7389,9 @@ object TextRenderer {
 	content: "exit"
 	fontSize: "0.500000"
 	color: "1.000000, 1.000000, 1.000000, 0.100000"
+	insertKeyNames: "0"
+	keyName1: "-858993460"
+	keyName2: "-858993460"
 }
 object Prefab {
 	ID: "36781"

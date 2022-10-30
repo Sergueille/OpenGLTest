@@ -152,7 +152,7 @@ object EditorSprite {
 object Player {
 	ID: "0"
 	name: ""
-	position: "53.799999, 4.000000, 20.000000"
+	position: "7.400000, -0.400000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"

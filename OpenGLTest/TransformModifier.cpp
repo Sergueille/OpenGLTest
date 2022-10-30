@@ -110,7 +110,7 @@ EditorObject* TransformModifier::Copy()
 		});
 
 	newObj->moveAction = nullptr;
-	newObj->roateAction = nullptr;
+	newObj->rotateAction = nullptr;
 	newObj->scaleAction = nullptr;
 
 	return newObj;
@@ -191,8 +191,8 @@ void TransformModifier::SetPosition()
 				this->targetObject->SetEditPos(vec3(value.x, value.y, this->targetObject->GetLocalEditPos().z)); 
 		},
 	easeType)->SetOnFinished([this] { 
-		onFinished.Call(this); 
 		this->moveAction = nullptr;
+		onFinished.Call(this); 
 	});
 }
 
@@ -201,14 +201,14 @@ void TransformModifier::SetRotation()
 	if (targetObject == nullptr) return;
 	float obj = relative ? targetStartRotation + targetRotation : targetRotation;
 
-	roateAction = TweenManager<float>::Tween(targetObject->GetLocalEditRotation(), obj, duration,
+	rotateAction = TweenManager<float>::Tween(targetObject->GetLocalEditRotation(), obj, duration,
 		[this](float value) { 
 			if (!EditorSaveManager::isLoading)
 				this->targetObject->SetEditRotation(value); 
 		},
 	easeType)->SetOnFinished([this] { 
+		this->rotateAction = nullptr;
 		onFinished.Call(this);
-		this->roateAction = nullptr;
 	});
 }
 
@@ -223,8 +223,8 @@ void TransformModifier::SetScale()
 				this->targetObject->SetEditScale(value); 
 		},
 	easeType)->SetOnFinished([this] { 
-		onFinished.Call(this);
 		this->scaleAction = nullptr;
+		onFinished.Call(this);
 	});
 }
 
@@ -242,10 +242,10 @@ void TransformModifier::CancelAll()
 		TweenManager<vec2>::Cancel(moveAction);
 		moveAction = nullptr;
 	}
-	if (roateAction != nullptr)
+	if (rotateAction != nullptr)
 	{
-		TweenManager<float>::Cancel(roateAction);
-		roateAction = nullptr;
+		TweenManager<float>::Cancel(rotateAction);
+		rotateAction = nullptr;
 	}
 	if (scaleAction != nullptr)
 	{

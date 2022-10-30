@@ -26,7 +26,7 @@ object EditorSprite {
 object Player {
 	ID: "1"
 	name: ""
-	position: "-16.600000, 32.000000, 20.000000"
+	position: "-16.000000, 32.000000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -6313,7 +6313,7 @@ object Trigger {
 	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "7.600000, 5.200000"
-	onEnter: "30599|Disable timer|"
+	onEnter: "30599|Disable timer|742|Save game|"
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
