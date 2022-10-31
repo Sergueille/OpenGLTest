@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 381
+count 383
 
 object MapData {
 	mapName: ""
@@ -94,7 +94,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "135"
 	name: ""
-	position: "18.600000, 4.600000, -10.000000"
+	position: "18.600000, 4.578411, -10.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "26.000000, 5.000000"
@@ -102,8 +102,8 @@ object EditorSprite {
 	color: "1.000000, 1.000000, 1.000000, 1.000000"
 	texturePath: "back\concrete_2.png"
 	collideWithPhys: "0"
-	UVstart: "0.000000, 0.000000"
-	UVend: "2.000000, 0.500000"
+	UVstart: "0.000000, 0.250000"
+	UVend: "2.900000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
@@ -5433,7 +5433,7 @@ object LogicRelay {
 object EditorSprite {
 	ID: "21140"
 	name: "over"
-	position: "-37.200001, 40.200001, 40.000000"
+	position: "-48.400002, 7.200000, 40.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "40.400002, 24.000000"
@@ -5829,4 +5829,38 @@ object EditorParticleSystem {
 	duration: "-1.000000"
 	autoStart: "1"
 	ignoreDistanceOptimization: "0"
+}
+object EditorSprite {
+	ID: "25727"
+	name: ""
+	position: "-29.400000, 1.400000, -9.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.800000, 2.800000"
+	rotation: "270.000000"
+	color: "1.000000, 1.000000, 1.000000, 0.400000"
+	texturePath: "decals\dust2.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "-1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "25909"
+	name: ""
+	position: "45.400002, -20.800001, 1.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.600000, 2.600000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "cables4.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }

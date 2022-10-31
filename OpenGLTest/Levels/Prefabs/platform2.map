@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 7
+count 10
 
 object MapData {
 	mapName: ""
@@ -21,6 +21,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "3"
@@ -37,6 +38,7 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object LogicRelay {
 	ID: "4"
@@ -93,4 +95,55 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "1"
+	fadeDuration: "1.000000"
+}
+object EditorParticleSystem {
+	ID: "23144"
+	name: ""
+	position: "0.000000, -39.799999, 6.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "6.000000, 0.600000"
+	emitCircle: "0"
+	velocityFromAngle: "0"
+	startVelocity: "0.000000, 3.000000"
+	endVelocity: "0.000000, -5.000000"
+	startSize: "0.500000, 0.500000"
+	endSize: "5.000000, 5.000000"
+	startColor: "0.900000, 1.000000, 0.800000, 0.200000"
+	endColor: "0.850000, 1.000000, 0.700000, 0.000000"
+	texture: "smoke1.png"
+	isLit: "0"
+	particlesPerSecond: "500.000000"
+	particleLifetime: "0.700000"
+	duration: "0.100000"
+	autoStart: "0"
+	ignoreDistanceOptimization: "0"
+}
+object LogicRelay {
+	ID: "8"
+	name: ""
+	position: "6.200000, -40.200001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	onTrigger: "23144|Start|23484|Play sound|"
+	onAltTrigger: ""
+	triggerOnStart: "1"
+	delay: "23.400000"
+}
+object SoundPoint {
+	ID: "23484"
+	name: ""
+	position: "0.000000, -38.799999, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	soundName: "splash_short.wav"
+	volume: "0.700000"
+	spatial: "1"
+	minDist: "5.000000"
+	maxDist: "25.000000"
+	autoStart: "0"
+	loop: "0"
+	dontPlayIfTooFar: "0"
 }

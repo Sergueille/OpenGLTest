@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 390
+count 394
 
 object MapData {
 	mapName: ""
@@ -371,7 +371,7 @@ object TransformModifier {
 	targetSize: "1.000000, 1.000000"
 	duration: "43.000000"
 	easeType: "0"
-	onFinished: "1419|Stop|5401|Stop sound|"
+	onFinished: "1419|Stop|5401|Stop sound|842|Shake|"
 }
 object LogicRelay {
 	ID: "369"
@@ -379,7 +379,7 @@ object LogicRelay {
 	position: "25.000000, -3.400000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	onTrigger: "364|Set position|1357|Start|1355|Start|1353|Start|5401|Play sound|"
+	onTrigger: "364|Set position|1357|Start|1355|Start|1353|Start|5401|Play sound|842|Shake|"
 	onAltTrigger: ""
 	triggerOnStart: "0"
 	delay: "1.000000"
@@ -496,8 +496,8 @@ object CameraController {
 	parallax: "1.000000"
 	zoom: "1.200000"
 	transTime: "2.000000"
-	shakeIntensity: "1.000000"
-	shakeDuration: "2.000000"
+	shakeIntensity: "0.700000"
+	shakeDuration: "1.000000"
 }
 object EditorSprite {
 	ID: "1040"
@@ -2334,7 +2334,7 @@ object Trigger {
 	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "8.200000, 0.800000"
-	onEnter: "370|Save game|"
+	onEnter: "370|Save game|26546|Set zoom|"
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"
@@ -3366,6 +3366,7 @@ object LevelEnd {
 	parent: "-1"
 	parallax: "1.000000"
 	nextLevel: "intro_rockets.map"
+	returnToMenu: "0"
 }
 object Trigger {
 	ID: "18948"
@@ -5796,4 +5797,63 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "26542"
+	name: ""
+	position: "-3.800000, 1.200000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "4.400000, 4.400000"
+	rotation: "0.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "cables3.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "26544"
+	name: ""
+	position: "15.400001, 4.400000, -7.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.000000, 1.000000"
+	rotation: "90.000000"
+	color: "1.000000, 1.000000, 1.000000, 1.000000"
+	texturePath: "truss.png"
+	collideWithPhys: "0"
+	UVstart: "0.000000, 0.000000"
+	UVend: "2.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
+}
+object CameraController {
+	ID: "26546"
+	name: ""
+	position: "26.800001, 46.400002, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	zoom: "1.000000"
+	transTime: "2.000000"
+	shakeIntensity: "1.000000"
+	shakeDuration: "2.000000"
+}
+object SoundArea {
+	ID: "26591"
+	name: ""
+	position: "93.200005, 64.599998, 50.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "67.200005, 32.200001"
+	soundName: "soundscape_wind3.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }

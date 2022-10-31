@@ -1216,6 +1216,7 @@ object LevelEnd {
 	parent: "-1"
 	parallax: "1.000000"
 	nextLevel: "rocket.map"
+	returnToMenu: "0"
 }
 object EditorSprite {
 	ID: "5532"

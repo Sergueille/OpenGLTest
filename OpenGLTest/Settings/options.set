@@ -20,5 +20,5 @@ Props {
 	musicVolume: "1.000000"
 	screenX: "1600"
 	screenY: "900"
-	uiVolume: "0.506667"
+	uiVolume: "0.500000"
 }

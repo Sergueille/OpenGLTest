@@ -39,6 +39,7 @@
 "controls","Controls","Contrôles"
 "press_key","Press a key for:","Appuyez sur une touche pour:"
 "react_temp","","Température du réacteur:"
+"temp_unit","","°C"
 "enter","Enter","Entrée"
 "space","Space","Espace"
 "tab","Tabulation","Tabulation"

@@ -142,7 +142,7 @@ void TemperatureManager::Start()
 
 	isActive = true;
 	subValue = 0;
-	currentTemp = static_cast<float>(startTemperature);
+	currentTemp = startTemperature;
 	startTime = Utility::time;
 	eventAlreadySent = false;
 	lastHighlightTime = Utility::time;
@@ -195,7 +195,8 @@ void TemperatureManager::OnMainLoop()
 		vec3 color = Utility::Lerp(textHighlightColor, textColor, t);
  
 		// Display
-		std::string txt = LocalizationManager::GetLocale(localKey) + " " + std::to_string(realTemp) + "°C";
+		int intTemp = static_cast<int>(realTemp);
+		std::string txt = LocalizationManager::GetLocale(localKey) + " " + std::to_string(intTemp) + LocalizationManager::GetLocale("temp_unit");
 		vec3 pos = vec3(
 			TerminalManager::screenMargin, 
 			TerminalManager::screenMargin, 
