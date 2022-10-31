@@ -16,6 +16,9 @@ builder.Selection(project, False)\
     .add_dir("Simulations")\
     .add_dir("Localization")\
     .add_dir_abs(base + "\\Docs")\
+    .add_file_abs(base + "\\x64\\Release\\OpenGLTest.exe").ignore_path().renamed("Game.exe")\
+    .add_file_abs(base + "\\x64\\Release\\freetype.dll").ignore_path()\
+    .add_file_abs(base + "\\credits.txt")\
     .copy_to(build)
 
 builder.create_dir(build + "\\Saves")
@@ -57,11 +60,5 @@ builder.create_file(build + "\\README.txt", """INSTRUCTIONS:
 - Pour utiliser l'éditeur de niveaux, réferez vous à la documentation (Docs\\fr\\index.html)
 
 BUGS CONNUS:
-- Le jeu risque de planter pendant le chargement des niveaux
-- L'éditeur de niveau est à moitié cassé
-
-Après avoir joué, merci de transmettre ces infos au développeur:
-- temps de jeu total
-- images par secondes (affichées en haut à droite)
-- cartie graphique, caractérisitiques du processeur et version de windows
+- Le jeu risque de planter pendant le chargement de la map 6 à la map 7
 """)
