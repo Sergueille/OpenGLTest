@@ -1402,6 +1402,7 @@ object LevelEnd {
 	parent: "-1"
 	parallax: "1.000000"
 	nextLevel: "lasers2.map"
+	returnToMenu: "0"
 }
 object EditorSprite {
 	ID: "3035"
@@ -6328,7 +6329,7 @@ object Trigger {
 	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "9.200000, 5.400000"
-	onEnter: "19461|Write|"
+	onEnter: "19461|Write|18141|Cancel|"
 	onExit: ""
 	once: "1"
 	needPlayerInteraction: "0"

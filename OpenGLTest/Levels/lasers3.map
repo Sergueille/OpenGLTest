@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 329
+count 331
 
 object MapData {
 	mapName: ""
@@ -4939,4 +4939,32 @@ object EditorSprite {
 	isLit: "1"
 	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
+}
+object SoundArea {
+	ID: "15465"
+	name: ""
+	position: "94.000000, 12.400001, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "17.200001, 57.600002"
+	soundName: "soundscape_wind1.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
+	syncAreaID: "-1"
+}
+object SoundArea {
+	ID: "15467"
+	name: ""
+	position: "68.200005, 20.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	editorSize: "18.000000, 27.000000"
+	soundName: "soundscape_wind3.wav"
+	volume: "1.000000"
+	isMusic: "0"
+	fadeIn: "1.000000"
+	fadeOut: "1.000000"
+	syncAreaID: "-1"
 }

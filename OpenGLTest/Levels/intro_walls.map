@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 580
+count 582
 
 object MapData {
 	mapName: ""
@@ -3411,16 +3411,17 @@ object LevelEnd {
 	parent: "-1"
 	parallax: "1.000000"
 	nextLevel: "intro_lasers.map"
+	returnToMenu: "0"
 }
 object Trigger {
 	ID: "8013"
 	name: ""
-	position: "241.199997, 4.800000, 0.000000"
+	position: "241.600006, 4.800000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
 	scale: "9.800000, 4.400000"
-	onEnter: "7726|End level|-1|Close door|"
+	onEnter: "7726|End level|3133|Close door|36650|Enable|"
 	onExit: ""
 	once: "0"
 	needPlayerInteraction: "0"
@@ -7461,10 +7462,10 @@ object EditorSprite {
 object LogicRelay {
 	ID: "12713"
 	name: ""
-	position: "231.600006, 5.200000, 50.000000"
+	position: "234.000000, 9.000000, 50.000000"
 	parent: "-1"
 	parallax: "1.000000"
-	onTrigger: "12507|Open door|"
+	onTrigger: "3133|Open door|36650|Disable|"
 	onAltTrigger: ""
 	triggerOnStart: "1"
 	delay: "1.000000"
@@ -8667,7 +8668,7 @@ object SoundArea {
 	parent: "-1"
 	parallax: "1.000000"
 	editorSize: "194.199997, 71.000000"
-	soundName: "1_base.ogg"
+	soundName: "1_base.wav"
 	volume: "0.200000"
 	isMusic: "1"
 	fadeIn: "3.000000"
@@ -8839,7 +8840,7 @@ object SoundArea {
 	parent: "-1"
 	parallax: "1.000000"
 	editorSize: "48.200001, 53.799999"
-	soundName: "1_high.ogg"
+	soundName: "1_high.wav"
 	volume: "0.100000"
 	isMusic: "1"
 	fadeIn: "3.000000"
@@ -8985,4 +8986,30 @@ object EditorParticleSystem {
 	duration: "-1.000000"
 	autoStart: "1"
 	ignoreDistanceOptimization: "0"
+}
+object Prefab {
+	ID: "3133"
+	name: ""
+	position: "234.000000, 4.800000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	path: "prefabs\door.map"
+	ori: "0.000000"
+	scale: "1.000000, 1.000000"
+}
+object EditorSprite {
+	ID: "36650"
+	name: "back coll"
+	position: "229.000000, 5.800000, -2.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "8.000000, 8.000000"
+	rotation: "0.000000"
+	color: "0.000000, 1.000000, 0.000000, 0.200000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "1"
+	visibleOnlyInEditor: "1"
+	fadeDuration: "1.000000"
 }
