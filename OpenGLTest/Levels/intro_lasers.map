@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 434
+count 435
 
 object MapData {
 	mapName: ""
@@ -10,7 +10,7 @@ object MapData {
 object Player {
 	ID: "0"
 	name: ""
-	position: "-38.400002, 3.200000, 20.000000"
+	position: "-38.400002, 3.600000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -6514,4 +6514,18 @@ object TerminalWriter {
 	key1: "t_ljump2"
 	onFinished: ""
 	writeRandom: "0"
+}
+object Trigger {
+	ID: "23090"
+	name: ""
+	position: "-38.000000, 2.600000, 1.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	orientation: "0.000000"
+	scale: "8.600000, 0.800000"
+	onEnter: "15541|Save game|"
+	onExit: ""
+	once: "0"
+	needPlayerInteraction: "0"
+	killPlayer: "0"
 }

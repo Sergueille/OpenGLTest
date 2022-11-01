@@ -1014,7 +1014,7 @@ object ShadowCaster {
 object Player {
 	ID: "1496"
 	name: ""
-	position: "-19.800001, 0.600000, 20.000000"
+	position: "-19.800001, 1.400000, 20.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	canTeleport: "1"
@@ -7747,11 +7747,11 @@ object SoundPoint {
 object Trigger {
 	ID: "21839"
 	name: ""
-	position: "-19.800001, 0.800000, -9.000000"
+	position: "-19.800001, 0.200000, -9.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	orientation: "0.000000"
-	scale: "4.400000, 4.400000"
+	scale: "4.800000, 0.800000"
 	onEnter: "22561|Trigger|1496|Remove teleportation|1496|Turn off|"
 	onExit: ""
 	once: "1"
@@ -7794,7 +7794,7 @@ object LogicRelay {
 object EditorSprite {
 	ID: "22566"
 	name: "over"
-	position: "-14.600000, 6.800000, 45.000000"
+	position: "-16.800001, 5.600000, 45.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "35.799999, 21.400000"
