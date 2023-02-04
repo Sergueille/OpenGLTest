@@ -15,13 +15,14 @@ object EditorSprite {
 	parallax: "1.000000"
 	size: "0.210000, 0.210000"
 	rotation: "0.000000"
-	color: "1.000000, 0.000000, 0.000000, 1.000000"
+	color: "1.500000, 0.000000, 0.000000, 1.000000"
 	texturePath: "glow.png"
 	collideWithPhys: "0"
 	UVstart: "0.000000, 0.000000"
 	UVend: "1.000000, 1.000000"
 	isLit: "0"
 	visibleOnlyInEditor: "0"
+	fadeDuration: "1.000000"
 }
 object LogicRelay {
 	ID: "0"

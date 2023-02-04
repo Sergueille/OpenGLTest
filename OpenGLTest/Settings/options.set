@@ -2,7 +2,7 @@
 
 Props {
 	displayFPS: "1"
-	fullscreen: "0"
+	fullscreen: "1"
 	gameSoundsVolume: "1.000000"
 	globalVolume: "1.000000"
 	key0: "65"

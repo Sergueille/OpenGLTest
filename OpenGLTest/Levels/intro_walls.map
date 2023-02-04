@@ -1,6 +1,6 @@
 // Editor map file, version 1
 
-count 582
+count 583
 
 object MapData {
 	mapName: ""
@@ -5407,7 +5407,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "10988"
 	name: ""
-	position: "97.400002, -8.600000, 1.000000"
+	position: "97.501602, -8.600000, 1.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "1.000000, 1.000000"
@@ -5424,7 +5424,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "10990"
 	name: ""
-	position: "99.200005, -8.600000, 0.000000"
+	position: "99.301605, -8.600000, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "1.000000, 1.000000"
@@ -5441,7 +5441,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "10992"
 	name: ""
-	position: "101.187370, -8.600000, 1.000000"
+	position: "101.288971, -8.600000, 1.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "1.000000, 1.000000"
@@ -7174,7 +7174,7 @@ object ShadowCaster {
 object Prefab {
 	ID: "11552"
 	name: ""
-	position: "204.199997, 22.800001, 0.000000"
+	position: "205.800003, 22.800001, 0.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	path: "prefabs\neon.map"
@@ -7217,7 +7217,7 @@ object EditorSprite {
 object EditorSprite {
 	ID: "11563"
 	name: ""
-	position: "201.600006, 20.600000, -5.000000"
+	position: "204.199997, 20.600000, -5.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "3.200000, 3.200000"
@@ -7794,7 +7794,7 @@ object LogicRelay {
 object EditorSprite {
 	ID: "22566"
 	name: "over"
-	position: "-16.800001, 5.600000, 45.000000"
+	position: "-14.600000, 5.600000, 45.000000"
 	parent: "-1"
 	parallax: "1.000000"
 	size: "35.799999, 21.400000"
@@ -9011,5 +9011,21 @@ object EditorSprite {
 	UVend: "1.000000, 1.000000"
 	isLit: "1"
 	visibleOnlyInEditor: "1"
+	fadeDuration: "1.000000"
+}
+object EditorSprite {
+	ID: "36885"
+	name: ""
+	position: "201.600006, 21.000000, 0.000000"
+	parent: "-1"
+	parallax: "1.000000"
+	size: "2.600000, 3.800000"
+	rotation: "0.000000"
+	color: "0.000000, 0.000000, 0.000000, 1.000000"
+	collideWithPhys: "1"
+	UVstart: "0.000000, 0.000000"
+	UVend: "1.000000, 1.000000"
+	isLit: "0"
+	visibleOnlyInEditor: "0"
 	fadeDuration: "1.000000"
 }
